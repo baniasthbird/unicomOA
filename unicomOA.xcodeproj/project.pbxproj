@@ -1,0 +1,562 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2C35B04C1C7062160003BF6C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C35B04B1C7062160003BF6C /* main.m */; };
+		2C35B04F1C7062160003BF6C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C35B04E1C7062160003BF6C /* AppDelegate.m */; };
+		2C35B0521C7062160003BF6C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C35B0511C7062160003BF6C /* ViewController.m */; };
+		2C35B0551C7062160003BF6C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C35B0531C7062160003BF6C /* Main.storyboard */; };
+		2C35B0571C7062160003BF6C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C35B0561C7062160003BF6C /* Assets.xcassets */; };
+		2C35B05A1C7062160003BF6C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C35B0581C7062160003BF6C /* LaunchScreen.storyboard */; };
+		2C35B0651C7062160003BF6C /* unicomOATests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C35B0641C7062160003BF6C /* unicomOATests.m */; };
+		2C35B0701C7062160003BF6C /* unicomOAUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C35B06F1C7062160003BF6C /* unicomOAUITests.m */; };
+		2C35B0D21C7157120003BF6C /* settingPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C35B0D11C7157120003BF6C /* settingPasswordViewController.m */; };
+		2C35B0D51C715CB90003BF6C /* settingHeaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C35B0D41C715CB90003BF6C /* settingHeaderViewController.m */; };
+		2CFEAD181C7168980054730E /* forgetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD131C7168980054730E /* forgetPasswordViewController.m */; };
+		2CFEAD191C7168980054730E /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD151C7168980054730E /* LoginViewController.m */; };
+		2CFEAD1A1C7168980054730E /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD171C7168980054730E /* SignInViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2C35B0611C7062160003BF6C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2C35B03F1C7062160003BF6C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2C35B0461C7062160003BF6C;
+			remoteInfo = unicomOA;
+		};
+		2C35B06C1C7062160003BF6C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2C35B03F1C7062160003BF6C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2C35B0461C7062160003BF6C;
+			remoteInfo = unicomOA;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2C35B0471C7062160003BF6C /* unicomOA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = unicomOA.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C35B04B1C7062160003BF6C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2C35B04D1C7062160003BF6C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		2C35B04E1C7062160003BF6C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		2C35B0501C7062160003BF6C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		2C35B0511C7062160003BF6C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		2C35B0541C7062160003BF6C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2C35B0561C7062160003BF6C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2C35B0591C7062160003BF6C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		2C35B05B1C7062160003BF6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2C35B0601C7062160003BF6C /* unicomOATests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = unicomOATests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C35B0641C7062160003BF6C /* unicomOATests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = unicomOATests.m; sourceTree = "<group>"; };
+		2C35B0661C7062160003BF6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2C35B06B1C7062160003BF6C /* unicomOAUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = unicomOAUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C35B06F1C7062160003BF6C /* unicomOAUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = unicomOAUITests.m; sourceTree = "<group>"; };
+		2C35B0711C7062160003BF6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2C35B0D01C7157120003BF6C /* settingPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = settingPasswordViewController.h; path = Login/settingPasswordViewController.h; sourceTree = "<group>"; };
+		2C35B0D11C7157120003BF6C /* settingPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = settingPasswordViewController.m; path = Login/settingPasswordViewController.m; sourceTree = "<group>"; };
+		2C35B0D31C715CB90003BF6C /* settingHeaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = settingHeaderViewController.h; path = Login/settingHeaderViewController.h; sourceTree = "<group>"; };
+		2C35B0D41C715CB90003BF6C /* settingHeaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = settingHeaderViewController.m; path = Login/settingHeaderViewController.m; sourceTree = "<group>"; };
+		2CFEAD121C7168980054730E /* forgetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = forgetPasswordViewController.h; path = Login/forgetPasswordViewController.h; sourceTree = "<group>"; };
+		2CFEAD131C7168980054730E /* forgetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = forgetPasswordViewController.m; path = Login/forgetPasswordViewController.m; sourceTree = "<group>"; };
+		2CFEAD141C7168980054730E /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = Login/LoginViewController.h; sourceTree = "<group>"; };
+		2CFEAD151C7168980054730E /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = Login/LoginViewController.m; sourceTree = "<group>"; };
+		2CFEAD161C7168980054730E /* SignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SignInViewController.h; path = Login/SignInViewController.h; sourceTree = "<group>"; };
+		2CFEAD171C7168980054730E /* SignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SignInViewController.m; path = Login/SignInViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2C35B0441C7062160003BF6C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C35B05D1C7062160003BF6C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C35B0681C7062160003BF6C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2C35B03E1C7062160003BF6C = {
+			isa = PBXGroup;
+			children = (
+				2C35B0491C7062160003BF6C /* unicomOA */,
+				2C35B0631C7062160003BF6C /* unicomOATests */,
+				2C35B06E1C7062160003BF6C /* unicomOAUITests */,
+				2C35B0481C7062160003BF6C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2C35B0481C7062160003BF6C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2C35B0471C7062160003BF6C /* unicomOA.app */,
+				2C35B0601C7062160003BF6C /* unicomOATests.xctest */,
+				2C35B06B1C7062160003BF6C /* unicomOAUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2C35B0491C7062160003BF6C /* unicomOA */ = {
+			isa = PBXGroup;
+			children = (
+				2C35B07D1C70662D0003BF6C /* Login */,
+				2C35B04D1C7062160003BF6C /* AppDelegate.h */,
+				2C35B04E1C7062160003BF6C /* AppDelegate.m */,
+				2C35B0501C7062160003BF6C /* ViewController.h */,
+				2C35B0511C7062160003BF6C /* ViewController.m */,
+				2C35B0531C7062160003BF6C /* Main.storyboard */,
+				2C35B0561C7062160003BF6C /* Assets.xcassets */,
+				2C35B0581C7062160003BF6C /* LaunchScreen.storyboard */,
+				2C35B05B1C7062160003BF6C /* Info.plist */,
+				2C35B04A1C7062160003BF6C /* Supporting Files */,
+			);
+			path = unicomOA;
+			sourceTree = "<group>";
+		};
+		2C35B04A1C7062160003BF6C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2C35B04B1C7062160003BF6C /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2C35B0631C7062160003BF6C /* unicomOATests */ = {
+			isa = PBXGroup;
+			children = (
+				2C35B0641C7062160003BF6C /* unicomOATests.m */,
+				2C35B0661C7062160003BF6C /* Info.plist */,
+			);
+			path = unicomOATests;
+			sourceTree = "<group>";
+		};
+		2C35B06E1C7062160003BF6C /* unicomOAUITests */ = {
+			isa = PBXGroup;
+			children = (
+				2C35B06F1C7062160003BF6C /* unicomOAUITests.m */,
+				2C35B0711C7062160003BF6C /* Info.plist */,
+			);
+			path = unicomOAUITests;
+			sourceTree = "<group>";
+		};
+		2C35B07D1C70662D0003BF6C /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				2CFEAD121C7168980054730E /* forgetPasswordViewController.h */,
+				2CFEAD131C7168980054730E /* forgetPasswordViewController.m */,
+				2CFEAD141C7168980054730E /* LoginViewController.h */,
+				2CFEAD151C7168980054730E /* LoginViewController.m */,
+				2CFEAD161C7168980054730E /* SignInViewController.h */,
+				2CFEAD171C7168980054730E /* SignInViewController.m */,
+				2C35B0D01C7157120003BF6C /* settingPasswordViewController.h */,
+				2C35B0D11C7157120003BF6C /* settingPasswordViewController.m */,
+				2C35B0D31C715CB90003BF6C /* settingHeaderViewController.h */,
+				2C35B0D41C715CB90003BF6C /* settingHeaderViewController.m */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2C35B0461C7062160003BF6C /* unicomOA */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2C35B0741C7062160003BF6C /* Build configuration list for PBXNativeTarget "unicomOA" */;
+			buildPhases = (
+				2C35B0431C7062160003BF6C /* Sources */,
+				2C35B0441C7062160003BF6C /* Frameworks */,
+				2C35B0451C7062160003BF6C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = unicomOA;
+			productName = unicomOA;
+			productReference = 2C35B0471C7062160003BF6C /* unicomOA.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2C35B05F1C7062160003BF6C /* unicomOATests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2C35B0771C7062160003BF6C /* Build configuration list for PBXNativeTarget "unicomOATests" */;
+			buildPhases = (
+				2C35B05C1C7062160003BF6C /* Sources */,
+				2C35B05D1C7062160003BF6C /* Frameworks */,
+				2C35B05E1C7062160003BF6C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2C35B0621C7062160003BF6C /* PBXTargetDependency */,
+			);
+			name = unicomOATests;
+			productName = unicomOATests;
+			productReference = 2C35B0601C7062160003BF6C /* unicomOATests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		2C35B06A1C7062160003BF6C /* unicomOAUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2C35B07A1C7062160003BF6C /* Build configuration list for PBXNativeTarget "unicomOAUITests" */;
+			buildPhases = (
+				2C35B0671C7062160003BF6C /* Sources */,
+				2C35B0681C7062160003BF6C /* Frameworks */,
+				2C35B0691C7062160003BF6C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2C35B06D1C7062160003BF6C /* PBXTargetDependency */,
+			);
+			name = unicomOAUITests;
+			productName = unicomOAUITests;
+			productReference = 2C35B06B1C7062160003BF6C /* unicomOAUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2C35B03F1C7062160003BF6C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = "zr-mac";
+				TargetAttributes = {
+					2C35B0461C7062160003BF6C = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
+					2C35B05F1C7062160003BF6C = {
+						CreatedOnToolsVersion = 7.2.1;
+						TestTargetID = 2C35B0461C7062160003BF6C;
+					};
+					2C35B06A1C7062160003BF6C = {
+						CreatedOnToolsVersion = 7.2.1;
+						TestTargetID = 2C35B0461C7062160003BF6C;
+					};
+				};
+			};
+			buildConfigurationList = 2C35B0421C7062160003BF6C /* Build configuration list for PBXProject "unicomOA" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2C35B03E1C7062160003BF6C;
+			productRefGroup = 2C35B0481C7062160003BF6C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2C35B0461C7062160003BF6C /* unicomOA */,
+				2C35B05F1C7062160003BF6C /* unicomOATests */,
+				2C35B06A1C7062160003BF6C /* unicomOAUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2C35B0451C7062160003BF6C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C35B05A1C7062160003BF6C /* LaunchScreen.storyboard in Resources */,
+				2C35B0571C7062160003BF6C /* Assets.xcassets in Resources */,
+				2C35B0551C7062160003BF6C /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C35B05E1C7062160003BF6C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C35B0691C7062160003BF6C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2C35B0431C7062160003BF6C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2CFEAD1A1C7168980054730E /* SignInViewController.m in Sources */,
+				2C35B0D21C7157120003BF6C /* settingPasswordViewController.m in Sources */,
+				2C35B0521C7062160003BF6C /* ViewController.m in Sources */,
+				2C35B04F1C7062160003BF6C /* AppDelegate.m in Sources */,
+				2C35B04C1C7062160003BF6C /* main.m in Sources */,
+				2CFEAD191C7168980054730E /* LoginViewController.m in Sources */,
+				2CFEAD181C7168980054730E /* forgetPasswordViewController.m in Sources */,
+				2C35B0D51C715CB90003BF6C /* settingHeaderViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C35B05C1C7062160003BF6C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C35B0651C7062160003BF6C /* unicomOATests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C35B0671C7062160003BF6C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C35B0701C7062160003BF6C /* unicomOAUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2C35B0621C7062160003BF6C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2C35B0461C7062160003BF6C /* unicomOA */;
+			targetProxy = 2C35B0611C7062160003BF6C /* PBXContainerItemProxy */;
+		};
+		2C35B06D1C7062160003BF6C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2C35B0461C7062160003BF6C /* unicomOA */;
+			targetProxy = 2C35B06C1C7062160003BF6C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		2C35B0531C7062160003BF6C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2C35B0541C7062160003BF6C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		2C35B0581C7062160003BF6C /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2C35B0591C7062160003BF6C /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2C35B0721C7062160003BF6C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2C35B0731C7062160003BF6C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2C35B0751C7062160003BF6C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = unicomOA/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.nsc.unicomOA;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		2C35B0761C7062160003BF6C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = unicomOA/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.nsc.unicomOA;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		2C35B0781C7062160003BF6C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = unicomOATests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.nsc.unicomOATests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/unicomOA.app/unicomOA";
+			};
+			name = Debug;
+		};
+		2C35B0791C7062160003BF6C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = unicomOATests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.nsc.unicomOATests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/unicomOA.app/unicomOA";
+			};
+			name = Release;
+		};
+		2C35B07B1C7062160003BF6C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = unicomOAUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.nsc.unicomOAUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = unicomOA;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		2C35B07C1C7062160003BF6C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = unicomOAUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.nsc.unicomOAUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = unicomOA;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2C35B0421C7062160003BF6C /* Build configuration list for PBXProject "unicomOA" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2C35B0721C7062160003BF6C /* Debug */,
+				2C35B0731C7062160003BF6C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2C35B0741C7062160003BF6C /* Build configuration list for PBXNativeTarget "unicomOA" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2C35B0751C7062160003BF6C /* Debug */,
+				2C35B0761C7062160003BF6C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2C35B0771C7062160003BF6C /* Build configuration list for PBXNativeTarget "unicomOATests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2C35B0781C7062160003BF6C /* Debug */,
+				2C35B0791C7062160003BF6C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2C35B07A1C7062160003BF6C /* Build configuration list for PBXNativeTarget "unicomOAUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2C35B07B1C7062160003BF6C /* Debug */,
+				2C35B07C1C7062160003BF6C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2C35B03F1C7062160003BF6C /* Project object */;
+}
