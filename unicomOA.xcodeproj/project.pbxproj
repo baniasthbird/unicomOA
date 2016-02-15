@@ -21,6 +21,13 @@
 		2CFEAD191C7168980054730E /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD151C7168980054730E /* LoginViewController.m */; };
 		2CFEAD1A1C7168980054730E /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD171C7168980054730E /* SignInViewController.m */; };
 		2CFEAD1D1C7173690054730E /* newPassWordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD1C1C7173690054730E /* newPassWordViewController.m */; };
+		2CFEAD241C717F910054730E /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD231C717F910054730E /* MessageViewController.m */; };
+		2CFEAD271C717FA70054730E /* ContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD261C717FA70054730E /* ContactViewController.m */; };
+		2CFEAD2A1C717FCB0054730E /* FunctionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD291C717FCB0054730E /* FunctionViewController.m */; };
+		2CFEAD2D1C717FDC0054730E /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD2C1C717FDC0054730E /* SettingViewController.m */; };
+		2CFEAD301C7181F30054730E /* NTButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD2F1C7181F30054730E /* NTButton.m */; };
+		2CFEAD331C7183930054730E /* BaseNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD321C7183930054730E /* BaseNavigationViewController.m */; };
+		2CFEAD361C7188500054730E /* OAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD351C7188500054730E /* OAViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +76,22 @@
 		2CFEAD171C7168980054730E /* SignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SignInViewController.m; path = Login/SignInViewController.m; sourceTree = "<group>"; };
 		2CFEAD1B1C7173690054730E /* newPassWordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = newPassWordViewController.h; path = Login/newPassWordViewController.h; sourceTree = "<group>"; };
 		2CFEAD1C1C7173690054730E /* newPassWordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = newPassWordViewController.m; path = Login/newPassWordViewController.m; sourceTree = "<group>"; };
+		2CFEAD221C717F910054730E /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageViewController.h; path = View/MessageViewController.h; sourceTree = "<group>"; };
+		2CFEAD231C717F910054730E /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageViewController.m; path = View/MessageViewController.m; sourceTree = "<group>"; };
+		2CFEAD251C717FA70054730E /* ContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContactViewController.h; path = View/ContactViewController.h; sourceTree = "<group>"; };
+		2CFEAD261C717FA70054730E /* ContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContactViewController.m; path = View/ContactViewController.m; sourceTree = "<group>"; };
+		2CFEAD281C717FCB0054730E /* FunctionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FunctionViewController.h; path = View/FunctionViewController.h; sourceTree = "<group>"; };
+		2CFEAD291C717FCB0054730E /* FunctionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FunctionViewController.m; path = View/FunctionViewController.m; sourceTree = "<group>"; };
+		2CFEAD2B1C717FDC0054730E /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		2CFEAD2C1C717FDC0054730E /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		2CFEAD2E1C7181F30054730E /* NTButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NTButton.h; path = View/NTButton.h; sourceTree = "<group>"; };
+		2CFEAD2F1C7181F30054730E /* NTButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NTButton.m; path = View/NTButton.m; sourceTree = "<group>"; };
+		2CFEAD311C7183930054730E /* BaseNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseNavigationViewController.h; path = View/BaseNavigationViewController.h; sourceTree = "<group>"; };
+		2CFEAD321C7183930054730E /* BaseNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseNavigationViewController.m; path = View/BaseNavigationViewController.m; sourceTree = "<group>"; };
+		2CFEAD341C7188500054730E /* OAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OAViewController.h; path = View/OAViewController.h; sourceTree = "<group>"; };
+		2CFEAD351C7188500054730E /* OAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OAViewController.m; path = View/OAViewController.m; sourceTree = "<group>"; };
+		2CFEAD391C71C90C0054730E /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		2CFEAD3A1C71CAFB0054730E /* WxHxD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WxHxD.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +142,7 @@
 		2C35B0491C7062160003BF6C /* unicomOA */ = {
 			isa = PBXGroup;
 			children = (
+				2CFEAD1E1C71789F0054730E /* View */,
 				2C35B07D1C70662D0003BF6C /* Login */,
 				2C35B04D1C7062160003BF6C /* AppDelegate.h */,
 				2C35B04E1C7062160003BF6C /* AppDelegate.m */,
@@ -136,7 +160,9 @@
 		2C35B04A1C7062160003BF6C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2CFEAD391C71C90C0054730E /* PrefixHeader.pch */,
 				2C35B04B1C7062160003BF6C /* main.m */,
+				2CFEAD3A1C71CAFB0054730E /* WxHxD.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -176,6 +202,27 @@
 				2CFEAD1C1C7173690054730E /* newPassWordViewController.m */,
 			);
 			name = Login;
+			sourceTree = "<group>";
+		};
+		2CFEAD1E1C71789F0054730E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2CFEAD221C717F910054730E /* MessageViewController.h */,
+				2CFEAD231C717F910054730E /* MessageViewController.m */,
+				2CFEAD251C717FA70054730E /* ContactViewController.h */,
+				2CFEAD261C717FA70054730E /* ContactViewController.m */,
+				2CFEAD281C717FCB0054730E /* FunctionViewController.h */,
+				2CFEAD291C717FCB0054730E /* FunctionViewController.m */,
+				2CFEAD2B1C717FDC0054730E /* SettingViewController.h */,
+				2CFEAD2C1C717FDC0054730E /* SettingViewController.m */,
+				2CFEAD2E1C7181F30054730E /* NTButton.h */,
+				2CFEAD2F1C7181F30054730E /* NTButton.m */,
+				2CFEAD311C7183930054730E /* BaseNavigationViewController.h */,
+				2CFEAD321C7183930054730E /* BaseNavigationViewController.m */,
+				2CFEAD341C7188500054730E /* OAViewController.h */,
+				2CFEAD351C7188500054730E /* OAViewController.m */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -309,11 +356,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CFEAD1A1C7168980054730E /* SignInViewController.m in Sources */,
+				2CFEAD271C717FA70054730E /* ContactViewController.m in Sources */,
+				2CFEAD241C717F910054730E /* MessageViewController.m in Sources */,
+				2CFEAD331C7183930054730E /* BaseNavigationViewController.m in Sources */,
+				2CFEAD2D1C717FDC0054730E /* SettingViewController.m in Sources */,
 				2C35B0D21C7157120003BF6C /* settingPasswordViewController.m in Sources */,
 				2C35B0521C7062160003BF6C /* ViewController.m in Sources */,
+				2CFEAD2A1C717FCB0054730E /* FunctionViewController.m in Sources */,
 				2C35B04F1C7062160003BF6C /* AppDelegate.m in Sources */,
 				2C35B04C1C7062160003BF6C /* main.m in Sources */,
 				2CFEAD191C7168980054730E /* LoginViewController.m in Sources */,
+				2CFEAD301C7181F30054730E /* NTButton.m in Sources */,
+				2CFEAD361C7188500054730E /* OAViewController.m in Sources */,
 				2CFEAD181C7168980054730E /* forgetPasswordViewController.m in Sources */,
 				2CFEAD1D1C7173690054730E /* newPassWordViewController.m in Sources */,
 				2C35B0D51C715CB90003BF6C /* settingHeaderViewController.m in Sources */,
@@ -457,6 +511,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/unicomOA/PrefixHeader.pch";
 				INFOPLIST_FILE = unicomOA/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nsc.unicomOA;
@@ -468,6 +523,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/unicomOA/PrefixHeader.pch";
 				INFOPLIST_FILE = unicomOA/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nsc.unicomOA;

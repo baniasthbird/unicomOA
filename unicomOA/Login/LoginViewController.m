@@ -9,6 +9,7 @@
 #import "LoginViewController.h"
 #import "SignInViewController.h"
 #import "forgetPasswordViewController.h"
+#import "OAViewController.h"
 
 
 @interface LoginViewController()
@@ -130,6 +131,8 @@
 //登录
 -(void)landClick
 {
+    //zr 20160215 测试暂时屏蔽
+    /*
     UIAlertController *alert;
     if ([user.text isEqualToString:@""])
     {
@@ -151,7 +154,8 @@
         [self presentViewController:alert animated:YES completion:nil];
         return;
     }
-    
+     */
+    [self.navigationController pushViewController:[[OAViewController alloc]init] animated:YES];
     
 }
 
