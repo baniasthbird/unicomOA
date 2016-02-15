@@ -130,26 +130,28 @@
 //登录
 -(void)landClick
 {
+    UIAlertController *alert;
     if ([user.text isEqualToString:@""])
     {
-        //[SVProgressHUD showInfoWithStatus:@"亲,请输入用户名"];
-        return;
+        alert= [self createAlertController:@"提示" message:@"请输入用户名"];
     }
     else if (user.text.length <11)
     {
-        //[SVProgressHUD showInfoWithStatus:@"您输入的手机号码格式不正确"];
-        return;
+        alert=[self createAlertController:@"提示" message:@"您输入的手机号码格式不正确"];
     }
     else if ([pwd.text isEqualToString:@""])
     {
-        //[SVProgressHUD showInfoWithStatus:@"亲,请输入密码"];
-        return;
+        alert=[self createAlertController:@"提示" message:@"请输入密码"];
     }
     else if (pwd.text.length <6)
     {
-        //[SVProgressHUD showInfoWithStatus:@"亲,密码长度至少六位"];
+        alert=[self createAlertController:@"提示" message:@"密码长度至少六位"];
+    }
+    if (alert!=nil) {
+        [self presentViewController:alert animated:YES completion:nil];
         return;
     }
+    
     
 }
 
@@ -177,10 +179,6 @@
     UIImageView *line3=[self createImageViewFrame:CGRectMake(2, 400, 100, 1) imageName:nil color:[UIColor lightGrayColor]];
     UIImageView *line4=[self createImageViewFrame:CGRectMake(self.view.frame.size.width-100-4, 400, 100, 1) imageName:nil color:[UIColor lightGrayColor]];
     
-    //    [bgView addSubview:userImageView];
-    //    [bgView addSubview:pwdImageView];
-    //    [bgView addSubview:line1];
-    //[self.view addSubview:line2];
     [self.view addSubview:line3];
     [self.view addSubview:line4];
     
@@ -259,6 +257,15 @@
     textField.placeholder=placeholder;
     
     return textField;
+}
+
+-(UIAlertController *)createAlertController: (NSString *)str_title message:(NSString*) str_message
+{
+    UIAlertController *alertController=[UIAlertController alertControllerWithTitle:str_title message:str_message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil];
+    [alertController addAction:okAction];
+    return alertController;
+                                        
 }
 
 

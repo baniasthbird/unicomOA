@@ -20,6 +20,7 @@
 		2CFEAD181C7168980054730E /* forgetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD131C7168980054730E /* forgetPasswordViewController.m */; };
 		2CFEAD191C7168980054730E /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD151C7168980054730E /* LoginViewController.m */; };
 		2CFEAD1A1C7168980054730E /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD171C7168980054730E /* SignInViewController.m */; };
+		2CFEAD1D1C7173690054730E /* newPassWordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD1C1C7173690054730E /* newPassWordViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,8 @@
 		2CFEAD151C7168980054730E /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = Login/LoginViewController.m; sourceTree = "<group>"; };
 		2CFEAD161C7168980054730E /* SignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SignInViewController.h; path = Login/SignInViewController.h; sourceTree = "<group>"; };
 		2CFEAD171C7168980054730E /* SignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SignInViewController.m; path = Login/SignInViewController.m; sourceTree = "<group>"; };
+		2CFEAD1B1C7173690054730E /* newPassWordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = newPassWordViewController.h; path = Login/newPassWordViewController.h; sourceTree = "<group>"; };
+		2CFEAD1C1C7173690054730E /* newPassWordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = newPassWordViewController.m; path = Login/newPassWordViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +172,8 @@
 				2C35B0D11C7157120003BF6C /* settingPasswordViewController.m */,
 				2C35B0D31C715CB90003BF6C /* settingHeaderViewController.h */,
 				2C35B0D41C715CB90003BF6C /* settingHeaderViewController.m */,
+				2CFEAD1B1C7173690054730E /* newPassWordViewController.h */,
+				2CFEAD1C1C7173690054730E /* newPassWordViewController.m */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -310,6 +315,7 @@
 				2C35B04C1C7062160003BF6C /* main.m in Sources */,
 				2CFEAD191C7168980054730E /* LoginViewController.m in Sources */,
 				2CFEAD181C7168980054730E /* forgetPasswordViewController.m in Sources */,
+				2CFEAD1D1C7173690054730E /* newPassWordViewController.m in Sources */,
 				2C35B0D51C715CB90003BF6C /* settingHeaderViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
