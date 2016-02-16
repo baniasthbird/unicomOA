@@ -7,13 +7,28 @@
 //
 
 #import "SettingViewController.h"
+#import "LGSettingItem.h"
+#import "LGSettingSection.h"
 
 @interface SettingViewController ()
-
+@property (strong,nonatomic) NSMutableArray *groups;
 @end
 
 @implementation SettingViewController
 
+
+- (NSMutableArray *) groups
+{
+    if (!_groups) {
+        _groups=[NSMutableArray array];
+    }
+    return _groups;
+}
+
+-(instancetype)init {
+    //设置样式
+    return [self initWithStyle:UITableViewStyleGrouped];
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -29,8 +44,41 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor=[UIColor greenColor];
+    self.view.backgroundColor=[UIColor whiteColor];
     // Do any additional setup after loading the view.
+    
+    //添加第一组
+    LGSettingSection *section1=[LGSettingSection initWithHeaderTitle:@"Demo" footerTitle:nil];
+    //添加行
+    LGSettingItem *item1=[LGSettingItem initWithtitle:@"赵睿"];
+    item1.image=[UIImage imageNamed:@"me"];
+    item1.height=64;
+    [section1 addItem:item1];
+    LGSettingItem *item2=[LGSettingItem initWithtitle:@"Wii are the futrue."];
+    item2.type=UITableViewCellAccessoryNone;
+    [section1 addItem:item2];
+    //保存到groups数组
+    [self.groups addObject:section1];
+    
+    //添加第二组
+    LGSettingSection *section2=[LGSettingSection initWithHeaderTitle:@"" footerTitle:nil];
+    //添加行
+    [section2 addItemWithTitle:@"我的文件"];
+    [section2 addItemWithTitle:@"我的企业"];
+    [self.groups addObject:section2];
+    
+    //添加第三组
+    LGSettingSection *section3=[LGSettingSection initWithHeaderTitle:@"" footerTitle:nil];
+    //添加行
+    [section3 addItemWithTitle:@"推荐给朋友使用"];
+    [section3 addItemWithTitle:@"客服帮助"];
+    [self.groups addObject:section3];
+    
+    //添加第四组
+    LGSettingSection *section4=[LGSettingSection initWithHeaderTitle:@"" footerTitle:@"2016 河南软信"];
+    //添加行
+    [section4 addItemWithTitle:@"设置"];
+    [self.groups addObject:section4];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -38,7 +86,73 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+#pragma mark -Table view data source
+
+/**
+ 设置数组
+ */
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return self.groups.count;
+}
+
+
+/**
+ 设置行数
+ */
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    LGSettingSection *group=self.groups[section];
+    return group.items.count;
+}
+
+/**
+ 设置每行内容
+ */
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *ID=@"cell";
+    UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:ID];
+    if (cell==nil) {
+        cell =[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
+    }
+    
+    LGSettingSection *section=self.groups[indexPath.section];
+    LGSettingItem *item= section.items[indexPath.row];
+    
+    //设置Cell的标题
+    cell.textLabel.text=item.title;
+    //设置Cell左边的图标
+    cell.imageView.image=item.image;
+    //设置cell右边的图标
+    cell.accessoryType=item.type;
+    
+    return cell;
+}
+
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    LGSettingSection *group=self.groups[section];
+    return  group.headerTitle;
+}
+
+-(NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
+    LGSettingSection *group=self.groups[section];
+    return group.footerTitle;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    LGSettingSection *section=self.groups[indexPath.section];
+    LGSettingItem *item=section.items[indexPath.row];
+    return item.height;
+}
+
+
+#pragma mark 点击事件
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"点击了第%ld组，第%ld行",indexPath.section,indexPath.row);
+}
 /*
+ 
+ 
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation

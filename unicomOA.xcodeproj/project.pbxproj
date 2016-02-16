@@ -28,6 +28,8 @@
 		2CFEAD301C7181F30054730E /* NTButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD2F1C7181F30054730E /* NTButton.m */; };
 		2CFEAD331C7183930054730E /* BaseNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD321C7183930054730E /* BaseNavigationViewController.m */; };
 		2CFEAD361C7188500054730E /* OAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD351C7188500054730E /* OAViewController.m */; };
+		2CFEAD441C72B8B90054730E /* LGSettingItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD411C72B8B90054730E /* LGSettingItem.m */; };
+		2CFEAD451C72B8B90054730E /* LGSettingSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD431C72B8B90054730E /* LGSettingSection.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +94,10 @@
 		2CFEAD351C7188500054730E /* OAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OAViewController.m; path = View/OAViewController.m; sourceTree = "<group>"; };
 		2CFEAD391C71C90C0054730E /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		2CFEAD3A1C71CAFB0054730E /* WxHxD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WxHxD.h; sourceTree = "<group>"; };
+		2CFEAD401C72B8B90054730E /* LGSettingItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LGSettingItem.h; path = Base/Settings/Modal/LGSettingItem.h; sourceTree = "<group>"; };
+		2CFEAD411C72B8B90054730E /* LGSettingItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LGSettingItem.m; path = Base/Settings/Modal/LGSettingItem.m; sourceTree = "<group>"; };
+		2CFEAD421C72B8B90054730E /* LGSettingSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LGSettingSection.h; path = Base/Settings/Modal/LGSettingSection.h; sourceTree = "<group>"; };
+		2CFEAD431C72B8B90054730E /* LGSettingSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LGSettingSection.m; path = Base/Settings/Modal/LGSettingSection.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +148,7 @@
 		2C35B0491C7062160003BF6C /* unicomOA */ = {
 			isa = PBXGroup;
 			children = (
+				2CFEAD3F1C72B6870054730E /* Modal */,
 				2CFEAD1E1C71789F0054730E /* View */,
 				2C35B07D1C70662D0003BF6C /* Login */,
 				2C35B04D1C7062160003BF6C /* AppDelegate.h */,
@@ -223,6 +230,17 @@
 				2CFEAD351C7188500054730E /* OAViewController.m */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		2CFEAD3F1C72B6870054730E /* Modal */ = {
+			isa = PBXGroup;
+			children = (
+				2CFEAD401C72B8B90054730E /* LGSettingItem.h */,
+				2CFEAD411C72B8B90054730E /* LGSettingItem.m */,
+				2CFEAD421C72B8B90054730E /* LGSettingSection.h */,
+				2CFEAD431C72B8B90054730E /* LGSettingSection.m */,
+			);
+			name = Modal;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -366,9 +384,11 @@
 				2C35B04F1C7062160003BF6C /* AppDelegate.m in Sources */,
 				2C35B04C1C7062160003BF6C /* main.m in Sources */,
 				2CFEAD191C7168980054730E /* LoginViewController.m in Sources */,
+				2CFEAD451C72B8B90054730E /* LGSettingSection.m in Sources */,
 				2CFEAD301C7181F30054730E /* NTButton.m in Sources */,
 				2CFEAD361C7188500054730E /* OAViewController.m in Sources */,
 				2CFEAD181C7168980054730E /* forgetPasswordViewController.m in Sources */,
+				2CFEAD441C72B8B90054730E /* LGSettingItem.m in Sources */,
 				2CFEAD1D1C7173690054730E /* newPassWordViewController.m in Sources */,
 				2C35B0D51C715CB90003BF6C /* settingHeaderViewController.m in Sources */,
 			);
