@@ -57,7 +57,8 @@
     // Do any additional setup after loading the view.
     _tabBarView = [[UIImageView alloc]initWithFrame:self.tabBar.bounds];
     _tabBarView.userInteractionEnabled = YES;
-    _tabBarView.backgroundColor = [UIColor lightGrayColor];
+    _tabBarView.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor=[UIColor colorWithRed:70/255.0f green:156/255.0f blue:241/255.0f alpha:1];
     [self.tabBar addSubview:_tabBarView];
     
     MessageViewController *message=[[MessageViewController alloc]init];
@@ -124,8 +125,10 @@
     customButton.imageView.contentMode = UIViewContentModeCenter;
     customButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     customButton.titleLabel.font = [UIFont systemFontOfSize:10];
+    [customButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
     [_tabBarView addSubview:customButton];
+    
     
     if(index == 0)//设置第一个选择项。（默认选择项） wsq
     {

@@ -26,8 +26,12 @@
 }
 
 -(instancetype)init {
+    self.title = @"我";
+    
+    self.tableView.tintColor=[UIColor redColor];
     //设置样式
     return [self initWithStyle:UITableViewStyleGrouped];
+    
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -50,34 +54,36 @@
     //添加第一组
     LGSettingSection *section1=[LGSettingSection initWithHeaderTitle:@"Demo" footerTitle:nil];
     //添加行
-    LGSettingItem *item1=[LGSettingItem initWithtitle:@"赵睿"];
+    LGSettingItem *item1=[LGSettingItem initWithtitle:@"张三"];
     item1.image=[UIImage imageNamed:@"me"];
     item1.height=64;
     [section1 addItem:item1];
-    LGSettingItem *item2=[LGSettingItem initWithtitle:@"Wii are the futrue."];
-    item2.type=UITableViewCellAccessoryNone;
-    [section1 addItem:item2];
     //保存到groups数组
     [self.groups addObject:section1];
     
     //添加第二组
     LGSettingSection *section2=[LGSettingSection initWithHeaderTitle:@"" footerTitle:nil];
     //添加行
-    [section2 addItemWithTitle:@"我的文件"];
-    [section2 addItemWithTitle:@"我的企业"];
+    [section2 addItemWithTitle:@"新消息通知"];
+    [section2 addItemWithTitle:@"修改密码"];
+    [section2 addItemWithTitle:@"清除缓存"];
     [self.groups addObject:section2];
     
     //添加第三组
     LGSettingSection *section3=[LGSettingSection initWithHeaderTitle:@"" footerTitle:nil];
     //添加行
-    [section3 addItemWithTitle:@"推荐给朋友使用"];
-    [section3 addItemWithTitle:@"客服帮助"];
+    [section3 addItemWithTitle:@"意见反馈"];
+    [section3 addItemWithTitle:@"关于"];
     [self.groups addObject:section3];
     
     //添加第四组
     LGSettingSection *section4=[LGSettingSection initWithHeaderTitle:@"" footerTitle:@"2016 河南软信"];
     //添加行
-    [section4 addItemWithTitle:@"设置"];
+    LGSettingItem *item4=[LGSettingItem initWithtitle:@"                          退出当前账号"];
+   // item4.type=UITableViewCellAccessoryDetailDisclosureButton;
+    [section4 addItem:item4];
+
+   // [section4 addItemWithTitle:@"退出当前账号"];
     [self.groups addObject:section4];
 }
 

@@ -42,13 +42,14 @@
     //设置NavigationBar的背景色
     View=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     View.image=[UIImage imageNamed:@"bg4"];
+    View.backgroundColor=[UIColor whiteColor];
     [self.view addSubview:View];
     
     //navigationbar上面的三个按钮
     UIButton *btn_back=[[UIButton alloc]initWithFrame:CGRectMake(5, 27, 35, 35)];
     [btn_back setImage:[UIImage imageNamed:@"goback_back_orange_on"] forState:UIControlStateNormal];
     [btn_back addTarget:self action:@selector(clickBack:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:btn_back];
+  //  [self.view addSubview:btn_back];
     
     UIButton *btn_signin=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width-60, 30, 50, 30)];
     [btn_signin setTitle:@"注册" forState:UIControlStateNormal];
@@ -56,16 +57,15 @@
    // btn_signin.font=[UIFont systemFontOfSize:17];
     btn_signin.titleLabel.font=[UIFont systemFontOfSize:17];
     [btn_signin addTarget:self action:@selector(zhuce) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:btn_signin];
+   // [self.view addSubview:btn_signin];
     
     UILabel *lb_login=[[UILabel alloc]initWithFrame:CGRectMake((self.view.frame.size.width-30)/2, 30, 50, 30)];
     lb_login.text=@"登陆";
     lb_login.textColor=[UIColor colorWithRed:248/255.0f green:144/255.0f blue:34/255.0f alpha:1];
-    [self.view addSubview:lb_login];
+   // [self.view addSubview:lb_login];
     
     
     [self createButtons];
-    [self createImageViews];
     [self createTextFields];
     
 }
@@ -74,14 +74,14 @@
 
 -(void)createButtons
 {
-    UIButton *btn_login=[self createButtonFrame:CGRectMake(10, 190, self.view.frame.size.width-20, 37) backImageName:nil title:@"登录" titleColor:[UIColor whiteColor]  font:[UIFont systemFontOfSize:19] target:self action:@selector(landClick)];
-    btn_login.backgroundColor=[UIColor colorWithRed:248/255.0f green:144/255.0f blue:34/255.0f alpha:1];
+    UIButton *btn_login=[self createButtonFrame:CGRectMake(10, self.view.frame.size.height/2, self.view.frame.size.width-20, 37) backImageName:nil title:@"登录" titleColor:[UIColor whiteColor]  font:[UIFont systemFontOfSize:19] target:self action:@selector(landClick)];
+    btn_login.backgroundColor=[UIColor colorWithRed:30/255.0f green:155/255.0f blue:240/255.0f alpha:1];
     btn_login.layer.cornerRadius=5.0f;
     
     UIButton *btn_newuser=[self createButtonFrame:CGRectMake(5, 235, 70, 30) backImageName:nil title:@"快速注册" titleColor:[UIColor grayColor] font:[UIFont systemFontOfSize:13] target:self action:@selector(registration:)];
     //newUserBtn.backgroundColor=[UIColor lightGrayColor];
     
-    UIButton *btn_forgetpassword=[self createButtonFrame:CGRectMake(self.view.frame.size.width-75, 235, 60, 30) backImageName:nil title:@"找回密码" titleColor:[UIColor grayColor] font:[UIFont systemFontOfSize:13] target:self action:@selector(fogetPwd:)];
+    UIButton *btn_forgetpassword=[self createButtonFrame:CGRectMake(self.view.frame.size.width-75, self.view.frame.size.height/2+40, 60, 30) backImageName:nil title:@"忘记密码" titleColor:[UIColor blackColor] font:[UIFont systemFontOfSize:15] target:self action:@selector(fogetPwd:)];
     //fogotPwdBtn.backgroundColor=[UIColor lightGrayColor];
     
     
@@ -93,7 +93,7 @@
     #define Button_Width 50.0f      // 宽
     
     [self.view addSubview:btn_login];
-    [self.view addSubview:btn_newuser];
+   // [self.view addSubview:btn_newuser];
     [self.view addSubview:btn_forgetpassword];
     
 }
@@ -177,16 +177,7 @@
 }
 
 
--(void)createImageViews
-{
-    
-    UIImageView *line3=[self createImageViewFrame:CGRectMake(2, 400, 100, 1) imageName:nil color:[UIColor lightGrayColor]];
-    UIImageView *line4=[self createImageViewFrame:CGRectMake(self.view.frame.size.width-100-4, 400, 100, 1) imageName:nil color:[UIColor lightGrayColor]];
-    
-    [self.view addSubview:line3];
-    [self.view addSubview:line4];
-    
-}
+
 
 
 -(UIImageView *)createImageViewFrame:(CGRect)frame imageName:(NSString *)imageName color:(UIColor *)color
@@ -219,15 +210,15 @@
     bgView=[[UIView alloc]initWithFrame:CGRectMake(10, 75, frame.size.width-20, 100)];
     bgView.layer.cornerRadius=3.0;
     bgView.alpha=0.7;
-    bgView.backgroundColor=[UIColor whiteColor];
-    [self.view addSubview:bgView];
+    bgView.backgroundColor=[UIColor clearColor];
+    //[self.view addSubview:bgView];
     
-    user=[self createTextFielfFrame:CGRectMake(60, 10, 271, 30) font:[UIFont systemFontOfSize:14] placeholder:@"请输入您手机号码"];
+    user=[self createTextFielfFrame:CGRectMake(60, self.view.frame.size.height/2-130, 271, 30) font:[UIFont systemFontOfSize:16] placeholder:@"账号"];
     //user.text=@"13419693608";
     user.keyboardType=UIKeyboardTypeNumberPad;
     user.clearButtonMode = UITextFieldViewModeWhileEditing;
     
-    pwd=[self createTextFielfFrame:CGRectMake(60, 60, 271, 30) font:[UIFont systemFontOfSize:14]  placeholder:@"密码" ];
+    pwd=[self createTextFielfFrame:CGRectMake(60, self.view.frame.size.height/2-80, 271, 30) font:[UIFont systemFontOfSize:16]  placeholder:@"密码" ];
     pwd.clearButtonMode = UITextFieldViewModeWhileEditing;
     //pwd.text=@"123456";
     //密文样式
@@ -235,16 +226,16 @@
     //pwd.keyboardType=UIKeyboardTypeNumberPad;
     
     
-    UIImageView *userImageView=[self createImageViewFrame:CGRectMake(20, 10, 25, 25) imageName:@"ic_landing_nickname" color:nil];
-    UIImageView *pwdImageView=[self createImageViewFrame:CGRectMake(20, 60, 25, 25) imageName:@"mm_normal" color:nil];
-    UIImageView *line1=[self createImageViewFrame:CGRectMake(20, 50, bgView.frame.size.width-40, 1) imageName:nil color:[UIColor colorWithRed:180/255.0f green:180/255.0f blue:180/255.0f alpha:.3]];
+    UIImageView *userImageView=[self createImageViewFrame:CGRectMake(20, self.view.frame.size.height/2-130, 25, 25) imageName:@"ic_landing_nickname" color:nil];
+    UIImageView *pwdImageView=[self createImageViewFrame:CGRectMake(20, self.view.frame.size.height/2-80, 25, 25) imageName:@"mm_normal" color:nil];
+   
     
-    [bgView addSubview:user];
-    [bgView addSubview:pwd];
+    [self.view addSubview:user];
+    [self.view addSubview:pwd];
     
-    [bgView addSubview:userImageView];
-    [bgView addSubview:pwdImageView];
-    [bgView addSubview:line1];
+    [self.view addSubview:userImageView];
+    [self.view addSubview:pwdImageView];
+   // [bgView addSubview:line1];
 }
 
 
@@ -254,7 +245,7 @@
     
     textField.font=font;
     
-    textField.textColor=[UIColor grayColor];
+    textField.textColor=[UIColor blackColor];
     
     textField.borderStyle=UITextBorderStyleNone;
     

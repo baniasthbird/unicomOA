@@ -30,6 +30,7 @@
 		2CFEAD361C7188500054730E /* OAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD351C7188500054730E /* OAViewController.m */; };
 		2CFEAD441C72B8B90054730E /* LGSettingItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD411C72B8B90054730E /* LGSettingItem.m */; };
 		2CFEAD451C72B8B90054730E /* LGSettingSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD431C72B8B90054730E /* LGSettingSection.m */; };
+		2CFEAD801C72C7050054730E /* node.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CFEAD7F1C72C7050054730E /* node.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +99,7 @@
 		2CFEAD411C72B8B90054730E /* LGSettingItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LGSettingItem.m; path = Base/Settings/Modal/LGSettingItem.m; sourceTree = "<group>"; };
 		2CFEAD421C72B8B90054730E /* LGSettingSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LGSettingSection.h; path = Base/Settings/Modal/LGSettingSection.h; sourceTree = "<group>"; };
 		2CFEAD431C72B8B90054730E /* LGSettingSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LGSettingSection.m; path = Base/Settings/Modal/LGSettingSection.m; sourceTree = "<group>"; };
+		2CFEAD7F1C72C7050054730E /* node.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = node.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,7 +150,8 @@
 		2C35B0491C7062160003BF6C /* unicomOA */ = {
 			isa = PBXGroup;
 			children = (
-				2CFEAD3F1C72B6870054730E /* Modal */,
+				2CFEAD461C72C3410054730E /* ContactViewBase */,
+				2CFEAD3F1C72B6870054730E /* SettingViewModal */,
 				2CFEAD1E1C71789F0054730E /* View */,
 				2C35B07D1C70662D0003BF6C /* Login */,
 				2C35B04D1C7062160003BF6C /* AppDelegate.h */,
@@ -159,6 +162,7 @@
 				2C35B0561C7062160003BF6C /* Assets.xcassets */,
 				2C35B0581C7062160003BF6C /* LaunchScreen.storyboard */,
 				2C35B05B1C7062160003BF6C /* Info.plist */,
+				2CFEAD7F1C72C7050054730E /* node.plist */,
 				2C35B04A1C7062160003BF6C /* Supporting Files */,
 			);
 			path = unicomOA;
@@ -232,7 +236,7 @@
 			name = View;
 			sourceTree = "<group>";
 		};
-		2CFEAD3F1C72B6870054730E /* Modal */ = {
+		2CFEAD3F1C72B6870054730E /* SettingViewModal */ = {
 			isa = PBXGroup;
 			children = (
 				2CFEAD401C72B8B90054730E /* LGSettingItem.h */,
@@ -240,7 +244,14 @@
 				2CFEAD421C72B8B90054730E /* LGSettingSection.h */,
 				2CFEAD431C72B8B90054730E /* LGSettingSection.m */,
 			);
-			name = Modal;
+			name = SettingViewModal;
+			sourceTree = "<group>";
+		};
+		2CFEAD461C72C3410054730E /* ContactViewBase */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ContactViewBase;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -346,6 +357,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CFEAD801C72C7050054730E /* node.plist in Resources */,
 				2C35B05A1C7062160003BF6C /* LaunchScreen.storyboard in Resources */,
 				2C35B0571C7062160003BF6C /* Assets.xcassets in Resources */,
 				2C35B0551C7062160003BF6C /* Main.storyboard in Resources */,

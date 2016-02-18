@@ -20,6 +20,7 @@
     if (self) {
         // Custom initialization
         self.title = @"消息";
+        
     }
     return self;
 }
