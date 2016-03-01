@@ -28,7 +28,6 @@
 -(instancetype)init {
     self.title = @"我";
     
-    self.tableView.tintColor=[UIColor redColor];
     //设置样式
     return [self initWithStyle:UITableViewStyleGrouped];
     

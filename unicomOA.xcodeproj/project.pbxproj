@@ -17,12 +17,14 @@
 		2C35B0701C7062160003BF6C /* unicomOAUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C35B06F1C7062160003BF6C /* unicomOAUITests.m */; };
 		2C35B0D21C7157120003BF6C /* settingPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C35B0D11C7157120003BF6C /* settingPasswordViewController.m */; };
 		2C35B0D51C715CB90003BF6C /* settingHeaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C35B0D41C715CB90003BF6C /* settingHeaderViewController.m */; };
+		2C5460A81C82F5C3005C5AB9 /* UserEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5460A71C82F5C3005C5AB9 /* UserEntity.m */; };
+		2C5460BD1C854733005C5AB9 /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5460BB1C854733005C5AB9 /* TableViewCell.m */; };
+		2C5460BE1C854733005C5AB9 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C5460BC1C854733005C5AB9 /* TableViewCell.xib */; };
 		2CFEAD181C7168980054730E /* forgetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD131C7168980054730E /* forgetPasswordViewController.m */; };
 		2CFEAD191C7168980054730E /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD151C7168980054730E /* LoginViewController.m */; };
 		2CFEAD1A1C7168980054730E /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD171C7168980054730E /* SignInViewController.m */; };
 		2CFEAD1D1C7173690054730E /* newPassWordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD1C1C7173690054730E /* newPassWordViewController.m */; };
 		2CFEAD241C717F910054730E /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD231C717F910054730E /* MessageViewController.m */; };
-		2CFEAD271C717FA70054730E /* ContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD261C717FA70054730E /* ContactViewController.m */; };
 		2CFEAD2A1C717FCB0054730E /* FunctionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD291C717FCB0054730E /* FunctionViewController.m */; };
 		2CFEAD2D1C717FDC0054730E /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD2C1C717FDC0054730E /* SettingViewController.m */; };
 		2CFEAD301C7181F30054730E /* NTButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD2F1C7181F30054730E /* NTButton.m */; };
@@ -30,7 +32,30 @@
 		2CFEAD361C7188500054730E /* OAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD351C7188500054730E /* OAViewController.m */; };
 		2CFEAD441C72B8B90054730E /* LGSettingItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD411C72B8B90054730E /* LGSettingItem.m */; };
 		2CFEAD451C72B8B90054730E /* LGSettingSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD431C72B8B90054730E /* LGSettingSection.m */; };
-		2CFEAD801C72C7050054730E /* node.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CFEAD7F1C72C7050054730E /* node.plist */; };
+		2CFEADA61C769EBF0054730E /* friends.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CFEADA41C769EBF0054730E /* friends.plist */; };
+		2CFEADA71C769EBF0054730E /* messages.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CFEADA51C769EBF0054730E /* messages.plist */; };
+		2CFEADB41C76A6350054730E /* CellFrameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEADAD1C76A6350054730E /* CellFrameModel.m */; };
+		2CFEADB51C76A6350054730E /* Friend.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEADAF1C76A6350054730E /* Friend.m */; };
+		2CFEADB61C76A6350054730E /* FriendGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEADB11C76A6350054730E /* FriendGroup.m */; };
+		2CFEADB71C76A6350054730E /* MessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEADB31C76A6350054730E /* MessageModel.m */; };
+		2CFEADBC1C76A6440054730E /* HeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEADB91C76A6440054730E /* HeadView.m */; };
+		2CFEADBD1C76A6440054730E /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEADBB1C76A6440054730E /* MessageCell.m */; };
+		2CFEADC01C76A6520054730E /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEADBF1C76A6520054730E /* ChatViewController.m */; };
+		2CFEADC51C76A65E0054730E /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEADC21C76A65E0054730E /* NSString+Extension.m */; };
+		2CFEADC61C76A65E0054730E /* UIImage+ResizeImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEADC41C76A65E0054730E /* UIImage+ResizeImage.m */; };
+		2CFEADC91C76D96B0054730E /* ContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEADC81C76D96B0054730E /* ContactViewController.m */; };
+		2CFEADCC1C76E56D0054730E /* SearchResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEADCB1C76E56D0054730E /* SearchResultViewController.m */; };
+		2CFEADD21C770D6F0054730E /* UIImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEADCF1C770D6F0054730E /* UIImageButton.m */; };
+		2CFEADD31C770D6F0054730E /* UITableGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEADD11C770D6F0054730E /* UITableGridViewCell.m */; };
+		2CFEADD71C79CCDE0054730E /* NotesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEADD61C79CCDE0054730E /* NotesViewController.m */; };
+		2CFEADDA1C79D9480054730E /* NewNotesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEADD91C79D9480054730E /* NewNotesViewController.m */; };
+		2CFEADE61C7C05830054730E /* LYButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEADE01C7C05830054730E /* LYButton.m */; };
+		2CFEADE71C7C05830054730E /* MenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEADE21C7C05830054730E /* MenuTableViewCell.m */; };
+		2CFEADE81C7C05830054730E /* MenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CFEADE31C7C05830054730E /* MenuTableViewCell.xib */; };
+		2CFEADE91C7C05830054730E /* UIButton+Extra.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEADE51C7C05830054730E /* UIButton+Extra.m */; };
+		2CFEADEF1C7C06CB0054730E /* CellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEADEC1C7C06CB0054730E /* CellModel.m */; };
+		2CFEADF01C7C06CB0054730E /* MenuItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEADEE1C7C06CB0054730E /* MenuItemModel.m */; };
+		2CFEADF31C7C27020054730E /* UIViewExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEADF21C7C27020054730E /* UIViewExt.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +96,12 @@
 		2C35B0D11C7157120003BF6C /* settingPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = settingPasswordViewController.m; path = Login/settingPasswordViewController.m; sourceTree = "<group>"; };
 		2C35B0D31C715CB90003BF6C /* settingHeaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = settingHeaderViewController.h; path = Login/settingHeaderViewController.h; sourceTree = "<group>"; };
 		2C35B0D41C715CB90003BF6C /* settingHeaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = settingHeaderViewController.m; path = Login/settingHeaderViewController.m; sourceTree = "<group>"; };
+		2C5460A51C7FDDA6005C5AB9 /* NotePassValueDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NotePassValueDelegate.h; path = Base/Function/NotesModel/NotePassValueDelegate.h; sourceTree = "<group>"; };
+		2C5460A61C82F580005C5AB9 /* UserEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = UserEntity.h; path = Base/Function/NotesModel/UserEntity.h; sourceTree = "<group>"; };
+		2C5460A71C82F5C3005C5AB9 /* UserEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserEntity.m; path = Base/Function/NotesModel/UserEntity.m; sourceTree = "<group>"; };
+		2C5460BA1C854733005C5AB9 /* TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TableViewCell.h; path = Base/Function/NotesViews/TableViewCell.h; sourceTree = "<group>"; };
+		2C5460BB1C854733005C5AB9 /* TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TableViewCell.m; path = Base/Function/NotesViews/TableViewCell.m; sourceTree = "<group>"; };
+		2C5460BC1C854733005C5AB9 /* TableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TableViewCell.xib; path = Base/Function/NotesViews/TableViewCell.xib; sourceTree = "<group>"; };
 		2CFEAD121C7168980054730E /* forgetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = forgetPasswordViewController.h; path = Login/forgetPasswordViewController.h; sourceTree = "<group>"; };
 		2CFEAD131C7168980054730E /* forgetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = forgetPasswordViewController.m; path = Login/forgetPasswordViewController.m; sourceTree = "<group>"; };
 		2CFEAD141C7168980054730E /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = Login/LoginViewController.h; sourceTree = "<group>"; };
@@ -81,8 +112,6 @@
 		2CFEAD1C1C7173690054730E /* newPassWordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = newPassWordViewController.m; path = Login/newPassWordViewController.m; sourceTree = "<group>"; };
 		2CFEAD221C717F910054730E /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageViewController.h; path = View/MessageViewController.h; sourceTree = "<group>"; };
 		2CFEAD231C717F910054730E /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageViewController.m; path = View/MessageViewController.m; sourceTree = "<group>"; };
-		2CFEAD251C717FA70054730E /* ContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContactViewController.h; path = View/ContactViewController.h; sourceTree = "<group>"; };
-		2CFEAD261C717FA70054730E /* ContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContactViewController.m; path = View/ContactViewController.m; sourceTree = "<group>"; };
 		2CFEAD281C717FCB0054730E /* FunctionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FunctionViewController.h; path = View/FunctionViewController.h; sourceTree = "<group>"; };
 		2CFEAD291C717FCB0054730E /* FunctionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FunctionViewController.m; path = View/FunctionViewController.m; sourceTree = "<group>"; };
 		2CFEAD2B1C717FDC0054730E /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
@@ -99,7 +128,51 @@
 		2CFEAD411C72B8B90054730E /* LGSettingItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LGSettingItem.m; path = Base/Settings/Modal/LGSettingItem.m; sourceTree = "<group>"; };
 		2CFEAD421C72B8B90054730E /* LGSettingSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LGSettingSection.h; path = Base/Settings/Modal/LGSettingSection.h; sourceTree = "<group>"; };
 		2CFEAD431C72B8B90054730E /* LGSettingSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LGSettingSection.m; path = Base/Settings/Modal/LGSettingSection.m; sourceTree = "<group>"; };
-		2CFEAD7F1C72C7050054730E /* node.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = node.plist; sourceTree = "<group>"; };
+		2CFEADA41C769EBF0054730E /* friends.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = friends.plist; sourceTree = "<group>"; };
+		2CFEADA51C769EBF0054730E /* messages.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = messages.plist; sourceTree = "<group>"; };
+		2CFEADAC1C76A6350054730E /* CellFrameModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CellFrameModel.h; path = Base/Contact/Model/CellFrameModel.h; sourceTree = "<group>"; };
+		2CFEADAD1C76A6350054730E /* CellFrameModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CellFrameModel.m; path = Base/Contact/Model/CellFrameModel.m; sourceTree = "<group>"; };
+		2CFEADAE1C76A6350054730E /* Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Friend.h; path = Base/Contact/Model/Friend.h; sourceTree = "<group>"; };
+		2CFEADAF1C76A6350054730E /* Friend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Friend.m; path = Base/Contact/Model/Friend.m; sourceTree = "<group>"; };
+		2CFEADB01C76A6350054730E /* FriendGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FriendGroup.h; path = Base/Contact/Model/FriendGroup.h; sourceTree = "<group>"; };
+		2CFEADB11C76A6350054730E /* FriendGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FriendGroup.m; path = Base/Contact/Model/FriendGroup.m; sourceTree = "<group>"; };
+		2CFEADB21C76A6350054730E /* MessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageModel.h; path = Base/Contact/Model/MessageModel.h; sourceTree = "<group>"; };
+		2CFEADB31C76A6350054730E /* MessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageModel.m; path = Base/Contact/Model/MessageModel.m; sourceTree = "<group>"; };
+		2CFEADB81C76A6440054730E /* HeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HeadView.h; path = Base/Contact/View/HeadView.h; sourceTree = "<group>"; };
+		2CFEADB91C76A6440054730E /* HeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HeadView.m; path = Base/Contact/View/HeadView.m; sourceTree = "<group>"; };
+		2CFEADBA1C76A6440054730E /* MessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageCell.h; path = Base/Contact/View/MessageCell.h; sourceTree = "<group>"; };
+		2CFEADBB1C76A6440054730E /* MessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageCell.m; path = Base/Contact/View/MessageCell.m; sourceTree = "<group>"; };
+		2CFEADBE1C76A6520054730E /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChatViewController.h; path = Base/Contact/Controller/ChatViewController.h; sourceTree = "<group>"; };
+		2CFEADBF1C76A6520054730E /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChatViewController.m; path = Base/Contact/Controller/ChatViewController.m; sourceTree = "<group>"; };
+		2CFEADC11C76A65E0054730E /* NSString+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Extension.h"; path = "Base/Contact/Other/NSString+Extension.h"; sourceTree = "<group>"; };
+		2CFEADC21C76A65E0054730E /* NSString+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Extension.m"; path = "Base/Contact/Other/NSString+Extension.m"; sourceTree = "<group>"; };
+		2CFEADC31C76A65E0054730E /* UIImage+ResizeImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+ResizeImage.h"; path = "Base/Contact/Other/UIImage+ResizeImage.h"; sourceTree = "<group>"; };
+		2CFEADC41C76A65E0054730E /* UIImage+ResizeImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+ResizeImage.m"; path = "Base/Contact/Other/UIImage+ResizeImage.m"; sourceTree = "<group>"; };
+		2CFEADC71C76D96B0054730E /* ContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContactViewController.h; path = View/ContactViewController.h; sourceTree = "<group>"; };
+		2CFEADC81C76D96B0054730E /* ContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContactViewController.m; path = View/ContactViewController.m; sourceTree = "<group>"; };
+		2CFEADCA1C76E56D0054730E /* SearchResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchResultViewController.h; path = Base/Contact/Controller/SearchResultViewController.h; sourceTree = "<group>"; };
+		2CFEADCB1C76E56D0054730E /* SearchResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchResultViewController.m; path = Base/Contact/Controller/SearchResultViewController.m; sourceTree = "<group>"; };
+		2CFEADCE1C770D6F0054730E /* UIImageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIImageButton.h; path = Base/Function/UIImageButton.h; sourceTree = "<group>"; };
+		2CFEADCF1C770D6F0054730E /* UIImageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIImageButton.m; path = Base/Function/UIImageButton.m; sourceTree = "<group>"; };
+		2CFEADD01C770D6F0054730E /* UITableGridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UITableGridViewCell.h; path = Base/Function/UITableGridViewCell.h; sourceTree = "<group>"; };
+		2CFEADD11C770D6F0054730E /* UITableGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UITableGridViewCell.m; path = Base/Function/UITableGridViewCell.m; sourceTree = "<group>"; };
+		2CFEADD51C79CCDE0054730E /* NotesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NotesViewController.h; path = Base/Function/Controller/NotesViewController.h; sourceTree = "<group>"; };
+		2CFEADD61C79CCDE0054730E /* NotesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NotesViewController.m; path = Base/Function/Controller/NotesViewController.m; sourceTree = "<group>"; };
+		2CFEADD81C79D9480054730E /* NewNotesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewNotesViewController.h; path = Base/Function/Controller/NewNotesViewController.h; sourceTree = "<group>"; };
+		2CFEADD91C79D9480054730E /* NewNotesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewNotesViewController.m; path = Base/Function/Controller/NewNotesViewController.m; sourceTree = "<group>"; };
+		2CFEADDF1C7C05830054730E /* LYButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LYButton.h; path = Base/Function/NotesViews/LYButton.h; sourceTree = "<group>"; };
+		2CFEADE01C7C05830054730E /* LYButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LYButton.m; path = Base/Function/NotesViews/LYButton.m; sourceTree = "<group>"; };
+		2CFEADE11C7C05830054730E /* MenuTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuTableViewCell.h; path = Base/Function/NotesViews/MenuTableViewCell.h; sourceTree = "<group>"; };
+		2CFEADE21C7C05830054730E /* MenuTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenuTableViewCell.m; path = Base/Function/NotesViews/MenuTableViewCell.m; sourceTree = "<group>"; };
+		2CFEADE31C7C05830054730E /* MenuTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MenuTableViewCell.xib; path = Base/Function/NotesViews/MenuTableViewCell.xib; sourceTree = "<group>"; };
+		2CFEADE41C7C05830054730E /* UIButton+Extra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIButton+Extra.h"; path = "Base/Function/NotesViews/UIButton+Extra.h"; sourceTree = "<group>"; };
+		2CFEADE51C7C05830054730E /* UIButton+Extra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIButton+Extra.m"; path = "Base/Function/NotesViews/UIButton+Extra.m"; sourceTree = "<group>"; };
+		2CFEADEB1C7C06CB0054730E /* CellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CellModel.h; path = Base/Function/NotesModel/CellModel.h; sourceTree = "<group>"; };
+		2CFEADEC1C7C06CB0054730E /* CellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CellModel.m; path = Base/Function/NotesModel/CellModel.m; sourceTree = "<group>"; };
+		2CFEADED1C7C06CB0054730E /* MenuItemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuItemModel.h; path = Base/Function/NotesModel/MenuItemModel.h; sourceTree = "<group>"; };
+		2CFEADEE1C7C06CB0054730E /* MenuItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenuItemModel.m; path = Base/Function/NotesModel/MenuItemModel.m; sourceTree = "<group>"; };
+		2CFEADF11C7C27020054730E /* UIViewExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIViewExt.h; path = Base/Function/NotesViews/UIViewExt.h; sourceTree = "<group>"; };
+		2CFEADF21C7C27020054730E /* UIViewExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIViewExt.m; path = Base/Function/NotesViews/UIViewExt.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +223,7 @@
 		2C35B0491C7062160003BF6C /* unicomOA */ = {
 			isa = PBXGroup;
 			children = (
+				2CFEADCD1C770D1D0054730E /* FunctionViewBase */,
 				2CFEAD461C72C3410054730E /* ContactViewBase */,
 				2CFEAD3F1C72B6870054730E /* SettingViewModal */,
 				2CFEAD1E1C71789F0054730E /* View */,
@@ -162,7 +236,6 @@
 				2C35B0561C7062160003BF6C /* Assets.xcassets */,
 				2C35B0581C7062160003BF6C /* LaunchScreen.storyboard */,
 				2C35B05B1C7062160003BF6C /* Info.plist */,
-				2CFEAD7F1C72C7050054730E /* node.plist */,
 				2C35B04A1C7062160003BF6C /* Supporting Files */,
 			);
 			path = unicomOA;
@@ -174,6 +247,8 @@
 				2CFEAD391C71C90C0054730E /* PrefixHeader.pch */,
 				2C35B04B1C7062160003BF6C /* main.m */,
 				2CFEAD3A1C71CAFB0054730E /* WxHxD.h */,
+				2CFEADA41C769EBF0054730E /* friends.plist */,
+				2CFEADA51C769EBF0054730E /* messages.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -220,8 +295,6 @@
 			children = (
 				2CFEAD221C717F910054730E /* MessageViewController.h */,
 				2CFEAD231C717F910054730E /* MessageViewController.m */,
-				2CFEAD251C717FA70054730E /* ContactViewController.h */,
-				2CFEAD261C717FA70054730E /* ContactViewController.m */,
 				2CFEAD281C717FCB0054730E /* FunctionViewController.h */,
 				2CFEAD291C717FCB0054730E /* FunctionViewController.m */,
 				2CFEAD2B1C717FDC0054730E /* SettingViewController.h */,
@@ -232,6 +305,8 @@
 				2CFEAD321C7183930054730E /* BaseNavigationViewController.m */,
 				2CFEAD341C7188500054730E /* OAViewController.h */,
 				2CFEAD351C7188500054730E /* OAViewController.m */,
+				2CFEADC71C76D96B0054730E /* ContactViewController.h */,
+				2CFEADC81C76D96B0054730E /* ContactViewController.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -250,8 +325,118 @@
 		2CFEAD461C72C3410054730E /* ContactViewBase */ = {
 			isa = PBXGroup;
 			children = (
+				2CFEADAB1C76A5180054730E /* Model */,
+				2CFEADAA1C76A5100054730E /* View */,
+				2CFEADA91C76A4F30054730E /* Controller */,
+				2CFEADA81C76A4E90054730E /* Other */,
 			);
 			name = ContactViewBase;
+			sourceTree = "<group>";
+		};
+		2CFEADA81C76A4E90054730E /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				2CFEADC11C76A65E0054730E /* NSString+Extension.h */,
+				2CFEADC21C76A65E0054730E /* NSString+Extension.m */,
+				2CFEADC31C76A65E0054730E /* UIImage+ResizeImage.h */,
+				2CFEADC41C76A65E0054730E /* UIImage+ResizeImage.m */,
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
+		2CFEADA91C76A4F30054730E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2CFEADBE1C76A6520054730E /* ChatViewController.h */,
+				2CFEADBF1C76A6520054730E /* ChatViewController.m */,
+				2CFEADCA1C76E56D0054730E /* SearchResultViewController.h */,
+				2CFEADCB1C76E56D0054730E /* SearchResultViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		2CFEADAA1C76A5100054730E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2CFEADB81C76A6440054730E /* HeadView.h */,
+				2CFEADB91C76A6440054730E /* HeadView.m */,
+				2CFEADBA1C76A6440054730E /* MessageCell.h */,
+				2CFEADBB1C76A6440054730E /* MessageCell.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		2CFEADAB1C76A5180054730E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2CFEADAC1C76A6350054730E /* CellFrameModel.h */,
+				2CFEADAD1C76A6350054730E /* CellFrameModel.m */,
+				2CFEADAE1C76A6350054730E /* Friend.h */,
+				2CFEADAF1C76A6350054730E /* Friend.m */,
+				2CFEADB01C76A6350054730E /* FriendGroup.h */,
+				2CFEADB11C76A6350054730E /* FriendGroup.m */,
+				2CFEADB21C76A6350054730E /* MessageModel.h */,
+				2CFEADB31C76A6350054730E /* MessageModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		2CFEADCD1C770D1D0054730E /* FunctionViewBase */ = {
+			isa = PBXGroup;
+			children = (
+				2CFEADEA1C7C06B60054730E /* NotesModel */,
+				2CFEADDE1C7C050F0054730E /* NotesViews */,
+				2CFEADD41C79A3550054730E /* NotesController */,
+				2CFEADCE1C770D6F0054730E /* UIImageButton.h */,
+				2CFEADCF1C770D6F0054730E /* UIImageButton.m */,
+				2CFEADD01C770D6F0054730E /* UITableGridViewCell.h */,
+				2CFEADD11C770D6F0054730E /* UITableGridViewCell.m */,
+			);
+			name = FunctionViewBase;
+			sourceTree = "<group>";
+		};
+		2CFEADD41C79A3550054730E /* NotesController */ = {
+			isa = PBXGroup;
+			children = (
+				2CFEADD51C79CCDE0054730E /* NotesViewController.h */,
+				2CFEADD61C79CCDE0054730E /* NotesViewController.m */,
+				2CFEADD81C79D9480054730E /* NewNotesViewController.h */,
+				2CFEADD91C79D9480054730E /* NewNotesViewController.m */,
+			);
+			name = NotesController;
+			sourceTree = "<group>";
+		};
+		2CFEADDE1C7C050F0054730E /* NotesViews */ = {
+			isa = PBXGroup;
+			children = (
+				2C5460BA1C854733005C5AB9 /* TableViewCell.h */,
+				2C5460BB1C854733005C5AB9 /* TableViewCell.m */,
+				2C5460BC1C854733005C5AB9 /* TableViewCell.xib */,
+				2CFEADF11C7C27020054730E /* UIViewExt.h */,
+				2CFEADF21C7C27020054730E /* UIViewExt.m */,
+				2CFEADDF1C7C05830054730E /* LYButton.h */,
+				2CFEADE01C7C05830054730E /* LYButton.m */,
+				2CFEADE11C7C05830054730E /* MenuTableViewCell.h */,
+				2CFEADE21C7C05830054730E /* MenuTableViewCell.m */,
+				2CFEADE31C7C05830054730E /* MenuTableViewCell.xib */,
+				2CFEADE41C7C05830054730E /* UIButton+Extra.h */,
+				2CFEADE51C7C05830054730E /* UIButton+Extra.m */,
+				2C5460A51C7FDDA6005C5AB9 /* NotePassValueDelegate.h */,
+			);
+			name = NotesViews;
+			sourceTree = "<group>";
+		};
+		2CFEADEA1C7C06B60054730E /* NotesModel */ = {
+			isa = PBXGroup;
+			children = (
+				2CFEADEB1C7C06CB0054730E /* CellModel.h */,
+				2CFEADEC1C7C06CB0054730E /* CellModel.m */,
+				2CFEADED1C7C06CB0054730E /* MenuItemModel.h */,
+				2CFEADEE1C7C06CB0054730E /* MenuItemModel.m */,
+				2C5460A61C82F580005C5AB9 /* UserEntity.h */,
+				2C5460A71C82F5C3005C5AB9 /* UserEntity.m */,
+			);
+			name = NotesModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -357,9 +542,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2CFEAD801C72C7050054730E /* node.plist in Resources */,
+				2CFEADE81C7C05830054730E /* MenuTableViewCell.xib in Resources */,
 				2C35B05A1C7062160003BF6C /* LaunchScreen.storyboard in Resources */,
+				2C5460BE1C854733005C5AB9 /* TableViewCell.xib in Resources */,
 				2C35B0571C7062160003BF6C /* Assets.xcassets in Resources */,
+				2CFEADA71C769EBF0054730E /* messages.plist in Resources */,
+				2CFEADA61C769EBF0054730E /* friends.plist in Resources */,
 				2C35B0551C7062160003BF6C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -386,23 +574,45 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CFEAD1A1C7168980054730E /* SignInViewController.m in Sources */,
-				2CFEAD271C717FA70054730E /* ContactViewController.m in Sources */,
+				2C5460BD1C854733005C5AB9 /* TableViewCell.m in Sources */,
 				2CFEAD241C717F910054730E /* MessageViewController.m in Sources */,
 				2CFEAD331C7183930054730E /* BaseNavigationViewController.m in Sources */,
+				2C5460A81C82F5C3005C5AB9 /* UserEntity.m in Sources */,
 				2CFEAD2D1C717FDC0054730E /* SettingViewController.m in Sources */,
+				2CFEADE61C7C05830054730E /* LYButton.m in Sources */,
 				2C35B0D21C7157120003BF6C /* settingPasswordViewController.m in Sources */,
+				2CFEADDA1C79D9480054730E /* NewNotesViewController.m in Sources */,
 				2C35B0521C7062160003BF6C /* ViewController.m in Sources */,
+				2CFEADB61C76A6350054730E /* FriendGroup.m in Sources */,
 				2CFEAD2A1C717FCB0054730E /* FunctionViewController.m in Sources */,
+				2CFEADEF1C7C06CB0054730E /* CellModel.m in Sources */,
+				2CFEADBC1C76A6440054730E /* HeadView.m in Sources */,
 				2C35B04F1C7062160003BF6C /* AppDelegate.m in Sources */,
 				2C35B04C1C7062160003BF6C /* main.m in Sources */,
+				2CFEADD71C79CCDE0054730E /* NotesViewController.m in Sources */,
+				2CFEADD21C770D6F0054730E /* UIImageButton.m in Sources */,
+				2CFEADCC1C76E56D0054730E /* SearchResultViewController.m in Sources */,
+				2CFEADE71C7C05830054730E /* MenuTableViewCell.m in Sources */,
+				2CFEADB41C76A6350054730E /* CellFrameModel.m in Sources */,
+				2CFEADB51C76A6350054730E /* Friend.m in Sources */,
+				2CFEADF01C7C06CB0054730E /* MenuItemModel.m in Sources */,
+				2CFEADF31C7C27020054730E /* UIViewExt.m in Sources */,
 				2CFEAD191C7168980054730E /* LoginViewController.m in Sources */,
 				2CFEAD451C72B8B90054730E /* LGSettingSection.m in Sources */,
+				2CFEADD31C770D6F0054730E /* UITableGridViewCell.m in Sources */,
 				2CFEAD301C7181F30054730E /* NTButton.m in Sources */,
+				2CFEADC61C76A65E0054730E /* UIImage+ResizeImage.m in Sources */,
 				2CFEAD361C7188500054730E /* OAViewController.m in Sources */,
 				2CFEAD181C7168980054730E /* forgetPasswordViewController.m in Sources */,
+				2CFEADC51C76A65E0054730E /* NSString+Extension.m in Sources */,
+				2CFEADE91C7C05830054730E /* UIButton+Extra.m in Sources */,
 				2CFEAD441C72B8B90054730E /* LGSettingItem.m in Sources */,
 				2CFEAD1D1C7173690054730E /* newPassWordViewController.m in Sources */,
+				2CFEADC91C76D96B0054730E /* ContactViewController.m in Sources */,
+				2CFEADBD1C76A6440054730E /* MessageCell.m in Sources */,
 				2C35B0D51C715CB90003BF6C /* settingHeaderViewController.m in Sources */,
+				2CFEADB71C76A6350054730E /* MessageModel.m in Sources */,
+				2CFEADC01C76A6520054730E /* ChatViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -543,9 +753,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/unicomOA/PrefixHeader.pch";
 				INFOPLIST_FILE = unicomOA/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nsc.unicomOA;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -555,9 +767,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/unicomOA/PrefixHeader.pch";
 				INFOPLIST_FILE = unicomOA/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nsc.unicomOA;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

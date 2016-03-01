@@ -67,7 +67,7 @@
     UINavigationController *navi1=[[BaseNavigationViewController alloc]initWithRootViewController:message];
     
     ContactViewController *contact=[[ContactViewController alloc]init];
-    UINavigationController *navi2=[[UINavigationController alloc]initWithRootViewController:contact];
+    UINavigationController *navi2=[[BaseNavigationViewController alloc]initWithRootViewController:contact];
     
     FunctionViewController *func=[[FunctionViewController alloc]init];
     UINavigationController *navi3=[[UINavigationController alloc]initWithRootViewController:func];
@@ -104,7 +104,7 @@
     CGFloat buttonW = _tabBarView.frame.size.width / 4;
     CGFloat buttonH = _tabBarView.frame.size.height;
     
-    if (iPhone5_5s) {
+    if (iPhone5_5s || iPhone4_4s) {
         customButton.frame = CGRectMake(80 * index, 0, buttonW, buttonH);
     }
     else if (iPhone6) {

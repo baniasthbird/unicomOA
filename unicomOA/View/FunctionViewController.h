@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FunctionViewController : UIViewController
+@interface FunctionViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 
 @end
