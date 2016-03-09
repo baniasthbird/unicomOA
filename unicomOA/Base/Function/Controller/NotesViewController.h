@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "NotePassValueDelegate.h"
+#import "NotesTableVIewCell.h"
 
-@interface NotesViewController : UITableViewController<UINoteViewPassValueDelegate>
+@interface NotesViewController : UITableViewController<UINoteViewPassValueDelegate,NotesTableSlidCellDelegate>
 
 
 @end

@@ -18,7 +18,8 @@
 
 @end
 
-static int i_count =0;
+NSInteger i_count=0;
+
 @implementation NotesViewController
 
 -(void)viewDidLoad {
@@ -44,8 +45,8 @@ static int i_count =0;
     self.tableView.dataSource=self;
     self.tableView.delegate=self;
     
-    _arr_Notes=[NSMutableArray arrayWithCapacity:1];
-    _arr_Notes[0]=@"";
+    _arr_Notes=[NSMutableArray arrayWithCapacity:0];
+    
     
 }
 
@@ -72,17 +73,50 @@ static int i_count =0;
 
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *cellIdentifier = @"cell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    
-    if (cell==nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.textLabel.text= [_arr_Notes objectAtIndex:(_arr_Notes.count-1-indexPath.row)];
+    NotesTableVIewCell *cell=[NotesTableVIewCell cellWithTable:tableView withCellHeight:180];
+    cell.delegate=self;
+    cell.myTag= indexPath.row;
+    NSString *str_note = [_arr_Notes objectAtIndex:(_arr_Notes.count-1-indexPath.row)];
+   // cell.textLabel.text=str_note;
+    NSArray *arr_note= [str_note componentsSeparatedByString:@","];
+    if (arr_note.count==3) {
+        cell.lbl_arrangement.text=[arr_note objectAtIndex:0];
+        cell.lbl_content.text=[arr_note objectAtIndex:1];
+        cell.lbl_time.text=[arr_note objectAtIndex:2];
+    }
+    else {
+        cell.lbl_arrangement.text=@"";
+        cell.lbl_content.text=@"";
+        cell.lbl_time.text=@"";
     }
     
     return cell;
+    /*
+    static NSString *cellIdentifier = @"cell";
+    
+    NotesTableVIewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    
+    if (cell==nil) {
+        cell = [[NotesTableVIewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        NSString *str_note = [_arr_Notes objectAtIndex:(_arr_Notes.count-1-indexPath.row)];
+       // cell.textLabel.text=str_note;
+        NSArray *arr_note= [str_note componentsSeparatedByString:@","];
+        if (arr_note.count==3) {
+            cell.lbl_arrangement.text=[arr_note objectAtIndex:0];
+            cell.lbl_content.text=[arr_note objectAtIndex:1];
+            cell.lbl_time.text=[arr_note objectAtIndex:2];
+        }
+        else {
+            cell.lbl_arrangement.text=@"";
+            cell.lbl_content.text=@"";
+            cell.lbl_time.text=@"";
+        }
+        
+    }
+    
+    return cell;
+     */
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -114,13 +148,14 @@ static int i_count =0;
     NSString *str_tmp=[NSString stringWithFormat:@"%@,%@,%@",str_FenLei,str_Content,str_curTime];
     
     [_arr_Notes addObject:str_tmp];
-    
+    /*
     NSMutableArray *indexPaths=[[NSMutableArray alloc]init];
     NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
     [indexPaths addObject:indexPath];
     
     [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
-    
+    */
+    [self.tableView reloadData];
    /*
     [self.tableView setEditing:YES];
     static NSString *cellIdentifier = @"cell";
@@ -147,4 +182,25 @@ static int i_count =0;
     
     NSLog(@"the get value is %@ %@ %@",str_FenLei,str_Content,str_curTime);
     }
+
+
+-(void)sideslipCellRemoveCell:(NotesTableVIewCell *)cell atIndex:(NSInteger)index {
+
+    [self.arr_Notes removeObjectAtIndex:_arr_Notes.count-1-index];
+    [self.tableView reloadData];
+    
+}
+
+
+-(void)tapCell:(NotesTableVIewCell*)cell atIndex:(NSInteger)index {
+    
+    NewNotesViewController *new_controller=[[NewNotesViewController alloc]init];
+    
+    new_controller.str_FenLei=cell.lbl_arrangement.text;
+    new_controller.str_noteContent=cell.lbl_content.text;  new_controller.str_time=cell.lbl_time.text;
+    
+    [self.navigationController pushViewController:new_controller animated:YES];
+
+    
+}
 @end

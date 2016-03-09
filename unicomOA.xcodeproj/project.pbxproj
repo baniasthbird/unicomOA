@@ -17,6 +17,7 @@
 		2C35B0701C7062160003BF6C /* unicomOAUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C35B06F1C7062160003BF6C /* unicomOAUITests.m */; };
 		2C35B0D21C7157120003BF6C /* settingPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C35B0D11C7157120003BF6C /* settingPasswordViewController.m */; };
 		2C35B0D51C715CB90003BF6C /* settingHeaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C35B0D41C715CB90003BF6C /* settingHeaderViewController.m */; };
+		2C3F219C1C85837F00EBD122 /* NotesTableVIewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3F219B1C85837F00EBD122 /* NotesTableVIewCell.m */; };
 		2C5460A81C82F5C3005C5AB9 /* UserEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5460A71C82F5C3005C5AB9 /* UserEntity.m */; };
 		2C5460BD1C854733005C5AB9 /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5460BB1C854733005C5AB9 /* TableViewCell.m */; };
 		2C5460BE1C854733005C5AB9 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C5460BC1C854733005C5AB9 /* TableViewCell.xib */; };
@@ -96,6 +97,8 @@
 		2C35B0D11C7157120003BF6C /* settingPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = settingPasswordViewController.m; path = Login/settingPasswordViewController.m; sourceTree = "<group>"; };
 		2C35B0D31C715CB90003BF6C /* settingHeaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = settingHeaderViewController.h; path = Login/settingHeaderViewController.h; sourceTree = "<group>"; };
 		2C35B0D41C715CB90003BF6C /* settingHeaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = settingHeaderViewController.m; path = Login/settingHeaderViewController.m; sourceTree = "<group>"; };
+		2C3F219A1C85837F00EBD122 /* NotesTableVIewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NotesTableVIewCell.h; path = Base/Function/NotesViews/NotesTableVIewCell.h; sourceTree = "<group>"; };
+		2C3F219B1C85837F00EBD122 /* NotesTableVIewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NotesTableVIewCell.m; path = Base/Function/NotesViews/NotesTableVIewCell.m; sourceTree = "<group>"; };
 		2C5460A51C7FDDA6005C5AB9 /* NotePassValueDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NotePassValueDelegate.h; path = Base/Function/NotesModel/NotePassValueDelegate.h; sourceTree = "<group>"; };
 		2C5460A61C82F580005C5AB9 /* UserEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = UserEntity.h; path = Base/Function/NotesModel/UserEntity.h; sourceTree = "<group>"; };
 		2C5460A71C82F5C3005C5AB9 /* UserEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserEntity.m; path = Base/Function/NotesModel/UserEntity.m; sourceTree = "<group>"; };
@@ -422,6 +425,8 @@
 				2CFEADE41C7C05830054730E /* UIButton+Extra.h */,
 				2CFEADE51C7C05830054730E /* UIButton+Extra.m */,
 				2C5460A51C7FDDA6005C5AB9 /* NotePassValueDelegate.h */,
+				2C3F219A1C85837F00EBD122 /* NotesTableVIewCell.h */,
+				2C3F219B1C85837F00EBD122 /* NotesTableVIewCell.m */,
 			);
 			name = NotesViews;
 			sourceTree = "<group>";
@@ -595,6 +600,7 @@
 				2CFEADE71C7C05830054730E /* MenuTableViewCell.m in Sources */,
 				2CFEADB41C76A6350054730E /* CellFrameModel.m in Sources */,
 				2CFEADB51C76A6350054730E /* Friend.m in Sources */,
+				2C3F219C1C85837F00EBD122 /* NotesTableVIewCell.m in Sources */,
 				2CFEADF01C7C06CB0054730E /* MenuItemModel.m in Sources */,
 				2CFEADF31C7C27020054730E /* UIViewExt.m in Sources */,
 				2CFEAD191C7168980054730E /* LoginViewController.m in Sources */,
