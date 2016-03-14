@@ -21,6 +21,11 @@
 		2C5460A81C82F5C3005C5AB9 /* UserEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5460A71C82F5C3005C5AB9 /* UserEntity.m */; };
 		2C5460BD1C854733005C5AB9 /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5460BB1C854733005C5AB9 /* TableViewCell.m */; };
 		2C5460BE1C854733005C5AB9 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C5460BC1C854733005C5AB9 /* TableViewCell.xib */; };
+		2CDC2BDD1C8FBFC90067693B /* NewsManagementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDC2BDC1C8FBFC90067693B /* NewsManagementViewController.m */; };
+		2CDC2BE01C8FD1300067693B /* NewsFocusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDC2BDF1C8FD1300067693B /* NewsFocusViewController.m */; };
+		2CDC2BE41C8FFD6C0067693B /* NIDropDown.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDC2BE31C8FFD6C0067693B /* NIDropDown.m */; };
+		2CDC2BF21C9117FE0067693B /* NewsManagementTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDC2BF11C9117FE0067693B /* NewsManagementTableViewCell.m */; };
+		2CDC2BF51C924DAC0067693B /* NewsDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDC2BF41C924DAC0067693B /* NewsDisplayViewController.m */; };
 		2CFEAD181C7168980054730E /* forgetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD131C7168980054730E /* forgetPasswordViewController.m */; };
 		2CFEAD191C7168980054730E /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD151C7168980054730E /* LoginViewController.m */; };
 		2CFEAD1A1C7168980054730E /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD171C7168980054730E /* SignInViewController.m */; };
@@ -105,6 +110,16 @@
 		2C5460BA1C854733005C5AB9 /* TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TableViewCell.h; path = Base/Function/NotesViews/TableViewCell.h; sourceTree = "<group>"; };
 		2C5460BB1C854733005C5AB9 /* TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TableViewCell.m; path = Base/Function/NotesViews/TableViewCell.m; sourceTree = "<group>"; };
 		2C5460BC1C854733005C5AB9 /* TableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TableViewCell.xib; path = Base/Function/NotesViews/TableViewCell.xib; sourceTree = "<group>"; };
+		2CDC2BDB1C8FBFC90067693B /* NewsManagementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsManagementViewController.h; path = Base/Function/NewsController/NewsManagementViewController.h; sourceTree = "<group>"; };
+		2CDC2BDC1C8FBFC90067693B /* NewsManagementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsManagementViewController.m; path = Base/Function/NewsController/NewsManagementViewController.m; sourceTree = "<group>"; };
+		2CDC2BDE1C8FD1300067693B /* NewsFocusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsFocusViewController.h; path = Base/Function/NewsController/NewsFocusViewController.h; sourceTree = "<group>"; };
+		2CDC2BDF1C8FD1300067693B /* NewsFocusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsFocusViewController.m; path = Base/Function/NewsController/NewsFocusViewController.m; sourceTree = "<group>"; };
+		2CDC2BE21C8FFD6C0067693B /* NIDropDown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NIDropDown.h; path = Base/Function/NewsModel/Classes/NIDropDown.h; sourceTree = "<group>"; };
+		2CDC2BE31C8FFD6C0067693B /* NIDropDown.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NIDropDown.m; path = Base/Function/NewsModel/Classes/NIDropDown.m; sourceTree = "<group>"; };
+		2CDC2BF01C9117FE0067693B /* NewsManagementTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsManagementTableViewCell.h; path = Base/Function/NewsModel/NewsManagementTableViewCell.h; sourceTree = "<group>"; };
+		2CDC2BF11C9117FE0067693B /* NewsManagementTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsManagementTableViewCell.m; path = Base/Function/NewsModel/NewsManagementTableViewCell.m; sourceTree = "<group>"; };
+		2CDC2BF31C924DAC0067693B /* NewsDisplayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsDisplayViewController.h; path = Base/Function/NewsController/NewsDisplayViewController.h; sourceTree = "<group>"; };
+		2CDC2BF41C924DAC0067693B /* NewsDisplayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsDisplayViewController.m; path = Base/Function/NewsController/NewsDisplayViewController.m; sourceTree = "<group>"; };
 		2CFEAD121C7168980054730E /* forgetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = forgetPasswordViewController.h; path = Login/forgetPasswordViewController.h; sourceTree = "<group>"; };
 		2CFEAD131C7168980054730E /* forgetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = forgetPasswordViewController.m; path = Login/forgetPasswordViewController.m; sourceTree = "<group>"; };
 		2CFEAD141C7168980054730E /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = Login/LoginViewController.h; sourceTree = "<group>"; };
@@ -293,6 +308,37 @@
 			name = Login;
 			sourceTree = "<group>";
 		};
+		2CDC2BCB1C8FBB390067693B /* NewsView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = NewsView;
+			sourceTree = "<group>";
+		};
+		2CDC2BCD1C8FBB4C0067693B /* NewsController */ = {
+			isa = PBXGroup;
+			children = (
+				2CDC2BDB1C8FBFC90067693B /* NewsManagementViewController.h */,
+				2CDC2BDC1C8FBFC90067693B /* NewsManagementViewController.m */,
+				2CDC2BDE1C8FD1300067693B /* NewsFocusViewController.h */,
+				2CDC2BDF1C8FD1300067693B /* NewsFocusViewController.m */,
+				2CDC2BF31C924DAC0067693B /* NewsDisplayViewController.h */,
+				2CDC2BF41C924DAC0067693B /* NewsDisplayViewController.m */,
+			);
+			name = NewsController;
+			sourceTree = "<group>";
+		};
+		2CDC2BE11C8FFC590067693B /* NewsModel */ = {
+			isa = PBXGroup;
+			children = (
+				2CDC2BE21C8FFD6C0067693B /* NIDropDown.h */,
+				2CDC2BE31C8FFD6C0067693B /* NIDropDown.m */,
+				2CDC2BF01C9117FE0067693B /* NewsManagementTableViewCell.h */,
+				2CDC2BF11C9117FE0067693B /* NewsManagementTableViewCell.m */,
+			);
+			name = NewsModel;
+			sourceTree = "<group>";
+		};
 		2CFEAD1E1C71789F0054730E /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -387,6 +433,9 @@
 		2CFEADCD1C770D1D0054730E /* FunctionViewBase */ = {
 			isa = PBXGroup;
 			children = (
+				2CDC2BE11C8FFC590067693B /* NewsModel */,
+				2CDC2BCD1C8FBB4C0067693B /* NewsController */,
+				2CDC2BCB1C8FBB390067693B /* NewsView */,
 				2CFEADEA1C7C06B60054730E /* NotesModel */,
 				2CFEADDE1C7C050F0054730E /* NotesViews */,
 				2CFEADD41C79A3550054730E /* NotesController */,
@@ -578,6 +627,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CDC2BE01C8FD1300067693B /* NewsFocusViewController.m in Sources */,
 				2CFEAD1A1C7168980054730E /* SignInViewController.m in Sources */,
 				2C5460BD1C854733005C5AB9 /* TableViewCell.m in Sources */,
 				2CFEAD241C717F910054730E /* MessageViewController.m in Sources */,
@@ -592,14 +642,18 @@
 				2CFEAD2A1C717FCB0054730E /* FunctionViewController.m in Sources */,
 				2CFEADEF1C7C06CB0054730E /* CellModel.m in Sources */,
 				2CFEADBC1C76A6440054730E /* HeadView.m in Sources */,
+				2CDC2BF21C9117FE0067693B /* NewsManagementTableViewCell.m in Sources */,
 				2C35B04F1C7062160003BF6C /* AppDelegate.m in Sources */,
 				2C35B04C1C7062160003BF6C /* main.m in Sources */,
 				2CFEADD71C79CCDE0054730E /* NotesViewController.m in Sources */,
 				2CFEADD21C770D6F0054730E /* UIImageButton.m in Sources */,
+				2CDC2BDD1C8FBFC90067693B /* NewsManagementViewController.m in Sources */,
 				2CFEADCC1C76E56D0054730E /* SearchResultViewController.m in Sources */,
 				2CFEADE71C7C05830054730E /* MenuTableViewCell.m in Sources */,
+				2CDC2BE41C8FFD6C0067693B /* NIDropDown.m in Sources */,
 				2CFEADB41C76A6350054730E /* CellFrameModel.m in Sources */,
 				2CFEADB51C76A6350054730E /* Friend.m in Sources */,
+				2CDC2BF51C924DAC0067693B /* NewsDisplayViewController.m in Sources */,
 				2C3F219C1C85837F00EBD122 /* NotesTableVIewCell.m in Sources */,
 				2CFEADF01C7C06CB0054730E /* MenuItemModel.m in Sources */,
 				2CFEADF31C7C27020054730E /* UIViewExt.m in Sources */,

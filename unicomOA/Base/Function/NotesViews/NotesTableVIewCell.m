@@ -80,8 +80,11 @@
         lbl_content=[[UILabel alloc]initWithFrame:CGRectMake(0.0f, 30.0f, self.frame.size.width, 100.0f)];
         lbl_time=[[UILabel alloc]initWithFrame:CGRectMake(0.0f, 140.0f, self.frame.size.width, 30.0f)];
         lbl_arrangement.textColor=[UIColor blackColor];
+        lbl_arrangement.font=[UIFont systemFontOfSize:14];
         lbl_content.textColor=[UIColor blackColor];
-        lbl_time.textColor=[UIColor blackColor];
+        lbl_content.font=[UIFont systemFontOfSize:20];
+        lbl_time.textColor=[UIColor lightGrayColor];
+        lbl_time.font=[UIFont systemFontOfSize:14];
         [baseView addSubview:lbl_arrangement];
         [baseView addSubview:lbl_content];
         [baseView addSubview:lbl_time];
@@ -133,7 +136,7 @@
 {
     if ([self.delegate respondsToSelector:@selector(tapCell:atIndex:)]) {
         [self.delegate tapCell:self atIndex:self.myTag];
-        NSLog(@"%ld,%@",self.myTag,@"移除");
+        NSLog(@"%ld,%@",self.myTag,@"进入");
     }
 }
 
