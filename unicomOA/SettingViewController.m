@@ -9,6 +9,9 @@
 #import "SettingViewController.h"
 #import "LGSettingItem.h"
 #import "LGSettingSection.h"
+#import "NewsSettingViewController.h"
+#import "PasswordViewController.h"
+#import "SendFeedBackViewController.h"
 
 @interface SettingViewController ()
 @property (strong,nonatomic) NSMutableArray *groups;
@@ -153,7 +156,44 @@
 
 #pragma mark 点击事件
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"点击了第%ld组，第%ld行",indexPath.section,indexPath.row);
+    //NSLog(@"点击了第%ld组，第%ld行",indexPath.section,indexPath.row);
+    if (indexPath.section==1 && indexPath.row==0) {
+        NewsSettingViewController *newsController=[[NewsSettingViewController alloc]init];
+        [self.navigationController pushViewController:newsController animated:YES];
+    }
+    else if (indexPath.section==1 && indexPath.row==1) {
+        PasswordViewController *passwordController=[[PasswordViewController alloc]init];
+        [self.navigationController pushViewController:passwordController animated:YES];
+    }
+    else if (indexPath.section==1 && indexPath.row==2) {
+        NSString *alert_title=@"警告";
+        NSString *alert_message=@"是否清空所有的缓存数据";
+        NSString *cancelButtonTitle=@"否";
+        NSString *otherButtonTitle=@"是";
+        
+        UIAlertController *alertController=[UIAlertController alertControllerWithTitle:alert_title message:alert_message preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction=[UIAlertAction actionWithTitle:cancelButtonTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+            NSLog(@"点击了取消按钮");
+        }];
+        
+        UIAlertAction *otherAction=[UIAlertAction actionWithTitle:otherButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            NSLog(@"点击了确定按钮");
+        }];
+        
+        [alertController addAction:cancelAction];
+        [alertController addAction:otherAction];
+        
+        [self presentViewController:alertController animated:YES completion:nil];
+
+        
+    }
+    else if (indexPath.section==2 && indexPath.row==0) {
+        SendFeedBackViewController *sendController=[[SendFeedBackViewController alloc]init];
+        [self.navigationController pushViewController:sendController animated:YES];
+    }
+    else {
+        NSLog(@"点击了第%ld组，第%ld行",indexPath.section,indexPath.row);
+    }
 }
 /*
  

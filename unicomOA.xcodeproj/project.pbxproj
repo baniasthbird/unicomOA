@@ -62,6 +62,10 @@
 		2CFEADEF1C7C06CB0054730E /* CellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEADEC1C7C06CB0054730E /* CellModel.m */; };
 		2CFEADF01C7C06CB0054730E /* MenuItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEADEE1C7C06CB0054730E /* MenuItemModel.m */; };
 		2CFEADF31C7C27020054730E /* UIViewExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEADF21C7C27020054730E /* UIViewExt.m */; };
+		6822656F1C96B4C400AB29C0 /* NewsSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6822656E1C96B4C400AB29C0 /* NewsSettingViewController.m */; };
+		68D05CBA1C9791000039220F /* PasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D05CB91C9791000039220F /* PasswordViewController.m */; };
+		68D05CC01C97AC050039220F /* SendFeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D05CBF1C97AC050039220F /* SendFeedBackViewController.m */; };
+		68D05CC41C97B3530039220F /* SendFeedbackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D05CC31C97B3530039220F /* SendFeedbackView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -191,6 +195,14 @@
 		2CFEADEE1C7C06CB0054730E /* MenuItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenuItemModel.m; path = Base/Function/NotesModel/MenuItemModel.m; sourceTree = "<group>"; };
 		2CFEADF11C7C27020054730E /* UIViewExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIViewExt.h; path = Base/Function/NotesViews/UIViewExt.h; sourceTree = "<group>"; };
 		2CFEADF21C7C27020054730E /* UIViewExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIViewExt.m; path = Base/Function/NotesViews/UIViewExt.m; sourceTree = "<group>"; };
+		6822656D1C96B4C400AB29C0 /* NewsSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsSettingViewController.h; path = Base/Settings/Controller/NewsSettingViewController.h; sourceTree = "<group>"; };
+		6822656E1C96B4C400AB29C0 /* NewsSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsSettingViewController.m; path = Base/Settings/Controller/NewsSettingViewController.m; sourceTree = "<group>"; };
+		68D05CB81C9791000039220F /* PasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PasswordViewController.h; path = Base/Settings/Controller/PasswordViewController.h; sourceTree = "<group>"; };
+		68D05CB91C9791000039220F /* PasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PasswordViewController.m; path = Base/Settings/Controller/PasswordViewController.m; sourceTree = "<group>"; };
+		68D05CBE1C97AC050039220F /* SendFeedBackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SendFeedBackViewController.h; path = Base/Settings/Controller/SendFeedBackViewController.h; sourceTree = "<group>"; };
+		68D05CBF1C97AC050039220F /* SendFeedBackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SendFeedBackViewController.m; path = Base/Settings/Controller/SendFeedBackViewController.m; sourceTree = "<group>"; };
+		68D05CC21C97B3530039220F /* SendFeedbackView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SendFeedbackView.h; path = Base/Settings/Modal/SendFeedbackView.h; sourceTree = "<group>"; };
+		68D05CC31C97B3530039220F /* SendFeedbackView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SendFeedbackView.m; path = Base/Settings/Modal/SendFeedbackView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -243,7 +255,7 @@
 			children = (
 				2CFEADCD1C770D1D0054730E /* FunctionViewBase */,
 				2CFEAD461C72C3410054730E /* ContactViewBase */,
-				2CFEAD3F1C72B6870054730E /* SettingViewModal */,
+				2CFEAD3F1C72B6870054730E /* SettingViewBase */,
 				2CFEAD1E1C71789F0054730E /* View */,
 				2C35B07D1C70662D0003BF6C /* Login */,
 				2C35B04D1C7062160003BF6C /* AppDelegate.h */,
@@ -360,15 +372,17 @@
 			name = View;
 			sourceTree = "<group>";
 		};
-		2CFEAD3F1C72B6870054730E /* SettingViewModal */ = {
+		2CFEAD3F1C72B6870054730E /* SettingViewBase */ = {
 			isa = PBXGroup;
 			children = (
+				68D05CC11C97B3290039220F /* Model */,
+				682265691C96A5EE00AB29C0 /* Controller */,
 				2CFEAD401C72B8B90054730E /* LGSettingItem.h */,
 				2CFEAD411C72B8B90054730E /* LGSettingItem.m */,
 				2CFEAD421C72B8B90054730E /* LGSettingSection.h */,
 				2CFEAD431C72B8B90054730E /* LGSettingSection.m */,
 			);
-			name = SettingViewModal;
+			name = SettingViewBase;
 			sourceTree = "<group>";
 		};
 		2CFEAD461C72C3410054730E /* ContactViewBase */ = {
@@ -491,6 +505,28 @@
 				2C5460A71C82F5C3005C5AB9 /* UserEntity.m */,
 			);
 			name = NotesModel;
+			sourceTree = "<group>";
+		};
+		682265691C96A5EE00AB29C0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6822656D1C96B4C400AB29C0 /* NewsSettingViewController.h */,
+				6822656E1C96B4C400AB29C0 /* NewsSettingViewController.m */,
+				68D05CB81C9791000039220F /* PasswordViewController.h */,
+				68D05CB91C9791000039220F /* PasswordViewController.m */,
+				68D05CBE1C97AC050039220F /* SendFeedBackViewController.h */,
+				68D05CBF1C97AC050039220F /* SendFeedBackViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		68D05CC11C97B3290039220F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				68D05CC21C97B3530039220F /* SendFeedbackView.h */,
+				68D05CC31C97B3530039220F /* SendFeedbackView.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -632,8 +668,11 @@
 				2C5460BD1C854733005C5AB9 /* TableViewCell.m in Sources */,
 				2CFEAD241C717F910054730E /* MessageViewController.m in Sources */,
 				2CFEAD331C7183930054730E /* BaseNavigationViewController.m in Sources */,
+				68D05CBA1C9791000039220F /* PasswordViewController.m in Sources */,
 				2C5460A81C82F5C3005C5AB9 /* UserEntity.m in Sources */,
 				2CFEAD2D1C717FDC0054730E /* SettingViewController.m in Sources */,
+				68D05CC01C97AC050039220F /* SendFeedBackViewController.m in Sources */,
+				6822656F1C96B4C400AB29C0 /* NewsSettingViewController.m in Sources */,
 				2CFEADE61C7C05830054730E /* LYButton.m in Sources */,
 				2C35B0D21C7157120003BF6C /* settingPasswordViewController.m in Sources */,
 				2CFEADDA1C79D9480054730E /* NewNotesViewController.m in Sources */,
@@ -653,6 +692,7 @@
 				2CDC2BE41C8FFD6C0067693B /* NIDropDown.m in Sources */,
 				2CFEADB41C76A6350054730E /* CellFrameModel.m in Sources */,
 				2CFEADB51C76A6350054730E /* Friend.m in Sources */,
+				68D05CC41C97B3530039220F /* SendFeedbackView.m in Sources */,
 				2CDC2BF51C924DAC0067693B /* NewsDisplayViewController.m in Sources */,
 				2C3F219C1C85837F00EBD122 /* NotesTableVIewCell.m in Sources */,
 				2CFEADF01C7C06CB0054730E /* MenuItemModel.m in Sources */,
