@@ -12,6 +12,7 @@
 #import "NewsSettingViewController.h"
 #import "PasswordViewController.h"
 #import "SendFeedBackViewController.h"
+#import "AboutViewController.h"
 
 @interface SettingViewController ()
 @property (strong,nonatomic) NSMutableArray *groups;
@@ -190,6 +191,10 @@
     else if (indexPath.section==2 && indexPath.row==0) {
         SendFeedBackViewController *sendController=[[SendFeedBackViewController alloc]init];
         [self.navigationController pushViewController:sendController animated:YES];
+    }
+    else if (indexPath.section==2 && indexPath.row==1) {
+        AboutViewController *aboutController=[[AboutViewController alloc]init];
+        [self.navigationController pushViewController:aboutController animated:YES];
     }
     else {
         NSLog(@"点击了第%ld组，第%ld行",indexPath.section,indexPath.row);

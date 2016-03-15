@@ -66,6 +66,8 @@
 		68D05CBA1C9791000039220F /* PasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D05CB91C9791000039220F /* PasswordViewController.m */; };
 		68D05CC01C97AC050039220F /* SendFeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D05CBF1C97AC050039220F /* SendFeedBackViewController.m */; };
 		68D05CC41C97B3530039220F /* SendFeedbackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D05CC31C97B3530039220F /* SendFeedbackView.m */; };
+		68D05CC71C97F6470039220F /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D05CC61C97F6470039220F /* AboutViewController.m */; };
+		68D05CCA1C97FBC00039220F /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D05CC91C97FBC00039220F /* logo.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -203,6 +205,9 @@
 		68D05CBF1C97AC050039220F /* SendFeedBackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SendFeedBackViewController.m; path = Base/Settings/Controller/SendFeedBackViewController.m; sourceTree = "<group>"; };
 		68D05CC21C97B3530039220F /* SendFeedbackView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SendFeedbackView.h; path = Base/Settings/Modal/SendFeedbackView.h; sourceTree = "<group>"; };
 		68D05CC31C97B3530039220F /* SendFeedbackView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SendFeedbackView.m; path = Base/Settings/Modal/SendFeedbackView.m; sourceTree = "<group>"; };
+		68D05CC51C97F6470039220F /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AboutViewController.h; path = Base/Settings/Controller/AboutViewController.h; sourceTree = "<group>"; };
+		68D05CC61C97F6470039220F /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AboutViewController.m; path = Base/Settings/Controller/AboutViewController.m; sourceTree = "<group>"; };
+		68D05CC91C97FBC00039220F /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -253,6 +258,7 @@
 		2C35B0491C7062160003BF6C /* unicomOA */ = {
 			isa = PBXGroup;
 			children = (
+				68D05CC81C97FBAE0039220F /* Image */,
 				2CFEADCD1C770D1D0054730E /* FunctionViewBase */,
 				2CFEAD461C72C3410054730E /* ContactViewBase */,
 				2CFEAD3F1C72B6870054730E /* SettingViewBase */,
@@ -516,6 +522,8 @@
 				68D05CB91C9791000039220F /* PasswordViewController.m */,
 				68D05CBE1C97AC050039220F /* SendFeedBackViewController.h */,
 				68D05CBF1C97AC050039220F /* SendFeedBackViewController.m */,
+				68D05CC51C97F6470039220F /* AboutViewController.h */,
+				68D05CC61C97F6470039220F /* AboutViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -527,6 +535,14 @@
 				68D05CC31C97B3530039220F /* SendFeedbackView.m */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		68D05CC81C97FBAE0039220F /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				68D05CC91C97FBC00039220F /* logo.png */,
+			);
+			name = Image;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -636,6 +652,7 @@
 				2C35B05A1C7062160003BF6C /* LaunchScreen.storyboard in Resources */,
 				2C5460BE1C854733005C5AB9 /* TableViewCell.xib in Resources */,
 				2C35B0571C7062160003BF6C /* Assets.xcassets in Resources */,
+				68D05CCA1C97FBC00039220F /* logo.png in Resources */,
 				2CFEADA71C769EBF0054730E /* messages.plist in Resources */,
 				2CFEADA61C769EBF0054730E /* friends.plist in Resources */,
 				2C35B0551C7062160003BF6C /* Main.storyboard in Resources */,
@@ -672,6 +689,7 @@
 				2C5460A81C82F5C3005C5AB9 /* UserEntity.m in Sources */,
 				2CFEAD2D1C717FDC0054730E /* SettingViewController.m in Sources */,
 				68D05CC01C97AC050039220F /* SendFeedBackViewController.m in Sources */,
+				68D05CC71C97F6470039220F /* AboutViewController.m in Sources */,
 				6822656F1C96B4C400AB29C0 /* NewsSettingViewController.m in Sources */,
 				2CFEADE61C7C05830054730E /* LYButton.m in Sources */,
 				2C35B0D21C7157120003BF6C /* settingPasswordViewController.m in Sources */,
