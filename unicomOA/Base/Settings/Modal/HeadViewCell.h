@@ -14,6 +14,4 @@
 
 @property (nonatomic,strong) UIImageView *img_Head;
 
-@property (nonatomic,strong) UIButton *btn_changeHead;
-
 @end
