@@ -68,6 +68,8 @@
 		68D05CC41C97B3530039220F /* SendFeedbackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D05CC31C97B3530039220F /* SendFeedbackView.m */; };
 		68D05CC71C97F6470039220F /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D05CC61C97F6470039220F /* AboutViewController.m */; };
 		68D05CCA1C97FBC00039220F /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D05CC91C97FBC00039220F /* logo.png */; };
+		68F173C91C99034500A8BEA3 /* StaffInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F173C81C99034500A8BEA3 /* StaffInfoViewController.m */; };
+		68F173D11C99575200A8BEA3 /* HeadViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F173D01C99575200A8BEA3 /* HeadViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -208,6 +210,10 @@
 		68D05CC51C97F6470039220F /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AboutViewController.h; path = Base/Settings/Controller/AboutViewController.h; sourceTree = "<group>"; };
 		68D05CC61C97F6470039220F /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AboutViewController.m; path = Base/Settings/Controller/AboutViewController.m; sourceTree = "<group>"; };
 		68D05CC91C97FBC00039220F /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		68F173C71C99034500A8BEA3 /* StaffInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StaffInfoViewController.h; path = Base/Settings/Controller/StaffInfoViewController.h; sourceTree = "<group>"; };
+		68F173C81C99034500A8BEA3 /* StaffInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StaffInfoViewController.m; path = Base/Settings/Controller/StaffInfoViewController.m; sourceTree = "<group>"; };
+		68F173CF1C99575200A8BEA3 /* HeadViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HeadViewCell.h; path = Base/Settings/Modal/HeadViewCell.h; sourceTree = "<group>"; };
+		68F173D01C99575200A8BEA3 /* HeadViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HeadViewCell.m; path = Base/Settings/Modal/HeadViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -524,6 +530,8 @@
 				68D05CBF1C97AC050039220F /* SendFeedBackViewController.m */,
 				68D05CC51C97F6470039220F /* AboutViewController.h */,
 				68D05CC61C97F6470039220F /* AboutViewController.m */,
+				68F173C71C99034500A8BEA3 /* StaffInfoViewController.h */,
+				68F173C81C99034500A8BEA3 /* StaffInfoViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -533,6 +541,8 @@
 			children = (
 				68D05CC21C97B3530039220F /* SendFeedbackView.h */,
 				68D05CC31C97B3530039220F /* SendFeedbackView.m */,
+				68F173CF1C99575200A8BEA3 /* HeadViewCell.h */,
+				68F173D01C99575200A8BEA3 /* HeadViewCell.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -683,6 +693,7 @@
 				2CDC2BE01C8FD1300067693B /* NewsFocusViewController.m in Sources */,
 				2CFEAD1A1C7168980054730E /* SignInViewController.m in Sources */,
 				2C5460BD1C854733005C5AB9 /* TableViewCell.m in Sources */,
+				68F173C91C99034500A8BEA3 /* StaffInfoViewController.m in Sources */,
 				2CFEAD241C717F910054730E /* MessageViewController.m in Sources */,
 				2CFEAD331C7183930054730E /* BaseNavigationViewController.m in Sources */,
 				68D05CBA1C9791000039220F /* PasswordViewController.m in Sources */,
@@ -719,6 +730,7 @@
 				2CFEAD451C72B8B90054730E /* LGSettingSection.m in Sources */,
 				2CFEADD31C770D6F0054730E /* UITableGridViewCell.m in Sources */,
 				2CFEAD301C7181F30054730E /* NTButton.m in Sources */,
+				68F173D11C99575200A8BEA3 /* HeadViewCell.m in Sources */,
 				2CFEADC61C76A65E0054730E /* UIImage+ResizeImage.m in Sources */,
 				2CFEAD361C7188500054730E /* OAViewController.m in Sources */,
 				2CFEAD181C7168980054730E /* forgetPasswordViewController.m in Sources */,

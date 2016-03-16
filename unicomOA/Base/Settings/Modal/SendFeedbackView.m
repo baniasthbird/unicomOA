@@ -59,7 +59,7 @@
     [super layoutSubviews];
     
     
-    [self.placeholderLabel setFrame:CGRectMake(5, 0, self.frame.size.width-10, 40)];
+    [self.placeholderLabel setFrame:CGRectMake(5, -50, self.frame.size.width-10, 40)];
 
     
 }

@@ -13,6 +13,8 @@
 #import "PasswordViewController.h"
 #import "SendFeedBackViewController.h"
 #import "AboutViewController.h"
+#import "StaffInfoViewController.h"
+
 
 @interface SettingViewController ()
 @property (strong,nonatomic) NSMutableArray *groups;
@@ -158,7 +160,11 @@
 #pragma mark 点击事件
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     //NSLog(@"点击了第%ld组，第%ld行",indexPath.section,indexPath.row);
-    if (indexPath.section==1 && indexPath.row==0) {
+    if (indexPath.section==0 && indexPath.row==0) {
+        StaffInfoViewController *staffController=[[StaffInfoViewController alloc]init];
+        [self.navigationController pushViewController:staffController animated:YES];
+    }
+    else if (indexPath.section==1 && indexPath.row==0) {
         NewsSettingViewController *newsController=[[NewsSettingViewController alloc]init];
         [self.navigationController pushViewController:newsController animated:YES];
     }
