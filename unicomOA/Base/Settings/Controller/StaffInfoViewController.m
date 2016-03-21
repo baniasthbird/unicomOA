@@ -8,6 +8,7 @@
 
 #import "StaffInfoViewController.h"
 #import "HeadViewCell.h"
+#import "ChangePhoneNumViewController.h"
 
 @interface StaffInfoViewController ()
 
@@ -90,7 +91,7 @@
     }
     else if (indexPath.section==1 && indexPath.row==2) {
         cell.textLabel.text=@"手机";
-        
+        cell.detailTextLabel.text=@"13812345678";
     }
     else if (indexPath.section==1 && indexPath.row==3) {
         cell.textLabel.text=@"Email";
@@ -131,6 +132,13 @@
     UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 10)];
     view.backgroundColor=[UIColor colorWithRed:236.0/255.0f green:236/255.0f blue:236/255.0f alpha:1];
     return view;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section==1 && indexPath.row==2) {
+        ChangePhoneNumViewController *viewController=[[ChangePhoneNumViewController alloc]init];
+        [self.navigationController pushViewController:viewController animated:YES];
+    }
 }
 
 /*

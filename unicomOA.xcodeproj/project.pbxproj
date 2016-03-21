@@ -70,6 +70,8 @@
 		68D05CCA1C97FBC00039220F /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D05CC91C97FBC00039220F /* logo.png */; };
 		68F173C91C99034500A8BEA3 /* StaffInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F173C81C99034500A8BEA3 /* StaffInfoViewController.m */; };
 		68F173D11C99575200A8BEA3 /* HeadViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F173D01C99575200A8BEA3 /* HeadViewCell.m */; };
+		68F950B61C9F9A4200CA1519 /* LZActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F950B51C9F9A4200CA1519 /* LZActionSheet.m */; };
+		68F950B91C9F9E9000CA1519 /* ChangePhoneNumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F950B81C9F9E9000CA1519 /* ChangePhoneNumViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -214,6 +216,10 @@
 		68F173C81C99034500A8BEA3 /* StaffInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StaffInfoViewController.m; path = Base/Settings/Controller/StaffInfoViewController.m; sourceTree = "<group>"; };
 		68F173CF1C99575200A8BEA3 /* HeadViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HeadViewCell.h; path = Base/Settings/Modal/HeadViewCell.h; sourceTree = "<group>"; };
 		68F173D01C99575200A8BEA3 /* HeadViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HeadViewCell.m; path = Base/Settings/Modal/HeadViewCell.m; sourceTree = "<group>"; };
+		68F950B41C9F9A4200CA1519 /* LZActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LZActionSheet.h; path = Base/Settings/Modal/LZActionSheet.h; sourceTree = "<group>"; };
+		68F950B51C9F9A4200CA1519 /* LZActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LZActionSheet.m; path = Base/Settings/Modal/LZActionSheet.m; sourceTree = "<group>"; };
+		68F950B71C9F9E9000CA1519 /* ChangePhoneNumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChangePhoneNumViewController.h; path = Base/Settings/Controller/ChangePhoneNumViewController.h; sourceTree = "<group>"; };
+		68F950B81C9F9E9000CA1519 /* ChangePhoneNumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChangePhoneNumViewController.m; path = Base/Settings/Controller/ChangePhoneNumViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -532,6 +538,8 @@
 				68D05CC61C97F6470039220F /* AboutViewController.m */,
 				68F173C71C99034500A8BEA3 /* StaffInfoViewController.h */,
 				68F173C81C99034500A8BEA3 /* StaffInfoViewController.m */,
+				68F950B71C9F9E9000CA1519 /* ChangePhoneNumViewController.h */,
+				68F950B81C9F9E9000CA1519 /* ChangePhoneNumViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -539,6 +547,8 @@
 		68D05CC11C97B3290039220F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				68F950B41C9F9A4200CA1519 /* LZActionSheet.h */,
+				68F950B51C9F9A4200CA1519 /* LZActionSheet.m */,
 				68D05CC21C97B3530039220F /* SendFeedbackView.h */,
 				68D05CC31C97B3530039220F /* SendFeedbackView.m */,
 				68F173CF1C99575200A8BEA3 /* HeadViewCell.h */,
@@ -693,6 +703,7 @@
 				2CDC2BE01C8FD1300067693B /* NewsFocusViewController.m in Sources */,
 				2CFEAD1A1C7168980054730E /* SignInViewController.m in Sources */,
 				2C5460BD1C854733005C5AB9 /* TableViewCell.m in Sources */,
+				68F950B91C9F9E9000CA1519 /* ChangePhoneNumViewController.m in Sources */,
 				68F173C91C99034500A8BEA3 /* StaffInfoViewController.m in Sources */,
 				2CFEAD241C717F910054730E /* MessageViewController.m in Sources */,
 				2CFEAD331C7183930054730E /* BaseNavigationViewController.m in Sources */,
@@ -711,6 +722,7 @@
 				2CFEADEF1C7C06CB0054730E /* CellModel.m in Sources */,
 				2CFEADBC1C76A6440054730E /* HeadView.m in Sources */,
 				2CDC2BF21C9117FE0067693B /* NewsManagementTableViewCell.m in Sources */,
+				68F950B61C9F9A4200CA1519 /* LZActionSheet.m in Sources */,
 				2C35B04F1C7062160003BF6C /* AppDelegate.m in Sources */,
 				2C35B04C1C7062160003BF6C /* main.m in Sources */,
 				2CFEADD71C79CCDE0054730E /* NotesViewController.m in Sources */,

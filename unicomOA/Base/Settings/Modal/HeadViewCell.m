@@ -7,6 +7,11 @@
 //
 
 #import "HeadViewCell.h"
+#import "LZActionSheet.h"
+
+@interface HeadViewCell() <LZActionSheetDelegate>
+
+@end
 
 @implementation HeadViewCell
 
@@ -46,8 +51,21 @@
 }
 
 -(void)buttonPressed:(UITapGestureRecognizer *)gestrueRecognizer {
+    LZActionSheet *sheet=[LZActionSheet showActionSheetWithDelegate:self cancelButtonTitle:@"取消" otherButtonTitles:@[@"拍照",@"从相册中选择"]];
+    
+    [sheet show];
     NSLog(@"已点击图片");
 }
 
+-(void)LZActionSheet:(LZActionSheet *)actionSheet didClickedButtonAtIndex:(NSInteger)index {
+    switch (index) {
+        case 0:
+            break;
+        case 1:
+            break;
+        default:
+            break;
+    }
+}
 
 @end
