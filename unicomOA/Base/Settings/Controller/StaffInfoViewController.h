@@ -10,4 +10,6 @@
 
 @interface StaffInfoViewController : UITableViewController
 
+@property (nonatomic,strong) NSString *str_cellphone;
+
 @end

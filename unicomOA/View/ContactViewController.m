@@ -10,7 +10,7 @@
 #import "Friend.h"
 #import "FriendGroup.h"
 #import "HeadView.h"
-#import "ChatViewController.h"
+#import "MemberInfoViewController.h"
 
 @interface ContactViewController() <HeadViewDelegate>
 {
@@ -120,6 +120,18 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    MemberInfoViewController *viewController=[[MemberInfoViewController alloc] init];
+    UITableViewCell *cell=[tableView cellForRowAtIndexPath:indexPath];
+    viewController.str_Name= cell.textLabel.text;
+    viewController.str_Gender=@"男";
+    viewController.str_img=@"me.png";
+    FriendGroup *tmp_friend=[_friendsData objectAtIndex:indexPath.section];
+    viewController.str_department=tmp_friend.name;
+    viewController.str_carrer=cell.detailTextLabel.text;
+    viewController.str_cellphone=@"18600697151";
+    viewController.str_phonenum=@"0371-65160750";
+    viewController.str_email=@"2002-sunshine@163.com";
+    [self.navigationController pushViewController:viewController animated:YES];
     /*
     ChatViewController *viewController = [[ChatViewController alloc] init];
     [self.navigationController pushViewController:viewController animated:YES];

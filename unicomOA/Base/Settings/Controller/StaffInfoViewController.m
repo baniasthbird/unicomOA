@@ -103,7 +103,12 @@
     }
     else if (indexPath.section==1 && indexPath.row==2) {
         cell.textLabel.text=@"手机";
-        cell.detailTextLabel.text=@"13812345678";
+        if (_str_cellphone==nil) {
+            cell.detailTextLabel.text=@"13812345678";
+        } else {
+            cell.detailTextLabel.text=_str_cellphone;
+        }
+        
     }
     else if (indexPath.section==1 && indexPath.row==3) {
         cell.textLabel.text=@"Email";

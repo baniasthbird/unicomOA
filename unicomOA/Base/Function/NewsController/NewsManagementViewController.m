@@ -66,7 +66,7 @@
 }
 
 -(void)buildView {
-    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height/5, 15*self.view.frame.size.width/16, self.view.frame.size.height) style:UITableViewStylePlain];
+    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.005, self.view.frame.size.height/5, self.view.frame.size.width*0.99, self.view.frame.size.height) style:UITableViewStylePlain];
     
     _tableView.separatorStyle=UITableViewCellSeparatorStyleSingleLine;
     

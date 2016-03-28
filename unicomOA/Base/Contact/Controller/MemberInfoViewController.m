@@ -7,6 +7,7 @@
 //
 
 #import "MemberInfoViewController.h"
+#import "LogoView.h"
 
 @interface MemberInfoViewController ()
 
@@ -19,6 +20,13 @@
     
     self.title=@"员工资料";
     
+    self.view.backgroundColor=[UIColor colorWithRed:236.0/255.0f green:236.0/255.0f blue:236.0/255.0f alpha:1];
+    
+    NSDictionary * dict=@{
+                          NSForegroundColorAttributeName:   [UIColor whiteColor]};
+    
+    self.navigationController.navigationBar.titleTextAttributes=dict;
+
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -36,23 +44,71 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 #warning Incomplete implementation, return the number of sections
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete implementation, return the number of rows
-    return 0;
+    return 8;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseIdentifier" forIndexPath:indexPath];
+    static NSString *ID=@"cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    if (cell==nil) {
+        cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:ID];
+    }
+    cell.textLabel.textColor=[UIColor blackColor];
+    cell.textLabel.textAlignment=NSTextAlignmentLeft;
+    cell.detailTextLabel.textColor=[UIColor colorWithRed:236.0/255.0f green:236.0/255.0f  blue:236.0/255.0f  alpha:1];
     
+    if (indexPath.row==0) {
+        LogoView *cell=[LogoView cellWithTable:tableView withName:_str_Name withImage:_str_img];
+        return cell;
+    }
+    else if (indexPath.row==1) {
+        cell.textLabel.text=@"性别";
+        cell.detailTextLabel.text=_str_Gender;
+    }
+    else if (indexPath.row==2) {
+        cell.textLabel.text=@"部门";
+        cell.detailTextLabel.text=_str_department;
+    }
+    else if (indexPath.row==3) {
+        cell.textLabel.text=@"职务";
+        cell.detailTextLabel.text=_str_carrer;
+    }
+    else if (indexPath.row==4) {
+        cell.textLabel.text=@"手机";
+        cell.detailTextLabel.text=_str_cellphone;
+    }
+    else if (indexPath.row==5) {
+        cell.textLabel.text=@"固定电话";
+        cell.detailTextLabel.text=_str_phonenum;
+    }
+    else if (indexPath.row==6) {
+        cell.textLabel.text=@"EMail";
+        cell.detailTextLabel.text=_str_email;
+    }
+    else if (indexPath.row==7) {
+        cell.textLabel.textColor=[UIColor colorWithRed:22/255.0f green:155/255.0f blue:213/255.0f alpha:1];
+        cell.textLabel.text=@"发送信息";
+    }
     // Configure the cell...
     
     return cell;
 }
 
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row==0) {
+        return  100;
+    }
+    else {
+        return  45;
+    }
+}
 
 /*
 // Override to support conditional editing of the table view.

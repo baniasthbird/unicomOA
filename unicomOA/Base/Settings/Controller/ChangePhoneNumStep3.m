@@ -74,6 +74,9 @@
 
 -(void)MoveNextVc:(UIButton*)sender {
     StaffInfoViewController *viewController=[[StaffInfoViewController alloc]init];
+    if (_str_phonenum!=nil) {
+         viewController.str_cellphone=_str_phonenum;
+    }
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
