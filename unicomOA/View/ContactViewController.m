@@ -26,6 +26,12 @@
 {
     [super viewDidLoad];
     self.title=@"通讯录";
+    NSDictionary * dict=@{
+                          NSForegroundColorAttributeName:   [UIColor whiteColor]};
+    
+    self.navigationController.navigationBar.titleTextAttributes=dict;
+    
+    
     self.tableView.sectionHeaderHeight=40;
     
    
@@ -114,8 +120,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    /*
     ChatViewController *viewController = [[ChatViewController alloc] init];
     [self.navigationController pushViewController:viewController animated:YES];
+     */
 }
 
 - (void)clickHeadView

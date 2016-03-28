@@ -20,6 +20,10 @@
     if (self) {
         // Custom initialization
         self.title = @"消息";
+        NSDictionary * dict=@{
+                              NSForegroundColorAttributeName:   [UIColor whiteColor]};
+        
+        self.navigationController.navigationBar.titleTextAttributes=dict;
         
     }
     return self;
@@ -30,6 +34,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor=[UIColor redColor];
+    NSDictionary * dict=@{
+                          NSForegroundColorAttributeName:   [UIColor whiteColor]};
+    
+    self.navigationController.navigationBar.titleTextAttributes=dict;
+    
 }
 
 - (void)didReceiveMemoryWarning {

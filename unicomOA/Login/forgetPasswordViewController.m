@@ -7,8 +7,7 @@
 //
 
 #import "forgetPasswordViewController.h"
-#import "newPassWordViewController.h"
-#import "LoginViewController.h"
+#import "SMSCodeViewController.h"
 
 @interface forgetPasswordViewController()
 {
@@ -36,8 +35,38 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationController.navigationBarHidden = NO;
-    self.title=@"找回密码1/2";
+    self.title=@"找回密码";
+    
+    NSDictionary * dict=@{
+                          NSForegroundColorAttributeName:   [UIColor whiteColor]};
+    
+    self.navigationController.navigationBar.titleTextAttributes=dict;
+    
     self.view.backgroundColor=[UIColor colorWithRed:240/255.0f green:240/255.0f blue:240/255.0f alpha:1];
+    
+    UITextField *txt_Num=[[UITextField alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.12, self.view.frame.size.width, self.view.frame.size.height*0.08)];
+    txt_Num.backgroundColor=[UIColor whiteColor];
+    txt_Num.placeholder=@"请输入手机号码";
+    txt_Num.keyboardType=UIKeyboardTypeNumberPad;
+    
+    
+    
+    UILabel *lbl_txt1=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.22, self.view.frame.size.width, self.view.frame.size.height*0.08)];
+    lbl_txt1.text=@"点击下一步，系统将发送一条短信";
+    lbl_txt1.textColor=[UIColor colorWithRed:146/255.0f green:146/255.0f blue:146/255.0f alpha:1];
+    
+    [self.view addSubview:txt_Num];
+    [self.view addSubview:lbl_txt1];
+    
+    UIBarButtonItem *barButtonItemNx = [[UIBarButtonItem alloc] initWithTitle:@"下一步" style:UIBarButtonItemStyleDone target:self action:@selector(MoveNextVc:)];
+    [barButtonItemNx setTitleTextAttributes:dict forState:UIControlStateNormal];
+    self.navigationItem.rightBarButtonItem=barButtonItemNx;
+    
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleDone target:self action:@selector(MovePreviousVc:)];
+    [barButtonItem setTitleTextAttributes:dict forState:UIControlStateNormal];
+    self.navigationItem.leftBarButtonItem = barButtonItem;
+    
+    /*
     UIBarButtonItem *addBtn = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:@selector(clickaddBtn)];
     [addBtn setImage:[UIImage imageNamed:@"goback_back_orange_on"]];
     [addBtn setImageInsets:UIEdgeInsetsMake(0, -15, 0, 15)];
@@ -46,13 +75,20 @@
     
     
     [self createTextFields];
+     */
 }
 
--(void)clickaddBtn
-{
-    [self.navigationController popViewControllerAnimated:YES];
-    //[self.navigationController pushViewController:[[MMZCViewController alloc]init] animated:YES];
+
+-(void)MoveNextVc:(UIButton*)sender {
+    SMSCodeViewController *vc=[[SMSCodeViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
+
+-(void)MovePreviousVc:(UIButton*)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
 
 -(void)createTextFields
 {
@@ -246,10 +282,6 @@
     //        return;
     //    }
     
-    newPassWordViewController *new=[[newPassWordViewController alloc]init];
-    //赋值
-    new.userPhone=_phone.text;
-    [self.navigationController pushViewController:new animated:YES];
     
 }
 

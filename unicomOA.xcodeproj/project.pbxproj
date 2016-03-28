@@ -21,6 +21,13 @@
 		2C5460A81C82F5C3005C5AB9 /* UserEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5460A71C82F5C3005C5AB9 /* UserEntity.m */; };
 		2C5460BD1C854733005C5AB9 /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5460BB1C854733005C5AB9 /* TableViewCell.m */; };
 		2C5460BE1C854733005C5AB9 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C5460BC1C854733005C5AB9 /* TableViewCell.xib */; };
+		2C99721E1CA21E0E00B803FC /* ChangePhoneNumStep3.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C99721D1CA21E0E00B803FC /* ChangePhoneNumStep3.m */; };
+		2CA10C881CA110DE008D6394 /* PHONEOA.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA10C871CA110DE008D6394 /* PHONEOA.png */; };
+		2CA10C8B1CA18F17008D6394 /* ChangePhoneNumStep1.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA10C8A1CA18F17008D6394 /* ChangePhoneNumStep1.m */; };
+		2CA10C8E1CA1945F008D6394 /* ChangePhoneNumStep2.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA10C8D1CA1945F008D6394 /* ChangePhoneNumStep2.m */; };
+		2CB7DB5F1CA278C00057633D /* SMSCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB7DB5E1CA278C00057633D /* SMSCodeViewController.m */; };
+		2CB7DB621CA2C3150057633D /* ServerIPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB7DB611CA2C3150057633D /* ServerIPViewController.m */; };
+		2CB7DB651CA3C5970057633D /* MemberInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB7DB641CA3C5970057633D /* MemberInfoViewController.m */; };
 		2CDC2BDD1C8FBFC90067693B /* NewsManagementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDC2BDC1C8FBFC90067693B /* NewsManagementViewController.m */; };
 		2CDC2BE01C8FD1300067693B /* NewsFocusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDC2BDF1C8FD1300067693B /* NewsFocusViewController.m */; };
 		2CDC2BE41C8FFD6C0067693B /* NIDropDown.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDC2BE31C8FFD6C0067693B /* NIDropDown.m */; };
@@ -120,6 +127,19 @@
 		2C5460BA1C854733005C5AB9 /* TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TableViewCell.h; path = Base/Function/NotesViews/TableViewCell.h; sourceTree = "<group>"; };
 		2C5460BB1C854733005C5AB9 /* TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TableViewCell.m; path = Base/Function/NotesViews/TableViewCell.m; sourceTree = "<group>"; };
 		2C5460BC1C854733005C5AB9 /* TableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TableViewCell.xib; path = Base/Function/NotesViews/TableViewCell.xib; sourceTree = "<group>"; };
+		2C99721C1CA21E0E00B803FC /* ChangePhoneNumStep3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChangePhoneNumStep3.h; path = Base/Settings/Controller/ChangePhoneNumStep3.h; sourceTree = "<group>"; };
+		2C99721D1CA21E0E00B803FC /* ChangePhoneNumStep3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChangePhoneNumStep3.m; path = Base/Settings/Controller/ChangePhoneNumStep3.m; sourceTree = "<group>"; };
+		2CA10C871CA110DE008D6394 /* PHONEOA.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PHONEOA.png; sourceTree = "<group>"; };
+		2CA10C891CA18F17008D6394 /* ChangePhoneNumStep1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChangePhoneNumStep1.h; path = Base/Settings/Controller/ChangePhoneNumStep1.h; sourceTree = "<group>"; };
+		2CA10C8A1CA18F17008D6394 /* ChangePhoneNumStep1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChangePhoneNumStep1.m; path = Base/Settings/Controller/ChangePhoneNumStep1.m; sourceTree = "<group>"; };
+		2CA10C8C1CA1945F008D6394 /* ChangePhoneNumStep2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChangePhoneNumStep2.h; path = Base/Settings/Controller/ChangePhoneNumStep2.h; sourceTree = "<group>"; };
+		2CA10C8D1CA1945F008D6394 /* ChangePhoneNumStep2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChangePhoneNumStep2.m; path = Base/Settings/Controller/ChangePhoneNumStep2.m; sourceTree = "<group>"; };
+		2CB7DB5D1CA278C00057633D /* SMSCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SMSCodeViewController.h; path = Login/SMSCodeViewController.h; sourceTree = "<group>"; };
+		2CB7DB5E1CA278C00057633D /* SMSCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SMSCodeViewController.m; path = Login/SMSCodeViewController.m; sourceTree = "<group>"; };
+		2CB7DB601CA2C3150057633D /* ServerIPViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ServerIPViewController.h; path = Login/ServerIPViewController.h; sourceTree = "<group>"; };
+		2CB7DB611CA2C3150057633D /* ServerIPViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ServerIPViewController.m; path = Login/ServerIPViewController.m; sourceTree = "<group>"; };
+		2CB7DB631CA3C5970057633D /* MemberInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MemberInfoViewController.h; path = Base/Contact/Controller/MemberInfoViewController.h; sourceTree = "<group>"; };
+		2CB7DB641CA3C5970057633D /* MemberInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MemberInfoViewController.m; path = Base/Contact/Controller/MemberInfoViewController.m; sourceTree = "<group>"; };
 		2CDC2BDB1C8FBFC90067693B /* NewsManagementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsManagementViewController.h; path = Base/Function/NewsController/NewsManagementViewController.h; sourceTree = "<group>"; };
 		2CDC2BDC1C8FBFC90067693B /* NewsManagementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsManagementViewController.m; path = Base/Function/NewsController/NewsManagementViewController.m; sourceTree = "<group>"; };
 		2CDC2BDE1C8FD1300067693B /* NewsFocusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsFocusViewController.h; path = Base/Function/NewsController/NewsFocusViewController.h; sourceTree = "<group>"; };
@@ -334,6 +354,10 @@
 				2C35B0D41C715CB90003BF6C /* settingHeaderViewController.m */,
 				2CFEAD1B1C7173690054730E /* newPassWordViewController.h */,
 				2CFEAD1C1C7173690054730E /* newPassWordViewController.m */,
+				2CB7DB5D1CA278C00057633D /* SMSCodeViewController.h */,
+				2CB7DB5E1CA278C00057633D /* SMSCodeViewController.m */,
+				2CB7DB601CA2C3150057633D /* ServerIPViewController.h */,
+				2CB7DB611CA2C3150057633D /* ServerIPViewController.m */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -432,6 +456,8 @@
 				2CFEADBF1C76A6520054730E /* ChatViewController.m */,
 				2CFEADCA1C76E56D0054730E /* SearchResultViewController.h */,
 				2CFEADCB1C76E56D0054730E /* SearchResultViewController.m */,
+				2CB7DB631CA3C5970057633D /* MemberInfoViewController.h */,
+				2CB7DB641CA3C5970057633D /* MemberInfoViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -540,6 +566,12 @@
 				68F173C81C99034500A8BEA3 /* StaffInfoViewController.m */,
 				68F950B71C9F9E9000CA1519 /* ChangePhoneNumViewController.h */,
 				68F950B81C9F9E9000CA1519 /* ChangePhoneNumViewController.m */,
+				2CA10C891CA18F17008D6394 /* ChangePhoneNumStep1.h */,
+				2CA10C8A1CA18F17008D6394 /* ChangePhoneNumStep1.m */,
+				2CA10C8C1CA1945F008D6394 /* ChangePhoneNumStep2.h */,
+				2CA10C8D1CA1945F008D6394 /* ChangePhoneNumStep2.m */,
+				2C99721C1CA21E0E00B803FC /* ChangePhoneNumStep3.h */,
+				2C99721D1CA21E0E00B803FC /* ChangePhoneNumStep3.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -560,6 +592,7 @@
 		68D05CC81C97FBAE0039220F /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				2CA10C871CA110DE008D6394 /* PHONEOA.png */,
 				68D05CC91C97FBC00039220F /* logo.png */,
 			);
 			name = Image;
@@ -670,6 +703,7 @@
 			files = (
 				2CFEADE81C7C05830054730E /* MenuTableViewCell.xib in Resources */,
 				2C35B05A1C7062160003BF6C /* LaunchScreen.storyboard in Resources */,
+				2CA10C881CA110DE008D6394 /* PHONEOA.png in Resources */,
 				2C5460BE1C854733005C5AB9 /* TableViewCell.xib in Resources */,
 				2C35B0571C7062160003BF6C /* Assets.xcassets in Resources */,
 				68D05CCA1C97FBC00039220F /* logo.png in Resources */,
@@ -704,6 +738,7 @@
 				2CFEAD1A1C7168980054730E /* SignInViewController.m in Sources */,
 				2C5460BD1C854733005C5AB9 /* TableViewCell.m in Sources */,
 				68F950B91C9F9E9000CA1519 /* ChangePhoneNumViewController.m in Sources */,
+				2CA10C8E1CA1945F008D6394 /* ChangePhoneNumStep2.m in Sources */,
 				68F173C91C99034500A8BEA3 /* StaffInfoViewController.m in Sources */,
 				2CFEAD241C717F910054730E /* MessageViewController.m in Sources */,
 				2CFEAD331C7183930054730E /* BaseNavigationViewController.m in Sources */,
@@ -711,9 +746,11 @@
 				2C5460A81C82F5C3005C5AB9 /* UserEntity.m in Sources */,
 				2CFEAD2D1C717FDC0054730E /* SettingViewController.m in Sources */,
 				68D05CC01C97AC050039220F /* SendFeedBackViewController.m in Sources */,
+				2CB7DB651CA3C5970057633D /* MemberInfoViewController.m in Sources */,
 				68D05CC71C97F6470039220F /* AboutViewController.m in Sources */,
 				6822656F1C96B4C400AB29C0 /* NewsSettingViewController.m in Sources */,
 				2CFEADE61C7C05830054730E /* LYButton.m in Sources */,
+				2CB7DB5F1CA278C00057633D /* SMSCodeViewController.m in Sources */,
 				2C35B0D21C7157120003BF6C /* settingPasswordViewController.m in Sources */,
 				2CFEADDA1C79D9480054730E /* NewNotesViewController.m in Sources */,
 				2C35B0521C7062160003BF6C /* ViewController.m in Sources */,
@@ -744,15 +781,18 @@
 				2CFEAD301C7181F30054730E /* NTButton.m in Sources */,
 				68F173D11C99575200A8BEA3 /* HeadViewCell.m in Sources */,
 				2CFEADC61C76A65E0054730E /* UIImage+ResizeImage.m in Sources */,
+				2C99721E1CA21E0E00B803FC /* ChangePhoneNumStep3.m in Sources */,
 				2CFEAD361C7188500054730E /* OAViewController.m in Sources */,
 				2CFEAD181C7168980054730E /* forgetPasswordViewController.m in Sources */,
 				2CFEADC51C76A65E0054730E /* NSString+Extension.m in Sources */,
+				2CB7DB621CA2C3150057633D /* ServerIPViewController.m in Sources */,
 				2CFEADE91C7C05830054730E /* UIButton+Extra.m in Sources */,
 				2CFEAD441C72B8B90054730E /* LGSettingItem.m in Sources */,
 				2CFEAD1D1C7173690054730E /* newPassWordViewController.m in Sources */,
 				2CFEADC91C76D96B0054730E /* ContactViewController.m in Sources */,
 				2CFEADBD1C76A6440054730E /* MessageCell.m in Sources */,
 				2C35B0D51C715CB90003BF6C /* settingHeaderViewController.m in Sources */,
+				2CA10C8B1CA18F17008D6394 /* ChangePhoneNumStep1.m in Sources */,
 				2CFEADB71C76A6350054730E /* MessageModel.m in Sources */,
 				2CFEADC01C76A6520054730E /* ChatViewController.m in Sources */,
 			);

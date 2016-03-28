@@ -10,6 +10,7 @@
 #import "SignInViewController.h"
 #import "forgetPasswordViewController.h"
 #import "OAViewController.h"
+#import "ServerIPViewController.h"
 
 
 @interface LoginViewController()
@@ -34,11 +35,12 @@
 {
     self.navigationController.navigationBarHidden=YES;
 }
-
+ 
 -(void)viewDidLoad
 {
     [super viewDidLoad];
     
+    [self.navigationItem setHidesBackButton:YES];
     //设置NavigationBar的背景色
     View=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     View.image=[UIImage imageNamed:@"bg4"];
@@ -78,11 +80,12 @@
     btn_login.backgroundColor=[UIColor colorWithRed:30/255.0f green:155/255.0f blue:240/255.0f alpha:1];
     btn_login.layer.cornerRadius=5.0f;
     
-    UIButton *btn_newuser=[self createButtonFrame:CGRectMake(5, 235, 70, 30) backImageName:nil title:@"快速注册" titleColor:[UIColor grayColor] font:[UIFont systemFontOfSize:13] target:self action:@selector(registration:)];
+    UIButton *btn_Server=[self createButtonFrame:CGRectMake(self.view.frame.size.width-75, self.view.frame.size.height/2+100, 60, 30) backImageName:nil title:@"服务器" titleColor:[UIColor grayColor] font:[UIFont systemFontOfSize:13] target:self action:@selector(serverip:)];
     //newUserBtn.backgroundColor=[UIColor lightGrayColor];
     
     UIButton *btn_forgetpassword=[self createButtonFrame:CGRectMake(self.view.frame.size.width-75, self.view.frame.size.height/2+40, 60, 30) backImageName:nil title:@"忘记密码" titleColor:[UIColor blackColor] font:[UIFont systemFontOfSize:15] target:self action:@selector(fogetPwd:)];
     //fogotPwdBtn.backgroundColor=[UIColor lightGrayColor];
+    
     
     
     #define Start_X 60.0f           // 第一个按钮的X坐标
@@ -96,6 +99,7 @@
    // [self.view addSubview:btn_newuser];
     [self.view addSubview:btn_forgetpassword];
     
+    [self.view addSubview:btn_Server];
 }
 
 -(UIButton *)createButtonFrame:(CGRect)frame backImageName:(NSString *)imageName title:(NSString *)title titleColor:(UIColor *)color font:(UIFont *)font target:(id)target action:(SEL)action
@@ -177,7 +181,10 @@
 }
 
 
-
+-(void)serverip:(UIButton*)button {
+    ServerIPViewController *vc=[[ServerIPViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 
 -(UIImageView *)createImageViewFrame:(CGRect)frame imageName:(NSString *)imageName color:(UIColor *)color

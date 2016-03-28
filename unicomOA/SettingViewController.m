@@ -32,7 +32,15 @@
 }
 
 -(instancetype)init {
+    
+    
     self.title = @"我";
+    
+    NSDictionary * dict=@{
+                          NSForegroundColorAttributeName:   [UIColor whiteColor]};
+    
+    self.navigationController.navigationBar.titleTextAttributes=dict;
+
     
     //设置样式
     return [self initWithStyle:UITableViewStyleGrouped];
@@ -45,6 +53,12 @@
     if (self) {
         // Custom initialization
         self.title = @"设置";
+        
+        NSDictionary * dict=@{
+                              NSForegroundColorAttributeName:   [UIColor whiteColor]};
+        
+        self.navigationController.navigationBar.titleTextAttributes=dict;
+
     }
     return self;
 }
@@ -55,6 +69,15 @@
     [super viewDidLoad];
     self.view.backgroundColor=[UIColor whiteColor];
     // Do any additional setup after loading the view.
+    
+    self.title = @"我";
+    
+    NSDictionary * dict=@{
+                          NSForegroundColorAttributeName:   [UIColor whiteColor]};
+    
+    self.navigationController.navigationBar.titleTextAttributes=dict;
+    
+    [self.navigationItem setHidesBackButton:YES];
     
     //添加第一组
     LGSettingSection *section1=[LGSettingSection initWithHeaderTitle:@"Demo" footerTitle:nil];
@@ -136,6 +159,10 @@
     cell.imageView.image=item.image;
     //设置cell右边的图标
     cell.accessoryType=item.type;
+    
+    if (indexPath.section==3 && indexPath.row==0) {
+        cell.textLabel.textColor=[UIColor redColor];
+    }
     
     return cell;
 }

@@ -9,6 +9,7 @@
 #import "StaffInfoViewController.h"
 #import "HeadViewCell.h"
 #import "ChangePhoneNumViewController.h"
+#import "SettingViewController.h"
 
 @interface StaffInfoViewController ()
 
@@ -22,11 +23,22 @@
     self.title=@"我的资料";
     
     self.view.backgroundColor=[UIColor colorWithRed:236.0/255.0f green:236.0/255.0f blue:236.0/255.0f alpha:1];
+    
+    NSDictionary * dict=@{
+                          NSForegroundColorAttributeName:   [UIColor whiteColor]};
+    
+    self.navigationController.navigationBar.titleTextAttributes=dict;
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"我" style:UIBarButtonItemStyleDone target:self action:@selector(MovePreviousVc:)];
+    [barButtonItem setTitleTextAttributes:dict forState:UIControlStateNormal];
+    self.navigationItem.leftBarButtonItem = barButtonItem;
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -141,6 +153,11 @@
     }
 }
 
+
+-(void)MovePreviousVc:(UIButton *)sender {
+    SettingViewController *viewController=[[SettingViewController alloc]init];
+    [self.navigationController pushViewController:viewController animated:YES];
+}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -29,7 +29,13 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        NSDictionary * dict=@{
+                              NSForegroundColorAttributeName:   [UIColor whiteColor]};
+        
+        self.navigationController.navigationBar.titleTextAttributes=dict;
         self.title = @"应用";
+       
+        
     }
     return self;
 }
@@ -43,7 +49,10 @@
     //self.view.backgroundColor=[UIColor yellowColor];
     self.title=@"应用";
     self.view.backgroundColor=[UIColor whiteColor];
+    NSDictionary * dict=@{
+                          NSForegroundColorAttributeName:   [UIColor whiteColor]};
     
+    self.navigationController.navigationBar.titleTextAttributes=dict;
     
     
     CGSize mSize=[[UIScreen mainScreen] bounds].size;
