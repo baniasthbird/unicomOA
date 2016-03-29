@@ -17,6 +17,8 @@
 
 @property (strong,nonatomic) NSMutableArray *arr_News;
 
+@property (strong,nonatomic) NSMutableArray *arr_Focus;
+
 @end
 
 @implementation NewsManagementViewController
@@ -99,7 +101,10 @@
     
     self.view.backgroundColor=[UIColor colorWithRed:243.0/255.0f green:243.0/255.0f blue:243.0/255.0 alpha:1];
     
-    _arr_News=[NSMutableArray arrayWithCapacity:0];
+    _arr_News=[NSMutableArray arrayWithCapacity:2];
+    
+    
+    _arr_Focus=[NSMutableArray arrayWithCapacity:0];
 }
 
 -(void)FocusNews:(UIButton*)Btn {
@@ -127,7 +132,7 @@
     NewsManagementTableViewCell *cell=[NewsManagementTableViewCell cellWithTable:tableView withCellHeight:110 titleX:self.view.frame.size.width/32 titleY:0.0f titleW:15*self.view.frame.size.width/16 titleH:50.0f DepartX:self.view.frame.size.width/32 DepartY:60.0f DepartW:3*self.view.frame.size.width/8 DepartH:40.0f TimeX:self.view.frame.size.width/2 TimeY:60.0f TimeW:self.view.frame.size.width/3 TimeH:40.0f];
     cell.delegate=self;
     cell.myTag=indexPath.row;
-    cell.lbl_Title.text=@"国家发展改革委关于放开部分建设项目服务收费标准有关问题的通知";
+    cell.lbl_Title.text=[NSString stringWithFormat:@"%@|%ld",@"国家发展改革委关于放开部分建设项目服务收费标准有关问题的通知",(long)indexPath.row];
     cell.lbl_department.text=@"综合管理部 张三";
     cell.lbl_time.text=@"2016-01-26 16:45";
     
@@ -190,9 +195,17 @@
 
 -(void)tapCell:(NewsManagementTableViewCell *)cell atIndex:(NSInteger)index {
     NewsDisplayViewController *news_controller=[[NewsDisplayViewController alloc]init];
-    
+    news_controller.news_index=&(index);
+    news_controller.str_label=cell.lbl_Title.text;
+    news_controller.str_depart=cell.lbl_department.text;
+    news_controller.delegate=self;
     [self.navigationController pushViewController:news_controller animated:YES];
     
+}
+
+-(void)passFocusValue:(NSString *)str_title {
+    
+    NSLog(@"传值成功");
 }
 
 @end

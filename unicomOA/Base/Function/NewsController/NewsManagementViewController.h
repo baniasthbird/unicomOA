@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "NIDropDown.h"
 #import "NewsManagementTableViewCell.h"
+#import "NewsDisplayViewController.h"
 
-@interface NewsManagementViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,NIDropDownDelegate,NewsTapDelegate>
+
+@interface NewsManagementViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,NIDropDownDelegate,NewsTapDelegate,FocusNewsPassDelegate>
 {
     NIDropDown *dropDown;
 }

@@ -17,6 +17,9 @@
 
 @implementation NewsDisplayViewController
 
+
+@synthesize delegate;
+
 int i_num;
 
 int i_comment_num;
@@ -31,7 +34,7 @@ int i_comment_num;
     [_lbl_label setLineBreakMode:NSLineBreakByWordWrapping];
     _lbl_label.font=[UIFont systemFontOfSize:20];
     _lbl_label.textColor=[UIColor blackColor];
-    _lbl_label.text=@"国家发展改革委关于放开部分建设项目服务收费标准有关问题的通知";
+    _lbl_label.text=_str_label;
     
     _lbl_depart=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, 3*self.view.frame.size.height/16, 15*self.view.frame.size.width/16, self.view.frame.size.height/8)];
     _lbl_depart.numberOfLines=1;
@@ -51,6 +54,8 @@ int i_comment_num;
     [self.view addSubview:_lbl_depart];
     [self.view addSubview:_lbl_label];
     [self.view addSubview:_txt_content];
+    
+   // self.delegate=self;
     
     i_num=0;
     i_comment_num=5;
@@ -109,6 +114,7 @@ int i_comment_num;
 -(void)FocusEvent:(UIButton*)btn {
     if ([btn.titleLabel.text isEqualToString:@"关注"]) {
         [btn setTitle:@"已关注" forState:UIControlStateNormal];
+        [self.delegate passFocusValue:@"AAA"];
     }
     else if ([btn.titleLabel.text isEqualToString:@"已关注"]) {
         [btn setTitle:@"关注" forState:UIControlStateNormal];

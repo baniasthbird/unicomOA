@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NewsFocusViewController : UITableViewController
+@interface NewsFocusViewController : UIViewController
+
+
 
 @end
