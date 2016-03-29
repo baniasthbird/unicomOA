@@ -204,7 +204,9 @@
 }
 
 -(void)passFocusValue:(NSString *)str_title {
-    
+    if (str_title!=nil) {
+        [_arr_Focus addObject:str_title];
+    }
     NSLog(@"传值成功");
 }
 
