@@ -23,6 +23,10 @@
 
     self.view.backgroundColor=[UIColor whiteColor];
     
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"在线投票" style:UIBarButtonItemStyleDone target:self action:@selector(MovePreviousVc:)];
+    [barButtonItem setTitleTextAttributes:dict forState:UIControlStateNormal];
+    self.navigationItem.leftBarButtonItem = barButtonItem;
+    
 #pragma mark 标题
     UILabel *lbl_Title=[[UILabel alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.08, self.view.frame.size.width, self.view.frame.size.height*0.15)];
     lbl_Title.textAlignment=NSTextAlignmentCenter;
@@ -147,22 +151,29 @@
 -(void)VoteResult:(UIButton*)sender {
     IVotingResultViewController *viewController=[[IVotingResultViewController alloc]init];
     viewController.str_title=_str_title;
+    viewController.str_condition=@"投票进行中";
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
 -(void)Vote:(UIButton*)sender {
     //数值没有传，回去再看
     NSString *str_tmp=@"";
-    NSInteger i_value=-1;
     for (UIView *view in self.view.subviews) {
         if ([view isMemberOfClass:[RadioGroup class]]) {
             RadioGroup *tmp_radio=(RadioGroup*)view;
-             i_value= tmp_radio.selectValue;
+            for (UIView *sub_view in tmp_radio.subviews) {
+                if ([sub_view isMemberOfClass:[RadioBox class]]) {
+                    RadioBox *tmp_box=(RadioBox*)sub_view;
+                    if (tmp_box.on==YES) {
+                        str_tmp=tmp_box.text;
+                    }
+                }
+            }
         }
     }
     
     NSString *alert_title=@"提示";
-    NSString *alert_message=[NSString stringWithFormat:@"%@%ld",@"您已投票成功，您投给了:",(long)i_value];
+    NSString *alert_message=[NSString stringWithFormat:@"%@%@",@"您已投票成功，您投给了:",str_tmp];
     
     UIAlertController *alertController=[UIAlertController alertControllerWithTitle:alert_title message:alert_message preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *cancelAction=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
@@ -172,4 +183,8 @@
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
+
+-(void)MovePreviousVc:(UIButton*)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 @end

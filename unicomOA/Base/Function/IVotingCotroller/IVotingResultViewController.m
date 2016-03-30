@@ -7,6 +7,7 @@
 //
 
 #import "IVotingResultViewController.h"
+#import "JXBarChartView.h"
 
 @implementation IVotingResultViewController
 
@@ -50,6 +51,24 @@
     [self.view addSubview:lbl_condition];
     [self.view addSubview:lbl_time];
     [self.view addSubview:view_line];
+    
+   //\
+    'sdklfjflk;aajs;lkfs;djl;ksdjslkajfdl;kjlkjsfd            [self buildChart];
+}
+
+-(void)buildChart {
+    NSMutableArray *textIndicators = [[NSMutableArray alloc] initWithObjects:@"在公司举办的party上找机会婉转谈起", @"面对面交流", @"电子邮件或电话",  nil];
+    NSMutableArray *values = [[NSMutableArray alloc] initWithObjects:@12, @31, @13, nil];
+    CGRect frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+    JXBarChartView *barChartView = [[JXBarChartView alloc] initWithFrame:frame
+                                                              startPoint:CGPointMake(20, self.view.frame.size.height*0.35)
+                                                                  values:values maxValue:50
+                                                          textIndicators:textIndicators
+                                                               textColor:[UIColor orangeColor]
+                                                               barHeight:30
+                                                             barMaxWidth:200
+                                                                gradient:nil];
+    [self.view addSubview:barChartView];
 }
 
 @end

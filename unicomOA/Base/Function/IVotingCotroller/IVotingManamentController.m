@@ -157,6 +157,7 @@
     else if ([str_condition isEqualToString:@"已经结束"]) {
         IVotingResultViewController *viewController=[[IVotingResultViewController alloc]init];
         viewController.str_title=cell.lbl_Titile.text;
+        viewController.str_condition=@"已经结束";
         [self.navigationController pushViewController:viewController animated:YES];
     }
     NSLog(@"进入投票页");

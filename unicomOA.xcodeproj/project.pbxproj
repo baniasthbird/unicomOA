@@ -28,6 +28,7 @@
 		2CB7DB5F1CA278C00057633D /* SMSCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB7DB5E1CA278C00057633D /* SMSCodeViewController.m */; };
 		2CB7DB621CA2C3150057633D /* ServerIPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB7DB611CA2C3150057633D /* ServerIPViewController.m */; };
 		2CB7DB651CA3C5970057633D /* MemberInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB7DB641CA3C5970057633D /* MemberInfoViewController.m */; };
+		2CB7DB681CAC22BA0057633D /* JXBarChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB7DB671CAC22BA0057633D /* JXBarChartView.m */; };
 		2CDC2BDD1C8FBFC90067693B /* NewsManagementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDC2BDC1C8FBFC90067693B /* NewsManagementViewController.m */; };
 		2CDC2BE01C8FD1300067693B /* NewsFocusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDC2BDF1C8FD1300067693B /* NewsFocusViewController.m */; };
 		2CDC2BE41C8FFD6C0067693B /* NIDropDown.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDC2BE31C8FFD6C0067693B /* NIDropDown.m */; };
@@ -148,6 +149,8 @@
 		2CB7DB611CA2C3150057633D /* ServerIPViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ServerIPViewController.m; path = Login/ServerIPViewController.m; sourceTree = "<group>"; };
 		2CB7DB631CA3C5970057633D /* MemberInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MemberInfoViewController.h; path = Base/Contact/Controller/MemberInfoViewController.h; sourceTree = "<group>"; };
 		2CB7DB641CA3C5970057633D /* MemberInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MemberInfoViewController.m; path = Base/Contact/Controller/MemberInfoViewController.m; sourceTree = "<group>"; };
+		2CB7DB661CAC22BA0057633D /* JXBarChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JXBarChartView.h; path = OpenSource/JXBarChart/JXBarChartView.h; sourceTree = "<group>"; };
+		2CB7DB671CAC22BA0057633D /* JXBarChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JXBarChartView.m; path = OpenSource/JXBarChart/JXBarChartView.m; sourceTree = "<group>"; };
 		2CDC2BDB1C8FBFC90067693B /* NewsManagementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsManagementViewController.h; path = Base/Function/NewsController/NewsManagementViewController.h; sourceTree = "<group>"; };
 		2CDC2BDC1C8FBFC90067693B /* NewsManagementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsManagementViewController.m; path = Base/Function/NewsController/NewsManagementViewController.m; sourceTree = "<group>"; };
 		2CDC2BDE1C8FD1300067693B /* NewsFocusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsFocusViewController.h; path = Base/Function/NewsController/NewsFocusViewController.h; sourceTree = "<group>"; };
@@ -664,6 +667,8 @@
 		6846D35D1CABC483004BD285 /* OpenSource */ = {
 			isa = PBXGroup;
 			children = (
+				2CB7DB661CAC22BA0057633D /* JXBarChartView.h */,
+				2CB7DB671CAC22BA0057633D /* JXBarChartView.m */,
 				6846D35E1CABC496004BD285 /* RadioBox.h */,
 				6846D35F1CABC496004BD285 /* RadioBox.m */,
 				6846D3601CABC496004BD285 /* RadioGroup.h */,
@@ -877,6 +882,7 @@
 				2CFEAD191C7168980054730E /* LoginViewController.m in Sources */,
 				2CFEAD451C72B8B90054730E /* LGSettingSection.m in Sources */,
 				6846D3621CABC496004BD285 /* RadioBox.m in Sources */,
+				2CB7DB681CAC22BA0057633D /* JXBarChartView.m in Sources */,
 				2CFEADD31C770D6F0054730E /* UITableGridViewCell.m in Sources */,
 				2CFEAD301C7181F30054730E /* NTButton.m in Sources */,
 				68F173D11C99575200A8BEA3 /* HeadViewCell.m in Sources */,
