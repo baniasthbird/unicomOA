@@ -70,6 +70,12 @@
 		2CFEADF01C7C06CB0054730E /* MenuItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEADEE1C7C06CB0054730E /* MenuItemModel.m */; };
 		2CFEADF31C7C27020054730E /* UIViewExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEADF21C7C27020054730E /* UIViewExt.m */; };
 		6822656F1C96B4C400AB29C0 /* NewsSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6822656E1C96B4C400AB29C0 /* NewsSettingViewController.m */; };
+		6846D3531CAB5A1E004BD285 /* IVotingManamentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6846D3521CAB5A1E004BD285 /* IVotingManamentController.m */; };
+		6846D3561CAB62B1004BD285 /* VotingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6846D3551CAB62B1004BD285 /* VotingCell.m */; };
+		6846D3591CABA8AC004BD285 /* IVotingDisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6846D3581CABA8AC004BD285 /* IVotingDisplayController.m */; };
+		6846D35C1CABAF4D004BD285 /* IVotingResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6846D35B1CABAF4D004BD285 /* IVotingResultViewController.m */; };
+		6846D3621CABC496004BD285 /* RadioBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 6846D35F1CABC496004BD285 /* RadioBox.m */; };
+		6846D3631CABC496004BD285 /* RadioGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 6846D3611CABC496004BD285 /* RadioGroup.m */; };
 		6882C3181CA8D78300CDEB1A /* LogoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6882C3171CA8D78300CDEB1A /* LogoView.m */; };
 		6882C3211CA92C4B00CDEB1A /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6882C3201CA92C4B00CDEB1A /* CommentViewController.m */; };
 		68D05CBA1C9791000039220F /* PasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D05CB91C9791000039220F /* PasswordViewController.m */; };
@@ -225,6 +231,18 @@
 		2CFEADF21C7C27020054730E /* UIViewExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIViewExt.m; path = Base/Function/NotesViews/UIViewExt.m; sourceTree = "<group>"; };
 		6822656D1C96B4C400AB29C0 /* NewsSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsSettingViewController.h; path = Base/Settings/Controller/NewsSettingViewController.h; sourceTree = "<group>"; };
 		6822656E1C96B4C400AB29C0 /* NewsSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsSettingViewController.m; path = Base/Settings/Controller/NewsSettingViewController.m; sourceTree = "<group>"; };
+		6846D3511CAB5A1E004BD285 /* IVotingManamentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IVotingManamentController.h; path = Base/Function/IVotingCotroller/IVotingManamentController.h; sourceTree = "<group>"; };
+		6846D3521CAB5A1E004BD285 /* IVotingManamentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IVotingManamentController.m; path = Base/Function/IVotingCotroller/IVotingManamentController.m; sourceTree = "<group>"; };
+		6846D3541CAB62B1004BD285 /* VotingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VotingCell.h; path = Base/Function/IVotingModel/VotingCell.h; sourceTree = "<group>"; };
+		6846D3551CAB62B1004BD285 /* VotingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VotingCell.m; path = Base/Function/IVotingModel/VotingCell.m; sourceTree = "<group>"; };
+		6846D3571CABA8AC004BD285 /* IVotingDisplayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IVotingDisplayController.h; path = Base/Function/IVotingCotroller/IVotingDisplayController.h; sourceTree = "<group>"; };
+		6846D3581CABA8AC004BD285 /* IVotingDisplayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IVotingDisplayController.m; path = Base/Function/IVotingCotroller/IVotingDisplayController.m; sourceTree = "<group>"; };
+		6846D35A1CABAF4D004BD285 /* IVotingResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IVotingResultViewController.h; path = Base/Function/IVotingCotroller/IVotingResultViewController.h; sourceTree = "<group>"; };
+		6846D35B1CABAF4D004BD285 /* IVotingResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IVotingResultViewController.m; path = Base/Function/IVotingCotroller/IVotingResultViewController.m; sourceTree = "<group>"; };
+		6846D35E1CABC496004BD285 /* RadioBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RadioBox.h; path = OpenSource/RadioControl/RadioBox.h; sourceTree = "<group>"; };
+		6846D35F1CABC496004BD285 /* RadioBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RadioBox.m; path = OpenSource/RadioControl/RadioBox.m; sourceTree = "<group>"; };
+		6846D3601CABC496004BD285 /* RadioGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RadioGroup.h; path = OpenSource/RadioControl/RadioGroup.h; sourceTree = "<group>"; };
+		6846D3611CABC496004BD285 /* RadioGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RadioGroup.m; path = OpenSource/RadioControl/RadioGroup.m; sourceTree = "<group>"; };
 		6882C3161CA8D78300CDEB1A /* LogoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LogoView.h; path = Base/Contact/View/LogoView.h; sourceTree = "<group>"; };
 		6882C3171CA8D78300CDEB1A /* LogoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LogoView.m; path = Base/Contact/View/LogoView.m; sourceTree = "<group>"; };
 		6882C31F1CA92C4B00CDEB1A /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommentViewController.h; path = Base/Function/NewsController/CommentViewController.h; sourceTree = "<group>"; };
@@ -296,6 +314,7 @@
 		2C35B0491C7062160003BF6C /* unicomOA */ = {
 			isa = PBXGroup;
 			children = (
+				6846D35D1CABC483004BD285 /* OpenSource */,
 				68D05CC81C97FBAE0039220F /* Image */,
 				2CFEADCD1C770D1D0054730E /* FunctionViewBase */,
 				2CFEAD461C72C3410054730E /* ContactViewBase */,
@@ -501,12 +520,9 @@
 		2CFEADCD1C770D1D0054730E /* FunctionViewBase */ = {
 			isa = PBXGroup;
 			children = (
-				2CDC2BE11C8FFC590067693B /* NewsModel */,
-				2CDC2BCD1C8FBB4C0067693B /* NewsController */,
-				2CDC2BCB1C8FBB390067693B /* NewsView */,
-				2CFEADEA1C7C06B60054730E /* NotesModel */,
-				2CFEADDE1C7C050F0054730E /* NotesViews */,
-				2CFEADD41C79A3550054730E /* NotesController */,
+				6846D34E1CAB5998004BD285 /* IVoting */,
+				6846D34D1CAB5988004BD285 /* Notes */,
+				6846D34C1CAB5977004BD285 /* News */,
 				2CFEADCE1C770D6F0054730E /* UIImageButton.h */,
 				2CFEADCF1C770D6F0054730E /* UIImageButton.m */,
 				2CFEADD01C770D6F0054730E /* UITableGridViewCell.h */,
@@ -584,6 +600,76 @@
 				2C99721D1CA21E0E00B803FC /* ChangePhoneNumStep3.m */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		6846D34B1CAB5965004BD285 /* IVotingView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = IVotingView;
+			sourceTree = "<group>";
+		};
+		6846D34C1CAB5977004BD285 /* News */ = {
+			isa = PBXGroup;
+			children = (
+				2CDC2BE11C8FFC590067693B /* NewsModel */,
+				2CDC2BCD1C8FBB4C0067693B /* NewsController */,
+				2CDC2BCB1C8FBB390067693B /* NewsView */,
+			);
+			name = News;
+			sourceTree = "<group>";
+		};
+		6846D34D1CAB5988004BD285 /* Notes */ = {
+			isa = PBXGroup;
+			children = (
+				2CFEADEA1C7C06B60054730E /* NotesModel */,
+				2CFEADDE1C7C050F0054730E /* NotesViews */,
+				2CFEADD41C79A3550054730E /* NotesController */,
+			);
+			name = Notes;
+			sourceTree = "<group>";
+		};
+		6846D34E1CAB5998004BD285 /* IVoting */ = {
+			isa = PBXGroup;
+			children = (
+				6846D3501CAB59C2004BD285 /* IVotingModel */,
+				6846D34F1CAB59A6004BD285 /* IVotingController */,
+				6846D34B1CAB5965004BD285 /* IVotingView */,
+			);
+			name = IVoting;
+			sourceTree = "<group>";
+		};
+		6846D34F1CAB59A6004BD285 /* IVotingController */ = {
+			isa = PBXGroup;
+			children = (
+				6846D3511CAB5A1E004BD285 /* IVotingManamentController.h */,
+				6846D3521CAB5A1E004BD285 /* IVotingManamentController.m */,
+				6846D3571CABA8AC004BD285 /* IVotingDisplayController.h */,
+				6846D3581CABA8AC004BD285 /* IVotingDisplayController.m */,
+				6846D35A1CABAF4D004BD285 /* IVotingResultViewController.h */,
+				6846D35B1CABAF4D004BD285 /* IVotingResultViewController.m */,
+			);
+			name = IVotingController;
+			sourceTree = "<group>";
+		};
+		6846D3501CAB59C2004BD285 /* IVotingModel */ = {
+			isa = PBXGroup;
+			children = (
+				6846D3541CAB62B1004BD285 /* VotingCell.h */,
+				6846D3551CAB62B1004BD285 /* VotingCell.m */,
+			);
+			name = IVotingModel;
+			sourceTree = "<group>";
+		};
+		6846D35D1CABC483004BD285 /* OpenSource */ = {
+			isa = PBXGroup;
+			children = (
+				6846D35E1CABC496004BD285 /* RadioBox.h */,
+				6846D35F1CABC496004BD285 /* RadioBox.m */,
+				6846D3601CABC496004BD285 /* RadioGroup.h */,
+				6846D3611CABC496004BD285 /* RadioGroup.m */,
+			);
+			name = OpenSource;
 			sourceTree = "<group>";
 		};
 		68D05CC11C97B3290039220F /* Model */ = {
@@ -749,12 +835,15 @@
 				2C5460BD1C854733005C5AB9 /* TableViewCell.m in Sources */,
 				68F950B91C9F9E9000CA1519 /* ChangePhoneNumViewController.m in Sources */,
 				2CA10C8E1CA1945F008D6394 /* ChangePhoneNumStep2.m in Sources */,
+				6846D3631CABC496004BD285 /* RadioGroup.m in Sources */,
 				68F173C91C99034500A8BEA3 /* StaffInfoViewController.m in Sources */,
 				2CFEAD241C717F910054730E /* MessageViewController.m in Sources */,
 				2CFEAD331C7183930054730E /* BaseNavigationViewController.m in Sources */,
 				68D05CBA1C9791000039220F /* PasswordViewController.m in Sources */,
+				6846D3591CABA8AC004BD285 /* IVotingDisplayController.m in Sources */,
 				2C5460A81C82F5C3005C5AB9 /* UserEntity.m in Sources */,
 				2CFEAD2D1C717FDC0054730E /* SettingViewController.m in Sources */,
+				6846D3531CAB5A1E004BD285 /* IVotingManamentController.m in Sources */,
 				68D05CC01C97AC050039220F /* SendFeedBackViewController.m in Sources */,
 				2CB7DB651CA3C5970057633D /* MemberInfoViewController.m in Sources */,
 				68D05CC71C97F6470039220F /* AboutViewController.m in Sources */,
@@ -787,10 +876,12 @@
 				2CFEADF31C7C27020054730E /* UIViewExt.m in Sources */,
 				2CFEAD191C7168980054730E /* LoginViewController.m in Sources */,
 				2CFEAD451C72B8B90054730E /* LGSettingSection.m in Sources */,
+				6846D3621CABC496004BD285 /* RadioBox.m in Sources */,
 				2CFEADD31C770D6F0054730E /* UITableGridViewCell.m in Sources */,
 				2CFEAD301C7181F30054730E /* NTButton.m in Sources */,
 				68F173D11C99575200A8BEA3 /* HeadViewCell.m in Sources */,
 				2CFEADC61C76A65E0054730E /* UIImage+ResizeImage.m in Sources */,
+				6846D35C1CABAF4D004BD285 /* IVotingResultViewController.m in Sources */,
 				2C99721E1CA21E0E00B803FC /* ChangePhoneNumStep3.m in Sources */,
 				2CFEAD361C7188500054730E /* OAViewController.m in Sources */,
 				2CFEAD181C7168980054730E /* forgetPasswordViewController.m in Sources */,
@@ -804,6 +895,7 @@
 				2CFEADC91C76D96B0054730E /* ContactViewController.m in Sources */,
 				2CFEADBD1C76A6440054730E /* MessageCell.m in Sources */,
 				2C35B0D51C715CB90003BF6C /* settingHeaderViewController.m in Sources */,
+				6846D3561CAB62B1004BD285 /* VotingCell.m in Sources */,
 				2CA10C8B1CA18F17008D6394 /* ChangePhoneNumStep1.m in Sources */,
 				2CFEADB71C76A6350054730E /* MessageModel.m in Sources */,
 				2CFEADC01C76A6520054730E /* ChatViewController.m in Sources */,

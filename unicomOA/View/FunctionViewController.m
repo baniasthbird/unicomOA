@@ -11,6 +11,7 @@
 #import "UIImageButton.h"
 #import "NotesViewController.h"
 #import "NewsManagementViewController.h"
+#import "IVotingManamentController.h"
 
 #define kImageWidth 100      //UITAbleViewCell里面图片的宽度
 #define kImageHeight 100     //UITableViewCell里面图片的高度
@@ -193,6 +194,7 @@
 }
 
 -(void)IVotingItemClick:(UIImageButton *)button {
+    /*
     NSString *msg = [NSString stringWithFormat:@"第%i行 第%i列",button.row + 1, button.column + 1];
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
                                                     message:msg
@@ -200,6 +202,9 @@
                                           cancelButtonTitle:@"好的，知道了"
                                           otherButtonTitles:nil, nil];
     [alert show];
+     */
+    IVotingManamentController *viewController=[[IVotingManamentController alloc]init];
+    [self.navigationController pushViewController:viewController animated:YES];
 
 }
 
