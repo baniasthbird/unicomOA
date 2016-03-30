@@ -12,4 +12,6 @@
 
 @property (strong,nonatomic) NSString *str_title;
 
+@property (strong,nonatomic) NSString *str_condition;
+
 @end
