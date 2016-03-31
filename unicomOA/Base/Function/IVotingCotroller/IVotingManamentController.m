@@ -108,7 +108,14 @@
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    VotingCell *cell=[VotingCell cellWithTable:tableView withCellHeight:110 titleX:self.view.frame.size.width*0.05 titleY:0.0f titleW:self.view.frame.size.width*0.68 titleH:50.0f ConditionX:self.view.frame.size.width*0.75 CondiditonY:0.0f ConditionW:self.view.frame.size.width*0.35 ConditionH:50.0f DepartX:self.view.frame.size.width*0.05 DepartY:60.0f DepartW:3*self.view.frame.size.width/8 DepartH:40.0f TimeX:self.view.frame.size.width/2 TimeY:60.0f TimeW:self.view.frame.size.width/3 TimeH:40.0f];
+    VotingCell *cell;
+    if (iPhone6 || iPhone6_plus) {
+        cell=[VotingCell cellWithTable:tableView withCellHeight:110 titleX:self.view.frame.size.width*0.05 titleY:0.0f titleW:self.view.frame.size.width*0.68 titleH:50.0f ConditionX:self.view.frame.size.width*0.75 CondiditonY:0.0f ConditionW:self.view.frame.size.width*0.35 ConditionH:50.0f DepartX:self.view.frame.size.width*0.05 DepartY:60.0f DepartW:3*self.view.frame.size.width/8 DepartH:40.0f TimeX:self.view.frame.size.width/2 TimeY:60.0f TimeW:self.view.frame.size.width/3 TimeH:40.0f];
+    }
+    else if (iPhone5_5s || iPhone4_4s) {
+        cell=[VotingCell cellWithTable:tableView withCellHeight:110 titleX:self.view.frame.size.width*0.05 titleY:0.0f titleW:self.view.frame.size.width*0.68 titleH:50.0f ConditionX:self.view.frame.size.width*0.75 CondiditonY:0.0f ConditionW:self.view.frame.size.width*0.35 ConditionH:50.0f DepartX:self.view.frame.size.width*0.05 DepartY:60.0f DepartW:3*self.view.frame.size.width/8 DepartH:40.0f TimeX:self.view.frame.size.width/2 TimeY:60.0f TimeW:self.view.frame.size.width*0.4 TimeH:40.0f];
+    }
+    
     cell.delegate=self;
     cell.myTag=indexPath.row;
     if (indexPath.section==0 && indexPath.row==0) {

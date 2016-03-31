@@ -22,11 +22,20 @@
     self.view.backgroundColor=[UIColor whiteColor];
     
 #pragma mark 标题
-    UILabel *lbl_Title=[[UILabel alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.08, self.view.frame.size.width, self.view.frame.size.height*0.15)];
+    UILabel *lbl_Title;
+    if (iPhone6 || iPhone6_plus)
+    {
+        lbl_Title=[[UILabel alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.08, self.view.frame.size.width, self.view.frame.size.height*0.15)];
+    }
+    else if (iPhone5_5s || iPhone4_4s) {
+        lbl_Title=[[UILabel alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.1, self.view.frame.size.width, self.view.frame.size.height*0.15)];
+    }
     lbl_Title.textAlignment=NSTextAlignmentCenter;
     lbl_Title.font=[UIFont systemFontOfSize:24];
     lbl_Title.textColor=[UIColor blackColor];
     lbl_Title.text=_str_title;
+    lbl_Title.numberOfLines=0;
+    
     
 #pragma mark 状态
     UILabel *lbl_condition=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.03, self.view.frame.size.height*0.25, self.view.frame.size.width*0.4, self.view.frame.size.height*0.05)];
@@ -35,8 +44,14 @@
     lbl_condition.textColor=[UIColor colorWithRed:153/255.0f green:153/255.0f blue:153/255.0f alpha:1];
     lbl_condition.text=_str_condition;
     
-#pragma mark 时间
-    UILabel *lbl_time=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.45, self.view.frame.size.height*0.25, self.view.frame.size.width*0.55, self.view.frame.size.height*0.05)];
+    UILabel *lbl_time;
+    if (iPhone6_plus || iPhone6) {
+        lbl_time=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.45, self.view.frame.size.height*0.25, self.view.frame.size.width*0.55, self.view.frame.size.height*0.05)];
+    }
+    else if (iPhone4_4s || iPhone5_5s) {
+        lbl_time=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.35, self.view.frame.size.height*0.25, self.view.frame.size.width*0.65, self.view.frame.size.height*0.05)];
+    }
+    
     lbl_time.textAlignment=NSTextAlignmentLeft;
     lbl_time.font=[UIFont systemFontOfSize:14];
     lbl_time.textColor=[UIColor colorWithRed:153/255.0f green:153/255.0f blue:153/255.0f alpha:1];

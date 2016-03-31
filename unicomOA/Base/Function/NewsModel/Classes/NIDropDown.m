@@ -102,8 +102,14 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        cell.textLabel.font = [UIFont systemFontOfSize:15];
-        cell.textLabel.textAlignment = UITextAlignmentCenter;
+        if (iPhone6 || iPhone6_plus) {
+            cell.textLabel.font = [UIFont systemFontOfSize:15];
+        }
+        else if (iPhone4_4s || iPhone5_5s) {
+            cell.textLabel.font=[UIFont systemFontOfSize:12.5];
+        }
+        
+        cell.textLabel.textAlignment =NSTextAlignmentCenter;
     }
     if ([self.imageList count] == [self.list count]) {
         cell.textLabel.text =[list objectAtIndex:indexPath.row];
