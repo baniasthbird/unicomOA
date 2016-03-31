@@ -36,10 +36,13 @@
     
     self.title = @"我";
     
+    
     NSDictionary * dict=@{
                           NSForegroundColorAttributeName:   [UIColor whiteColor]};
     
     self.navigationController.navigationBar.titleTextAttributes=dict;
+    
+
 
     
     //设置样式

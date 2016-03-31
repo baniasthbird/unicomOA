@@ -159,6 +159,9 @@
         return;
     }
      */
+    NSArray *tabBarItems = self.navigationController.tabBarController.tabBar.items;
+    UITabBarItem *personCenterTabBarItem = [tabBarItems objectAtIndex:2];
+    personCenterTabBarItem.badgeValue = @"2";
     [self.navigationController pushViewController:[[OAViewController alloc]init] animated:YES];
     
 }

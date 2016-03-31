@@ -78,7 +78,16 @@
     
     _tableView.delegate=self;
     
-    _btn_Select=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height/9, self.view.frame.size.width/4, self.view.frame.size.height/16)];
+    if (iPhone4_4s || iPhone5_5s) {
+        _btn_Select=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height*0.123, self.view.frame.size.width/4, self.view.frame.size.height/16)];
+    }
+    else if (iPhone6) {
+        _btn_Select=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height*0.115, self.view.frame.size.width/4, self.view.frame.size.height/16)];
+    }
+    else if (iPhone6_plus) {
+        _btn_Select=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height*0.113, self.view.frame.size.width/4, self.view.frame.size.height/16)];
+    }
+    
     [_btn_Select setTitle:@"类别" forState:UIControlStateNormal];
     [_btn_Select setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [_btn_Select setBackgroundColor:[UIColor colorWithRed:243.0/255.0f green:243.0f/255.0f blue:243.0f/255.0f alpha:1]];
@@ -87,7 +96,16 @@
     _btn_Select.layer.cornerRadius=5;
     [_btn_Select addTarget:self action:@selector(selectClicked:) forControlEvents:UIControlEventTouchUpInside];
     
-    _txt_Search=[[UITextField alloc]initWithFrame:CGRectMake(5*self.view.frame.size.width/16.0, self.view.frame.size.height/9, 2*self.view.frame.size.width/3, self.view.frame.size.height/16)];
+    if (iPhone4_4s || iPhone5_5s) {
+       _txt_Search=[[UITextField alloc]initWithFrame:CGRectMake(5*self.view.frame.size.width/16.0, self.view.frame.size.height*0.123, 2*self.view.frame.size.width/3, self.view.frame.size.height/16)];
+    }
+    else if (iPhone6) {
+        _txt_Search=[[UITextField alloc]initWithFrame:CGRectMake(5*self.view.frame.size.width/16.0, self.view.frame.size.height*0.115, 2*self.view.frame.size.width/3, self.view.frame.size.height/16)];
+    }
+    else if (iPhone6_plus) {
+        _txt_Search=[[UITextField alloc]initWithFrame:CGRectMake(5*self.view.frame.size.width/16.0, self.view.frame.size.height*0.113, 2*self.view.frame.size.width/3, self.view.frame.size.height/16)];
+    }
+    
     _txt_Search.layer.borderWidth=1;
     _txt_Search.layer.borderColor=[[UIColor lightGrayColor] CGColor];
     _txt_Search.layer.cornerRadius=5;

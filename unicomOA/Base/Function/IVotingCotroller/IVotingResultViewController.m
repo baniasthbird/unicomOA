@@ -52,8 +52,7 @@
     [self.view addSubview:lbl_time];
     [self.view addSubview:view_line];
     
-   //\
-    'sdklfjflk;aajs;lkfs;djl;ksdjslkajfdl;kjlkjsfd            [self buildChart];
+    [self buildChart];
 }
 
 -(void)buildChart {
@@ -61,10 +60,10 @@
     NSMutableArray *values = [[NSMutableArray alloc] initWithObjects:@12, @31, @13, nil];
     CGRect frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
     JXBarChartView *barChartView = [[JXBarChartView alloc] initWithFrame:frame
-                                                              startPoint:CGPointMake(20, self.view.frame.size.height*0.35)
+                                                              startPoint:CGPointMake(20, self.view.frame.size.height*0.38)
                                                                   values:values maxValue:50
                                                           textIndicators:textIndicators
-                                                               textColor:[UIColor orangeColor]
+                                                               textColor:[UIColor blackColor]
                                                                barHeight:30
                                                              barMaxWidth:200
                                                                 gradient:nil];

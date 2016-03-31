@@ -49,7 +49,7 @@
         size_t count = 3;
         CGGradientRef defaultGradient = CGGradientCreateWithColorComponents(colorSpace, colorComponents, locations, count);
         _gradient = gradient ?  gradient : defaultGradient;
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = [UIColor clearColor];
     }
     return self;
 }
@@ -59,20 +59,77 @@
 {
     label.textColor = self.textColor;
     [label setTextAlignment:NSTextAlignmentLeft];
-    label.adjustsFontSizeToFitWidth = YES;
+    //label.adjustsFontSizeToFitWidth = YES;
+    label.font=[UIFont systemFontOfSize:14];
     //label.adjustsLetterSpacingToFitWidth = YES;
     label.backgroundColor = [UIColor clearColor];
 }
 
-- (void)drawRectangle:(CGRect)rect context:(CGContextRef)context
+-(CGGradientRef)makeGradient:(NSString*)str_color {
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    //blue gradient
+    CGFloat locations[] = {0.0, 0.5, 1.0};
+    CGFloat red_colorComponents[] = {
+        238/255.0f, 110/255.0f, 88/255.0f, 1.0, //red, green, blue, alpha
+        230/255.0f, 95/255.0f, 62/255.0f, 1.0,
+        224/255.0f, 74/255.0f, 25/255.0f, 1.0
+    };
+    CGFloat orange_colorComponents[] = {
+            224/255.0f, 167/255.0f, 79/255.0f, 1.0, //red, green, blue, alpha
+            213/255.0f, 148/255.0f, 46/255.0f, 1.0,
+            200/255.0f, 127/255.0f, 7/255.0f, 1.0
+        };
+    CGFloat blue_colorComponents[] = {
+        0.254, 0.599, 0.82, 1.0, //red, green, blue, alpha
+        0.192, 0.525, 0.75, 1.0,
+        0.096, 0.415, 0.686, 1.0
+    };
+
+    size_t count = 3;
+    if ([str_color isEqualToString:@"red"])
+    {
+        CGGradientRef Gradient = CGGradientCreateWithColorComponents(colorSpace, red_colorComponents, locations, count);
+        return Gradient;
+
+    }
+    else if ([str_color isEqualToString:@"orange"])
+    {
+         CGGradientRef Gradient = CGGradientCreateWithColorComponents(colorSpace, orange_colorComponents, locations, count);
+        return Gradient;
+
+    }
+    else {
+        CGGradientRef Gradient = CGGradientCreateWithColorComponents(colorSpace, blue_colorComponents, locations, count);
+        return Gradient;
+    }
+    
+    
+}
+
+- (void)drawRectangle:(CGRect)rect context:(CGContextRef)context maxRect:(CGRect)max_rect atIndex:(int)i_index Grdient:(CGGradientRef)gradient
 {
     CGContextSaveGState(self.context);
+    CGContextStrokeRectWithWidth(context, max_rect, 1);
     CGContextAddRect(self.context, rect);
     CGContextClipToRect(self.context, rect);
     CGPoint startPoint = CGPointMake(rect.origin.x, rect.origin.y);
     CGPoint endPoint = CGPointMake(rect.origin.x + rect.size.width, rect.origin.y);
-    CGContextDrawLinearGradient(self.context, self.gradient, startPoint, endPoint, 0);
+    if (i_index==0) {
+        CGContextDrawLinearGradient(self.context, self.gradient, startPoint, endPoint, 0);
+    }
+    else if (i_index==1) {
+        CGContextDrawLinearGradient(self.context, gradient, startPoint, endPoint, 0);
+    }
+    else if (i_index==2) {
+        CGContextDrawLinearGradient(self.context, gradient, startPoint, endPoint, 0);
+        
+    }
+    
+    
     CGContextRestoreGState(self.context);
+    //添加barmaxwidth
+    
+    
 }
 
 - (void)drawRect:(CGRect)rect
@@ -82,14 +139,16 @@
     float startx = self.startPoint.x;
     float starty = self.startPoint.y;
     float barMargin = 22;
-    float marginOfBarAndDigit = 2;
-    float marginOfTextAndBar = 8;
-    float digitWidth = 20;
-    float textWidth = 70;
+    float digitWidth = rect.size.width;
+    int total_value=0;
+    for (int i=0; i<count; i++) {
+        total_value+=[self.values[i] intValue];
+    }
     for (int i = 0; i < count; i++) {
+        
         //handle textlabel
-        float textMargin_y = (i * (self.barHeight + barMargin)) + starty;
-        UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(startx, textMargin_y, textWidth, self.barHeight)];
+        float textMargin_y = (i * (self.barHeight + barMargin*2)) + starty-self.barHeight*0.5;
+        UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(startx, textMargin_y, rect.size.width, self.barHeight*0.5)];
         textLabel.text = self.textIndicators[i];
         [self setLabelDefaults:textLabel];
         @try {
@@ -104,15 +163,30 @@
         [self addSubview:textLabel];
         
         //handle bar
-        float barMargin_y = (i * (self.barHeight + barMargin)) + starty;
+        float barMargin_y = (i * (self.barHeight + barMargin*2)) + starty+self.barHeight*0.5;
         float v = [self.values[i] floatValue] <= self.maxValue ? [self.values[i] floatValue]: self.maxValue;
         float rate = v / self.maxValue;
         float barWidth = rate * self.barMaxWidth;
-        CGRect barFrame = CGRectMake(startx + textWidth + marginOfTextAndBar, barMargin_y, barWidth, self.barHeight);
-        [self drawRectangle:barFrame context:self.context];
+        CGRect barFrame = CGRectMake(startx, barMargin_y, barWidth, self.barHeight);
+        CGRect max_barFrame=CGRectMake(startx, barMargin_y, self.barMaxWidth, self.barHeight);
+        CGGradientRef gradient=nil;
+        if (i==1)
+        {
+           gradient =[self makeGradient:@"red"];
+        }
+        else if (i==2) {
+            gradient =[self makeGradient:@"orange"];
+        }
+        [self drawRectangle:barFrame context:self.context maxRect:max_barFrame atIndex:i Grdient:gradient];
         //handle digitlabel
-        UILabel *digitLabel = [[UILabel alloc] initWithFrame:CGRectMake(barFrame.origin.x + barFrame.size.width + marginOfBarAndDigit, barFrame.origin.y, digitWidth, barFrame.size.height)];
-        digitLabel.text = [self.values[i] stringValue];
+        UILabel *digitLabel = [[UILabel alloc] initWithFrame:CGRectMake(barFrame.origin.x +self.barMaxWidth*1.1, barFrame.origin.y, digitWidth, barFrame.size.height)];
+        float d_percent=(float)[self.values[i] intValue]/(float)total_value;
+        d_percent= d_percent*100;
+        NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+        [numberFormatter setPositiveFormat:@"0.00"];
+        NSString *str_percent= [numberFormatter stringFromNumber:[NSNumber numberWithFloat:d_percent]];
+        NSString *str_text=[NSString stringWithFormat:@"%@%%(%@)",str_percent,[self.values[i] stringValue]];
+        digitLabel.text = str_text;
         [self setLabelDefaults:digitLabel];
         @try {
             UILabel *originalDigitLabel = self.digitIndicatorsLabels[i];
@@ -124,6 +198,9 @@
             [self.digitIndicatorsLabels insertObject:digitLabel atIndex:i];
         }
         [self addSubview:digitLabel];
+        
+        
+        
     }
 }
 

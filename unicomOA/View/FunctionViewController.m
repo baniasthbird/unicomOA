@@ -12,6 +12,8 @@
 #import "NotesViewController.h"
 #import "NewsManagementViewController.h"
 #import "IVotingManamentController.h"
+#import "UIView+Frame.h"
+#import "WZLBadgeImport.h"
 
 #define kImageWidth 100      //UITAbleViewCell里面图片的宽度
 #define kImageHeight 100     //UITableViewCell里面图片的高度
@@ -114,6 +116,7 @@
         UIImageButton *btn_Notes;
         if (iPhone6) {
             btn_News=[self createImageButton:30+kImageWidth*0.5 CenterY:5+kImageHeight*0.5 title:@"公告" image:@"News.png"];
+            
             [btn_News addTarget:self action:@selector(NewsItemClick:) forControlEvents:UIControlEventTouchUpInside];
             btn_ShenPi=[self createImageButton:35+kImageWidth*1.5 CenterY:5+kImageHeight*0.5 title:@"审批" image:@"ShenPi.png"];
             [btn_ShenPi addTarget:self action:@selector(ShenPiItemClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -143,7 +146,13 @@
                 btn_Notes=[self createImageButton:30+kImageWidth*0.5 CenterY:5+kImageHeight*0.5 title:@"备忘录" image:@"Notes.png"];
                [btn_Notes addTarget:self action:@selector(NotesItemClick:) forControlEvents:UIControlEventTouchUpInside];
         }
+        btn_News.badgeBgColor=[UIColor redColor];
+        btn_News.badgeCenterOffset=CGPointMake(0, btn_News.size.height*0.08);
+        [btn_News showBadgeWithStyle:WBadgeStyleNumber value:1 animationType:WBadgeAnimTypeNone];
         
+        btn_ShenPi.badgeBgColor=[UIColor purpleColor];
+        btn_ShenPi.badgeCenterOffset=CGPointMake(0, btn_ShenPi.size.height*0.08);
+        [btn_ShenPi showBadgeWithStyle:WBadgeStyleNumber value:1 animationType:WBadgeAnimTypeNone];
         
         if (indexPath.row==0) {
             [cell addSubview:btn_News];

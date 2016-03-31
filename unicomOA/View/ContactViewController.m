@@ -22,6 +22,25 @@
 
 @implementation ContactViewController
 
+
+
+-(instancetype)init {
+    
+    
+    self.title = @"通讯录";
+    
+    NSDictionary * dict=@{
+                          NSForegroundColorAttributeName:   [UIColor whiteColor]};
+    
+    self.navigationController.navigationBar.titleTextAttributes=dict;
+    
+    
+    //设置样式
+    return [self initWithStyle:UITableViewStyleGrouped];
+    
+}
+
+
 -(void)viewDidLoad
 {
     [super viewDidLoad];

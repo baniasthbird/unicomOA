@@ -70,6 +70,11 @@
 		2CFEADEF1C7C06CB0054730E /* CellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEADEC1C7C06CB0054730E /* CellModel.m */; };
 		2CFEADF01C7C06CB0054730E /* MenuItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEADEE1C7C06CB0054730E /* MenuItemModel.m */; };
 		2CFEADF31C7C27020054730E /* UIViewExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEADF21C7C27020054730E /* UIViewExt.m */; };
+		68052C1C1CAD166800A93BDA /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 68052C1B1CAD166800A93BDA /* UIView+Frame.m */; };
+		68052C2C1CAD167400A93BDA /* UIBarButtonItem+WZLBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = 68052C201CAD167400A93BDA /* UIBarButtonItem+WZLBadge.m */; };
+		68052C2D1CAD167400A93BDA /* UITabBarItem+WZLBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = 68052C221CAD167400A93BDA /* UITabBarItem+WZLBadge.m */; };
+		68052C2E1CAD167400A93BDA /* CAAnimation+WAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 68052C251CAD167400A93BDA /* CAAnimation+WAnimation.m */; };
+		68052C2F1CAD167400A93BDA /* UIView+WZLBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = 68052C2A1CAD167400A93BDA /* UIView+WZLBadge.m */; };
 		6822656F1C96B4C400AB29C0 /* NewsSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6822656E1C96B4C400AB29C0 /* NewsSettingViewController.m */; };
 		6846D3531CAB5A1E004BD285 /* IVotingManamentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6846D3521CAB5A1E004BD285 /* IVotingManamentController.m */; };
 		6846D3561CAB62B1004BD285 /* VotingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6846D3551CAB62B1004BD285 /* VotingCell.m */; };
@@ -232,6 +237,18 @@
 		2CFEADEE1C7C06CB0054730E /* MenuItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenuItemModel.m; path = Base/Function/NotesModel/MenuItemModel.m; sourceTree = "<group>"; };
 		2CFEADF11C7C27020054730E /* UIViewExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIViewExt.h; path = Base/Function/NotesViews/UIViewExt.h; sourceTree = "<group>"; };
 		2CFEADF21C7C27020054730E /* UIViewExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIViewExt.m; path = Base/Function/NotesViews/UIViewExt.m; sourceTree = "<group>"; };
+		68052C1A1CAD166800A93BDA /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
+		68052C1B1CAD166800A93BDA /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
+		68052C1F1CAD167400A93BDA /* UIBarButtonItem+WZLBadge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+WZLBadge.h"; sourceTree = "<group>"; };
+		68052C201CAD167400A93BDA /* UIBarButtonItem+WZLBadge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+WZLBadge.m"; sourceTree = "<group>"; };
+		68052C211CAD167400A93BDA /* UITabBarItem+WZLBadge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBarItem+WZLBadge.h"; sourceTree = "<group>"; };
+		68052C221CAD167400A93BDA /* UITabBarItem+WZLBadge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBarItem+WZLBadge.m"; sourceTree = "<group>"; };
+		68052C241CAD167400A93BDA /* CAAnimation+WAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAAnimation+WAnimation.h"; sourceTree = "<group>"; };
+		68052C251CAD167400A93BDA /* CAAnimation+WAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CAAnimation+WAnimation.m"; sourceTree = "<group>"; };
+		68052C271CAD167400A93BDA /* WZLBadgeProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WZLBadgeProtocol.h; sourceTree = "<group>"; };
+		68052C291CAD167400A93BDA /* UIView+WZLBadge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WZLBadge.h"; sourceTree = "<group>"; };
+		68052C2A1CAD167400A93BDA /* UIView+WZLBadge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WZLBadge.m"; sourceTree = "<group>"; };
+		68052C2B1CAD167400A93BDA /* WZLBadgeImport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WZLBadgeImport.h; sourceTree = "<group>"; };
 		6822656D1C96B4C400AB29C0 /* NewsSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsSettingViewController.h; path = Base/Settings/Controller/NewsSettingViewController.h; sourceTree = "<group>"; };
 		6822656E1C96B4C400AB29C0 /* NewsSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsSettingViewController.m; path = Base/Settings/Controller/NewsSettingViewController.m; sourceTree = "<group>"; };
 		6846D3511CAB5A1E004BD285 /* IVotingManamentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IVotingManamentController.h; path = Base/Function/IVotingCotroller/IVotingManamentController.h; sourceTree = "<group>"; };
@@ -580,6 +597,74 @@
 			name = NotesModel;
 			sourceTree = "<group>";
 		};
+		68052C181CAD166800A93BDA /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				68052C191CAD166800A93BDA /* Category */,
+			);
+			name = Tool;
+			path = OpenSource/Tool;
+			sourceTree = "<group>";
+		};
+		68052C191CAD166800A93BDA /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				68052C1A1CAD166800A93BDA /* UIView+Frame.h */,
+				68052C1B1CAD166800A93BDA /* UIView+Frame.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		68052C1D1CAD167400A93BDA /* WZLBadge */ = {
+			isa = PBXGroup;
+			children = (
+				68052C1E1CAD167400A93BDA /* BarItem */,
+				68052C231CAD167400A93BDA /* CategorySupport */,
+				68052C261CAD167400A93BDA /* Protocol */,
+				68052C281CAD167400A93BDA /* View */,
+				68052C2B1CAD167400A93BDA /* WZLBadgeImport.h */,
+			);
+			name = WZLBadge;
+			path = OpenSource/Tool/WZLBadge;
+			sourceTree = "<group>";
+		};
+		68052C1E1CAD167400A93BDA /* BarItem */ = {
+			isa = PBXGroup;
+			children = (
+				68052C1F1CAD167400A93BDA /* UIBarButtonItem+WZLBadge.h */,
+				68052C201CAD167400A93BDA /* UIBarButtonItem+WZLBadge.m */,
+				68052C211CAD167400A93BDA /* UITabBarItem+WZLBadge.h */,
+				68052C221CAD167400A93BDA /* UITabBarItem+WZLBadge.m */,
+			);
+			path = BarItem;
+			sourceTree = "<group>";
+		};
+		68052C231CAD167400A93BDA /* CategorySupport */ = {
+			isa = PBXGroup;
+			children = (
+				68052C241CAD167400A93BDA /* CAAnimation+WAnimation.h */,
+				68052C251CAD167400A93BDA /* CAAnimation+WAnimation.m */,
+			);
+			path = CategorySupport;
+			sourceTree = "<group>";
+		};
+		68052C261CAD167400A93BDA /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				68052C271CAD167400A93BDA /* WZLBadgeProtocol.h */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		68052C281CAD167400A93BDA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				68052C291CAD167400A93BDA /* UIView+WZLBadge.h */,
+				68052C2A1CAD167400A93BDA /* UIView+WZLBadge.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		682265691C96A5EE00AB29C0 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -667,6 +752,8 @@
 		6846D35D1CABC483004BD285 /* OpenSource */ = {
 			isa = PBXGroup;
 			children = (
+				68052C1D1CAD167400A93BDA /* WZLBadge */,
+				68052C181CAD166800A93BDA /* Tool */,
 				2CB7DB661CAC22BA0057633D /* JXBarChartView.h */,
 				2CB7DB671CAC22BA0057633D /* JXBarChartView.m */,
 				6846D35E1CABC496004BD285 /* RadioBox.h */,
@@ -846,6 +933,7 @@
 				2CFEAD331C7183930054730E /* BaseNavigationViewController.m in Sources */,
 				68D05CBA1C9791000039220F /* PasswordViewController.m in Sources */,
 				6846D3591CABA8AC004BD285 /* IVotingDisplayController.m in Sources */,
+				68052C2E1CAD167400A93BDA /* CAAnimation+WAnimation.m in Sources */,
 				2C5460A81C82F5C3005C5AB9 /* UserEntity.m in Sources */,
 				2CFEAD2D1C717FDC0054730E /* SettingViewController.m in Sources */,
 				6846D3531CAB5A1E004BD285 /* IVotingManamentController.m in Sources */,
@@ -859,6 +947,7 @@
 				2CFEADDA1C79D9480054730E /* NewNotesViewController.m in Sources */,
 				2C35B0521C7062160003BF6C /* ViewController.m in Sources */,
 				2CFEADB61C76A6350054730E /* FriendGroup.m in Sources */,
+				68052C2F1CAD167400A93BDA /* UIView+WZLBadge.m in Sources */,
 				2CFEAD2A1C717FCB0054730E /* FunctionViewController.m in Sources */,
 				2CFEADEF1C7C06CB0054730E /* CellModel.m in Sources */,
 				2CFEADBC1C76A6440054730E /* HeadView.m in Sources */,
@@ -881,13 +970,16 @@
 				2CFEADF31C7C27020054730E /* UIViewExt.m in Sources */,
 				2CFEAD191C7168980054730E /* LoginViewController.m in Sources */,
 				2CFEAD451C72B8B90054730E /* LGSettingSection.m in Sources */,
+				68052C2C1CAD167400A93BDA /* UIBarButtonItem+WZLBadge.m in Sources */,
 				6846D3621CABC496004BD285 /* RadioBox.m in Sources */,
 				2CB7DB681CAC22BA0057633D /* JXBarChartView.m in Sources */,
+				68052C2D1CAD167400A93BDA /* UITabBarItem+WZLBadge.m in Sources */,
 				2CFEADD31C770D6F0054730E /* UITableGridViewCell.m in Sources */,
 				2CFEAD301C7181F30054730E /* NTButton.m in Sources */,
 				68F173D11C99575200A8BEA3 /* HeadViewCell.m in Sources */,
 				2CFEADC61C76A65E0054730E /* UIImage+ResizeImage.m in Sources */,
 				6846D35C1CABAF4D004BD285 /* IVotingResultViewController.m in Sources */,
+				68052C1C1CAD166800A93BDA /* UIView+Frame.m in Sources */,
 				2C99721E1CA21E0E00B803FC /* ChangePhoneNumStep3.m in Sources */,
 				2CFEAD361C7188500054730E /* OAViewController.m in Sources */,
 				2CFEAD181C7168980054730E /* forgetPasswordViewController.m in Sources */,

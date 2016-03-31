@@ -39,6 +39,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    /*
     //wsq
     for (UIView* obj in self.tabBar.subviews) {
         if (obj != _tabBarView) {//_tabBarView 应该单独封装。
@@ -48,6 +49,7 @@
         //
         //        }
     }
+     */
 }
 
 
@@ -57,9 +59,9 @@
     // Do any additional setup after loading the view.
     _tabBarView = [[UIImageView alloc]initWithFrame:self.tabBar.bounds];
     _tabBarView.userInteractionEnabled = YES;
-    _tabBarView.backgroundColor = [UIColor whiteColor];
-    self.view.backgroundColor=[UIColor colorWithRed:70/255.0f green:156/255.0f blue:241/255.0f alpha:1];
-    [self.tabBar addSubview:_tabBarView];
+    _tabBarView.backgroundColor = [UIColor clearColor];
+    //self.view.backgroundColor=[UIColor colorWithRed:70/255.0f green:156/255.0f blue:241/255.0f alpha:1];
+    //[self.tabBar addSubview:_tabBarView];
     
     MessageViewController *message=[[MessageViewController alloc]init];
     message.delegate=self;
@@ -77,14 +79,18 @@
     
     self.viewControllers=[NSArray arrayWithObjects:navi1,navi2,navi3,navi4, nil];
     
-    [self creatButtonWithNormalName:@"message.png" andSelectName:@"message_selected.png" andTitle:@"消息" andIndex:0];
-    [self creatButtonWithNormalName:@"contact.png" andSelectName:@"contact_selected.png" andTitle:@"联系人" andIndex:1];
-    [self creatButtonWithNormalName:@"appcenter.png" andSelectName:@"appcenter_selected.png" andTitle:@"应用" andIndex:2];
-    [self creatButtonWithNormalName:@"user.png" andSelectName:@"user_selected.png" andTitle:@"我" andIndex:3];
+    [self creatButtonWithNormalName:@"message.png" andSelectName:@"message_selected.png" andTitle:@"" andIndex:0];
+    [self creatButtonWithNormalName:@"contact.png" andSelectName:@"contact_selected" andTitle:@"" andIndex:1];
+    [self creatButtonWithNormalName:@"appcenter.png" andSelectName:@"appcenter_selected.png" andTitle:@"" andIndex:2];
+    [self creatButtonWithNormalName:@"user.png" andSelectName:@"user_selected.png" andTitle:@"" andIndex:3];
     
-    NTButton *button=_tabBarView.subviews[0];
+   // NTButton *button=_tabBarView.subviews[0];
+    NTButton *button=self.tabBar.subviews[0];
     [self changeViewController:button];
-  
+    
+    UITabBarItem *item= [self.tabBar.items objectAtIndex:2];
+    item.badgeValue=@"2";
+   // [self.tabBar.items objectAtIndex:2].badgeValue=@"1";
     
 }
 
@@ -127,7 +133,8 @@
     customButton.titleLabel.font = [UIFont systemFontOfSize:10];
     [customButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
-    [_tabBarView addSubview:customButton];
+   // [_tabBarView addSubview:customButton];
+    [self.tabBar addSubview:customButton];
     
     
     if(index == 0)//设置第一个选择项。（默认选择项） wsq

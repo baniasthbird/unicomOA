@@ -28,7 +28,12 @@ int i_comment_num;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    _lbl_label=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height/16, 15*self.view.frame.size.width/16, self.view.frame.size.height/6)];
+    if (iPhone6 || iPhone6_plus) {
+        _lbl_label=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height/16, 15*self.view.frame.size.width/16, self.view.frame.size.height/6)];
+    }
+    else if (iPhone4_4s || iPhone5_5s) {
+         _lbl_label=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height*0.1, 15*self.view.frame.size.width/16, self.view.frame.size.height/6)];
+    }
     _lbl_label.numberOfLines=0;
     _lbl_label.textAlignment=NSTextAlignmentCenter;
     [_lbl_label setLineBreakMode:NSLineBreakByWordWrapping];
@@ -36,14 +41,32 @@ int i_comment_num;
     _lbl_label.textColor=[UIColor blackColor];
     _lbl_label.text=_str_label;
     
-    _lbl_depart=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, 3*self.view.frame.size.height/16, 15*self.view.frame.size.width/16, self.view.frame.size.height/8)];
+    if (iPhone6 || iPhone6_plus) {
+         _lbl_depart=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, 3*self.view.frame.size.height/16, 15*self.view.frame.size.width/16, self.view.frame.size.height/8)];
+    }
+    else if (iPhone5_5s || iPhone4_4s) {
+        _lbl_depart=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height*0.195, 15*self.view.frame.size.width/16, self.view.frame.size.height/8)];
+    }
+   
     _lbl_depart.numberOfLines=1;
     [_lbl_depart setLineBreakMode:NSLineBreakByWordWrapping];
     _lbl_depart.textColor=[UIColor lightGrayColor];
     _lbl_depart.font=[UIFont systemFontOfSize:14];
-    _lbl_depart.text=@"           综合管理部                        张三   2016-01-26 ";
+    if (iPhone6 || iPhone6_plus) {
+        _lbl_depart.text=@"           综合管理部                        张三   2016-01-26 ";
+    }
+    else if (iPhone5_5s || iPhone4_4s) {
+        _lbl_depart.text=@"   综合管理部            张三   2016-01-26 ";
+    }
     
-    _txt_content=[[UITextView alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height*0.27, 15*self.view.frame.size.width/16, self.view.frame.size.height*0.60)];
+    
+    if (iPhone6 || iPhone6_plus) {
+       _txt_content=[[UITextView alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height*0.27, 15*self.view.frame.size.width/16, self.view.frame.size.height*0.60)];
+    }
+    else if (iPhone4_4s || iPhone5_5s) {
+         _txt_content=[[UITextView alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height*0.27, 15*self.view.frame.size.width/16, self.view.frame.size.height*0.57)];
+    }
+    
     //[_lbl_content setLineBreakMode:NSLineBreakByWordWrapping];
     
     _txt_content.font=[UIFont systemFontOfSize:14];
