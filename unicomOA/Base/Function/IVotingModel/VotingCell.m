@@ -53,7 +53,7 @@
         //创建按钮
         CGFloat btnViewH=btnH;
         CGFloat btnViewW=btnCount*btnW;
-        CGFloat btnViewX=WHScreenW-btnViewW;
+        CGFloat btnViewX=WHScreenW;
         
         CGFloat btnViewY=0;
         UIView *btnView=[[UIView alloc]initWithFrame:CGRectMake(btnViewX, btnViewY, btnViewW, btnViewH)];

@@ -107,9 +107,11 @@
     NTButton * customButton = [NTButton buttonWithType:UIButtonTypeCustom];
     customButton.tag = index;
     
-    CGFloat buttonW = _tabBarView.frame.size.width / 4;
-    CGFloat buttonH = _tabBarView.frame.size.height;
+    CGFloat buttonW = self.tabBar.frame.size.width/4;
+    CGFloat buttonH = self.tabBar.frame.size.height;
     
+    customButton.frame=CGRectMake(buttonW*index, 0, buttonW, buttonH);
+    /*
     if (iPhone5_5s || iPhone4_4s) {
         customButton.frame = CGRectMake(80 * index, 0, buttonW, buttonH);
     }
@@ -119,7 +121,7 @@
     else if (iPhone6_plus) {
         customButton.frame = CGRectMake(100 * index, 0, buttonW, buttonH);
     }
-    
+    */
     [customButton setImage:[UIImage imageNamed:normal] forState:UIControlStateNormal];
     //[customButton setImage:[UIImage imageNamed:selected] forState:UIControlStateDisabled];
     //这里应该设置选中状态的图片。wsq

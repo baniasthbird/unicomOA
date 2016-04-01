@@ -30,7 +30,9 @@
     self.table = (UITableView *)[super init];
     if (self) {
         // Initialization code
-        CGRect btn = b.frame;
+        CGRect btn;
+        btn = b.frame;
+        
         self.list = [NSArray arrayWithArray:arr];
         self.imageList = [NSArray arrayWithArray:imgArr];
         if ([direction isEqualToString:@"up"]) {

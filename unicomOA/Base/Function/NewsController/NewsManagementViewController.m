@@ -12,6 +12,10 @@
 #import "NewsManagementTableViewCell.h"
 #import "QuartzCore/QuartzCore.h"
 #import "NewsDisplayViewController.h"
+#import "UIView+Frame.h"
+#import "WZLBadgeImport.h"
+#import "UIImageButton.h"
+
 
 @interface NewsManagementViewController ()
 
@@ -132,6 +136,8 @@
 }
 
 -(void)BackToAppCenter:(UIButton*)Btn {
+   
+    [self.delegate ClearNewsRedDot];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -147,12 +153,28 @@
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NewsManagementTableViewCell *cell=[NewsManagementTableViewCell cellWithTable:tableView withCellHeight:110 titleX:self.view.frame.size.width/32 titleY:0.0f titleW:15*self.view.frame.size.width/16 titleH:50.0f DepartX:self.view.frame.size.width/32 DepartY:60.0f DepartW:3*self.view.frame.size.width/8 DepartH:40.0f TimeX:self.view.frame.size.width/2 TimeY:60.0f TimeW:self.view.frame.size.width/3 TimeH:40.0f];
+    NewsManagementTableViewCell *cell;
+    if (iPhone6 || iPhone6_plus)
+    {
+         cell=[NewsManagementTableViewCell cellWithTable:tableView withCellHeight:110 titleX:self.view.frame.size.width/32 titleY:0.0f titleW:15*self.view.frame.size.width/16 titleH:50.0f DepartX:self.view.frame.size.width/32 DepartY:60.0f DepartW:3*self.view.frame.size.width/8 DepartH:40.0f TimeX:self.view.frame.size.width/2 TimeY:60.0f TimeW:self.view.frame.size.width/3 TimeH:40.0f];
+    }
+    else if (iPhone5_5s || iPhone4_4s) {
+        cell=[NewsManagementTableViewCell cellWithTable:tableView withCellHeight:110 titleX:self.view.frame.size.width/32 titleY:0.0f titleW:15*self.view.frame.size.width/16 titleH:50.0f DepartX:self.view.frame.size.width/32 DepartY:60.0f DepartW:3*self.view.frame.size.width/8 DepartH:40.0f TimeX:self.view.frame.size.width/2 TimeY:60.0f TimeW:self.view.frame.size.width*0.4 TimeH:40.0f];
+    }
+    
+   
     cell.delegate=self;
     cell.myTag=indexPath.row;
     cell.lbl_Title.text=[NSString stringWithFormat:@"%@|%ld",@"国家发展改革委关于放开部分建设项目服务收费标准有关问题的通知",(long)indexPath.row];
     cell.lbl_department.text=@"综合管理部 张三";
     cell.lbl_time.text=@"2016-01-26 16:45";
+    
+    if (_b_hasnews==NO) {
+        if (indexPath.section==0 && indexPath.row==1) {
+            cell.backgroundColor=[UIColor colorWithRed:242/255.0f green:242/255.0f blue:242/255.0f alpha:1];
+        }
+    }
+    
     
     return cell;
     
@@ -212,6 +234,20 @@
 }
 
 -(void)tapCell:(NewsManagementTableViewCell *)cell atIndex:(NSInteger)index {
+#pragma mark 红点通知消除
+    if (_b_hasnews==NO) {
+        if (cell.backgroundColor!=[UIColor clearColor])
+        {
+            NSString *str_badgevalue= [self.tabBarController.tabBar.items objectAtIndex:2].badgeValue;
+            int i_badgevalue=[str_badgevalue intValue];
+            i_badgevalue=i_badgevalue-1;
+            [self.tabBarController.tabBar.items objectAtIndex:2].badgeValue=[NSString stringWithFormat:@"%d",i_badgevalue];
+            cell.backgroundColor=[UIColor clearColor];
+            
+        }
+    }
+    
+    
     NewsDisplayViewController *news_controller=[[NewsDisplayViewController alloc]init];
     news_controller.news_index=&(index);
     news_controller.str_label=cell.lbl_Title.text;

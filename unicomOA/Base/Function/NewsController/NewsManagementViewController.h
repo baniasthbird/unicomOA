@@ -11,6 +11,11 @@
 #import "NewsManagementTableViewCell.h"
 #import "NewsDisplayViewController.h"
 
+@protocol ClearRedDotDelegate
+
+-(void)ClearNewsRedDot;
+
+@end
 
 @interface NewsManagementViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,NIDropDownDelegate,NewsTapDelegate,FocusNewsPassDelegate>
 {
@@ -22,6 +27,10 @@
 @property (nonatomic,strong) UIButton *btn_Select;
 
 @property (nonatomic,strong) UITextField *txt_Search;
+
+@property (nonatomic,strong) id<ClearRedDotDelegate> delegate;
+
+@property  BOOL b_hasnews;
 
 -(IBAction)selectClicked:(id)sender;
 

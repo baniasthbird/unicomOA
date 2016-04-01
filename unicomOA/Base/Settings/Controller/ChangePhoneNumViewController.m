@@ -33,11 +33,18 @@
     UIImageView *img_View=[[UIImageView alloc]initWithImage:img_bg];
     img_View.frame=CGRectMake(self.view.frame.size.width*0.15, self.view.frame.size.height*0.15, self.view.frame.size.width*0.7, self.view.frame.size.height*0.3);
     
-    UILabel *lbl_txt1=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.45, self.view.frame.size.width*0.5, self.view.frame.size.height/32)];
+    UILabel *lbl_txt1;
+    if (iPhone6 || iPhone6_plus) {
+        lbl_txt1=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.45, self.view.frame.size.width*0.5, self.view.frame.size.height/32)];
+        lbl_txt1.font=[UIFont systemFontOfSize:22];
+    }
+    else if (iPhone4_4s || iPhone5_5s) {
+        lbl_txt1=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.45, self.view.frame.size.width, self.view.frame.size.height/32)];
+        lbl_txt1.font=[UIFont systemFontOfSize:18];
+    }
+    lbl_txt1.numberOfLines=0;
+    lbl_txt1.text=[NSString stringWithFormat:@"%@%@",@"当前绑定的手机号:",_str_phonenum];
     
-    lbl_txt1.text=@"当前绑定的手机号:";
-    
-    lbl_txt1.font=[UIFont systemFontOfSize:22];
     
     lbl_txt1.textColor=[UIColor blackColor];
     
@@ -49,7 +56,14 @@
     [btn_ChangeNum addTarget:self action:@selector(MoveNextVc:) forControlEvents:UIControlEventTouchUpInside];
     
     
-    UILabel *lbl_txt2=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.615, self.view.frame.size.width*0.6, self.view.frame.size.height/32)];
+    UILabel *lbl_txt2;
+    if (iPhone6 || iPhone6_plus) {
+        lbl_txt2=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.615, self.view.frame.size.width*0.6, self.view.frame.size.height/32)];
+    }
+    else if (iPhone5_5s || iPhone4_4s) {
+        lbl_txt2=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.615, self.view.frame.size.width*0.9, self.view.frame.size.height/32)];
+    }
+    
     
     lbl_txt2.text=@"手机账号可用于登陆和找回密码";
     

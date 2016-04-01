@@ -110,7 +110,7 @@
     //添加第四组
     LGSettingSection *section4=[LGSettingSection initWithHeaderTitle:@"" footerTitle:@"2016 河南软信"];
     //添加行
-    LGSettingItem *item4=[LGSettingItem initWithtitle:@"                          退出当前账号"];
+    LGSettingItem *item4=[LGSettingItem initWithtitle:@"退出当前账号"];
    // item4.type=UITableViewCellAccessoryDetailDisclosureButton;
     [section4 addItem:item4];
 
@@ -165,6 +165,7 @@
     
     if (indexPath.section==3 && indexPath.row==0) {
         cell.textLabel.textColor=[UIColor redColor];
+        cell.textLabel.textAlignment=NSTextAlignmentCenter;
     }
     
     return cell;

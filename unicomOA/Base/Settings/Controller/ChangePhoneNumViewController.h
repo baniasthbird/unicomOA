@@ -10,4 +10,6 @@
 
 @interface ChangePhoneNumViewController : UIViewController
 
+@property (nonatomic,strong) NSString *str_phonenum;
+
 @end

@@ -36,7 +36,15 @@
         
         UIImage *imageHead=[UIImage imageNamed:@"me.png"];
         _img_Head=[[UIImageView alloc]initWithImage:imageHead];
-        [_img_Head setFrame:CGRectMake(self.frame.size.width*0.8, 0, imageHead.size.width, imageHead.size.height)];
+        if (iPhone6 || iPhone6_plus)
+        {
+            [_img_Head setFrame:CGRectMake(self.frame.size.width*0.8, 0, imageHead.size.width, imageHead.size.height)];
+        }
+        else if (iPhone5_5s || iPhone4_4s) {
+            [_img_Head setFrame:CGRectMake(self.frame.size.width*0.68, 0, imageHead.size.width, imageHead.size.height)];
+
+        }
+        
         _img_Head.userInteractionEnabled=YES;
         UITapGestureRecognizer *singleTap1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(buttonPressed:)];
         

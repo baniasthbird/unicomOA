@@ -57,11 +57,15 @@
     static NSString *ID=@"cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
     if (cell==nil) {
-        cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:ID];
+        cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:ID];
     }
     cell.textLabel.textColor=[UIColor blackColor];
+    cell.textLabel.font=[UIFont systemFontOfSize:16];
+    cell.detailTextLabel.font=[UIFont systemFontOfSize:16];
     cell.textLabel.textAlignment=NSTextAlignmentLeft;
     cell.detailTextLabel.textColor=[UIColor colorWithRed:236.0/255.0f green:236.0/255.0f  blue:236.0/255.0f  alpha:1];
+    [cell.detailTextLabel setFrame:CGRectMake(cell.frame.size.width/2, cell.frame.origin.y, cell.frame.size.width*0.4, cell.frame.size.height)];
+    
     
     if (indexPath.row==0) {
         LogoView *cell=[LogoView cellWithTable:tableView withName:_str_Name withImage:_str_img];
@@ -82,10 +86,12 @@
     else if (indexPath.row==4) {
         cell.textLabel.text=@"手机";
         cell.detailTextLabel.text=_str_cellphone;
+        cell.detailTextLabel.textColor=[UIColor colorWithRed:23/255.0f green:159/255.0f blue:213/255.0f alpha:1];
     }
     else if (indexPath.row==5) {
         cell.textLabel.text=@"固定电话";
         cell.detailTextLabel.text=_str_phonenum;
+        cell.detailTextLabel.textColor=[UIColor colorWithRed:23/255.0f green:159/255.0f blue:213/255.0f alpha:1];
     }
     else if (indexPath.row==6) {
         cell.textLabel.text=@"EMail";
@@ -106,7 +112,7 @@
         return  100;
     }
     else {
-        return  45;
+        return  60;
     }
 }
 

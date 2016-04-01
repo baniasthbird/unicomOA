@@ -18,7 +18,7 @@
 #define kImageWidth 100      //UITAbleViewCell里面图片的宽度
 #define kImageHeight 100     //UITableViewCell里面图片的高度
 
-@interface FunctionViewController ()
+@interface FunctionViewController ()<ClearRedDotDelegate>
 
 @property(nonatomic,strong) UITableView *tableView;
 @property(nonatomic,strong) UIImage *image;
@@ -148,7 +148,8 @@
         }
         btn_News.badgeBgColor=[UIColor redColor];
         btn_News.badgeCenterOffset=CGPointMake(0, btn_News.size.height*0.08);
-        [btn_News showBadgeWithStyle:WBadgeStyleNumber value:1 animationType:WBadgeAnimTypeNone];
+        [btn_News showBadgeWithStyle:WBadgeStyleRedDot value:1 animationType:WBadgeAnimTypeNone];
+        
         
         btn_ShenPi.badgeBgColor=[UIColor purpleColor];
         btn_ShenPi.badgeCenterOffset=CGPointMake(0, btn_ShenPi.size.height*0.08);
@@ -187,7 +188,11 @@
 }
 
 -(void)NewsItemClick:(UIImageButton *)button {
+#pragma mark 控制红点通知
+    
     NewsManagementViewController *newsView=[[NewsManagementViewController alloc]init];
+    newsView.b_hasnews= button.badge.isHidden;
+    newsView.delegate=self;
     [self.navigationController pushViewController:newsView animated:YES];
 }
 
@@ -221,6 +226,22 @@
 -(void)NotesItemClick:(UIImageButton *)button {
     NotesViewController *notesView=[[NotesViewController alloc]init];
     [self.navigationController pushViewController:notesView animated:YES];
+}
+
+-(void)ClearNewsRedDot {
+    UITableViewCell *cell=[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    UITableGridViewCell *news_cell=(UITableGridViewCell*)cell;
+    for (UIView *view in news_cell.subviews) {
+        if ([view isMemberOfClass:[UIImageButton class]]) {
+            UIImageButton *news_btn=(UIImageButton*)view;
+            if ([news_btn.titleLabel.text isEqualToString:@"公告"]) {
+                [news_btn clearBadge];
+            }
+            
+        }
+    }
+    [self.tableView reloadData];
+    
 }
 /*
 #pragma mark - Navigation
