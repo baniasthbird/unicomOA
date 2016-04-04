@@ -73,6 +73,7 @@
     
     self.tableView.tableHeaderView=self.searchcontroller.searchBar;
     
+    
     [self loadData];
     
 }
@@ -95,7 +96,8 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return _friendsData.count;
+    //return _friendsData.count;
+    return  4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

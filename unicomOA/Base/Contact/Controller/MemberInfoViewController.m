@@ -8,6 +8,7 @@
 
 #import "MemberInfoViewController.h"
 #import "LogoView.h"
+#import "PhoneLabelView.h"
 
 @interface MemberInfoViewController ()
 
@@ -63,7 +64,7 @@
     cell.textLabel.font=[UIFont systemFontOfSize:16];
     cell.detailTextLabel.font=[UIFont systemFontOfSize:16];
     cell.textLabel.textAlignment=NSTextAlignmentLeft;
-    cell.detailTextLabel.textColor=[UIColor colorWithRed:236.0/255.0f green:236.0/255.0f  blue:236.0/255.0f  alpha:1];
+    cell.detailTextLabel.textColor=[UIColor colorWithRed:153.0/255.0f green:153.0/255.0f  blue:153.0/255.0f  alpha:1];
     [cell.detailTextLabel setFrame:CGRectMake(cell.frame.size.width/2, cell.frame.origin.y, cell.frame.size.width*0.4, cell.frame.size.height)];
     
     
@@ -84,14 +85,22 @@
         cell.detailTextLabel.text=_str_carrer;
     }
     else if (indexPath.row==4) {
+        PhoneLabelView *cell=[PhoneLabelView cellWithTable:tableView withTtile:@"手机" withName:_str_cellphone withCallImage:@"call" withMessageImage:@"message_contact"];
+        return cell;
+        /*
         cell.textLabel.text=@"手机";
         cell.detailTextLabel.text=_str_cellphone;
         cell.detailTextLabel.textColor=[UIColor colorWithRed:23/255.0f green:159/255.0f blue:213/255.0f alpha:1];
+         */
     }
     else if (indexPath.row==5) {
+        PhoneLabelView *cell=[PhoneLabelView cellWithTable:tableView withTtile:@"固定电话" withName:_str_phonenum withCallImage:@"call" withMessageImage:@"message_contact"];
+        return cell;
+        /*
         cell.textLabel.text=@"固定电话";
         cell.detailTextLabel.text=_str_phonenum;
         cell.detailTextLabel.textColor=[UIColor colorWithRed:23/255.0f green:159/255.0f blue:213/255.0f alpha:1];
+         */
     }
     else if (indexPath.row==6) {
         cell.textLabel.text=@"EMail";

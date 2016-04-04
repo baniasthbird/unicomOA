@@ -21,6 +21,7 @@
 		2C5460A81C82F5C3005C5AB9 /* UserEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5460A71C82F5C3005C5AB9 /* UserEntity.m */; };
 		2C5460BD1C854733005C5AB9 /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5460BB1C854733005C5AB9 /* TableViewCell.m */; };
 		2C5460BE1C854733005C5AB9 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C5460BC1C854733005C5AB9 /* TableViewCell.xib */; };
+		2C74F0791CAEACDA00CC5C5F /* PhoneLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C74F0781CAEACDA00CC5C5F /* PhoneLabelView.m */; };
 		2C99721E1CA21E0E00B803FC /* ChangePhoneNumStep3.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C99721D1CA21E0E00B803FC /* ChangePhoneNumStep3.m */; };
 		2CA10C881CA110DE008D6394 /* PHONEOA.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA10C871CA110DE008D6394 /* PHONEOA.png */; };
 		2CA10C8B1CA18F17008D6394 /* ChangePhoneNumStep1.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA10C8A1CA18F17008D6394 /* ChangePhoneNumStep1.m */; };
@@ -141,6 +142,8 @@
 		2C5460BA1C854733005C5AB9 /* TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TableViewCell.h; path = Base/Function/NotesViews/TableViewCell.h; sourceTree = "<group>"; };
 		2C5460BB1C854733005C5AB9 /* TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TableViewCell.m; path = Base/Function/NotesViews/TableViewCell.m; sourceTree = "<group>"; };
 		2C5460BC1C854733005C5AB9 /* TableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TableViewCell.xib; path = Base/Function/NotesViews/TableViewCell.xib; sourceTree = "<group>"; };
+		2C74F0771CAEACDA00CC5C5F /* PhoneLabelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhoneLabelView.h; path = Base/Contact/View/PhoneLabelView.h; sourceTree = "<group>"; };
+		2C74F0781CAEACDA00CC5C5F /* PhoneLabelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhoneLabelView.m; path = Base/Contact/View/PhoneLabelView.m; sourceTree = "<group>"; };
 		2C99721C1CA21E0E00B803FC /* ChangePhoneNumStep3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChangePhoneNumStep3.h; path = Base/Settings/Controller/ChangePhoneNumStep3.h; sourceTree = "<group>"; };
 		2C99721D1CA21E0E00B803FC /* ChangePhoneNumStep3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChangePhoneNumStep3.m; path = Base/Settings/Controller/ChangePhoneNumStep3.m; sourceTree = "<group>"; };
 		2CA10C871CA110DE008D6394 /* PHONEOA.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PHONEOA.png; sourceTree = "<group>"; };
@@ -518,6 +521,8 @@
 				2CFEADBB1C76A6440054730E /* MessageCell.m */,
 				6882C3161CA8D78300CDEB1A /* LogoView.h */,
 				6882C3171CA8D78300CDEB1A /* LogoView.m */,
+				2C74F0771CAEACDA00CC5C5F /* PhoneLabelView.h */,
+				2C74F0781CAEACDA00CC5C5F /* PhoneLabelView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -986,6 +991,7 @@
 				2CFEADC51C76A65E0054730E /* NSString+Extension.m in Sources */,
 				6882C3211CA92C4B00CDEB1A /* CommentViewController.m in Sources */,
 				2CB7DB621CA2C3150057633D /* ServerIPViewController.m in Sources */,
+				2C74F0791CAEACDA00CC5C5F /* PhoneLabelView.m in Sources */,
 				2CFEADE91C7C05830054730E /* UIButton+Extra.m in Sources */,
 				6882C3181CA8D78300CDEB1A /* LogoView.m in Sources */,
 				2CFEAD441C72B8B90054730E /* LGSettingItem.m in Sources */,
