@@ -7,6 +7,9 @@
 //
 
 #import "CommentViewController.h"
+#import "IQKeyboardManager.h"
+#import "IQKeyboardReturnKeyHandler.h"
+#import "IQUIView+IQKeyboardToolbar.h"
 
 @interface CommentViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 
@@ -19,9 +22,13 @@
 @end
 
 @implementation CommentViewController
+{
+    int prewTag;
+    float prewMoveY;
+    IQKeyboardReturnKeyHandler *returnKeyHandler;
+}
 
-int prewTag;
-float prewMoveY;
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -62,6 +69,9 @@ float prewMoveY;
     [_arr_comment addObject:@"服从领导，坚决贯彻|开发部王五"];
     [_arr_comment addObject:@"绝对支持|开发部李四"];
     [_arr_comment addObject:@"绝对支持|开发部李四"];
+    
+    returnKeyHandler=[[IQKeyboardReturnKeyHandler alloc]initWithViewController:self];
+    [returnKeyHandler setLastTextFieldReturnKeyType:UIReturnKeyDone];
     
     
 }
@@ -112,14 +122,14 @@ float prewMoveY;
 {
     [super viewWillAppear:animated];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillShow:)
-                                                 name:UIKeyboardWillShowNotification
-                                               object:nil];
+   // [[NSNotificationCenter defaultCenter] addObserver:self
+    //                                         selector:@selector(keyboardWillShow:)
+     //                                            name:UIKeyboardWillShowNotification
+      //                                         object:nil];
 }
 
 //program UITextField delegate
-
+/*
 - (void)keyboardWillShow:(NSNotification *)noti
 {
     NSDictionary *userInfo = [noti userInfo];
@@ -155,6 +165,7 @@ float prewMoveY;
     return YES;
 }
 
+
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     CGRect frame = textField.frame;
@@ -173,6 +184,7 @@ float prewMoveY;
     
 }
 
+
 -
 
 (void)viewDidDisappear:(BOOL)animated
@@ -183,7 +195,11 @@ float prewMoveY;
                                                     name:UIKeyboardWillShowNotification
                                                   object:nil];
 }
+  */
 
+-(void)dealloc {
+    returnKeyHandler=nil;
+}
 /*
 #pragma mark - Navigation
 

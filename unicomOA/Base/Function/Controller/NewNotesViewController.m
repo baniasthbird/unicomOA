@@ -13,6 +13,9 @@
 #import "MenuTableViewCell.h"
 #import "UserEntity.h"
 #import "TableViewCell.h"
+#import "IQKeyboardManager.h"
+#import "IQKeyboardReturnKeyHandler.h"
+#import "IQUIView+IQKeyboardToolbar.h"
 
 #define TABLEVIEW_CELL_RESUSE_ID @"TABLEVIEW_CELL_REUSE_ID"
 
@@ -47,7 +50,9 @@ typedef enum
 
 @end
 
-@implementation NewNotesViewController
+@implementation NewNotesViewController {
+    IQKeyboardReturnKeyHandler *returnKeyHandler;
+}
 
 @synthesize delegate;
 
@@ -63,6 +68,10 @@ typedef enum
     
     [self buildDataSource];
     [self buildView];
+    
+    returnKeyHandler=[[IQKeyboardReturnKeyHandler alloc]initWithViewController:self];
+    [returnKeyHandler setLastTextFieldReturnKeyType:UIReturnKeyDone];
+    
     
     
 }
