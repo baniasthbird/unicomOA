@@ -9,10 +9,10 @@
 #import "OAViewController.h"
 #import "NTButton.h"
 #import "MessageViewController.h"
-#import "ContactViewController.h"
 #import "FunctionViewController.h"
 #import "SettingViewController.h"
 #import "BaseNavigationViewController.h"
+#import "ContactViewControllerNew.h"
 
 @interface OAViewController () {
     UIImageView *_tabBarView;  //自定义的覆盖原先的tabbar控件
@@ -68,7 +68,8 @@
     
     UINavigationController *navi1=[[BaseNavigationViewController alloc]initWithRootViewController:message];
     
-    ContactViewController *contact=[[ContactViewController alloc]init];
+   // ContactViewController *contact=[[ContactViewController alloc]init];
+    ContactViewControllerNew *contact=[[ContactViewControllerNew alloc]init];
     UINavigationController *navi2=[[BaseNavigationViewController alloc]initWithRootViewController:contact];
     
     FunctionViewController *func=[[FunctionViewController alloc]init];

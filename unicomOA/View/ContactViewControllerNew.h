@@ -1,15 +1,15 @@
 //
-//  ContactViewController.h
+//  ContactViewControllerNew.h
 //  unicomOA
 //
-//  Created by zr-mac on 16/2/19.
+//  Created by hnsi-03 on 16/4/5.
 //  Copyright © 2016年 zr-mac. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import "SearchResultViewController.h"
 
-@interface ContactViewController : UITableViewController <UISearchBarDelegate,UISearchResultsUpdating>
+@interface ContactViewControllerNew : UITableViewController<UISearchBarDelegate,UISearchResultsUpdating>
 
 @property (strong,nonatomic) UISearchController *searchcontroller;
 
