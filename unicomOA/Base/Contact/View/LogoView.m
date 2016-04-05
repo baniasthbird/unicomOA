@@ -51,7 +51,7 @@
         
         UIImage *imageHead=[UIImage imageNamed:str_img];
         _img_Head=[[UIImageView alloc]initWithImage:imageHead];
-        [_img_Head setFrame:CGRectMake(self.frame.size.width*0.05, 0, imageHead.size.width, imageHead.size.height)];
+        [_img_Head setFrame:CGRectMake(self.frame.size.width*0.05, self.frame.size.height*0.13, self.frame.size.width*0.28, self.frame.size.width*0.28)];
         _img_Head.userInteractionEnabled=YES;
         
         [self.contentView addSubview:_lbl_name];

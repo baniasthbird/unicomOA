@@ -14,6 +14,11 @@
 @property (strong,nonatomic) NSString *signture;
 @property (strong,nonatomic) NSString *headImgPath;//本地图片名,若不为空则优先于远程图片加载
 @property (strong,nonatomic) NSURL *headImgUrl;//远程图片链接
+@property (strong,nonatomic) NSString *gender;
+@property (strong,nonatomic) NSString *department;
+@property (strong,nonatomic) NSString *cellphonenum;
+@property (strong,nonatomic) NSString *phonenum;
+@property (strong,nonatomic) NSString *email;
 
 @end
 

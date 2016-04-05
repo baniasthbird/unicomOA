@@ -15,6 +15,7 @@
 
 @property (strong,nonatomic) NSMutableArray *dataArray;  //保存全部数据的数组
 @property (strong,nonatomic) NSArray *displayArray;      //保存要显示在界面上的数据的数组
+@property (strong,nonatomic) NSString *str_department;   //联系人所在部门
 
 @end
 
@@ -84,8 +85,8 @@
     CLTreeViewNode *node3=[self CreateLevel0Node:@"综合管理部" staff_num:@"0"];
     
 #pragma mark 第一设计分公司
-    CLTreeViewNode *node1_2_0=[self CreateLevel2Node:@"崔红涛" signture:@"分公司总经理" headImgPath:@"head1.jpg" headImgUrl:nil];
-    CLTreeViewNode *node1_2_1=[self CreateLevel2Node:@"孙晓巍" signture:@"员工" headImgPath:@"head2.jpg" headImgUrl:nil];
+    CLTreeViewNode *node1_2_0=[self CreateLevel2Node:@"崔红涛" signture:@"分公司总经理" headImgPath:@"head1.jpg" headImgUrl:nil gender:@"男" department:@"第一设计分公司" cell:@"18600697151" phone:@"0371-65106156" email:@"2002-sunshine@163.com"];
+    CLTreeViewNode *node1_2_1=[self CreateLevel2Node:@"孙晓巍" signture:@"员工" headImgPath:@"head2.jpg" headImgUrl:nil gender:@"女" department:@"第一设计分公司" cell:@"18600697151" phone:@"0371-65106156" email:@"2002-sunshine@163.com"];
     
 #pragma mark 软信第二级组织架构
     CLTreeViewNode *node2_0=[self CreateLevel1Node:@"综合部" sonCnt:@"3"];
@@ -94,18 +95,18 @@
     CLTreeViewNode *node2_3=[self CreateLevel1Node:@"开发部" sonCnt:@"8"];
     
 #pragma mark 软信员工
-    CLTreeViewNode *node2_0_0=[self CreateLevel2Node:@"刘佳" signture:@"综合部部长" headImgPath:@"head1.jpg" headImgUrl:nil];
-    CLTreeViewNode *node2_0_1=[self CreateLevel2Node:@"张三" signture:@"员工" headImgPath:@"head2.jpg" headImgUrl:nil];
-    CLTreeViewNode *node2_1_0=[self CreateLevel2Node:@"李四" signture:@"员工" headImgPath:@"head2.jpg" headImgUrl:nil];
-    CLTreeViewNode *node2_1_1=[self CreateLevel2Node:@"王五" signture:@"员工" headImgPath:@"head2.jpg" headImgUrl:nil];
-    CLTreeViewNode *node2_1_2=[self CreateLevel2Node:@"冀明哲" signture:@"员工" headImgPath:@"head2.jpg" headImgUrl:nil];
-    CLTreeViewNode *node2_2_0=[self CreateLevel2Node:@"刘攀攀" signture:@"员工" headImgPath:@"head2.jpg" headImgUrl:nil];
-    CLTreeViewNode *node2_2_1=[self CreateLevel2Node:@"朱培配" signture:@"员工" headImgPath:@"head2.jpg" headImgUrl:nil];
-    CLTreeViewNode *node2_2_2=[self CreateLevel2Node:@"李忻雨" signture:@"员工" headImgPath:@"head2.jpg" headImgUrl:nil];
-    CLTreeViewNode *node2_2_3=[self CreateLevel2Node:@"张曙光" signture:@"员工" headImgPath:@"head2.jpg" headImgUrl:nil];
-    CLTreeViewNode *node2_2_4=[self CreateLevel2Node:@"赵睿" signture:@"员工" headImgPath:@"head2.jpg" headImgUrl:nil];
-    CLTreeViewNode *node2_3_0=[self CreateLevel2Node:@"乔帮主" signture:@"员工" headImgPath:@"head2.jpg" headImgUrl:nil];
-    CLTreeViewNode *node2_3_1=[self CreateLevel2Node:@"周大" signture:@"员工" headImgPath:@"head2.jpg" headImgUrl:nil];
+    CLTreeViewNode *node2_0_0=[self CreateLevel2Node:@"刘佳" signture:@"综合部部长" headImgPath:@"head1.jpg" headImgUrl:nil gender:@"女" department:@"综合部" cell:@"18600697151" phone:@"0371-65106156" email:@"2002-sunshine@163.com"];
+    CLTreeViewNode *node2_0_1=[self CreateLevel2Node:@"张三" signture:@"员工" headImgPath:@"head2.jpg" headImgUrl:nil gender:@"男" department:@"综合部" cell:@"18600697151" phone:@"0371-65106156" email:@"2002-sunshine@163.com"];
+    CLTreeViewNode *node2_1_0=[self CreateLevel2Node:@"李四" signture:@"员工" headImgPath:@"head2.jpg" headImgUrl:nil gender:@"女" department:@"市场部" cell:@"18600697151" phone:@"0371-65106156" email:@"2002-sunshine@163.com"];
+    CLTreeViewNode *node2_1_1=[self CreateLevel2Node:@"王五" signture:@"员工" headImgPath:@"head2.jpg" headImgUrl:nil gender:@"男" department:@"市场部" cell:@"18600697151" phone:@"0371-65106156" email:@"2002-sunshine@163.com"];
+    CLTreeViewNode *node2_1_2=[self CreateLevel2Node:@"冀明哲" signture:@"员工" headImgPath:@"head2.jpg" headImgUrl:nil gender:@"男" department:@"市场部" cell:@"18600697151" phone:@"0371-65106156" email:@"2002-sunshine@163.com"];
+    CLTreeViewNode *node2_2_0=[self CreateLevel2Node:@"刘攀攀" signture:@"员工" headImgPath:@"head2.jpg" headImgUrl:nil gender:@"男" department:@"产品部" cell:@"18600697151" phone:@"0371-65106156" email:@"2002-sunshine@163.com"];
+    CLTreeViewNode *node2_2_1=[self CreateLevel2Node:@"朱培配" signture:@"员工" headImgPath:@"head2.jpg" headImgUrl:nil gender:@"男" department:@"产品部" cell:@"18600697151" phone:@"0371-65106156" email:@"2002-sunshine@163.com"];
+    CLTreeViewNode *node2_2_2=[self CreateLevel2Node:@"李忻雨" signture:@"员工" headImgPath:@"head2.jpg" headImgUrl:nil gender:@"男" department:@"产品部" cell:@"18600697151" phone:@"0371-65106156" email:@"2002-sunshine@163.com"];
+    CLTreeViewNode *node2_2_3=[self CreateLevel2Node:@"张曙光" signture:@"员工" headImgPath:@"head2.jpg" headImgUrl:nil gender:@"男" department:@"产品部" cell:@"18600697151" phone:@"0371-65106156" email:@"2002-sunshine@163.com"];
+    CLTreeViewNode *node2_2_4=[self CreateLevel2Node:@"赵睿" signture:@"员工" headImgPath:@"head2.jpg" headImgUrl:nil gender:@"男" department:@"产品部" cell:@"18600697151" phone:@"0371-65106156" email:@"2002-sunshine@163.com"];
+    CLTreeViewNode *node2_3_0=[self CreateLevel2Node:@"乔帮主" signture:@"员工" headImgPath:@"head2.jpg" headImgUrl:nil gender:@"男" department:@"开发部" cell:@"18600697151" phone:@"0371-65106156" email:@"2002-sunshine@163.com"];
+    CLTreeViewNode *node2_3_1=[self CreateLevel2Node:@"周大" signture:@"员工" headImgPath:@"head2.jpg" headImgUrl:nil gender:@"男" department:@"开发部" cell:@"18600697151" phone:@"0371-65106156" email:@"2002-sunshine@163.com"];
     
     node1.sonNodes=[NSMutableArray arrayWithObjects:node1_2_0,node1_2_1, nil];
     node2.sonNodes=[NSMutableArray arrayWithObjects:node2_0,node2_1,node2_2,node2_3, nil];
@@ -151,7 +152,7 @@
     return node0;
 }
 
--(CLTreeViewNode*)CreateLevel2Node:(NSString*)str_name signture:(NSString*)str_signture headImgPath:(NSString*)str_headImgPath headImgUrl:(NSString*)str_headImgUrl {
+-(CLTreeViewNode*)CreateLevel2Node:(NSString*)str_name signture:(NSString*)str_signture headImgPath:(NSString*)str_headImgPath headImgUrl:(NSString*)str_headImgUrl gender:(NSString*)str_gender department:(NSString*)str_department cell:(NSString*)str_cellphone phone:(NSString*)str_phonenum email:(NSString*)str_email{
     CLTreeViewNode *node0 = [[CLTreeViewNode alloc]init];
     node0.nodeLevel = 2;
     node0.type = 2;
@@ -162,6 +163,11 @@
     tmp0.signture = str_signture;
     tmp0.headImgPath = str_headImgPath;
     tmp0.headImgUrl = nil;
+    tmp0.gender=str_gender;
+    tmp0.department=str_department;
+    tmp0.cellphonenum=str_cellphone;
+    tmp0.phonenum=str_phonenum;
+    tmp0.email=str_email;
     node0.nodeData = tmp0;
     
     return node0;
@@ -263,7 +269,16 @@
  cell高度默认为50
  --------------------------------------- */
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return  50;
+    if (iPhone4_4s || iPhone5_5s) {
+        return  40;
+    }
+    else if (iPhone6) {
+        return 50;
+    }
+    else {
+        return 60;
+    }
+    
 }
 
 /*---------------------------------------
@@ -274,21 +289,23 @@
     CLTreeViewNode *node = [_displayArray objectAtIndex:indexPath.row];
     [self reloadDataForDisplayArrayChangeAt:indexPath.row];//修改cell的状态(关闭或打开)
     if(node.type == 2){
+        CLTreeView_LEVEL2_Model *nodeData = node.nodeData;
         //处理叶子节点选中，此处需要自定义
         MemberInfoViewController *viewController=[[MemberInfoViewController alloc] init];
-        UITableViewCell *cell=[tableView cellForRowAtIndexPath:indexPath];
-        viewController.str_Name= cell.textLabel.text;
-        viewController.str_Gender=@"男";
-        viewController.str_img=@"me.png";
+        viewController.str_Name= nodeData.name;
+        viewController.str_Gender=nodeData.gender;
+        //本地图片
+        viewController.str_img=nodeData.headImgPath;
        // FriendGroup *tmp_friend=[_friendsData objectAtIndex:indexPath.section];
-        viewController.str_department=@"综合部";
-        viewController.str_carrer=cell.detailTextLabel.text;
-        viewController.str_cellphone=@"18600697151";
-        viewController.str_phonenum=@"0371-65160750";
-        viewController.str_email=@"2002-sunshine@163.com";
+        viewController.str_department=nodeData.department;
+        
+        viewController.str_carrer=nodeData.signture;
+        viewController.str_cellphone=nodeData.cellphonenum;
+        viewController.str_phonenum=nodeData.phonenum;
+        viewController.str_email=nodeData.email;
         [self.navigationController pushViewController:viewController animated:YES];
     }
-    else{
+    else {
         CLTreeView_LEVEL0_Cell *cell = (CLTreeView_LEVEL0_Cell*)[tableView cellForRowAtIndexPath:indexPath];
         if(cell.node.isExpanded ){
             [self rotateArrow:cell with:M_PI_2];
@@ -297,6 +314,7 @@
             [self rotateArrow:cell with:0];
         }
     }
+
 
 }
 
