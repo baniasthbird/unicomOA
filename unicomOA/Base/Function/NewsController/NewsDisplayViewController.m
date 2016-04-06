@@ -27,6 +27,15 @@ int i_comment_num;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.title=@"公告详情";
+    
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"  " style:UIBarButtonItemStyleDone target:self action:@selector(MovePreviousVc:)];
+    barButtonItem.tintColor=[UIColor whiteColor];
+    [barButtonItem setImage:[UIImage imageNamed:@"returnlogo.png"]];
+    
+    //[barButtonItem setTitleTextAttributes:dict forState:UIControlStateNormal];
+    self.navigationItem.leftBarButtonItem = barButtonItem;
+
     
     if (iPhone6 || iPhone6_plus) {
         _lbl_label=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height/16, 15*self.view.frame.size.width/16, self.view.frame.size.height/6)];
@@ -149,7 +158,14 @@ int i_comment_num;
    // viewController.str=[NSString stringWithFormat:@"%d",i_comment_num];
     [self.navigationController pushViewController:viewController animated:YES];
 }
+
+
+-(void)MovePreviousVc:(UIButton*)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 /*
+ 
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation

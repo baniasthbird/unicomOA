@@ -86,7 +86,7 @@
     LGSettingSection *section1=[LGSettingSection initWithHeaderTitle:@"Demo" footerTitle:nil];
     //添加行
     LGSettingItem *item1=[LGSettingItem initWithtitle:@"张三"];
-    item1.image=[UIImage imageNamed:@"me"];
+    item1.image=[UIImage imageNamed:@"headLogo.png"];
     item1.height=64;
     [section1 addItem:item1];
     //保存到groups数组

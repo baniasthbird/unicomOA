@@ -29,10 +29,11 @@
 - (void)drawRect:(CGRect)rect
 {
     int addX = _node.nodeLevel*25; //根据节点所在的层次计算平移距离
+    /*
     CGRect imgFrame = _imgView.frame;
     imgFrame.origin.x = 14 + addX;
     _imgView.frame = imgFrame;
-    
+    */
     CGRect nameFrame = _name.frame;
     nameFrame.origin.x = 62 + addX;
     _name.frame = nameFrame;

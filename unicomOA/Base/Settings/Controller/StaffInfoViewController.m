@@ -22,6 +22,9 @@
     
     self.title=@"我的资料";
     
+    
+
+    
     self.view.backgroundColor=[UIColor colorWithRed:236.0/255.0f green:236.0/255.0f blue:236.0/255.0f alpha:1];
     
     NSDictionary * dict=@{
@@ -35,8 +38,10 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     
-    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"我" style:UIBarButtonItemStyleDone target:self action:@selector(MovePreviousVc:)];
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"  " style:UIBarButtonItemStyleDone target:self action:@selector(MovePreviousVc:)];
     [barButtonItem setTitleTextAttributes:dict forState:UIControlStateNormal];
+    barButtonItem.tintColor=[UIColor whiteColor];
+    [barButtonItem setImage:[UIImage imageNamed:@"returnlogo.png"]];
     self.navigationItem.leftBarButtonItem = barButtonItem;
     
 }
@@ -173,8 +178,11 @@
 
 
 -(void)MovePreviousVc:(UIButton *)sender {
+    
     SettingViewController *viewController=[[SettingViewController alloc]init];
     [self.navigationController pushViewController:viewController animated:YES];
+     
+     //[self.navigationController popViewControllerAnimated:YES];
 }
 /*
 // Override to support conditional editing of the table view.

@@ -21,6 +21,12 @@
     
     self.view.backgroundColor=[UIColor whiteColor];
     
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"  " style:UIBarButtonItemStyleDone target:self action:@selector(MovePreviousVc:)];
+    [barButtonItem setTitleTextAttributes:dict forState:UIControlStateNormal];
+    barButtonItem.tintColor=[UIColor whiteColor];
+    [barButtonItem setImage:[UIImage imageNamed:@"returnlogo.png"]];
+    self.navigationItem.leftBarButtonItem = barButtonItem;
+    
 #pragma mark 标题
     UILabel *lbl_Title;
     if (iPhone6 || iPhone6_plus)
@@ -83,6 +89,10 @@
                                                              barMaxWidth:200
                                                                 gradient:nil];
     [self.view addSubview:barChartView];
+}
+
+-(void)MovePreviousVc:(UIButton*)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

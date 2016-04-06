@@ -34,14 +34,14 @@
         _lbl_title.font=[UIFont systemFontOfSize:24];
         _lbl_title.textColor=[UIColor blackColor];
         
-        UIImage *imageHead=[UIImage imageNamed:@"me.png"];
+        UIImage *imageHead=[UIImage imageNamed:@"headLogo.png"];
         _img_Head=[[UIImageView alloc]initWithImage:imageHead];
         if (iPhone6 || iPhone6_plus)
         {
-            [_img_Head setFrame:CGRectMake(self.frame.size.width*0.8, 0, imageHead.size.width, imageHead.size.height)];
+            [_img_Head setFrame:CGRectMake(self.frame.size.width*0.86, self.frame.size.height*0.13, self.frame.size.width*0.28, self.frame.size.width*0.28)];
         }
         else if (iPhone5_5s || iPhone4_4s) {
-            [_img_Head setFrame:CGRectMake(self.frame.size.width*0.68, 0, imageHead.size.width, imageHead.size.height)];
+            [_img_Head setFrame:CGRectMake(self.frame.size.width*0.68, self.frame.size.height*0.13, self.frame.size.width*0.28, self.frame.size.width*0.28)];
 
         }
         

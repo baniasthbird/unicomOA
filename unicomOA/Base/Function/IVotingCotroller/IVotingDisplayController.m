@@ -23,8 +23,10 @@
 
     self.view.backgroundColor=[UIColor whiteColor];
     
-    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"在线投票" style:UIBarButtonItemStyleDone target:self action:@selector(MovePreviousVc:)];
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"  " style:UIBarButtonItemStyleDone target:self action:@selector(MovePreviousVc:)];
     [barButtonItem setTitleTextAttributes:dict forState:UIControlStateNormal];
+    barButtonItem.tintColor=[UIColor whiteColor];
+    [barButtonItem setImage:[UIImage imageNamed:@"returnlogo.png"]];
     self.navigationItem.leftBarButtonItem = barButtonItem;
     
 #pragma mark 标题

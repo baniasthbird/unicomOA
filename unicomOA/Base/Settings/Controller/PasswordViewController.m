@@ -24,6 +24,17 @@
     [super viewDidLoad];
     
     self.title=@"修改密码";
+    
+    NSDictionary * dict=@{
+                          NSForegroundColorAttributeName:   [UIColor whiteColor]};
+    
+    self.navigationController.navigationBar.titleTextAttributes=dict;
+    
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleDone target:self action:@selector(MovePreviousVc:)];
+    
+    [barButtonItem setTitleTextAttributes:dict forState:UIControlStateNormal];
+    self.navigationItem.leftBarButtonItem = barButtonItem;
+    
     // Do any additional setup after loading the view.
     self.view.backgroundColor=[UIColor colorWithRed:243.0/255.0f green:243.0/255.0f blue:243.0/255.0f alpha:1];
     
@@ -95,6 +106,10 @@
 
 
 -(void)btn_Finish:(UIButton *)newBtn {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)MovePreviousVc:(UIButton*)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
 /*

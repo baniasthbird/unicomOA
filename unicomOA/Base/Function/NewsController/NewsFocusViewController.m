@@ -23,6 +23,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.title=@"关注列表";
+    
+    NSDictionary * dict=@{
+                          NSForegroundColorAttributeName:   [UIColor whiteColor]};
+    
+    self.navigationController.navigationBar.titleTextAttributes=dict;
+    
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"  " style:UIBarButtonItemStyleDone target:self action:@selector(MovePreviousVc:)];
+    barButtonItem.tintColor=[UIColor whiteColor];
+    [barButtonItem setImage:[UIImage imageNamed:@"returnlogo.png"]];
+    
+    [barButtonItem setTitleTextAttributes:dict forState:UIControlStateNormal];
+    self.navigationItem.leftBarButtonItem = barButtonItem;
+
+    
     self.view.backgroundColor=[UIColor colorWithRed:243/255.0f green:243/255.0f blue:242/255.0f alpha:1];
     
     _arr_focus=[[NSMutableArray alloc]initWithCapacity:1];
@@ -86,6 +101,11 @@
     [self.navigationController pushViewController:news_controller animated:YES];
     
 }
+
+-(void)MovePreviousVc:(UIButton*)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 
 /*
 // Override to support conditional editing of the table view.

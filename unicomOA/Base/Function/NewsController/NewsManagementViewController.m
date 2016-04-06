@@ -41,8 +41,10 @@
     
     
     UIButton *btn_back=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40, 40)];
-    [btn_back setTitle:@"返回" forState:UIControlStateNormal];
+    [btn_back setTitle:@"  " forState:UIControlStateNormal];
     [btn_back setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [btn_back setTintColor:[UIColor whiteColor]];
+    [btn_back setImage:[UIImage imageNamed:@"returnlogo.png"] forState:UIControlStateNormal];
     [btn_back addTarget:self action:@selector(BackToAppCenter:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]initWithCustomView:btn_back];
     

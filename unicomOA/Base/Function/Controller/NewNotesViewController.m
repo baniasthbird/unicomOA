@@ -66,6 +66,14 @@ typedef enum
     [btn_Finish addTarget:self action:@selector(FinishNotes:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithCustomView:btn_Finish];
     
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"  " style:UIBarButtonItemStyleDone target:self action:@selector(MovePreviousVc:)];
+    barButtonItem.tintColor=[UIColor whiteColor];
+    [barButtonItem setImage:[UIImage imageNamed:@"returnlogo.png"]];
+    
+    //[barButtonItem setTitleTextAttributes:dict forState:UIControlStateNormal];
+    self.navigationItem.leftBarButtonItem = barButtonItem;
+    
+    
     [self buildDataSource];
     [self buildView];
     
@@ -556,5 +564,9 @@ typedef enum
     UILabel *lbl_date=cell.subviews[1];
     lbl_date.text=dateString;
     lbl_date.textColor=[UIColor blackColor];
+}
+
+-(void)MovePreviousVc:(UIButton*)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 @end

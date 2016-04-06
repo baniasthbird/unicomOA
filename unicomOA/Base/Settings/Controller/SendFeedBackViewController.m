@@ -20,6 +20,13 @@
     // Do any additional setup after loading the view.
     self.title=@"意见反馈";
     
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"  " style:UIBarButtonItemStyleDone target:self action:@selector(MovePreviousVc:)];
+    barButtonItem.tintColor=[UIColor whiteColor];
+    [barButtonItem setImage:[UIImage imageNamed:@"returnlogo.png"]];
+    
+    self.navigationItem.leftBarButtonItem = barButtonItem;
+
+    
     self.view.backgroundColor=[UIColor colorWithRed:236.0/255.0f green:236.0/255.0f blue:236.0/255.0f alpha:1];
     
     UIButton *btn_send=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40, 40)];
@@ -67,6 +74,10 @@
 -(void)textViewDidChange:(UITextView *)textView
 {
     
+}
+
+-(void)MovePreviousVc:(UIButton*)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 
