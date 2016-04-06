@@ -7,6 +7,7 @@
 //
 
 #import "PrintApplication.h"
+#import "PrintApplicationTitleCell.h"
 
 @interface PrintApplication()<UITableViewDelegate,UITableViewDataSource>
 
@@ -127,7 +128,9 @@
         }
         else if (indexPath.row==1) {
             //textfield
-            cell.textLabel.text=@"复印标题";
+            PrintApplicationTitleCell *cell=[PrintApplicationTitleCell cellWithTable:tableView withName:@"复印标题"];
+            //cell.textLabel.text=@"复印标题";
+            return cell;
         }
         else if (indexPath.row==2) {
             //textview
