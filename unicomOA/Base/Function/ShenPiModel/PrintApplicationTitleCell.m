@@ -39,7 +39,7 @@
         self.textLabel.text=str_name;
         
         _txt_title=[[UITextField alloc]initWithFrame:CGRectMake(self.frame.size.width*0.3, 0, self.frame.size.width*0.7, self.frame.size.height)];
-        _txt_title.textColor=[UIColor colorWithRed:112/255.0f green:112/255.0f blue:112/255.0f alpha:1];
+        _txt_title.textColor=[UIColor colorWithRed:110/255.0f green:112/255.0f blue:112/255.0f alpha:1];
         _txt_title.textAlignment=NSTextAlignmentLeft;
         _txt_title.font=[UIFont systemFontOfSize:13];
         _txt_title.placeholder=@"请输入复印标题，最多50个字";
