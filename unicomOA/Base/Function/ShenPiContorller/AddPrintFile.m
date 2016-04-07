@@ -9,6 +9,7 @@
 #import "AddPrintFile.h"
 #import "AddPrintFileCell.h"
 #import "AddPrintRadioCell.h"
+#import "PrintApplication.h"
 
 
 @interface AddPrintFile()
@@ -55,7 +56,7 @@
 }
 
 -(void)MoveNextVc:(UIButton*)sender {
-    
+  
 }
 
 #pragma mark tableView 方法
