@@ -35,6 +35,7 @@
 		2CDC2BE41C8FFD6C0067693B /* NIDropDown.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDC2BE31C8FFD6C0067693B /* NIDropDown.m */; };
 		2CDC2BF21C9117FE0067693B /* NewsManagementTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDC2BF11C9117FE0067693B /* NewsManagementTableViewCell.m */; };
 		2CDC2BF51C924DAC0067693B /* NewsDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDC2BF41C924DAC0067693B /* NewsDisplayViewController.m */; };
+		2CE320EE1CB6B4B000B36793 /* PrintFiles.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CE320ED1CB6B4B000B36793 /* PrintFiles.m */; };
 		2CFEAD181C7168980054730E /* forgetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD131C7168980054730E /* forgetPasswordViewController.m */; };
 		2CFEAD191C7168980054730E /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD151C7168980054730E /* LoginViewController.m */; };
 		2CFEAD1A1C7168980054730E /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD171C7168980054730E /* SignInViewController.m */; };
@@ -219,6 +220,8 @@
 		2CDC2BF11C9117FE0067693B /* NewsManagementTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsManagementTableViewCell.m; path = Base/Function/NewsModel/NewsManagementTableViewCell.m; sourceTree = "<group>"; };
 		2CDC2BF31C924DAC0067693B /* NewsDisplayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsDisplayViewController.h; path = Base/Function/NewsController/NewsDisplayViewController.h; sourceTree = "<group>"; };
 		2CDC2BF41C924DAC0067693B /* NewsDisplayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsDisplayViewController.m; path = Base/Function/NewsController/NewsDisplayViewController.m; sourceTree = "<group>"; };
+		2CE320EC1CB6B4B000B36793 /* PrintFiles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrintFiles.h; path = Base/Function/ShenPiModel/PrintFiles.h; sourceTree = "<group>"; };
+		2CE320ED1CB6B4B000B36793 /* PrintFiles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrintFiles.m; path = Base/Function/ShenPiModel/PrintFiles.m; sourceTree = "<group>"; };
 		2CFEAD121C7168980054730E /* forgetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = forgetPasswordViewController.h; path = Login/forgetPasswordViewController.h; sourceTree = "<group>"; };
 		2CFEAD131C7168980054730E /* forgetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = forgetPasswordViewController.m; path = Login/forgetPasswordViewController.m; sourceTree = "<group>"; };
 		2CFEAD141C7168980054730E /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = Login/LoginViewController.h; sourceTree = "<group>"; };
@@ -1107,6 +1110,8 @@
 				682B68B81CB64683002EC60F /* AddPrintFileCell.m */,
 				682B68BA1CB64FDE002EC60F /* AddPrintRadioCell.h */,
 				682B68BB1CB64FDE002EC60F /* AddPrintRadioCell.m */,
+				2CE320EC1CB6B4B000B36793 /* PrintFiles.h */,
+				2CE320ED1CB6B4B000B36793 /* PrintFiles.m */,
 			);
 			name = ShenPiModel;
 			sourceTree = "<group>";
@@ -1357,6 +1362,7 @@
 				6882C3211CA92C4B00CDEB1A /* CommentViewController.m in Sources */,
 				68E77A251CB3A133006DA5B9 /* IQUIView+Hierarchy.m in Sources */,
 				2CB7DB621CA2C3150057633D /* ServerIPViewController.m in Sources */,
+				2CE320EE1CB6B4B000B36793 /* PrintFiles.m in Sources */,
 				68E77A2F1CB3A133006DA5B9 /* IQUIView+IQKeyboardToolbar.m in Sources */,
 				2C74F0791CAEACDA00CC5C5F /* PhoneLabelView.m in Sources */,
 				68E77A2E1CB3A133006DA5B9 /* IQToolbar.m in Sources */,

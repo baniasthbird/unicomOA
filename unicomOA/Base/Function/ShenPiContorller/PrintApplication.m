@@ -12,8 +12,9 @@
 #import "PrintApplicationNoFileCell.h"
 #import "PrintApplicationFileCell.h"
 #import "AddPrintFile.h"
+#import "PrintFiles.h"
 
-@interface PrintApplication()<UITableViewDelegate,UITableViewDataSource,PrintApplicationFileCellDelegate>
+@interface PrintApplication()<UITableViewDelegate,UITableViewDataSource,PrintApplicationFileCellDelegate,PrintFilePassValueDelegate>
 
 @property (strong,nonatomic) UITableView *tableview;
 
@@ -51,7 +52,7 @@
     _tableview.backgroundColor=[UIColor clearColor];
     
     _b_hasFile=NO;
-    _arr_printFiles=[[NSMutableArray alloc]initWithCapacity:1];
+    _arr_printFiles=[[NSMutableArray alloc]initWithCapacity:0];
     
     [self.view addSubview:_tableview];
     
@@ -63,6 +64,7 @@
 
 -(void)AddFile:(UIButton*)sender {
     AddPrintFile *viewController=[[AddPrintFile alloc]init];
+    viewController.delegate=self;
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
@@ -198,8 +200,13 @@
             return cell;
         }
         else {
-            PrintApplicationFileCell *cell=[PrintApplicationFileCell cellWithTable:tableView withTitle:@"周口太昊陵项目竣工验收图纸" withPages:24 withCopies:3 withCellHeight:100];
+            PrintFiles *tmp_File=[_arr_printFiles objectAtIndex:(_arr_printFiles.count-1-indexPath.row)];
+            
+           // PrintApplicationFileCell *cell=[PrintApplicationFileCell cellWithTable:tableView withTitle:@"周口太昊陵项目竣工验收图纸" withPages:24 withCopies:3 withCellHeight:100];
+            PrintApplicationFileCell *cell=[PrintApplicationFileCell cellWithTable:tableView withTitle:tmp_File.str_filename withPages:tmp_File.i_pages withCopies:tmp_File.i_copies withCellHeight:100];
             cell.delegate=self;
+            cell.myTag=indexPath.row;
+            
             return cell;
         }
        
@@ -217,5 +224,17 @@
     NSLog(@"选中第%ld个文件",(long)index);
 }
 
+-(void)passValue:(NSString *)str_FileName pages:(int)i_pages copies:(int)i_copies pic_pages:(int)i_pic_pages cover:(BOOL)b_hascover colorcopies:(int)i_colorcopies simplecopies:(int)i_simplecopies {
+    PrintFiles *tmp_Files=[[PrintFiles alloc]init];
+    tmp_Files.str_filename=str_FileName;
+    tmp_Files.i_pages=i_pages;
+    tmp_Files.i_copies=i_copies;
+    tmp_Files.i_pic_pages=i_pic_pages;
+    tmp_Files.b_hascover=b_hascover;
+    tmp_Files.i_colorcopies=i_colorcopies;
+    tmp_Files.i_simplecopies=i_simplecopies;
+    [_arr_printFiles addObject:tmp_Files];
+    [self.tableview reloadData];
+}
 
 @end

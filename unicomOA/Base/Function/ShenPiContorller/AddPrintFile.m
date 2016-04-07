@@ -56,7 +56,8 @@
 }
 
 -(void)MoveNextVc:(UIButton*)sender {
-  
+  //  [_delegate passValue:<#(NSString *)#> pages:<#(int)#> copies:<#(int)#> pic_pages:<#(int)#> cover:<#(BOOL)#> colorcopies:<#(int)#> simplecopies:<#(int)#>]
+  [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark tableView 方法
