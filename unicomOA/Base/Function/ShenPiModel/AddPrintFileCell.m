@@ -1,59 +1,64 @@
 //
-//  PrintApplicationTitleCell.m
+//  AddPrintFileCell.m
 //  unicomOA
 //
-//  Created by hnsi-03 on 16/4/6.
+//  Created by hnsi-03 on 16/4/7.
 //  Copyright © 2016年 zr-mac. All rights reserved.
 //
 
-#import "PrintApplicationTitleCell.h"
+#import "AddPrintFileCell.h"
 
-@interface PrintApplicationTitleCell()<UITextFieldDelegate>
-
+@interface AddPrintFileCell()<UITextFieldDelegate>
 
 @property (nonatomic,strong) UITextField *txt_title;
 
 @end
 
-@implementation PrintApplicationTitleCell
-
+@implementation AddPrintFileCell
 -(void)awakeFromNib {
     [super awakeFromNib];
 }
 
-+(instancetype)cellWithTable:(UITableView *)tableView withName:(NSString *)str_Name {
++(instancetype)cellWithTable:(UITableView *)tableView withName:(NSString *)str_Name withPlaceHolder:(NSString *)str_placeholder {
     static NSString *cellID=@"cellID";
-    PrintApplicationTitleCell *cell=[tableView dequeueReusableCellWithIdentifier:cellID];
+    AddPrintFileCell *cell=[tableView dequeueReusableCellWithIdentifier:cellID];
     if (!cell) {
-        cell=[[PrintApplicationTitleCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID withName:str_Name];
+        cell=[[AddPrintFileCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID withName:str_Name withPlaceHolder:str_placeholder];
     }
     return cell;
 }
 
--(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withName:(NSString *) str_name {
+-(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withName:(NSString *)str_Name withPlaceHolder:(NSString*)str_placeholder {
     self=[super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.textLabel.textColor=[UIColor colorWithRed:112/255.0f green:112/255.0f blue:112/255.0f alpha:1];
         self.textLabel.font=[UIFont systemFontOfSize:13];
         self.textLabel.textAlignment=NSTextAlignmentLeft;
-        self.textLabel.text=str_name;
+        self.textLabel.text=str_Name;
         
         if (iPhone6) {
-            _txt_title=[[UITextField alloc]initWithFrame:CGRectMake(self.frame.size.width*0.348, -3, self.frame.size.width*0.652, self.frame.size.height+3)];
+            _txt_title=[[UITextField alloc]initWithFrame:CGRectMake(self.frame.size.width*0.348, 3, self.frame.size.width*0.652, self.frame.size.height)];
         }
         else if (iPhone5_5s || iPhone4_4s) {
-             _txt_title=[[UITextField alloc]initWithFrame:CGRectMake(self.frame.size.width*0.348, -3, self.frame.size.width*0.652, self.frame.size.height+3)];
+            _txt_title=[[UITextField alloc]initWithFrame:CGRectMake(self.frame.size.width*0.348, 3, self.frame.size.width*0.652, self.frame.size.height)];
         }
         else {
-             _txt_title=[[UITextField alloc]initWithFrame:CGRectMake(self.frame.size.width*0.365, -3, self.frame.size.width*1.2, self.frame.size.height+3)];
+            _txt_title=[[UITextField alloc]initWithFrame:CGRectMake(self.frame.size.width*0.365, 3, self.frame.size.width*1.2, self.frame.size.height)];
         }
         
         _txt_title.textColor=[UIColor colorWithRed:110/255.0f green:112/255.0f blue:112/255.0f alpha:1];
         _txt_title.textAlignment=NSTextAlignmentLeft;
         _txt_title.font=[UIFont systemFontOfSize:13];
-        _txt_title.placeholder=@"请输入复印标题，最多50个字";
+        _txt_title.placeholder=str_placeholder;
         _txt_title.autocorrectionType=UITextAutocorrectionTypeNo;
         _txt_title.autocapitalizationType=UITextAutocapitalizationTypeNone;
+        if ([str_Name isEqualToString:@"文件名称"])
+        {
+            _txt_title.keyboardType=UIKeyboardTypeDefault;
+        }
+        else {
+            _txt_title.keyboardType=UIKeyboardTypePhonePad;
+        }
         _txt_title.returnKeyType=UIReturnKeyDone;
         _txt_title.clearButtonMode=UITextFieldViewModeWhileEditing;
         [_txt_title addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
@@ -63,6 +68,7 @@
     }
     
     return self;
+
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {

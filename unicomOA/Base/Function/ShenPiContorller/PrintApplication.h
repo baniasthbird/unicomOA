@@ -13,4 +13,8 @@
 
 @interface PrintApplication : UIViewController
 
+//是否包含打印文件
+@property BOOL b_hasFile;
+
+
 @end
