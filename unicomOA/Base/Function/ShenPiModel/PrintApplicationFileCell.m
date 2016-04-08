@@ -35,11 +35,23 @@
     [super awakeFromNib];
 }
 
-+(instancetype)cellWithTable:(UITableView *)tableView withTitle:(NSString *)str_Title withPages:(int)str_Pages withCopies:(int)str_copies withCellHeight:(CGFloat)cellHeight {
++(instancetype)cellWithTable:(UITableView *)tableView withTitle:(NSString *)str_Title withPages:(int)str_Pages withCopies:(int)str_copies withCellHeight:(CGFloat)cellHeight withPrintFile:(PrintFiles*)tmp_file {
     static NSString *cellID=@"cellID";
     PrintApplicationFileCell *cell=[tableView dequeueReusableCellWithIdentifier:cellID];
     if (!cell) {
-        cell=[[PrintApplicationFileCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID withTtile:str_Title withPages:str_Pages withCopies:str_copies withCellHeight:cellHeight];
+            cell=[[PrintApplicationFileCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID withTtile:str_Title withPages:str_Pages withCopies:str_copies withCellHeight:cellHeight];
+    }
+    else {
+        if (![cell isMemberOfClass:[PrintApplicationFileCell class]]) {
+         //   if (cell.file!=tmp_file) {
+                 cell=[[PrintApplicationFileCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID withTtile:str_Title withPages:str_Pages withCopies:str_copies withCellHeight:cellHeight];
+          //  }
+           
+        }
+        else {
+            cell=[[PrintApplicationFileCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID withTtile:str_Title withPages:str_Pages withCopies:str_copies withCellHeight:cellHeight];
+            
+        }
     }
     return  cell;
 }
@@ -137,7 +149,7 @@
     }
 }
 
--(void)Actiondo:(id)sender
+-(void)ActionDo:(id)sender
 {
     if ([self.delegate respondsToSelector:@selector(tapCell:atIndex:)]) {
         [self.delegate tapCell:self atIndex:self.myTag];

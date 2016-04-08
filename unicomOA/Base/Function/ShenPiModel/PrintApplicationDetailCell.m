@@ -24,9 +24,9 @@
     [super awakeFromNib];
 }
 
-+(instancetype)cellWithTable:(UITableView *)tableView withName:(NSString *)str_Name {
++(instancetype)cellWithTable:(UITableView *)tableView withName:(NSString *)str_Name atIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellID=@"cellID";
-    PrintApplicationDetailCell *cell=[tableView dequeueReusableCellWithIdentifier:cellID];
+    PrintApplicationDetailCell *cell=[tableView cellForRowAtIndexPath:indexPath];
     if (!cell) {
         cell=[[PrintApplicationDetailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID withName:str_Name];
     }

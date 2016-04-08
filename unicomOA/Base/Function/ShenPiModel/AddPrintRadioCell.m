@@ -7,8 +7,7 @@
 //
 
 #import "AddPrintRadioCell.h"
-#import "RadioBox.h"
-#import "RadioGroup.h"
+
 
 @interface AddPrintRadioCell()
 
@@ -54,23 +53,23 @@
         NSArray *controls=[NSArray arrayWithObjects:radio1,radio2, nil];
         
         
-        RadioGroup *radioGroup1;
+        
         if (iPhone4_4s || iPhone5_5s || iPhone6) {
-           radioGroup1 =[[RadioGroup alloc]initWithFrame:CGRectMake(108, 0, 160, 50) WithControl:controls];
+           _radioGroup1 =[[RadioGroup alloc]initWithFrame:CGRectMake(108, 0, 160, 50) WithControl:controls];
         }
         else if (iPhone6_plus) {
-            radioGroup1 =[[RadioGroup alloc]initWithFrame:CGRectMake(113, 0, 160, 50) WithControl:controls];
+            _radioGroup1 =[[RadioGroup alloc]initWithFrame:CGRectMake(113, 0, 160, 50) WithControl:controls];
         }
         
-        [radioGroup1 addSubview:radio1];
-        [radioGroup1 addSubview:radio2];
+        [_radioGroup1 addSubview:radio1];
+        [_radioGroup1 addSubview:radio2];
         
-        radioGroup1.backgroundColor=[UIColor clearColor];
-        radioGroup1.textFont=[UIFont systemFontOfSize:14];
-        radioGroup1.textColor=[UIColor colorWithRed:112/255.0f green:112/255.0f blue:112/255.0f alpha:1];;
-        radioGroup1.selectValue=0;
+        _radioGroup1.backgroundColor=[UIColor clearColor];
+        _radioGroup1.textFont=[UIFont systemFontOfSize:14];
+        _radioGroup1.textColor=[UIColor colorWithRed:112/255.0f green:112/255.0f blue:112/255.0f alpha:1];;
+        _radioGroup1.selectValue=0;
         
-        [self.contentView addSubview:radioGroup1];
+        [self.contentView addSubview:_radioGroup1];
     }
     return  self;
 }

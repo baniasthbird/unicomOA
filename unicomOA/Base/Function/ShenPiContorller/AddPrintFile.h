@@ -13,7 +13,9 @@
 
 @protocol PrintFilePassValueDelegate <NSObject>
 
--(void)passValue:(NSString*)str_FileName pages:(int)i_pages copies:(int)i_copies pic_pages:(int)i_pic_pages cover:(BOOL)b_hascover colorcopies:(int)i_colorcopies simplecopies:(int)i_simplecopies;
+-(void)passValue:(PrintFiles*)new_file ;
+
+-(void)editValue:(PrintFiles*)origin_file editFile:(PrintFiles*)edit_file;
 
 @end
 
@@ -22,6 +24,8 @@
 @property (nonatomic,unsafe_unretained) id<PrintFilePassValueDelegate> delegate;
 
 @property (strong,nonatomic) PrintFiles *printFiles;
+
+@property BOOL b_isEdit;
 
 
 @end

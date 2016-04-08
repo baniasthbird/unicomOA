@@ -27,6 +27,11 @@
     if (!cell) {
         cell=[[PrintApplicationNoFileCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
     }
+    else {
+        if (![cell isMemberOfClass:[PrintApplicationNoFileCell class]]) {
+            cell=[[PrintApplicationNoFileCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+        }
+    }
     return  cell;
 }
 

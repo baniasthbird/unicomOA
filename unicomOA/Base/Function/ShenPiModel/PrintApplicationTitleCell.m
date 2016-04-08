@@ -21,12 +21,20 @@
     [super awakeFromNib];
 }
 
-+(instancetype)cellWithTable:(UITableView *)tableView withName:(NSString *)str_Name {
++(instancetype)cellWithTable:(UITableView *)tableView withName:(NSString *)str_Name atIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellID=@"cellID";
-    PrintApplicationTitleCell *cell=[tableView dequeueReusableCellWithIdentifier:cellID];
+    //PrintApplicationTitleCell *cell=[tableView dequeueReusableCellWithIdentifier:cellID];
+    PrintApplicationTitleCell *cell=[tableView cellForRowAtIndexPath:indexPath];
     if (!cell) {
         cell=[[PrintApplicationTitleCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID withName:str_Name];
     }
+    /*
+    else {
+        if (![cell isMemberOfClass:[PrintApplicationTitleCell class]]) {
+            cell=[[PrintApplicationTitleCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID withName:str_Name];
+        }
+    }
+     */
     return cell;
 }
 

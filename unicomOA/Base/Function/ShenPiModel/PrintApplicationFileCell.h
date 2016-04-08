@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PrintFiles.h"
 
 //复印文件  有文件的tableviewcell
 
@@ -30,8 +31,10 @@
 /**标记*/
 @property (nonatomic, assign) NSInteger myTag;
 
+@property (nonatomic, assign) PrintFiles *file;
+
 /** 快速创建cell的方法*/
-+ (instancetype)cellWithTable:(UITableView *)tableView withTitle:(NSString*)str_Title withPages:(int)str_Pages withCopies:(int)str_copies withCellHeight:(CGFloat)cellHeight;
++ (instancetype)cellWithTable:(UITableView *)tableView withTitle:(NSString*)str_Title withPages:(int)str_Pages withCopies:(int)str_copies withCellHeight:(CGFloat)cellHeight withPrintFile:(PrintFiles*)tmp_file;
 
 
 @end

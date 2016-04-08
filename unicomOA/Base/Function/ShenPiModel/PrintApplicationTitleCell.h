@@ -14,6 +14,6 @@
 
 
 /** 快速创建cell的方法*/
-+ (instancetype)cellWithTable:(UITableView *)tableView withName:(NSString*)str_Name;
++ (instancetype)cellWithTable:(UITableView *)tableView withName:(NSString*)str_Name atIndexPath:(NSIndexPath*)indexPath;
 
 @end

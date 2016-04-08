@@ -22,8 +22,15 @@
 
 -(void)viewDidLoad {
     [super viewDidLoad];
-    self.title=@"添加文件";
+    if (_b_isEdit==NO) {
+       self.title=@"添加文件";
+    }
+    else {
+       self.title=@"编辑文件";
+    }
     
+    
+   
     NSDictionary * dict=@{
                           NSForegroundColorAttributeName:   [UIColor whiteColor]};
     
@@ -40,11 +47,16 @@
     [barButtonItem2 setTitleTextAttributes:dict forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = barButtonItem2;
 
+    
+
     _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.05, self.view.frame.size.width, self.view.frame.size.height*0.7) style:UITableViewStylePlain];
     _tableView.delegate=self;
     _tableView.dataSource=self;
     _tableView.backgroundColor=[UIColor clearColor];
     [self.view addSubview:_tableView];
+    
+    
+
     
     self.view.backgroundColor=[UIColor colorWithRed:243/255.0f green:243/255.0f blue:243/255.0f alpha:1];
 
@@ -56,7 +68,44 @@
 }
 
 -(void)MoveNextVc:(UIButton*)sender {
-  //  [_delegate passValue:<#(NSString *)#> pages:<#(int)#> copies:<#(int)#> pic_pages:<#(int)#> cover:<#(BOOL)#> colorcopies:<#(int)#> simplecopies:<#(int)#>]
+    AddPrintFileCell *cell_name= [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    NSString *str_name=cell_name.txt_title.text;
+    AddPrintFileCell *cell_pages= [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+    int i_pages=[cell_pages.txt_title.text intValue];
+    AddPrintFileCell *cell_copies= [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
+    int i_copies=[cell_copies.txt_title.text intValue];
+    AddPrintFileCell *cell_pic_pages= [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
+    int i_pic_pages=[cell_pic_pages.txt_title.text intValue];
+    AddPrintRadioCell *cell_has_cover=[_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:4 inSection:0]];
+    int i_has_cover=(int)cell_has_cover.radioGroup1.selectValue;
+    AddPrintFileCell *cell_color_copies= [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:5 inSection:0]];
+    int i_color_copies=[cell_color_copies.txt_title.text intValue];
+    AddPrintFileCell *cell_simple_copies= [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:6 inSection:0]];
+    int i_simple_copies=[cell_simple_copies.txt_title.text intValue];
+    BOOL b_hascover=NO;
+    if (i_has_cover==0)
+    {
+        b_hascover=YES;
+    }
+    else {
+        b_hascover=NO;
+    }
+    PrintFiles *tmp_file=[[PrintFiles alloc]init];
+    tmp_file.str_filename=str_name;
+    tmp_file.i_pages=i_pages;
+    tmp_file.i_copies=i_copies;
+    tmp_file.i_pic_pages=i_pic_pages;
+    tmp_file.b_hascover=b_hascover;
+    tmp_file.i_colorcopies=i_color_copies;
+    tmp_file.i_simplecopies=i_simple_copies;
+    
+    if (_b_isEdit==NO) {
+        [_delegate passValue:tmp_file];
+    }
+    else {
+        [_delegate editValue:_printFiles editFile:tmp_file];
+    }
+    
   [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -70,46 +119,61 @@
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    /*
-    static NSString *ID=@"cell";
-    UITableViewCell *cell_d = [tableView dequeueReusableCellWithIdentifier:ID];
-    if (cell_d==nil) {
-        cell_d=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
-    }
-    cell_d.backgroundColor=[UIColor whiteColor];
-    cell_d.textLabel.textColor=[UIColor blackColor];
-    cell_d.textLabel.font=[UIFont systemFontOfSize:16];
-    cell_d.textLabel.textAlignment=NSTextAlignmentLeft;
-    */
     AddPrintFileCell *cell;
-    
-    if (indexPath.row==0) {
-        cell=[AddPrintFileCell cellWithTable:tableView withName:@"文件名称" withPlaceHolder:@"填写文件名称"];
-    }
-    else if (indexPath.row==1) {
-        cell=[AddPrintFileCell cellWithTable:tableView withName:@"复印页数" withPlaceHolder:@"填写复印页数"];
-    }
-    else if (indexPath.row==2) {
-        cell=[AddPrintFileCell cellWithTable:tableView withName:@"份数" withPlaceHolder:@"填写份数"];
-    }
-    else if (indexPath.row==3) {
-        cell=[AddPrintFileCell cellWithTable:tableView withName:@"晒图张数" withPlaceHolder:@"填写晒图张数"];
-    }
-    else if (indexPath.row==4) {
-        AddPrintRadioCell  *cell=[AddPrintRadioCell cellWithTable:tableView withName:@"正式封皮"];
-        return cell;
-    }
-    else if (indexPath.row==5) {
-        cell=[AddPrintFileCell cellWithTable:tableView withName:@"精装册数" withPlaceHolder:@"填写精装册数"];
-    }
-    else if (indexPath.row==6) {
-        cell=[AddPrintFileCell cellWithTable:tableView withName:@"简装册数" withPlaceHolder:@"填写简装册数"];
+    if (_b_isEdit==NO) {
+        if (indexPath.row==0) {
+            cell=[AddPrintFileCell cellWithTable:tableView withName:@"文件名称" withPlaceHolder:@"填写文件名称"];
+        }
+        else if (indexPath.row==1) {
+            cell=[AddPrintFileCell cellWithTable:tableView withName:@"复印页数" withPlaceHolder:@"填写复印页数"];
+        }
+        else if (indexPath.row==2) {
+            cell=[AddPrintFileCell cellWithTable:tableView withName:@"份数" withPlaceHolder:@"填写份数"];
+        }
+        else if (indexPath.row==3) {
+            cell=[AddPrintFileCell cellWithTable:tableView withName:@"晒图张数" withPlaceHolder:@"填写晒图张数"];
+        }
+        else if (indexPath.row==4) {
+            AddPrintRadioCell  *cell=[AddPrintRadioCell cellWithTable:tableView withName:@"正式封皮"];
+            return cell;
+        }
+        else if (indexPath.row==5) {
+            cell=[AddPrintFileCell cellWithTable:tableView withName:@"精装册数" withPlaceHolder:@"填写精装册数"];
+        }
+        else if (indexPath.row==6) {
+            cell=[AddPrintFileCell cellWithTable:tableView withName:@"简装册数" withPlaceHolder:@"填写简装册数"];
+        }
     }
     else {
-        /*
-        cell_d.textLabel.text=@"正式封皮";
-        return cell_d;
-         */
+        if (indexPath.row==0) {
+            NSString *str_name=_printFiles.str_filename;
+            cell=[AddPrintFileCell cellWithTable:tableView withName:@"文件名称" withText:str_name];
+        }
+        else if (indexPath.row==1) {
+            NSString *str_page=[NSString stringWithFormat:@"%d",_printFiles.i_pages];
+            cell=[AddPrintFileCell cellWithTable:tableView withName:@"复印页数" withText:str_page];
+        }
+        else if (indexPath.row==2) {
+            NSString *str_copies=[NSString stringWithFormat:@"%d",_printFiles.i_copies];
+            cell=[AddPrintFileCell cellWithTable:tableView withName:@"份数" withText:str_copies];
+        }
+        else if (indexPath.row==3) {
+            NSString *str_pic_pages=[NSString stringWithFormat:@"%d",_printFiles.i_pic_pages];
+            cell=[AddPrintFileCell cellWithTable:tableView withName:@"晒图张数" withText:str_pic_pages];
+        }
+        else if (indexPath.row==4) {
+            //封皮赋值待定 zr 0408
+            AddPrintRadioCell  *cell=[AddPrintRadioCell cellWithTable:tableView withName:@"正式封皮"];
+            return cell;
+        }
+        else if (indexPath.row==5) {
+            NSString *str_color_pages=[NSString stringWithFormat:@"%d",_printFiles.i_colorcopies];
+            cell=[AddPrintFileCell cellWithTable:tableView withName:@"精装册数" withText:str_color_pages];
+        }
+        else if (indexPath.row==6) {
+            NSString *str_simple_pages=[NSString stringWithFormat:@"%d",_printFiles.i_simplecopies];
+            cell=[AddPrintFileCell cellWithTable:tableView withName:@"简装册数" withText:str_simple_pages];
+        }
     }
     
     

@@ -65,6 +65,7 @@
 -(void)AddFile:(UIButton*)sender {
     AddPrintFile *viewController=[[AddPrintFile alloc]init];
     viewController.delegate=self;
+    viewController.b_isEdit=NO;
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
@@ -138,8 +139,10 @@
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *ID=@"cell";
+    //static NSString *ID=@"cell";
+    NSString *ID=[NSString stringWithFormat:@"Cell%ld%ld", (long)[indexPath section], (long)[indexPath row]];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    //UITableViewCell *cell=[tableView cellForRowAtIndexPath:indexPath];
     if (cell==nil) {
         cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:ID];
     }
@@ -157,16 +160,22 @@
             cell.detailTextLabel.textColor=[UIColor blackColor];
         }
         else if (indexPath.row==1) {
+            
             //textfield
-            PrintApplicationTitleCell *cell=[PrintApplicationTitleCell cellWithTable:tableView withName:@"复印标题"];
-            //cell.textLabel.text=@"复印标题";
+           // PrintApplicationTitleCell *cell=[PrintApplicationTitleCell cellWithTable:tableView withName:@"复印标题"];
+                        //cell.textLabel.text=@"复印标题";
+            PrintApplicationTitleCell *cell=[PrintApplicationTitleCell cellWithTable:tableView withName:@"复印标题" atIndexPath:indexPath];
             return cell;
+            
         }
         else if (indexPath.row==2) {
+            
             //textview
-            PrintApplicationDetailCell *cell=[PrintApplicationDetailCell cellWithTable:tableView withName:@"备注信息"];
+            PrintApplicationDetailCell *cell=[PrintApplicationDetailCell cellWithTable:tableView withName:@"备注信息" atIndexPath:indexPath];
+            
             //cell.textLabel.text=@"备注信息";
             return cell;
+            
         }
         else if (indexPath.row==3) {
             cell.textLabel.text=@"发起人";
@@ -191,19 +200,21 @@
             cell.detailTextLabel.text=strDate;
         }
     }
-    else {
+    else if (indexPath.section==1) {
         //cell.backgroundColor=[UIColor clearColor];
         //cell.textLabel.text=@"无复印文件，请点击右上角『添加』按钮，进行文件添加";
         if (_b_hasFile==NO)
         {
-            PrintApplicationNoFileCell *cell=[PrintApplicationNoFileCell cellWithTable:tableView withName:@""];
+            PrintApplicationNoFileCell* cell=[PrintApplicationNoFileCell cellWithTable:tableView withName:@""];
             return cell;
         }
         else {
-            PrintFiles *tmp_File=[_arr_printFiles objectAtIndex:(_arr_printFiles.count-1-indexPath.row)];
-            
+           // PrintFiles *tmp_File=[_arr_printFiles objectAtIndex:(_arr_printFiles.count-1-indexPath.row)];
+            PrintFiles *tmp_File=[_arr_printFiles objectAtIndex:(indexPath.row)];
            // PrintApplicationFileCell *cell=[PrintApplicationFileCell cellWithTable:tableView withTitle:@"周口太昊陵项目竣工验收图纸" withPages:24 withCopies:3 withCellHeight:100];
-            PrintApplicationFileCell *cell=[PrintApplicationFileCell cellWithTable:tableView withTitle:tmp_File.str_filename withPages:tmp_File.i_pages withCopies:tmp_File.i_copies withCellHeight:100];
+            PrintApplicationFileCell *cell=[PrintApplicationFileCell cellWithTable:tableView withTitle:tmp_File.str_filename withPages:tmp_File.i_pages withCopies:tmp_File.i_copies withCellHeight:100 withPrintFile:tmp_File];
+            
+            cell.file=tmp_File;
             cell.delegate=self;
             cell.myTag=indexPath.row;
             
@@ -217,13 +228,48 @@
 }
 
 -(void)sideslipCellRemoveCell:(PrintApplicationFileCell *)cell atIndex:(NSInteger)index {
+   // [_arr_printFiles removeObjectAtIndex:_arr_printFiles.count-1-index];
+    [_arr_printFiles removeObjectAtIndex:index];
     NSLog(@"删除第%ld个文件",(long)index);
+    if ([_arr_printFiles count]==0) {
+        _b_hasFile=NO;
+    }
+    else {
+        _b_hasFile=YES;
+    }
+    NSIndexSet *nd=[[NSIndexSet alloc]initWithIndex:1];
+    [self.tableview reloadSections:nd withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 -(void)tapCell:(PrintApplicationFileCell *)cell atIndex:(NSInteger)index {
+    AddPrintFile *viewController=[[AddPrintFile alloc]init];
+    viewController.printFiles=cell.file;
+    viewController.b_isEdit=YES;
+    viewController.delegate=self;
+    [self.navigationController pushViewController:viewController animated:YES];
     NSLog(@"选中第%ld个文件",(long)index);
 }
 
+-(void)passValue:(PrintFiles *)new_file {
+    [_arr_printFiles addObject:new_file];
+    _b_hasFile=YES;
+    NSIndexSet *nd=[[NSIndexSet alloc]initWithIndex:1];
+    [self.tableview reloadSections:nd withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
+-(void)editValue:(PrintFiles *)origin_file editFile:(PrintFiles *)edit_file {
+    for (int i=0; i<_arr_printFiles.count;i++) {
+        PrintFiles *tmpFile=[_arr_printFiles objectAtIndex:i];
+        if (tmpFile==origin_file) {
+            [_arr_printFiles setObject:edit_file atIndexedSubscript:i];
+        }
+    }
+    NSIndexSet *nd=[[NSIndexSet alloc]initWithIndex:1];
+    [self.tableview reloadSections:nd withRowAnimation:UITableViewRowAnimationAutomatic];
+
+}
+
+/*
 -(void)passValue:(NSString *)str_FileName pages:(int)i_pages copies:(int)i_copies pic_pages:(int)i_pic_pages cover:(BOOL)b_hascover colorcopies:(int)i_colorcopies simplecopies:(int)i_simplecopies {
     PrintFiles *tmp_Files=[[PrintFiles alloc]init];
     tmp_Files.str_filename=str_FileName;
@@ -233,8 +279,11 @@
     tmp_Files.b_hascover=b_hascover;
     tmp_Files.i_colorcopies=i_colorcopies;
     tmp_Files.i_simplecopies=i_simplecopies;
+    _b_hasFile=YES;
     [_arr_printFiles addObject:tmp_Files];
-    [self.tableview reloadData];
+    NSIndexSet *nd=[[NSIndexSet alloc]initWithIndex:1];
+    [self.tableview reloadSections:nd withRowAnimation:UITableViewRowAnimationAutomatic];
 }
+*/
 
 @end
