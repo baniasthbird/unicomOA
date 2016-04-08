@@ -21,16 +21,16 @@
     [super awakeFromNib];
 }
 
-+(instancetype)cellWithTable:(UITableView *)tableView withName:(NSString *)str_Name {
++(instancetype)cellWithTable:(UITableView *)tableView withName:(NSString *)str_Name withSelectedValue:(int)value{
     static NSString *cellID=@"cellID";
     AddPrintRadioCell *cell=[tableView dequeueReusableCellWithIdentifier:cellID];
     if (!cell) {
-        cell=[[AddPrintRadioCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID withName:str_Name];
+        cell=[[AddPrintRadioCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID withName:str_Name withSelectedValue:value];
     }
     return cell;
 }
 
--(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withName:(NSString*)str_Name {
+-(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withName:(NSString*)str_Name withSelectedValue:(int)value {
     self=[super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.textLabel.textColor=[UIColor colorWithRed:112/255.0f green:112/255.0f blue:112/255.0f alpha:1];
@@ -67,7 +67,7 @@
         _radioGroup1.backgroundColor=[UIColor clearColor];
         _radioGroup1.textFont=[UIFont systemFontOfSize:14];
         _radioGroup1.textColor=[UIColor colorWithRed:112/255.0f green:112/255.0f blue:112/255.0f alpha:1];;
-        _radioGroup1.selectValue=0;
+        _radioGroup1.selectValue=value;
         
         [self.contentView addSubview:_radioGroup1];
     }

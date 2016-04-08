@@ -13,7 +13,7 @@
 @interface AddPrintRadioCell : UITableViewCell
 
 /** 快速创建cell的方法*/
-+ (instancetype)cellWithTable:(UITableView *)tableView withName:(NSString*)str_Name;
++(instancetype)cellWithTable:(UITableView *)tableView withName:(NSString *)str_Name withSelectedValue:(int)value;
 
 @property (nonatomic,strong) RadioGroup* radioGroup1;
 

@@ -10,6 +10,7 @@
 #import "AddPrintFileCell.h"
 #import "AddPrintRadioCell.h"
 #import "PrintApplication.h"
+#import "RadioBox.h"
 
 
 @interface AddPrintFile()
@@ -77,19 +78,27 @@
     AddPrintFileCell *cell_pic_pages= [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
     int i_pic_pages=[cell_pic_pages.txt_title.text intValue];
     AddPrintRadioCell *cell_has_cover=[_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:4 inSection:0]];
-    int i_has_cover=(int)cell_has_cover.radioGroup1.selectValue;
+    BOOL b_hascover=NO;
+    for (UIView *subview in cell_has_cover.radioGroup1.subviews)
+    {
+        if ([subview isMemberOfClass:[RadioBox class]]) {
+            RadioBox *tmp_box=(RadioBox*)subview;
+            if (tmp_box.on==YES)
+            {
+                if ([tmp_box.text isEqualToString:@"是"]) {
+                    b_hascover=YES;
+                }
+                else if ([tmp_box.text isEqualToString:@"否"]) {
+                    b_hascover=NO;
+                }
+            }
+        }
+    }
+    //int i_has_cover=(int)cell_has_cover.radioGroup1.selectValue;
     AddPrintFileCell *cell_color_copies= [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:5 inSection:0]];
     int i_color_copies=[cell_color_copies.txt_title.text intValue];
     AddPrintFileCell *cell_simple_copies= [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:6 inSection:0]];
     int i_simple_copies=[cell_simple_copies.txt_title.text intValue];
-    BOOL b_hascover=NO;
-    if (i_has_cover==0)
-    {
-        b_hascover=YES;
-    }
-    else {
-        b_hascover=NO;
-    }
     PrintFiles *tmp_file=[[PrintFiles alloc]init];
     tmp_file.str_filename=str_name;
     tmp_file.i_pages=i_pages;
@@ -134,7 +143,8 @@
             cell=[AddPrintFileCell cellWithTable:tableView withName:@"晒图张数" withPlaceHolder:@"填写晒图张数"];
         }
         else if (indexPath.row==4) {
-            AddPrintRadioCell  *cell=[AddPrintRadioCell cellWithTable:tableView withName:@"正式封皮"];
+            AddPrintRadioCell  *cell=[AddPrintRadioCell cellWithTable:tableView withName:@"正式封皮" withSelectedValue:0];
+           
             return cell;
         }
         else if (indexPath.row==5) {
@@ -163,7 +173,14 @@
         }
         else if (indexPath.row==4) {
             //封皮赋值待定 zr 0408
-            AddPrintRadioCell  *cell=[AddPrintRadioCell cellWithTable:tableView withName:@"正式封皮"];
+            //AddPrintRadioCell  *cell=[AddPrintRadioCell cellWithTable:tableView withName:@"正式封皮"];
+            AddPrintRadioCell *cell;
+            if (_printFiles.b_hascover==YES) {
+                cell=[AddPrintRadioCell cellWithTable:tableView withName:@"正式封皮" withSelectedValue:0];
+            }
+            else if (_printFiles.b_hascover==NO) {
+                cell=[AddPrintRadioCell cellWithTable:tableView withName:@"正式封皮" withSelectedValue:1];
+            }
             return cell;
         }
         else if (indexPath.row==5) {
