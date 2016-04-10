@@ -21,12 +21,12 @@
     [super awakeFromNib];
 }
 
-+(instancetype)cellWithTable:(UITableView *)tableView withName:(NSString *)str_Name atIndexPath:(NSIndexPath *)indexPath {
++(instancetype)cellWithTable:(UITableView *)tableView withName:(NSString *)str_Name withPlaceHolder:(NSString *)str_Placeholder atIndexPath:(NSIndexPath *)indexPath keyboardType:(UIKeyboardType)type{
     static NSString *cellID=@"cellID";
     //PrintApplicationTitleCell *cell=[tableView dequeueReusableCellWithIdentifier:cellID];
     PrintApplicationTitleCell *cell=[tableView cellForRowAtIndexPath:indexPath];
     if (!cell) {
-        cell=[[PrintApplicationTitleCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID withName:str_Name];
+        cell=[[PrintApplicationTitleCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID withName:str_Name withPlaceHolder:str_Placeholder keyboardType:type];
     }
     /*
     else {
@@ -38,7 +38,7 @@
     return cell;
 }
 
--(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withName:(NSString *) str_name {
+-(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withName:(NSString *) str_name  withPlaceHolder:(NSString*)str_PlaceHolder keyboardType:(UIKeyboardType)type{
     self=[super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.textLabel.textColor=[UIColor colorWithRed:112/255.0f green:112/255.0f blue:112/255.0f alpha:1];
@@ -59,11 +59,12 @@
         _txt_title.textColor=[UIColor colorWithRed:110/255.0f green:112/255.0f blue:112/255.0f alpha:1];
         _txt_title.textAlignment=NSTextAlignmentLeft;
         _txt_title.font=[UIFont systemFontOfSize:13];
-        _txt_title.placeholder=@"请输入复印标题，最多50个字";
+        _txt_title.placeholder=str_PlaceHolder;
         _txt_title.autocorrectionType=UITextAutocorrectionTypeNo;
         _txt_title.autocapitalizationType=UITextAutocapitalizationTypeNone;
         _txt_title.returnKeyType=UIReturnKeyDone;
         _txt_title.clearButtonMode=UITextFieldViewModeWhileEditing;
+        _txt_title.keyboardType=type;
         [_txt_title addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
         _txt_title.delegate=self;
         [self.contentView addSubview:_txt_title];

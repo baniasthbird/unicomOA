@@ -8,6 +8,7 @@
 
 #import "NewApplication.h"
 #import "PrintApplication.h"
+#import "CarApplication.h"
 
 @interface NewApplication()<UITableViewDelegate,UITableViewDataSource>
 
@@ -89,7 +90,8 @@
         [self.navigationController pushViewController:viewController animated:YES];
     }
     else if (indexPath.row==1) {
-        
+        CarApplication *viewController=[[CarApplication alloc]init];
+        [self.navigationController pushViewController:viewController animated:YES];
     }
     
 }

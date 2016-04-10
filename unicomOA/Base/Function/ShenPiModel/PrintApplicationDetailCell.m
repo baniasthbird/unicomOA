@@ -24,17 +24,17 @@
     [super awakeFromNib];
 }
 
-+(instancetype)cellWithTable:(UITableView *)tableView withName:(NSString *)str_Name atIndexPath:(NSIndexPath *)indexPath {
++(instancetype)cellWithTable:(UITableView *)tableView withName:(NSString *)str_Name withPlaceHolder:(NSString *)str_placeHolder  atIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellID=@"cellID";
     PrintApplicationDetailCell *cell=[tableView cellForRowAtIndexPath:indexPath];
     if (!cell) {
-        cell=[[PrintApplicationDetailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID withName:str_Name];
+        cell=[[PrintApplicationDetailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID withName:str_Name withPlaceholder:str_placeHolder];
     }
     return cell;
 }
 
 
--(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withName:(NSString*)str_name {
+-(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withName:(NSString*)str_name withPlaceholder:(NSString*)str_placeholder{
     self=[super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.textLabel.textColor=[UIColor colorWithRed:112/255.0f green:112/255.0f blue:112/255.0f alpha:1];
@@ -75,7 +75,7 @@
             _lbl_tip=[[UILabel alloc]initWithFrame:CGRectMake(116, 0,self.frame.size.width*0.6 , self.frame.size.height)];
         }
         
-        _lbl_tip.text=@"请输入备注信息，最多500个字";
+        _lbl_tip.text=str_placeholder;
         _lbl_tip.textColor=[UIColor colorWithRed:110/255.0f green:112/255.0f blue:112/255.0f alpha:1];
         _lbl_tip.textAlignment=NSTextAlignmentLeft;
         _lbl_tip.font=[UIFont systemFontOfSize:13];

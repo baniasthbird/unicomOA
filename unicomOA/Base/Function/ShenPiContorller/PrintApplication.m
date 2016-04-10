@@ -94,7 +94,7 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 50;
+    return 30;
 }
 
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -102,10 +102,10 @@
     view.backgroundColor=[UIColor clearColor];
     CGRect view_title;
     if (iPhone5_5s || iPhone4_4s) {
-        view_title=CGRectMake(0, 20, self.view.frame.size.width*0.28, 30);
+        view_title=CGRectMake(0, 0, self.view.frame.size.width*0.28, 30);
     }
     else {
-        view_title=CGRectMake(0, 20, self.view.frame.size.width*0.2, 30);
+        view_title=CGRectMake(0, 0, self.view.frame.size.width*0.2, 30);
     }
     UILabel *lbl_sectionTitle=[[UILabel alloc]initWithFrame:view_title];
     lbl_sectionTitle.textAlignment=NSTextAlignmentLeft;
@@ -162,16 +162,15 @@
         else if (indexPath.row==1) {
             
             //textfield
-           // PrintApplicationTitleCell *cell=[PrintApplicationTitleCell cellWithTable:tableView withName:@"复印标题"];
-                        //cell.textLabel.text=@"复印标题";
-            PrintApplicationTitleCell *cell=[PrintApplicationTitleCell cellWithTable:tableView withName:@"复印标题" atIndexPath:indexPath];
+            PrintApplicationTitleCell *cell=[PrintApplicationTitleCell cellWithTable:tableView withName:@"复印标题" withPlaceHolder:@"请输入复印标题，最多50个字" atIndexPath:indexPath keyboardType:UIKeyboardTypeDefault];
             return cell;
             
         }
         else if (indexPath.row==2) {
             
             //textview
-            PrintApplicationDetailCell *cell=[PrintApplicationDetailCell cellWithTable:tableView withName:@"备注信息" atIndexPath:indexPath];
+           // PrintApplicationDetailCell *cell=[PrintApplicationDetailCell cellWithTable:tableView withName:@"备注信息" atIndexPath:indexPath];
+            PrintApplicationDetailCell *cell=[PrintApplicationDetailCell cellWithTable:tableView withName:@"备注信息" withPlaceHolder:@"请输入备注信息，最多500个字" atIndexPath:indexPath];
             
             //cell.textLabel.text=@"备注信息";
             return cell;

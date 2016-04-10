@@ -36,6 +36,8 @@
 		2CDC2BF21C9117FE0067693B /* NewsManagementTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDC2BF11C9117FE0067693B /* NewsManagementTableViewCell.m */; };
 		2CDC2BF51C924DAC0067693B /* NewsDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDC2BF41C924DAC0067693B /* NewsDisplayViewController.m */; };
 		2CE320EE1CB6B4B000B36793 /* PrintFiles.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CE320ED1CB6B4B000B36793 /* PrintFiles.m */; };
+		2CE320F11CB7FF4800B36793 /* CarApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CE320F01CB7FF4800B36793 /* CarApplication.m */; };
+		2CE320F41CBA6BFE00B36793 /* MultSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CE320F31CBA6BFE00B36793 /* MultSelection.m */; };
 		2CFEAD181C7168980054730E /* forgetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD131C7168980054730E /* forgetPasswordViewController.m */; };
 		2CFEAD191C7168980054730E /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD151C7168980054730E /* LoginViewController.m */; };
 		2CFEAD1A1C7168980054730E /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD171C7168980054730E /* SignInViewController.m */; };
@@ -222,6 +224,10 @@
 		2CDC2BF41C924DAC0067693B /* NewsDisplayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsDisplayViewController.m; path = Base/Function/NewsController/NewsDisplayViewController.m; sourceTree = "<group>"; };
 		2CE320EC1CB6B4B000B36793 /* PrintFiles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrintFiles.h; path = Base/Function/ShenPiModel/PrintFiles.h; sourceTree = "<group>"; };
 		2CE320ED1CB6B4B000B36793 /* PrintFiles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrintFiles.m; path = Base/Function/ShenPiModel/PrintFiles.m; sourceTree = "<group>"; };
+		2CE320EF1CB7FF4800B36793 /* CarApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CarApplication.h; path = Base/Function/ShenPiContorller/CarApplication.h; sourceTree = "<group>"; };
+		2CE320F01CB7FF4800B36793 /* CarApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CarApplication.m; path = Base/Function/ShenPiContorller/CarApplication.m; sourceTree = "<group>"; };
+		2CE320F21CBA6BFE00B36793 /* MultSelection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MultSelection.h; path = Base/Function/ShenPiContorller/MultSelection.h; sourceTree = "<group>"; };
+		2CE320F31CBA6BFE00B36793 /* MultSelection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MultSelection.m; path = Base/Function/ShenPiContorller/MultSelection.m; sourceTree = "<group>"; };
 		2CFEAD121C7168980054730E /* forgetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = forgetPasswordViewController.h; path = Login/forgetPasswordViewController.h; sourceTree = "<group>"; };
 		2CFEAD131C7168980054730E /* forgetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = forgetPasswordViewController.m; path = Login/forgetPasswordViewController.m; sourceTree = "<group>"; };
 		2CFEAD141C7168980054730E /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = Login/LoginViewController.h; sourceTree = "<group>"; };
@@ -1091,6 +1097,10 @@
 				68ED4E4E1CB4EFD2000E8A7B /* PrintApplication.m */,
 				682B68B41CB64482002EC60F /* AddPrintFile.h */,
 				682B68B51CB64482002EC60F /* AddPrintFile.m */,
+				2CE320EF1CB7FF4800B36793 /* CarApplication.h */,
+				2CE320F01CB7FF4800B36793 /* CarApplication.m */,
+				2CE320F21CBA6BFE00B36793 /* MultSelection.h */,
+				2CE320F31CBA6BFE00B36793 /* MultSelection.m */,
 			);
 			name = ShenPiController;
 			sourceTree = "<group>";
@@ -1275,6 +1285,7 @@
 				2CDC2BE01C8FD1300067693B /* NewsFocusViewController.m in Sources */,
 				2CFEAD1A1C7168980054730E /* SignInViewController.m in Sources */,
 				68E77A261CB3A133006DA5B9 /* IQUIViewController+Additions.m in Sources */,
+				2CE320F11CB7FF4800B36793 /* CarApplication.m in Sources */,
 				2C5460BD1C854733005C5AB9 /* TableViewCell.m in Sources */,
 				68F950B91C9F9E9000CA1519 /* ChangePhoneNumViewController.m in Sources */,
 				2CA10C8E1CA1945F008D6394 /* ChangePhoneNumStep2.m in Sources */,
@@ -1375,6 +1386,7 @@
 				68E77A291CB3A133006DA5B9 /* IQKeyboardReturnKeyHandler.m in Sources */,
 				68ED4E551CB5078C000E8A7B /* PrintApplicationDetailCell.m in Sources */,
 				2C35B0D51C715CB90003BF6C /* settingHeaderViewController.m in Sources */,
+				2CE320F41CBA6BFE00B36793 /* MultSelection.m in Sources */,
 				6846D3561CAB62B1004BD285 /* VotingCell.m in Sources */,
 				2CA10C8B1CA18F17008D6394 /* ChangePhoneNumStep1.m in Sources */,
 				2CFEADB71C76A6350054730E /* MessageModel.m in Sources */,
