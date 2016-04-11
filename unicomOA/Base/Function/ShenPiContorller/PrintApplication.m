@@ -70,7 +70,11 @@
 }
 
 -(void)SubmitToPrint:(UIButton*)sender {
-    
+    PrintApplicationTitleCell *cell=[self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+    if ([cell.textLabel.text isEqualToString:@"复印标题"]) {
+        [_delegate PassPrintValue:cell.txt_title.text];
+    }
+    [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-3] animated:YES];
 }
 
 #pragma mark 复印内容

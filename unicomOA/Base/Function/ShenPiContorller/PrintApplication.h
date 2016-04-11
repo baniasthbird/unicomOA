@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@class PrintApplication;
+
+@protocol PrintApplicationDelegate <NSObject>
+
+-(void)PassPrintValue:(NSString*)str_title;
+
+@end
 
 //复印申请
 
@@ -25,5 +32,6 @@
 //联系电话
 @property NSString *str_phonenum;
 
+@property (nonatomic,unsafe_unretained) id<PrintApplicationDelegate> delegate;
 
 @end

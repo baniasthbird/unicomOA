@@ -16,4 +16,6 @@
 /** 快速创建cell的方法*/
 + (instancetype)cellWithTable:(UITableView *)tableView withName:(NSString*)str_Name withPlaceHolder:(NSString*)str_Placeholder atIndexPath:(NSIndexPath*)indexPath keyboardType:(UIKeyboardType)type;
 
+@property (nonatomic,strong) UITextField *txt_title;
+
 @end

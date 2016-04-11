@@ -13,7 +13,7 @@
 #import "MCPopMenuViewController.h"
 #import "MyShenPi.h"
 
-@interface MyApplication()<UITableViewDelegate,UITableViewDataSource>
+@interface MyApplication()<UITableViewDelegate,UITableViewDataSource,NewApplicationDelegate>
 
 /**
  *  头部筛选模块
@@ -70,7 +70,7 @@
     
     _arr_MyShenPi=[[NSMutableArray alloc]initWithCapacity:0];
     
-    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.05, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
+    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
     _tableView.delegate=self;
     _tableView.dataSource=self;
     _tableView.backgroundColor=[UIColor clearColor];
@@ -85,6 +85,7 @@
 
 -(void)NewVc:(UIButton*)sender {
     NewApplication *viewController=[[NewApplication alloc]init];
+    viewController.delegate=self;
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
@@ -184,18 +185,36 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 40;
+    if (iPhone4_4s || iPhone5_5s)
+        return 20;
+    else if (iPhone6)
+        return 30;
+    else
+        return 40;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 40;
+    if (iPhone4_4s || iPhone5_5s)
+        return 20;
+    else if (iPhone6)
+        return 30;
+    else
+        return 40;
+
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *ID=[NSString stringWithFormat:@"Cell%ld%ld",(long)[indexPath section],(long)[indexPath row]];
-    UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:ID];
+    MyShenPi *cell=[tableView dequeueReusableCellWithIdentifier:ID];
     if (cell==nil) {
-        cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
+        NSString *str_tmp=[_arr_MyShenPi objectAtIndex:indexPath.section];
+        NSArray *arr_tmp=[str_tmp componentsSeparatedByString:@","];
+        if ([[arr_tmp objectAtIndex:0] isEqualToString:@"YES"]) {
+            cell=[MyShenPi cellWithTable:tableView withTitle:[arr_tmp objectAtIndex:1] withStatus:@"审批中" isUsingCar:YES withTime:@"04-16 16:06"];
+        }
+        else if ([[arr_tmp objectAtIndex:0] isEqualToString:@"NO"]) {
+            cell=[MyShenPi cellWithTable:tableView withTitle:[arr_tmp objectAtIndex:1] withStatus:@"审批中" isUsingCar:NO withTime:@"04-16 16:06"];
+        }
     }
     
     cell.backgroundColor=[UIColor whiteColor];
@@ -207,6 +226,17 @@
     return 100;
 }
 
+-(void)PassValueFromCarApplication:(NSString *)str_title {
+    NSString *str_cell=[NSString stringWithFormat:@"%@,%@",@"YES",str_title];
+    [_arr_MyShenPi addObject:str_cell];
+    [self.tableView reloadData];
+}
+
+-(void)PassValueFromPrintApplication:(NSString *)str_title {
+    NSString *str_cell=[NSString stringWithFormat:@"%@,%@%@",@"NO",str_title,@"项目打印清单"];
+    [_arr_MyShenPi addObject:str_cell];
+    [self.tableView reloadData];
+}
 
 
 @end

@@ -68,7 +68,18 @@
 }
 
 -(void)SubmitToPrint:(UIButton*)sender {
+    PrintApplicationTitleCell *cell=[self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:10 inSection:0]];
+    if ([cell.textLabel.text isEqualToString:@"用车事由"]) {
+        [_delegate PassCarValue:cell.txt_title.text];
+    }
+    else {
+        cell=[self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:11 inSection:0]];
+        if ([cell.textLabel.text isEqualToString:@"用车事由"]) {
+            [_delegate PassCarValue:cell.txt_title.text];
+        }
+    }
     
+    [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-3] animated:YES];
 }
 
 

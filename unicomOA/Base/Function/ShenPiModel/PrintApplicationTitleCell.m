@@ -11,7 +11,7 @@
 @interface PrintApplicationTitleCell()<UITextFieldDelegate>
 
 
-@property (nonatomic,strong) UITextField *txt_title;
+
 
 @end
 

@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@class CarApplication;
+@protocol CarApplicationDelegate <NSObject>
+
+-(void)PassCarValue:(NSString*)str_reason;
+
+
+@end
+
 //预约用车
 @interface CarApplication : UIViewController
 
@@ -19,5 +27,7 @@
 
 //联系电话
 @property NSString *str_phonenum;
+
+@property (nonatomic,unsafe_unretained) id<CarApplicationDelegate> delegate;
 
 @end

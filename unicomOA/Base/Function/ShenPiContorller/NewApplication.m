@@ -10,7 +10,7 @@
 #import "PrintApplication.h"
 #import "CarApplication.h"
 
-@interface NewApplication()<UITableViewDelegate,UITableViewDataSource>
+@interface NewApplication()<UITableViewDelegate,UITableViewDataSource,CarApplicationDelegate,PrintApplicationDelegate>
 
 @property (strong,nonatomic) UITableView *tableView;
 
@@ -87,10 +87,12 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row==0) {
         PrintApplication *viewController=[[PrintApplication alloc]init];
+        viewController.delegate=self;
         [self.navigationController pushViewController:viewController animated:YES];
     }
     else if (indexPath.row==1) {
         CarApplication *viewController=[[CarApplication alloc]init];
+        viewController.delegate=self;
         [self.navigationController pushViewController:viewController animated:YES];
     }
     
@@ -100,8 +102,13 @@
     return 50;
 }
 
+-(void)PassCarValue:(NSString *)str_reason {
+    [_delegate PassValueFromCarApplication:str_reason];
+}
 
-
+-(void)PassPrintValue:(NSString *)str_title {
+    [_delegate PassValueFromPrintApplication:str_title];
+}
 
 
 
