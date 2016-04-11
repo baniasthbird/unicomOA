@@ -29,6 +29,14 @@
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier isUsingCar:(BOOL)b_Category withTitle:(NSString*)str_Title withStatus:(NSString *)str_status withTime:(NSString *)str_time {
     self=[super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        UILabel *lbl_category=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 50, 20)];
+        lbl_category.textColor=[UIColor blackColor];
+        if (b_Category==YES) {
+            lbl_category.text=@"复印";
+        }
+        else {
+            lbl_category.text=@"预约用车";
+        }
         
     }
     return self;
