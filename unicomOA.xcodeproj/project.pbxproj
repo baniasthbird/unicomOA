@@ -143,6 +143,10 @@
 		68ED4E521CB5076D000E8A7B /* PrintApplicationTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68ED4E511CB5076D000E8A7B /* PrintApplicationTitleCell.m */; };
 		68ED4E551CB5078C000E8A7B /* PrintApplicationDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68ED4E541CB5078C000E8A7B /* PrintApplicationDetailCell.m */; };
 		68ED4E581CB507B9000E8A7B /* PrintApplicationFileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68ED4E571CB507B9000E8A7B /* PrintApplicationFileCell.m */; };
+		68EEDE561CBB2E19003295EB /* Address.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EEDE501CBB2E19003295EB /* Address.m */; };
+		68EEDE571CBB2E19003295EB /* DYCAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EEDE521CBB2E19003295EB /* DYCAddress.m */; };
+		68EEDE581CBB2E19003295EB /* DYCAddressPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EEDE541CBB2E19003295EB /* DYCAddressPickerView.m */; };
+		68EEDE591CBB2E19003295EB /* SYS_AREA.xml in Resources */ = {isa = PBXBuildFile; fileRef = 68EEDE551CBB2E19003295EB /* SYS_AREA.xml */; };
 		68F173C91C99034500A8BEA3 /* StaffInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F173C81C99034500A8BEA3 /* StaffInfoViewController.m */; };
 		68F173D11C99575200A8BEA3 /* HeadViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F173D01C99575200A8BEA3 /* HeadViewCell.m */; };
 		68F950B61C9F9A4200CA1519 /* LZActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F950B51C9F9A4200CA1519 /* LZActionSheet.m */; };
@@ -424,6 +428,13 @@
 		68ED4E541CB5078C000E8A7B /* PrintApplicationDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrintApplicationDetailCell.m; path = Base/Function/ShenPiModel/PrintApplicationDetailCell.m; sourceTree = "<group>"; };
 		68ED4E561CB507B9000E8A7B /* PrintApplicationFileCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrintApplicationFileCell.h; path = Base/Function/ShenPiModel/PrintApplicationFileCell.h; sourceTree = "<group>"; };
 		68ED4E571CB507B9000E8A7B /* PrintApplicationFileCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrintApplicationFileCell.m; path = Base/Function/ShenPiModel/PrintApplicationFileCell.m; sourceTree = "<group>"; };
+		68EEDE4F1CBB2E19003295EB /* Address.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Address.h; sourceTree = "<group>"; };
+		68EEDE501CBB2E19003295EB /* Address.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Address.m; sourceTree = "<group>"; };
+		68EEDE511CBB2E19003295EB /* DYCAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DYCAddress.h; sourceTree = "<group>"; };
+		68EEDE521CBB2E19003295EB /* DYCAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DYCAddress.m; sourceTree = "<group>"; };
+		68EEDE531CBB2E19003295EB /* DYCAddressPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DYCAddressPickerView.h; sourceTree = "<group>"; };
+		68EEDE541CBB2E19003295EB /* DYCAddressPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DYCAddressPickerView.m; sourceTree = "<group>"; };
+		68EEDE551CBB2E19003295EB /* SYS_AREA.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SYS_AREA.xml; sourceTree = "<group>"; };
 		68F173C71C99034500A8BEA3 /* StaffInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StaffInfoViewController.h; path = Base/Settings/Controller/StaffInfoViewController.h; sourceTree = "<group>"; };
 		68F173C81C99034500A8BEA3 /* StaffInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StaffInfoViewController.m; path = Base/Settings/Controller/StaffInfoViewController.m; sourceTree = "<group>"; };
 		68F173CF1C99575200A8BEA3 /* HeadViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HeadViewCell.h; path = Base/Settings/Modal/HeadViewCell.h; sourceTree = "<group>"; };
@@ -903,6 +914,7 @@
 		6846D35D1CABC483004BD285 /* OpenSource */ = {
 			isa = PBXGroup;
 			children = (
+				68EEDE4E1CBB2E19003295EB /* CityPicker */,
 				68E779FC1CB3A133006DA5B9 /* IQKeyboardManager */,
 				68E779BB1CB34A72006DA5B9 /* CLTreeView */,
 				68052C1D1CAD167400A93BDA /* WZLBadge */,
@@ -1126,6 +1138,21 @@
 			name = ShenPiModel;
 			sourceTree = "<group>";
 		};
+		68EEDE4E1CBB2E19003295EB /* CityPicker */ = {
+			isa = PBXGroup;
+			children = (
+				68EEDE4F1CBB2E19003295EB /* Address.h */,
+				68EEDE501CBB2E19003295EB /* Address.m */,
+				68EEDE511CBB2E19003295EB /* DYCAddress.h */,
+				68EEDE521CBB2E19003295EB /* DYCAddress.m */,
+				68EEDE531CBB2E19003295EB /* DYCAddressPickerView.h */,
+				68EEDE541CBB2E19003295EB /* DYCAddressPickerView.m */,
+				68EEDE551CBB2E19003295EB /* SYS_AREA.xml */,
+			);
+			name = CityPicker;
+			path = OpenSource/CityPicker;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1243,6 +1270,7 @@
 				68ED4E3E1CB4CDC4000E8A7B /* headLogo.png in Resources */,
 				2C5460BE1C854733005C5AB9 /* TableViewCell.xib in Resources */,
 				68E779EF1CB34A8E006DA5B9 /* Level0_Cell.xib in Resources */,
+				68EEDE591CBB2E19003295EB /* SYS_AREA.xml in Resources */,
 				2C35B0571C7062160003BF6C /* Assets.xcassets in Resources */,
 				68D05CCA1C97FBC00039220F /* logo.png in Resources */,
 				68E779E41CB34A8E006DA5B9 /* contacts_collect@2x.png in Resources */,
@@ -1303,6 +1331,7 @@
 				6846D3531CAB5A1E004BD285 /* IVotingManamentController.m in Sources */,
 				68D05CC01C97AC050039220F /* SendFeedBackViewController.m in Sources */,
 				682B68B01CB618DD002EC60F /* PrintApplicationNoFileCell.m in Sources */,
+				68EEDE571CBB2E19003295EB /* DYCAddress.m in Sources */,
 				2CB7DB651CA3C5970057633D /* MemberInfoViewController.m in Sources */,
 				682B68B61CB64482002EC60F /* AddPrintFile.m in Sources */,
 				68ED4E581CB507B9000E8A7B /* PrintApplicationFileCell.m in Sources */,
@@ -1346,6 +1375,7 @@
 				2CFEADB41C76A6350054730E /* CellFrameModel.m in Sources */,
 				68D05CC41C97B3530039220F /* SendFeedbackView.m in Sources */,
 				2CDC2BF51C924DAC0067693B /* NewsDisplayViewController.m in Sources */,
+				68EEDE581CBB2E19003295EB /* DYCAddressPickerView.m in Sources */,
 				2C3F219C1C85837F00EBD122 /* NotesTableVIewCell.m in Sources */,
 				68E779FA1CB37D6A006DA5B9 /* FriendGroup.m in Sources */,
 				682B68BC1CB64FDE002EC60F /* AddPrintRadioCell.m in Sources */,
@@ -1369,6 +1399,7 @@
 				2C99721E1CA21E0E00B803FC /* ChangePhoneNumStep3.m in Sources */,
 				2CFEAD361C7188500054730E /* OAViewController.m in Sources */,
 				2CFEAD181C7168980054730E /* forgetPasswordViewController.m in Sources */,
+				68EEDE561CBB2E19003295EB /* Address.m in Sources */,
 				2CFEADC51C76A65E0054730E /* NSString+Extension.m in Sources */,
 				6882C3211CA92C4B00CDEB1A /* CommentViewController.m in Sources */,
 				68E77A251CB3A133006DA5B9 /* IQUIView+Hierarchy.m in Sources */,

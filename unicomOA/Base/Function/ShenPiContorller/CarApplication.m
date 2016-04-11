@@ -11,9 +11,12 @@
 #import "PrintApplicationDetailCell.h"
 #import "TableViewCell.h"
 #import "MultSelection.h"
-//#import "AddressChoicePickerView.h"
+#import "DYCAddress.h"
+#import "DYCAddressPickerView.h"
+#import "Address.h"
 
-@interface CarApplication ()<UITableViewDelegate,UITableViewDataSource>
+
+@interface CarApplication ()<UITableViewDelegate,UITableViewDataSource,DYCAddressDelegate,DYCAddressPickerViewDelegate>
 
 @property (strong,nonatomic) UITableView *tableview;
 
@@ -114,8 +117,14 @@
     else if (indexPath.row!=11) {
         return 40;
     }
-    else if ([self isExtendedCellIndexPath:[NSIndexPath indexPathForRow:10 inSection:0]] && indexPath.row==11) {
-        return 40;
+    else if (indexPath.row==11 && [self isExtendedCellIndexPath:[NSIndexPath indexPathForRow:10 inSection:0]]) {
+        return  40;
+    }
+    else if (indexPath.row==11 && [self isExtendedCellIndexPath:[NSIndexPath indexPathForRow:9 inSection:0]]) {
+        return  40;
+    }
+    else if (indexPath.row==11 && [self isExtendedCellIndexPath:[NSIndexPath indexPathForRow:8 inSection:0]]) {
+        return  40;
     }
     else {
         return 180;
@@ -151,7 +160,7 @@
         return cell;
     }
 
-    
+#pragma mark 以上行不因添加而改变
     if (indexPath.row==0) {
         cell.textLabel.text=@"申请流程";
         cell.detailTextLabel.text=@"用车申请";
@@ -177,7 +186,7 @@
         // textfield
         PrintApplicationTitleCell *cell=[PrintApplicationTitleCell cellWithTable:tableView withName:@"用车人数" withPlaceHolder:@"填写用车人数" atIndexPath:indexPath keyboardType:UIKeyboardTypeNumberPad];
         return cell;
-
+        
     }
     else if (indexPath.row==6) {
         cell.textLabel.text=@"使用人";
@@ -190,6 +199,8 @@
         NSString *strDate = [dateFormatter stringFromDate:[NSDate date]];
         cell.detailTextLabel.text=strDate;
     }
+
+#pragma  mark 以下行随添加而改变
     
     else if (indexPath.row ==8) {
             cell.textLabel.text=@"返程时间";
@@ -199,16 +210,32 @@
             cell.detailTextLabel.text=strDate;
     }
     else if (indexPath.row==9) {
+        if ([self isExtendedCellIndexPath:[NSIndexPath indexPathForRow:8 inSection:0]]) {
+            cell.textLabel.text=@"返程时间";
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"yyyy/MM/dd"];
+            NSString *strDate = [dateFormatter stringFromDate:[NSDate date]];
+            cell.detailTextLabel.text=strDate;
+        }
+        else {
             cell.textLabel.text=@"目的地";
             cell.detailTextLabel.text=@"郑州";
+        }
     }
     else if (indexPath.row==10) {
+        if ([self isExtendedCellIndexPath:[NSIndexPath indexPathForRow:8 inSection:0]] || [self isExtendedCellIndexPath:[NSIndexPath indexPathForRow:9 inSection:0]]) {
+            cell.textLabel.text=@"目的地";
+            cell.detailTextLabel.text=@"郑州";
+        }
+        else {
             // textfield
             PrintApplicationTitleCell *cell=[PrintApplicationTitleCell cellWithTable:tableView withName:@"用车事由" withPlaceHolder:@"填写用车事由" atIndexPath:indexPath keyboardType:UIKeyboardTypeDefault];
             return cell;
+        }
+        
     }
     else if (indexPath.row==11) {
-        if ([self isExtendedCellIndexPath:[NSIndexPath indexPathForRow:10 inSection:0]]) {
+        if ([self isExtendedCellIndexPath:[NSIndexPath indexPathForRow:8 inSection:0]] || [self isExtendedCellIndexPath:[NSIndexPath indexPathForRow:9 inSection:0]] || [self isExtendedCellIndexPath:[NSIndexPath indexPathForRow:10 inSection:0]]) {
             PrintApplicationTitleCell *cell=[PrintApplicationTitleCell cellWithTable:tableView withName:@"用车事由" withPlaceHolder:@"填写用车事由" atIndexPath:indexPath keyboardType:UIKeyboardTypeDefault];
             return cell;
         }
@@ -218,10 +245,6 @@
             return cell;
             
         }
-       
-
-            
-        
     }
        else {
         PrintApplicationDetailCell *cell=[PrintApplicationDetailCell cellWithTable:tableView withName:@"备注信息" withPlaceHolder:@"请输入备注信息" atIndexPath:indexPath];
@@ -233,7 +256,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (![self isExtendedCellIndexPath:indexPath]) {
-        if (indexPath.row==7 || indexPath.row==8 || indexPath.row==9) {
+        if (indexPath.row==7 || indexPath.row==8 || indexPath.row==9 || indexPath.row==10) {
             [self.tableview deselectRowAtIndexPath:indexPath animated:YES];
             [self extendCellAtIndexPath:indexPath];
         }
@@ -246,7 +269,6 @@
 
 -(void)extendCellAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row==7 || indexPath.row==8 || indexPath.row==9) {
         [self.tableview beginUpdates];
         
         if (self.selectedRowIndexPath) {
@@ -275,7 +297,7 @@
         
         [self.tableview endUpdates];
         [self.tableview scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
-    }
+    
     
 }
 
@@ -325,21 +347,20 @@
             // [datePicker setLocale:[NSLocale alloc]:@"zh_Hans_CN"];
             [datePicker setLocale:[[NSLocale alloc]initWithLocaleIdentifier:@"zh_Hans_CN"]];
             [datePicker addTarget:self action:@selector(dateChanged:) forControlEvents:UIControlEventValueChanged];
+            [datePicker setTag:indexPath.row];
             UIView *dropDownView=datePicker;
             
             return dropDownView;
         }
         else {
-            /*
-            AddressChoicePickerView *addressPickerView = [[AddressChoicePickerView alloc]init];
-            addressPickerView.block = ^(AddressChoicePickerView *view,UIButton *btn,AreaObject *locate){
-               // self.addressLabel.text = [NSString stringWithFormat:@"%@",locate];
-               // self.addressLabel.textColor = [UIColor blackColor];
-            };
-            [addressPickerView show];
-            return addressPickerView;
-             */
-            return nil;
+            DYCAddress *address = [[DYCAddress alloc] init];
+            address.dataDelegate = self;
+            [address handlerAddress];
+            DYCAddressPickerView *pickerView = [[DYCAddressPickerView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 180) withAddressArray:address.array];
+            pickerView.DYCDelegate = self;
+            pickerView.backgroundColor = [UIColor clearColor];
+            UIView *dropDownView=pickerView;
+            return dropDownView;
         }
        
     }
@@ -349,15 +370,38 @@
 }
 
 #pragma 日期
--(void)dateChanged:(UIDatePicker*)sender {
+-(void)dateChanged:(UIDatePicker*)sender  {
+    NSInteger i=sender.tag;
     NSDate *date=sender.date;
     NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    [dateFormatter setDateFormat:@"yyyy/MM/dd"];
     NSString *dateString=[dateFormatter stringFromDate:date];
-    UITableViewCell *cell=[self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForItem:3 inSection:0]];
-    UILabel *lbl_date=cell.subviews[1];
+    UITableViewCell *cell=[self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i-1 inSection:0]];
+    UILabel *lbl_date=cell.detailTextLabel;
     lbl_date.text=dateString;
     lbl_date.textColor=[UIColor blackColor];
+}
+
+
+-(void)addressList:(NSArray *)array {
+    /*
+    DYCAddressPickerView *pickerView = [[DYCAddressPickerView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 180) withAddressArray:array];
+    pickerView.DYCDelegate = self;
+    pickerView.backgroundColor = [UIColor yellowColor];
+    [self.view addSubview:pickerView];
+     */
+}
+
+-(void)selectAddressProvince:(Address *)province andCity:(Address *)city andCounty:(Address *)county {
+    UITableViewCell *cell=[self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:9 inSection:0]];
+    cell.detailTextLabel.text=[NSString stringWithFormat:@"%@ %@ %@",province.name,city.name,county.name];
+    cell.detailTextLabel.textColor=[UIColor blackColor];
+    /*
+    [_province setText:province.name];
+    [_city setText:city.name];
+    [_county setText:county.name];
+     */
+    
 }
 
 /*
