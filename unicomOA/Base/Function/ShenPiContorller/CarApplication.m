@@ -10,13 +10,13 @@
 #import "PrintApplicationTitleCell.h"
 #import "PrintApplicationDetailCell.h"
 #import "TableViewCell.h"
-#import "MultSelection.h"
 #import "DYCAddress.h"
 #import "DYCAddressPickerView.h"
 #import "Address.h"
+#import "CarUser.h"
 
 
-@interface CarApplication ()<UITableViewDelegate,UITableViewDataSource,DYCAddressDelegate,DYCAddressPickerViewDelegate>
+@interface CarApplication ()<UITableViewDelegate,UITableViewDataSource,DYCAddressDelegate,DYCAddressPickerViewDelegate,CarUserDelgate>
 
 @property (strong,nonatomic) UITableView *tableview;
 
@@ -190,7 +190,7 @@
     }
     else if (indexPath.row==6) {
         cell.textLabel.text=@"使用人";
-        cell.detailTextLabel.text=@"张三";
+        cell.detailTextLabel.text=@"选择使用人";
     }
     else if (indexPath.row==7) {
         cell.textLabel.text=@"用车时间";
@@ -262,6 +262,11 @@
         }
     }
     
+    if (indexPath.row==6) {
+        CarUser *viewController=[[CarUser alloc]init];
+        viewController.delegate=self;
+        [self.navigationController pushViewController:viewController animated:YES];
+    }
     
 }
 
@@ -404,6 +409,11 @@
     
 }
 
+-(void)CarUserName:(NSString *)str_name {
+    UITableViewCell *cell=[self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:6 inSection:0]];
+    cell.detailTextLabel.text=str_name;
+    cell.detailTextLabel.textColor=[UIColor blackColor];
+}
 /*
 #pragma mark - Navigation
 

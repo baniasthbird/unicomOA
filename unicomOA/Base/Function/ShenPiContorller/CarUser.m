@@ -1,81 +1,58 @@
 //
-//  ContactViewControllerNew.m
+//  CarUser.m
 //  unicomOA
 //
-//  Created by hnsi-03 on 16/4/5.
+//  Created by hnsi-03 on 16/4/11.
 //  Copyright © 2016年 zr-mac. All rights reserved.
 //
 
-#import "ContactViewControllerNew.h"
+#import "CarUser.h"
 #import "CLTree.h"
-#import "MemberInfoViewController.h"
 
+@interface CarUser()<UITableViewDelegate,UITableViewDataSource>
 
-@interface ContactViewControllerNew()
+@property (nonatomic,strong) UITableView *tableView;
 
 @property (strong,nonatomic) NSMutableArray *dataArray;  //保存全部数据的数组
 @property (strong,nonatomic) NSArray *displayArray;      //保存要显示在界面上的数据的数组
-@property (strong,nonatomic) NSString *str_department;   //联系人所在部门
+
 
 @end
 
-@implementation ContactViewControllerNew
-
--(instancetype)init {
-    
-    
-    self.title = @"通讯录";
-    
-    NSDictionary * dict=@{
-                          NSForegroundColorAttributeName:   [UIColor whiteColor]};
-    
-    self.navigationController.navigationBar.titleTextAttributes=dict;
-    
-    
-    //设置样式
-    return [self initWithStyle:UITableViewStyleGrouped];
-    
-}
-
+@implementation CarUser
 
 -(void)viewDidLoad {
     [super viewDidLoad];
-    self.title=@"通讯录";
+    self.title=@"选择使用人";
+    
     NSDictionary * dict=@{
                           NSForegroundColorAttributeName:   [UIColor whiteColor]};
     
     self.navigationController.navigationBar.titleTextAttributes=dict;
     
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleDone target:self action:@selector(MovePreviousVc:)];
+    [barButtonItem setTitleTextAttributes:dict forState:UIControlStateNormal];
+    self.navigationItem.leftBarButtonItem = barButtonItem;
     
-    self.tableView.sectionHeaderHeight=40;
+    self.view.backgroundColor=[UIColor colorWithRed:243/255.0f green:243/255.0f blue:243/255.0f alpha:1];
     
-    
-    self.resultViewController=[[SearchResultViewController alloc]init];
-    
-    self.searchcontroller=[[UISearchController alloc] initWithSearchResultsController:self.resultViewController];
-    
-    self.searchcontroller.searchBar.delegate=self;
-    
-    [self.searchcontroller.searchBar sizeToFit];
-    
-    self.searchcontroller.searchBar.placeholder=@"搜索姓名/拼音/电话";
-    
-    
-    self.searchcontroller.searchResultsUpdater=self;
-    
-    self.searchcontroller.dimsBackgroundDuringPresentation=NO;
-    
-    self.definesPresentationContext=YES;
-    
-    self.tableView.tableHeaderView=self.searchcontroller.searchBar;
-    
-    self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
+    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped];
+    _tableView.delegate=self;
+    _tableView.dataSource=self;
+    _tableView.backgroundColor=[UIColor clearColor];
+    _tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     
     //添加演示数据
     [self addTestData];
+    
     //初始化将要显示的数据
     [self reloadDataForDisplayArray];
     
+    [self.view addSubview:_tableView];
+}
+
+-(void)MovePreviousVc:(UIButton*)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 //添加演示数据 (先根据demo在代码中添加，再组成plist文件以方便调整)
@@ -123,6 +100,7 @@
     
 }
 
+
 -(CLTreeViewNode*)CreateLevel0Node:(NSString*)str_name staff_num:(NSString*)staff_num {
     CLTreeViewNode *node0=[[CLTreeViewNode alloc]init];
     node0.nodeLevel=0;
@@ -132,13 +110,13 @@
     CLTreeView_LEVEL0_Model *tmp0=[[CLTreeView_LEVEL0_Model alloc]init];
     tmp0.name=str_name;
     tmp0.num=staff_num;
-   // tmp0.headImgPath=@"contacts_major.png";
+    // tmp0.headImgPath=@"contacts_major.png";
     //tmp0.headImgPath=nil;
-   // tmp0.headImgUrl=nil;
+    // tmp0.headImgUrl=nil;
     node0.nodeData=tmp0;
     
     return node0;
-
+    
 }
 
 -(CLTreeViewNode*)CreateLevel1Node:(NSString*)str_name sonCnt:(NSString*)str_soncnt {
@@ -226,7 +204,7 @@
         [cell setNeedsDisplay];
         return cell;
     }
-
+    
 }
 
 /*---------------------------------------
@@ -238,14 +216,14 @@
         ((CLTreeView_LEVEL0_Cell*)cell).name.text = nodeData.name;
         ((CLTreeView_LEVEL0_Cell*)cell).staffnum.text = nodeData.num;
         /*
-        if(nodeData.headImgPath != nil){
-            //本地图片
-            [((CLTreeView_LEVEL0_Cell*)cell).imageView setImage:[UIImage imageNamed:nodeData.headImgPath]];
-        }
-        else if (nodeData.headImgUrl != nil){
-            //加载图片，这里是同步操作。建议使用SDWebImage异步加载图片
-            [((CLTreeView_LEVEL0_Cell*)cell).imageView setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:nodeData.headImgUrl]]];
-        }
+         if(nodeData.headImgPath != nil){
+         //本地图片
+         [((CLTreeView_LEVEL0_Cell*)cell).imageView setImage:[UIImage imageNamed:nodeData.headImgPath]];
+         }
+         else if (nodeData.headImgUrl != nil){
+         //加载图片，这里是同步操作。建议使用SDWebImage异步加载图片
+         [((CLTreeView_LEVEL0_Cell*)cell).imageView setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:nodeData.headImgUrl]]];
+         }
          */
     }
     
@@ -284,43 +262,6 @@
         return 60;
     }
     
-}
-
-/*---------------------------------------
- 处理cell选中事件，需要自定义的部分
- --------------------------------------- */
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    CLTreeViewNode *node = [_displayArray objectAtIndex:indexPath.row];
-    [self reloadDataForDisplayArrayChangeAt:indexPath.row];//修改cell的状态(关闭或打开)
-    if(node.type == 2){
-        CLTreeView_LEVEL2_Model *nodeData = node.nodeData;
-        //处理叶子节点选中，此处需要自定义
-        MemberInfoViewController *viewController=[[MemberInfoViewController alloc] init];
-        viewController.str_Name= nodeData.name;
-        viewController.str_Gender=nodeData.gender;
-        //本地图片
-        viewController.str_img=nodeData.headImgPath;
-       // FriendGroup *tmp_friend=[_friendsData objectAtIndex:indexPath.section];
-        viewController.str_department=nodeData.department;
-        
-        viewController.str_carrer=nodeData.signture;
-        viewController.str_cellphone=nodeData.cellphonenum;
-        viewController.str_phonenum=nodeData.phonenum;
-        viewController.str_email=nodeData.email;
-        [self.navigationController pushViewController:viewController animated:YES];
-    }
-    else {
-        CLTreeView_LEVEL0_Cell *cell = (CLTreeView_LEVEL0_Cell*)[tableView cellForRowAtIndexPath:indexPath];
-        if(cell.node.isExpanded ){
-            [self rotateArrow:cell with:M_PI_2];
-        }
-        else{
-            [self rotateArrow:cell with:0];
-        }
-    }
-
-
 }
 
 /*---------------------------------------
@@ -386,18 +327,32 @@
     [self.tableView reloadData];
 }
 
-#pragma mark -search bar delegate
 
--(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-    [searchBar resignFirstResponder];
-}
-
-#pragma mark- UISearchResultUpdating
-
--(void)updateSearchResultsForSearchController:(UISearchController *)searchController {
-    NSString *searchtext=searchController.searchBar.text;
+/*---------------------------------------
+ 处理cell选中事件，需要自定义的部分
+ --------------------------------------- */
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    CLTreeViewNode *node = [_displayArray objectAtIndex:indexPath.row];
+    [self reloadDataForDisplayArrayChangeAt:indexPath.row];//修改cell的状态(关闭或打开)
+    if(node.type == 2){
+        CLTreeView_LEVEL2_Model *nodeData = node.nodeData;
+        [self.delegate CarUserName:nodeData.name];
+        [self.navigationController popViewControllerAnimated:YES];
+           }
+    else {
+        CLTreeView_LEVEL0_Cell *cell = (CLTreeView_LEVEL0_Cell*)[tableView cellForRowAtIndexPath:indexPath];
+        if(cell.node.isExpanded ){
+            [self rotateArrow:cell with:M_PI_2];
+        }
+        else{
+            [self rotateArrow:cell with:0];
+        }
+    }
+    
     
 }
+
 
 
 @end

@@ -37,7 +37,6 @@
 		2CDC2BF51C924DAC0067693B /* NewsDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDC2BF41C924DAC0067693B /* NewsDisplayViewController.m */; };
 		2CE320EE1CB6B4B000B36793 /* PrintFiles.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CE320ED1CB6B4B000B36793 /* PrintFiles.m */; };
 		2CE320F11CB7FF4800B36793 /* CarApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CE320F01CB7FF4800B36793 /* CarApplication.m */; };
-		2CE320F41CBA6BFE00B36793 /* MultSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CE320F31CBA6BFE00B36793 /* MultSelection.m */; };
 		2CFEAD181C7168980054730E /* forgetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD131C7168980054730E /* forgetPasswordViewController.m */; };
 		2CFEAD191C7168980054730E /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD151C7168980054730E /* LoginViewController.m */; };
 		2CFEAD1A1C7168980054730E /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD171C7168980054730E /* SignInViewController.m */; };
@@ -147,6 +146,17 @@
 		68EEDE571CBB2E19003295EB /* DYCAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EEDE521CBB2E19003295EB /* DYCAddress.m */; };
 		68EEDE581CBB2E19003295EB /* DYCAddressPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EEDE541CBB2E19003295EB /* DYCAddressPickerView.m */; };
 		68EEDE591CBB2E19003295EB /* SYS_AREA.xml in Resources */ = {isa = PBXBuildFile; fileRef = 68EEDE551CBB2E19003295EB /* SYS_AREA.xml */; };
+		68EEDE5C1CBB8236003295EB /* CarUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EEDE5B1CBB8236003295EB /* CarUser.m */; };
+		68EEDE711CBB911A003295EB /* down_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68EEDE5E1CBB911A003295EB /* down_arrow@2x.png */; };
+		68EEDE721CBB911A003295EB /* MCMenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EEDE601CBB911A003295EB /* MCMenuButton.m */; };
+		68EEDE731CBB911A003295EB /* MCPopMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EEDE631CBB911A003295EB /* MCPopMenuCell.m */; };
+		68EEDE741CBB911A003295EB /* MCPopMenuDissmissAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EEDE651CBB911A003295EB /* MCPopMenuDissmissAnimator.m */; };
+		68EEDE751CBB911A003295EB /* MCPopMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EEDE671CBB911A003295EB /* MCPopMenuItem.m */; };
+		68EEDE761CBB911A003295EB /* MCPopMenuPresentAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EEDE691CBB911A003295EB /* MCPopMenuPresentAnimator.m */; };
+		68EEDE771CBB911A003295EB /* MCPopMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EEDE6B1CBB911A003295EB /* MCPopMenuViewController.m */; };
+		68EEDE781CBB911A003295EB /* UITableView+SDAutoTableViewCellHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EEDE6E1CBB911A003295EB /* UITableView+SDAutoTableViewCellHeight.m */; };
+		68EEDE791CBB911A003295EB /* UIView+SDAutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EEDE701CBB911A003295EB /* UIView+SDAutoLayout.m */; };
+		68EEDE7C1CBB9D07003295EB /* MyShenPi.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EEDE7B1CBB9D07003295EB /* MyShenPi.m */; };
 		68F173C91C99034500A8BEA3 /* StaffInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F173C81C99034500A8BEA3 /* StaffInfoViewController.m */; };
 		68F173D11C99575200A8BEA3 /* HeadViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F173D01C99575200A8BEA3 /* HeadViewCell.m */; };
 		68F950B61C9F9A4200CA1519 /* LZActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F950B51C9F9A4200CA1519 /* LZActionSheet.m */; };
@@ -230,8 +240,6 @@
 		2CE320ED1CB6B4B000B36793 /* PrintFiles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrintFiles.m; path = Base/Function/ShenPiModel/PrintFiles.m; sourceTree = "<group>"; };
 		2CE320EF1CB7FF4800B36793 /* CarApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CarApplication.h; path = Base/Function/ShenPiContorller/CarApplication.h; sourceTree = "<group>"; };
 		2CE320F01CB7FF4800B36793 /* CarApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CarApplication.m; path = Base/Function/ShenPiContorller/CarApplication.m; sourceTree = "<group>"; };
-		2CE320F21CBA6BFE00B36793 /* MultSelection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MultSelection.h; path = Base/Function/ShenPiContorller/MultSelection.h; sourceTree = "<group>"; };
-		2CE320F31CBA6BFE00B36793 /* MultSelection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MultSelection.m; path = Base/Function/ShenPiContorller/MultSelection.m; sourceTree = "<group>"; };
 		2CFEAD121C7168980054730E /* forgetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = forgetPasswordViewController.h; path = Login/forgetPasswordViewController.h; sourceTree = "<group>"; };
 		2CFEAD131C7168980054730E /* forgetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = forgetPasswordViewController.m; path = Login/forgetPasswordViewController.m; sourceTree = "<group>"; };
 		2CFEAD141C7168980054730E /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = Login/LoginViewController.h; sourceTree = "<group>"; };
@@ -435,6 +443,27 @@
 		68EEDE531CBB2E19003295EB /* DYCAddressPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DYCAddressPickerView.h; sourceTree = "<group>"; };
 		68EEDE541CBB2E19003295EB /* DYCAddressPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DYCAddressPickerView.m; sourceTree = "<group>"; };
 		68EEDE551CBB2E19003295EB /* SYS_AREA.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SYS_AREA.xml; sourceTree = "<group>"; };
+		68EEDE5A1CBB8236003295EB /* CarUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CarUser.h; path = Base/Function/ShenPiContorller/CarUser.h; sourceTree = "<group>"; };
+		68EEDE5B1CBB8236003295EB /* CarUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CarUser.m; path = Base/Function/ShenPiContorller/CarUser.m; sourceTree = "<group>"; };
+		68EEDE5E1CBB911A003295EB /* down_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "down_arrow@2x.png"; sourceTree = "<group>"; };
+		68EEDE5F1CBB911A003295EB /* MCMenuButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMenuButton.h; sourceTree = "<group>"; };
+		68EEDE601CBB911A003295EB /* MCMenuButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCMenuButton.m; sourceTree = "<group>"; };
+		68EEDE621CBB911A003295EB /* MCPopMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPopMenuCell.h; sourceTree = "<group>"; };
+		68EEDE631CBB911A003295EB /* MCPopMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCPopMenuCell.m; sourceTree = "<group>"; };
+		68EEDE641CBB911A003295EB /* MCPopMenuDissmissAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPopMenuDissmissAnimator.h; sourceTree = "<group>"; };
+		68EEDE651CBB911A003295EB /* MCPopMenuDissmissAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCPopMenuDissmissAnimator.m; sourceTree = "<group>"; };
+		68EEDE661CBB911A003295EB /* MCPopMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPopMenuItem.h; sourceTree = "<group>"; };
+		68EEDE671CBB911A003295EB /* MCPopMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCPopMenuItem.m; sourceTree = "<group>"; };
+		68EEDE681CBB911A003295EB /* MCPopMenuPresentAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPopMenuPresentAnimator.h; sourceTree = "<group>"; };
+		68EEDE691CBB911A003295EB /* MCPopMenuPresentAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCPopMenuPresentAnimator.m; sourceTree = "<group>"; };
+		68EEDE6A1CBB911A003295EB /* MCPopMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPopMenuViewController.h; sourceTree = "<group>"; };
+		68EEDE6B1CBB911A003295EB /* MCPopMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCPopMenuViewController.m; sourceTree = "<group>"; };
+		68EEDE6D1CBB911A003295EB /* UITableView+SDAutoTableViewCellHeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+SDAutoTableViewCellHeight.h"; sourceTree = "<group>"; };
+		68EEDE6E1CBB911A003295EB /* UITableView+SDAutoTableViewCellHeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+SDAutoTableViewCellHeight.m"; sourceTree = "<group>"; };
+		68EEDE6F1CBB911A003295EB /* UIView+SDAutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SDAutoLayout.h"; sourceTree = "<group>"; };
+		68EEDE701CBB911A003295EB /* UIView+SDAutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SDAutoLayout.m"; sourceTree = "<group>"; };
+		68EEDE7A1CBB9D07003295EB /* MyShenPi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyShenPi.h; path = Base/Function/ShenPiModel/MyShenPi.h; sourceTree = "<group>"; };
+		68EEDE7B1CBB9D07003295EB /* MyShenPi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyShenPi.m; path = Base/Function/ShenPiModel/MyShenPi.m; sourceTree = "<group>"; };
 		68F173C71C99034500A8BEA3 /* StaffInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StaffInfoViewController.h; path = Base/Settings/Controller/StaffInfoViewController.h; sourceTree = "<group>"; };
 		68F173C81C99034500A8BEA3 /* StaffInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StaffInfoViewController.m; path = Base/Settings/Controller/StaffInfoViewController.m; sourceTree = "<group>"; };
 		68F173CF1C99575200A8BEA3 /* HeadViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HeadViewCell.h; path = Base/Settings/Modal/HeadViewCell.h; sourceTree = "<group>"; };
@@ -914,6 +943,9 @@
 		6846D35D1CABC483004BD285 /* OpenSource */ = {
 			isa = PBXGroup;
 			children = (
+				68EEDE5D1CBB911A003295EB /* MCMenuButton */,
+				68EEDE611CBB911A003295EB /* MCPopMenuController */,
+				68EEDE6C1CBB911A003295EB /* SDAutoLayout */,
 				68EEDE4E1CBB2E19003295EB /* CityPicker */,
 				68E779FC1CB3A133006DA5B9 /* IQKeyboardManager */,
 				68E779BB1CB34A72006DA5B9 /* CLTreeView */,
@@ -1111,8 +1143,8 @@
 				682B68B51CB64482002EC60F /* AddPrintFile.m */,
 				2CE320EF1CB7FF4800B36793 /* CarApplication.h */,
 				2CE320F01CB7FF4800B36793 /* CarApplication.m */,
-				2CE320F21CBA6BFE00B36793 /* MultSelection.h */,
-				2CE320F31CBA6BFE00B36793 /* MultSelection.m */,
+				68EEDE5A1CBB8236003295EB /* CarUser.h */,
+				68EEDE5B1CBB8236003295EB /* CarUser.m */,
 			);
 			name = ShenPiController;
 			sourceTree = "<group>";
@@ -1134,6 +1166,8 @@
 				682B68BB1CB64FDE002EC60F /* AddPrintRadioCell.m */,
 				2CE320EC1CB6B4B000B36793 /* PrintFiles.h */,
 				2CE320ED1CB6B4B000B36793 /* PrintFiles.m */,
+				68EEDE7A1CBB9D07003295EB /* MyShenPi.h */,
+				68EEDE7B1CBB9D07003295EB /* MyShenPi.m */,
 			);
 			name = ShenPiModel;
 			sourceTree = "<group>";
@@ -1151,6 +1185,47 @@
 			);
 			name = CityPicker;
 			path = OpenSource/CityPicker;
+			sourceTree = "<group>";
+		};
+		68EEDE5D1CBB911A003295EB /* MCMenuButton */ = {
+			isa = PBXGroup;
+			children = (
+				68EEDE5E1CBB911A003295EB /* down_arrow@2x.png */,
+				68EEDE5F1CBB911A003295EB /* MCMenuButton.h */,
+				68EEDE601CBB911A003295EB /* MCMenuButton.m */,
+			);
+			name = MCMenuButton;
+			path = OpenSource/MCMenuButton;
+			sourceTree = "<group>";
+		};
+		68EEDE611CBB911A003295EB /* MCPopMenuController */ = {
+			isa = PBXGroup;
+			children = (
+				68EEDE621CBB911A003295EB /* MCPopMenuCell.h */,
+				68EEDE631CBB911A003295EB /* MCPopMenuCell.m */,
+				68EEDE641CBB911A003295EB /* MCPopMenuDissmissAnimator.h */,
+				68EEDE651CBB911A003295EB /* MCPopMenuDissmissAnimator.m */,
+				68EEDE661CBB911A003295EB /* MCPopMenuItem.h */,
+				68EEDE671CBB911A003295EB /* MCPopMenuItem.m */,
+				68EEDE681CBB911A003295EB /* MCPopMenuPresentAnimator.h */,
+				68EEDE691CBB911A003295EB /* MCPopMenuPresentAnimator.m */,
+				68EEDE6A1CBB911A003295EB /* MCPopMenuViewController.h */,
+				68EEDE6B1CBB911A003295EB /* MCPopMenuViewController.m */,
+			);
+			name = MCPopMenuController;
+			path = OpenSource/MCPopMenuController;
+			sourceTree = "<group>";
+		};
+		68EEDE6C1CBB911A003295EB /* SDAutoLayout */ = {
+			isa = PBXGroup;
+			children = (
+				68EEDE6D1CBB911A003295EB /* UITableView+SDAutoTableViewCellHeight.h */,
+				68EEDE6E1CBB911A003295EB /* UITableView+SDAutoTableViewCellHeight.m */,
+				68EEDE6F1CBB911A003295EB /* UIView+SDAutoLayout.h */,
+				68EEDE701CBB911A003295EB /* UIView+SDAutoLayout.m */,
+			);
+			name = SDAutoLayout;
+			path = OpenSource/SDAutoLayout;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1220,6 +1295,7 @@
 				TargetAttributes = {
 					2C35B0461C7062160003BF6C = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = 7V7J6BLVB4;
 					};
 					2C35B05F1C7062160003BF6C = {
 						CreatedOnToolsVersion = 7.2.1;
@@ -1277,6 +1353,7 @@
 				68ED4E341CB4A077000E8A7B /* returnlogo.png in Resources */,
 				68E77A301CB3A133006DA5B9 /* IQKeyboardManager.bundle in Resources */,
 				68E779E61CB34A8E006DA5B9 /* head1.jpg in Resources */,
+				68EEDE711CBB911A003295EB /* down_arrow@2x.png in Resources */,
 				68ED4E4A1CB4EB52000E8A7B /* print.png in Resources */,
 				2CFEADA71C769EBF0054730E /* messages.plist in Resources */,
 				68E779E51CB34A8E006DA5B9 /* contacts_major@2x.png in Resources */,
@@ -1311,9 +1388,11 @@
 				68E77A2C1CB3A133006DA5B9 /* IQPreviousNextView.m in Sources */,
 				68E77A281CB3A133006DA5B9 /* IQKeyboardManager.m in Sources */,
 				2CDC2BE01C8FD1300067693B /* NewsFocusViewController.m in Sources */,
+				68EEDE721CBB911A003295EB /* MCMenuButton.m in Sources */,
 				2CFEAD1A1C7168980054730E /* SignInViewController.m in Sources */,
 				68E77A261CB3A133006DA5B9 /* IQUIViewController+Additions.m in Sources */,
 				2CE320F11CB7FF4800B36793 /* CarApplication.m in Sources */,
+				68EEDE771CBB911A003295EB /* MCPopMenuViewController.m in Sources */,
 				2C5460BD1C854733005C5AB9 /* TableViewCell.m in Sources */,
 				68F950B91C9F9E9000CA1519 /* ChangePhoneNumViewController.m in Sources */,
 				2CA10C8E1CA1945F008D6394 /* ChangePhoneNumStep2.m in Sources */,
@@ -1343,6 +1422,7 @@
 				2C35B0D21C7157120003BF6C /* settingPasswordViewController.m in Sources */,
 				68E77A271CB3A133006DA5B9 /* IQUIWindow+Hierarchy.m in Sources */,
 				68E77A241CB3A133006DA5B9 /* IQUITextFieldView+Additions.m in Sources */,
+				68EEDE5C1CBB8236003295EB /* CarUser.m in Sources */,
 				68E77A221CB3A133006DA5B9 /* IQNSArray+Sort.m in Sources */,
 				2CFEADDA1C79D9480054730E /* NewNotesViewController.m in Sources */,
 				2C35B0521C7062160003BF6C /* ViewController.m in Sources */,
@@ -1353,6 +1433,7 @@
 				2CFEADBC1C76A6440054730E /* HeadView.m in Sources */,
 				68E77A231CB3A133006DA5B9 /* IQUIScrollView+Additions.m in Sources */,
 				2CDC2BF21C9117FE0067693B /* NewsManagementTableViewCell.m in Sources */,
+				68EEDE7C1CBB9D07003295EB /* MyShenPi.m in Sources */,
 				68F950B61C9F9A4200CA1519 /* LZActionSheet.m in Sources */,
 				2C35B04F1C7062160003BF6C /* AppDelegate.m in Sources */,
 				68E77A2D1CB3A133006DA5B9 /* IQTitleBarButtonItem.m in Sources */,
@@ -1369,7 +1450,9 @@
 				2CFEADCC1C76E56D0054730E /* SearchResultViewController.m in Sources */,
 				2CFEADE71C7C05830054730E /* MenuTableViewCell.m in Sources */,
 				68E779E31CB34A8E006DA5B9 /* CLTreeViewNode.m in Sources */,
+				68EEDE791CBB911A003295EB /* UIView+SDAutoLayout.m in Sources */,
 				68ED4E521CB5076D000E8A7B /* PrintApplicationTitleCell.m in Sources */,
+				68EEDE741CBB911A003295EB /* MCPopMenuDissmissAnimator.m in Sources */,
 				2CDC2BE41C8FFD6C0067693B /* NIDropDown.m in Sources */,
 				68E77A2B1CB3A133006DA5B9 /* IQBarButtonItem.m in Sources */,
 				2CFEADB41C76A6350054730E /* CellFrameModel.m in Sources */,
@@ -1383,13 +1466,16 @@
 				2CFEADF31C7C27020054730E /* UIViewExt.m in Sources */,
 				2CFEAD191C7168980054730E /* LoginViewController.m in Sources */,
 				2CFEAD451C72B8B90054730E /* LGSettingSection.m in Sources */,
+				68EEDE761CBB911A003295EB /* MCPopMenuPresentAnimator.m in Sources */,
 				68052C2C1CAD167400A93BDA /* UIBarButtonItem+WZLBadge.m in Sources */,
 				6846D3621CABC496004BD285 /* RadioBox.m in Sources */,
 				2CB7DB681CAC22BA0057633D /* JXBarChartView.m in Sources */,
 				68E779E11CB34A8E006DA5B9 /* CLTreeView_LEVEL2_Model.m in Sources */,
 				68052C2D1CAD167400A93BDA /* UITabBarItem+WZLBadge.m in Sources */,
+				68EEDE731CBB911A003295EB /* MCPopMenuCell.m in Sources */,
 				2CFEADD31C770D6F0054730E /* UITableGridViewCell.m in Sources */,
 				68E77A2A1CB3A133006DA5B9 /* IQTextView.m in Sources */,
+				68EEDE781CBB911A003295EB /* UITableView+SDAutoTableViewCellHeight.m in Sources */,
 				2CFEAD301C7181F30054730E /* NTButton.m in Sources */,
 				68F173D11C99575200A8BEA3 /* HeadViewCell.m in Sources */,
 				2CFEADC61C76A65E0054730E /* UIImage+ResizeImage.m in Sources */,
@@ -1409,6 +1495,7 @@
 				2C74F0791CAEACDA00CC5C5F /* PhoneLabelView.m in Sources */,
 				68E77A2E1CB3A133006DA5B9 /* IQToolbar.m in Sources */,
 				2CFEADE91C7C05830054730E /* UIButton+Extra.m in Sources */,
+				68EEDE751CBB911A003295EB /* MCPopMenuItem.m in Sources */,
 				6882C3181CA8D78300CDEB1A /* LogoView.m in Sources */,
 				2CFEAD441C72B8B90054730E /* LGSettingItem.m in Sources */,
 				2CFEAD1D1C7173690054730E /* newPassWordViewController.m in Sources */,
@@ -1417,7 +1504,6 @@
 				68E77A291CB3A133006DA5B9 /* IQKeyboardReturnKeyHandler.m in Sources */,
 				68ED4E551CB5078C000E8A7B /* PrintApplicationDetailCell.m in Sources */,
 				2C35B0D51C715CB90003BF6C /* settingHeaderViewController.m in Sources */,
-				2CE320F41CBA6BFE00B36793 /* MultSelection.m in Sources */,
 				6846D3561CAB62B1004BD285 /* VotingCell.m in Sources */,
 				2CA10C8B1CA18F17008D6394 /* ChangePhoneNumStep1.m in Sources */,
 				2CFEADB71C76A6350054730E /* MessageModel.m in Sources */,
@@ -1562,6 +1648,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/unicomOA/PrefixHeader.pch";
 				INFOPLIST_FILE = unicomOA/Info.plist;
@@ -1569,6 +1657,7 @@
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nsc.unicomOA;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -1576,6 +1665,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/unicomOA/PrefixHeader.pch";
 				INFOPLIST_FILE = unicomOA/Info.plist;
@@ -1583,6 +1674,7 @@
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nsc.unicomOA;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
