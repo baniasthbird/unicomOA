@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CarService.h"
 
 @class CarApplication;
 @protocol CarApplicationDelegate <NSObject>
 
--(void)PassCarValue:(NSString*)str_reason;
+-(void)PassCarValue:(NSString*)str_reason CarObject:(CarService*)carservice;
 
 
 @end

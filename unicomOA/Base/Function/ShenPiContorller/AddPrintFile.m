@@ -13,7 +13,7 @@
 #import "RadioBox.h"
 
 
-@interface AddPrintFile()
+@interface AddPrintFile()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic,strong) UITableView *tableView;
 

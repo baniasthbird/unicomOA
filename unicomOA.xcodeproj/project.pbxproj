@@ -80,6 +80,13 @@
 		682B68B61CB64482002EC60F /* AddPrintFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 682B68B51CB64482002EC60F /* AddPrintFile.m */; };
 		682B68B91CB64683002EC60F /* AddPrintFileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 682B68B81CB64683002EC60F /* AddPrintFileCell.m */; };
 		682B68BC1CB64FDE002EC60F /* AddPrintRadioCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 682B68BB1CB64FDE002EC60F /* AddPrintRadioCell.m */; };
+		683815301CBC79F500E6AFD3 /* CarService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6838152F1CBC79F500E6AFD3 /* CarService.m */; };
+		683815331CBC7A2100E6AFD3 /* PrintService.m in Sources */ = {isa = PBXBuildFile; fileRef = 683815321CBC7A2100E6AFD3 /* PrintService.m */; };
+		683815361CBC941300E6AFD3 /* CarApplicationDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 683815351CBC941300E6AFD3 /* CarApplicationDetail.m */; };
+		6838153C1CBCB5E700E6AFD3 /* ShenPiResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6838153B1CBCB5E700E6AFD3 /* ShenPiResultCell.m */; };
+		6838153F1CBCCB2A00E6AFD3 /* PrintApplicationDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 6838153E1CBCCB2A00E6AFD3 /* PrintApplicationDetail.m */; };
+		683815421CBCDAA400E6AFD3 /* PrintFileDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 683815411CBCDAA400E6AFD3 /* PrintFileDetail.m */; };
+		683815451CBCE28500E6AFD3 /* PrintFileNavCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 683815441CBCE28500E6AFD3 /* PrintFileNavCell.m */; };
 		6846D3531CAB5A1E004BD285 /* IVotingManamentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6846D3521CAB5A1E004BD285 /* IVotingManamentController.m */; };
 		6846D3561CAB62B1004BD285 /* VotingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6846D3551CAB62B1004BD285 /* VotingCell.m */; };
 		6846D3591CABA8AC004BD285 /* IVotingDisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6846D3581CABA8AC004BD285 /* IVotingDisplayController.m */; };
@@ -327,6 +334,20 @@
 		682B68B81CB64683002EC60F /* AddPrintFileCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddPrintFileCell.m; path = Base/Function/ShenPiModel/AddPrintFileCell.m; sourceTree = "<group>"; };
 		682B68BA1CB64FDE002EC60F /* AddPrintRadioCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddPrintRadioCell.h; path = Base/Function/ShenPiModel/AddPrintRadioCell.h; sourceTree = "<group>"; };
 		682B68BB1CB64FDE002EC60F /* AddPrintRadioCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddPrintRadioCell.m; path = Base/Function/ShenPiModel/AddPrintRadioCell.m; sourceTree = "<group>"; };
+		6838152E1CBC79F500E6AFD3 /* CarService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CarService.h; path = Base/Function/ShenPiModel/CarService.h; sourceTree = "<group>"; };
+		6838152F1CBC79F500E6AFD3 /* CarService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CarService.m; path = Base/Function/ShenPiModel/CarService.m; sourceTree = "<group>"; };
+		683815311CBC7A2100E6AFD3 /* PrintService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrintService.h; path = Base/Function/ShenPiModel/PrintService.h; sourceTree = "<group>"; };
+		683815321CBC7A2100E6AFD3 /* PrintService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrintService.m; path = Base/Function/ShenPiModel/PrintService.m; sourceTree = "<group>"; };
+		683815341CBC941300E6AFD3 /* CarApplicationDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CarApplicationDetail.h; path = Base/Function/ShenPiContorller/CarApplicationDetail.h; sourceTree = "<group>"; };
+		683815351CBC941300E6AFD3 /* CarApplicationDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CarApplicationDetail.m; path = Base/Function/ShenPiContorller/CarApplicationDetail.m; sourceTree = "<group>"; };
+		6838153A1CBCB5E700E6AFD3 /* ShenPiResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShenPiResultCell.h; path = Base/Function/ShenPiModel/ShenPiResultCell.h; sourceTree = "<group>"; };
+		6838153B1CBCB5E700E6AFD3 /* ShenPiResultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShenPiResultCell.m; path = Base/Function/ShenPiModel/ShenPiResultCell.m; sourceTree = "<group>"; };
+		6838153D1CBCCB2A00E6AFD3 /* PrintApplicationDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrintApplicationDetail.h; path = Base/Function/ShenPiContorller/PrintApplicationDetail.h; sourceTree = "<group>"; };
+		6838153E1CBCCB2A00E6AFD3 /* PrintApplicationDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrintApplicationDetail.m; path = Base/Function/ShenPiContorller/PrintApplicationDetail.m; sourceTree = "<group>"; };
+		683815401CBCDAA400E6AFD3 /* PrintFileDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrintFileDetail.h; path = Base/Function/ShenPiContorller/PrintFileDetail.h; sourceTree = "<group>"; };
+		683815411CBCDAA400E6AFD3 /* PrintFileDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrintFileDetail.m; path = Base/Function/ShenPiContorller/PrintFileDetail.m; sourceTree = "<group>"; };
+		683815431CBCE28500E6AFD3 /* PrintFileNavCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrintFileNavCell.h; path = Base/Function/ShenPiModel/PrintFileNavCell.h; sourceTree = "<group>"; };
+		683815441CBCE28500E6AFD3 /* PrintFileNavCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrintFileNavCell.m; path = Base/Function/ShenPiModel/PrintFileNavCell.m; sourceTree = "<group>"; };
 		6846D3511CAB5A1E004BD285 /* IVotingManamentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IVotingManamentController.h; path = Base/Function/IVotingCotroller/IVotingManamentController.h; sourceTree = "<group>"; };
 		6846D3521CAB5A1E004BD285 /* IVotingManamentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IVotingManamentController.m; path = Base/Function/IVotingCotroller/IVotingManamentController.m; sourceTree = "<group>"; };
 		6846D3541CAB62B1004BD285 /* VotingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VotingCell.h; path = Base/Function/IVotingModel/VotingCell.h; sourceTree = "<group>"; };
@@ -1124,6 +1145,22 @@
 		68ED4E2C1CB494F8000E8A7B /* ShenPiViews */ = {
 			isa = PBXGroup;
 			children = (
+				68ED4E501CB5076D000E8A7B /* PrintApplicationTitleCell.h */,
+				68ED4E511CB5076D000E8A7B /* PrintApplicationTitleCell.m */,
+				68ED4E531CB5078C000E8A7B /* PrintApplicationDetailCell.h */,
+				68ED4E541CB5078C000E8A7B /* PrintApplicationDetailCell.m */,
+				68ED4E561CB507B9000E8A7B /* PrintApplicationFileCell.h */,
+				68ED4E571CB507B9000E8A7B /* PrintApplicationFileCell.m */,
+				682B68AE1CB618DD002EC60F /* PrintApplicationNoFileCell.h */,
+				682B68AF1CB618DD002EC60F /* PrintApplicationNoFileCell.m */,
+				682B68B71CB64683002EC60F /* AddPrintFileCell.h */,
+				682B68B81CB64683002EC60F /* AddPrintFileCell.m */,
+				682B68BA1CB64FDE002EC60F /* AddPrintRadioCell.h */,
+				682B68BB1CB64FDE002EC60F /* AddPrintRadioCell.m */,
+				6838153A1CBCB5E700E6AFD3 /* ShenPiResultCell.h */,
+				6838153B1CBCB5E700E6AFD3 /* ShenPiResultCell.m */,
+				683815431CBCE28500E6AFD3 /* PrintFileNavCell.h */,
+				683815441CBCE28500E6AFD3 /* PrintFileNavCell.m */,
 			);
 			name = ShenPiViews;
 			sourceTree = "<group>";
@@ -1145,6 +1182,12 @@
 				2CE320F01CB7FF4800B36793 /* CarApplication.m */,
 				68EEDE5A1CBB8236003295EB /* CarUser.h */,
 				68EEDE5B1CBB8236003295EB /* CarUser.m */,
+				683815341CBC941300E6AFD3 /* CarApplicationDetail.h */,
+				683815351CBC941300E6AFD3 /* CarApplicationDetail.m */,
+				6838153D1CBCCB2A00E6AFD3 /* PrintApplicationDetail.h */,
+				6838153E1CBCCB2A00E6AFD3 /* PrintApplicationDetail.m */,
+				683815401CBCDAA400E6AFD3 /* PrintFileDetail.h */,
+				683815411CBCDAA400E6AFD3 /* PrintFileDetail.m */,
 			);
 			name = ShenPiController;
 			sourceTree = "<group>";
@@ -1152,22 +1195,14 @@
 		68ED4E2E1CB49526000E8A7B /* ShenPiModel */ = {
 			isa = PBXGroup;
 			children = (
-				68ED4E501CB5076D000E8A7B /* PrintApplicationTitleCell.h */,
-				68ED4E511CB5076D000E8A7B /* PrintApplicationTitleCell.m */,
-				68ED4E531CB5078C000E8A7B /* PrintApplicationDetailCell.h */,
-				68ED4E541CB5078C000E8A7B /* PrintApplicationDetailCell.m */,
-				68ED4E561CB507B9000E8A7B /* PrintApplicationFileCell.h */,
-				68ED4E571CB507B9000E8A7B /* PrintApplicationFileCell.m */,
-				682B68AE1CB618DD002EC60F /* PrintApplicationNoFileCell.h */,
-				682B68AF1CB618DD002EC60F /* PrintApplicationNoFileCell.m */,
-				682B68B71CB64683002EC60F /* AddPrintFileCell.h */,
-				682B68B81CB64683002EC60F /* AddPrintFileCell.m */,
-				682B68BA1CB64FDE002EC60F /* AddPrintRadioCell.h */,
-				682B68BB1CB64FDE002EC60F /* AddPrintRadioCell.m */,
 				2CE320EC1CB6B4B000B36793 /* PrintFiles.h */,
 				2CE320ED1CB6B4B000B36793 /* PrintFiles.m */,
 				68EEDE7A1CBB9D07003295EB /* MyShenPi.h */,
 				68EEDE7B1CBB9D07003295EB /* MyShenPi.m */,
+				6838152E1CBC79F500E6AFD3 /* CarService.h */,
+				6838152F1CBC79F500E6AFD3 /* CarService.m */,
+				683815311CBC7A2100E6AFD3 /* PrintService.h */,
+				683815321CBC7A2100E6AFD3 /* PrintService.m */,
 			);
 			name = ShenPiModel;
 			sourceTree = "<group>";
@@ -1387,10 +1422,12 @@
 			files = (
 				68E77A2C1CB3A133006DA5B9 /* IQPreviousNextView.m in Sources */,
 				68E77A281CB3A133006DA5B9 /* IQKeyboardManager.m in Sources */,
+				683815361CBC941300E6AFD3 /* CarApplicationDetail.m in Sources */,
 				2CDC2BE01C8FD1300067693B /* NewsFocusViewController.m in Sources */,
 				68EEDE721CBB911A003295EB /* MCMenuButton.m in Sources */,
 				2CFEAD1A1C7168980054730E /* SignInViewController.m in Sources */,
 				68E77A261CB3A133006DA5B9 /* IQUIViewController+Additions.m in Sources */,
+				6838153F1CBCCB2A00E6AFD3 /* PrintApplicationDetail.m in Sources */,
 				2CE320F11CB7FF4800B36793 /* CarApplication.m in Sources */,
 				68EEDE771CBB911A003295EB /* MCPopMenuViewController.m in Sources */,
 				2C5460BD1C854733005C5AB9 /* TableViewCell.m in Sources */,
@@ -1459,6 +1496,8 @@
 				68D05CC41C97B3530039220F /* SendFeedbackView.m in Sources */,
 				2CDC2BF51C924DAC0067693B /* NewsDisplayViewController.m in Sources */,
 				68EEDE581CBB2E19003295EB /* DYCAddressPickerView.m in Sources */,
+				683815301CBC79F500E6AFD3 /* CarService.m in Sources */,
+				683815421CBCDAA400E6AFD3 /* PrintFileDetail.m in Sources */,
 				2C3F219C1C85837F00EBD122 /* NotesTableVIewCell.m in Sources */,
 				68E779FA1CB37D6A006DA5B9 /* FriendGroup.m in Sources */,
 				682B68BC1CB64FDE002EC60F /* AddPrintRadioCell.m in Sources */,
@@ -1482,6 +1521,7 @@
 				6846D35C1CABAF4D004BD285 /* IVotingResultViewController.m in Sources */,
 				68E779E01CB34A8E006DA5B9 /* CLTreeView_LEVEL2_Cell.m in Sources */,
 				68052C1C1CAD166800A93BDA /* UIView+Frame.m in Sources */,
+				683815331CBC7A2100E6AFD3 /* PrintService.m in Sources */,
 				2C99721E1CA21E0E00B803FC /* ChangePhoneNumStep3.m in Sources */,
 				2CFEAD361C7188500054730E /* OAViewController.m in Sources */,
 				2CFEAD181C7168980054730E /* forgetPasswordViewController.m in Sources */,
@@ -1502,6 +1542,8 @@
 				68E779F91CB37D6A006DA5B9 /* Friend.m in Sources */,
 				2CFEADBD1C76A6440054730E /* MessageCell.m in Sources */,
 				68E77A291CB3A133006DA5B9 /* IQKeyboardReturnKeyHandler.m in Sources */,
+				6838153C1CBCB5E700E6AFD3 /* ShenPiResultCell.m in Sources */,
+				683815451CBCE28500E6AFD3 /* PrintFileNavCell.m in Sources */,
 				68ED4E551CB5078C000E8A7B /* PrintApplicationDetailCell.m in Sources */,
 				2C35B0D51C715CB90003BF6C /* settingHeaderViewController.m in Sources */,
 				6846D3561CAB62B1004BD285 /* VotingCell.m in Sources */,
@@ -1653,6 +1695,7 @@
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/unicomOA/PrefixHeader.pch";
 				INFOPLIST_FILE = unicomOA/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nsc.unicomOA;
@@ -1670,6 +1713,7 @@
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/unicomOA/PrefixHeader.pch";
 				INFOPLIST_FILE = unicomOA/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nsc.unicomOA;

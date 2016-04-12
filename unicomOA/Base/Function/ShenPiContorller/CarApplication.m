@@ -69,13 +69,16 @@
 
 -(void)SubmitToPrint:(UIButton*)sender {
     PrintApplicationTitleCell *cell=[self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:10 inSection:0]];
+    
+    CarService *service=[self getCarService:self.tableview];
+    
     if ([cell.textLabel.text isEqualToString:@"用车事由"]) {
-        [_delegate PassCarValue:cell.txt_title.text];
+        [_delegate PassCarValue:cell.txt_title.text CarObject:service];
     }
     else {
         cell=[self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:11 inSection:0]];
         if ([cell.textLabel.text isEqualToString:@"用车事由"]) {
-            [_delegate PassCarValue:cell.txt_title.text];
+            [_delegate PassCarValue:cell.txt_title.text CarObject:service];
         }
     }
     
@@ -424,6 +427,66 @@
     UITableViewCell *cell=[self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:6 inSection:0]];
     cell.detailTextLabel.text=str_name;
     cell.detailTextLabel.textColor=[UIColor blackColor];
+}
+
+-(CarService*)getCarService:(UITableView*)tableView {
+    CarService *tmp_carservice=[[CarService alloc]init];
+    //申请人
+    UITableViewCell *cell_name=[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+    tmp_carservice.str_name=cell_name.detailTextLabel.text;
+    //所在部门
+    UITableViewCell *cell_department=[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
+    tmp_carservice.str_department=cell_department.detailTextLabel.text;
+    //联系电话
+    UITableViewCell *cell_phonenum=[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
+    tmp_carservice.str_phonenum=cell_phonenum.detailTextLabel.text;
+    //用车类别
+    UITableViewCell *cell_categroy=[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:4 inSection:0]];
+    tmp_carservice.str_categroy=cell_categroy.detailTextLabel.text;
+    //用车人数
+    PrintApplicationTitleCell *cell_usernum=[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:5 inSection:0]];
+    tmp_carservice.i_usernum=[cell_usernum.txt_title.text intValue];
+    //使用人
+    UITableViewCell *cell_username=[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:6 inSection:0]];
+    tmp_carservice.str_usrname=cell_username.detailTextLabel.text;
+    //用车时间
+    UITableViewCell *cell_usingtime=[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:7 inSection:0]];
+    tmp_carservice.str_usingtime=cell_usingtime.detailTextLabel.text;
+    //返回时间
+    UITableViewCell *cell_returnTime=[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:8 inSection:0]];
+    if ([cell_returnTime.textLabel.text isEqualToString:@"返程时间"]) {
+        tmp_carservice.str_returntime=cell_returnTime.detailTextLabel.text;
+    }
+    UITableViewCell *cell_9=[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:9 inSection:0]];
+    if ([cell_9.textLabel.text isEqualToString:@"目的地"]) {
+            tmp_carservice.str_destination=cell_9.detailTextLabel.text;
+    }
+    else if ([cell_9.textLabel.text isEqualToString:@"返程时间"]) {
+         tmp_carservice.str_returntime=cell_9.detailTextLabel.text;
+    }
+    UITableViewCell *cell_10=[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:10 inSection:0]];
+    if ([cell_10.textLabel.text isEqualToString:@"用车事由"]) {
+        PrintApplicationTitleCell *cell=[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:10 inSection:0]];
+        tmp_carservice.str_reason=cell.txt_title.text;
+    }
+    else if ([cell_10.textLabel.text isEqualToString:@"目的地"]) {
+        tmp_carservice.str_destination=cell_10.detailTextLabel.text;
+    }
+    UITableViewCell *cell_11=[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:11 inSection:0]];
+    if ([cell_11.textLabel.text isEqualToString:@"备注信息"]) {
+        PrintApplicationDetailCell *cell=[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:11 inSection:0]];
+        tmp_carservice.str_remark=cell.txt_detail.text;
+    }
+    else if ([cell_11.textLabel.text isEqualToString:@"用车事由"]) {
+        PrintApplicationTitleCell *cell=[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:11 inSection:0]];
+        tmp_carservice.str_reason=cell.txt_title.text;
+        PrintApplicationDetailCell *cell_2=[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:12 inSection:0]];
+        tmp_carservice.str_remark=cell_2.txt_detail.text;
+    }
+
+    return tmp_carservice;
+    
+    
 }
 /*
 #pragma mark - Navigation

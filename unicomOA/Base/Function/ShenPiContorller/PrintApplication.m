@@ -71,8 +71,9 @@
 
 -(void)SubmitToPrint:(UIButton*)sender {
     PrintApplicationTitleCell *cell=[self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+    PrintService *tmp_service=[self getPrintObject:self.tableview];
     if ([cell.textLabel.text isEqualToString:@"复印标题"]) {
-        [_delegate PassPrintValue:cell.txt_title.text];
+        [_delegate PassPrintValue:cell.txt_title.text PrintObject:tmp_service];
     }
     [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-3] animated:YES];
 }
@@ -272,21 +273,33 @@
 
 }
 
-/*
--(void)passValue:(NSString *)str_FileName pages:(int)i_pages copies:(int)i_copies pic_pages:(int)i_pic_pages cover:(BOOL)b_hascover colorcopies:(int)i_colorcopies simplecopies:(int)i_simplecopies {
-    PrintFiles *tmp_Files=[[PrintFiles alloc]init];
-    tmp_Files.str_filename=str_FileName;
-    tmp_Files.i_pages=i_pages;
-    tmp_Files.i_copies=i_copies;
-    tmp_Files.i_pic_pages=i_pic_pages;
-    tmp_Files.b_hascover=b_hascover;
-    tmp_Files.i_colorcopies=i_colorcopies;
-    tmp_Files.i_simplecopies=i_simplecopies;
-    _b_hasFile=YES;
-    [_arr_printFiles addObject:tmp_Files];
-    NSIndexSet *nd=[[NSIndexSet alloc]initWithIndex:1];
-    [self.tableview reloadSections:nd withRowAnimation:UITableViewRowAnimationAutomatic];
+
+-(PrintService*)getPrintObject:(UITableView*)tableView {
+    PrintService *tmp_printService=[[PrintService alloc]init];
+    //复印标题
+    PrintApplicationTitleCell *cell_title=[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+    tmp_printService.str_title=cell_title.txt_title.text;
+    //备注信息
+    PrintApplicationDetailCell *cell_detail=[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
+    tmp_printService.str_remark=cell_detail.txt_detail.text;
+    //发起人
+    UITableViewCell *cell_name=[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
+    tmp_printService.str_name=cell_name.detailTextLabel.text;
+    //所在部门
+    UITableViewCell *cell_department=[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:4 inSection:0]];
+    tmp_printService.str_department=cell_department.detailTextLabel.text;
+    //联系电话
+    UITableViewCell *cell_phonenum=[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:5 inSection:0]];
+    tmp_printService.str_phonenum=cell_phonenum.detailTextLabel.text;
+    //发起时间
+    UITableViewCell *cell_time=[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:6 inSection:0]];
+    tmp_printService.str_time=cell_time.detailTextLabel.text;
+    
+    //复印文件
+    tmp_printService.arr_PrintFiles=_arr_printFiles;
+
+
+    return tmp_printService;
 }
-*/
 
 @end

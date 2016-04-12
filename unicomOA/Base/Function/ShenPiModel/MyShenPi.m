@@ -30,16 +30,36 @@
     self=[super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         UILabel *lbl_category=[[UILabel alloc]initWithFrame:CGRectMake(10, 2, 80, 18)];
-        UILabel *lbl_status=[[UILabel alloc]initWithFrame:CGRectMake(self.frame.size.width*0.85, 2, self.frame.size.width*0.15, 18)];
-        UIView *view_seperator=[[UIView alloc]initWithFrame:CGRectMake(20, 0, self.frame.size.width, 1)];
+        UILabel *lbl_status=[[UILabel alloc]init];
+        if (iPhone4_4s || iPhone5_5s) {
+            [lbl_status setFrame:CGRectMake(260, 2, 50, 18)];
+        }
+        else if (iPhone6) {
+            [lbl_status setFrame:CGRectMake(280, 2, 50, 18)];
+        }
+        else {
+            [lbl_status setFrame:CGRectMake(300, 2, 50, 18)];
+        }
+        UIView *view_seperator=[[UIView alloc]init];
+        if (iPhone5_5s || iPhone4_4s) {
+             [view_seperator setFrame:CGRectMake(0, 20, 320, 1)];
+        }
+        else if (iPhone6){
+            [view_seperator setFrame:CGRectMake(0, 20, 375, 1)];
+        }
+        else {
+            [view_seperator setFrame:CGRectMake(0, 20, 414, 1)];
+        }
+       
         view_seperator.backgroundColor=[UIColor colorWithRed:204/255.0f green:204/255.0f blue:204/255.0f alpha:1];
+        //view_seperator.backgroundColor=[UIColor blackColor];
         if (b_Category==YES) {
             lbl_category.text=@"预约用车";
         }
         else {
             lbl_category.text=@"复印";
         }
-        lbl_status.text=@"审批中";
+        lbl_status.text=str_status;
         lbl_category.textColor=[UIColor blackColor];
         lbl_category.font=[UIFont systemFontOfSize:13];
         lbl_category.textAlignment=NSTextAlignmentCenter;
@@ -65,6 +85,7 @@
         [self.contentView addSubview:lbl_status];
         [self.contentView addSubview:lbl_title];
         [self.contentView addSubview:lbl_time];
+        [self.contentView addSubview:view_seperator];
         
         
     }

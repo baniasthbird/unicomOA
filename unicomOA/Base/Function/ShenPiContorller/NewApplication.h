@@ -7,14 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CarService.h"
+#import "PrintService.h"
 
 @class NewApplication;
 
 @protocol NewApplicationDelegate <NSObject>
 
--(void)PassValueFromCarApplication:(NSString*)str_title;
+-(void)PassValueFromCarApplication:(NSString*)str_title CarObject:(CarService*)service;
 
--(void)PassValueFromPrintApplication:(NSString*)str_title;
+-(void)PassValueFromPrintApplication:(NSString*)str_title PrintObject:(PrintService*)service;
 
 @end
 

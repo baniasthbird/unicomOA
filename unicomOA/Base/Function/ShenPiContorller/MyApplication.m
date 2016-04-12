@@ -12,6 +12,8 @@
 #import "MCMenuButton.h"
 #import "MCPopMenuViewController.h"
 #import "MyShenPi.h"
+#import "CarApplicationDetail.h"
+#import "PrintApplicationDetail.h"
 
 @interface MyApplication()<UITableViewDelegate,UITableViewDataSource,NewApplicationDelegate>
 
@@ -73,6 +75,7 @@
     _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
     _tableView.delegate=self;
     _tableView.dataSource=self;
+    _tableView.scrollEnabled=YES;
     _tableView.backgroundColor=[UIColor clearColor];
     [self.view addSubview:_tableView];
     
@@ -207,34 +210,59 @@
     NSString *ID=[NSString stringWithFormat:@"Cell%ld%ld",(long)[indexPath section],(long)[indexPath row]];
     MyShenPi *cell=[tableView dequeueReusableCellWithIdentifier:ID];
     if (cell==nil) {
-        NSString *str_tmp=[_arr_MyShenPi objectAtIndex:indexPath.section];
-        NSArray *arr_tmp=[str_tmp componentsSeparatedByString:@","];
-        if ([[arr_tmp objectAtIndex:0] isEqualToString:@"YES"]) {
-            cell=[MyShenPi cellWithTable:tableView withTitle:[arr_tmp objectAtIndex:1] withStatus:@"审批中" isUsingCar:YES withTime:@"04-16 16:06"];
+        if ([[_arr_MyShenPi objectAtIndex:indexPath.section] isMemberOfClass:[CarService class]]) {
+            CarService *tmp_service=[_arr_MyShenPi objectAtIndex:indexPath.section];
+            cell=[MyShenPi cellWithTable:tableView withTitle:tmp_service.str_reason withStatus:@"审批中" isUsingCar:YES withTime:@"04-04 16:06"];
+            cell.car_service=tmp_service;
+            cell.str_status=@"审批中";
+            cell.str_time=@"04-04 16:06";
         }
-        else if ([[arr_tmp objectAtIndex:0] isEqualToString:@"NO"]) {
-            cell=[MyShenPi cellWithTable:tableView withTitle:[arr_tmp objectAtIndex:1] withStatus:@"审批中" isUsingCar:NO withTime:@"04-16 16:06"];
+        else if ([[_arr_MyShenPi objectAtIndex:indexPath.section] isMemberOfClass:[PrintService class]]) {
+            PrintService *tmp_service=[_arr_MyShenPi objectAtIndex:indexPath.section];
+            cell=[MyShenPi cellWithTable:tableView withTitle:[NSString stringWithFormat:@"%@%@",tmp_service.str_title,@"项目打印清单"] withStatus:@"审批中" isUsingCar:NO withTime:@"04-04 16:06"];
+            cell.print_service=tmp_service;
+            cell.str_status=@"审批中";
+            cell.str_time=@"04-04 16:06";
         }
     }
-    
     cell.backgroundColor=[UIColor whiteColor];
     
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    MyShenPi *cell=[tableView cellForRowAtIndexPath:indexPath];
+    if (cell.car_service!=nil) {
+        CarApplicationDetail *viewController=[[CarApplicationDetail alloc]init];
+        viewController.service=cell.car_service;
+        viewController.str_status=cell.str_status;
+        viewController.str_time=cell.str_time;
+        
+        [self.navigationController pushViewController:viewController animated:YES];
+    }
+    else if (cell.print_service!=nil) {
+        PrintApplicationDetail *viewController=[[PrintApplicationDetail alloc]init];
+        viewController.service=cell.print_service;
+        viewController.str_status=cell.str_status;
+        viewController.str_time=cell.str_time;
+        
+        [self.navigationController pushViewController:viewController animated:YES];
+    }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 100;
 }
 
--(void)PassValueFromCarApplication:(NSString *)str_title {
-    NSString *str_cell=[NSString stringWithFormat:@"%@,%@",@"YES",str_title];
-    [_arr_MyShenPi addObject:str_cell];
+-(void)PassValueFromCarApplication:(NSString *)str_title CarObject:(CarService *)service {
+   // NSString *str_cell=[NSString stringWithFormat:@"%@,%@",@"YES",str_title];
+    [_arr_MyShenPi addObject:service];
     [self.tableView reloadData];
 }
 
--(void)PassValueFromPrintApplication:(NSString *)str_title {
-    NSString *str_cell=[NSString stringWithFormat:@"%@,%@%@",@"NO",str_title,@"项目打印清单"];
-    [_arr_MyShenPi addObject:str_cell];
+-(void)PassValueFromPrintApplication:(NSString *)str_title PrintObject:(PrintService *)service{
+    //NSString *str_cell=[NSString stringWithFormat:@"%@,%@%@",@"NO",str_title,@"项目打印清单"];
+    [_arr_MyShenPi addObject:service];
     [self.tableView reloadData];
 }
 

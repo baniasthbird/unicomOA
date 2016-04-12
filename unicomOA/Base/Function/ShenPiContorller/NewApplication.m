@@ -102,12 +102,12 @@
     return 50;
 }
 
--(void)PassCarValue:(NSString *)str_reason {
-    [_delegate PassValueFromCarApplication:str_reason];
+-(void)PassCarValue:(NSString *)str_reason CarObject:(CarService *)carservice {
+    [_delegate PassValueFromCarApplication:str_reason CarObject:carservice];
 }
 
--(void)PassPrintValue:(NSString *)str_title {
-    [_delegate PassValueFromPrintApplication:str_title];
+-(void)PassPrintValue:(NSString *)str_title PrintObject:(PrintService *)service{
+    [_delegate PassValueFromPrintApplication:str_title PrintObject:service];
 }
 
 

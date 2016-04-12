@@ -10,7 +10,7 @@
 
 @interface PrintApplicationDetailCell()<UITextViewDelegate>
 
-@property (strong,nonatomic) UITextView *txt_detail;
+
 
 @property (strong,nonatomic) UILabel *lbl_count;
 

@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PrintService.h"
 
 @class PrintApplication;
 
 @protocol PrintApplicationDelegate <NSObject>
 
--(void)PassPrintValue:(NSString*)str_title;
+-(void)PassPrintValue:(NSString*)str_title PrintObject:(PrintService*)service;
 
 @end
 
