@@ -72,7 +72,7 @@
     
     _arr_MyShenPi=[[NSMutableArray alloc]initWithCapacity:0];
     
-    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
+    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, self.view.frame.size.height-150) style:UITableViewStylePlain];
     _tableView.delegate=self;
     _tableView.dataSource=self;
     _tableView.scrollEnabled=YES;
@@ -258,12 +258,14 @@
    // NSString *str_cell=[NSString stringWithFormat:@"%@,%@",@"YES",str_title];
     [_arr_MyShenPi addObject:service];
     [self.tableView reloadData];
+   // [self.tableView setContentOffset:CGPointMake(0, self.tableView.contentSize.height -self.tableView.bounds.size.height) animated:YES];
 }
 
 -(void)PassValueFromPrintApplication:(NSString *)str_title PrintObject:(PrintService *)service{
     //NSString *str_cell=[NSString stringWithFormat:@"%@,%@%@",@"NO",str_title,@"项目打印清单"];
     [_arr_MyShenPi addObject:service];
     [self.tableView reloadData];
+   // [self.tableView setContentOffset:CGPointMake(0, self.tableView.contentSize.height -self.tableView.bounds.size.height) animated:YES];
 }
 
 
