@@ -207,13 +207,13 @@
     if (cell==nil) {
         if ([obj isMemberOfClass:[CarService class]]) {
             CarService *service=(CarService*)obj;
-            cell=[MyShenPiCell cellWithTable:tableView withImage:@"headLogo.png" withName:service.str_name withCategroy:@"预约用车" withStatus:@"未处理" withTitle:service.str_reason withTime:@"04-04 16:06" atIndex:indexPath];
+            cell=[MyShenPiCell cellWithTable:tableView withImage:_userInfo.str_Logo withName:service.str_name withCategroy:@"预约用车" withStatus:@"未处理" withTitle:service.str_reason withTime:@"04-04 16:06" atIndex:indexPath];
             cell.car_service=service;
             cell.str_category=@"预约用车";
         }
         else if ([obj isMemberOfClass:[PrintService class]]) {
             PrintService *service=(PrintService*)obj;
-            cell=[MyShenPiCell cellWithTable:tableView withImage:@"headLogo.png" withName:service.str_name withCategroy:@"复印" withStatus:@"未处理" withTitle:service.str_title withTime:@"04-04 16:06" atIndex:indexPath];
+            cell=[MyShenPiCell cellWithTable:tableView withImage:_userInfo.str_Logo withName:service.str_name withCategroy:@"复印" withStatus:@"未处理" withTitle:service.str_title withTime:@"04-04 16:06" atIndex:indexPath];
             cell.print_service=service;
             cell.str_category=@"复印";
         }

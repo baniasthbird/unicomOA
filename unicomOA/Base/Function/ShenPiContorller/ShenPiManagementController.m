@@ -9,8 +9,9 @@
 #import "ShenPiManagementController.h"
 #import "MyApplication.h"
 #import "MyShenPiViewController.h"
+#import "NewApplication.h"
 
-@interface ShenPiManagementController()<MyApplicationDelegate>
+@interface ShenPiManagementController()<MyApplicationDelegate,NewApplicationDelegate>
 
 @property (nonatomic,strong) NSMutableArray *arr_application;
 
@@ -120,6 +121,7 @@
 -(void)MyApproval:(UIButton*)sender {
     MyShenPiViewController *viewController=[[MyShenPiViewController alloc]init];
     viewController.arr_MyShenPi=_arr_application;
+    viewController.userInfo=_userInfo;
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
@@ -128,11 +130,23 @@
 }
 
 -(void)NewApplication:(UIButton*)sender {
+    NewApplication *viewController=[[NewApplication alloc]init];
+    viewController.userInfo=_userInfo;
+    viewController.delegate=self;
+    [self.navigationController pushViewController:viewController animated:YES];
     
 }
 
 -(void)PassArray:(NSMutableArray *)arr__MyApplication {
     _arr_application=arr__MyApplication;
+}
+
+-(void)PassValueFromCarApplication:(NSString *)str_title CarObject:(CarService *)service {
+    
+}
+
+-(void)PassValueFromPrintApplication:(NSString *)str_title PrintObject:(PrintService *)service {
+    
 }
 
 @end
