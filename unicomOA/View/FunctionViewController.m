@@ -152,7 +152,7 @@
         [btn_News showBadgeWithStyle:WBadgeStyleRedDot value:1 animationType:WBadgeAnimTypeNone];
         
         
-        btn_ShenPi.badgeBgColor=[UIColor purpleColor];
+        btn_ShenPi.badgeBgColor=[UIColor redColor];
         btn_ShenPi.badgeCenterOffset=CGPointMake(0, btn_ShenPi.size.height*0.08);
         [btn_ShenPi showBadgeWithStyle:WBadgeStyleNumber value:1 animationType:WBadgeAnimTypeNone];
         
@@ -174,7 +174,7 @@
     }
         NSArray *imageButtons=cell.buttons;
         
-        [imageButtons setValue:[NSNumber numberWithInt:indexPath.row] forKey:@"row"];
+        [imageButtons setValue:[NSNumber numberWithInt:(int)indexPath.row] forKey:@"row"];
         
         return cell;
 }

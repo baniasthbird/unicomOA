@@ -11,7 +11,7 @@
 
 @interface CarApplicationDetail()<UITableViewDelegate,UITableViewDataSource>
 
-@property (nonatomic,strong) UITableView *tableview;
+
 
 @end
 

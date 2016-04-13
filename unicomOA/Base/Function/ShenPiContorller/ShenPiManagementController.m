@@ -8,6 +8,14 @@
 
 #import "ShenPiManagementController.h"
 #import "MyApplication.h"
+#import "MyShenPiViewController.h"
+
+@interface ShenPiManagementController()<MyApplicationDelegate>
+
+@property (nonatomic,strong) NSMutableArray *arr_application;
+
+@end
+
 
 @implementation ShenPiManagementController
 
@@ -64,7 +72,7 @@
             btn_newApplication.titleEdgeInsets=UIEdgeInsetsMake(0, -135, -85, 0);
         }
         
-}
+    }
     
     
    
@@ -80,6 +88,8 @@
     [self.view addSubview:btn_myApproval];
     [self.view addSubview:btn_sendme];
     [self.view addSubview:btn_newApplication];
+    
+    _arr_application=[[NSMutableArray alloc]initWithCapacity:0];
 
 }
 
@@ -102,11 +112,14 @@
 
 -(void)MyApplication:(UIButton*)sender {
     MyApplication *viewController=[[MyApplication alloc]init];
+    viewController.delegate=self;
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
 -(void)MyApproval:(UIButton*)sender {
-    
+    MyShenPiViewController *viewController=[[MyShenPiViewController alloc]init];
+    viewController.arr_MyShenPi=_arr_application;
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 -(void)SendMe:(UIButton*)sender {
@@ -117,6 +130,8 @@
     
 }
 
-
+-(void)PassArray:(NSMutableArray *)arr__MyApplication {
+    _arr_application=arr__MyApplication;
+}
 
 @end

@@ -13,7 +13,7 @@
 
 @interface PrintApplicationDetail()<UITableViewDelegate,UITableViewDataSource>
 
-@property (nonatomic,strong) UITableView *tableview;
+
 
 @end
 

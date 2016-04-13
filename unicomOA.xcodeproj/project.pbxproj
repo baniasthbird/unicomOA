@@ -100,6 +100,13 @@
 		68D05CC41C97B3530039220F /* SendFeedbackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D05CC31C97B3530039220F /* SendFeedbackView.m */; };
 		68D05CC71C97F6470039220F /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D05CC61C97F6470039220F /* AboutViewController.m */; };
 		68D05CCA1C97FBC00039220F /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D05CC91C97FBC00039220F /* logo.png */; };
+		68DEEBC51CBDCED6003DB7AA /* MyShenPiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DEEBC41CBDCED6003DB7AA /* MyShenPiViewController.m */; };
+		68DEEBC81CBDDA91003DB7AA /* MyShenPiCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DEEBC71CBDDA91003DB7AA /* MyShenPiCell.m */; };
+		68DEEBD41CBE0FD4003DB7AA /* CarShenPiDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DEEBD31CBE0FD4003DB7AA /* CarShenPiDetail.m */; };
+		68DEEBD71CBE0FF7003DB7AA /* PrintShenPiDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DEEBD61CBE0FF7003DB7AA /* PrintShenPiDetail.m */; };
+		68DEEBDA1CBE1D0D003DB7AA /* ShenPiAgree.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DEEBD91CBE1D0D003DB7AA /* ShenPiAgree.m */; };
+		68DEEBDD1CBE1D29003DB7AA /* ShenPiDisAgree.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DEEBDC1CBE1D29003DB7AA /* ShenPiDisAgree.m */; };
+		68DEEBE01CBE1D61003DB7AA /* ShenPiCopy.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DEEBDF1CBE1D61003DB7AA /* ShenPiCopy.m */; };
 		68E779DC1CB34A8E006DA5B9 /* CLTreeView_LEVEL0_Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E779BE1CB34A8E006DA5B9 /* CLTreeView_LEVEL0_Cell.m */; };
 		68E779DD1CB34A8E006DA5B9 /* CLTreeView_LEVEL0_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E779C01CB34A8E006DA5B9 /* CLTreeView_LEVEL0_Model.m */; };
 		68E779DE1CB34A8E006DA5B9 /* CLTreeView_LEVEL1_Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E779C21CB34A8E006DA5B9 /* CLTreeView_LEVEL1_Cell.m */; };
@@ -163,7 +170,7 @@
 		68EEDE771CBB911A003295EB /* MCPopMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EEDE6B1CBB911A003295EB /* MCPopMenuViewController.m */; };
 		68EEDE781CBB911A003295EB /* UITableView+SDAutoTableViewCellHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EEDE6E1CBB911A003295EB /* UITableView+SDAutoTableViewCellHeight.m */; };
 		68EEDE791CBB911A003295EB /* UIView+SDAutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EEDE701CBB911A003295EB /* UIView+SDAutoLayout.m */; };
-		68EEDE7C1CBB9D07003295EB /* MyShenPi.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EEDE7B1CBB9D07003295EB /* MyShenPi.m */; };
+		68EEDE7C1CBB9D07003295EB /* MyApplicationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EEDE7B1CBB9D07003295EB /* MyApplicationCell.m */; };
 		68F173C91C99034500A8BEA3 /* StaffInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F173C81C99034500A8BEA3 /* StaffInfoViewController.m */; };
 		68F173D11C99575200A8BEA3 /* HeadViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F173D01C99575200A8BEA3 /* HeadViewCell.m */; };
 		68F950B61C9F9A4200CA1519 /* LZActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F950B51C9F9A4200CA1519 /* LZActionSheet.m */; };
@@ -373,6 +380,20 @@
 		68D05CC51C97F6470039220F /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AboutViewController.h; path = Base/Settings/Controller/AboutViewController.h; sourceTree = "<group>"; };
 		68D05CC61C97F6470039220F /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AboutViewController.m; path = Base/Settings/Controller/AboutViewController.m; sourceTree = "<group>"; };
 		68D05CC91C97FBC00039220F /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		68DEEBC31CBDCED6003DB7AA /* MyShenPiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyShenPiViewController.h; path = Base/Function/ShenPiContorller/MyShenPiViewController.h; sourceTree = "<group>"; };
+		68DEEBC41CBDCED6003DB7AA /* MyShenPiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyShenPiViewController.m; path = Base/Function/ShenPiContorller/MyShenPiViewController.m; sourceTree = "<group>"; };
+		68DEEBC61CBDDA91003DB7AA /* MyShenPiCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyShenPiCell.h; path = Base/Function/ShenPiModel/MyShenPiCell.h; sourceTree = "<group>"; };
+		68DEEBC71CBDDA91003DB7AA /* MyShenPiCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyShenPiCell.m; path = Base/Function/ShenPiModel/MyShenPiCell.m; sourceTree = "<group>"; };
+		68DEEBD21CBE0FD4003DB7AA /* CarShenPiDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CarShenPiDetail.h; path = Base/Function/ShenPiContorller/CarShenPiDetail.h; sourceTree = "<group>"; };
+		68DEEBD31CBE0FD4003DB7AA /* CarShenPiDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CarShenPiDetail.m; path = Base/Function/ShenPiContorller/CarShenPiDetail.m; sourceTree = "<group>"; };
+		68DEEBD51CBE0FF7003DB7AA /* PrintShenPiDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrintShenPiDetail.h; path = Base/Function/ShenPiContorller/PrintShenPiDetail.h; sourceTree = "<group>"; };
+		68DEEBD61CBE0FF7003DB7AA /* PrintShenPiDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrintShenPiDetail.m; path = Base/Function/ShenPiContorller/PrintShenPiDetail.m; sourceTree = "<group>"; };
+		68DEEBD81CBE1D0D003DB7AA /* ShenPiAgree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShenPiAgree.h; path = Base/Function/ShenPiContorller/ShenPiAgree.h; sourceTree = "<group>"; };
+		68DEEBD91CBE1D0D003DB7AA /* ShenPiAgree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShenPiAgree.m; path = Base/Function/ShenPiContorller/ShenPiAgree.m; sourceTree = "<group>"; };
+		68DEEBDB1CBE1D29003DB7AA /* ShenPiDisAgree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShenPiDisAgree.h; path = Base/Function/ShenPiContorller/ShenPiDisAgree.h; sourceTree = "<group>"; };
+		68DEEBDC1CBE1D29003DB7AA /* ShenPiDisAgree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShenPiDisAgree.m; path = Base/Function/ShenPiContorller/ShenPiDisAgree.m; sourceTree = "<group>"; };
+		68DEEBDE1CBE1D61003DB7AA /* ShenPiCopy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShenPiCopy.h; path = Base/Function/ShenPiContorller/ShenPiCopy.h; sourceTree = "<group>"; };
+		68DEEBDF1CBE1D61003DB7AA /* ShenPiCopy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShenPiCopy.m; path = Base/Function/ShenPiContorller/ShenPiCopy.m; sourceTree = "<group>"; };
 		68E779BC1CB34A8E006DA5B9 /* CLTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLTree.h; path = OpenSource/CLTreeView/CLTree.h; sourceTree = "<group>"; };
 		68E779BD1CB34A8E006DA5B9 /* CLTreeView_LEVEL0_Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLTreeView_LEVEL0_Cell.h; path = OpenSource/CLTreeView/CLTreeView_LEVEL0_Cell.h; sourceTree = "<group>"; };
 		68E779BE1CB34A8E006DA5B9 /* CLTreeView_LEVEL0_Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLTreeView_LEVEL0_Cell.m; path = OpenSource/CLTreeView/CLTreeView_LEVEL0_Cell.m; sourceTree = "<group>"; };
@@ -483,8 +504,8 @@
 		68EEDE6E1CBB911A003295EB /* UITableView+SDAutoTableViewCellHeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+SDAutoTableViewCellHeight.m"; sourceTree = "<group>"; };
 		68EEDE6F1CBB911A003295EB /* UIView+SDAutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SDAutoLayout.h"; sourceTree = "<group>"; };
 		68EEDE701CBB911A003295EB /* UIView+SDAutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SDAutoLayout.m"; sourceTree = "<group>"; };
-		68EEDE7A1CBB9D07003295EB /* MyShenPi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyShenPi.h; path = Base/Function/ShenPiModel/MyShenPi.h; sourceTree = "<group>"; };
-		68EEDE7B1CBB9D07003295EB /* MyShenPi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyShenPi.m; path = Base/Function/ShenPiModel/MyShenPi.m; sourceTree = "<group>"; };
+		68EEDE7A1CBB9D07003295EB /* MyApplicationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyApplicationCell.h; path = Base/Function/ShenPiModel/MyApplicationCell.h; sourceTree = "<group>"; };
+		68EEDE7B1CBB9D07003295EB /* MyApplicationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyApplicationCell.m; path = Base/Function/ShenPiModel/MyApplicationCell.m; sourceTree = "<group>"; };
 		68F173C71C99034500A8BEA3 /* StaffInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StaffInfoViewController.h; path = Base/Settings/Controller/StaffInfoViewController.h; sourceTree = "<group>"; };
 		68F173C81C99034500A8BEA3 /* StaffInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StaffInfoViewController.m; path = Base/Settings/Controller/StaffInfoViewController.m; sourceTree = "<group>"; };
 		68F173CF1C99575200A8BEA3 /* HeadViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HeadViewCell.h; path = Base/Settings/Modal/HeadViewCell.h; sourceTree = "<group>"; };
@@ -1161,6 +1182,8 @@
 				6838153B1CBCB5E700E6AFD3 /* ShenPiResultCell.m */,
 				683815431CBCE28500E6AFD3 /* PrintFileNavCell.h */,
 				683815441CBCE28500E6AFD3 /* PrintFileNavCell.m */,
+				68DEEBC61CBDDA91003DB7AA /* MyShenPiCell.h */,
+				68DEEBC71CBDDA91003DB7AA /* MyShenPiCell.m */,
 			);
 			name = ShenPiViews;
 			sourceTree = "<group>";
@@ -1188,6 +1211,18 @@
 				6838153E1CBCCB2A00E6AFD3 /* PrintApplicationDetail.m */,
 				683815401CBCDAA400E6AFD3 /* PrintFileDetail.h */,
 				683815411CBCDAA400E6AFD3 /* PrintFileDetail.m */,
+				68DEEBC31CBDCED6003DB7AA /* MyShenPiViewController.h */,
+				68DEEBC41CBDCED6003DB7AA /* MyShenPiViewController.m */,
+				68DEEBD21CBE0FD4003DB7AA /* CarShenPiDetail.h */,
+				68DEEBD31CBE0FD4003DB7AA /* CarShenPiDetail.m */,
+				68DEEBD51CBE0FF7003DB7AA /* PrintShenPiDetail.h */,
+				68DEEBD61CBE0FF7003DB7AA /* PrintShenPiDetail.m */,
+				68DEEBD81CBE1D0D003DB7AA /* ShenPiAgree.h */,
+				68DEEBD91CBE1D0D003DB7AA /* ShenPiAgree.m */,
+				68DEEBDB1CBE1D29003DB7AA /* ShenPiDisAgree.h */,
+				68DEEBDC1CBE1D29003DB7AA /* ShenPiDisAgree.m */,
+				68DEEBDE1CBE1D61003DB7AA /* ShenPiCopy.h */,
+				68DEEBDF1CBE1D61003DB7AA /* ShenPiCopy.m */,
 			);
 			name = ShenPiController;
 			sourceTree = "<group>";
@@ -1197,8 +1232,8 @@
 			children = (
 				2CE320EC1CB6B4B000B36793 /* PrintFiles.h */,
 				2CE320ED1CB6B4B000B36793 /* PrintFiles.m */,
-				68EEDE7A1CBB9D07003295EB /* MyShenPi.h */,
-				68EEDE7B1CBB9D07003295EB /* MyShenPi.m */,
+				68EEDE7A1CBB9D07003295EB /* MyApplicationCell.h */,
+				68EEDE7B1CBB9D07003295EB /* MyApplicationCell.m */,
 				6838152E1CBC79F500E6AFD3 /* CarService.h */,
 				6838152F1CBC79F500E6AFD3 /* CarService.m */,
 				683815311CBC7A2100E6AFD3 /* PrintService.h */,
@@ -1428,6 +1463,8 @@
 				2CFEAD1A1C7168980054730E /* SignInViewController.m in Sources */,
 				68E77A261CB3A133006DA5B9 /* IQUIViewController+Additions.m in Sources */,
 				6838153F1CBCCB2A00E6AFD3 /* PrintApplicationDetail.m in Sources */,
+				68DEEBE01CBE1D61003DB7AA /* ShenPiCopy.m in Sources */,
+				68DEEBC51CBDCED6003DB7AA /* MyShenPiViewController.m in Sources */,
 				2CE320F11CB7FF4800B36793 /* CarApplication.m in Sources */,
 				68EEDE771CBB911A003295EB /* MCPopMenuViewController.m in Sources */,
 				2C5460BD1C854733005C5AB9 /* TableViewCell.m in Sources */,
@@ -1464,14 +1501,16 @@
 				2CFEADDA1C79D9480054730E /* NewNotesViewController.m in Sources */,
 				2C35B0521C7062160003BF6C /* ViewController.m in Sources */,
 				68052C2F1CAD167400A93BDA /* UIView+WZLBadge.m in Sources */,
+				68DEEBD71CBE0FF7003DB7AA /* PrintShenPiDetail.m in Sources */,
 				2CFEAD2A1C717FCB0054730E /* FunctionViewController.m in Sources */,
 				2CFEADEF1C7C06CB0054730E /* CellModel.m in Sources */,
 				68ED4E4F1CB4EFD2000E8A7B /* PrintApplication.m in Sources */,
 				2CFEADBC1C76A6440054730E /* HeadView.m in Sources */,
 				68E77A231CB3A133006DA5B9 /* IQUIScrollView+Additions.m in Sources */,
 				2CDC2BF21C9117FE0067693B /* NewsManagementTableViewCell.m in Sources */,
-				68EEDE7C1CBB9D07003295EB /* MyShenPi.m in Sources */,
+				68EEDE7C1CBB9D07003295EB /* MyApplicationCell.m in Sources */,
 				68F950B61C9F9A4200CA1519 /* LZActionSheet.m in Sources */,
+				68DEEBDD1CBE1D29003DB7AA /* ShenPiDisAgree.m in Sources */,
 				2C35B04F1C7062160003BF6C /* AppDelegate.m in Sources */,
 				68E77A2D1CB3A133006DA5B9 /* IQTitleBarButtonItem.m in Sources */,
 				68E779DE1CB34A8E006DA5B9 /* CLTreeView_LEVEL1_Cell.m in Sources */,
@@ -1486,6 +1525,7 @@
 				68E779DD1CB34A8E006DA5B9 /* CLTreeView_LEVEL0_Model.m in Sources */,
 				2CFEADCC1C76E56D0054730E /* SearchResultViewController.m in Sources */,
 				2CFEADE71C7C05830054730E /* MenuTableViewCell.m in Sources */,
+				68DEEBDA1CBE1D0D003DB7AA /* ShenPiAgree.m in Sources */,
 				68E779E31CB34A8E006DA5B9 /* CLTreeViewNode.m in Sources */,
 				68EEDE791CBB911A003295EB /* UIView+SDAutoLayout.m in Sources */,
 				68ED4E521CB5076D000E8A7B /* PrintApplicationTitleCell.m in Sources */,
@@ -1510,6 +1550,7 @@
 				6846D3621CABC496004BD285 /* RadioBox.m in Sources */,
 				2CB7DB681CAC22BA0057633D /* JXBarChartView.m in Sources */,
 				68E779E11CB34A8E006DA5B9 /* CLTreeView_LEVEL2_Model.m in Sources */,
+				68DEEBD41CBE0FD4003DB7AA /* CarShenPiDetail.m in Sources */,
 				68052C2D1CAD167400A93BDA /* UITabBarItem+WZLBadge.m in Sources */,
 				68EEDE731CBB911A003295EB /* MCPopMenuCell.m in Sources */,
 				2CFEADD31C770D6F0054730E /* UITableGridViewCell.m in Sources */,
@@ -1537,6 +1578,7 @@
 				2CFEADE91C7C05830054730E /* UIButton+Extra.m in Sources */,
 				68EEDE751CBB911A003295EB /* MCPopMenuItem.m in Sources */,
 				6882C3181CA8D78300CDEB1A /* LogoView.m in Sources */,
+				68DEEBC81CBDDA91003DB7AA /* MyShenPiCell.m in Sources */,
 				2CFEAD441C72B8B90054730E /* LGSettingItem.m in Sources */,
 				2CFEAD1D1C7173690054730E /* newPassWordViewController.m in Sources */,
 				68E779F91CB37D6A006DA5B9 /* Friend.m in Sources */,

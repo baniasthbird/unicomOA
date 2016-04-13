@@ -20,4 +20,7 @@
 //审批时间
 @property (nonatomic,strong) NSString *str_time;
 
+//tableView
+@property (nonatomic,strong) UITableView *tableview;
+
 @end

@@ -1,21 +1,23 @@
 //
-//  MyApplication.m
+//  MyShenPiViewController.m
 //  unicomOA
 //
-//  Created by hnsi-03 on 16/4/6.
+//  Created by hnsi-03 on 16/4/13.
 //  Copyright © 2016年 zr-mac. All rights reserved.
 //
 
-#import "MyApplication.h"
-#import "NewApplication.h"
+#import "MyShenPiViewController.h"
 #import "UIView+SDAutoLayout.h"
 #import "MCMenuButton.h"
 #import "MCPopMenuViewController.h"
-#import "MyApplicationCell.h"
-#import "CarApplicationDetail.h"
-#import "PrintApplicationDetail.h"
+#import "MyShenPiCell.h"
+#import "CarService.h"
+#import "PrintService.h"
+#import "CarShenPiDetail.h"
+#import "PrintShenPiDetail.h"
 
-@interface MyApplication()<UITableViewDelegate,UITableViewDataSource,NewApplicationDelegate>
+
+@interface MyShenPiViewController()<UITableViewDelegate,UITableViewDataSource>
 
 /**
  *  头部筛选模块
@@ -29,13 +31,10 @@
 
 @property (nonatomic,strong) UITableView *tableView;
 
-//我的申请事项
-@property (nonatomic,strong) NSMutableArray *arr_MyApplication;
 
 @end
 
-
-@implementation MyApplication
+@implementation MyShenPiViewController
 
 -(void)viewDidLoad {
     [super viewDidLoad];
@@ -54,23 +53,19 @@
     [barButtonItem setTitleTextAttributes:dict forState:UIControlStateNormal];
     self.navigationItem.leftBarButtonItem = barButtonItem;
     
-    UIBarButtonItem *barButtonItem2 = [[UIBarButtonItem alloc] initWithTitle:@"新建" style:UIBarButtonItemStyleDone target:self action:@selector(NewVc:)];
-    [barButtonItem2 setTitleTextAttributes:dict forState:UIControlStateNormal];
-    self.navigationItem.rightBarButtonItem = barButtonItem2;
-    
+
     
     self.view.backgroundColor=[UIColor colorWithRed:243/255.0f green:243/255.0f blue:243/255.0f alpha:1];
     
     if ([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)]) {
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
-
+    
     self.leftArray=@[@"全部",@"审批中",@"同意",@"不同意"];
     self.rightArray=@[@"全部",@"复印",@"预约用车"];
-
+    
     [self setupTopView];
     
-    _arr_MyApplication=[[NSMutableArray alloc]initWithCapacity:0];
     
     _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, self.view.frame.size.height-150) style:UITableViewStylePlain];
     _tableView.delegate=self;
@@ -81,15 +76,8 @@
     
 }
 
-
 -(void)MovePreviousVc:(UIButton*)sender {
     [self.navigationController popViewControllerAnimated:YES];
-}
-
--(void)NewVc:(UIButton*)sender {
-    NewApplication *viewController=[[NewApplication alloc]init];
-    viewController.delegate=self;
-    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 /**
@@ -180,7 +168,7 @@
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [_arr_MyApplication count];
+    return [_arr_MyShenPi count];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -203,68 +191,53 @@
         return 30;
     else
         return 40;
+    
+}
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 110;
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *ID=[NSString stringWithFormat:@"Cell%ld%ld",(long)[indexPath section],(long)[indexPath row]];
-    MyApplicationCell *cell=[tableView dequeueReusableCellWithIdentifier:ID];
-    if (cell==nil) {
-        if ([[_arr_MyApplication objectAtIndex:indexPath.section] isMemberOfClass:[CarService class]]) {
-            CarService *tmp_service=[_arr_MyApplication objectAtIndex:indexPath.section];
-            cell=[MyApplicationCell cellWithTable:tableView withTitle:tmp_service.str_reason withStatus:@"审批中" isUsingCar:YES withTime:@"04-04 16:06"];
-            cell.car_service=tmp_service;
-            cell.str_status=@"审批中";
-            cell.str_time=@"04-04 16:06";
-        }
-        else if ([[_arr_MyApplication objectAtIndex:indexPath.section] isMemberOfClass:[PrintService class]]) {
-            PrintService *tmp_service=[_arr_MyApplication objectAtIndex:indexPath.section];
-            cell=[MyApplicationCell cellWithTable:tableView withTitle:[NSString stringWithFormat:@"%@%@",tmp_service.str_title,@"项目打印清单"] withStatus:@"审批中" isUsingCar:NO withTime:@"04-04 16:06"];
-            cell.print_service=tmp_service;
-            cell.str_status=@"审批中";
-            cell.str_time=@"04-04 16:06";
-        }
-    }
-    cell.backgroundColor=[UIColor whiteColor];
+   // NSString *ID=@"cell";
+   
+    MyShenPiCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    NSObject *obj=[_arr_MyShenPi objectAtIndex:indexPath.section];
     
+    if (cell==nil) {
+        if ([obj isMemberOfClass:[CarService class]]) {
+            CarService *service=(CarService*)obj;
+            cell=[MyShenPiCell cellWithTable:tableView withImage:@"HeadLogo.png" withName:service.str_name withCategroy:@"预约用车" withStatus:@"未处理" withTitle:service.str_reason withTime:@"04-04 16:06" atIndex:indexPath];
+            cell.car_service=service;
+            cell.str_category=@"预约用车";
+        }
+        else if ([obj isMemberOfClass:[PrintService class]]) {
+            PrintService *service=(PrintService*)obj;
+            cell=[MyShenPiCell cellWithTable:tableView withImage:@"HeadLogo.png" withName:service.str_name withCategroy:@"复印" withStatus:@"未处理" withTitle:service.str_title withTime:@"04-04 16:06" atIndex:indexPath];
+            cell.print_service=service;
+            cell.str_category=@"复印";
+        }
+        
+    }
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    MyApplicationCell *cell=[tableView cellForRowAtIndexPath:indexPath];
-    if (cell.car_service!=nil) {
-        CarApplicationDetail *viewController=[[CarApplicationDetail alloc]init];
+    MyShenPiCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if ([cell.str_category isEqualToString:@"预约用车"]) {
+        CarShenPiDetail *viewController=[[CarShenPiDetail alloc]init];
         viewController.service=cell.car_service;
-        viewController.str_status=cell.str_status;
-        viewController.str_time=cell.str_time;
-        
+        viewController.str_time=@"04-04 16:06";
+        viewController.str_status=@"审批中";
         [self.navigationController pushViewController:viewController animated:YES];
     }
-    else if (cell.print_service!=nil) {
-        PrintApplicationDetail *viewController=[[PrintApplicationDetail alloc]init];
+    else if ([cell.str_category isEqualToString:@"复印"]) {
+        PrintShenPiDetail *viewController=[[PrintShenPiDetail alloc]init];
         viewController.service=cell.print_service;
-        viewController.str_status=cell.str_status;
-        viewController.str_time=cell.str_time;
-        
+        viewController.str_time=@"04-04 16:06";
+        viewController.str_status=@"审批中";
         [self.navigationController pushViewController:viewController animated:YES];
     }
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 100;
-}
-
--(void)PassValueFromCarApplication:(NSString *)str_title CarObject:(CarService *)service {
-    [_arr_MyApplication addObject:service];
-    [_delegate PassArray:_arr_MyApplication];
-    [self.tableView reloadData];
-}
-
--(void)PassValueFromPrintApplication:(NSString *)str_title PrintObject:(PrintService *)service{
-    [_arr_MyApplication addObject:service];
-    [_delegate PassArray:_arr_MyApplication];
-    [self.tableView reloadData];
-   
 }
 
 
