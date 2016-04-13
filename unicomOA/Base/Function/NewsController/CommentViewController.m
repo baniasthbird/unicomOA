@@ -112,7 +112,7 @@
 }
 
 -(void)Comment:(UIButton*)sender {
-    NSString *str_comment=[NSString stringWithFormat:@"%@|%@",_txt_comment.text,@"研发部李四"];
+    NSString *str_comment=[NSString stringWithFormat:@"%@|%@%@",_txt_comment.text,_userInfo.str_department,_userInfo.str_name];
     [_arr_comment addObject:str_comment];
     [self.tableView reloadData];
 }

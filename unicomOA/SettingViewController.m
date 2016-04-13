@@ -85,8 +85,8 @@
     //添加第一组
     LGSettingSection *section1=[LGSettingSection initWithHeaderTitle:@"Demo" footerTitle:nil];
     //添加行
-    LGSettingItem *item1=[LGSettingItem initWithtitle:@"张三"];
-    item1.image=[UIImage imageNamed:@"headLogo.png"];
+    LGSettingItem *item1=[LGSettingItem initWithtitle:_userInfo.str_name];
+    item1.image=[UIImage imageNamed:_userInfo.str_Logo];
     item1.height=64;
     [section1 addItem:item1];
     //保存到groups数组
@@ -193,6 +193,7 @@
     //NSLog(@"点击了第%ld组，第%ld行",indexPath.section,indexPath.row);
     if (indexPath.section==0 && indexPath.row==0) {
         StaffInfoViewController *staffController=[[StaffInfoViewController alloc]init];
+        staffController.userInfo=_userInfo;
         [self.navigationController pushViewController:staffController animated:YES];
     }
     else if (indexPath.section==1 && indexPath.row==0) {

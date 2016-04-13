@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "PrintService.h"
+#import "UserInfo.h"
 
 @class PrintApplication;
 
@@ -24,14 +25,7 @@
 //是否包含打印文件
 @property BOOL b_hasFile;
 
-//发起人
-@property NSString *str_name;
-
-//所在部门
-@property NSString *str_department;
-
-//联系电话
-@property NSString *str_phonenum;
+@property (nonatomic,strong) UserInfo *userInfo;
 
 @property (nonatomic,unsafe_unretained) id<PrintApplicationDelegate> delegate;
 

@@ -11,6 +11,7 @@
 #import "forgetPasswordViewController.h"
 #import "OAViewController.h"
 #import "ServerIPViewController.h"
+#import "UserInfo.h"
 
 
 @interface LoginViewController()
@@ -162,7 +163,19 @@
     NSArray *tabBarItems = self.navigationController.tabBarController.tabBar.items;
     UITabBarItem *personCenterTabBarItem = [tabBarItems objectAtIndex:2];
     personCenterTabBarItem.badgeValue = @"2";
-    [self.navigationController pushViewController:[[OAViewController alloc]init] animated:YES];
+    UserInfo *userInfo=[[UserInfo alloc]init];
+    userInfo.str_name=@"张三";
+    userInfo.str_username=@"张三";
+    userInfo.str_gender=@"男";
+    userInfo.str_department=@"综合部";
+    userInfo.str_position=@"部门经理";
+    userInfo.str_cellphone=@"13812345678";
+    userInfo.str_email=@"未绑定";
+    userInfo.str_phonenum=@"未填写";
+    userInfo.str_Logo=@"headLogo.png";
+    OAViewController *viewController=[[OAViewController alloc]init];
+    viewController.user_Info=userInfo;
+    [self.navigationController pushViewController:viewController animated:YES];
     
 }
 

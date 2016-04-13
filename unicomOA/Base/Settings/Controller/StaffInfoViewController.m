@@ -88,40 +88,41 @@
     }
     else if (indexPath.section==0 && indexPath.row==1) {
         cell.textLabel.text=@"姓名";
-        cell.detailTextLabel.text=@"张三";
+        cell.detailTextLabel.text=_userInfo.str_name;
     }
     else if (indexPath.section==0 && indexPath.row==2) {
         cell.textLabel.text=@"帐号";
-        cell.detailTextLabel.text=@"张三";
+        cell.detailTextLabel.text=_userInfo.str_username;
     }
     else if (indexPath.section==0 && indexPath.row==3) {
         cell.textLabel.text=@"性别";
-        cell.detailTextLabel.text=@"男";
+        cell.detailTextLabel.text=_userInfo.str_gender;
     }
     else if (indexPath.section==1 && indexPath.row==0) {
         cell.textLabel.text=@"部门";
-        cell.detailTextLabel.text=@"综合部";
+        cell.detailTextLabel.text=_userInfo.str_department;
     }
     else if (indexPath.section==1 && indexPath.row==1) {
         cell.textLabel.text=@"职务";
-        cell.detailTextLabel.text=@"部门经理";
+        cell.detailTextLabel.text=_userInfo.str_position;
     }
     else if (indexPath.section==1 && indexPath.row==2) {
         cell.textLabel.text=@"手机";
         if (_str_cellphone==nil) {
-            cell.detailTextLabel.text=@"13812345678";
+            cell.detailTextLabel.text=_userInfo.str_cellphone;
         } else {
             cell.detailTextLabel.text=_str_cellphone;
+            _userInfo.str_cellphone=_str_cellphone;
         }
         
     }
     else if (indexPath.section==1 && indexPath.row==3) {
         cell.textLabel.text=@"Email";
-        cell.detailTextLabel.text=@"未绑定";
+        cell.detailTextLabel.text=_userInfo.str_email;
     }
     else if (indexPath.section==1 && indexPath.row==4) {
         cell.textLabel.text=@"固定电话";
-        cell.detailTextLabel.text=@"未填写";
+        cell.detailTextLabel.text=_userInfo.str_phonenum;
     }
     
     return cell;

@@ -89,6 +89,7 @@
 -(void)NewVc:(UIButton*)sender {
     NewApplication *viewController=[[NewApplication alloc]init];
     viewController.delegate=self;
+    viewController.userInfo=_userInfo;
     [self.navigationController pushViewController:viewController animated:YES];
 }
 

@@ -8,11 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "SearchResultViewController.h"
+#import "UserInfo.h"
 
 @interface ContactViewControllerNew : UITableViewController<UISearchBarDelegate,UISearchResultsUpdating>
 
 @property (strong,nonatomic) UISearchController *searchcontroller;
 
 @property (strong,nonatomic) SearchResultViewController *resultViewController;
+
+@property (nonatomic,strong) UserInfo *userInfo;
 
 @end

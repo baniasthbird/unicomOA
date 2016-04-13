@@ -57,6 +57,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    UserInfo *userInfo=[[UserInfo alloc]init];
+    userInfo.str_name=@"张三";
+    userInfo.str_username=@"张三";
+    userInfo.str_gender=@"男";
+    userInfo.str_department=@"综合部";
+    userInfo.str_position=@"部门经理";
+    userInfo.str_cellphone=@"13812345678";
+    userInfo.str_email=@"未绑定";
+    userInfo.str_phonenum=@"未填写";
+    userInfo.str_Logo=@"headLogo.png";
     // Do any additional setup after loading the view.
     _tabBarView = [[UIImageView alloc]initWithFrame:self.tabBar.bounds];
     _tabBarView.userInteractionEnabled = YES;
@@ -66,17 +77,21 @@
     
     MessageViewController *message=[[MessageViewController alloc]init];
     message.delegate=self;
+    message.userInfo=userInfo;
     
     UINavigationController *navi1=[[BaseNavigationViewController alloc]initWithRootViewController:message];
     
    // ContactViewController *contact=[[ContactViewController alloc]init];
     ContactViewControllerNew *contact=[[ContactViewControllerNew alloc]init];
+    contact.userInfo=userInfo;
     UINavigationController *navi2=[[BaseNavigationViewController alloc]initWithRootViewController:contact];
     
     FunctionViewController *func=[[FunctionViewController alloc]init];
+    func.userInfo=userInfo;
     UINavigationController *navi3=[[UINavigationController alloc]initWithRootViewController:func];
     
     SettingViewController *setting=[[SettingViewController alloc]init];
+    setting.userInfo=userInfo;
     UINavigationController *navi4=[[UINavigationController alloc]initWithRootViewController:setting];
     
     self.viewControllers=[NSArray arrayWithObjects:navi1,navi2,navi3,navi4, nil];

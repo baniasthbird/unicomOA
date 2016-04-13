@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "OAViewController.h"
+#import "UserInfo.h"
 
 @interface MessageViewController : UIViewController
 
 @property (nonatomic,weak) OAViewController *delegate;
+
+@property (nonatomic,strong) UserInfo *userInfo;
 
 @end

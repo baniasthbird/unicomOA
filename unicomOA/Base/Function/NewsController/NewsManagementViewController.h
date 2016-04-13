@@ -10,6 +10,7 @@
 #import "NIDropDown.h"
 #import "NewsManagementTableViewCell.h"
 #import "NewsDisplayViewController.h"
+#import "UserInfo.h"
 
 @protocol ClearRedDotDelegate
 
@@ -31,6 +32,8 @@
 @property (nonatomic,strong) id<ClearRedDotDelegate> delegate;
 
 @property  BOOL b_hasnews;
+
+@property (nonatomic,strong) UserInfo *userInfo;
 
 -(IBAction)selectClicked:(id)sender;
 

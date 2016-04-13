@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UserInfo.h"
 
 @interface SettingViewController : UITableViewController
+
+@property (nonatomic,strong) UserInfo *userInfo;
 
 @end

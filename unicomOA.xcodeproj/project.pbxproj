@@ -107,6 +107,7 @@
 		68DEEBDA1CBE1D0D003DB7AA /* ShenPiAgree.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DEEBD91CBE1D0D003DB7AA /* ShenPiAgree.m */; };
 		68DEEBDD1CBE1D29003DB7AA /* ShenPiDisAgree.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DEEBDC1CBE1D29003DB7AA /* ShenPiDisAgree.m */; };
 		68DEEBE01CBE1D61003DB7AA /* ShenPiCopy.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DEEBDF1CBE1D61003DB7AA /* ShenPiCopy.m */; };
+		68DEEBE31CBE30E6003DB7AA /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DEEBE21CBE30E6003DB7AA /* UserInfo.m */; };
 		68E779DC1CB34A8E006DA5B9 /* CLTreeView_LEVEL0_Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E779BE1CB34A8E006DA5B9 /* CLTreeView_LEVEL0_Cell.m */; };
 		68E779DD1CB34A8E006DA5B9 /* CLTreeView_LEVEL0_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E779C01CB34A8E006DA5B9 /* CLTreeView_LEVEL0_Model.m */; };
 		68E779DE1CB34A8E006DA5B9 /* CLTreeView_LEVEL1_Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E779C21CB34A8E006DA5B9 /* CLTreeView_LEVEL1_Cell.m */; };
@@ -394,6 +395,8 @@
 		68DEEBDC1CBE1D29003DB7AA /* ShenPiDisAgree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShenPiDisAgree.m; path = Base/Function/ShenPiContorller/ShenPiDisAgree.m; sourceTree = "<group>"; };
 		68DEEBDE1CBE1D61003DB7AA /* ShenPiCopy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShenPiCopy.h; path = Base/Function/ShenPiContorller/ShenPiCopy.h; sourceTree = "<group>"; };
 		68DEEBDF1CBE1D61003DB7AA /* ShenPiCopy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShenPiCopy.m; path = Base/Function/ShenPiContorller/ShenPiCopy.m; sourceTree = "<group>"; };
+		68DEEBE11CBE30E6003DB7AA /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserInfo.h; path = Base/Settings/Modal/UserInfo.h; sourceTree = "<group>"; };
+		68DEEBE21CBE30E6003DB7AA /* UserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserInfo.m; path = Base/Settings/Modal/UserInfo.m; sourceTree = "<group>"; };
 		68E779BC1CB34A8E006DA5B9 /* CLTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLTree.h; path = OpenSource/CLTreeView/CLTree.h; sourceTree = "<group>"; };
 		68E779BD1CB34A8E006DA5B9 /* CLTreeView_LEVEL0_Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLTreeView_LEVEL0_Cell.h; path = OpenSource/CLTreeView/CLTreeView_LEVEL0_Cell.h; sourceTree = "<group>"; };
 		68E779BE1CB34A8E006DA5B9 /* CLTreeView_LEVEL0_Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLTreeView_LEVEL0_Cell.m; path = OpenSource/CLTreeView/CLTreeView_LEVEL0_Cell.m; sourceTree = "<group>"; };
@@ -1012,6 +1015,8 @@
 				68D05CC31C97B3530039220F /* SendFeedbackView.m */,
 				68F173CF1C99575200A8BEA3 /* HeadViewCell.h */,
 				68F173D01C99575200A8BEA3 /* HeadViewCell.m */,
+				68DEEBE11CBE30E6003DB7AA /* UserInfo.h */,
+				68DEEBE21CBE30E6003DB7AA /* UserInfo.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1555,6 +1560,7 @@
 				68EEDE731CBB911A003295EB /* MCPopMenuCell.m in Sources */,
 				2CFEADD31C770D6F0054730E /* UITableGridViewCell.m in Sources */,
 				68E77A2A1CB3A133006DA5B9 /* IQTextView.m in Sources */,
+				68DEEBE31CBE30E6003DB7AA /* UserInfo.m in Sources */,
 				68EEDE781CBB911A003295EB /* UITableView+SDAutoTableViewCellHeight.m in Sources */,
 				2CFEAD301C7181F30054730E /* NTButton.m in Sources */,
 				68F173D11C99575200A8BEA3 /* HeadViewCell.m in Sources */,

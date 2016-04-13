@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CarService.h"
 #import "PrintService.h"
+#import "UserInfo.h"
 
 @class NewApplication;
 
@@ -23,6 +24,8 @@
 //新建审批
 
 @interface NewApplication : UIViewController
+
+@property (nonatomic,strong) UserInfo *userInfo;
 
 @property (nonatomic,unsafe_unretained) id<NewApplicationDelegate> delegate;
 

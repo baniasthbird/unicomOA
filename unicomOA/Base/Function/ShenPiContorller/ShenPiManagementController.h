@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UserInfo.h"
 
 @interface ShenPiManagementController : UIViewController
+
+@property (nonatomic,strong) UserInfo *userInfo;
 
 @end

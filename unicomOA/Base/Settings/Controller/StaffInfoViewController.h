@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UserInfo.h"
 
 @interface StaffInfoViewController : UITableViewController
 
 @property (nonatomic,strong) NSString *str_cellphone;
+
+@property (nonatomic,strong) UserInfo *userInfo;
 
 @end

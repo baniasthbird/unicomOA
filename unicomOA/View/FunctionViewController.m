@@ -194,6 +194,7 @@
     NewsManagementViewController *newsView=[[NewsManagementViewController alloc]init];
     newsView.b_hasnews= button.badge.isHidden;
     newsView.delegate=self;
+    newsView.userInfo=_userInfo;
     [self.navigationController pushViewController:newsView animated:YES];
 }
 
@@ -208,6 +209,7 @@
     [alert show];
      */
     ShenPiManagementController *viewController=[[ShenPiManagementController alloc] init];
+    viewController.userInfo=_userInfo;
     [self.navigationController pushViewController:viewController animated:YES];
 
 }

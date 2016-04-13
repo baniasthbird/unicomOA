@@ -255,6 +255,7 @@
     news_controller.str_label=cell.lbl_Title.text;
     news_controller.str_depart=cell.lbl_department.text;
     news_controller.delegate=self;
+    news_controller.userInfo=_userInfo;
     [self.navigationController pushViewController:news_controller animated:YES];
     
 }

@@ -88,11 +88,13 @@
     if (indexPath.row==0) {
         PrintApplication *viewController=[[PrintApplication alloc]init];
         viewController.delegate=self;
+        viewController.userInfo=_userInfo;
         [self.navigationController pushViewController:viewController animated:YES];
     }
     else if (indexPath.row==1) {
         CarApplication *viewController=[[CarApplication alloc]init];
         viewController.delegate=self;
+        viewController.userInfo=_userInfo;
         [self.navigationController pushViewController:viewController animated:YES];
     }
     

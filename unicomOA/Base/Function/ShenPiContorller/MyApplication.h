@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UserInfo.h"
 
 //我的申请
 @class MyApplication;
@@ -17,6 +18,8 @@
 @end
 
 @interface MyApplication : UIViewController
+
+@property (nonatomic,strong) UserInfo *userInfo;
 
 @property (nonatomic,strong) id<MyApplicationDelegate> delegate;
 

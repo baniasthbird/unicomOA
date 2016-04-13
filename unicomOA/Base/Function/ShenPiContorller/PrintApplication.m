@@ -184,17 +184,17 @@
         else if (indexPath.row==3) {
             cell.textLabel.text=@"发起人";
             //与"我"的设置一致，考虑获取数据
-            cell.detailTextLabel.text=@"张三";
+            cell.detailTextLabel.text=_userInfo.str_name;
         }
         else if (indexPath.row==4) {
             cell.textLabel.text=@"所在部门";
              //与"我"的设置一致，考虑获取数据
-            cell.detailTextLabel.text=@"综合部";
+            cell.detailTextLabel.text=_userInfo.str_department;
         }
         else if (indexPath.row==5) {
             cell.textLabel.text=@"联系电话";
              //与"我"的设置一致，考虑获取数据
-            cell.detailTextLabel.text=@"13812345678";
+            cell.detailTextLabel.text=_userInfo.str_cellphone;
         }
         else if (indexPath.row==6) {
             cell.textLabel.text=@"发起时间";

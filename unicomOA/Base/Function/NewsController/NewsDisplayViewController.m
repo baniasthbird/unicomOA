@@ -155,6 +155,7 @@ int i_comment_num;
 
 -(void)CommentEvent:(UIButton*)btn {
     CommentViewController *viewController=[[CommentViewController alloc]init];
+    viewController.userInfo=_userInfo;
    // viewController.str=[NSString stringWithFormat:@"%d",i_comment_num];
     [self.navigationController pushViewController:viewController animated:YES];
 }

@@ -182,15 +182,15 @@
     }
     else if (indexPath.row==1) {
         cell.textLabel.text=@"申请人";
-        cell.detailTextLabel.text=@"张三";
+        cell.detailTextLabel.text=_userInfo.str_name;
     }
     else if (indexPath.row==2) {
         cell.textLabel.text=@"所在部门";
-        cell.detailTextLabel.text=@"产品部";
+        cell.detailTextLabel.text=_userInfo.str_department;
     }
     else if (indexPath.row==3) {
         cell.textLabel.text=@"联系电话";
-        cell.detailTextLabel.text=@"13812345678";
+        cell.detailTextLabel.text=_userInfo.str_cellphone;
     }
     else if (indexPath.row==4) {
         cell.textLabel.text=@"用车类别";

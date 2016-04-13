@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UserInfo.h"
 
 @protocol FocusNewsPassDelegate
 
@@ -27,6 +28,8 @@
 @property (strong,nonatomic) UILabel *lbl_depart;
 
 @property (assign) NSInteger *news_index;
+
+@property (strong,nonatomic) UserInfo *userInfo;
 
 @property (retain,nonatomic) id <FocusNewsPassDelegate> delegate;
 

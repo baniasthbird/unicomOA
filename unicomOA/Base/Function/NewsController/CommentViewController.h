@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UserInfo.h"
 
 @interface CommentViewController : UIViewController
 
 @property (nonatomic,strong) NSString *str_comment;
+
+@property (nonatomic,strong) UserInfo *userInfo;
 
 @end
