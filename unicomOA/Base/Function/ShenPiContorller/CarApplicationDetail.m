@@ -32,11 +32,20 @@
     UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"  " style:UIBarButtonItemStyleDone target:self action:@selector(MovePreviousVc:)];
     barButtonItem.tintColor=[UIColor whiteColor];
     [barButtonItem setImage:[UIImage imageNamed:@"returnlogo.png"]];
+    self.navigationItem.leftBarButtonItem=barButtonItem;
     
     _tableview=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped];
     _tableview.delegate=self;
     _tableview.dataSource=self;
     _tableview.backgroundColor=[UIColor clearColor];
+    
+    if (_arr_ShenPiStatus==nil) {
+        _arr_ShenPiStatus=[[NSMutableArray alloc]init];
+    }
+ 
+  //  _arr_ShenPiStatus=[[NSMutableArray alloc]initWithCapacity:2];
+        
+    
     
     [self.view addSubview:_tableview];
     
@@ -63,18 +72,18 @@
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *ID=@"cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
-    //UITableViewCell *cell=[tableView cellForRowAtIndexPath:indexPath];
-    if (cell==nil) {
-        cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:ID];
-    }
-    cell.textLabel.textAlignment=NSTextAlignmentLeft;
-    cell.textLabel.textColor=[UIColor colorWithRed:152/255.0f green:152/255.0f blue:152/255.0f alpha:1];
-    cell.detailTextLabel.textColor=[UIColor colorWithRed:152/255.0f green:152/255.0f blue:152/255.0f alpha:1];
-    cell.textLabel.font=[UIFont systemFontOfSize:13];
-    cell.detailTextLabel.font=[UIFont systemFontOfSize:13];
+    
     
     if (indexPath.section==0) {
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        if (cell==nil) {
+            cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:ID];
+        }
+        cell.textLabel.textAlignment=NSTextAlignmentLeft;
+        cell.textLabel.textColor=[UIColor colorWithRed:152/255.0f green:152/255.0f blue:152/255.0f alpha:1];
+        cell.detailTextLabel.textColor=[UIColor colorWithRed:152/255.0f green:152/255.0f blue:152/255.0f alpha:1];
+        cell.textLabel.font=[UIFont systemFontOfSize:13];
+        cell.detailTextLabel.font=[UIFont systemFontOfSize:13];
         if (indexPath.row==0) {
             cell.textLabel.text=@"申请流程";
             cell.detailTextLabel.text=@"预约用车";
@@ -131,14 +140,29 @@
             cell.textLabel.text=@"备注信息";
             cell.detailTextLabel.text=_service.str_remark;
         }
-    }
-    
-    else if (indexPath.section==1) {
-        ShenPiResultCell *cell=[ShenPiResultCell cellWithTable:tableView withImage:@"headLogo.png" withName:@"李四" withStatus:_str_status withTime:_str_time atIndex:indexPath];
         return cell;
     }
     
-    return cell;
+    else {
+        if (_arr_ShenPiStatus.count>0) {
+            if (indexPath.row<=_arr_ShenPiStatus.count-1) {
+                ShenPiStatus *tmp_status=[_arr_ShenPiStatus objectAtIndex:indexPath.row];
+                ShenPiResultCell *cell=[ShenPiResultCell cellWithTable:tableView withImage:tmp_status.str_Logo withName:tmp_status.str_name withStatus:tmp_status.str_status withTime:tmp_status.str_time atIndex:indexPath];
+                return cell;
+            }
+            else {
+                ShenPiResultCell *cell=[ShenPiResultCell cellWithTable:tableView withImage:@"headLogo.png" withName:@"李四" withStatus:@"审批中" withTime:@"04-04 16:16" atIndex:indexPath];
+                return cell;
+                
+            }
+        }
+        else {
+            ShenPiResultCell *cell=[ShenPiResultCell cellWithTable:tableView withImage:@"headLogo.png" withName:@"李四" withStatus:@"审批中" withTime:@"04-04 16:16" atIndex:indexPath];
+            return cell;
+        }
+    }
+    
+    
 }
 
 
@@ -200,5 +224,25 @@
     return days;
 }
 
+-(void)ModifyCellStatus:(ShenPiResultCell*)cell Status:(NSString *)str_status Time:(NSString*)str_time {
+    cell.lbl_status.text=str_status;
+    cell.lbl_time.text=str_time;
+    [self.tableview reloadData];
+}
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (_arr_ShenPiStatus.count>0) {
+        if (indexPath.section==1) {
+            if ([cell isMemberOfClass:[ShenPiResultCell class]]) {
+                    ShenPiResultCell *cell_ShenPi=(ShenPiResultCell*)cell;
+                    ShenPiStatus *tmp_Status=(ShenPiStatus*)[_arr_ShenPiStatus objectAtIndex:indexPath.row];
+                    NSString *str_status=tmp_Status.str_status;
+                    NSString *str_time=tmp_Status.str_time;
+                    [self ModifyCellStatus:cell_ShenPi Status:str_status Time:str_time];
+                }
+            }
+        }
+    
+}
 
 @end

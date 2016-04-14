@@ -227,8 +227,7 @@
     if ([cell.str_category isEqualToString:@"预约用车"]) {
         CarShenPiDetail *viewController=[[CarShenPiDetail alloc]init];
         viewController.service=cell.car_service;
-        viewController.str_time=@"04-04 16:06";
-        viewController.str_status=@"审批中";
+        viewController.user_Info=_userInfo;
         [self.navigationController pushViewController:viewController animated:YES];
     }
     else if ([cell.str_category isEqualToString:@"复印"]) {

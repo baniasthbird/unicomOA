@@ -60,7 +60,16 @@
 }
 
 -(void)NewVc:(UIButton*)sender {
-    
+    ShenPiStatus *tmp_Status=[[ShenPiStatus alloc]init];
+    tmp_Status.str_Logo=_userInfo.str_Logo;
+    tmp_Status.str_name=_userInfo.str_name;
+    tmp_Status.str_status=@"同意";
+    NSDate *  senddate=[NSDate date];
+    NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
+    [dateformatter setDateFormat:@"MM-dd HH:mm"];
+    NSString *  locationString=[dateformatter stringFromDate:senddate];
+    tmp_Status.str_time=locationString;
+    [_delegate SendAgreeStatus:tmp_Status];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

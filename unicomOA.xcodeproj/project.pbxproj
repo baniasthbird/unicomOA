@@ -95,6 +95,7 @@
 		6846D3631CABC496004BD285 /* RadioGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 6846D3611CABC496004BD285 /* RadioGroup.m */; };
 		6882C3181CA8D78300CDEB1A /* LogoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6882C3171CA8D78300CDEB1A /* LogoView.m */; };
 		6882C3211CA92C4B00CDEB1A /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6882C3201CA92C4B00CDEB1A /* CommentViewController.m */; };
+		68C0A5BC1CBF6667008BEE27 /* ShenPiStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C0A5BB1CBF6667008BEE27 /* ShenPiStatus.m */; };
 		68D05CBA1C9791000039220F /* PasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D05CB91C9791000039220F /* PasswordViewController.m */; };
 		68D05CC01C97AC050039220F /* SendFeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D05CBF1C97AC050039220F /* SendFeedBackViewController.m */; };
 		68D05CC41C97B3530039220F /* SendFeedbackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D05CC31C97B3530039220F /* SendFeedbackView.m */; };
@@ -372,6 +373,8 @@
 		6882C3171CA8D78300CDEB1A /* LogoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LogoView.m; path = Base/Contact/View/LogoView.m; sourceTree = "<group>"; };
 		6882C31F1CA92C4B00CDEB1A /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommentViewController.h; path = Base/Function/NewsController/CommentViewController.h; sourceTree = "<group>"; };
 		6882C3201CA92C4B00CDEB1A /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommentViewController.m; path = Base/Function/NewsController/CommentViewController.m; sourceTree = "<group>"; };
+		68C0A5BA1CBF6667008BEE27 /* ShenPiStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShenPiStatus.h; path = Base/Function/ShenPiModel/ShenPiStatus.h; sourceTree = "<group>"; };
+		68C0A5BB1CBF6667008BEE27 /* ShenPiStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShenPiStatus.m; path = Base/Function/ShenPiModel/ShenPiStatus.m; sourceTree = "<group>"; };
 		68D05CB81C9791000039220F /* PasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PasswordViewController.h; path = Base/Settings/Controller/PasswordViewController.h; sourceTree = "<group>"; };
 		68D05CB91C9791000039220F /* PasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PasswordViewController.m; path = Base/Settings/Controller/PasswordViewController.m; sourceTree = "<group>"; };
 		68D05CBE1C97AC050039220F /* SendFeedBackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SendFeedBackViewController.h; path = Base/Settings/Controller/SendFeedBackViewController.h; sourceTree = "<group>"; };
@@ -1243,6 +1246,8 @@
 				6838152F1CBC79F500E6AFD3 /* CarService.m */,
 				683815311CBC7A2100E6AFD3 /* PrintService.h */,
 				683815321CBC7A2100E6AFD3 /* PrintService.m */,
+				68C0A5BA1CBF6667008BEE27 /* ShenPiStatus.h */,
+				68C0A5BB1CBF6667008BEE27 /* ShenPiStatus.m */,
 			);
 			name = ShenPiModel;
 			sourceTree = "<group>";
@@ -1540,6 +1545,7 @@
 				2CFEADB41C76A6350054730E /* CellFrameModel.m in Sources */,
 				68D05CC41C97B3530039220F /* SendFeedbackView.m in Sources */,
 				2CDC2BF51C924DAC0067693B /* NewsDisplayViewController.m in Sources */,
+				68C0A5BC1CBF6667008BEE27 /* ShenPiStatus.m in Sources */,
 				68EEDE581CBB2E19003295EB /* DYCAddressPickerView.m in Sources */,
 				683815301CBC79F500E6AFD3 /* CarService.m in Sources */,
 				683815421CBCDAA400E6AFD3 /* PrintFileDetail.m in Sources */,

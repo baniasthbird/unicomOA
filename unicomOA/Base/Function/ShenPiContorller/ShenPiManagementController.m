@@ -115,6 +115,7 @@
     MyApplication *viewController=[[MyApplication alloc]init];
     viewController.delegate=self;
     viewController.userInfo=_userInfo;
+    viewController.arr_MyApplication=_arr_application;
     [self.navigationController pushViewController:viewController animated:YES];
 }
 

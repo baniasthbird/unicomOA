@@ -7,7 +7,11 @@
 //
 
 #import "CarApplicationDetail.h"
+#import "UserInfo.h"
+
 
 @interface CarShenPiDetail : CarApplicationDetail
+
+@property (nonatomic,strong) UserInfo *user_Info;
 
 @end

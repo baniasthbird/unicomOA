@@ -15,4 +15,8 @@
 /** 快速创建cell的方法 在编辑数据时使用**/
 + (instancetype)cellWithTable:(UITableView *)tableView withImage:(NSString*)str_Image withName:(NSString*)str_Name withStatus:(NSString*)str_status withTime:(NSString*)str_time atIndex:(NSIndexPath*)indexPath;
 
+@property (nonatomic,strong) UILabel *lbl_status;
+
+@property (nonatomic,strong) UILabel *lbl_time;
+
 @end

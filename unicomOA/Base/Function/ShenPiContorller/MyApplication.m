@@ -14,6 +14,7 @@
 #import "MyApplicationCell.h"
 #import "CarApplicationDetail.h"
 #import "PrintApplicationDetail.h"
+#import "ShenPiStatus.h"
 
 @interface MyApplication()<UITableViewDelegate,UITableViewDataSource,NewApplicationDelegate>
 
@@ -29,8 +30,6 @@
 
 @property (nonatomic,strong) UITableView *tableView;
 
-//我的申请事项
-@property (nonatomic,strong) NSMutableArray *arr_MyApplication;
 
 @end
 
@@ -39,7 +38,7 @@
 
 -(void)viewDidLoad {
     [super viewDidLoad];
-    self.title=@"我的审批";
+    self.title=@"我的申请";
     
     NSDictionary * dict=@{
                           NSForegroundColorAttributeName:   [UIColor whiteColor]};
@@ -69,8 +68,7 @@
     self.rightArray=@[@"全部",@"复印",@"预约用车"];
 
     [self setupTopView];
-    
-    _arr_MyApplication=[[NSMutableArray alloc]initWithCapacity:0];
+
     
     _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, self.view.frame.size.height-150) style:UITableViewStylePlain];
     _tableView.delegate=self;
@@ -236,9 +234,7 @@
     if (cell.car_service!=nil) {
         CarApplicationDetail *viewController=[[CarApplicationDetail alloc]init];
         viewController.service=cell.car_service;
-        viewController.str_status=cell.str_status;
-        viewController.str_time=cell.str_time;
-        
+        viewController.userInfo=_userInfo;
         [self.navigationController pushViewController:viewController animated:YES];
     }
     else if (cell.print_service!=nil) {
@@ -266,6 +262,21 @@
     [_delegate PassArray:_arr_MyApplication];
     [self.tableView reloadData];
    
+}
+
+
+//临时创建领导审批
+-(ShenPiStatus*)CreateShenPiStatus {
+    ShenPiStatus *tmp_status=[[ShenPiStatus alloc]init];
+    tmp_status.str_name=@"李四";
+    tmp_status.str_Logo=@"headLogo.png";
+    tmp_status.str_status=@"申请中";
+    NSDate *  senddate=[NSDate date];
+    NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
+    [dateformatter setDateFormat:@"MM-dd HH:mm"];
+    NSString *  locationString=[dateformatter stringFromDate:senddate];
+    tmp_status.str_time=locationString;
+    return tmp_status;
 }
 
 

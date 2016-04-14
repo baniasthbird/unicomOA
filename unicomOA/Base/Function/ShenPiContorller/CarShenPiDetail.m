@@ -10,6 +10,11 @@
 #import "ShenPiAgree.h"
 #import "ShenPiDisAgree.h"
 #import "ShenPiCopy.h"
+#import "ShenPiResultCell.h"
+
+@interface CarShenPiDetail()<ShenPiAgreeDelegate>
+
+@end
 
 @implementation CarShenPiDetail
 
@@ -45,6 +50,8 @@
 
 -(void)SignToAgree:(UIButton*)sender {
     ShenPiAgree *viewController=[[ShenPiAgree alloc]init];
+    viewController.delegate=self;
+    viewController.userInfo=_user_Info;
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
@@ -69,6 +76,11 @@
 
 -(void)MovePreviousVc:(UIButton*)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)SendAgreeStatus:(ShenPiStatus *)tmp_status {
+    [self.arr_ShenPiStatus addObject:tmp_status];
+
 }
 
 @end

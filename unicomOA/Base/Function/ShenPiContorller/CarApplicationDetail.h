@@ -8,19 +8,22 @@
 
 #import <UIKit/UIKit.h>
 #import "CarService.h"
+#import "ShenPiStatus.h"
+#import "UserInfo.h"
 
 @interface CarApplicationDetail : UIViewController
 
 //用车详情
 @property (nonatomic,strong) CarService *service;
 
-//审批状态
-@property (nonatomic,strong) NSString *str_status;
+//各级领导的审批状态
+@property (nonatomic,strong) NSMutableArray *arr_ShenPiStatus;
 
-//审批时间
-@property (nonatomic,strong) NSString *str_time;
 //tableView
-@property (nonatomic,strong) UITableView *tableview;
+@property  UITableView *tableview;
+
+@property (nonatomic,strong) UserInfo *userInfo;
+
 
 
 @end

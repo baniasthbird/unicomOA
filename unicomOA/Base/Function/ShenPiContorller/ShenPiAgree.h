@@ -7,7 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ShenPiStatus.h"
+#import "UserInfo.h"
+
+@class ShenPiAgree;
+
+@protocol ShenPiAgreeDelegate <NSObject>
+
+-(void)SendAgreeStatus:(ShenPiStatus*)tmp_status;
+
+@end
 
 @interface ShenPiAgree : UIViewController
+
+@property (nonatomic,strong) id<ShenPiAgreeDelegate>delegate;
+
+@property (nonatomic,strong) UserInfo *userInfo;
 
 @end

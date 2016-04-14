@@ -23,4 +23,6 @@
 
 @property (nonatomic,strong) id<MyApplicationDelegate> delegate;
 
+@property (nonatomic,strong) NSMutableArray *arr_MyApplication;
+
 @end
