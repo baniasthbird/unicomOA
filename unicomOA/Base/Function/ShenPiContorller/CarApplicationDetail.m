@@ -227,13 +227,15 @@
 -(void)ModifyCellStatus:(ShenPiResultCell*)cell Status:(NSString *)str_status Time:(NSString*)str_time {
     cell.lbl_status.text=str_status;
     cell.lbl_time.text=str_time;
-    [self.tableview reloadData];
+    NSIndexSet *nd=[[NSIndexSet alloc]initWithIndex:1];
+    [self.tableview reloadSections:nd withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (_arr_ShenPiStatus.count>0) {
+    if (_arr_ShenPiStatus.count>0 ) {
         if (indexPath.section==1) {
-            if ([cell isMemberOfClass:[ShenPiResultCell class]]) {
+            if (indexPath.row<=_arr_ShenPiStatus.count-1) {
+                if ([cell isMemberOfClass:[ShenPiResultCell class]]) {
                     ShenPiResultCell *cell_ShenPi=(ShenPiResultCell*)cell;
                     ShenPiStatus *tmp_Status=(ShenPiStatus*)[_arr_ShenPiStatus objectAtIndex:indexPath.row];
                     NSString *str_status=tmp_Status.str_status;
@@ -242,6 +244,8 @@
                 }
             }
         }
+        
+    }
     
 }
 
