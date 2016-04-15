@@ -10,7 +10,7 @@
 #import "CarDeployCell.h"
 
 
-@interface ShenPiAgreeWithCarDeploy()<UITextViewDelegate,UITableViewDelegate,UITableViewDataSource>
+@interface ShenPiAgreeWithCarDeploy()<UITextViewDelegate,UITableViewDelegate,UITableViewDataSource,UISearchResultsUpdating>
 
 @property (nonatomic,strong) UILabel *lbl_tip;
 
@@ -20,9 +20,7 @@
 
 @property (nonatomic,strong) NSArray *filterData;
 
-@property (nonatomic,strong) UISearchController *serachController;
-
-@property (nonatomic,strong) UISearchBar *searchBar;
+@property (nonatomic,strong) UISearchController *searchController;
 
 @end
 
@@ -67,8 +65,13 @@
      UILabel *lbl_tabletitle_3=[self createTitleLabel:@"颜色" x:self.view.frame.size.width/2];
      UILabel *lbl_tabletitle_4=[self createTitleLabel:@"司机" x:3*self.view.frame.size.width/4];
     
-    _searchBar=[[UISearchBar alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.18-44,self.view.frame.size.width , 44)];
-    _searchBar.placeholder=@"请按照车牌号/车型/颜色/司机搜索";
+    self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
+    self.searchController.searchResultsUpdater = self;
+    self.searchController.dimsBackgroundDuringPresentation = false;
+    [self.searchController.searchBar sizeToFit];
+    self.searchController.searchBar.placeholder=@"请按照车牌号/车型/颜色/司机搜索";
+    //self.tableView.tableHeaderView = self.searchController.searchBar;
+    
     
     
     UITableView *tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.18, self.view.frame.size.width, self.view.frame.size.height*0.3) style:UITableViewStylePlain];
@@ -76,7 +79,7 @@
     tableView.dataSource=self;
     tableView.backgroundColor=[UIColor whiteColor];
     
-    tableView.tableHeaderView=_searchBar;
+    tableView.tableHeaderView=self.searchController.searchBar;
 
 
     [self.view addSubview:txt_View];
@@ -199,7 +202,11 @@
     _tmp_model.str_color=cell.lbl_Color.text;
     _tmp_model.str_driver=cell.lbl_driver.text;
     
-    _searchBar.text=[NSString stringWithFormat:@"%@  %@  %@  %@",cell.lbl_ID.text,cell.lbl_Brand.text,cell.lbl_Color.text,cell.lbl_driver.text];
+    self.searchController.searchBar.text=[NSString stringWithFormat:@"%@  %@  %@  %@",cell.lbl_ID.text,cell.lbl_Brand.text,cell.lbl_Color.text,cell.lbl_driver.text];
+    
+}
+
+-(void)updateSearchResultsForSearchController:(UISearchController *)searchController {
     
 }
 
