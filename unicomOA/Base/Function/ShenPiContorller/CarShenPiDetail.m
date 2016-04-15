@@ -11,8 +11,13 @@
 #import "ShenPiDisAgree.h"
 #import "ShenPiCopy.h"
 #import "ShenPiResultCell.h"
+#import "ShenPiAgreeWithCarDeploy.h"
 
-@interface CarShenPiDetail()<ShenPiAgreeDelegate>
+@interface CarShenPiDetail()<ShenPiAgreeDelegate,ShenPiDisAgreeDelegate,ShenPiAgreeWithCarDeployDelegate>
+
+@property (nonatomic,strong) UIButton *btn_agree;
+
+@property (nonatomic,strong) UIButton *btn_disagree;
 
 @end
 
@@ -28,35 +33,57 @@
     self.navigationItem.leftBarButtonItem=barButtonItem;
     
     
-    UIButton *btn_agree=[self CreateButton:0 y:self.view.frame.size.height-100 width:self.view.frame.size.width/3 height:50 text:@"同意"];
+    _btn_agree=[self CreateButton:0 y:self.view.frame.size.height-100 width:self.view.frame.size.width/3 height:50 text:@"同意"];
     
     
     
-    UIButton *btn_disagree=[self CreateButton:self.view.frame.size.width/3 y:self.view.frame.size.height-100 width:self.view.frame.size.width/3 height:50 text:@"不同意"];
+    _btn_disagree=[self CreateButton:self.view.frame.size.width/3 y:self.view.frame.size.height-100 width:self.view.frame.size.width/3 height:50 text:@"不同意"];
     
     UIButton *btn_copy=[self CreateButton:2*self.view.frame.size.width/3 y:self.view.frame.size.height-100 width:self.view.frame.size.width/3 height:50 text:@"抄送"];
     
     
-    [btn_agree addTarget:self action:@selector(SignToAgree:) forControlEvents:UIControlEventTouchUpInside];
+    [_btn_agree addTarget:self action:@selector(SignToAgree:) forControlEvents:UIControlEventTouchUpInside];
     
-    [btn_disagree addTarget:self action:@selector(SignToDissAgree:) forControlEvents:UIControlEventTouchUpInside];
+    [_btn_disagree addTarget:self action:@selector(SignToDissAgree:) forControlEvents:UIControlEventTouchUpInside];
     
     [btn_copy addTarget:self action:@selector(SignToCopy:) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.view addSubview:btn_agree];
-    [self.view addSubview:btn_disagree];
+    if (_b_IsEnabled==NO) {
+        [_btn_agree setEnabled:NO];
+        [_btn_disagree setEnabled:NO];
+    }
+    else if (_b_IsEnabled==YES) {
+        [_btn_disagree setEnabled:YES];
+        [_btn_agree setEnabled:YES];
+    }
+    
+    [self.view addSubview:_btn_agree];
+    [self.view addSubview:_btn_disagree];
     [self.view addSubview:btn_copy];
 }
 
 -(void)SignToAgree:(UIButton*)sender {
-    ShenPiAgree *viewController=[[ShenPiAgree alloc]init];
-    viewController.delegate=self;
-    viewController.userInfo=_user_Info;
-    [self.navigationController pushViewController:viewController animated:YES];
+    if (self.service.shenpi_1!=nil && self.service.shenpi_2==nil) {
+        ShenPiAgreeWithCarDeploy *viewController=[[ShenPiAgreeWithCarDeploy alloc]init];
+        viewController.delegate=self;
+        viewController.user_info=_user_Info;
+        [self.navigationController pushViewController:viewController animated:YES];
+        
+    }
+    else if (self.service.shenpi_1==nil && self.service.shenpi_2==nil) {
+        ShenPiAgree *viewController=[[ShenPiAgree alloc]init];
+        viewController.delegate=self;
+        viewController.userInfo=_user_Info;
+        [self.navigationController pushViewController:viewController animated:YES];
+    }
+    
 }
 
 -(void)SignToDissAgree:(UIButton*)sender {
-    
+    ShenPiDisAgree *viewController=[[ShenPiDisAgree alloc]init];
+    viewController.delegate=self;
+    viewController.userInfo=_user_Info;
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 -(void)SignToCopy:(UIButton*)sender {
@@ -75,12 +102,39 @@
 }
 
 -(void)MovePreviousVc:(UIButton*)sender {
+    [_delegate CarRefreshTableView];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)SendAgreeStatus:(ShenPiStatus *)tmp_status {
-    [self.arr_ShenPiStatus addObject:tmp_status];
+    if (self.service.shenpi_1==nil) {
+        self.service.shenpi_1=tmp_status;
+    }
+    else if (self.service.shenpi_2==nil) {
+        self.service.shenpi_2=tmp_status;
+        [_btn_agree setEnabled:NO];
+        [_btn_disagree setEnabled:NO];
+    }
+    [self.tableview reloadData];
+    
+}
 
+-(void)SendDisAgreeStatus:(ShenPiStatus *)tmp_Status {
+    if (self.service.shenpi_1==nil) {
+        self.service.shenpi_1=tmp_Status;
+        [_btn_agree setEnabled:NO];
+        [_btn_disagree setEnabled:NO];
+    }
+    else if (self.service.shenpi_2==nil) {
+        self.service.shenpi_2=tmp_Status;
+        [_btn_agree setEnabled:NO];
+        [_btn_disagree setEnabled:NO];
+    }
+    [self.tableview reloadData];
+}
+
+-(void)SendAgreeStatus:(ShenPiStatus *)tmp_status CarModel:(CarModel *)model {
+    
 }
 
 @end

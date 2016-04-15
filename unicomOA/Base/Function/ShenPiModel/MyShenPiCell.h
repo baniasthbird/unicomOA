@@ -22,4 +22,6 @@
 
 @property (nonatomic,strong) PrintService *print_service;
 
+@property (nonatomic,strong) UILabel *lbl_status;
+
 @end

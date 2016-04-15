@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ShenPiStatus.h"
+#import "CarModel.h"
 //预约用车业务
 
 @interface CarService : NSObject
@@ -43,5 +45,18 @@
 
 //备注信息
 @property (nonatomic,strong) NSString *str_remark;
+
+//部门领导审批
+@property (nonatomic,strong) ShenPiStatus *shenpi_1;
+
+//车辆管理员审批
+@property (nonatomic,strong) ShenPiStatus *shenpi_2;
+
+//申请时间
+@property (nonatomic,strong) NSString *str_applicationTime;
+
+@property (nonatomic,strong) CarModel *car_model;
+
+
 
 @end

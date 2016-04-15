@@ -7,7 +7,21 @@
 //
 
 #import "PrintApplicationDetail.h"
+#import "UserInfo.h"
+
+@class PrintShenPiDetail;
+@protocol PrintShenPiDetailDelegate <NSObject>
+
+-(void)PrintRefreshTableView;
+
+@end
 
 @interface PrintShenPiDetail : PrintApplicationDetail
+
+@property (nonatomic,strong) UserInfo *user_Info;
+
+@property (nonatomic,strong) id<PrintShenPiDetailDelegate> delegate;
+
+@property  BOOL b_isEnabled;
 
 @end

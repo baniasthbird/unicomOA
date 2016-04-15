@@ -40,6 +40,8 @@
     txt_View.backgroundColor=[UIColor whiteColor];
     txt_View.delegate=self;
     
+    
+    
     _lbl_tip=[[UILabel alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.15, 200, 20)];
     _lbl_tip.text=@"填写意见说明（非必填）";
     _lbl_tip.textColor=[UIColor colorWithRed:116/255.0f green:116/255.0f blue:116/255.0f alpha:1];

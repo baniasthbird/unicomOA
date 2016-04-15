@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "PrintFiles.h"
+#import "ShenPiStatus.h"
 //复印业务
 
 @interface PrintService : NSObject
@@ -32,5 +33,15 @@
 
 //复印文件
 @property (nonatomic,strong) NSArray *arr_PrintFiles;
+
+//部门主任
+@property (nonatomic,strong) ShenPiStatus *shenpi_1;
+
+//出版室
+@property (nonatomic,strong) ShenPiStatus *shenpi_2;
+
+//申请时间
+@property (nonatomic,strong) NSString *str_applicationTime;
+
 
 @end

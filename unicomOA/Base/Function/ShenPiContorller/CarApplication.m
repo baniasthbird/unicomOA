@@ -483,6 +483,13 @@
         PrintApplicationDetailCell *cell_2=[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:12 inSection:0]];
         tmp_carservice.str_remark=cell_2.txt_detail.text;
     }
+    
+    //申请时间
+    NSDate *  senddate=[NSDate date];
+    NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
+    [dateformatter setDateFormat:@"MM-dd HH:mm"];
+    NSString *  locationString=[dateformatter stringFromDate:senddate];
+    tmp_carservice.str_applicationTime=locationString;
 
     return tmp_carservice;
     

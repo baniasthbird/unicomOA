@@ -63,9 +63,20 @@
         lbl_category.textColor=[UIColor blackColor];
         lbl_category.font=[UIFont systemFontOfSize:13];
         lbl_category.textAlignment=NSTextAlignmentCenter;
-        lbl_status.textColor=[UIColor colorWithRed:247/255.0f green:153/255.0f blue:4/255.0f alpha:1];
+        
+        
         lbl_status.font=[UIFont systemFontOfSize:13];
         lbl_status.textAlignment=NSTextAlignmentCenter;
+        if ([lbl_status.text isEqualToString:@"同意"]) {
+            lbl_status.textColor=[UIColor colorWithRed:103/255.0f green:204/255.0f blue:0 alpha:1];
+        }
+        else if ([lbl_status.text isEqualToString:@"不同意"]) {
+            lbl_status.textColor=[UIColor colorWithRed:226/255.0f green:19/255.0f blue:20/255.0f alpha:1];
+        }
+        else {
+            lbl_status.textColor=[UIColor colorWithRed:247/255.0f green:153/255.0f blue:4/255.0f alpha:1];
+        }
+        
 
         
         UILabel *lbl_title=[[UILabel alloc]initWithFrame:CGRectMake(10, 30, self.frame.size.width, 40)];

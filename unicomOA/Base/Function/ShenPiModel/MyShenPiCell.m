@@ -29,7 +29,7 @@
         UIImageView *img_Logo=[[UIImageView alloc]init];
         UILabel *lbl_name=[[UILabel alloc]init];
         UILabel *lbl_category=[[UILabel alloc]init];
-        UILabel *lbl_status=[[UILabel alloc]init];
+        _lbl_status=[[UILabel alloc]init];
         UIView  *view_line=[[UIView alloc]init];
         UILabel *lbl_Title=[[UILabel alloc]init];
         UILabel *lbl_time=[[UILabel alloc]init];
@@ -39,42 +39,53 @@
         [lbl_Title setFrame:CGRectMake(10, 60, 200, 20)];
         [lbl_time setFrame:CGRectMake(10, 90, 200, 20)];
         if (iPhone4_4s || iPhone5_5s) {
-            [lbl_status setFrame:CGRectMake(250, 20, 50, 20)];
+            [_lbl_status setFrame:CGRectMake(250, 20, 50, 20)];
             [view_line setFrame:CGRectMake(0, 50, 320, 1)];
             
         }
         else if (iPhone6) {
-            [lbl_status setFrame:CGRectMake(300, 20, 50, 20)];
+            [_lbl_status setFrame:CGRectMake(300, 20, 50, 20)];
             [view_line setFrame:CGRectMake(0, 50, 375, 1)];
             }
         else {
-            [lbl_status setFrame:CGRectMake(350, 20, 50, 20)];
+            [_lbl_status setFrame:CGRectMake(350, 20, 50, 20)];
             [view_line setFrame:CGRectMake(0, 50, 414, 1)];
         }
         img_Logo.image=[UIImage imageNamed:str_Image];
         lbl_name.textColor=[UIColor blackColor];
         lbl_category.textColor=[UIColor blackColor];
-        lbl_status.textColor=[UIColor colorWithRed:255/255.0f green:161/255.0f blue:0 alpha:1];
         lbl_Title.textColor=[UIColor blackColor];
         lbl_time.textColor=[UIColor colorWithRed:153/255.0f green:153/255.0f blue:153/255.0f alpha:1];
         view_line.backgroundColor=[UIColor colorWithRed:204/255.0f green:204/255.0f blue:204/255.0f alpha:1];
         
         lbl_name.font=[UIFont systemFontOfSize:13];
         lbl_category.font=[UIFont systemFontOfSize:13];
-        lbl_status.font=[UIFont systemFontOfSize:13];
+        _lbl_status.font=[UIFont systemFontOfSize:13];
         lbl_Title.font=[UIFont systemFontOfSize:13];
         lbl_time.font=[UIFont systemFontOfSize:13];
         
         lbl_name.text=str_Name;
         lbl_category.text=str_Categroy;
-        lbl_status.text=str_status;
+        _lbl_status.text=str_status;
         lbl_Title.text=str_Title;
         lbl_time.text=str_time;
+        
+        if ([_lbl_status.text isEqualToString:@"同意"]) {
+            _lbl_status.textColor=[UIColor colorWithRed:103/255.0f green:204/255.0f blue:0 alpha:1];
+        }
+        else if ([_lbl_status.text isEqualToString:@"不同意"]) {
+            _lbl_status.textColor=[UIColor colorWithRed:226/255.0f green:19/255.0f blue:20/255.0f alpha:1];
+        }
+        else {
+            _lbl_status.textColor=[UIColor colorWithRed:255/255.0f green:161/255.0f blue:0 alpha:1];
+            
+        }
+
         
         [self.contentView addSubview:img_Logo];
         [self.contentView addSubview:lbl_name];
         [self.contentView addSubview:lbl_category];
-        [self.contentView addSubview:lbl_status];
+        [self.contentView addSubview:_lbl_status];
         [self.contentView addSubview:view_line];
         [self.contentView addSubview:lbl_Title];
         [self.contentView addSubview:lbl_time];

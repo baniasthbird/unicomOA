@@ -211,14 +211,50 @@
     if (cell==nil) {
         if ([[_arr_MyApplication objectAtIndex:indexPath.section] isMemberOfClass:[CarService class]]) {
             CarService *tmp_service=[_arr_MyApplication objectAtIndex:indexPath.section];
-            cell=[MyApplicationCell cellWithTable:tableView withTitle:tmp_service.str_reason withStatus:@"审批中" isUsingCar:YES withTime:@"04-04 16:06"];
+            if (tmp_service.shenpi_1==nil && tmp_service.shenpi_2==nil) {
+                cell=[MyApplicationCell cellWithTable:tableView withTitle:tmp_service.str_reason withStatus:@"未处理" isUsingCar:YES withTime:tmp_service.str_applicationTime];
+            }
+            else if (tmp_service.shenpi_1!=nil && tmp_service.shenpi_2==nil) {
+                if ([tmp_service.shenpi_1.str_status isEqualToString:@"同意"]) {
+                    cell=[MyApplicationCell cellWithTable:tableView withTitle:tmp_service.str_reason withStatus:@"审批中" isUsingCar:YES withTime:tmp_service.shenpi_1.str_time];
+                }
+                else if ([tmp_service.shenpi_1.str_status isEqualToString:@"不同意"]) {
+                    cell=[MyApplicationCell cellWithTable:tableView withTitle:tmp_service.str_reason withStatus:@"不同意" isUsingCar:YES withTime:tmp_service.shenpi_1.str_time];
+                }
+            }
+            else if (tmp_service.shenpi_2!=nil ) {
+                if ([tmp_service.shenpi_2.str_status isEqualToString:@"同意"]) {
+                    cell=[MyApplicationCell cellWithTable:tableView withTitle:tmp_service.str_reason withStatus:@"同意" isUsingCar:YES withTime:tmp_service.shenpi_2.str_time];
+                }
+                else if ([tmp_service.shenpi_1.str_status isEqualToString:@"不同意"]) {
+                    cell=[MyApplicationCell cellWithTable:tableView withTitle:tmp_service.str_reason withStatus:@"不同意" isUsingCar:YES withTime:tmp_service.shenpi_2.str_time];
+                }
+            }
             cell.car_service=tmp_service;
             cell.str_status=@"审批中";
             cell.str_time=@"04-04 16:06";
         }
         else if ([[_arr_MyApplication objectAtIndex:indexPath.section] isMemberOfClass:[PrintService class]]) {
             PrintService *tmp_service=[_arr_MyApplication objectAtIndex:indexPath.section];
-            cell=[MyApplicationCell cellWithTable:tableView withTitle:[NSString stringWithFormat:@"%@%@",tmp_service.str_title,@"项目打印清单"] withStatus:@"审批中" isUsingCar:NO withTime:@"04-04 16:06"];
+            if (tmp_service.shenpi_1==nil && tmp_service.shenpi_2==nil) {
+                cell=[MyApplicationCell cellWithTable:tableView withTitle:[NSString stringWithFormat:@"%@%@",tmp_service.str_title,@"项目打印清单"] withStatus:@"未处理" isUsingCar:NO withTime:tmp_service.str_applicationTime];
+            }
+            else if (tmp_service.shenpi_1!=nil && tmp_service.shenpi_2==nil) {
+                if ([tmp_service.shenpi_1.str_status isEqualToString:@"同意"]) {
+                    cell=[MyApplicationCell cellWithTable:tableView withTitle:[NSString stringWithFormat:@"%@%@",tmp_service.str_title,@"项目打印清单"] withStatus:@"审批中" isUsingCar:NO withTime:tmp_service.shenpi_1.str_time];
+                }
+                else if ([tmp_service.shenpi_1.str_status isEqualToString:@"不同意"]) {
+                    cell=[MyApplicationCell cellWithTable:tableView withTitle:[NSString stringWithFormat:@"%@%@",tmp_service.str_title,@"项目打印清单"] withStatus:@"不同意" isUsingCar:NO withTime:tmp_service.shenpi_1.str_time];
+                }
+            }
+            else if (tmp_service.shenpi_2!=nil) {
+                if ([tmp_service.shenpi_2.str_status isEqualToString:@"同意"]) {
+                    cell=[MyApplicationCell cellWithTable:tableView withTitle:[NSString stringWithFormat:@"%@%@",tmp_service.str_title,@"项目打印清单"] withStatus:@"同意" isUsingCar:NO withTime:tmp_service.shenpi_2.str_time];
+                }
+                else if ([tmp_service.shenpi_1.str_status isEqualToString:@"不同意"]) {
+                    cell=[MyApplicationCell cellWithTable:tableView withTitle:[NSString stringWithFormat:@"%@%@",tmp_service.str_title,@"项目打印清单"] withStatus:@"不同意" isUsingCar:NO withTime:tmp_service.shenpi_2.str_time];
+                }
+            }
             cell.print_service=tmp_service;
             cell.str_status=@"审批中";
             cell.str_time=@"04-04 16:06";
@@ -240,9 +276,7 @@
     else if (cell.print_service!=nil) {
         PrintApplicationDetail *viewController=[[PrintApplicationDetail alloc]init];
         viewController.service=cell.print_service;
-        viewController.str_status=cell.str_status;
-        viewController.str_time=cell.str_time;
-        
+        viewController.userInfo=_userInfo;
         [self.navigationController pushViewController:viewController animated:YES];
     }
 }

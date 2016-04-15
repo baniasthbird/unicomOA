@@ -10,20 +10,18 @@
 #import "CarService.h"
 #import "ShenPiStatus.h"
 #import "UserInfo.h"
+#import "ShenPiResultCell.h"
 
 @interface CarApplicationDetail : UIViewController
 
 //用车详情
 @property (nonatomic,strong) CarService *service;
 
-//各级领导的审批状态
-@property (nonatomic,strong) NSMutableArray *arr_ShenPiStatus;
 
 //tableView
 @property  UITableView *tableview;
 
 @property (nonatomic,strong) UserInfo *userInfo;
-
 
 
 @end

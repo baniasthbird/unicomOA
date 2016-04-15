@@ -9,9 +9,19 @@
 #import "CarApplicationDetail.h"
 #import "UserInfo.h"
 
+@class CarShenPiDetail;
+@protocol CarShenPiDetailDelegate <NSObject>
+
+-(void)CarRefreshTableView;
+
+@end
 
 @interface CarShenPiDetail : CarApplicationDetail
 
 @property (nonatomic,strong) UserInfo *user_Info;
+
+@property (nonatomic,strong) id<CarShenPiDetailDelegate> delegate;
+
+@property BOOL b_IsEnabled;
 
 @end

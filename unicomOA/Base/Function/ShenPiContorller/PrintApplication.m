@@ -297,6 +297,13 @@
     
     //复印文件
     tmp_printService.arr_PrintFiles=_arr_printFiles;
+    
+    //申请时间
+    NSDate *  senddate=[NSDate date];
+    NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
+    [dateformatter setDateFormat:@"MM-dd HH:mm"];
+    NSString *  locationString=[dateformatter stringFromDate:senddate];
+    tmp_printService.str_applicationTime=locationString;
 
 
     return tmp_printService;

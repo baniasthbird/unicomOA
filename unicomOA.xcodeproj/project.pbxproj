@@ -93,6 +93,9 @@
 		6846D35C1CABAF4D004BD285 /* IVotingResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6846D35B1CABAF4D004BD285 /* IVotingResultViewController.m */; };
 		6846D3621CABC496004BD285 /* RadioBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 6846D35F1CABC496004BD285 /* RadioBox.m */; };
 		6846D3631CABC496004BD285 /* RadioGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 6846D3611CABC496004BD285 /* RadioGroup.m */; };
+		68579FA31CC0BBCE00597FBD /* ShenPiAgreeWithCarDeploy.m in Sources */ = {isa = PBXBuildFile; fileRef = 68579FA21CC0BBCE00597FBD /* ShenPiAgreeWithCarDeploy.m */; };
+		68579FA61CC0C21100597FBD /* CarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68579FA51CC0C21100597FBD /* CarModel.m */; };
+		68579FA91CC0C88600597FBD /* CarDeployCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68579FA81CC0C88600597FBD /* CarDeployCell.m */; };
 		6882C3181CA8D78300CDEB1A /* LogoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6882C3171CA8D78300CDEB1A /* LogoView.m */; };
 		6882C3211CA92C4B00CDEB1A /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6882C3201CA92C4B00CDEB1A /* CommentViewController.m */; };
 		68C0A5BC1CBF6667008BEE27 /* ShenPiStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C0A5BB1CBF6667008BEE27 /* ShenPiStatus.m */; };
@@ -369,6 +372,12 @@
 		6846D35F1CABC496004BD285 /* RadioBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RadioBox.m; path = OpenSource/RadioControl/RadioBox.m; sourceTree = "<group>"; };
 		6846D3601CABC496004BD285 /* RadioGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RadioGroup.h; path = OpenSource/RadioControl/RadioGroup.h; sourceTree = "<group>"; };
 		6846D3611CABC496004BD285 /* RadioGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RadioGroup.m; path = OpenSource/RadioControl/RadioGroup.m; sourceTree = "<group>"; };
+		68579FA11CC0BBCE00597FBD /* ShenPiAgreeWithCarDeploy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShenPiAgreeWithCarDeploy.h; path = Base/Function/ShenPiContorller/ShenPiAgreeWithCarDeploy.h; sourceTree = "<group>"; };
+		68579FA21CC0BBCE00597FBD /* ShenPiAgreeWithCarDeploy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShenPiAgreeWithCarDeploy.m; path = Base/Function/ShenPiContorller/ShenPiAgreeWithCarDeploy.m; sourceTree = "<group>"; };
+		68579FA41CC0C21100597FBD /* CarModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CarModel.h; path = Base/Function/ShenPiModel/CarModel.h; sourceTree = "<group>"; };
+		68579FA51CC0C21100597FBD /* CarModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CarModel.m; path = Base/Function/ShenPiModel/CarModel.m; sourceTree = "<group>"; };
+		68579FA71CC0C88600597FBD /* CarDeployCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CarDeployCell.h; path = Base/Function/ShenPiModel/CarDeployCell.h; sourceTree = "<group>"; };
+		68579FA81CC0C88600597FBD /* CarDeployCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CarDeployCell.m; path = Base/Function/ShenPiModel/CarDeployCell.m; sourceTree = "<group>"; };
 		6882C3161CA8D78300CDEB1A /* LogoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LogoView.h; path = Base/Contact/View/LogoView.h; sourceTree = "<group>"; };
 		6882C3171CA8D78300CDEB1A /* LogoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LogoView.m; path = Base/Contact/View/LogoView.m; sourceTree = "<group>"; };
 		6882C31F1CA92C4B00CDEB1A /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommentViewController.h; path = Base/Function/NewsController/CommentViewController.h; sourceTree = "<group>"; };
@@ -1192,6 +1201,8 @@
 				683815441CBCE28500E6AFD3 /* PrintFileNavCell.m */,
 				68DEEBC61CBDDA91003DB7AA /* MyShenPiCell.h */,
 				68DEEBC71CBDDA91003DB7AA /* MyShenPiCell.m */,
+				68579FA71CC0C88600597FBD /* CarDeployCell.h */,
+				68579FA81CC0C88600597FBD /* CarDeployCell.m */,
 			);
 			name = ShenPiViews;
 			sourceTree = "<group>";
@@ -1231,6 +1242,8 @@
 				68DEEBDC1CBE1D29003DB7AA /* ShenPiDisAgree.m */,
 				68DEEBDE1CBE1D61003DB7AA /* ShenPiCopy.h */,
 				68DEEBDF1CBE1D61003DB7AA /* ShenPiCopy.m */,
+				68579FA11CC0BBCE00597FBD /* ShenPiAgreeWithCarDeploy.h */,
+				68579FA21CC0BBCE00597FBD /* ShenPiAgreeWithCarDeploy.m */,
 			);
 			name = ShenPiController;
 			sourceTree = "<group>";
@@ -1248,6 +1261,8 @@
 				683815321CBC7A2100E6AFD3 /* PrintService.m */,
 				68C0A5BA1CBF6667008BEE27 /* ShenPiStatus.h */,
 				68C0A5BB1CBF6667008BEE27 /* ShenPiStatus.m */,
+				68579FA41CC0C21100597FBD /* CarModel.h */,
+				68579FA51CC0C21100597FBD /* CarModel.m */,
 			);
 			name = ShenPiModel;
 			sourceTree = "<group>";
@@ -1476,6 +1491,7 @@
 				68DEEBE01CBE1D61003DB7AA /* ShenPiCopy.m in Sources */,
 				68DEEBC51CBDCED6003DB7AA /* MyShenPiViewController.m in Sources */,
 				2CE320F11CB7FF4800B36793 /* CarApplication.m in Sources */,
+				68579FA31CC0BBCE00597FBD /* ShenPiAgreeWithCarDeploy.m in Sources */,
 				68EEDE771CBB911A003295EB /* MCPopMenuViewController.m in Sources */,
 				2C5460BD1C854733005C5AB9 /* TableViewCell.m in Sources */,
 				68F950B91C9F9E9000CA1519 /* ChangePhoneNumViewController.m in Sources */,
@@ -1499,6 +1515,7 @@
 				682B68B61CB64482002EC60F /* AddPrintFile.m in Sources */,
 				68ED4E581CB507B9000E8A7B /* PrintApplicationFileCell.m in Sources */,
 				68D05CC71C97F6470039220F /* AboutViewController.m in Sources */,
+				68579FA61CC0C21100597FBD /* CarModel.m in Sources */,
 				6822656F1C96B4C400AB29C0 /* NewsSettingViewController.m in Sources */,
 				2CFEADE61C7C05830054730E /* LYButton.m in Sources */,
 				68ED4E481CB4E3CF000E8A7B /* NewApplication.m in Sources */,
@@ -1566,6 +1583,7 @@
 				68EEDE731CBB911A003295EB /* MCPopMenuCell.m in Sources */,
 				2CFEADD31C770D6F0054730E /* UITableGridViewCell.m in Sources */,
 				68E77A2A1CB3A133006DA5B9 /* IQTextView.m in Sources */,
+				68579FA91CC0C88600597FBD /* CarDeployCell.m in Sources */,
 				68DEEBE31CBE30E6003DB7AA /* UserInfo.m in Sources */,
 				68EEDE781CBB911A003295EB /* UITableView+SDAutoTableViewCellHeight.m in Sources */,
 				2CFEAD301C7181F30054730E /* NTButton.m in Sources */,

@@ -7,6 +7,17 @@
 //
 
 #import "PrintShenPiDetail.h"
+#import "ShenPiAgree.h"
+#import "ShenPiDisAgree.h"
+
+@interface PrintShenPiDetail()<ShenPiAgreeDelegate,ShenPiDisAgreeDelegate>
+
+@property (nonatomic,strong) UIButton *btn_agree;
+
+@property (nonatomic,strong) UIButton *btn_disagree;
+
+@end
+
 
 @implementation PrintShenPiDetail
 
@@ -14,33 +25,51 @@
     [super viewDidLoad];
     [self.tableview setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-100)];
     
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"  " style:UIBarButtonItemStyleDone target:self action:@selector(MovePreviousVc:)];
+    barButtonItem.tintColor=[UIColor whiteColor];
+    [barButtonItem setImage:[UIImage imageNamed:@"returnlogo.png"]];
+    self.navigationItem.leftBarButtonItem=barButtonItem;
+
     
-    UIButton *btn_agree=[self CreateButton:0 y:self.view.frame.size.height-100 width:self.view.frame.size.width/3 height:50 text:@"同意"];
+    _btn_agree=[self CreateButton:0 y:self.view.frame.size.height-100 width:self.view.frame.size.width/3 height:50 text:@"同意"];
     
-    
-    
-    UIButton *btn_disagree=[self CreateButton:self.view.frame.size.width/3 y:self.view.frame.size.height-100 width:self.view.frame.size.width/3 height:50 text:@"不同意"];
+    _btn_disagree=[self CreateButton:self.view.frame.size.width/3 y:self.view.frame.size.height-100 width:self.view.frame.size.width/3 height:50 text:@"不同意"];
     
     UIButton *btn_copy=[self CreateButton:2*self.view.frame.size.width/3 y:self.view.frame.size.height-100 width:self.view.frame.size.width/3 height:50 text:@"抄送"];
     
     
-    [btn_agree addTarget:self action:@selector(SignToAgree:) forControlEvents:UIControlEventTouchUpInside];
+    [_btn_agree addTarget:self action:@selector(SignToAgree:) forControlEvents:UIControlEventTouchUpInside];
     
-    [btn_disagree addTarget:self action:@selector(SignToDissAgree:) forControlEvents:UIControlEventTouchUpInside];
+    [_btn_disagree addTarget:self action:@selector(SignToDissAgree:) forControlEvents:UIControlEventTouchUpInside];
     
     [btn_copy addTarget:self action:@selector(SignToCopy:) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.view addSubview:btn_agree];
-    [self.view addSubview:btn_disagree];
+    if (_b_isEnabled==YES) {
+        [_btn_agree setEnabled:YES];
+        [_btn_disagree setEnabled:YES];
+    }
+    else {
+        [_btn_disagree setEnabled:NO];
+        [_btn_agree setEnabled:NO];
+    }
+    
+    [self.view addSubview:_btn_agree];
+    [self.view addSubview:_btn_disagree];
     [self.view addSubview:btn_copy];
 }
 
 -(void)SignToAgree:(UIButton*)sender {
-    
+    ShenPiAgree *viewController=[[ShenPiAgree alloc]init];
+    viewController.delegate=self;
+    viewController.userInfo=_user_Info;
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 -(void)SignToDissAgree:(UIButton*)sender {
-    
+    ShenPiDisAgree *viewController=[[ShenPiDisAgree alloc]init];
+    viewController.delegate=self;
+    viewController.userInfo=_user_Info;
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 -(void)SignToCopy:(UIButton*)sender {
@@ -59,6 +88,38 @@
     btn_tmp.titleLabel.font=[UIFont systemFontOfSize:13];
     return btn_tmp;
     
+}
+
+
+-(void)SendAgreeStatus:(ShenPiStatus *)tmp_status {
+    if (self.service.shenpi_1==nil) {
+        self.service.shenpi_1=tmp_status;
+    }
+    else if (self.service.shenpi_2==nil) {
+        self.service.shenpi_2=tmp_status;
+        [_btn_agree setEnabled:NO];
+        [_btn_disagree setEnabled:NO];
+    }
+    [self.tableview reloadData];
+}
+
+-(void)MovePreviousVc:(UIButton*)sender {
+    [_delegate PrintRefreshTableView];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)SendDisAgreeStatus:(ShenPiStatus *)tmp_Status {
+    if (self.service.shenpi_1==nil) {
+        self.service.shenpi_1=tmp_Status;
+        [_btn_agree setEnabled:NO];
+        [_btn_disagree setEnabled:NO];
+    }
+    else if (self.service.shenpi_2==nil) {
+        self.service.shenpi_2=tmp_Status;
+        [_btn_agree setEnabled:NO];
+        [_btn_disagree setEnabled:NO];
+    }
+    [self.tableview reloadData];
 }
 
 @end

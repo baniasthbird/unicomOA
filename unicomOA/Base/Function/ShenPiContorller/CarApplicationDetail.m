@@ -7,7 +7,7 @@
 //
 
 #import "CarApplicationDetail.h"
-#import "ShenPiResultCell.h"
+
 
 @interface CarApplicationDetail()<UITableViewDelegate,UITableViewDataSource>
 
@@ -39,9 +39,6 @@
     _tableview.dataSource=self;
     _tableview.backgroundColor=[UIColor clearColor];
     
-    if (_arr_ShenPiStatus==nil) {
-        _arr_ShenPiStatus=[[NSMutableArray alloc]init];
-    }
  
   //  _arr_ShenPiStatus=[[NSMutableArray alloc]initWithCapacity:2];
         
@@ -144,25 +141,36 @@
     }
     
     else {
-        if (_arr_ShenPiStatus.count>0) {
-            if (indexPath.row<=_arr_ShenPiStatus.count-1) {
-                ShenPiStatus *tmp_status=[_arr_ShenPiStatus objectAtIndex:indexPath.row];
+        if (indexPath.row==0) {
+            if (_service.shenpi_1!=nil) {
+                ShenPiStatus *tmp_status=_service.shenpi_1;
                 ShenPiResultCell *cell=[ShenPiResultCell cellWithTable:tableView withImage:tmp_status.str_Logo withName:tmp_status.str_name withStatus:tmp_status.str_status withTime:tmp_status.str_time atIndex:indexPath];
                 return cell;
             }
             else {
                 ShenPiResultCell *cell=[ShenPiResultCell cellWithTable:tableView withImage:@"headLogo.png" withName:@"李四" withStatus:@"审批中" withTime:@"04-04 16:16" atIndex:indexPath];
                 return cell;
-                
+
             }
+            
+        }
+        else if (indexPath.row==1) {
+            if (_service.shenpi_2!=nil) {
+                ShenPiStatus *tmp_status=_service.shenpi_2;
+                ShenPiResultCell *cell=[ShenPiResultCell cellWithTable:tableView withImage:tmp_status.str_Logo withName:tmp_status.str_name withStatus:tmp_status.str_status withTime:tmp_status.str_time atIndex:indexPath];
+                return cell;
+            }
+            else {
+                ShenPiResultCell *cell=[ShenPiResultCell cellWithTable:tableView withImage:@"headLogo.png" withName:@"李四" withStatus:@"审批中" withTime:@"04-04 16:16" atIndex:indexPath];
+                return cell;
+            }
+            
         }
         else {
             ShenPiResultCell *cell=[ShenPiResultCell cellWithTable:tableView withImage:@"headLogo.png" withName:@"李四" withStatus:@"审批中" withTime:@"04-04 16:16" atIndex:indexPath];
             return cell;
         }
     }
-    
-    
 }
 
 
@@ -224,29 +232,8 @@
     return days;
 }
 
--(void)ModifyCellStatus:(ShenPiResultCell*)cell Status:(NSString *)str_status Time:(NSString*)str_time {
-    cell.lbl_status.text=str_status;
-    cell.lbl_time.text=str_time;
-    NSIndexSet *nd=[[NSIndexSet alloc]initWithIndex:1];
-    [self.tableview reloadSections:nd withRowAnimation:UITableViewRowAnimationAutomatic];
-}
 
--(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (_arr_ShenPiStatus.count>0 ) {
-        if (indexPath.section==1) {
-            if (indexPath.row<=_arr_ShenPiStatus.count-1) {
-                if ([cell isMemberOfClass:[ShenPiResultCell class]]) {
-                    ShenPiResultCell *cell_ShenPi=(ShenPiResultCell*)cell;
-                    ShenPiStatus *tmp_Status=(ShenPiStatus*)[_arr_ShenPiStatus objectAtIndex:indexPath.row];
-                    NSString *str_status=tmp_Status.str_status;
-                    NSString *str_time=tmp_Status.str_time;
-                    [self ModifyCellStatus:cell_ShenPi Status:str_status Time:str_time];
-                }
-            }
-        }
-        
-    }
-    
-}
+
+
 
 @end

@@ -8,19 +8,17 @@
 
 #import <UIKit/UIKit.h>
 #import "PrintService.h"
+#import "UserInfo.h"
 
 @interface PrintApplicationDetail : UIViewController
 
 //复印详情
 @property (nonatomic,strong) PrintService *service;
 
-//审批状态
-@property (nonatomic,strong) NSString *str_status;
-
-//审批时间
-@property (nonatomic,strong) NSString *str_time;
 
 //tableView
 @property (nonatomic,strong) UITableView *tableview;
+
+@property (nonatomic,strong) UserInfo *userInfo;
 
 @end
