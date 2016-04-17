@@ -20,8 +20,5 @@
 
 @property (strong,nonatomic) PrintService *print_service;
 
-@property (nonatomic,strong) NSString *str_status;
-
-@property (nonatomic,strong) NSString *str_time;
 
 @end

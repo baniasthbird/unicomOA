@@ -1,23 +1,22 @@
 //
-//  MyShenPiViewController.m
+//  SendMeViewController.m
 //  unicomOA
 //
-//  Created by hnsi-03 on 16/4/13.
+//  Created by zr-mac on 16/4/17.
 //  Copyright © 2016年 zr-mac. All rights reserved.
 //
 
-#import "MyShenPiViewController.h"
+#import "SendMeViewController.h"
 #import "UIView+SDAutoLayout.h"
 #import "MCMenuButton.h"
 #import "MCPopMenuViewController.h"
 #import "MyShenPiCell.h"
 #import "CarService.h"
 #import "PrintService.h"
-#import "CarShenPiDetail.h"
-#import "PrintShenPiDetail.h"
+#import "CarApplicationDetail.h"
+#import "PrintApplicationDetail.h"
 
-
-@interface MyShenPiViewController()<UITableViewDelegate,UITableViewDataSource,CarShenPiDetailDelegate,PrintShenPiDetailDelegate>
+@interface SendMeViewController()<UITableViewDelegate,UITableViewDataSource>
 
 /**
  *  头部筛选模块
@@ -33,19 +32,19 @@
 
 @property NSInteger i_sectionClicked;
 
-//审批状态搜索关键字
+//抄送给我搜索关键字
 @property (nonatomic,strong) NSString *str_searchKeyword1;
 
-//审批类型搜索关键字
+//抄送给我搜索关键字
 @property (nonatomic,strong) NSString *str_searchKeyword2;
 
 @end
 
-@implementation MyShenPiViewController
+@implementation SendMeViewController
 
 -(void)viewDidLoad {
     [super viewDidLoad];
-    self.title=@"我的审批";
+    self.title=@"抄送给我";
     
     NSDictionary * dict=@{
                           NSForegroundColorAttributeName:   [UIColor whiteColor]};
@@ -59,9 +58,7 @@
     
     [barButtonItem setTitleTextAttributes:dict forState:UIControlStateNormal];
     self.navigationItem.leftBarButtonItem = barButtonItem;
-    
 
-    
     self.view.backgroundColor=[UIColor colorWithRed:243/255.0f green:243/255.0f blue:243/255.0f alpha:1];
     
     if ([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)]) {
@@ -75,7 +72,7 @@
     
     _str_searchKeyword1=@"全部";
     _str_searchKeyword2=@"全部";
-    
+
     [self setupTopView];
     
     _i_sectionClicked=-1;
@@ -86,7 +83,9 @@
     _tableView.scrollEnabled=YES;
     _tableView.backgroundColor=[UIColor clearColor];
     [self.view addSubview:_tableView];
+
     
+
 }
 
 -(void)MovePreviousVc:(UIButton*)sender {
@@ -186,147 +185,16 @@
     };
 }
 
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    if ([_str_searchKeyword2 isEqualToString:@"全部"] && [_str_searchKeyword1 isEqualToString:@"全部"]) {
-        return [_arr_MyShenPi count];
-    }
-    else {
-        return   [_arr_SearchResult count];
-    }
-    
-}
-
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (iPhone4_4s || iPhone5_5s)
-        return 20;
-    else if (iPhone6)
-        return 30;
-    else
-        return 40;
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    if (iPhone4_4s || iPhone5_5s)
-        return 20;
-    else if (iPhone6)
-        return 30;
-    else
-        return 40;
-    
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 110;
-}
-
--(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-   // NSString *ID=@"cell";
-   NSString *ID=[NSString stringWithFormat:@"Cell%ld%ld",(long)[indexPath section],(long)[indexPath row]];
-    MyShenPiCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
-    
-    if (cell==nil) {
-       if ([_str_searchKeyword1 isEqualToString:@"全部"] && [_str_searchKeyword2 isEqualToString:@"全部"])
-       {
-           NSObject *obj=[_arr_MyShenPi objectAtIndex:indexPath.section];
-           
-           if ([obj isMemberOfClass:[CarService class]]) {
-               CarService *service=(CarService*)obj;
-               cell=[self CreateCarCell:service tableView:tableView atIndexPath:indexPath];
-           }
-           else if ([obj isMemberOfClass:[PrintService class]]) {
-               PrintService *service=(PrintService*)obj;
-               cell=[self CreatePrintCell:service tableView:tableView atIndexPath:indexPath];
-           }
-       }
-       else {
-           NSObject *obj=[_arr_SearchResult objectAtIndex:indexPath.section];
-           
-           if ([obj isMemberOfClass:[CarService class]]) {
-               CarService *service=(CarService*)obj;
-               cell=[self CreateCarCell:service tableView:tableView atIndexPath:indexPath];
-           }
-           else if ([obj isMemberOfClass:[PrintService class]]) {
-               PrintService *service=(PrintService*)obj;
-               cell=[self CreatePrintCell:service tableView:tableView atIndexPath:indexPath];
-           }
-
-           
-       }
-       
-        
-    }
-    return cell;
-}
-
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    MyShenPiCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-     _i_sectionClicked=indexPath.section;
-    if ([cell.str_category isEqualToString:@"预约用车"]) {
-        CarShenPiDetail *viewController=[[CarShenPiDetail alloc]init];
-        viewController.service=cell.car_service;
-        viewController.user_Info=_userInfo;
-        viewController.delegate=self;
-        if ([cell.lbl_status.text isEqualToString:@"同意"] || [cell.lbl_status.text isEqualToString:@"不同意"]) {
-            viewController.b_IsEnabled=NO;
-        }
-        else {
-            viewController.b_IsEnabled=YES;
-        }
-        [self.navigationController pushViewController:viewController animated:YES];
-    }
-    else if ([cell.str_category isEqualToString:@"复印"]) {
-        PrintShenPiDetail *viewController=[[PrintShenPiDetail alloc]init];
-        viewController.service=cell.print_service;
-        viewController.user_Info=_userInfo;
-        viewController.delegate=self;
-        if ([cell.lbl_status.text isEqualToString:@"同意"] || [cell.lbl_status.text isEqualToString:@"不同意"]) {
-            viewController.b_isEnabled=NO;
-        }
-        else {
-            viewController.b_isEnabled=YES;
-        }
-
-        [self.navigationController pushViewController:viewController animated:YES];
-    }
-}
-
-//刷新表格，后期刷新单个section
--(void)CarRefreshTableView {
-    [_tableView reloadData];
-    /*
-    if (_i_sectionClicked!=-1) {
-        NSIndexSet *nd=[[NSIndexSet alloc]initWithIndex:_i_sectionClicked];
-        [_tableView reloadSections:nd withRowAnimation:UITableViewRowAnimationAutomatic];
-    }
-     */
-    
-
-}
-
--(void)PrintRefreshTableView {
-    [_tableView reloadData];
-    /*
-     if (_i_sectionClicked!=-1) {
-     NSIndexSet *nd=[[NSIndexSet alloc]initWithIndex:_i_sectionClicked];
-     [_tableView reloadSections:nd withRowAnimation:UITableViewRowAnimationAutomatic];
-     }
-     */
-}
-
 
 //根据条件筛选
 -(NSMutableArray*)CreateSearchResult:(NSString*)str_condition1 con2:(NSString*)str_condition2 {
     NSMutableArray *arr_result=[[NSMutableArray alloc]init];
-    if (_arr_MyShenPi.count>0) {
+    if (_arr_SendMe.count>0) {
         if ([str_condition1 isEqualToString:@"全部"]) {
-            arr_result= [self CreateSearchResultAdvanced:_arr_MyShenPi con2:str_condition2];
+            arr_result= [self CreateSearchResultAdvanced:_arr_SendMe con2:str_condition2];
         }
         else {
-            arr_result=[self CreateSearchResultFirst:_arr_MyShenPi con1:str_condition1];
+            arr_result=[self CreateSearchResultFirst:_arr_SendMe con1:str_condition1];
             arr_result=[self CreateSearchResultAdvanced:arr_result con2:str_condition2];
         }
         
@@ -433,28 +301,28 @@
 
 -(MyShenPiCell*)CreateCarCell:(CarService*)service tableView:(UITableView*)tableView atIndexPath:(NSIndexPath*)indexPath {
     MyShenPiCell *cell;
-        if (service.shenpi_1==nil && service.shenpi_2==nil) {
-            cell=[MyShenPiCell cellWithTable:tableView withImage:_userInfo.str_Logo withName:service.str_name withCategroy:@"预约用车" withStatus:@"未处理" withTitle:service.str_reason withTime:service.str_applicationTime atIndex:indexPath];
+    if (service.shenpi_1==nil && service.shenpi_2==nil) {
+        cell=[MyShenPiCell cellWithTable:tableView withImage:_userInfo.str_Logo withName:service.str_name withCategroy:@"预约用车" withStatus:@"未处理" withTitle:service.str_reason withTime:service.str_applicationTime atIndex:indexPath];
+    }
+    else if (service.shenpi_1!=nil && service.shenpi_2==nil) {
+        if ([service.shenpi_1.str_status isEqualToString:@"同意"]) {
+            cell=[MyShenPiCell cellWithTable:tableView withImage:_userInfo.str_Logo withName:service.str_name withCategroy:@"预约用车" withStatus:@"审批中" withTitle:service.str_reason withTime:service.shenpi_1.str_time atIndex:indexPath];
         }
-        else if (service.shenpi_1!=nil && service.shenpi_2==nil) {
-            if ([service.shenpi_1.str_status isEqualToString:@"同意"]) {
-                cell=[MyShenPiCell cellWithTable:tableView withImage:_userInfo.str_Logo withName:service.str_name withCategroy:@"预约用车" withStatus:@"审批中" withTitle:service.str_reason withTime:service.shenpi_1.str_time atIndex:indexPath];
-            }
-            else if ([service.shenpi_1.str_status isEqualToString:@"不同意"]) {
-                cell=[MyShenPiCell cellWithTable:tableView withImage:_userInfo.str_Logo withName:service.str_name withCategroy:@"预约用车" withStatus:@"不同意" withTitle:service.str_reason withTime:service.shenpi_1.str_time atIndex:indexPath];
-            }
+        else if ([service.shenpi_1.str_status isEqualToString:@"不同意"]) {
+            cell=[MyShenPiCell cellWithTable:tableView withImage:_userInfo.str_Logo withName:service.str_name withCategroy:@"预约用车" withStatus:@"不同意" withTitle:service.str_reason withTime:service.shenpi_1.str_time atIndex:indexPath];
         }
-        else if (service.shenpi_2!=nil) {
-            if ([service.shenpi_2.str_status isEqualToString:@"同意"]) {
-                cell=[MyShenPiCell cellWithTable:tableView withImage:_userInfo.str_Logo withName:service.str_name withCategroy:@"预约用车" withStatus:@"同意" withTitle:service.str_reason withTime:service.shenpi_2.str_time atIndex:indexPath];
-            }
-            else if ([service.shenpi_2.str_status isEqualToString:@"不同意"]) {
-                cell=[MyShenPiCell cellWithTable:tableView withImage:_userInfo.str_Logo withName:service.str_name withCategroy:@"预约用车" withStatus:@"不同意" withTitle:service.str_reason withTime:service.shenpi_2.str_time atIndex:indexPath];
-            }
+    }
+    else if (service.shenpi_2!=nil) {
+        if ([service.shenpi_2.str_status isEqualToString:@"同意"]) {
+            cell=[MyShenPiCell cellWithTable:tableView withImage:_userInfo.str_Logo withName:service.str_name withCategroy:@"预约用车" withStatus:@"同意" withTitle:service.str_reason withTime:service.shenpi_2.str_time atIndex:indexPath];
         }
-        cell.car_service=service;
-        cell.str_category=@"预约用车";
-        return cell;
+        else if ([service.shenpi_2.str_status isEqualToString:@"不同意"]) {
+            cell=[MyShenPiCell cellWithTable:tableView withImage:_userInfo.str_Logo withName:service.str_name withCategroy:@"预约用车" withStatus:@"不同意" withTitle:service.str_reason withTime:service.shenpi_2.str_time atIndex:indexPath];
+        }
+    }
+    cell.car_service=service;
+    cell.str_category=@"预约用车";
+    return cell;
 }
 
 -(MyShenPiCell*)CreatePrintCell:(PrintService*)service tableView:(UITableView*)tableView atIndexPath:(NSIndexPath*)indexPath {
@@ -482,6 +350,92 @@
     cell.str_category=@"复印";
     return cell;
     
+}
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    if ([_str_searchKeyword2 isEqualToString:@"全部"] && [_str_searchKeyword1 isEqualToString:@"全部"]) {
+        return [_arr_SendMe count];
+    }
+    else {
+        return   [_arr_SearchResult count];
+    }
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 1;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if (iPhone4_4s || iPhone5_5s)
+        return 20;
+    else if (iPhone6)
+        return 30;
+    else
+        return 40;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    if (iPhone4_4s || iPhone5_5s)
+        return 20;
+    else if (iPhone6)
+        return 30;
+    else
+        return 40;
+    
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 110;
+}
+
+-(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    // NSString *ID=@"cell";
+    NSString *ID=[NSString stringWithFormat:@"Cell%ld%ld",(long)[indexPath section],(long)[indexPath row]];
+    MyShenPiCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    
+    if (cell==nil) {
+        if ([_str_searchKeyword1 isEqualToString:@"全部"] && [_str_searchKeyword2 isEqualToString:@"全部"])
+        {
+            NSObject *obj=[_arr_SendMe objectAtIndex:indexPath.section];
+            
+            if ([obj isMemberOfClass:[CarService class]]) {
+                CarService *service=(CarService*)obj;
+                cell=[self CreateCarCell:service tableView:tableView atIndexPath:indexPath];
+            }
+            else if ([obj isMemberOfClass:[PrintService class]]) {
+                PrintService *service=(PrintService*)obj;
+                cell=[self CreatePrintCell:service tableView:tableView atIndexPath:indexPath];
+            }
+        }
+        else {
+            NSObject *obj=[_arr_SearchResult objectAtIndex:indexPath.section];
+            
+            if ([obj isMemberOfClass:[CarService class]]) {
+                CarService *service=(CarService*)obj;
+                cell=[self CreateCarCell:service tableView:tableView atIndexPath:indexPath];
+            }
+            else if ([obj isMemberOfClass:[PrintService class]]) {
+                PrintService *service=(PrintService*)obj;
+                cell=[self CreatePrintCell:service tableView:tableView atIndexPath:indexPath];
+            }
+        }
+    }
+    return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    MyShenPiCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    _i_sectionClicked=indexPath.section;
+    if ([cell.str_category isEqualToString:@"预约用车"]) {
+        CarApplicationDetail *viewController=[[CarApplicationDetail alloc]init];
+        viewController.service=cell.car_service;
+        [self.navigationController pushViewController:viewController animated:YES];
+    }
+    else if ([cell.str_category isEqualToString:@"复印"]) {
+        PrintApplicationDetail *viewController=[[PrintApplicationDetail alloc]init];
+        viewController.service=cell.print_service;
+        [self.navigationController pushViewController:viewController animated:YES];
+    }
 }
 
 

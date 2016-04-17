@@ -10,7 +10,7 @@
 #import "CarDeployCell.h"
 
 
-@interface ShenPiAgreeWithCarDeploy()<UITextViewDelegate,UITableViewDelegate,UITableViewDataSource,UISearchResultsUpdating>
+@interface ShenPiAgreeWithCarDeploy()<UITextViewDelegate,UITableViewDelegate,UITableViewDataSource,UISearchResultsUpdating,UISearchBarDelegate>
 
 @property (nonatomic,strong) UILabel *lbl_tip;
 
@@ -21,6 +21,12 @@
 @property (nonatomic,strong) NSArray *filterData;
 
 @property (nonatomic,strong) UISearchController *searchController;
+
+@property (nonatomic,strong) NSMutableArray *arr_searchList;
+
+@property (nonatomic,strong) NSMutableArray *arr_dataList;
+
+@property (nonatomic,strong) UITableView *tableView;
 
 @end
 
@@ -64,27 +70,32 @@
      UILabel *lbl_tabletitle_2=[self createTitleLabel:@"车型" x:self.view.frame.size.width/4];
      UILabel *lbl_tabletitle_3=[self createTitleLabel:@"颜色" x:self.view.frame.size.width/2];
      UILabel *lbl_tabletitle_4=[self createTitleLabel:@"司机" x:3*self.view.frame.size.width/4];
+    self.arr_searchList=[[NSMutableArray alloc]init];
+    self.arr_dataList=[[NSMutableArray alloc]init];
+    
+    self.arr_dataList=[self CreateDataList];
     
     self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
     self.searchController.searchResultsUpdater = self;
-    self.searchController.dimsBackgroundDuringPresentation = false;
+    self.searchController.dimsBackgroundDuringPresentation = NO;
+    self.searchController.hidesNavigationBarDuringPresentation=NO;
     [self.searchController.searchBar sizeToFit];
     self.searchController.searchBar.placeholder=@"请按照车牌号/车型/颜色/司机搜索";
     //self.tableView.tableHeaderView = self.searchController.searchBar;
     
     
     
-    UITableView *tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.18, self.view.frame.size.width, self.view.frame.size.height*0.3) style:UITableViewStylePlain];
-    tableView.delegate=self;
-    tableView.dataSource=self;
-    tableView.backgroundColor=[UIColor whiteColor];
+    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.18, self.view.frame.size.width, self.view.frame.size.height*0.3) style:UITableViewStylePlain];
+    _tableView.delegate=self;
+    _tableView.dataSource=self;
+    _tableView.backgroundColor=[UIColor whiteColor];
     
-    tableView.tableHeaderView=self.searchController.searchBar;
+    _tableView.tableHeaderView=self.searchController.searchBar;
 
 
     [self.view addSubview:txt_View];
     [self.view addSubview:_lbl_tip];
-    [self.view addSubview:tableView];
+    [self.view addSubview:_tableView];
     [self.view addSubview:lbl_tabletitle_1];
      [self.view addSubview:lbl_tabletitle_2];
      [self.view addSubview:lbl_tabletitle_3];
@@ -105,9 +116,9 @@
     [dateformatter setDateFormat:@"MM-dd HH:mm"];
     NSString *  locationString=[dateformatter stringFromDate:senddate];
     tmp_Status.str_time=locationString;
-    if (_tmp_model.str_driver!=nil) {
-        [_delegate SendAgreeStatus:tmp_Status CarModel:_tmp_model];
-    }
+    //if (_tmp_model.str_driver!=nil) {
+    [_delegate SendAgreeStatus:tmp_Status CarModel:_tmp_model];
+    //}
     
     [self.navigationController popViewControllerAnimated:YES];
 
@@ -139,42 +150,27 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 30;
+    if (self.searchController.active) {
+        return [self.arr_searchList count];
+    }
+    else {
+        return 30;
+    }
+    
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *cellID=@"CellID";
     CarDeployCell *cell=[tableView dequeueReusableCellWithIdentifier:cellID];
     if (!cell) {
-        NSString *str_ID_part;
-        if (indexPath.row<10) {
-            str_ID_part=[NSString stringWithFormat:@"%@%ld",@"0",(long)indexPath.row];
+        if (self.searchController.active) {
+            CarModel *model=[self.arr_searchList objectAtIndex:indexPath.row];
+            cell=[CarDeployCell cellWithTable:UITableViewCellStyleDefault withID:model.str_ID  withBrand:model.str_brand withColor:model.str_color withDriver:model.str_driver];
         }
-        else
-            str_ID_part=[NSString stringWithFormat:@"%ld",(long)indexPath.row];
-        NSString *strID=[NSString stringWithFormat:@"%@%@",@"豫A YYA",str_ID_part];
-        
-        if (indexPath.row%7==0)
-        {
-            cell=[CarDeployCell cellWithTable:UITableViewCellStyleDefault withID:strID withBrand:@"宝来" withColor:@"蓝色" withDriver:@"李师傅"];
-        }
-        else if (indexPath.row%7==1) {
-              cell=[CarDeployCell cellWithTable:UITableViewCellStyleDefault withID:strID withBrand:@"别克" withColor:@"红色" withDriver:@"王师傅"];
-        }
-        else if (indexPath.row%7==2) {
-              cell=[CarDeployCell cellWithTable:UITableViewCellStyleDefault withID:strID withBrand:@"凯美瑞" withColor:@"灰色" withDriver:@"梁师傅"];
-        }
-        else if (indexPath.row%7==3) {
-              cell=[CarDeployCell cellWithTable:UITableViewCellStyleDefault withID:strID withBrand:@"途观" withColor:@"白色" withDriver:@"张师傅"];
-        }
-        else if (indexPath.row%7==4) {
-              cell=[CarDeployCell cellWithTable:UITableViewCellStyleDefault withID:strID withBrand:@"雷克萨斯" withColor:@"米色" withDriver:@"郭师傅"];
-        }
-        else if (indexPath.row%7==5) {
-              cell=[CarDeployCell cellWithTable:UITableViewCellStyleDefault withID:strID withBrand:@"尚酷" withColor:@"绿色" withDriver:@"刁师傅"];
-        }
-        else if (indexPath.row%7==6) {
-              cell=[CarDeployCell cellWithTable:UITableViewCellStyleDefault withID:strID withBrand:@"奥迪" withColor:@"黑色" withDriver:@"宋师傅"];
+        else {
+            //[self CreateDefaultCell:indexPath];
+            CarModel *model=[self.arr_dataList objectAtIndex:indexPath.row];
+            cell=[CarDeployCell cellWithTable:UITableViewCellStyleDefault withID:model.str_ID  withBrand:model.str_brand withColor:model.str_color withDriver:model.str_driver];
         }
     }
     return cell;
@@ -207,6 +203,104 @@
 }
 
 -(void)updateSearchResultsForSearchController:(UISearchController *)searchController {
+    if (self.arr_searchList!=nil) {
+        [self.arr_searchList removeAllObjects];
+    }
+    //筛选条件
+    NSString *searchString=[self.searchController.searchBar text];
+    for (int i=0;i<self.arr_dataList.count;i++) {
+        CarModel *tmp_Model=[self.arr_dataList objectAtIndex:i];
+        if (![tmp_Model.str_ID isEqualToString:searchString] && ![tmp_Model.str_brand isEqualToString:searchString] && ![tmp_Model.str_color isEqualToString:searchString] && ![tmp_Model.str_driver isEqualToString:searchString])
+        {}
+        else {
+            [self.arr_searchList addObject:tmp_Model];
+        }
+    }
+    [_tableView reloadData];
+    
+}
+
+
+
+
+-(NSMutableArray*)CreateDataList {
+    NSMutableArray *arr_tmp=[[NSMutableArray alloc]init];
+    for (int i=0;i<30;i++) {
+        NSString *str_ID_part;
+        if (i<10)
+        {
+            str_ID_part=[NSString stringWithFormat:@"%@%ld",@"0",(long)i];
+        }
+        else {
+            str_ID_part=[NSString stringWithFormat:@"%ld",(long)i];
+        }
+        NSString *strID=[NSString stringWithFormat:@"%@%@",@"豫A YYA",str_ID_part];
+        if (i%7==0) {
+            CarModel *model1=[[CarModel alloc]init];
+            model1.str_ID=strID;
+            model1.str_brand=@"宝来";
+            model1.str_color=@"蓝色";
+            model1.str_driver=@"李师傅";
+            [arr_tmp addObject:model1];
+        }
+        else if (i%7==1) {
+            CarModel *model2=[[CarModel alloc]init];
+            model2.str_ID=strID;
+            model2.str_brand=@"别克";
+            model2.str_color=@"红色";
+            model2.str_driver=@"王师傅";
+            [arr_tmp addObject:model2];
+        }
+        else if (i%7==2) {
+            CarModel *model3=[[CarModel alloc]init];
+            model3.str_ID=strID;
+            model3.str_brand=@"凯美瑞";
+            model3.str_color=@"灰色";
+            model3.str_driver=@"梁师傅";
+            [arr_tmp addObject:model3];
+        }
+        else if (i%7==3) {
+            CarModel *model4=[[CarModel alloc]init];
+            model4.str_ID=strID;
+            model4.str_brand=@"途观";
+            model4.str_color=@"白色";
+            model4.str_driver=@"张师傅";
+            [arr_tmp addObject:model4];
+        }
+        else if (i%7==3) {
+            CarModel *model4=[[CarModel alloc]init];
+            model4.str_ID=strID;
+            model4.str_brand=@"途观";
+            model4.str_color=@"白色";
+            model4.str_driver=@"张师傅";
+            [arr_tmp addObject:model4];
+        }
+        else if (i%7==4) {
+            CarModel *model4=[[CarModel alloc]init];
+            model4.str_ID=strID;
+            model4.str_brand=@"雷克萨斯";
+            model4.str_color=@"米色";
+            model4.str_driver=@"郭师傅";
+            [arr_tmp addObject:model4];
+        }
+        else if (i%7==5) {
+            CarModel *model5=[[CarModel alloc]init];
+            model5.str_ID=strID;
+            model5.str_brand=@"尚酷";
+            model5.str_color=@"绿色";
+            model5.str_driver=@"刁师傅";
+            [arr_tmp addObject:model5];
+        }
+        else if (i%7==6) {
+            CarModel *model5=[[CarModel alloc]init];
+            model5.str_ID=strID;
+            model5.str_brand=@"尚酷";
+            model5.str_color=@"绿色";
+            model5.str_driver=@"刁师傅";
+            [arr_tmp addObject:model5];
+        }
+    }
+    return  arr_tmp;
     
 }
 

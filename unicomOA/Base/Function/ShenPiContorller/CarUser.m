@@ -8,14 +8,16 @@
 
 #import "CarUser.h"
 #import "CLTree.h"
+#import "DataSource.h"
 
-@interface CarUser()<UITableViewDelegate,UITableViewDataSource>
+@interface CarUser()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate,UISearchResultsUpdating>
 
 @property (nonatomic,strong) UITableView *tableView;
 
 @property (strong,nonatomic) NSMutableArray *dataArray;  //保存全部数据的数组
 @property (strong,nonatomic) NSArray *displayArray;      //保存要显示在界面上的数据的数组
 
+@property (strong,nonatomic) UISearchController *searchController;   //搜索栏
 
 @end
 
@@ -42,11 +44,26 @@
     _tableView.backgroundColor=[UIColor clearColor];
     _tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     
+    DataSource *dt_tmp=[[DataSource alloc]init];
+    
     //添加演示数据
-    [self addTestData];
+    //[self addTestData];
+    _dataArray=[dt_tmp addTestData];
+    
+    
     
     //初始化将要显示的数据
     [self reloadDataForDisplayArray];
+    
+    //搜索栏
+    self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
+    self.searchController.searchResultsUpdater = self;
+    self.searchController.dimsBackgroundDuringPresentation = NO;
+    self.searchController.hidesNavigationBarDuringPresentation=NO;
+    [self.searchController.searchBar sizeToFit];
+    self.searchController.searchBar.placeholder=@"搜索姓名/拼音/电话";
+    
+    _tableView.tableHeaderView=self.searchController.searchBar;
     
     [self.view addSubview:_tableView];
 }
@@ -56,6 +73,7 @@
 }
 
 //添加演示数据 (先根据demo在代码中添加，再组成plist文件以方便调整)
+/*
 -(void) addTestData {
     
 #pragma mark 组织架构
@@ -153,7 +171,7 @@
     
     return node0;
 }
-
+*/
 
 -(void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -353,6 +371,8 @@
     
 }
 
-
+-(void)updateSearchResultsForSearchController:(UISearchController *)searchController {
+    
+}
 
 @end

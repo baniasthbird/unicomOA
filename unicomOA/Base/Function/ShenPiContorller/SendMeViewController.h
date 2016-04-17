@@ -1,19 +1,20 @@
 //
-//  MyShenPiViewController.h
+//  SendMeViewController.h
 //  unicomOA
 //
-//  Created by hnsi-03 on 16/4/13.
+//  Created by zr-mac on 16/4/17.
 //  Copyright © 2016年 zr-mac. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import "UserInfo.h"
-//我的审批页面
 
-@interface MyShenPiViewController : UIViewController
 
-//我的审批事项
-@property (nonatomic,strong) NSMutableArray *arr_MyShenPi;
+//抄送页面
+@interface SendMeViewController : UIViewController
+
+//抄送事项
+@property (nonatomic,strong) NSMutableArray *arr_SendMe;
 
 @property (nonatomic,strong) UserInfo *userInfo;
 

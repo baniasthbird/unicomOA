@@ -10,6 +10,7 @@
 #import "MyApplication.h"
 #import "MyShenPiViewController.h"
 #import "NewApplication.h"
+#import "SendMeViewController.h"
 
 @interface ShenPiManagementController()<MyApplicationDelegate,NewApplicationDelegate>
 
@@ -127,7 +128,12 @@
 }
 
 -(void)SendMe:(UIButton*)sender {
-    
+    //抄送给我，文件目前仅供显示
+    SendMeViewController *viewController=[[SendMeViewController alloc]init];
+    viewController.arr_SendMe=_arr_application;
+    viewController.userInfo=_userInfo;
+    [self.navigationController pushViewController:viewController animated:YES];
+
 }
 
 -(void)NewApplication:(UIButton*)sender {

@@ -13,7 +13,7 @@
 #import "ShenPiResultCell.h"
 #import "ShenPiAgreeWithCarDeploy.h"
 
-@interface CarShenPiDetail()<ShenPiAgreeDelegate,ShenPiDisAgreeDelegate,ShenPiAgreeWithCarDeployDelegate>
+@interface CarShenPiDetail()<ShenPiAgreeDelegate,ShenPiDisAgreeDelegate,ShenPiAgreeWithCarDeployDelegate,ShenPiCopyDelegate>
 
 @property (nonatomic,strong) UIButton *btn_agree;
 
@@ -57,6 +57,7 @@
         [_btn_agree setEnabled:YES];
     }
     
+    
     [self.view addSubview:_btn_agree];
     [self.view addSubview:_btn_disagree];
     [self.view addSubview:btn_copy];
@@ -87,7 +88,10 @@
 }
 
 -(void)SignToCopy:(UIButton*)sender {
-    
+    ShenPiCopy *viewController=[[ShenPiCopy alloc]init];
+    viewController.delegate=self;
+    viewController.userInfo=_user_Info;
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 -(UIButton*)CreateButton:(CGFloat)x y:(CGFloat)y width:(CGFloat)width height:(CGFloat)height text:(NSString*)str_text{
@@ -134,6 +138,14 @@
 }
 
 -(void)SendAgreeStatus:(ShenPiStatus *)tmp_status CarModel:(CarModel *)model {
+    if (self.service.shenpi_2==nil) {
+        self.service.shenpi_2=tmp_status;
+        //self.service.car_model=model;
+    }
+    [self.tableview reloadData];
+}
+
+-(void)SendShenPiCopyUser:(NSMutableArray *)usr_copy {
     
 }
 

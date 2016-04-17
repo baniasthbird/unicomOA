@@ -24,4 +24,6 @@
 
 @property BOOL b_IsEnabled;
 
+@property BOOL b_IsVisible;
+
 @end

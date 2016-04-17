@@ -19,9 +19,9 @@
 +(instancetype)cellWithTable:(UITableView *)tableView withTitle:(NSString *)str_Title withStatus:(NSString *)str_status isUsingCar:(BOOL)b_Category withTime:(NSString*)str_time{
     static NSString *cellID=@"cellID";
     MyApplicationCell *cell=[tableView dequeueReusableCellWithIdentifier:cellID];
-    if (!cell) {
+   // if (!cell) {
         cell=[[MyApplicationCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID isUsingCar:b_Category withTitle:str_Title withStatus:str_status withTime:str_time];
-    }
+    //}
     return cell;
 }
 

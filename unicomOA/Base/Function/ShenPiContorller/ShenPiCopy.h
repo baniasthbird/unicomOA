@@ -7,7 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ShenPiStatus.h"
+#import "UserInfo.h"
+
+//抄送页面
+@class ShenPiCopy;
+
+@protocol ShenPiCopyDelegate <NSObject>
+
+-(void)SendShenPiCopyUser:(NSMutableArray*)usr_copy;
+
+@end
+
 
 @interface ShenPiCopy : UIViewController
+
+@property (nonatomic,strong) id<ShenPiCopyDelegate> delegate;
+
+@property (nonatomic,strong) UserInfo *userInfo;
 
 @end

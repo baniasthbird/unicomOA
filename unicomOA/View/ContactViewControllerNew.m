@@ -9,6 +9,7 @@
 #import "ContactViewControllerNew.h"
 #import "CLTree.h"
 #import "MemberInfoViewController.h"
+#import "DataSource.h"
 
 
 @interface ContactViewControllerNew()
@@ -16,6 +17,8 @@
 @property (strong,nonatomic) NSMutableArray *dataArray;  //保存全部数据的数组
 @property (strong,nonatomic) NSArray *displayArray;      //保存要显示在界面上的数据的数组
 @property (strong,nonatomic) NSString *str_department;   //联系人所在部门
+
+@property (strong,nonatomic) NSMutableArray *searchArray;  //搜索数据
 
 @end
 
@@ -71,13 +74,18 @@
     
     self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     
+    DataSource *dt_tmp=[[DataSource alloc]init];
+    _dataArray=[dt_tmp addTestData];
+    /*
     //添加演示数据
     [self addTestData];
+     */
     //初始化将要显示的数据
     [self reloadDataForDisplayArray];
     
 }
 
+/*
 //添加演示数据 (先根据demo在代码中添加，再组成plist文件以方便调整)
 -(void) addTestData {
     
@@ -122,6 +130,7 @@
     
     
 }
+*/
 
 -(CLTreeViewNode*)CreateLevel0Node:(NSString*)str_name staff_num:(NSString*)staff_num {
     CLTreeViewNode *node0=[[CLTreeViewNode alloc]init];
@@ -395,7 +404,15 @@
 #pragma mark- UISearchResultUpdating
 
 -(void)updateSearchResultsForSearchController:(UISearchController *)searchController {
+    if (self.searchArray!=nil) {
+        [self.searchArray removeAllObjects];
+    }
+    //筛选条件
     NSString *searchtext=searchController.searchBar.text;
+    for (int i=0;i<self.dataArray.count;i++) {
+        
+    }
+    
     
 }
 

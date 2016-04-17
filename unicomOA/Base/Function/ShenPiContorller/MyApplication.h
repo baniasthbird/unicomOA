@@ -23,6 +23,10 @@
 
 @property (nonatomic,strong) id<MyApplicationDelegate> delegate;
 
+//提交申请
 @property (nonatomic,strong) NSMutableArray *arr_MyApplication;
+
+//筛选结果
+@property (nonatomic,strong) NSMutableArray *arr_MySearchResult;
 
 @end

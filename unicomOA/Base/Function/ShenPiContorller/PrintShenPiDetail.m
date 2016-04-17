@@ -9,8 +9,9 @@
 #import "PrintShenPiDetail.h"
 #import "ShenPiAgree.h"
 #import "ShenPiDisAgree.h"
+#import "ShenPiCopy.h"
 
-@interface PrintShenPiDetail()<ShenPiAgreeDelegate,ShenPiDisAgreeDelegate>
+@interface PrintShenPiDetail()<ShenPiAgreeDelegate,ShenPiDisAgreeDelegate,ShenPiCopyDelegate>
 
 @property (nonatomic,strong) UIButton *btn_agree;
 
@@ -73,7 +74,10 @@
 }
 
 -(void)SignToCopy:(UIButton*)sender {
-    
+    ShenPiCopy *viewController=[[ShenPiCopy alloc]init];
+    viewController.delegate=self;
+    viewController.userInfo=_user_Info;
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 -(UIButton*)CreateButton:(CGFloat)x y:(CGFloat)y width:(CGFloat)width height:(CGFloat)height text:(NSString*)str_text{
@@ -120,6 +124,10 @@
         [_btn_disagree setEnabled:NO];
     }
     [self.tableview reloadData];
+}
+
+-(void)SendShenPiCopyUser:(NSMutableArray *)usr_copy {
+    
 }
 
 @end
