@@ -82,12 +82,14 @@
     
     [self.navigationItem setHidesBackButton:YES];
     
+    self.view.backgroundColor=[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1];
+    
     //添加第一组
-    LGSettingSection *section1=[LGSettingSection initWithHeaderTitle:@"Demo" footerTitle:nil];
+    LGSettingSection *section1=[LGSettingSection initWithHeaderTitle:@"" footerTitle:nil];
     //添加行
     LGSettingItem *item1=[LGSettingItem initWithtitle:_userInfo.str_name];
     item1.image=[UIImage imageNamed:_userInfo.str_Logo];
-    item1.height=64;
+    item1.height=90;
     [section1 addItem:item1];
     //保存到groups数组
     [self.groups addObject:section1];
@@ -164,8 +166,15 @@
     cell.accessoryType=item.type;
     
     if (indexPath.section==3 && indexPath.row==0) {
+        UIButton *btn=[[UIButton alloc]init];
+        [btn setFrame:CGRectMake(cell.frame.origin.x+cell.frame.size.width*0.28, cell.frame.origin.y, cell.frame.size.width*0.44, cell.frame.size.height)];
+        [btn setTitle:@"退出当前帐号" forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [btn setBackgroundColor:[UIColor colorWithRed:246/255.0f green:88/255.0f blue:87/255.0f alpha:1]];
+        [cell addSubview:btn];
         cell.textLabel.textColor=[UIColor redColor];
         cell.textLabel.textAlignment=NSTextAlignmentCenter;
+        
     }
     
     return cell;
@@ -182,9 +191,31 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    LGSettingSection *section=self.groups[indexPath.section];
-    LGSettingItem *item=section.items[indexPath.row];
-    return item.height;
+    if (indexPath.section==0 && indexPath.row==0) {
+        return 100;
+    }
+    else {
+        LGSettingSection *section=self.groups[indexPath.section];
+        LGSettingItem *item=section.items[indexPath.row];
+        return item.height;
+    }
+   
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if (section==3) {
+        return 80;
+    }
+    else if (section==0) {
+        return 0;
+    }
+    else {
+        return 10;
+    }
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 0;
 }
 
 
@@ -238,7 +269,14 @@
         NSLog(@"点击了第%ld组，第%ld行",indexPath.section,indexPath.row);
     }
 }
+
+
+
+
+
+
 /*
+ 
  
  
 #pragma mark - Navigation

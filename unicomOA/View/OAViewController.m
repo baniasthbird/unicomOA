@@ -16,7 +16,6 @@
 
 
 @interface OAViewController () {
-    UIImageView *_tabBarView;  //自定义的覆盖原先的tabbar控件
     NTButton * _previousBtn;//记录前一次选中的按钮
 }
 
@@ -69,9 +68,7 @@
     userInfo.str_phonenum=@"未填写";
     userInfo.str_Logo=@"headLogo.png";
     // Do any additional setup after loading the view.
-    _tabBarView = [[UIImageView alloc]initWithFrame:self.tabBar.bounds];
-    _tabBarView.userInteractionEnabled = YES;
-    _tabBarView.backgroundColor = [UIColor clearColor];
+
     //self.view.backgroundColor=[UIColor colorWithRed:70/255.0f green:156/255.0f blue:241/255.0f alpha:1];
     //[self.tabBar addSubview:_tabBarView];
     
@@ -79,12 +76,12 @@
     message.delegate=self;
     message.userInfo=userInfo;
     
-    UINavigationController *navi1=[[BaseNavigationViewController alloc]initWithRootViewController:message];
+    UINavigationController *navi1=[[UINavigationController alloc]initWithRootViewController:message];
     
    // ContactViewController *contact=[[ContactViewController alloc]init];
     ContactViewControllerNew *contact=[[ContactViewControllerNew alloc]init];
     contact.userInfo=userInfo;
-    UINavigationController *navi2=[[BaseNavigationViewController alloc]initWithRootViewController:contact];
+    UINavigationController *navi2=[[UINavigationController alloc]initWithRootViewController:contact];
     
     FunctionViewController *func=[[FunctionViewController alloc]init];
     func.userInfo=userInfo;

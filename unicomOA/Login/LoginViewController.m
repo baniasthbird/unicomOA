@@ -44,47 +44,57 @@
     [self.navigationItem setHidesBackButton:YES];
     //设置NavigationBar的背景色
     View=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    View.image=[UIImage imageNamed:@"bg4"];
+    View.image=[UIImage imageNamed:@"LoginView.png"];
     View.backgroundColor=[UIColor whiteColor];
     [self.view addSubview:View];
     
-    //navigationbar上面的三个按钮
-    UIButton *btn_back=[[UIButton alloc]initWithFrame:CGRectMake(5, 27, 35, 35)];
-    [btn_back setImage:[UIImage imageNamed:@"goback_back_orange_on"] forState:UIControlStateNormal];
-    [btn_back addTarget:self action:@selector(clickBack:) forControlEvents:UIControlEventTouchUpInside];
-  //  [self.view addSubview:btn_back];
     
-    UIButton *btn_signin=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width-60, 30, 50, 30)];
-    [btn_signin setTitle:@"注册" forState:UIControlStateNormal];
-    [btn_signin setTitleColor:[UIColor colorWithRed:248/255.0f green:144/255.0f blue:34/255.0f alpha:1] forState:UIControlStateNormal];
-   // btn_signin.font=[UIFont systemFontOfSize:17];
-    btn_signin.titleLabel.font=[UIFont systemFontOfSize:17];
-    [btn_signin addTarget:self action:@selector(zhuce) forControlEvents:UIControlEventTouchUpInside];
-   // [self.view addSubview:btn_signin];
-    
-    UILabel *lb_login=[[UILabel alloc]initWithFrame:CGRectMake((self.view.frame.size.width-30)/2, 30, 50, 30)];
-    lb_login.text=@"登陆";
-    lb_login.textColor=[UIColor colorWithRed:248/255.0f green:144/255.0f blue:34/255.0f alpha:1];
-   // [self.view addSubview:lb_login];
-    
-    
+    [self createLabels];
     [self createButtons];
     [self createTextFields];
     
 }
 
+-(void)createLabels {
+    
+    UILabel *lbl_title1;
+    UILabel *lbl_title2;
+    UILabel *lbl_title3;
+    if (iPhone6 || iPhone6_plus) {
+        lbl_title1=[self CreateLabel:CGRectMake(10, self.view.frame.size.height/2-170, self.view.frame.size.width-20, 50) title:@"河南省信息咨询" titleColor:[UIColor whiteColor] font:[UIFont fontWithName:@"STHeitiSC-Medium" size:25]];
+        lbl_title2=[self CreateLabel:CGRectMake(10, self.view.frame.size.height/2-130, self.view.frame.size.width-20, 50) title:@"设计研究有限公司" titleColor:[UIColor whiteColor] font:[UIFont fontWithName:@"STHeitiSC-Medium" size:20]];
+        lbl_title3=[self CreateLabel:CGRectMake(10, self.view.frame.size.height-50, self.view.frame.size.width-20,30 ) title:@"原河南省电信规划设计院" titleColor:[UIColor whiteColor] font:[UIFont systemFontOfSize:15]];
+    }
+    else if (iPhone5_5s) {
+        lbl_title1=[self CreateLabel:CGRectMake(10, self.view.frame.size.height/2-140, self.view.frame.size.width-20, 50) title:@"河南省信息咨询" titleColor:[UIColor whiteColor] font:[UIFont fontWithName:@"STHeitiSC-Medium" size:25]];
+        lbl_title2=[self CreateLabel:CGRectMake(10, self.view.frame.size.height/2-100, self.view.frame.size.width-20, 50) title:@"设计研究有限公司" titleColor:[UIColor whiteColor] font:[UIFont fontWithName:@"STHeitiSC-Medium" size:20]];
+        lbl_title3=[self CreateLabel:CGRectMake(10, self.view.frame.size.height-50, self.view.frame.size.width-20,30 ) title:@"原河南省电信规划设计院" titleColor:[UIColor whiteColor] font:[UIFont systemFontOfSize:15]];
+        
+    }
+    
+    
+    [self.view addSubview:lbl_title1];
+    [self.view addSubview:lbl_title2];
+    [self.view addSubview:lbl_title3];
+}
 
 
 -(void)createButtons
 {
-    UIButton *btn_login=[self createButtonFrame:CGRectMake(10, self.view.frame.size.height/2, self.view.frame.size.width-20, 37) backImageName:nil title:@"登录" titleColor:[UIColor whiteColor]  font:[UIFont systemFontOfSize:19] target:self action:@selector(landClick)];
-    btn_login.backgroundColor=[UIColor colorWithRed:30/255.0f green:155/255.0f blue:240/255.0f alpha:1];
-    btn_login.layer.cornerRadius=5.0f;
+    UIButton *btn_login=[self createButtonFrame:CGRectMake(self.view.frame.size.width*0.28, self.view.frame.size.height/2+80, self.view.frame.size.width*0.44, 50) backImageName:nil title:@"登  录" titleColor:[UIColor whiteColor]  font:[UIFont systemFontOfSize:25] target:self action:@selector(landClick)];
+    btn_login.backgroundColor=[UIColor clearColor];
+    btn_login.layer.cornerRadius=25.0f;
+    btn_login.layer.borderWidth=1.0f;
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    CGColorRef colorref = CGColorCreate(colorSpace,(CGFloat[]){ 234/255.0f, 246/255.0f, 254/255.0f, 0.3 });
+    btn_login.layer.borderColor=colorref;
+
     
-    UIButton *btn_Server=[self createButtonFrame:CGRectMake(self.view.frame.size.width-75, self.view.frame.size.height/2+100, 60, 30) backImageName:nil title:@"服务器" titleColor:[UIColor grayColor] font:[UIFont systemFontOfSize:13] target:self action:@selector(serverip:)];
+    UIButton *btn_Server=[self createButtonFrame:CGRectMake(self.view.frame.size.width-75, self.view.frame.size.height/2+250, 60, 30) backImageName:nil title:@"服务器" titleColor:[UIColor grayColor] font:[UIFont systemFontOfSize:13] target:self action:@selector(serverip:)];
     //newUserBtn.backgroundColor=[UIColor lightGrayColor];
     
-    UIButton *btn_forgetpassword=[self createButtonFrame:CGRectMake(self.view.frame.size.width-75, self.view.frame.size.height/2+40, 60, 30) backImageName:nil title:@"忘记密码" titleColor:[UIColor blackColor] font:[UIFont systemFontOfSize:15] target:self action:@selector(fogetPwd:)];
+    
+    UIButton *btn_forgetpassword=[self createButtonFrame:CGRectMake((self.view.frame.size.width-60)/2, self.view.frame.size.height/2+150, 60, 30) backImageName:nil title:@"忘记密码" titleColor:[UIColor colorWithRed:232/255.0f green:242/255.0f blue:255/255.0f alpha:0.3] font:[UIFont systemFontOfSize:15] target:self action:@selector(fogetPwd:)];
     //fogotPwdBtn.backgroundColor=[UIColor lightGrayColor];
     
     
@@ -236,23 +246,31 @@
     bgView.backgroundColor=[UIColor clearColor];
     //[self.view addSubview:bgView];
     
-    user=[self createTextFielfFrame:CGRectMake(60, self.view.frame.size.height/2-130, 271, 30) font:[UIFont systemFontOfSize:16] placeholder:@"账号"];
+    UIColor *placeholderColor= [UIColor colorWithRed:166/255.0f green:191/255.0f blue:250/255.0f alpha:1];
+    user=[self createTextFielfFrame:CGRectMake(60, self.view.frame.size.height/2-50, self.view.frame.size.width-120, 30) font:[UIFont systemFontOfSize:20] placeholder:@"用户名"];
+    user.attributedPlaceholder=[[NSAttributedString alloc] initWithString:@"用户名" attributes:@{NSForegroundColorAttributeName:placeholderColor}];
     //user.text=@"13419693608";
     user.keyboardType=UIKeyboardTypeNumberPad;
     user.clearButtonMode = UITextFieldViewModeWhileEditing;
     
-    pwd=[self createTextFielfFrame:CGRectMake(60, self.view.frame.size.height/2-80, 271, 30) font:[UIFont systemFontOfSize:16]  placeholder:@"密码" ];
+    pwd=[self createTextFielfFrame:CGRectMake(60, self.view.frame.size.height/2, self.view.frame.size.width-120, 30) font:[UIFont systemFontOfSize:20]  placeholder:@"密码" ];
     pwd.clearButtonMode = UITextFieldViewModeWhileEditing;
     //pwd.text=@"123456";
     //密文样式
     pwd.secureTextEntry=YES;
+    pwd.attributedPlaceholder=[[NSAttributedString alloc] initWithString:@"密码" attributes:@{NSForegroundColorAttributeName:placeholderColor}];
     //pwd.keyboardType=UIKeyboardTypeNumberPad;
     
     
-    UIImageView *userImageView=[self createImageViewFrame:CGRectMake(20, self.view.frame.size.height/2-130, 25, 25) imageName:@"ic_landing_nickname" color:nil];
-    UIImageView *pwdImageView=[self createImageViewFrame:CGRectMake(20, self.view.frame.size.height/2-80, 25, 25) imageName:@"mm_normal" color:nil];
+    UIImageView *userImageView=[self createImageViewFrame:CGRectMake(self.view.frame.size.width*0.07, self.view.frame.size.height/2-50, 25, 25) imageName:@"ic_landing_nickname" color:nil];
+    UIImageView *pwdImageView=[self createImageViewFrame:CGRectMake(self.view.frame.size.width*0.07, self.view.frame.size.height/2, 25, 25) imageName:@"mm_normal" color:nil];
    
-    
+    UIView *underline1=[[UIView alloc]initWithFrame:CGRectMake(20, self.view.frame.size.height/2-20, self.view.frame.size.width-40, 1)];
+    underline1.backgroundColor=[UIColor whiteColor];
+    UIView *underline2=[[UIView alloc]initWithFrame:CGRectMake(20, self.view.frame.size.height/2+30, self.view.frame.size.width-40, 1)];
+    underline2.backgroundColor=[UIColor whiteColor];
+    [self.view addSubview:underline1];
+    [self.view addSubview:underline2];
     [self.view addSubview:user];
     [self.view addSubview:pwd];
     
@@ -274,7 +292,9 @@
     
     textField.placeholder=placeholder;
     
+    
     return textField;
+    
 }
 
 -(UIAlertController *)createAlertController: (NSString *)str_title message:(NSString*) str_message
@@ -287,5 +307,16 @@
 }
 
 
+-(UILabel*)CreateLabel:(CGRect)frame title:(NSString*)title titleColor:(UIColor*)titleColor font:(UIFont*)font {
+    UILabel *lbl_tmp=[[UILabel alloc]init];
+    [lbl_tmp setFrame:frame];
+    lbl_tmp.text=title;
+    lbl_tmp.textColor=titleColor;
+    lbl_tmp.font=font;
+    lbl_tmp.textAlignment=NSTextAlignmentCenter;
+    
+    return lbl_tmp;
+    
+}
 
 @end

@@ -19,7 +19,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-     [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:70/255.0f green:156/255.0f blue:241/255.0f alpha:1]];
+    // [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:70/255.0f green:156/255.0f blue:241/255.0f alpha:1]];
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"bg_Nav.png"] forBarMetrics:UIBarMetricsDefault];
      LoginViewController *login=[[LoginViewController alloc]init];
      UINavigationController *nav=[[UINavigationController alloc]initWithRootViewController:login];
      self.window.rootViewController=nav;
