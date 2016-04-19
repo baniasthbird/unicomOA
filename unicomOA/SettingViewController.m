@@ -84,12 +84,22 @@
     
     self.view.backgroundColor=[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1];
     
+    
     //添加第一组
     LGSettingSection *section1=[LGSettingSection initWithHeaderTitle:@"" footerTitle:nil];
     //添加行
     LGSettingItem *item1=[LGSettingItem initWithtitle:_userInfo.str_name];
     item1.image=[UIImage imageNamed:_userInfo.str_Logo];
-    item1.height=90;
+    if (iPhone5_5s || iPhone4_4s) {
+        item1.height=112;
+    }
+    else if (iPhone6) {
+        item1.height=133;
+    }
+    else {
+        item1.height=147;
+    }
+    item1.type=UITableViewCellAccessoryNone;
     [section1 addItem:item1];
     //保存到groups数组
     [self.groups addObject:section1];
@@ -109,15 +119,21 @@
     [section3 addItemWithTitle:@"关于"];
     [self.groups addObject:section3];
     
+    
     //添加第四组
-    LGSettingSection *section4=[LGSettingSection initWithHeaderTitle:@"" footerTitle:@"2016 河南软信"];
+    LGSettingSection *section4=[LGSettingSection initWithHeaderTitle:@"" footerTitle:@""];
     //添加行
-    LGSettingItem *item4=[LGSettingItem initWithtitle:@"退出当前账号"];
-   // item4.type=UITableViewCellAccessoryDetailDisclosureButton;
+    LGSettingItem *item4=[LGSettingItem initWithtitle:@""];
+
+    item4.type=UITableViewCellAccessoryNone   ;
     [section4 addItem:item4];
+    
 
    // [section4 addItemWithTitle:@"退出当前账号"];
     [self.groups addObject:section4];
+    
+    self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
+     
 }
 
 - (void)didReceiveMemoryWarning {
@@ -158,22 +174,50 @@
     LGSettingSection *section=self.groups[indexPath.section];
     LGSettingItem *item= section.items[indexPath.row];
     
-    //设置Cell的标题
-    cell.textLabel.text=item.title;
+    
+    
+    if (indexPath.section==0 && indexPath.row==0) {
+        UIImageView *img_View=[[UIImageView alloc]initWithFrame:CGRectMake((self.view.frame.size.width-item.height*0.8)/2, item.height*0.2, item.height*0.8, item.height*0.8)];
+        img_View.layer.cornerRadius=50.0f;
+        img_View.layer.masksToBounds=YES;
+        img_View.image=item.image;
+        UILabel *lbl_title=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, item.height*0.77, 50, 20)];
+        lbl_title.text=item.title;
+        lbl_title.textColor=[UIColor colorWithRed:72/255.0f green:117/255.0f blue:230/255.0f alpha:1];
+        lbl_title.font=[UIFont systemFontOfSize:20];
+        [cell addSubview:lbl_title];
+       // cell.textLabel.textColor=[UIColor colorWithRed:72/255.0f green:117/255.0f blue:230/255.0f alpha:1];
+        [cell addSubview:img_View];
+        UIImageView *img_bgView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 100)];
+        img_bgView.image=[UIImage imageNamed:@"logoimage.png"];
+        cell.backgroundView=img_bgView;
+        
+    }
+    else {
+        //设置Cell的标题
+        cell.textLabel.text=item.title;
+
+        cell.textLabel.textColor=[UIColor colorWithRed:174/255.0f green:174/255.0f blue:174/255.0f alpha:1];
+    }
     //设置Cell左边的图标
-    cell.imageView.image=item.image;
+   // cell.imageView.image=item.image;
     //设置cell右边的图标
     cell.accessoryType=item.type;
     
+    
+    
     if (indexPath.section==3 && indexPath.row==0) {
         UIButton *btn=[[UIButton alloc]init];
-        [btn setFrame:CGRectMake(cell.frame.origin.x+cell.frame.size.width*0.28, cell.frame.origin.y, cell.frame.size.width*0.44, cell.frame.size.height)];
+        [btn setFrame:CGRectMake(self.view.frame.size.width*0.15, cell.frame.origin.y, self.view.frame.size.width*0.7, cell.frame.size.height)];
         [btn setTitle:@"退出当前帐号" forState:UIControlStateNormal];
         [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        btn.layer.cornerRadius=25.0f;
         [btn setBackgroundColor:[UIColor colorWithRed:246/255.0f green:88/255.0f blue:87/255.0f alpha:1]];
+        [btn addTarget:self action:@selector(QuitUser:) forControlEvents:UIControlEventTouchUpInside];
         [cell addSubview:btn];
-        cell.textLabel.textColor=[UIColor redColor];
-        cell.textLabel.textAlignment=NSTextAlignmentCenter;
+        cell.backgroundColor=[UIColor clearColor];
+       // cell.textLabel.textColor=[UIColor redColor];
+       // cell.textLabel.textAlignment=NSTextAlignmentCenter;
         
     }
     
@@ -192,7 +236,14 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==0 && indexPath.row==0) {
-        return 100;
+        if (iPhone4_4s || iPhone5_5s)
+           return 122;
+        else if (iPhone6) {
+            return 143;
+        }
+        else {
+            return 157;
+        }
     }
     else {
         LGSettingSection *section=self.groups[indexPath.section];
@@ -204,18 +255,22 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (section==3) {
-        return 80;
+        return 60;
     }
     else if (section==0) {
-        return 0;
+        return 0.1;
+    }
+    else if (section==1 || section==2){
+        return 10;
     }
     else {
-        return 10;
+        return 1;
     }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 0;
+    return 0.1;
+        
 }
 
 
@@ -272,7 +327,9 @@
 
 
 
-
+-(void)QuitUser:(UIButton*)sender {
+    
+}
 
 
 /*

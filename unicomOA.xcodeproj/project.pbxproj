@@ -39,6 +39,8 @@
 		2CE320F11CB7FF4800B36793 /* CarApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CE320F01CB7FF4800B36793 /* CarApplication.m */; };
 		2CE321101CC2810800B36793 /* DataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CE3210F1CC2810800B36793 /* DataSource.m */; };
 		2CE321131CC3B86300B36793 /* SendMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CE321121CC3B86300B36793 /* SendMeViewController.m */; };
+		2CE321151CC6543100B36793 /* server.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CE321141CC6543100B36793 /* server.png */; };
+		2CE321171CC673BB00B36793 /* logoimage.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CE321161CC673BB00B36793 /* logoimage.png */; };
 		2CFEAD181C7168980054730E /* forgetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD131C7168980054730E /* forgetPasswordViewController.m */; };
 		2CFEAD191C7168980054730E /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD151C7168980054730E /* LoginViewController.m */; };
 		2CFEAD1A1C7168980054730E /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD171C7168980054730E /* SignInViewController.m */; };
@@ -267,6 +269,8 @@
 		2CE3210F1CC2810800B36793 /* DataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataSource.m; path = View/DataSource.m; sourceTree = "<group>"; };
 		2CE321111CC3B86300B36793 /* SendMeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SendMeViewController.h; path = Base/Function/ShenPiContorller/SendMeViewController.h; sourceTree = "<group>"; };
 		2CE321121CC3B86300B36793 /* SendMeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SendMeViewController.m; path = Base/Function/ShenPiContorller/SendMeViewController.m; sourceTree = "<group>"; };
+		2CE321141CC6543100B36793 /* server.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = server.png; sourceTree = "<group>"; };
+		2CE321161CC673BB00B36793 /* logoimage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logoimage.png; sourceTree = "<group>"; };
 		2CFEAD121C7168980054730E /* forgetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = forgetPasswordViewController.h; path = Login/forgetPasswordViewController.h; sourceTree = "<group>"; };
 		2CFEAD131C7168980054730E /* forgetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = forgetPasswordViewController.m; path = Login/forgetPasswordViewController.m; sourceTree = "<group>"; };
 		2CFEAD141C7168980054730E /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = Login/LoginViewController.h; sourceTree = "<group>"; };
@@ -1048,6 +1052,8 @@
 		68D05CC81C97FBAE0039220F /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				2CE321161CC673BB00B36793 /* logoimage.png */,
+				2CE321141CC6543100B36793 /* server.png */,
 				686F5B591CC4DD0E0062084C /* bg_Nav.png */,
 				686F5B531CC4B5720062084C /* LoginView.png */,
 				2CA10C871CA110DE008D6394 /* PHONEOA.png */,
@@ -1463,6 +1469,8 @@
 				68D05CCA1C97FBC00039220F /* logo.png in Resources */,
 				68E779E41CB34A8E006DA5B9 /* contacts_collect@2x.png in Resources */,
 				68ED4E341CB4A077000E8A7B /* returnlogo.png in Resources */,
+				2CE321151CC6543100B36793 /* server.png in Resources */,
+				2CE321171CC673BB00B36793 /* logoimage.png in Resources */,
 				68E77A301CB3A133006DA5B9 /* IQKeyboardManager.bundle in Resources */,
 				68E779E61CB34A8E006DA5B9 /* head1.jpg in Resources */,
 				68EEDE711CBB911A003295EB /* down_arrow@2x.png in Resources */,

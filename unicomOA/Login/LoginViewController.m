@@ -90,7 +90,7 @@
     btn_login.layer.borderColor=colorref;
 
     
-    UIButton *btn_Server=[self createButtonFrame:CGRectMake(self.view.frame.size.width-75, self.view.frame.size.height/2+250, 60, 30) backImageName:nil title:@"服务器" titleColor:[UIColor grayColor] font:[UIFont systemFontOfSize:13] target:self action:@selector(serverip:)];
+    UIButton *btn_Server=[self createButtonFrame:CGRectMake(self.view.frame.size.width-75, self.view.frame.size.height-50, 35, 35) backImageName:@"server.png" title:@"" titleColor:[UIColor grayColor] font:[UIFont systemFontOfSize:13] target:self action:@selector(serverip:)];
     //newUserBtn.backgroundColor=[UIColor lightGrayColor];
     
     
