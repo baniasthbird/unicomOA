@@ -10,7 +10,7 @@
 #import "SearchResultViewController.h"
 #import "UserInfo.h"
 
-@interface ContactViewControllerNew : UITableViewController<UISearchBarDelegate,UISearchResultsUpdating>
+@interface ContactViewControllerNew : UIViewController<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate,UISearchResultsUpdating>
 
 @property (strong,nonatomic) UISearchController *searchcontroller;
 

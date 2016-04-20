@@ -15,6 +15,8 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
+        //_headImg.layer.cornerRadius=50.0f;
+        
     }
     return self;
 }
@@ -28,19 +30,22 @@
 
 - (void)drawRect:(CGRect)rect
 {
+    
     int addX = _node.nodeLevel-1;
     addX = (addX<0?1:addX)*25; //根据节点所在的层次计算平移距离
     CGRect imgFrame = _headImg.frame;
     imgFrame.origin.x = 14 + addX;
     _headImg.frame = imgFrame;
+    _headImg.layer.cornerRadius=20.0f;
     
     CGRect nameFrame = _name.frame;
     nameFrame.origin.x = 62 + addX;
     _name.frame = nameFrame;
-    
+    /*
     CGRect signtureFrame = _signture.frame;
     signtureFrame.origin.x = 62 + addX;
     _signture.frame = signtureFrame;
+    */
 }
 
 @end

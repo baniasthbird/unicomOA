@@ -38,17 +38,25 @@
     
     UITextField *txt_Port=[[UITextField alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.24, self.view.frame.size.width*0.9, self.view.frame.size.height*0.05)];
     
+    txt_IP.layer.cornerRadius=18.0f;
+    [txt_IP.layer setMasksToBounds:YES];
+    
     txt_IP.backgroundColor=[UIColor whiteColor];
     
-    txt_IP.placeholder=@"请输入服务器地址";
+    txt_IP.placeholder=@"  请输入服务器地址";
+    
+    txt_Port.layer.cornerRadius=18.0f;
+    [txt_Port.layer setMasksToBounds:YES];
     
     txt_Port.backgroundColor=[UIColor whiteColor];
     
-    txt_Port.placeholder=@"请输入服务器端口";
+    txt_Port.placeholder=@"  请输入服务器端口";
     
     
     UIButton *btn_OK=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.2, self.view.frame.size.height*0.45, self.view.frame.size.width*0.6, self.view.frame.size.height*0.05)];
-    btn_OK.backgroundColor=[UIColor colorWithRed:30/255.0f green:156/255.0f blue:241/255.0f alpha:1];
+    btn_OK.layer.cornerRadius=18.0f;
+    [btn_OK.layer setMasksToBounds:YES];
+    btn_OK.backgroundColor=[UIColor colorWithRed:69/255.0f green:115/255.0f blue:230/255.0f alpha:1];
     [btn_OK setTitle:@"确定" forState:UIControlStateNormal];
     [btn_OK setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     btn_OK.titleLabel.font=[UIFont systemFontOfSize:22];
@@ -61,6 +69,15 @@
     [self.view addSubview:txt_Port];
     
     [self.view addSubview:btn_OK];
+    
+    
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"  " style:UIBarButtonItemStyleDone target:self action:@selector(MovePreviousVc:)];
+    barButtonItem.tintColor=[UIColor whiteColor];
+    [barButtonItem setImage:[UIImage imageNamed:@"returnlogo.png"]];
+    
+    [barButtonItem setTitleTextAttributes:dict forState:UIControlStateNormal];
+    self.navigationItem.leftBarButtonItem = barButtonItem;
+    
     // Do any additional setup after loading the view.
 }
 
@@ -73,6 +90,11 @@
     LoginViewController *vc=[[LoginViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
 }
+
+-(void)MovePreviousVc:(UIButton*)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 
 /*
 #pragma mark - Navigation

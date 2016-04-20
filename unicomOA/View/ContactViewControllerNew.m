@@ -20,24 +20,26 @@
 
 @property (strong,nonatomic) NSMutableArray *searchArray;  //搜索数据
 
+@property (strong,nonatomic) UITableView *tableView;
+
 @end
 
 @implementation ContactViewControllerNew
 
--(instancetype)init {
-    
-    
-    self.title = @"通讯录";
-    
-    NSDictionary * dict=@{
-                          NSForegroundColorAttributeName:   [UIColor whiteColor]};
-    
-    self.navigationController.navigationBar.titleTextAttributes=dict;
-    
-    
-    //设置样式
-    return [self initWithStyle:UITableViewStyleGrouped];
-    
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+        NSDictionary * dict=@{
+                              NSForegroundColorAttributeName:   [UIColor whiteColor]};
+        
+        self.navigationController.navigationBar.titleTextAttributes=dict;
+        self.title = @"通讯录";
+        
+        
+    }
+    return self;
 }
 
 
@@ -48,6 +50,31 @@
                           NSForegroundColorAttributeName:   [UIColor whiteColor]};
     
     self.navigationController.navigationBar.titleTextAttributes=dict;
+    
+    self.view.backgroundColor=[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1];
+    
+    CGFloat i_Height=-1;
+    if (iPhone4_4s || iPhone5_5s) {
+        i_Height=68;
+    }
+    else if (iPhone6) {
+        i_Height=79;
+    }
+    else if (iPhone6_plus) {
+        i_Height=87;
+    }
+    UIView *bg_base=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, i_Height)];
+    UIImageView *bg_View=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, i_Height)];
+    bg_View.image=[UIImage imageNamed:@"bg_Nav.png"];
+    [bg_base addSubview:bg_View];
+    [bg_base sendSubviewToBack:bg_View];
+    
+    
+    self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, i_Height, self.view.frame.size.width, self.view.frame.size.height-100)];
+    self.tableView.delegate=self;
+    self.tableView.dataSource=self;
+    self.tableView.backgroundColor=[UIColor clearColor];
+    [self.view addSubview:self.tableView];
     
     
     self.tableView.sectionHeaderHeight=40;
@@ -63,6 +90,9 @@
     
     self.searchcontroller.searchBar.placeholder=@"搜索姓名/拼音/电话";
     
+    [[[[self.searchcontroller.searchBar.subviews objectAtIndex:0] subviews]objectAtIndex:0]removeFromSuperview];
+    
+    [self.searchcontroller.searchBar setFrame:CGRectMake(0, 20, self.view.frame.size.width, i_Height-40)];
     
     self.searchcontroller.searchResultsUpdater=self;
     
@@ -70,7 +100,19 @@
     
     self.definesPresentationContext=YES;
     
-    self.tableView.tableHeaderView=self.searchcontroller.searchBar;
+
+    [bg_base addSubview:self.searchcontroller.searchBar];
+    
+    [self.view addSubview:bg_base];
+    
+    UILabel *lbl_title=[[UILabel alloc]initWithFrame:CGRectMake(0, i_Height, self.view.frame.size.width, 40)];
+    lbl_title.text=@"      组织结构";
+    lbl_title.textColor=[UIColor blackColor];
+    lbl_title.textAlignment=NSTextAlignmentLeft;
+    lbl_title.font=[UIFont systemFontOfSize:15];
+    
+    
+    self.tableView.tableHeaderView=lbl_title;
     
     self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     
@@ -284,13 +326,13 @@
  --------------------------------------- */
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (iPhone4_4s || iPhone5_5s) {
-        return  40;
+        return  60;
     }
     else if (iPhone6) {
-        return 50;
+        return 70;
     }
     else {
-        return 60;
+        return 80;
     }
     
 }

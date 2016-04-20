@@ -43,15 +43,46 @@
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withName:(NSString *) str_name withImage:(NSString*)str_img {
     self=[super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        CGFloat i_Width=320;
+        CGFloat i_Height=100;
+        if (iPhone5_5s || iPhone4_4s) {
+            i_Width=320;
+            i_Height=112;
+        }
+        else if (iPhone6) {
+            i_Width=375;
+            i_Height=133;
+        }
+        else if (iPhone6_plus) {
+            i_Width=414;
+            i_Height=147;
+        }
+        UIImageView *img_bgView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, i_Width, i_Height)];
+        img_bgView.image=[UIImage imageNamed:@"logoimage.png"];
+        self.backgroundView=img_bgView;
         _lbl_name=[[UILabel alloc]initWithFrame:CGRectMake(self.frame.size.width*0.65, self.frame.size.height*0.5, self.frame.size.width/3, self.frame.size.height)];
-        _lbl_name.text=str_name;
-        _lbl_name.textAlignment=NSTextAlignmentLeft;
-        _lbl_name.font=[UIFont systemFontOfSize:24];
-        _lbl_name.textColor=[UIColor blackColor];
+       
         
         UIImage *imageHead=[UIImage imageNamed:str_img];
         _img_Head=[[UIImageView alloc]initWithImage:imageHead];
-        [_img_Head setFrame:CGRectMake(self.frame.size.width*0.05, self.frame.size.height*0.13, self.frame.size.width*0.28, self.frame.size.width*0.28)];
+        _img_Head.backgroundColor=[UIColor clearColor];
+        if (iPhone4_4s || iPhone5_5s) {
+            [_img_Head setFrame:CGRectMake(115, 20, 88, 88)];
+            _img_Head.layer.cornerRadius=45.0f;
+        }
+        else if (iPhone6) {
+            [_img_Head setFrame:CGRectMake(134, 25, 105, 105)];
+            _img_Head.layer.cornerRadius=50.0f;
+        }
+        else if (iPhone6_plus) {
+            [_img_Head setFrame:CGRectMake(146, 33, 120, 120)];
+            _img_Head.layer.cornerRadius=58.0f;
+        }
+        _lbl_name.text=str_name;
+        _lbl_name.textAlignment=NSTextAlignmentCenter;
+        _lbl_name.font=[UIFont systemFontOfSize:24];
+        _lbl_name.textColor=[UIColor colorWithRed:86/255.0f green:130/255.0f blue:240/255.0f alpha:1];
+        [_img_Head.layer setMasksToBounds:YES];
         _img_Head.userInteractionEnabled=YES;
         
         [self.contentView addSubview:_lbl_name];

@@ -62,12 +62,28 @@
     CGSize mSize=[[UIScreen mainScreen] bounds].size;
     CGFloat screenWidth=mSize.width;
     CGFloat screenHeiht=mSize.height;
-    self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, screenWidth, screenHeiht) style:UITableViewStyleGrouped];
+    
+    CGFloat i_Height=-1;
+    if (iPhone4_4s || iPhone5_5s) {
+        i_Height=68;
+    }
+    else if (iPhone6) {
+        i_Height=79;
+    }
+    else if (iPhone6_plus) {
+        i_Height=87;
+    }
+    UIImageView *img_View=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, screenWidth, i_Height)];
+    img_View.image=[UIImage imageNamed:@"bg_Nav.png"];
+    
+    self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 50, screenWidth, screenHeiht) style:UITableViewStyleGrouped];
     [self.view addSubview:_tableView];
     self.tableView.dataSource=self;
-    self.tableView.separatorColor=[UIColor blackColor];
+    self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     self.tableView.delegate=self;
     self.tableView.backgroundColor=[UIColor clearColor];
+    
+    [self.view addSubview:img_View];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -87,7 +103,17 @@
 
 -(UIImageButton *)createImageButton:(CGFloat)x CenterY:(CGFloat)y title:(NSString*)str_title image:(NSString *)str_image {
     UIImageButton *tmp_btn=[UIImageButton buttonWithType:UIButtonTypeCustom];
-    tmp_btn.bounds=CGRectMake(0, 0, kImageWidth, kImageHeight);
+    if ( iPhone6_plus) {
+        tmp_btn.bounds=CGRectMake(0, 0, kImageWidth, kImageHeight);
+    }
+    else if (iPhone6) {
+        tmp_btn.bounds=CGRectMake(0, 0, 92, 92);
+    }
+    else {
+        tmp_btn.bounds=CGRectMake(0, 0, 90, 90);
+
+    }
+    
     
     tmp_btn.center=CGPointMake(x,y);
     [tmp_btn setValue:[NSNumber numberWithInt:0] forKey:@"column"];
@@ -116,35 +142,34 @@
         UIImageButton *btn_IVoting;
         UIImageButton *btn_Notes;
         if (iPhone6) {
-            btn_News=[self createImageButton:30+kImageWidth*0.5 CenterY:5+kImageHeight*0.5 title:@"公告" image:@"News.png"];
-            
+            btn_News=[self createImageButton:30+kImageWidth*0.5 CenterY:5+kImageHeight*0.5 title:@"" image:@"News.png"];
             [btn_News addTarget:self action:@selector(NewsItemClick:) forControlEvents:UIControlEventTouchUpInside];
-            btn_ShenPi=[self createImageButton:35+kImageWidth*1.5 CenterY:5+kImageHeight*0.5 title:@"审批" image:@"ShenPi.png"];
+            btn_ShenPi=[self createImageButton:35+kImageWidth*1.5 CenterY:5+kImageHeight*0.5 title:@"" image:@"ShenPi.png"];
             [btn_ShenPi addTarget:self action:@selector(ShenPiItemClick:) forControlEvents:UIControlEventTouchUpInside];
-            btn_IVoting=[self createImageButton:40+kImageWidth*2.5 CenterY:5+kImageWidth*0.5 title:@"电子投票" image:@"IVoting.png"];
+            btn_IVoting=[self createImageButton:40+kImageWidth*2.5 CenterY:5+kImageWidth*0.5 title:@"" image:@"IVoting.png"];
             [btn_IVoting addTarget:self action:@selector(IVotingItemClick:) forControlEvents:UIControlEventTouchUpInside];
-            btn_Notes=[self createImageButton:30+kImageWidth*0.5 CenterY:5+kImageHeight*0.5 title:@"备忘录" image:@"Notes.png"];
+            btn_Notes=[self createImageButton:30+kImageWidth*0.5 CenterY:5+kImageHeight*0.5 title:@"" image:@"Notes.png"];
             [btn_Notes addTarget:self action:@selector(NotesItemClick:) forControlEvents:UIControlEventTouchUpInside];
         }
         else if (iPhone5_5s || iPhone4_4s) {
-            btn_News=[self createImageButton:5+kImageWidth*0.5 CenterY:5+kImageHeight*0.5 title:@"公告" image:@"News.png"];
+            btn_News=[self createImageButton:5+kImageWidth*0.5 CenterY:5+kImageHeight*0.5 title:@"" image:@"News.png"];
             [btn_News addTarget:self action:@selector(NewsItemClick:) forControlEvents:UIControlEventTouchUpInside];
-            btn_ShenPi=[self createImageButton:10+kImageWidth*1.5 CenterY:5+kImageHeight*0.5 title:@"审批" image:@"ShenPi.png"];
+            btn_ShenPi=[self createImageButton:15+kImageWidth*1.5 CenterY:5+kImageHeight*0.5 title:@"" image:@"ShenPi.png"];
             [btn_ShenPi addTarget:self action:@selector(ShenPiItemClick:) forControlEvents:UIControlEventTouchUpInside];
-            btn_IVoting=[self createImageButton:15+kImageWidth*2.5 CenterY:5+kImageWidth*0.5 title:@"电子投票" image:@"IVoting.png"];
+            btn_IVoting=[self createImageButton:20+kImageWidth*2.5 CenterY:5+kImageWidth*0.5 title:@"" image:@"IVoting.png"];
             [btn_IVoting addTarget:self action:@selector(IVotingItemClick:) forControlEvents:UIControlEventTouchUpInside];
-            btn_Notes=[self createImageButton:5+kImageWidth*0.5 CenterY:5+kImageHeight*0.5 title:@"备忘录" image:@"Notes.png"];
+            btn_Notes=[self createImageButton:5+kImageWidth*0.5 CenterY:5+kImageHeight*0.5 title:@"" image:@"Notes.png"];
             [btn_Notes addTarget:self action:@selector(NotesItemClick:) forControlEvents:UIControlEventTouchUpInside];
         }
         else if (iPhone6_plus)
         {
-                btn_News=[self createImageButton:30+kImageWidth*0.5 CenterY:5+kImageHeight*0.5 title:@"公告" image:@"News.png"];
+                btn_News=[self createImageButton:30+kImageWidth*0.5 CenterY:5+kImageHeight*0.5 title:@"" image:@"News.png"];
                 [btn_News addTarget:self action:@selector(NewsItemClick:) forControlEvents:UIControlEventTouchUpInside];
-                btn_ShenPi=[self createImageButton:50+kImageWidth*1.5 CenterY:5+kImageHeight*0.5 title:@"审批" image:@"ShenPi.png"];
+                btn_ShenPi=[self createImageButton:50+kImageWidth*1.5 CenterY:5+kImageHeight*0.5 title:@"" image:@"ShenPi.png"];
                [btn_ShenPi addTarget:self action:@selector(ShenPiItemClick:) forControlEvents:UIControlEventTouchUpInside];
-                btn_IVoting=[self createImageButton:70+kImageWidth*2.5 CenterY:5+kImageWidth*0.5 title:@"电子投票" image:@"IVoting.png"];
+                btn_IVoting=[self createImageButton:70+kImageWidth*2.5 CenterY:5+kImageWidth*0.5 title:@"" image:@"IVoting.png"];
                [btn_IVoting addTarget:self action:@selector(IVotingItemClick:) forControlEvents:UIControlEventTouchUpInside];
-                btn_Notes=[self createImageButton:30+kImageWidth*0.5 CenterY:5+kImageHeight*0.5 title:@"备忘录" image:@"Notes.png"];
+                btn_Notes=[self createImageButton:30+kImageWidth*0.5 CenterY:5+kImageHeight*0.5 title:@"" image:@"Notes.png"];
                [btn_Notes addTarget:self action:@selector(NotesItemClick:) forControlEvents:UIControlEventTouchUpInside];
         }
         btn_News.badgeBgColor=[UIColor redColor];

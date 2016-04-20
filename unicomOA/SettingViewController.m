@@ -14,6 +14,7 @@
 #import "SendFeedBackViewController.h"
 #import "AboutViewController.h"
 #import "StaffInfoViewController.h"
+#import "LXAlertView.h"
 
 
 @interface SettingViewController ()
@@ -178,7 +179,13 @@
     
     if (indexPath.section==0 && indexPath.row==0) {
         UIImageView *img_View=[[UIImageView alloc]initWithFrame:CGRectMake((self.view.frame.size.width-item.height*0.8)/2, item.height*0.2, item.height*0.8, item.height*0.8)];
-        img_View.layer.cornerRadius=50.0f;
+        if (iPhone6_plus || iPhone6) {
+            img_View.layer.cornerRadius=55.0f;
+        }
+        else {
+            img_View.layer.cornerRadius=45.0f;
+        }
+        
         img_View.layer.masksToBounds=YES;
         img_View.image=item.image;
         UILabel *lbl_title=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, item.height*0.77, 50, 20)];
@@ -291,6 +298,7 @@
         [self.navigationController pushViewController:passwordController animated:YES];
     }
     else if (indexPath.section==1 && indexPath.row==2) {
+        /*
         NSString *alert_title=@"警告";
         NSString *alert_message=@"是否清空所有的缓存数据";
         NSString *cancelButtonTitle=@"否";
@@ -298,18 +306,28 @@
         
         UIAlertController *alertController=[UIAlertController alertControllerWithTitle:alert_title message:alert_message preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *cancelAction=[UIAlertAction actionWithTitle:cancelButtonTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+            
             NSLog(@"点击了取消按钮");
         }];
-        
         UIAlertAction *otherAction=[UIAlertAction actionWithTitle:otherButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             NSLog(@"点击了确定按钮");
         }];
         
+        
+        
+        [otherAction setValue:[UIColor redColor] forKey:@"titleTextColor"];
+        
         [alertController addAction:cancelAction];
         [alertController addAction:otherAction];
         
+        
         [self presentViewController:alertController animated:YES completion:nil];
-
+        */
+        
+        LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"警告" message:@"是否清空所有缓存数据" cancelBtnTitle:@"取消" otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+             NSLog(@"点击index====%ld",clickIndex);
+        }];
+        [alert showLXAlertView];
         
     }
     else if (indexPath.section==2 && indexPath.row==0) {

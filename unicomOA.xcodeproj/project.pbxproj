@@ -79,6 +79,9 @@
 		68052C2D1CAD167400A93BDA /* UITabBarItem+WZLBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = 68052C221CAD167400A93BDA /* UITabBarItem+WZLBadge.m */; };
 		68052C2E1CAD167400A93BDA /* CAAnimation+WAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 68052C251CAD167400A93BDA /* CAAnimation+WAnimation.m */; };
 		68052C2F1CAD167400A93BDA /* UIView+WZLBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = 68052C2A1CAD167400A93BDA /* UIView+WZLBadge.m */; };
+		681FFC701CC762840086A934 /* membertablecell.png in Resources */ = {isa = PBXBuildFile; fileRef = 681FFC6F1CC762840086A934 /* membertablecell.png */; };
+		681FFC761CC7828F0086A934 /* LXAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 681FFC731CC7828F0086A934 /* LXAlertView.m */; };
+		681FFC771CC7828F0086A934 /* UILabel+LXAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 681FFC751CC7828F0086A934 /* UILabel+LXAdd.m */; };
 		6822656F1C96B4C400AB29C0 /* NewsSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6822656E1C96B4C400AB29C0 /* NewsSettingViewController.m */; };
 		682B68B01CB618DD002EC60F /* PrintApplicationNoFileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 682B68AF1CB618DD002EC60F /* PrintApplicationNoFileCell.m */; };
 		682B68B61CB64482002EC60F /* AddPrintFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 682B68B51CB64482002EC60F /* AddPrintFile.m */; };
@@ -348,6 +351,11 @@
 		68052C291CAD167400A93BDA /* UIView+WZLBadge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WZLBadge.h"; sourceTree = "<group>"; };
 		68052C2A1CAD167400A93BDA /* UIView+WZLBadge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WZLBadge.m"; sourceTree = "<group>"; };
 		68052C2B1CAD167400A93BDA /* WZLBadgeImport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WZLBadgeImport.h; sourceTree = "<group>"; };
+		681FFC6F1CC762840086A934 /* membertablecell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = membertablecell.png; sourceTree = "<group>"; };
+		681FFC721CC7828F0086A934 /* LXAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXAlertView.h; sourceTree = "<group>"; };
+		681FFC731CC7828F0086A934 /* LXAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXAlertView.m; sourceTree = "<group>"; };
+		681FFC741CC7828F0086A934 /* UILabel+LXAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+LXAdd.h"; sourceTree = "<group>"; };
+		681FFC751CC7828F0086A934 /* UILabel+LXAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+LXAdd.m"; sourceTree = "<group>"; };
 		6822656D1C96B4C400AB29C0 /* NewsSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsSettingViewController.h; path = Base/Settings/Controller/NewsSettingViewController.h; sourceTree = "<group>"; };
 		6822656E1C96B4C400AB29C0 /* NewsSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsSettingViewController.m; path = Base/Settings/Controller/NewsSettingViewController.m; sourceTree = "<group>"; };
 		682B68AE1CB618DD002EC60F /* PrintApplicationNoFileCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrintApplicationNoFileCell.h; path = Base/Function/ShenPiModel/PrintApplicationNoFileCell.h; sourceTree = "<group>"; };
@@ -929,6 +937,18 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		681FFC711CC7828F0086A934 /* LXAlertView */ = {
+			isa = PBXGroup;
+			children = (
+				681FFC721CC7828F0086A934 /* LXAlertView.h */,
+				681FFC731CC7828F0086A934 /* LXAlertView.m */,
+				681FFC741CC7828F0086A934 /* UILabel+LXAdd.h */,
+				681FFC751CC7828F0086A934 /* UILabel+LXAdd.m */,
+			);
+			name = LXAlertView;
+			path = OpenSource/LXAlertView;
+			sourceTree = "<group>";
+		};
 		682265691C96A5EE00AB29C0 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -1016,6 +1036,7 @@
 		6846D35D1CABC483004BD285 /* OpenSource */ = {
 			isa = PBXGroup;
 			children = (
+				681FFC711CC7828F0086A934 /* LXAlertView */,
 				68EEDE5D1CBB911A003295EB /* MCMenuButton */,
 				68EEDE611CBB911A003295EB /* MCPopMenuController */,
 				68EEDE6C1CBB911A003295EB /* SDAutoLayout */,
@@ -1052,6 +1073,7 @@
 		68D05CC81C97FBAE0039220F /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				681FFC6F1CC762840086A934 /* membertablecell.png */,
 				2CE321161CC673BB00B36793 /* logoimage.png */,
 				2CE321141CC6543100B36793 /* server.png */,
 				686F5B591CC4DD0E0062084C /* bg_Nav.png */,
@@ -1475,6 +1497,7 @@
 				68E779E61CB34A8E006DA5B9 /* head1.jpg in Resources */,
 				68EEDE711CBB911A003295EB /* down_arrow@2x.png in Resources */,
 				68ED4E4A1CB4EB52000E8A7B /* print.png in Resources */,
+				681FFC701CC762840086A934 /* membertablecell.png in Resources */,
 				2CFEADA71C769EBF0054730E /* messages.plist in Resources */,
 				686F5B5A1CC4DD0E0062084C /* bg_Nav.png in Resources */,
 				68E779E51CB34A8E006DA5B9 /* contacts_major@2x.png in Resources */,
@@ -1530,6 +1553,7 @@
 				68D05CBA1C9791000039220F /* PasswordViewController.m in Sources */,
 				6846D3591CABA8AC004BD285 /* IVotingDisplayController.m in Sources */,
 				68052C2E1CAD167400A93BDA /* CAAnimation+WAnimation.m in Sources */,
+				681FFC771CC7828F0086A934 /* UILabel+LXAdd.m in Sources */,
 				68E779F41CB34D78006DA5B9 /* ContactViewControllerNew.m in Sources */,
 				2C5460A81C82F5C3005C5AB9 /* UserEntity.m in Sources */,
 				2CFEAD2D1C717FDC0054730E /* SettingViewController.m in Sources */,
@@ -1626,6 +1650,7 @@
 				68EEDE561CBB2E19003295EB /* Address.m in Sources */,
 				2CFEADC51C76A65E0054730E /* NSString+Extension.m in Sources */,
 				6882C3211CA92C4B00CDEB1A /* CommentViewController.m in Sources */,
+				681FFC761CC7828F0086A934 /* LXAlertView.m in Sources */,
 				68E77A251CB3A133006DA5B9 /* IQUIView+Hierarchy.m in Sources */,
 				2CB7DB621CA2C3150057633D /* ServerIPViewController.m in Sources */,
 				2CE320EE1CB6B4B000B36793 /* PrintFiles.m in Sources */,

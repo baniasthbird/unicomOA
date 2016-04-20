@@ -89,8 +89,17 @@
     CGColorRef colorref = CGColorCreate(colorSpace,(CGFloat[]){ 234/255.0f, 246/255.0f, 254/255.0f, 0.3 });
     btn_login.layer.borderColor=colorref;
 
-    
-    UIButton *btn_Server=[self createButtonFrame:CGRectMake(self.view.frame.size.width-75, self.view.frame.size.height-50, 35, 35) backImageName:@"server.png" title:@"" titleColor:[UIColor grayColor] font:[UIFont systemFontOfSize:13] target:self action:@selector(serverip:)];
+    CGFloat i_Width=35.0f;
+    CGFloat i_Right=75.0f;
+    if (iPhone6 || iPhone6_plus) {
+        i_Width=35.0f;
+        i_Right=75.0f;
+    }
+    else {
+        i_Width=25.0f;
+        i_Right=55.0f;
+    }
+    UIButton *btn_Server=[self createButtonFrame:CGRectMake(self.view.frame.size.width-i_Right, self.view.frame.size.height-50, i_Width, i_Width) backImageName:@"server.png" title:@"" titleColor:[UIColor grayColor] font:[UIFont systemFontOfSize:13] target:self action:@selector(serverip:)];
     //newUserBtn.backgroundColor=[UIColor lightGrayColor];
     
     

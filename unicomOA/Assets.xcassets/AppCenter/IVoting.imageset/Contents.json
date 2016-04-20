@@ -6,11 +6,12 @@
     },
     {
       "idiom" : "universal",
-      "filename" : "IVOTing.png",
+      "filename" : "ivoting.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "ivoting-1.png",
       "scale" : "3x"
     }
   ],

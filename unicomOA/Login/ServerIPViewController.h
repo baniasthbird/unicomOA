@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ServerIPViewController : UIViewController
+@interface ServerIPViewController : UITabBarController
 
 @end
