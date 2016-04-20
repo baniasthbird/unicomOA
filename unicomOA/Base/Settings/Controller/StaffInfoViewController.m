@@ -181,6 +181,7 @@
 -(void)MovePreviousVc:(UIButton *)sender {
     
     SettingViewController *viewController=[[SettingViewController alloc]init];
+    viewController.userInfo=_userInfo;
     [self.navigationController pushViewController:viewController animated:YES];
      
      //[self.navigationController popViewControllerAnimated:YES];

@@ -25,59 +25,95 @@
     
     self.navigationController.navigationBar.titleTextAttributes=dict;
     
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"  " style:UIBarButtonItemStyleDone target:self action:@selector(MovePreviousVc:)];
+    [barButtonItem setTitleTextAttributes:dict forState:UIControlStateNormal];
+    barButtonItem.tintColor=[UIColor whiteColor];
+    [barButtonItem setImage:[UIImage imageNamed:@"returnlogo.png"]];
+    self.navigationItem.leftBarButtonItem = barButtonItem;
+
+    
     // Do any additional setup after loading the view.
     self.view.backgroundColor=[UIColor whiteColor];
     
     UIImage *img_bg=[UIImage imageNamed:@"PHONEOA.png"];
     //UIImageView *img_View=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.2, self.view.frame.size.height*0.14, self.view.frame.size.width*0.5, self.view.frame.size.height*0.3)];
     UIImageView *img_View=[[UIImageView alloc]initWithImage:img_bg];
-    img_View.frame=CGRectMake(self.view.frame.size.width*0.15, self.view.frame.size.height*0.15, self.view.frame.size.width*0.7, self.view.frame.size.height*0.3);
+    if (iPhone6_plus || iPhone6) {
+        img_View.frame=CGRectMake(0, -60, self.view.frame.size.width, self.view.frame.size.height);
+    }
+    else if (iPhone4_4s || iPhone5_5s) {
+        img_View.frame=CGRectMake(0, -80, self.view.frame.size.width, self.view.frame.size.height);
+
+    }
+    
     
     UILabel *lbl_txt1;
     if (iPhone6 || iPhone6_plus) {
-        lbl_txt1=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.45, self.view.frame.size.width*0.5, self.view.frame.size.height/32)];
+        lbl_txt1=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.55, self.view.frame.size.width*0.9, self.view.frame.size.height/32)];
         lbl_txt1.font=[UIFont systemFontOfSize:22];
     }
     else if (iPhone4_4s || iPhone5_5s) {
-        lbl_txt1=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.45, self.view.frame.size.width, self.view.frame.size.height/32)];
+        lbl_txt1=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.5, self.view.frame.size.width*0.9, self.view.frame.size.height/32)];
         lbl_txt1.font=[UIFont systemFontOfSize:18];
     }
     lbl_txt1.numberOfLines=0;
-    lbl_txt1.text=[NSString stringWithFormat:@"%@%@",@"当前绑定的手机号:",_str_phonenum];
+    lbl_txt1.textAlignment=NSTextAlignmentCenter;
+    lbl_txt1.text=@"当前绑定的手机号:";
+    
+    UILabel *lbl_txtnum;
+    if (iPhone6 || iPhone6_plus) {
+        lbl_txtnum=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.6, self.view.frame.size.width*0.9, self.view.frame.size.height/32)];
+        lbl_txtnum.font=[UIFont systemFontOfSize:22];
+    }
+    else if (iPhone4_4s || iPhone5_5s) {
+        lbl_txtnum=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.55, self.view.frame.size.width*0.9, self.view.frame.size.height/32)];
+        lbl_txtnum.font=[UIFont systemFontOfSize:18];
+    }
+    lbl_txtnum.numberOfLines=0;
+    lbl_txtnum.textAlignment=NSTextAlignmentCenter;
+    lbl_txtnum.text=_str_phonenum;
     
     
     lbl_txt1.textColor=[UIColor blackColor];
     
-    UIButton *btn_ChangeNum=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.55, self.view.frame.size.width*0.9, self.view.frame.size.height/16)];
+    UIButton *btn_ChangeNum;
+    if (iPhone6 || iPhone6_plus) {
+        btn_ChangeNum=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.65, self.view.frame.size.width*0.9, self.view.frame.size.height/16)];
+    }
+    else if (iPhone5_5s || iPhone4_4s) {
+        btn_ChangeNum=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.6, self.view.frame.size.width*0.9, self.view.frame.size.height/16)];
+    }
+ 
     [btn_ChangeNum setTitle:@"更换手机账号" forState:UIControlStateNormal];
-    [btn_ChangeNum setBackgroundColor:[UIColor colorWithRed:22/255.0f green:156/255.0f blue:213/255.0f alpha:1]];
+    [btn_ChangeNum setBackgroundColor:[UIColor colorWithRed:70/255.0f green:115/255.0f blue:230/255.0f alpha:1]];
     btn_ChangeNum.titleLabel.textAlignment=NSTextAlignmentCenter;
     btn_ChangeNum.titleLabel.textColor=[UIColor whiteColor];
+    btn_ChangeNum.layer.cornerRadius=20.0f;
+    [btn_ChangeNum.layer setMasksToBounds:YES];
     [btn_ChangeNum addTarget:self action:@selector(MoveNextVc:) forControlEvents:UIControlEventTouchUpInside];
     
     
     UILabel *lbl_txt2;
     if (iPhone6 || iPhone6_plus) {
-        lbl_txt2=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.615, self.view.frame.size.width*0.6, self.view.frame.size.height/32)];
+        lbl_txt2=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.72, self.view.frame.size.width*0.9, self.view.frame.size.height/32)];
     }
     else if (iPhone5_5s || iPhone4_4s) {
-        lbl_txt2=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.615, self.view.frame.size.width*0.9, self.view.frame.size.height/32)];
+        lbl_txt2=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.67, self.view.frame.size.width*0.9, self.view.frame.size.height/32)];
     }
     
     
     lbl_txt2.text=@"手机账号可用于登陆和找回密码";
     
     lbl_txt2.font=[UIFont systemFontOfSize:14];
+    lbl_txt2.textAlignment=NSTextAlignmentCenter;
     
     lbl_txt2.textColor=[UIColor colorWithRed:153/255.0f green:153/255.0f blue:153/255.0f alpha:1];
 
     
-    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"我的资料" style:UIBarButtonItemStyleDone target:self action:@selector(MovePreviousVc:)];
-    [barButtonItem setTitleTextAttributes:dict forState:UIControlStateNormal];
-    self.navigationItem.leftBarButtonItem = barButtonItem;
     
     [self.view addSubview:img_View];
     [self.view addSubview:lbl_txt1];
+    [self.view addSubview:lbl_txtnum];
     [self.view addSubview:btn_ChangeNum];
     [self.view addSubview:lbl_txt2];
  

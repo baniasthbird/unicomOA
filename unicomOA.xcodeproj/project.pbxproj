@@ -23,7 +23,6 @@
 		2C5460BE1C854733005C5AB9 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C5460BC1C854733005C5AB9 /* TableViewCell.xib */; };
 		2C74F0791CAEACDA00CC5C5F /* PhoneLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C74F0781CAEACDA00CC5C5F /* PhoneLabelView.m */; };
 		2C99721E1CA21E0E00B803FC /* ChangePhoneNumStep3.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C99721D1CA21E0E00B803FC /* ChangePhoneNumStep3.m */; };
-		2CA10C881CA110DE008D6394 /* PHONEOA.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA10C871CA110DE008D6394 /* PHONEOA.png */; };
 		2CA10C8B1CA18F17008D6394 /* ChangePhoneNumStep1.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA10C8A1CA18F17008D6394 /* ChangePhoneNumStep1.m */; };
 		2CA10C8E1CA1945F008D6394 /* ChangePhoneNumStep2.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA10C8D1CA1945F008D6394 /* ChangePhoneNumStep2.m */; };
 		2CB7DB5F1CA278C00057633D /* SMSCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB7DB5E1CA278C00057633D /* SMSCodeViewController.m */; };
@@ -41,6 +40,7 @@
 		2CE321131CC3B86300B36793 /* SendMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CE321121CC3B86300B36793 /* SendMeViewController.m */; };
 		2CE321151CC6543100B36793 /* server.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CE321141CC6543100B36793 /* server.png */; };
 		2CE321171CC673BB00B36793 /* logoimage.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CE321161CC673BB00B36793 /* logoimage.png */; };
+		2CE3211B1CC7C51600B36793 /* PHONEOA.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CE3211A1CC7C51600B36793 /* PHONEOA.png */; };
 		2CFEAD181C7168980054730E /* forgetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD131C7168980054730E /* forgetPasswordViewController.m */; };
 		2CFEAD191C7168980054730E /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD151C7168980054730E /* LoginViewController.m */; };
 		2CFEAD1A1C7168980054730E /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD171C7168980054730E /* SignInViewController.m */; };
@@ -241,7 +241,6 @@
 		2C74F0781CAEACDA00CC5C5F /* PhoneLabelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhoneLabelView.m; path = Base/Contact/View/PhoneLabelView.m; sourceTree = "<group>"; };
 		2C99721C1CA21E0E00B803FC /* ChangePhoneNumStep3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChangePhoneNumStep3.h; path = Base/Settings/Controller/ChangePhoneNumStep3.h; sourceTree = "<group>"; };
 		2C99721D1CA21E0E00B803FC /* ChangePhoneNumStep3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChangePhoneNumStep3.m; path = Base/Settings/Controller/ChangePhoneNumStep3.m; sourceTree = "<group>"; };
-		2CA10C871CA110DE008D6394 /* PHONEOA.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PHONEOA.png; sourceTree = "<group>"; };
 		2CA10C891CA18F17008D6394 /* ChangePhoneNumStep1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChangePhoneNumStep1.h; path = Base/Settings/Controller/ChangePhoneNumStep1.h; sourceTree = "<group>"; };
 		2CA10C8A1CA18F17008D6394 /* ChangePhoneNumStep1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChangePhoneNumStep1.m; path = Base/Settings/Controller/ChangePhoneNumStep1.m; sourceTree = "<group>"; };
 		2CA10C8C1CA1945F008D6394 /* ChangePhoneNumStep2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChangePhoneNumStep2.h; path = Base/Settings/Controller/ChangePhoneNumStep2.h; sourceTree = "<group>"; };
@@ -274,6 +273,7 @@
 		2CE321121CC3B86300B36793 /* SendMeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SendMeViewController.m; path = Base/Function/ShenPiContorller/SendMeViewController.m; sourceTree = "<group>"; };
 		2CE321141CC6543100B36793 /* server.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = server.png; sourceTree = "<group>"; };
 		2CE321161CC673BB00B36793 /* logoimage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logoimage.png; sourceTree = "<group>"; };
+		2CE3211A1CC7C51600B36793 /* PHONEOA.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PHONEOA.png; sourceTree = "<group>"; };
 		2CFEAD121C7168980054730E /* forgetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = forgetPasswordViewController.h; path = Login/forgetPasswordViewController.h; sourceTree = "<group>"; };
 		2CFEAD131C7168980054730E /* forgetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = forgetPasswordViewController.m; path = Login/forgetPasswordViewController.m; sourceTree = "<group>"; };
 		2CFEAD141C7168980054730E /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = Login/LoginViewController.h; sourceTree = "<group>"; };
@@ -1073,12 +1073,12 @@
 		68D05CC81C97FBAE0039220F /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				2CE3211A1CC7C51600B36793 /* PHONEOA.png */,
 				681FFC6F1CC762840086A934 /* membertablecell.png */,
 				2CE321161CC673BB00B36793 /* logoimage.png */,
 				2CE321141CC6543100B36793 /* server.png */,
 				686F5B591CC4DD0E0062084C /* bg_Nav.png */,
 				686F5B531CC4B5720062084C /* LoginView.png */,
-				2CA10C871CA110DE008D6394 /* PHONEOA.png */,
 				68D05CC91C97FBC00039220F /* logo.png */,
 				68ED4E331CB4A077000E8A7B /* returnlogo.png */,
 				68ED4E351CB4B4FE000E8A7B /* myApplication.png */,
@@ -1477,9 +1477,9 @@
 				68ED4E4C1CB4EBF5000E8A7B /* uber.png in Resources */,
 				68ED4E361CB4B4FE000E8A7B /* myApplication.png in Resources */,
 				2C35B05A1C7062160003BF6C /* LaunchScreen.storyboard in Resources */,
+				2CE3211B1CC7C51600B36793 /* PHONEOA.png in Resources */,
 				68ED4E3A1CB4C89E000E8A7B /* SendMe.png in Resources */,
 				68E779E71CB34A8E006DA5B9 /* head2.jpg in Resources */,
-				2CA10C881CA110DE008D6394 /* PHONEOA.png in Resources */,
 				68E779EE1CB34A8E006DA5B9 /* the_arrow.png in Resources */,
 				68ED4E381CB4B945000E8A7B /* myApproval.png in Resources */,
 				68E779F01CB34A8E006DA5B9 /* Level1_Cell.xib in Resources */,
