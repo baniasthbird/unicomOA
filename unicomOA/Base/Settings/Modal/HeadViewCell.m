@@ -36,12 +36,15 @@
         
         UIImage *imageHead=[UIImage imageNamed:@"headLogo.png"];
         _img_Head=[[UIImageView alloc]initWithImage:imageHead];
+        [_img_Head.layer setMasksToBounds:YES];
         if (iPhone6 || iPhone6_plus)
         {
             [_img_Head setFrame:CGRectMake(self.frame.size.width*0.86, self.frame.size.height*0.13, self.frame.size.width*0.28, self.frame.size.width*0.28)];
+            _img_Head.layer.cornerRadius=42.0f;
         }
         else if (iPhone5_5s || iPhone4_4s) {
             [_img_Head setFrame:CGRectMake(self.frame.size.width*0.68, self.frame.size.height*0.13, self.frame.size.width*0.28, self.frame.size.width*0.28)];
+            _img_Head.layer.cornerRadius=42.0f;
 
         }
         
