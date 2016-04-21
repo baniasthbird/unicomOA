@@ -27,11 +27,28 @@
     
     self.view.backgroundColor=[UIColor colorWithRed:243/255.0 green:243/255.0 blue:243/255.0 alpha:1];
     
-    UITextField *txt_Num=[[UITextField alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.12, self.view.frame.size.width, self.view.frame.size.height*0.08)];
+    UITextField *txt_Num=[[UITextField alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.06, self.view.frame.size.width*0.9, 50)];
     
     txt_Num.backgroundColor=[UIColor whiteColor];
     
     txt_Num.placeholder=@"请输入登陆密码";
+    
+
+    NSMutableAttributedString *attributedStr=[[NSMutableAttributedString alloc]initWithString:@"  请输入登陆密码"];
+    
+    [attributedStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:173/255.0f green:173/255.0f blue:173/255.0f alpha:1] range:NSMakeRange(0, attributedStr.length)];
+    [attributedStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:20] range:NSMakeRange(0, attributedStr.length)];
+    
+    txt_Num.attributedPlaceholder=attributedStr;
+    
+    
+    /*
+    [txt_Num setValue:[UIColor colorWithRed:173/255.0f green:173/255.0f blue:173/255.0f alpha:1] forKey:@"_placholderLabel.color"];
+    [txt_Num setValue:[UIFont systemFontOfSize:15] forKey:@"_placeholderLabel.font"];
+    */
+    txt_Num.layer.cornerRadius=25.0f;
+    
+    [txt_Num.layer setMasksToBounds:YES];
     
     txt_Num.keyboardType=UIKeyboardTypeNumberPad;
     

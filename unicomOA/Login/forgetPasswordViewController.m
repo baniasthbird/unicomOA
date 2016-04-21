@@ -44,19 +44,33 @@
     
     self.view.backgroundColor=[UIColor colorWithRed:240/255.0f green:240/255.0f blue:240/255.0f alpha:1];
     
-    UITextField *txt_Num=[[UITextField alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.12, self.view.frame.size.width, self.view.frame.size.height*0.08)];
+    UITextField *txt_Num=[[UITextField alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.06, self.view.frame.size.width*0.9, 50)];
     txt_Num.backgroundColor=[UIColor whiteColor];
-    txt_Num.placeholder=@"请输入手机号码";
+    txt_Num.placeholder=@"   请输入手机号码";
     txt_Num.keyboardType=UIKeyboardTypeNumberPad;
     
+    txt_Num.layer.cornerRadius=25.0f;
+    
+    [txt_Num.layer setMasksToBounds:YES];
+    
+    NSMutableAttributedString *attributedStr=[[NSMutableAttributedString alloc]initWithString:@"    请输入手机号码"];
+    
+    [attributedStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:173/255.0f green:173/255.0f blue:173/255.0f alpha:1] range:NSMakeRange(0, attributedStr.length)];
+    [attributedStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:20] range:NSMakeRange(0, attributedStr.length)];
+    
+    txt_Num.attributedPlaceholder=attributedStr;
+
     
     
-    UILabel *lbl_txt1=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.22, self.view.frame.size.width, self.view.frame.size.height*0.08)];
-    lbl_txt1.text=@"点击下一步，系统将发送一条短信";
-    lbl_txt1.textColor=[UIColor colorWithRed:146/255.0f green:146/255.0f blue:146/255.0f alpha:1];
+    
+    UILabel *lbl_txt1=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.13, self.view.frame.size.width, 50)];
+    lbl_txt1.text=@"    点击下一步，系统将发送一条短信";
+    lbl_txt1.textColor=[UIColor colorWithRed:136/255.0f green:136/255.0f blue:136/255.0f alpha:1];
+    lbl_txt1.font=[UIFont boldSystemFontOfSize:17];
     
     [self.view addSubview:txt_Num];
     [self.view addSubview:lbl_txt1];
+    
     
     UIBarButtonItem *barButtonItemNx = [[UIBarButtonItem alloc] initWithTitle:@"下一步" style:UIBarButtonItemStyleDone target:self action:@selector(MoveNextVc:)];
     [barButtonItemNx setTitleTextAttributes:dict forState:UIControlStateNormal];

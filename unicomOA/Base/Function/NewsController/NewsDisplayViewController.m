@@ -38,7 +38,7 @@ int i_comment_num;
 
     
     if (iPhone6 || iPhone6_plus) {
-        _lbl_label=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height/16, 15*self.view.frame.size.width/16, self.view.frame.size.height/6)];
+        _lbl_label=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, 16, 15*self.view.frame.size.width/16, self.view.frame.size.height/6)];
     }
     else if (iPhone4_4s || iPhone5_5s) {
          _lbl_label=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height*0.1, 15*self.view.frame.size.width/16, self.view.frame.size.height/6)];
@@ -100,7 +100,7 @@ int i_comment_num;
     
 #pragma mark 最底下为三个button
     
-    UIButton *btn_read=[[UIButton alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.85, self.view.frame.size.width*0.329, self.view.frame.size.height*0.08)];
+    UIButton *btn_read=[[UIButton alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.75, self.view.frame.size.width*0.329, self.view.frame.size.height*0.08)];
     [btn_read setTitle:@"阅读" forState:UIControlStateNormal];
     [btn_read setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [btn_read.layer setBorderWidth:1.0];
@@ -108,7 +108,7 @@ int i_comment_num;
     btn_read.titleLabel.textAlignment=NSTextAlignmentCenter;
     [btn_read addTarget:self action:@selector(ReadNum:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *btn_focus=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.33, self.view.frame.size.height*0.85, self.view.frame.size.width*0.329, self.view.frame.size.height*0.08)];
+    UIButton *btn_focus=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.33, self.view.frame.size.height*0.75, self.view.frame.size.width*0.329, self.view.frame.size.height*0.08)];
     [btn_focus setTitle:@"关注" forState:UIControlStateNormal];
     [btn_focus setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     btn_focus.titleLabel.font=[UIFont systemFontOfSize:22];
@@ -116,7 +116,7 @@ int i_comment_num;
     [btn_focus.layer setBorderWidth:1.0];
     [btn_focus addTarget:self action:@selector(FocusEvent:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *btn_comment=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.66, self.view.frame.size.height*0.85, self.view.frame.size.width*0.34, self.view.frame.size.height*0.08)];
+    UIButton *btn_comment=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.66, self.view.frame.size.height*0.75, self.view.frame.size.width*0.34, self.view.frame.size.height*0.08)];
     [btn_comment setTitle:@"评论" forState:UIControlStateNormal];
     [btn_comment setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     btn_comment.titleLabel.font=[UIFont systemFontOfSize:22];

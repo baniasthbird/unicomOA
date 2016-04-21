@@ -27,7 +27,7 @@
 
 @property (nonatomic,strong) UIButton *btn_Select;
 
-@property (nonatomic,strong) UITextField *txt_Search;
+@property (nonatomic,strong) UISearchBar *searchBar;
 
 @property (nonatomic,strong) id<ClearRedDotDelegate> delegate;
 

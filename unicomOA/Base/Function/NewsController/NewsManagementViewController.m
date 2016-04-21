@@ -74,7 +74,7 @@
 }
 
 -(void)buildView {
-    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.005, self.view.frame.size.height/5, self.view.frame.size.width*0.99, self.view.frame.size.height) style:UITableViewStylePlain];
+    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.005, self.view.frame.size.height*0.13, self.view.frame.size.width*0.99, self.view.frame.size.height) style:UITableViewStylePlain];
     
     _tableView.separatorStyle=UITableViewCellSeparatorStyleSingleLine;
     
@@ -85,45 +85,65 @@
     _tableView.delegate=self;
     
     if (iPhone4_4s || iPhone5_5s) {
-        _btn_Select=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height*0.123, self.view.frame.size.width/4, self.view.frame.size.height/16)];
+        _btn_Select=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height*0.023, self.view.frame.size.width/4, self.view.frame.size.height/16)];
     }
     else if (iPhone6) {
-        _btn_Select=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height*0.115, self.view.frame.size.width/4, self.view.frame.size.height/16)];
+        _btn_Select=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height*0.015, self.view.frame.size.width/4, self.view.frame.size.height/16)];
     }
     else if (iPhone6_plus) {
-        _btn_Select=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height*0.113, self.view.frame.size.width/4, self.view.frame.size.height/16)];
+        _btn_Select=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height*0.013, self.view.frame.size.width/4, self.view.frame.size.height/16)];
     }
     
     [_btn_Select setTitle:@"类别" forState:UIControlStateNormal];
-    [_btn_Select setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-    [_btn_Select setBackgroundColor:[UIColor colorWithRed:243.0/255.0f green:243.0f/255.0f blue:243.0f/255.0f alpha:1]];
+    [_btn_Select setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [_btn_Select setBackgroundColor:[UIColor colorWithRed:80.0/255.0f green:124.0f/255.0f blue:236.0f/255.0f alpha:1]];
+    if (iPhone5_5s || iPhone4_4s) {
+        _btn_Select.titleLabel.font=[UIFont systemFontOfSize:15];
+    }
+    
+    
+    /*
     _btn_Select.layer.borderWidth=1;
     _btn_Select.layer.borderColor=[[UIColor lightGrayColor] CGColor];
-    _btn_Select.layer.cornerRadius=5;
+    */
+    _btn_Select.layer.cornerRadius=18.0f;
     [_btn_Select addTarget:self action:@selector(selectClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     if (iPhone4_4s || iPhone5_5s) {
-       _txt_Search=[[UITextField alloc]initWithFrame:CGRectMake(5*self.view.frame.size.width/16.0, self.view.frame.size.height*0.123, 2*self.view.frame.size.width/3, self.view.frame.size.height/16)];
+       _searchBar=[[UISearchBar alloc]initWithFrame:CGRectMake(5*self.view.frame.size.width/16.0, self.view.frame.size.height*0.023, 2*self.view.frame.size.width/3, self.view.frame.size.height/16)];
     }
     else if (iPhone6) {
-        _txt_Search=[[UITextField alloc]initWithFrame:CGRectMake(5*self.view.frame.size.width/16.0, self.view.frame.size.height*0.115, 2*self.view.frame.size.width/3, self.view.frame.size.height/16)];
+        _searchBar=[[UISearchBar alloc]initWithFrame:CGRectMake(5*self.view.frame.size.width/16.0, self.view.frame.size.height*0.015, 2*self.view.frame.size.width/3, self.view.frame.size.height/16)];
     }
     else if (iPhone6_plus) {
-        _txt_Search=[[UITextField alloc]initWithFrame:CGRectMake(5*self.view.frame.size.width/16.0, self.view.frame.size.height*0.113, 2*self.view.frame.size.width/3, self.view.frame.size.height/16)];
+         _searchBar=[[UISearchBar alloc]initWithFrame:CGRectMake(5*self.view.frame.size.width/16.0, self.view.frame.size.height*0.013, 2*self.view.frame.size.width/3, self.view.frame.size.height/16)];
+        
     }
     
+    /*
     _txt_Search.layer.borderWidth=1;
     _txt_Search.layer.borderColor=[[UIColor lightGrayColor] CGColor];
-    _txt_Search.layer.cornerRadius=5;
-    _txt_Search.placeholder=@"请输入搜索关键字";
-    [_txt_Search setTextColor:[UIColor blackColor]];
+    */
+    _searchBar.layer.cornerRadius=18.0f;
+    _searchBar.placeholder=@"  请输入搜索关键字";
+    for (UIView *view in _searchBar.subviews) {
+        if ([view isKindOfClass:NSClassFromString(@"UIView")] && view.subviews.count>0) {
+            [[view.subviews objectAtIndex:0] removeFromSuperview];
+            UITextField *txt_Field=[view.subviews objectAtIndex:0];
+            txt_Field.backgroundColor=[UIColor colorWithRed:240/255.0f green:240/255.0f blue:240/255.0f alpha:1];
+            txt_Field.layer.cornerRadius=15.0f;
+            break;
+        }
+    }
+   // _searchBar.backgroundColor=[UIColor colorWithRed:240/255.0f green:240/255.0f blue:240/255.0f alpha:1];
+    //[_searchBar setTextColor:[UIColor blackColor]];
     
     
     [self.view addSubview:_btn_Select];
     [self.view addSubview:_tableView];
-    [self.view addSubview:_txt_Search];
+    [self.view addSubview:_searchBar];
     
-    self.view.backgroundColor=[UIColor colorWithRed:243.0/255.0f green:243.0/255.0f blue:243.0/255.0 alpha:1];
+    self.view.backgroundColor=[UIColor whiteColor];
     
     _arr_News=[NSMutableArray arrayWithCapacity:2];
     

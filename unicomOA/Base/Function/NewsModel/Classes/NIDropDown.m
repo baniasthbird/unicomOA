@@ -104,6 +104,8 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell.backgroundColor=[UIColor colorWithRed:80/255.0f green:124/255.0f blue:236/255.0f alpha:1];
+        
         if (iPhone6 || iPhone6_plus) {
             cell.textLabel.font = [UIFont systemFontOfSize:15];
         }
@@ -128,7 +130,7 @@
         }
     }
     
-    cell.textLabel.textColor = [UIColor blackColor];
+    cell.textLabel.textColor=[UIColor whiteColor];
     
     UIView * v = [[UIView alloc] init];
     v.backgroundColor = [UIColor grayColor];

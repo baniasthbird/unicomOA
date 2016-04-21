@@ -107,6 +107,8 @@
 		686F5B5A1CC4DD0E0062084C /* bg_Nav.png in Resources */ = {isa = PBXBuildFile; fileRef = 686F5B591CC4DD0E0062084C /* bg_Nav.png */; };
 		6882C3181CA8D78300CDEB1A /* LogoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6882C3171CA8D78300CDEB1A /* LogoView.m */; };
 		6882C3211CA92C4B00CDEB1A /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6882C3201CA92C4B00CDEB1A /* CommentViewController.m */; };
+		688E6C931CC8BDEC003D9624 /* checkbox_checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 688E6C921CC8BDEC003D9624 /* checkbox_checked.png */; };
+		688E6C951CC8BDF3003D9624 /* checkbox_unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = 688E6C941CC8BDF3003D9624 /* checkbox_unchecked.png */; };
 		68C0A5BC1CBF6667008BEE27 /* ShenPiStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C0A5BB1CBF6667008BEE27 /* ShenPiStatus.m */; };
 		68D05CBA1C9791000039220F /* PasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D05CB91C9791000039220F /* PasswordViewController.m */; };
 		68D05CC01C97AC050039220F /* SendFeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D05CBF1C97AC050039220F /* SendFeedBackViewController.m */; };
@@ -404,6 +406,8 @@
 		6882C3171CA8D78300CDEB1A /* LogoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LogoView.m; path = Base/Contact/View/LogoView.m; sourceTree = "<group>"; };
 		6882C31F1CA92C4B00CDEB1A /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommentViewController.h; path = Base/Function/NewsController/CommentViewController.h; sourceTree = "<group>"; };
 		6882C3201CA92C4B00CDEB1A /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommentViewController.m; path = Base/Function/NewsController/CommentViewController.m; sourceTree = "<group>"; };
+		688E6C921CC8BDEC003D9624 /* checkbox_checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkbox_checked.png; sourceTree = "<group>"; };
+		688E6C941CC8BDF3003D9624 /* checkbox_unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkbox_unchecked.png; sourceTree = "<group>"; };
 		68C0A5BA1CBF6667008BEE27 /* ShenPiStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShenPiStatus.h; path = Base/Function/ShenPiModel/ShenPiStatus.h; sourceTree = "<group>"; };
 		68C0A5BB1CBF6667008BEE27 /* ShenPiStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShenPiStatus.m; path = Base/Function/ShenPiModel/ShenPiStatus.m; sourceTree = "<group>"; };
 		68D05CB81C9791000039220F /* PasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PasswordViewController.h; path = Base/Settings/Controller/PasswordViewController.h; sourceTree = "<group>"; };
@@ -1087,6 +1091,8 @@
 				68ED4E3B1CB4CBB7000E8A7B /* newApplication.png */,
 				68ED4E491CB4EB52000E8A7B /* print.png */,
 				68ED4E4B1CB4EBF5000E8A7B /* uber.png */,
+				688E6C921CC8BDEC003D9624 /* checkbox_checked.png */,
+				688E6C941CC8BDF3003D9624 /* checkbox_unchecked.png */,
 			);
 			name = Image;
 			sourceTree = "<group>";
@@ -1476,6 +1482,7 @@
 				686F5B541CC4B5720062084C /* LoginView.png in Resources */,
 				68ED4E4C1CB4EBF5000E8A7B /* uber.png in Resources */,
 				68ED4E361CB4B4FE000E8A7B /* myApplication.png in Resources */,
+				688E6C951CC8BDF3003D9624 /* checkbox_unchecked.png in Resources */,
 				2C35B05A1C7062160003BF6C /* LaunchScreen.storyboard in Resources */,
 				2CE3211B1CC7C51600B36793 /* PHONEOA.png in Resources */,
 				68ED4E3A1CB4C89E000E8A7B /* SendMe.png in Resources */,
@@ -1488,6 +1495,7 @@
 				68E779EF1CB34A8E006DA5B9 /* Level0_Cell.xib in Resources */,
 				68EEDE591CBB2E19003295EB /* SYS_AREA.xml in Resources */,
 				2C35B0571C7062160003BF6C /* Assets.xcassets in Resources */,
+				688E6C931CC8BDEC003D9624 /* checkbox_checked.png in Resources */,
 				68D05CCA1C97FBC00039220F /* logo.png in Resources */,
 				68E779E41CB34A8E006DA5B9 /* contacts_collect@2x.png in Resources */,
 				68ED4E341CB4A077000E8A7B /* returnlogo.png in Resources */,
