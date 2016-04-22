@@ -68,6 +68,7 @@
 
 -(void)MoveNextVc:(UIButton*)sender {
     ChangePhoneNumStep3 *viewController=[[ChangePhoneNumStep3 alloc]init];
+    viewController.user_Info=_user_Info;
     viewController.str_phonenum=_txt_num.text;
     [self.navigationController pushViewController:viewController animated:YES];
 }

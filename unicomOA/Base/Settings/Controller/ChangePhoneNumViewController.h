@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UserInfo.h"
 
 @interface ChangePhoneNumViewController : UIViewController
 
 @property (nonatomic,strong) NSString *str_phonenum;
+
+@property (nonatomic,strong) UserInfo *user_Info;
 
 @end

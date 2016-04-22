@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UserInfo.h"
 
 @interface ChangePhoneNumStep2 : UIViewController
+
+@property (nonatomic,strong) UserInfo *user_Info;
 
 @end

@@ -60,6 +60,14 @@
 
 -(void)landClick
 {
+    /*
+    //测试发送post请求
+    NSURL *URL=[NSURL URLWithString:@"http://192.168.12.25:8080/default/org.gocom.components.coframe.auth.LoginManager.login.biz.ext?userId=sysadmin&password=000000"];
+    
+    NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:URL];
+    request.timeoutInterval=2.0;   //设置请求超时为5秒
+    request.HTTPMethod=@"POST";
+    */
     [self.navigationController pushViewController:[[LoginViewController alloc]init] animated:YES];
     
 }

@@ -94,6 +94,7 @@
 
 -(void)MoveNextVc:(UIButton*)sender {
     StaffInfoViewController *viewController=[[StaffInfoViewController alloc]init];
+    viewController.userInfo=_user_Info;
     if (_str_phonenum!=nil) {
          viewController.str_cellphone=_str_phonenum;
     }

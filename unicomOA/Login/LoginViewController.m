@@ -81,7 +81,7 @@
 
 -(void)createButtons
 {
-    UIButton *btn_login=[self createButtonFrame:CGRectMake(self.view.frame.size.width*0.28, self.view.frame.size.height/2+80, self.view.frame.size.width*0.44, 50) backImageName:nil title:@"登  录" titleColor:[UIColor whiteColor]  font:[UIFont systemFontOfSize:25] target:self action:@selector(landClick)];
+    UIButton *btn_login=[self createButtonFrame:CGRectMake(self.view.frame.size.width*0.18, self.view.frame.size.height/2+80, self.view.frame.size.width*0.64, 50) backImageName:nil title:@"登  录" titleColor:[UIColor whiteColor]  font:[UIFont systemFontOfSize:25] target:self action:@selector(landClick)];
     btn_login.backgroundColor=[UIColor clearColor];
     btn_login.layer.cornerRadius=25.0f;
     btn_login.layer.borderWidth=1.0f;
@@ -103,7 +103,7 @@
     //newUserBtn.backgroundColor=[UIColor lightGrayColor];
     
     
-    UIButton *btn_forgetpassword=[self createButtonFrame:CGRectMake((self.view.frame.size.width-60)/2, self.view.frame.size.height/2+150, 60, 30) backImageName:nil title:@"忘记密码" titleColor:[UIColor colorWithRed:232/255.0f green:242/255.0f blue:255/255.0f alpha:0.3] font:[UIFont systemFontOfSize:15] target:self action:@selector(fogetPwd:)];
+    UIButton *btn_forgetpassword=[self createButtonFrame:CGRectMake((self.view.frame.size.width-60)/2, self.view.frame.size.height/2+150, 60, 30) backImageName:nil title:@"忘记密码?" titleColor:[UIColor colorWithRed:232/255.0f green:242/255.0f blue:255/255.0f alpha:0.3] font:[UIFont systemFontOfSize:15] target:self action:@selector(fogetPwd:)];
     //fogotPwdBtn.backgroundColor=[UIColor lightGrayColor];
     
     
@@ -192,6 +192,11 @@
     userInfo.str_email=@"未绑定";
     userInfo.str_phonenum=@"未填写";
     userInfo.str_Logo=@"headLogo.png";
+    
+    
+    [self postLogin];
+    
+    
     OAViewController *viewController=[[OAViewController alloc]init];
     viewController.user_Info=userInfo;
     [self.navigationController pushViewController:viewController animated:YES];
@@ -327,5 +332,93 @@
     return lbl_tmp;
     
 }
+
+
+-(void)postLogin {
+    //创建会话对象
+    NSURLSession *session=[NSURLSession sharedSession];
+    
+    
+    
+    //根据会话对象创建task
+    NSURL *url=[NSURL URLWithString:@"http://192.168.12.25:8080/default/org.gocom.components.coframe.auth.LoginManager.login.biz.ext"];
+    
+    //创建可变的请求对象
+    NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:url];
+    
+    //修改请求方法为POST
+    request.HTTPMethod=@"POST";
+    
+    //设置请求体
+    request.HTTPBody=[@"userId=sysadmin&password=000000" dataUsingEncoding:NSUTF8StringEncoding];
+    
+    //根据会话对象创建一个task
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        
+        /*
+                 //8.解析数据
+                 NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                 NSLog(@"%@",dict);
+         */
+        NSLog(@"response:%@",response);
+        //NSLog(@"data:%@",data);
+        //8.解析数据 是否登录成功
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+        NSLog(@"%@",dict);
+        //记录cookie，以便登录第二个连接
+        NSHTTPURLResponse *httpresponse=(NSHTTPURLResponse*)response;
+        NSArray *cookies=[NSHTTPCookie cookiesWithResponseHeaderFields:[httpresponse allHeaderFields] forURL:url];
+        NSHTTPCookie *cookie_1=[cookies objectAtIndex:0];
+        
+        //创建会话对象
+        NSURLSession *session=[NSURLSession sharedSession];
+        
+        
+        
+        //根据会话对象创建task
+        NSURL *url=[NSURL URLWithString:@"http://192.168.12.25:8080/default/project/networkOptimization/equipment/com.hnsi.erp.project.networkOptimization.equipment.queryEquipmentListForAdmin.biz.ext"];
+        
+        //创建可变的请求对象
+        NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:url];
+        
+        
+        //修改请求方法为POST
+        request.HTTPMethod=@"POST";
+        
+        //设置请求体
+        request.HTTPBody=[@"userId=sysadmin&password=000000" dataUsingEncoding:NSUTF8StringEncoding];
+        
+        //设置cookie
+        [request setHTTPShouldHandleCookies:YES];
+
+        [request setValue:[NSString stringWithFormat:@"%@=%@", [cookie_1 name], [cookie_1 value]] forHTTPHeaderField:@"Cookie"];
+        
+        //根据会话对象创建一个task
+        NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            
+            /*
+             //8.解析数据
+             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+             NSLog(@"%@",dict);
+             */
+            NSLog(@"response:%@",response);
+            //NSLog(@"data:%@",data);
+            //8.解析数据 是否登录成功
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+            NSLog(@"%@",dict);
+        }];
+        
+        
+        
+        [dataTask resume];
+    
+    }];
+    
+    
+    
+    
+    [dataTask resume];
+}
+
 
 @end
