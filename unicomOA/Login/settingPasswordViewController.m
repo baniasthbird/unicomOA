@@ -45,18 +45,27 @@
     [barButtonItem setTitleTextAttributes:dict forState:UIControlStateNormal];
     self.navigationItem.leftBarButtonItem = barButtonItem;
     
+    CGFloat i_Float=0;
     if (iPhone6_plus || iPhone6) {
-        _txt_Pwd=[self CreateTextFiled:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.06, self.view.frame.size.width*0.9, 50) placeholder:@"     请输入新密码" security:YES];
+        i_Float=20;
+    }
+    else {
+        i_Float=16;
+    }
+
+    
+    if (iPhone6_plus || iPhone6) {
+        _txt_Pwd=[self CreateTextFiled:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.06, self.view.frame.size.width*0.9, 50) placeholder:@"     请输入新密码" security:YES fontsize:i_Float];
         
         
-        _txt_Pwd2=[self CreateTextFiled:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.20, self.view.frame.size.width*0.9, 50) placeholder:@"     再次输入密码" security:YES];
+        _txt_Pwd2=[self CreateTextFiled:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.20, self.view.frame.size.width*0.9, 50) placeholder:@"     再次输入密码" security:YES fontsize:i_Float];
     }
     else {
         
-        _txt_Pwd=[self CreateTextFiled:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.06, self.view.frame.size.width*0.9, 50) placeholder:@"     请输入新密码" security:YES];
+        _txt_Pwd=[self CreateTextFiled:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.06, self.view.frame.size.width*0.9, 50) placeholder:@"     请输入新密码" security:YES fontsize:i_Float];
         
         
-        _txt_Pwd2=[self CreateTextFiled:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.25, self.view.frame.size.width*0.9, 50) placeholder:@"     再次输入密码" security:YES];
+        _txt_Pwd2=[self CreateTextFiled:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.25, self.view.frame.size.width*0.9, 50) placeholder:@"     再次输入密码" security:YES fontsize:i_Float];
         
     }
     
@@ -100,7 +109,7 @@
     
     
     lbl_Pwd.text=@"显示密码";
-    lbl_Pwd.font=[UIFont systemFontOfSize:20];
+    lbl_Pwd.font=[UIFont systemFontOfSize:i_Float];
     
     lbl_Pwd.textColor=[UIColor blackColor];
     
@@ -137,7 +146,7 @@
 }
 
 
--(UITextField*)CreateTextFiled:(CGRect)rect placeholder:(NSString*)str_placeholder security:(BOOL)b_secure {
+-(UITextField*)CreateTextFiled:(CGRect)rect placeholder:(NSString*)str_placeholder security:(BOOL)b_secure fontsize:(CGFloat)i_fontsize{
     UITextField *txt_tmp=[[UITextField alloc]initWithFrame:rect];
     
     NSMutableAttributedString *attributedStr=[[NSMutableAttributedString alloc]initWithString:str_placeholder];

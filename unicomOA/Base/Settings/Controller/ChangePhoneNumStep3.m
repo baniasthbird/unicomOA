@@ -42,11 +42,20 @@
     [barButtonItem setTitleTextAttributes:dict forState:UIControlStateNormal];
     self.navigationItem.leftBarButtonItem = barButtonItem;
     
+    CGFloat i_Float=0;
+    if (iPhone6_plus || iPhone6) {
+        i_Float=20;
+    }
+    else {
+        i_Float=16;
+    }
+
+    
     UILabel *lbl_text=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.01, self.view.frame.size.width*0.8, 50)];
     //lbl_text.textColor=[UIColor colorWithRed:151/255.0f green:151/255.0f blue:151/255.0f alpha:1];
     lbl_text.textColor=[UIColor colorWithRed:136/255.0f green:136/255.0f blue:136/255.0f alpha:1];
     lbl_text.text=[NSString stringWithFormat:@"%@%@",@"验证码短信已发送至",_str_phonenum];
-    lbl_text.font=[UIFont boldSystemFontOfSize:20];
+    lbl_text.font=[UIFont boldSystemFontOfSize:i_Float];
     
     UITextField *txt_Certificate=[[UITextField alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.09, self.view.frame.size.width*0.9, 50)];
     txt_Certificate.backgroundColor=[UIColor whiteColor];
@@ -60,9 +69,11 @@
     NSMutableAttributedString *attributedStr=[[NSMutableAttributedString alloc]initWithString:@"  请输入短信验证码"];
     
     [attributedStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:173/255.0f green:173/255.0f blue:173/255.0f alpha:1] range:NSMakeRange(0, attributedStr.length)];
-    [attributedStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:20] range:NSMakeRange(0, attributedStr.length)];
+    [attributedStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:i_Float] range:NSMakeRange(0, attributedStr.length)];
     
     txt_Certificate.attributedPlaceholder=attributedStr;
+    
+    txt_Certificate.font=[UIFont systemFontOfSize:i_Float];
     
     if (iPhone6 || iPhone6_plus) {
         _btn_send=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.19, self.view.frame.size.width*0.4, self.view.frame.size.height*0.05)];
@@ -73,9 +84,15 @@
     
     _btn_send.backgroundColor=[UIColor colorWithRed:70/255.0f green:155/255.0f blue:230/255.0f alpha:1];
     [_btn_send setTitle:@"重新获取短信" forState:UIControlStateNormal];
-    _btn_send.titleLabel.font=[UIFont boldSystemFontOfSize:20];
+    _btn_send.titleLabel.font=[UIFont boldSystemFontOfSize:i_Float];
     [_btn_send setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    _btn_send.layer.cornerRadius=20.0f;
+    if (iPhone5_5s) {
+        _btn_send.layer.cornerRadius=15.0f;
+    }
+    else if (iPhone6 || iPhone6_plus) {
+        _btn_send.layer.cornerRadius=20.0f;
+    }
+    
     [_btn_send.layer setMasksToBounds:YES];
     [_btn_send addTarget:self action:@selector(startTime) forControlEvents:UIControlEventTouchUpInside];
     

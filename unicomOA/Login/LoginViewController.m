@@ -103,7 +103,7 @@
     //newUserBtn.backgroundColor=[UIColor lightGrayColor];
     
     
-    UIButton *btn_forgetpassword=[self createButtonFrame:CGRectMake((self.view.frame.size.width-60)/2, self.view.frame.size.height/2+150, 60, 30) backImageName:nil title:@"忘记密码?" titleColor:[UIColor colorWithRed:232/255.0f green:242/255.0f blue:255/255.0f alpha:0.3] font:[UIFont systemFontOfSize:15] target:self action:@selector(fogetPwd:)];
+    UIButton *btn_forgetpassword=[self createButtonFrame:CGRectMake(self.view.frame.size.width*0.35, self.view.frame.size.height/2+150, self.view.frame.size.width*0.3, 30) backImageName:nil title:@"忘记密码?" titleColor:[UIColor colorWithRed:232/255.0f green:242/255.0f blue:255/255.0f alpha:0.3] font:[UIFont systemFontOfSize:15] target:self action:@selector(fogetPwd:)];
     //fogotPwdBtn.backgroundColor=[UIColor lightGrayColor];
     
     
@@ -194,7 +194,7 @@
     userInfo.str_Logo=@"headLogo.png";
     
     
-    [self postLogin];
+  //  [self postLogin];
     
     
     OAViewController *viewController=[[OAViewController alloc]init];

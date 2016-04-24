@@ -31,6 +31,14 @@
     [barButtonItem setImage:[UIImage imageNamed:@"returnlogo.png"]];
     self.navigationItem.leftBarButtonItem = barButtonItem;
 
+    CGFloat i_Float=0;
+    if (iPhone6_plus || iPhone6) {
+        i_Float=20;
+    }
+    else {
+        i_Float=16;
+    }
+
     
     // Do any additional setup after loading the view.
     self.view.backgroundColor=[UIColor whiteColor];
@@ -50,12 +58,11 @@
     UILabel *lbl_txt1;
     if (iPhone6 || iPhone6_plus) {
         lbl_txt1=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.55, self.view.frame.size.width*0.9, self.view.frame.size.height/32)];
-        lbl_txt1.font=[UIFont systemFontOfSize:22];
     }
     else if (iPhone4_4s || iPhone5_5s) {
         lbl_txt1=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.5, self.view.frame.size.width*0.9, self.view.frame.size.height/32)];
-        lbl_txt1.font=[UIFont systemFontOfSize:18];
     }
+    lbl_txt1.font=[UIFont systemFontOfSize:i_Float];
     lbl_txt1.numberOfLines=0;
     lbl_txt1.textAlignment=NSTextAlignmentCenter;
     lbl_txt1.text=@"当前绑定的手机号:";
@@ -63,12 +70,11 @@
     UILabel *lbl_txtnum;
     if (iPhone6 || iPhone6_plus) {
         lbl_txtnum=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.6, self.view.frame.size.width*0.9, self.view.frame.size.height/32)];
-        lbl_txtnum.font=[UIFont systemFontOfSize:22];
     }
     else if (iPhone4_4s || iPhone5_5s) {
         lbl_txtnum=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.55, self.view.frame.size.width*0.9, self.view.frame.size.height/32)];
-        lbl_txtnum.font=[UIFont systemFontOfSize:18];
     }
+    lbl_txtnum.font=[UIFont systemFontOfSize:i_Float];
     lbl_txtnum.numberOfLines=0;
     lbl_txtnum.textAlignment=NSTextAlignmentCenter;
     lbl_txtnum.text=_str_phonenum;

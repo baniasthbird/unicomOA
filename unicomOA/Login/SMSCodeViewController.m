@@ -43,15 +43,24 @@
     txt_Field.keyboardType=UIKeyboardTypeNumberPad;
     txt_Field.layer.cornerRadius=25.0f;
     [txt_Field.layer setMasksToBounds:YES];
-    
+    CGFloat i_Float=0;
+    if (iPhone6_plus || iPhone6) {
+        i_Float=20;
+    }
+    else {
+        i_Float=16;
+    }
+
     
     
     NSMutableAttributedString *attributedStr=[[NSMutableAttributedString alloc]initWithString:@"    请输入短信验证码"];
     
     [attributedStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:173/255.0f green:173/255.0f blue:173/255.0f alpha:1] range:NSMakeRange(0, attributedStr.length)];
-    [attributedStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:20] range:NSMakeRange(0, attributedStr.length)];
+    [attributedStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:i_Float] range:NSMakeRange(0, attributedStr.length)];
     
     txt_Field.attributedPlaceholder=attributedStr;
+    
+    txt_Field.font=[UIFont systemFontOfSize:i_Float];
     
     
     if (iPhone6 || iPhone6_plus) {
@@ -63,7 +72,7 @@
     
     _btn_send.backgroundColor=[UIColor colorWithRed:70/255.0f green:155/255.0f blue:230/255.0f alpha:1];
     [_btn_send setTitle:@"重新获取短信" forState:UIControlStateNormal];
-    _btn_send.titleLabel.font=[UIFont boldSystemFontOfSize:20];
+    _btn_send.titleLabel.font=[UIFont boldSystemFontOfSize:i_Float];
     [_btn_send setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _btn_send.layer.cornerRadius=20.0f;
     [_btn_send.layer setMasksToBounds:YES];

@@ -56,17 +56,25 @@
     NSMutableAttributedString *attributedStr=[[NSMutableAttributedString alloc]initWithString:@"    请输入手机号码"];
     
     [attributedStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:173/255.0f green:173/255.0f blue:173/255.0f alpha:1] range:NSMakeRange(0, attributedStr.length)];
-    [attributedStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:20] range:NSMakeRange(0, attributedStr.length)];
+    CGFloat i_Float=0;
+    if (iPhone6_plus || iPhone6) {
+        i_Float=20;
+    }
+    else {
+        i_Float=16;
+    }
+    [attributedStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:i_Float] range:NSMakeRange(0, attributedStr.length)];
     
     txt_Num.attributedPlaceholder=attributedStr;
 
+    txt_Num.font=[UIFont systemFontOfSize:i_Float];
     
     
     
     UILabel *lbl_txt1=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.13, self.view.frame.size.width, 50)];
     lbl_txt1.text=@"    点击下一步，系统将发送一条短信";
     lbl_txt1.textColor=[UIColor colorWithRed:136/255.0f green:136/255.0f blue:136/255.0f alpha:1];
-    lbl_txt1.font=[UIFont boldSystemFontOfSize:17];
+    lbl_txt1.font=[UIFont boldSystemFontOfSize:i_Float];
     
     [self.view addSubview:txt_Num];
     [self.view addSubview:lbl_txt1];

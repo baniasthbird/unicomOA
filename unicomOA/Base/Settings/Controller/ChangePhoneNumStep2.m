@@ -30,6 +30,15 @@
     
     self.view.backgroundColor=[UIColor colorWithRed:243/255.0f green:243/255.0f blue:243/255.0f alpha:243/255.0f];
     
+    CGFloat i_Float=0;
+    if (iPhone6_plus || iPhone6) {
+        i_Float=20;
+    }
+    else {
+        i_Float=16;
+    }
+
+    
     _txt_num=[[UITextField alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.06, self.view.frame.size.width*0.9, 50)];
     
     _txt_num.backgroundColor=[UIColor whiteColor];
@@ -45,9 +54,11 @@
     NSMutableAttributedString *attributedStr=[[NSMutableAttributedString alloc]initWithString:@"  请输入新手机号"];
     
     [attributedStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:173/255.0f green:173/255.0f blue:173/255.0f alpha:1] range:NSMakeRange(0, attributedStr.length)];
-    [attributedStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:20] range:NSMakeRange(0, attributedStr.length)];
+    [attributedStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:i_Float] range:NSMakeRange(0, attributedStr.length)];
     
     _txt_num.attributedPlaceholder=attributedStr;
+    
+    _txt_num.font=[UIFont systemFontOfSize:i_Float];
     
     [self.view addSubview:_txt_num];
     
