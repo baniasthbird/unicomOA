@@ -83,10 +83,27 @@
     cell.detailTextLabel.textColor=[UIColor colorWithRed:153.0/255.0f green:153.0/255.0f  blue:153.0/255.0f  alpha:1];
     [cell.detailTextLabel setFrame:CGRectMake(cell.frame.size.width/2, cell.frame.origin.y, cell.frame.size.width*0.4, cell.frame.size.height)];
      */
-    UILabel *lbl_title=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.22, -5, self.view.frame.size.width*0.2, cell.frame.size.height)];
+    UILabel *lbl_title;
+    if (iPhone5_5s || iPhone4_4s) {
+       lbl_title =[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.22, -5, self.view.frame.size.width*0.2, cell.frame.size.height)];
+    }
+    else if (iPhone6) {
+        lbl_title =[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.22, 0, self.view.frame.size.width*0.2, cell.frame.size.height)];
+    }
+    else {
+        lbl_title =[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.22, 0, self.view.frame.size.width*0.2, cell.frame.size.height)];
+    }
     lbl_title.font=[UIFont systemFontOfSize:16];
     lbl_title.textColor=[UIColor colorWithRed:165/255.0f green:165/255.0f blue:165/255.0f alpha:1];
-    UILabel *lbl_name=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.46, -5, self.view.frame.size.width*0.8, cell.frame.size.height)];
+    
+    
+    UILabel *lbl_name;
+    if (iPhone5_5s || iPhone4_4s) {
+        lbl_name=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.46, -5, self.view.frame.size.width*0.8, cell.frame.size.height)];
+    }
+    else {
+        lbl_name=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.46, 0, self.view.frame.size.width*0.8, cell.frame.size.height)];
+    }
     lbl_name.textColor=[UIColor colorWithRed:165/255.0f green:165/255.0f blue:165/255.0f alpha:1];
     lbl_name.font=[UIFont systemFontOfSize:16];
     lbl_name.textAlignment=NSTextAlignmentLeft;
@@ -145,7 +162,13 @@
              */
         }
         else if (indexPath.row==6) {
-            UILabel *lbl_num=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.17, -5, self.view.frame.size.width*0.2, cell.frame.size.height)];
+            UILabel *lbl_num;
+            if (iPhone4_4s || iPhone5_5s) {
+                lbl_num=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.17, -5, self.view.frame.size.width*0.2, cell.frame.size.height)];
+            }
+            else {
+               lbl_num=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.17, 0, self.view.frame.size.width*0.2, cell.frame.size.height)];
+            }
             lbl_num.text=@"固定电话";
             lbl_num.font=[UIFont systemFontOfSize:16];
             lbl_num.textColor=[UIColor colorWithRed:165/255.0f green:165/255.0f blue:165/255.0f alpha:1];
@@ -169,9 +192,16 @@
         }
         else if (indexPath.row==7) {
             lbl_title.text=@"EMail";
-            UILabel *lbl_email=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.46, -5, self.view.frame.size.width*0.7, cell.frame.size.height)];
+            UILabel *lbl_email;
+            if (iPhone4_4s || iPhone5_5s) {
+                lbl_email=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.46, -5, self.view.frame.size.width*0.7, cell.frame.size.height)];
+                lbl_email.font=[UIFont systemFontOfSize:14];
+            }
+            else {
+                lbl_email=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.46, 0, self.view.frame.size.width*0.7, cell.frame.size.height)];
+                lbl_email.font=[UIFont systemFontOfSize:16];
+            }
             lbl_email.text=_str_email;
-            lbl_email.font=[UIFont systemFontOfSize:14];
             lbl_email.textColor=[UIColor colorWithRed:165/255.0f green:165/255.0f blue:165/255.0f alpha:1];
             cell.backgroundView=img_View;
             [cell addSubview:lbl_email];

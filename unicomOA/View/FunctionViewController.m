@@ -142,13 +142,13 @@
         UIImageButton *btn_IVoting;
         UIImageButton *btn_Notes;
         if (iPhone6) {
-            btn_News=[self createImageButton:30+kImageWidth*0.5 CenterY:5+kImageHeight*0.5 title:@"" image:@"News.png"];
+            btn_News=[self createImageButton:30+kImageWidth*0.5 CenterY:20+kImageHeight*0.5 title:@"" image:@"News.png"];
             [btn_News addTarget:self action:@selector(NewsItemClick:) forControlEvents:UIControlEventTouchUpInside];
-            btn_ShenPi=[self createImageButton:35+kImageWidth*1.5 CenterY:5+kImageHeight*0.5 title:@"" image:@"ShenPi.png"];
+            btn_ShenPi=[self createImageButton:35+kImageWidth*1.5 CenterY:20+kImageHeight*0.5 title:@"" image:@"ShenPi.png"];
             [btn_ShenPi addTarget:self action:@selector(ShenPiItemClick:) forControlEvents:UIControlEventTouchUpInside];
-            btn_IVoting=[self createImageButton:40+kImageWidth*2.5 CenterY:5+kImageWidth*0.5 title:@"" image:@"IVoting.png"];
+            btn_IVoting=[self createImageButton:40+kImageWidth*2.5 CenterY:20+kImageWidth*0.5 title:@"" image:@"IVoting.png"];
             [btn_IVoting addTarget:self action:@selector(IVotingItemClick:) forControlEvents:UIControlEventTouchUpInside];
-            btn_Notes=[self createImageButton:30+kImageWidth*0.5 CenterY:5+kImageHeight*0.5 title:@"" image:@"Notes.png"];
+            btn_Notes=[self createImageButton:30+kImageWidth*0.5 CenterY:20+kImageHeight*0.5 title:@"" image:@"Notes.png"];
             [btn_Notes addTarget:self action:@selector(NotesItemClick:) forControlEvents:UIControlEventTouchUpInside];
         }
         else if (iPhone5_5s || iPhone4_4s) {
@@ -163,13 +163,13 @@
         }
         else if (iPhone6_plus)
         {
-                btn_News=[self createImageButton:30+kImageWidth*0.5 CenterY:5+kImageHeight*0.5 title:@"" image:@"News.png"];
+                btn_News=[self createImageButton:30+kImageWidth*0.5 CenterY:25+kImageHeight*0.5 title:@"" image:@"News.png"];
                 [btn_News addTarget:self action:@selector(NewsItemClick:) forControlEvents:UIControlEventTouchUpInside];
-                btn_ShenPi=[self createImageButton:50+kImageWidth*1.5 CenterY:5+kImageHeight*0.5 title:@"" image:@"ShenPi.png"];
+                btn_ShenPi=[self createImageButton:50+kImageWidth*1.5 CenterY:25+kImageHeight*0.5 title:@"" image:@"ShenPi.png"];
                [btn_ShenPi addTarget:self action:@selector(ShenPiItemClick:) forControlEvents:UIControlEventTouchUpInside];
-                btn_IVoting=[self createImageButton:70+kImageWidth*2.5 CenterY:5+kImageWidth*0.5 title:@"" image:@"IVoting.png"];
+                btn_IVoting=[self createImageButton:70+kImageWidth*2.5 CenterY:25+kImageWidth*0.5 title:@"" image:@"IVoting.png"];
                [btn_IVoting addTarget:self action:@selector(IVotingItemClick:) forControlEvents:UIControlEventTouchUpInside];
-                btn_Notes=[self createImageButton:30+kImageWidth*0.5 CenterY:5+kImageHeight*0.5 title:@"" image:@"Notes.png"];
+                btn_Notes=[self createImageButton:30+kImageWidth*0.5 CenterY:25+kImageHeight*0.5 title:@"" image:@"Notes.png"];
                [btn_Notes addTarget:self action:@selector(NotesItemClick:) forControlEvents:UIControlEventTouchUpInside];
         }
         btn_News.badgeBgColor=[UIColor redColor];

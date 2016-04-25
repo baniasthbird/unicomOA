@@ -38,10 +38,10 @@ int i_comment_num;
 
     
     if (iPhone6 || iPhone6_plus) {
-        _lbl_label=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, 16, 15*self.view.frame.size.width/16, self.view.frame.size.height/6)];
+        _lbl_label=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, 5, 15*self.view.frame.size.width/16, self.view.frame.size.height*0.08)];
     }
     else if (iPhone4_4s || iPhone5_5s) {
-         _lbl_label=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height*0.1, 15*self.view.frame.size.width/16, self.view.frame.size.height/6)];
+         _lbl_label=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, 5, 15*self.view.frame.size.width/16, self.view.frame.size.height*0.14)];
     }
     _lbl_label.numberOfLines=0;
     _lbl_label.textAlignment=NSTextAlignmentCenter;
@@ -51,10 +51,10 @@ int i_comment_num;
     _lbl_label.text=_str_label;
     
     if (iPhone6 || iPhone6_plus) {
-         _lbl_depart=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, 3*self.view.frame.size.height/16, 15*self.view.frame.size.width/16, self.view.frame.size.height/8)];
+         _lbl_depart=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height*0.07, 15*self.view.frame.size.width/16, self.view.frame.size.height*0.08)];
     }
     else if (iPhone5_5s || iPhone4_4s) {
-        _lbl_depart=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height*0.195, 15*self.view.frame.size.width/16, self.view.frame.size.height/8)];
+        _lbl_depart=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height*0.14, 15*self.view.frame.size.width/16, self.view.frame.size.height*0.08)];
     }
    
     _lbl_depart.numberOfLines=1;
@@ -65,15 +65,15 @@ int i_comment_num;
         _lbl_depart.text=@"           综合管理部                        张三   2016-01-26 ";
     }
     else if (iPhone5_5s || iPhone4_4s) {
-        _lbl_depart.text=@"   综合管理部            张三   2016-01-26 ";
+        _lbl_depart.text=@"     综合管理部          张三   2016-01-26 ";
     }
     
     
     if (iPhone6 || iPhone6_plus) {
-       _txt_content=[[UITextView alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height*0.27, 15*self.view.frame.size.width/16, self.view.frame.size.height*0.60)];
+       _txt_content=[[UITextView alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height*0.13, 15*self.view.frame.size.width/16, self.view.frame.size.height*0.60)];
     }
     else if (iPhone4_4s || iPhone5_5s) {
-         _txt_content=[[UITextView alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height*0.27, 15*self.view.frame.size.width/16, self.view.frame.size.height*0.57)];
+         _txt_content=[[UITextView alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height*0.20, 15*self.view.frame.size.width/16, self.view.frame.size.height*0.51)];
     }
     
     //[_lbl_content setLineBreakMode:NSLineBreakByWordWrapping];
@@ -92,36 +92,38 @@ int i_comment_num;
     i_num=0;
     i_comment_num=5;
     
-    UILabel *lbl_line=[[UILabel alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.85,self.view.frame.size.width, 1)];
+    UILabel *lbl_line;
+    
+    
+    
+    
+    
+#pragma mark 最底下为三个button
+    
+    UIButton *btn_read;
+    UIButton *btn_focus;
+    UIButton *btn_comment;
+    
+    CGFloat i_Height;
+    if (iPhone6 || iPhone6_plus) {
+        i_Height=self.view.frame.size.height*0.75;
+    }
+    else {
+        i_Height=self.view.frame.size.height*0.72;
+    }
+    
+    lbl_line=[[UILabel alloc]initWithFrame:CGRectMake(0, i_Height,self.view.frame.size.width, 1)];
     lbl_line.backgroundColor=[UIColor lightGrayColor];
     
     
     [self.view addSubview:lbl_line];
-    
-#pragma mark 最底下为三个button
-    
-    UIButton *btn_read=[[UIButton alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.75, self.view.frame.size.width*0.329, self.view.frame.size.height*0.08)];
-    [btn_read setTitle:@"阅读" forState:UIControlStateNormal];
-    [btn_read setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [btn_read.layer setBorderWidth:1.0];
-    btn_read.titleLabel.font=[UIFont systemFontOfSize:22];
-    btn_read.titleLabel.textAlignment=NSTextAlignmentCenter;
+    btn_read=[self createButton:0 y:i_Height w:self.view.frame.size.width*0.329 h:self.view.frame.size.height*0.08 title:@"阅读" image:@"read"];
     [btn_read addTarget:self action:@selector(ReadNum:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *btn_focus=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.33, self.view.frame.size.height*0.75, self.view.frame.size.width*0.329, self.view.frame.size.height*0.08)];
-    [btn_focus setTitle:@"关注" forState:UIControlStateNormal];
-    [btn_focus setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    btn_focus.titleLabel.font=[UIFont systemFontOfSize:22];
-    btn_focus.titleLabel.textAlignment=NSTextAlignmentCenter;
-    [btn_focus.layer setBorderWidth:1.0];
+    btn_focus=[self createButton:self.view.frame.size.width*0.33 y:i_Height w:self.view.frame.size.width*0.329 h:self.view.frame.size.height*0.08 title:@"关注" image:@"focus"];
     [btn_focus addTarget:self action:@selector(FocusEvent:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *btn_comment=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.66, self.view.frame.size.height*0.75, self.view.frame.size.width*0.34, self.view.frame.size.height*0.08)];
-    [btn_comment setTitle:@"评论" forState:UIControlStateNormal];
-    [btn_comment setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    btn_comment.titleLabel.font=[UIFont systemFontOfSize:22];
-    btn_comment.titleLabel.textAlignment=NSTextAlignmentCenter;
-    [btn_comment.layer setBorderWidth:1.0];
+    btn_comment=[self createButton:self.view.frame.size.width*0.66 y:i_Height w:self.view.frame.size.width*0.34 h:self.view.frame.size.height*0.08 title:@"评论" image:@"comment"];
     [btn_comment addTarget:self action:@selector(CommentEvent:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:btn_comment];
@@ -163,6 +165,21 @@ int i_comment_num;
 
 -(void)MovePreviousVc:(UIButton*)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+
+-(UIButton*)createButton:(CGFloat)x y:(CGFloat)y w:(CGFloat)w h:(CGFloat)h title:(NSString*)str_title image:(NSString*)str_imgname {
+    UIButton *btn_tmp=[[UIButton alloc]initWithFrame:CGRectMake(x, y, w, h)];
+    [btn_tmp setTitle:str_title forState:UIControlStateNormal];
+    [btn_tmp setTitleColor:[UIColor colorWithRed:25/255.0f green:186/255.0f blue:142/255.0f alpha:1] forState:UIControlStateNormal];
+    [btn_tmp.layer setBorderWidth:1.0];
+    btn_tmp.layer.borderColor=[[UIColor colorWithRed:185/255.0f green:180/255.0f blue:181/255.0f alpha:1] CGColor];
+    [btn_tmp setImage:[UIImage imageNamed:str_imgname] forState:UIControlStateNormal];
+    [btn_tmp setImageEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 0)];
+    btn_tmp.titleLabel.font=[UIFont systemFontOfSize:22];
+    btn_tmp.titleLabel.textAlignment=NSTextAlignmentCenter;
+    
+    return btn_tmp;
 }
 
 /*

@@ -10,6 +10,7 @@
 #import "IQKeyboardManager.h"
 #import "IQKeyboardReturnKeyHandler.h"
 #import "IQUIView+IQKeyboardToolbar.h"
+#import "CommentCell.h"
 
 @interface CommentViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 
@@ -18,6 +19,8 @@
 @property (nonatomic,strong) NSMutableArray *arr_comment;
 
 @property (nonatomic,strong) UITextField *txt_comment;
+
+@property (nonatomic,strong) NSMutableArray *arr_comment_add;
 
 @end
 
@@ -37,29 +40,54 @@
     
     NSDictionary * dict=@{
                           NSForegroundColorAttributeName:   [UIColor whiteColor]};
-    self.view.backgroundColor=[UIColor colorWithRed:242/255.0f green:242/255.0f blue:242/255.0f alpha:1];
+    self.view.backgroundColor=[UIColor whiteColor];
     
     self.navigationController.navigationBar.titleTextAttributes=dict;
     
-    self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height*0.85) style:UITableViewStylePlain];
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"  " style:UIBarButtonItemStyleDone target:self action:@selector(MovePreviousVc:)];
+    barButtonItem.tintColor=[UIColor whiteColor];
+    [barButtonItem setImage:[UIImage imageNamed:@"returnlogo.png"]];
+
+    self.navigationItem.leftBarButtonItem = barButtonItem;
+    
+    CGFloat i_Height=0;
+    if (iPhone6) {
+        i_Height=self.view.frame.size.height*0.75;
+    }
+    else if (iPhone6_plus) {
+        i_Height=self.view.frame.size.height*0.78;
+    }
+    else {
+        i_Height=self.view.frame.size.height*0.735;
+    }
+    
+    self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, i_Height) style:UITableViewStylePlain];
     self.tableView.dataSource=self;
     self.tableView.delegate=self;
     self.tableView.separatorColor=[UIColor blackColor];
     
     [self.view addSubview:self.tableView];
     
-    UIButton *btn_comment=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.8, self.view.frame.size.height*0.86, self.view.frame.size.width*0.15, self.view.frame.size.height*0.05)];
+    UIView *lbl_line=[[UIView alloc]initWithFrame:CGRectMake(0, i_Height, self.view.frame.size.width, 1)];
+    lbl_line.backgroundColor=[UIColor colorWithRed:189/255.0f green:189/255.0f blue:189/255.0f alpha:1];
+    
+    [self.view addSubview:lbl_line];
+    
+    UIButton *btn_comment=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.8, i_Height+self.view.frame.size.height*0.01, self.view.frame.size.width*0.18, self.view.frame.size.height*0.05)];
+    btn_comment.backgroundColor=[UIColor colorWithRed:99/255.0f green:115/255.0f blue:230/255.0f alpha:1];
     [btn_comment setTitle:@"发表" forState:UIControlStateNormal];
-    [btn_comment setTitleColor:[UIColor colorWithRed:153/255.0f green:153/255.0f blue:153/255.0f alpha:1] forState:UIControlStateNormal];
+    [btn_comment setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btn_comment addTarget:self action:@selector(Comment:) forControlEvents:UIControlEventTouchUpInside];
-    btn_comment.backgroundColor=[UIColor whiteColor];
+   
     
     [self.view addSubview:btn_comment];
     
-    _txt_comment=[[UITextField alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.03, self.view.frame.size.height*0.86, self.view.frame.size.width*0.75, self.view.frame.size.height*0.05)];
+    _txt_comment=[[UITextField alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.03, i_Height+self.view.frame.size.height*0.01, self.view.frame.size.width*0.75, self.view.frame.size.height*0.05)];
     _txt_comment.delegate=self;
     _txt_comment.backgroundColor=[UIColor whiteColor];
-    _txt_comment.placeholder=@"在此评论";
+    _txt_comment.layer.borderWidth=1;
+    _txt_comment.layer.borderColor=[[UIColor colorWithRed:189/255.0f green:189/255.0f blue:189/255.0f alpha:1] CGColor];
+    _txt_comment.placeholder=@"  在此评论";
     
     [self.view addSubview:_txt_comment];
     
@@ -69,6 +97,13 @@
     [_arr_comment addObject:@"服从领导，坚决贯彻|开发部王五"];
     [_arr_comment addObject:@"绝对支持|开发部李四"];
     [_arr_comment addObject:@"绝对支持|开发部李四"];
+    
+    _arr_comment_add=[[NSMutableArray alloc]initWithCapacity:5];
+    [_arr_comment_add addObject:@"党的政策好|综合部张三"];
+    [_arr_comment_add addObject:@"绝对支持|开发部李四"];
+    [_arr_comment_add addObject:@"服从领导，坚决贯彻|开发部王五"];
+    [_arr_comment_add addObject:@"绝对支持|开发部李四"];
+    [_arr_comment_add addObject:@"绝对支持|开发部李四"];
     
     returnKeyHandler=[[IQKeyboardReturnKeyHandler alloc]initWithViewController:self];
     [returnKeyHandler setLastTextFieldReturnKeyType:UIReturnKeyDone];
@@ -92,6 +127,7 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    /*
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseIdentifier"];
     if (cell==nil) {
         cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"reuseIdentifier"];
@@ -108,11 +144,40 @@
     // Configure the cell...
     
     return cell;
+     */
+    NSString *str_display=[_arr_comment objectAtIndex:indexPath.row];
+    NSArray *arr_display=[str_display componentsSeparatedByString:@"|"];
+    CommentCell *cell;
+    if (arr_display.count==2) {
+        cell=[CommentCell cellWithTable:tableView staff:[arr_display objectAtIndex:1] time:@"2016-01-27" content:[arr_display objectAtIndex:0] image:@"head1.jpg" thumbnum:8 atIndexPath:indexPath];
+    }
+    else {
+        cell=[CommentCell cellWithTable:tableView staff:[arr_display objectAtIndex:1] time:[arr_display objectAtIndex:2] content:[arr_display objectAtIndex:0] image:@"head1.jpg" thumbnum:0 atIndexPath:indexPath];
+    }
+    [cell.btn_thumb addTarget:self action:@selector(Thumb:) forControlEvents:UIControlEventTouchUpInside];
+    return cell;
+    
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (iPhone5_5s || iPhone4_4s) {
+        return 95;
+    }
+    else if (iPhone6) {
+        return 108;
+    }
+    else {
+        return 140;
+    }
     
 }
 
 -(void)Comment:(UIButton*)sender {
-    NSString *str_comment=[NSString stringWithFormat:@"%@|%@%@",_txt_comment.text,_userInfo.str_department,_userInfo.str_name];
+    NSDate *senddate=[NSDate date];
+    NSDateFormatter *dateformatter=[[NSDateFormatter alloc] init];
+    [dateformatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+    NSString *locationString=[dateformatter stringFromDate:senddate];
+    NSString *str_comment=[NSString stringWithFormat:@"%@|%@%@|%@",_txt_comment.text,_userInfo.str_department,_userInfo.str_name,locationString];
     [_arr_comment addObject:str_comment];
     [self.tableView reloadData];
 }
@@ -126,6 +191,11 @@
     //                                         selector:@selector(keyboardWillShow:)
      //                                            name:UIKeyboardWillShowNotification
       //                                         object:nil];
+}
+
+
+-(void)MovePreviousVc:(UIButton*)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 //program UITextField delegate
@@ -200,6 +270,18 @@
 -(void)dealloc {
     returnKeyHandler=nil;
 }
+
+
+-(void)Thumb:(UIButton*)btn {
+    if (btn.isSelected==NO) {
+         btn.selected=YES;
+    }
+    else {
+        btn.selected=NO;
+    }
+   
+}
+
 /*
 #pragma mark - Navigation
 
