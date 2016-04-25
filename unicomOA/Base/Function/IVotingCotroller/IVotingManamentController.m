@@ -133,9 +133,8 @@
     if (indexPath.section==0 && indexPath.row==0) {
         cell.backgroundColor=[UIColor clearColor];
         cell.lbl_Titile.text=@"你最喜欢的与院领导的交流方式";
-        
-     //   [cell.img_condition setFrame:CGRectMake(0, 0, 47, 40.5)];
-    //    cell.img_condition.image=[UIImage imageNamed:@"voting"];
+        [cell.img_condition setFrame:CGRectMake(cell.contentView.frame.origin.x, cell.contentView.frame.origin.y, 47, 40.5)];
+        cell.img_condition.image=[UIImage imageNamed:@"voting"];
         cell.lbl_Department.text=@"综合管理部 张三";
         cell.lbl_time.text=@"2016-01-26 16:45";
     }
@@ -145,8 +144,9 @@
         cell.lbl_Department.text=@"综合管理部 张三";
         cell.lbl_time.text=@"2016-01-26 16:45";
       
-       // [cell.img_condition setFrame:CGRectMake(0, 0, 47, 40.5)];
-      //  cell.imageView.image=[UIImage imageNamed:@"voteend"];
+        [cell.img_condition setFrame:CGRectMake(cell.contentView.frame.origin.x, cell.contentView.frame.origin.y, 47, 40.5)];
+        cell.img_condition.image=[UIImage imageNamed:@"voteend"];
+
 
     }
     return cell;
