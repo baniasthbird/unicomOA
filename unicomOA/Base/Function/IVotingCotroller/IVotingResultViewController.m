@@ -27,44 +27,56 @@
     [barButtonItem setImage:[UIImage imageNamed:@"returnlogo.png"]];
     self.navigationItem.leftBarButtonItem = barButtonItem;
     
+    CGFloat i_Font1=0;
+    CGFloat i_Font2=0;
+    CGFloat i_Font3=0;
+    
+    if (iPhone5_5s || iPhone4_4s) {
+        i_Font1=20;
+        i_Font2=14;
+        i_Font3=20;
+    }
+    else if (iPhone6) {
+        i_Font1=22;
+        i_Font2=16;
+        i_Font3=22;
+    }
+    else {
+        i_Font1=24;
+        i_Font2=18;
+        i_Font3=22;
+    }
 #pragma mark 标题
-    UILabel *lbl_Title;
-    if (iPhone6 || iPhone6_plus)
-    {
-        lbl_Title=[[UILabel alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.08, self.view.frame.size.width, self.view.frame.size.height*0.15)];
-    }
-    else if (iPhone5_5s || iPhone4_4s) {
-        lbl_Title=[[UILabel alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.1, self.view.frame.size.width, self.view.frame.size.height*0.15)];
-    }
+    UILabel *lbl_Title=[[UILabel alloc]initWithFrame:CGRectMake(0, 5, self.view.frame.size.width, self.view.frame.size.height*0.05)];
     lbl_Title.textAlignment=NSTextAlignmentCenter;
-    lbl_Title.font=[UIFont systemFontOfSize:24];
+    lbl_Title.font=[UIFont systemFontOfSize:i_Font1];
     lbl_Title.textColor=[UIColor blackColor];
     lbl_Title.text=_str_title;
     lbl_Title.numberOfLines=0;
     
-    
-#pragma mark 状态
-    UILabel *lbl_condition=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.03, self.view.frame.size.height*0.25, self.view.frame.size.width*0.4, self.view.frame.size.height*0.05)];
-    lbl_condition.textAlignment=NSTextAlignmentLeft;
-    lbl_condition.font=[UIFont systemFontOfSize:14];
-    lbl_condition.textColor=[UIColor colorWithRed:153/255.0f green:153/255.0f blue:153/255.0f alpha:1];
-    lbl_condition.text=_str_condition;
-    
-    UILabel *lbl_time;
-    if (iPhone6_plus || iPhone6) {
-        lbl_time=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.45, self.view.frame.size.height*0.25, self.view.frame.size.width*0.55, self.view.frame.size.height*0.05)];
-    }
-    else if (iPhone4_4s || iPhone5_5s) {
-        lbl_time=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.35, self.view.frame.size.height*0.25, self.view.frame.size.width*0.65, self.view.frame.size.height*0.05)];
-    }
-    
-    lbl_time.textAlignment=NSTextAlignmentLeft;
-    lbl_time.font=[UIFont systemFontOfSize:14];
+    UILabel *lbl_time=[[UILabel alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.05, self.view.frame.size.width, self.view.frame.size.height*0.05)];
+    lbl_time.textAlignment=NSTextAlignmentCenter;
+    lbl_time.font=[UIFont systemFontOfSize:i_Font2];
     lbl_time.textColor=[UIColor colorWithRed:153/255.0f green:153/255.0f blue:153/255.0f alpha:1];
-#pragma mark 时间为变量，日后修改
     lbl_time.text=@"结束时间：2016-01-26 16：45";
     
-    UIView *view_line=[[UIView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.31, self.view.frame.size.width, 1)];
+    
+#pragma mark 状态
+    UILabel *lbl_condition=[[UILabel alloc]initWithFrame:CGRectMake(03, self.view.frame.size.height*0.10, self.view.frame.size.width, self.view.frame.size.height*0.05)];
+    lbl_condition.textAlignment=NSTextAlignmentCenter;
+    lbl_condition.font=[UIFont systemFontOfSize:i_Font2];
+    lbl_condition.text=_str_condition;
+    if ([_str_condition isEqualToString:@"投票进行中"]) {
+        lbl_condition.textColor=[UIColor colorWithRed:154/255.0f green:202/255.0f blue:64/255.0f alpha:1];
+    }
+    else {
+        lbl_condition.textColor=[UIColor colorWithRed:153/255.0f green:153/255.0f blue:153/255.0f alpha:1];
+    }
+    
+    
+#pragma mark 时间为变量，日后修改
+    
+    UIView *view_line=[[UIView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.15, self.view.frame.size.width, 1)];
     view_line.backgroundColor=[UIColor blackColor];
     
     
@@ -73,18 +85,41 @@
     [self.view addSubview:lbl_time];
     [self.view addSubview:view_line];
     
+    [self buildView:NO number:30 font:i_Font3];
     [self buildChart];
 }
+
+
+//日后根据要求，单选或多选，多少人参与投票，投票题目与选项
+-(void)buildView:(BOOL)is_Multi number:(NSInteger)i_Number font:(CGFloat)i_Font{
+    UILabel *lbl_label1=[[UILabel alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.18, self.view.frame.size.width, self.view.frame.size.height*0.05)];
+    if (is_Multi==NO) {
+        lbl_label1.text=[NSString stringWithFormat:@"%@%@%ld%@",@"单项选择：",@"目前共有",(long)i_Number,@"人参与投票"];
+    }
+    else {
+        lbl_label1.text=[NSString stringWithFormat:@"%@%@%ld%@",@"多项选择：",@"目前共有",(long)i_Number,@"人参与投票"];
+        
+    }
+    
+    lbl_label1.textColor=[UIColor blackColor];
+    lbl_label1.font=[UIFont boldSystemFontOfSize:i_Font];
+    lbl_label1.textAlignment=NSTextAlignmentCenter;
+    
+    [self.view addSubview:lbl_label1];
+    
+}
+
+
 
 -(void)buildChart {
     NSMutableArray *textIndicators = [[NSMutableArray alloc] initWithObjects:@"在公司举办的party上找机会婉转谈起", @"面对面交流", @"电子邮件或电话",  nil];
     NSMutableArray *values = [[NSMutableArray alloc] initWithObjects:@12, @31, @13, nil];
     CGRect frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
     JXBarChartView *barChartView = [[JXBarChartView alloc] initWithFrame:frame
-                                                              startPoint:CGPointMake(20, self.view.frame.size.height*0.38)
+                                                              startPoint:CGPointMake(20, self.view.frame.size.height*0.28)
                                                                   values:values maxValue:50
                                                           textIndicators:textIndicators
-                                                               textColor:[UIColor blackColor]
+                                                               textColor:[UIColor colorWithRed:61/255.0f green:189/255.0f blue:144/255.0f alpha:1]
                                                                barHeight:30
                                                              barMaxWidth:200
                                                                 gradient:nil];

@@ -21,6 +21,7 @@
 		2C5460A81C82F5C3005C5AB9 /* UserEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5460A71C82F5C3005C5AB9 /* UserEntity.m */; };
 		2C5460BD1C854733005C5AB9 /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5460BB1C854733005C5AB9 /* TableViewCell.m */; };
 		2C5460BE1C854733005C5AB9 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C5460BC1C854733005C5AB9 /* TableViewCell.xib */; };
+		2C585FC61CCE59EC00D97172 /* vote_checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C585FC51CCE59EC00D97172 /* vote_checked.png */; };
 		2C74F0791CAEACDA00CC5C5F /* PhoneLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C74F0781CAEACDA00CC5C5F /* PhoneLabelView.m */; };
 		2C99721E1CA21E0E00B803FC /* ChangePhoneNumStep3.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C99721D1CA21E0E00B803FC /* ChangePhoneNumStep3.m */; };
 		2CA10C8B1CA18F17008D6394 /* ChangePhoneNumStep1.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA10C8A1CA18F17008D6394 /* ChangePhoneNumStep1.m */; };
@@ -106,8 +107,6 @@
 		686F5B541CC4B5720062084C /* LoginView.png in Resources */ = {isa = PBXBuildFile; fileRef = 686F5B531CC4B5720062084C /* LoginView.png */; };
 		686F5B5A1CC4DD0E0062084C /* bg_Nav.png in Resources */ = {isa = PBXBuildFile; fileRef = 686F5B591CC4DD0E0062084C /* bg_Nav.png */; };
 		68815DC71CCDC45400277807 /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68815DC61CCDC45400277807 /* CommentCell.m */; };
-		68815DD11CCE17A200277807 /* voteendbg.png in Resources */ = {isa = PBXBuildFile; fileRef = 68815DD01CCE17A200277807 /* voteendbg.png */; };
-		68815DD51CCE17F400277807 /* votingbg.png in Resources */ = {isa = PBXBuildFile; fileRef = 68815DD41CCE17F400277807 /* votingbg.png */; };
 		6882C3181CA8D78300CDEB1A /* LogoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6882C3171CA8D78300CDEB1A /* LogoView.m */; };
 		6882C3211CA92C4B00CDEB1A /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6882C3201CA92C4B00CDEB1A /* CommentViewController.m */; };
 		688E6C931CC8BDEC003D9624 /* checkbox_checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 688E6C921CC8BDEC003D9624 /* checkbox_checked.png */; };
@@ -242,6 +241,7 @@
 		2C5460BA1C854733005C5AB9 /* TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TableViewCell.h; path = Base/Function/NotesViews/TableViewCell.h; sourceTree = "<group>"; };
 		2C5460BB1C854733005C5AB9 /* TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TableViewCell.m; path = Base/Function/NotesViews/TableViewCell.m; sourceTree = "<group>"; };
 		2C5460BC1C854733005C5AB9 /* TableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TableViewCell.xib; path = Base/Function/NotesViews/TableViewCell.xib; sourceTree = "<group>"; };
+		2C585FC51CCE59EC00D97172 /* vote_checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vote_checked.png; sourceTree = "<group>"; };
 		2C74F0771CAEACDA00CC5C5F /* PhoneLabelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhoneLabelView.h; path = Base/Contact/View/PhoneLabelView.h; sourceTree = "<group>"; };
 		2C74F0781CAEACDA00CC5C5F /* PhoneLabelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhoneLabelView.m; path = Base/Contact/View/PhoneLabelView.m; sourceTree = "<group>"; };
 		2C99721C1CA21E0E00B803FC /* ChangePhoneNumStep3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChangePhoneNumStep3.h; path = Base/Settings/Controller/ChangePhoneNumStep3.h; sourceTree = "<group>"; };
@@ -407,8 +407,6 @@
 		686F5B591CC4DD0E0062084C /* bg_Nav.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_Nav.png; sourceTree = "<group>"; };
 		68815DC51CCDC45400277807 /* CommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommentCell.h; path = Base/Function/NewsModel/CommentCell.h; sourceTree = "<group>"; };
 		68815DC61CCDC45400277807 /* CommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommentCell.m; path = Base/Function/NewsModel/CommentCell.m; sourceTree = "<group>"; };
-		68815DD01CCE17A200277807 /* voteendbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voteendbg.png; sourceTree = "<group>"; };
-		68815DD41CCE17F400277807 /* votingbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = votingbg.png; sourceTree = "<group>"; };
 		6882C3161CA8D78300CDEB1A /* LogoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LogoView.h; path = Base/Contact/View/LogoView.h; sourceTree = "<group>"; };
 		6882C3171CA8D78300CDEB1A /* LogoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LogoView.m; path = Base/Contact/View/LogoView.m; sourceTree = "<group>"; };
 		6882C31F1CA92C4B00CDEB1A /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommentViewController.h; path = Base/Function/NewsController/CommentViewController.h; sourceTree = "<group>"; };
@@ -1086,8 +1084,7 @@
 		68D05CC81C97FBAE0039220F /* Image */ = {
 			isa = PBXGroup;
 			children = (
-				68815DD01CCE17A200277807 /* voteendbg.png */,
-				68815DD41CCE17F400277807 /* votingbg.png */,
+				2C585FC51CCE59EC00D97172 /* vote_checked.png */,
 				2CE3211A1CC7C51600B36793 /* PHONEOA.png */,
 				681FFC6F1CC762840086A934 /* membertablecell.png */,
 				2CE321161CC673BB00B36793 /* logoimage.png */,
@@ -1502,6 +1499,7 @@
 				68ED4E381CB4B945000E8A7B /* myApproval.png in Resources */,
 				68E779F01CB34A8E006DA5B9 /* Level1_Cell.xib in Resources */,
 				68ED4E3E1CB4CDC4000E8A7B /* headLogo.png in Resources */,
+				2C585FC61CCE59EC00D97172 /* vote_checked.png in Resources */,
 				2C5460BE1C854733005C5AB9 /* TableViewCell.xib in Resources */,
 				68E779EF1CB34A8E006DA5B9 /* Level0_Cell.xib in Resources */,
 				68EEDE591CBB2E19003295EB /* SYS_AREA.xml in Resources */,
@@ -1511,7 +1509,6 @@
 				68E779E41CB34A8E006DA5B9 /* contacts_collect@2x.png in Resources */,
 				68ED4E341CB4A077000E8A7B /* returnlogo.png in Resources */,
 				2CE321151CC6543100B36793 /* server.png in Resources */,
-				68815DD11CCE17A200277807 /* voteendbg.png in Resources */,
 				2CE321171CC673BB00B36793 /* logoimage.png in Resources */,
 				68E77A301CB3A133006DA5B9 /* IQKeyboardManager.bundle in Resources */,
 				68E779E61CB34A8E006DA5B9 /* head1.jpg in Resources */,
@@ -1521,7 +1518,6 @@
 				2CFEADA71C769EBF0054730E /* messages.plist in Resources */,
 				686F5B5A1CC4DD0E0062084C /* bg_Nav.png in Resources */,
 				68E779E51CB34A8E006DA5B9 /* contacts_major@2x.png in Resources */,
-				68815DD51CCE17F400277807 /* votingbg.png in Resources */,
 				68E779F11CB34A8E006DA5B9 /* Level2_Cell.xib in Resources */,
 				2CFEADA61C769EBF0054730E /* friends.plist in Resources */,
 				2C35B0551C7062160003BF6C /* Main.storyboard in Resources */,

@@ -71,7 +71,7 @@
     [_btn_Select setBackgroundColor:[UIColor colorWithRed:80.0/255.0f green:124.0f/255.0f blue:236.0f/255.0f alpha:1]];
     _btn_Select.layer.borderWidth=1;
     _btn_Select.layer.borderColor=[[UIColor lightGrayColor] CGColor];
-    _btn_Select.layer.cornerRadius=5;
+    _btn_Select.layer.cornerRadius=15.0f;
     [_btn_Select addTarget:self action:@selector(selectClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     if (iPhone4_4s || iPhone5_5s) {
@@ -119,13 +119,9 @@
     VotingCell *cell;
     if (iPhone6 || iPhone6_plus) {
         cell=[VotingCell cellWithTable:tableView withCellHeight:110 titleX:self.view.frame.size.width*0.15 titleY:0.0f titleW:self.view.frame.size.width*0.68 titleH:50.0f DepartX:self.view.frame.size.width*0.05 DepartY:60.0f DepartW:3*self.view.frame.size.width/8 DepartH:40.0f TimeX:self.view.frame.size.width/2 TimeY:60.0f TimeW:self.view.frame.size.width/3 TimeH:40.0f atIndexPath:indexPath];
-        cell.isVoting=YES;
-        
     }
     else if (iPhone5_5s || iPhone4_4s) {
         cell=[VotingCell cellWithTable:tableView withCellHeight:110 titleX:self.view.frame.size.width*0.15 titleY:0.0f titleW:self.view.frame.size.width*0.68 titleH:50.0f DepartX:self.view.frame.size.width*0.15 DepartY:60.0f DepartW:3*self.view.frame.size.width/8 DepartH:40.0f TimeX:self.view.frame.size.width*0.6 TimeY:60.0f TimeW:self.view.frame.size.width*0.4 TimeH:40.0f atIndexPath:indexPath];
-        cell.isVoting=NO;
-        
     }
     
     cell.delegate=self;
@@ -137,17 +133,16 @@
         cell.img_condition.image=[UIImage imageNamed:@"voting"];
         cell.lbl_Department.text=@"综合管理部 张三";
         cell.lbl_time.text=@"2016-01-26 16:45";
+        cell.isVoting=YES;
     }
     else if (indexPath.section==0 && indexPath.row==1) {
         cell.backgroundColor=[UIColor clearColor];
         cell.lbl_Titile.text=@"优秀员工评选（综合管理部）";
         cell.lbl_Department.text=@"综合管理部 张三";
         cell.lbl_time.text=@"2016-01-26 16:45";
-      
         [cell.img_condition setFrame:CGRectMake(cell.contentView.frame.origin.x, cell.contentView.frame.origin.y, 47, 40.5)];
         cell.img_condition.image=[UIImage imageNamed:@"voteend"];
-
-
+        cell.isVoting=NO;
     }
     return cell;
 }

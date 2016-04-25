@@ -14,10 +14,10 @@
 @interface RadioBox ()
 
 @property (nonatomic, strong) UIView *containerView;
-@property (nonatomic, strong) UIView *onBoxView;
+@property (nonatomic, strong) UIImageView *onBoxView;
 @property (nonatomic, strong) UIView *offBoxView;
 @property (nonatomic, strong) UIView *offKnobView;
-@property (nonatomic, strong) UIView *knobView;
+@property (nonatomic, strong) UIImageView *knobView;
 @property (nonatomic, strong) UILabel *lbText;
 
 - (void)commonInit;
@@ -159,9 +159,10 @@
     _containerView.backgroundColor = [UIColor clearColor];
     [self addSubview:_containerView];
     
-    _onBoxView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetHeight(self.containerView.bounds), CGRectGetHeight(self.containerView.bounds))];
-    _onBoxView.backgroundColor = _onTintColor;
-    _onBoxView.layer.cornerRadius = CGRectGetHeight(self.containerView.bounds) / 2.0;
+    _onBoxView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetHeight(self.containerView.bounds), CGRectGetHeight(self.containerView.bounds))];
+    _onBoxView.backgroundColor = [UIColor clearColor];
+    _onBoxView.image=[UIImage imageNamed:@"vote_checked"];
+    //_onBoxView.layer.cornerRadius = CGRectGetHeight(self.containerView.bounds) / 2.0;
     [_containerView addSubview:_onBoxView];
     
     _offBoxView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetHeight(self.containerView.bounds), CGRectGetHeight(self.containerView.bounds))];
@@ -179,8 +180,9 @@
     [_containerView addSubview:_offKnobView];
     
     
-    _knobView = [[UIView alloc] initWithFrame:CGRectMake(margin, margin, _boxWidth, _boxWidth)];
-    _knobView.backgroundColor = _boxColor;
+    _knobView = [[UIImageView alloc] initWithFrame:CGRectMake(margin, margin, _boxWidth, _boxWidth)];
+    _knobView.backgroundColor = [UIColor clearColor];
+    _knobView.image=[UIImage imageNamed:@"vote_checked"];
     _knobView.layer.cornerRadius = _boxWidth / 2.0;
     [_containerView addSubview:_knobView];
     
