@@ -33,12 +33,16 @@
 
 @property (nonatomic,retain) UILabel *lbl_time;
 
+@property (nonatomic,retain) UILabel *lbl_time2;
+
+@property (nonatomic,strong) UIView *view_bg;
+
 @property (nonatomic, unsafe_unretained) id<NotesTableSlidCellDelegate> delegate;
 
 /**标记*/
 @property (nonatomic, assign) NSInteger myTag;
 
 /** 快速创建cell的方法*/
-+ (instancetype)cellWithTable:(UITableView *)tableView withCellHeight:(CGFloat) cellHeight;
++ (instancetype)cellWithTable:(UITableView *)tableView withCellHeight:(CGFloat) cellHeight atIndexPath:(NSIndexPath*)indexPath;
 
 @end

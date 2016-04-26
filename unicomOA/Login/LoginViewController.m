@@ -12,6 +12,9 @@
 #import "OAViewController.h"
 #import "ServerIPViewController.h"
 #import "UserInfo.h"
+#import "AFHTTPSessionManager.h"
+
+
 
 
 @interface LoginViewController()
@@ -25,12 +28,24 @@
 @property(copy,nonatomic) NSString * accountNumber;
 @property(copy,nonatomic) NSString *mmmm;
 @property(copy,nonatomic) NSString *str_user;
+//连接
+@property (nonatomic,strong) AFHTTPSessionManager *session;
+//POST参数
+@property (nonatomic,strong) NSMutableDictionary *params;
+
+@property BOOL i_Success;
+
 
 @end
 
 
 
 @implementation LoginViewController
+
+static NSString *kServerSessionCookie=@"JSESSIONID";
+static NSString *kLocalCookieName=@"UnicomOACookie";
+static NSString *kLocalUserData=@"UnicomOALocalUser";
+static NSString *kBaseUrl=@"http://192.168.12.25:8080/default/org.gocom.components.coframe.auth.LoginManager.login.biz.ext";
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -48,6 +63,16 @@
     View.backgroundColor=[UIColor whiteColor];
     [self.view addSubview:View];
     
+    
+    _i_Success=NO;
+    
+    _session=[AFHTTPSessionManager manager];
+    _session.responseSerializer= [AFHTTPResponseSerializer serializer];
+    [_session.requestSerializer setHTTPShouldHandleCookies:YES];
+    
+    _params=[NSMutableDictionary dictionary];
+    _params[@"userId"]=@"sysadmin";
+    _params[@"password"]=@"000000";
     
     [self createLabels];
     [self createButtons];
@@ -194,12 +219,15 @@
     userInfo.str_Logo=@"headLogo.png";
     
     
-  //  [self postLogin];
+   // [self postLogin];
+   // if (_i_Success==YES) {
     
+            OAViewController *viewController=[[OAViewController alloc]init];
+            viewController.user_Info=userInfo;
+            [self.navigationController pushViewController:viewController animated:YES];
     
-    OAViewController *viewController=[[OAViewController alloc]init];
-    viewController.user_Info=userInfo;
-    [self.navigationController pushViewController:viewController animated:YES];
+    //    }
+   
     
 }
 
@@ -335,6 +363,7 @@
 
 
 -(void)postLogin {
+    /*
     //创建会话对象
     NSURLSession *session=[NSURLSession sharedSession];
     
@@ -355,11 +384,11 @@
     //根据会话对象创建一个task
     NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         
-        /*
+     
                  //8.解析数据
                  NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                  NSLog(@"%@",dict);
-         */
+     
         NSLog(@"response:%@",response);
         //NSLog(@"data:%@",data);
         //8.解析数据 是否登录成功
@@ -396,11 +425,11 @@
         //根据会话对象创建一个task
         NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             
-            /*
+     
              //8.解析数据
              NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
              NSLog(@"%@",dict);
-             */
+     
             NSLog(@"response:%@",response);
             //NSLog(@"data:%@",data);
             //8.解析数据 是否登录成功
@@ -413,11 +442,104 @@
         [dataTask resume];
     
     }];
-    
-    
-    
-    
+
     [dataTask resume];
+   */
+    
+    
+    [_session POST:kBaseUrl parameters:_params progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"请求成功:%@",responseObject);
+        NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        NSLog(@"请求JSON成功:%@",JSON);
+        [self saveLoginSession];
+        [self postLogin2];
+        
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"请求失败:%@",error.description);
+        _i_Success=NO;
+        return;
+    } ];
+    
+}
+
+
+-(void)postLogin2 {
+    [self updateSession];
+    [_session POST:@"http://192.168.12.25:8080/default/project/projectother/demmy/com.hnsi.erp.project.projectother.workload.queryWorkload.biz.ext" parameters:_params progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"请求成功:%@",responseObject);
+        NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        NSLog(@"请求JSON成功:%@",JSON);
+        
+        UserInfo *userInfo=[[UserInfo alloc]init];
+        userInfo.str_name=@"张三";
+        userInfo.str_username=@"张三";
+        userInfo.str_gender=@"男";
+        userInfo.str_department=@"综合部";
+        userInfo.str_position=@"部门经理";
+        userInfo.str_cellphone=@"13812345678";
+        userInfo.str_email=@"未绑定";
+        userInfo.str_phonenum=@"未填写";
+        userInfo.str_Logo=@"headLogo.png";
+        OAViewController *viewController=[[OAViewController alloc]init];
+        viewController.user_Info=userInfo;
+        [self.navigationController pushViewController:viewController animated:YES];
+        
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"请求失败:%@",error.description);
+        _i_Success=NO;
+        return;
+        
+    } ];
+}
+
+
+- (void)saveLoginSession
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    NSArray *allCookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:kBaseUrl]];
+    for (NSHTTPCookie *cookie in allCookies) {
+        if ([cookie.name isEqualToString:kServerSessionCookie]) {
+            NSMutableDictionary* cookieDictionary = [NSMutableDictionary dictionaryWithDictionary:[defaults dictionaryForKey:kLocalCookieName]];
+            [cookieDictionary setValue:cookie.properties forKey:kBaseUrl];
+            [defaults setObject:cookieDictionary forKey:kLocalCookieName];
+            [defaults synchronize];
+            
+            break;
+        }
+    }
+}
+
+// 4.
+- (void)removeLoginSession
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults removeObjectForKey:kLocalCookieName];
+    [defaults synchronize];
+}
+
+// 5.
+- (void)updateSession
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSDictionary *cookieDict = [defaults dictionaryForKey:kLocalCookieName];
+    NSDictionary *cookieProperties = [cookieDict valueForKey:kBaseUrl];
+    if (cookieProperties != nil) {
+        NSHTTPCookie *cookie = [NSHTTPCookie cookieWithProperties:cookieProperties];
+        NSArray *cookies = [NSArray arrayWithObject:cookie];
+        [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookies:cookies forURL:[NSURL URLWithString:kBaseUrl] mainDocumentURL:nil];
+    }
+}
+
+- (BOOL)isLoggedIn
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:kLocalCookieName] != nil;
 }
 
 

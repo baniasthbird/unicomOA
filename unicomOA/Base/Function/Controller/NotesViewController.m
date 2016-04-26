@@ -10,9 +10,10 @@
 #import "NewNotesViewController.h"
 #import "FunctionViewController.h"
 #import "UserEntity.h"
+#import "LZActionSheet.h"
 
 
-@interface NotesViewController()<UITableViewDelegate,UITableViewDataSource>
+@interface NotesViewController()<UITableViewDelegate,UITableViewDataSource,LZActionSheetDelegate>
 
 @property (strong,nonatomic) NSMutableArray *arr_Notes;
 
@@ -75,21 +76,24 @@ NSInteger i_count=0;
 
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NotesTableVIewCell *cell=[NotesTableVIewCell cellWithTable:tableView withCellHeight:180];
+    NotesTableVIewCell *cell=[NotesTableVIewCell cellWithTable:tableView withCellHeight:180 atIndexPath:indexPath];
     cell.delegate=self;
     cell.myTag= indexPath.row;
     NSString *str_note = [_arr_Notes objectAtIndex:(_arr_Notes.count-1-indexPath.row)];
    // cell.textLabel.text=str_note;
     NSArray *arr_note= [str_note componentsSeparatedByString:@","];
     if (arr_note.count==3) {
+        [cell.view_bg setFrame:CGRectMake(cell.contentView.frame.origin.x, cell.contentView.frame.origin.y,self.view.frame.size.width,40)];
         cell.lbl_arrangement.text=[arr_note objectAtIndex:0];
         cell.lbl_content.text=[arr_note objectAtIndex:1];
         cell.lbl_time.text=[arr_note objectAtIndex:2];
+        cell.lbl_time2.text=[arr_note objectAtIndex:2];
     }
     else {
         cell.lbl_arrangement.text=@"";
         cell.lbl_content.text=@"";
         cell.lbl_time.text=@"";
+        cell.lbl_time2.text=@"";
     }
     
     return cell;
@@ -196,13 +200,30 @@ NSInteger i_count=0;
 
 -(void)tapCell:(NotesTableVIewCell*)cell atIndex:(NSInteger)index {
     
-    NewNotesViewController *new_controller=[[NewNotesViewController alloc]init];
-    
-    new_controller.str_FenLei=cell.lbl_arrangement.text;
-    new_controller.str_noteContent=cell.lbl_content.text;  new_controller.str_time=cell.lbl_time.text;
-    
-    [self.navigationController pushViewController:new_controller animated:YES];
+    LZActionSheet *sheet=[LZActionSheet showActionSheetWithDelegate:self cancelButtonTitle:@"取消" otherButtonTitles:@[@"编辑备忘录",@"删除备忘录"]];
+    sheet.notes_tag=cell;
+    sheet.note_index=index;
+    [sheet show];
+   
+}
 
-    
+-(void)LZActionSheet:(LZActionSheet *)actionSheet didClickedButtonAtIndex:(NSInteger)index {
+    switch (index) {
+        case 0: {
+            NewNotesViewController *new_controller=[[NewNotesViewController alloc]init];
+            new_controller.str_FenLei=actionSheet.notes_tag.lbl_arrangement.text;
+            new_controller.str_noteContent=actionSheet.notes_tag.lbl_content.text;
+            new_controller.str_time=actionSheet.notes_tag.lbl_time.text;
+            [self.navigationController pushViewController:new_controller animated:YES];
+            break;
+        }
+        case 1: {
+            [self.arr_Notes removeObjectAtIndex:_arr_Notes.count-1-actionSheet.note_index];
+            [self.tableView reloadData];
+        }
+            break;
+        default:
+            break;
+    }
 }
 @end

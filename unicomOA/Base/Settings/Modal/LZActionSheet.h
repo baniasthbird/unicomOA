@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NotesTableVIewCell.h"
 @class LZActionSheet;
 @protocol LZActionSheetDelegate <NSObject>
 @optional
@@ -16,11 +17,19 @@
 
 
 @interface LZActionSheet : UIView
+
+//做备忘录菜单时添加cell
+@property (nonatomic,strong) NotesTableVIewCell *notes_tag;
+
+//做备忘录菜单时添加索引
+@property NSInteger note_index;
+
 @property (nonatomic, strong) id<LZActionSheetDelegate> delegate;
 
 - (instancetype)initWithDelegate:(id)delegate cancelButtonTitle:(NSString *)cancleTitle otherButtonTitles:(NSArray *)otherButtonTitles;
 + (instancetype)showActionSheetWithDelegate:(id)delegate cancelButtonTitle:(NSString *)cancleTitle otherButtonTitles:(NSArray *)otherButtonTitles;
 - (void)show;
+
 @end
 
 

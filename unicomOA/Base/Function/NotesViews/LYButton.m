@@ -37,7 +37,7 @@
     buttonLabel.text = menuItemModel.itemText;
     buttonLabel.textAlignment = NSTextAlignmentCenter;
     buttonLabel.font = [UIFont systemFontOfSize:15];
-    buttonLabel.textColor = [UIColor whiteColor];
+    buttonLabel.textColor = [UIColor blackColor];
     [self addSubview:buttonLabel];
 }
 

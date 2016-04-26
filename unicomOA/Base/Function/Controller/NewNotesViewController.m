@@ -116,19 +116,19 @@ typedef enum
 -(void)buildDataSource {
     //构建单元格下拉列表数据源
     self.menuItemDataSourceArray=[NSMutableArray arrayWithCapacity:0];
-    MenuItemModel *favItemModel=[[MenuItemModel alloc] initWithNormalImageName:@"cm2_lay_icn_fav" withHighLightedImageName:@"cm2_lay_icn_fav" withItemText:@"日程安排"];
+    MenuItemModel *favItemModel=[[MenuItemModel alloc] initWithNormalImageName:@"calendar" withHighLightedImageName:@"calendar" withItemText:@"日程安排"];
     [self.menuItemDataSourceArray addObject:favItemModel];
     
-    MenuItemModel *albItemModel=[[MenuItemModel alloc]initWithNormalImageName:@"cm2_lay_icn_alb" withHighLightedImageName:@"cm2_lay_icn_alb" withItemText:@"工作笔记"];
+    MenuItemModel *albItemModel=[[MenuItemModel alloc]initWithNormalImageName:@"notes" withHighLightedImageName:@"notes" withItemText:@"工作笔记"];
     [self.menuItemDataSourceArray addObject:albItemModel];
     
-    MenuItemModel *dldItemModel=[[MenuItemModel alloc] initWithNormalImageName:@"cm2_lay_icn_did" withHighLightedImageName:@"cm2_lay_icn_dld" withItemText:@"差旅安排"];
+    MenuItemModel *dldItemModel=[[MenuItemModel alloc] initWithNormalImageName:@"travel" withHighLightedImageName:@"travel" withItemText:@"差旅安排"];
     [self.menuItemDataSourceArray addObject:dldItemModel];
     
-    MenuItemModel *artistItemModel=[[MenuItemModel alloc]initWithNormalImageName:@"cm2_lay_icn_artist" withHighLightedImageName:@"cm2_lay_icn_artist" withItemText:@"会议记录"];
+    MenuItemModel *artistItemModel=[[MenuItemModel alloc]initWithNormalImageName:@"meeting" withHighLightedImageName:@"meeting" withItemText:@"会议记录"];
     [self.menuItemDataSourceArray addObject:artistItemModel];
     
-    MenuItemModel *dltItemModel=[[MenuItemModel alloc]initWithNormalImageName:@"cm2_lay_icn_dlt" withHighLightedImageName:@"cm2_lay_icn_dlt" withItemText:@"宴会安排"];
+    MenuItemModel *dltItemModel=[[MenuItemModel alloc]initWithNormalImageName:@"dinner" withHighLightedImageName:@"dinner" withItemText:@"宴会安排"];
     [self.menuItemDataSourceArray addObject:dltItemModel];
     
     //构建列表数据源

@@ -199,8 +199,8 @@
         NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
         [numberFormatter setPositiveFormat:@"0.0"];
         NSString *str_percent= [numberFormatter stringFromNumber:[NSNumber numberWithFloat:d_percent]];
-       // NSString *str_text=[NSString stringWithFormat:@"%@%%(%@)",str_percent,[self.values[i] stringValue]];
-        digitLabel.text = [NSString stringWithFormat: @"%@%@",str_percent,@"%"];
+        NSString *str_text=[NSString stringWithFormat:@"%@%@(%@%%)",[self.values[i] stringValue],@"票",str_percent];
+        digitLabel.text = str_text;
         [self setLabelDefaults:digitLabel];
         @try {
             UILabel *originalDigitLabel = self.digitIndicatorsLabels[i];
@@ -212,13 +212,14 @@
             [self.digitIndicatorsLabels insertObject:digitLabel atIndex:i];
         }
         [self addSubview:digitLabel];
-        
+        /*
         UILabel *numLable=[[UILabel alloc] initWithFrame:CGRectMake(barFrame.origin.x+self.barMaxWidth*0.07, barFrame.origin.y, digitWidth, barFrame.size.height)];
         NSString *num=self.values[i];
         numLable.text=[NSString stringWithFormat:@"%@%@",num,@"票"];
         numLable.textColor=[UIColor whiteColor];
         numLable.font=[UIFont systemFontOfSize:14];
         [self addSubview:numLable];
+         */
         
     }
 }
