@@ -36,7 +36,13 @@
     buttonLabel.center = CGPointMake(self.frame.size.width/2, self.frame.size.height - buttonLabel.frame.size.height/2);
     buttonLabel.text = menuItemModel.itemText;
     buttonLabel.textAlignment = NSTextAlignmentCenter;
-    buttonLabel.font = [UIFont systemFontOfSize:15];
+    if (iPhone6 || iPhone6_plus) {
+        buttonLabel.font = [UIFont systemFontOfSize:15];
+    }
+    else {
+        buttonLabel.font = [UIFont systemFontOfSize:13];
+    }
+    
     buttonLabel.textColor = [UIColor blackColor];
     [self addSubview:buttonLabel];
 }
