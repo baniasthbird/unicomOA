@@ -62,8 +62,9 @@
 }
 
 -(void)buttonPressed:(UITapGestureRecognizer *)gestrueRecognizer {
-    LZActionSheet *sheet=[LZActionSheet showActionSheetWithDelegate:self cancelButtonTitle:@"取消" otherButtonTitles:@[@"拍照",@"从相册中选择"]];
-    
+    UIColor *other_color=[UIColor colorWithRed:81/255.0f green:127/255.0f blue:238/255.0f alpha:1];
+    UIColor *cancel_color=[UIColor colorWithRed:246/255.0f green:88/255.0f blue:87/255.0f alpha:1];
+    LZActionSheet *sheet=[LZActionSheet showActionSheetWithDelegate:self cancelButtonTitle:@"取消" otherButtonTitles:@[@"拍照",@"从相册中选择"] cancelButtonColor:cancel_color otherButtonColor:other_color];
     [sheet show];
     NSLog(@"已点击图片");
 }
