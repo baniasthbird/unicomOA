@@ -26,8 +26,8 @@
 
 @property (nonatomic, strong) id<LZActionSheetDelegate> delegate;
 
-- (instancetype)initWithDelegate:(id)delegate cancelButtonTitle:(NSString *)cancleTitle otherButtonTitles:(NSArray *)otherButtonTitles;
-+ (instancetype)showActionSheetWithDelegate:(id)delegate cancelButtonTitle:(NSString *)cancleTitle otherButtonTitles:(NSArray *)otherButtonTitles;
+- (instancetype)initWithDelegate:(id)delegate cancelButtonTitle:(NSString *)cancleTitle otherButtonTitles:(NSArray *)otherButtonTitles cancelButtonColor:(UIColor*)color_cancel otherButtonColor:(UIColor*)color_other;
++ (instancetype)showActionSheetWithDelegate:(id)delegate cancelButtonTitle:(NSString *)cancleTitle otherButtonTitles:(NSArray *)otherButtonTitles cancelButtonColor:(UIColor*)color_cancel otherButtonColor:(UIColor*)color_other;
 - (void)show;
 
 @end

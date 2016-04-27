@@ -16,6 +16,7 @@
 #import "IQKeyboardManager.h"
 #import "IQKeyboardReturnKeyHandler.h"
 #import "IQUIView+IQKeyboardToolbar.h"
+#import "LZActionSheet.h"
 
 #define TABLEVIEW_CELL_RESUSE_ID @"TABLEVIEW_CELL_REUSE_ID"
 
@@ -28,7 +29,7 @@ typedef enum
     DiningService
 }OperationType;
 
-@interface NewNotesViewController()<UITableViewDataSource,UITableViewDelegate,UITextViewDelegate,MenuTableViewCellDelegate,MenutableViewCellDataSource>
+@interface NewNotesViewController()<UITableViewDataSource,UITableViewDelegate,UITextViewDelegate,MenuTableViewCellDelegate,MenutableViewCellDataSource,LZActionSheetDelegate>
     
 //列表
 @property (strong,nonatomic) UITableView *tableView;
@@ -47,6 +48,8 @@ typedef enum
 
 @property (strong,nonatomic) NSIndexPath *selectedRowIndexPath;
 
+//是否开启下拉菜单
+@property BOOL b_isOpenMenu;
 
 @end
 
@@ -80,7 +83,7 @@ typedef enum
     returnKeyHandler=[[IQKeyboardReturnKeyHandler alloc]initWithViewController:self];
     [returnKeyHandler setLastTextFieldReturnKeyType:UIReturnKeyDone];
     
-    
+    _b_isOpenMenu=NO;
     
 }
 
@@ -174,12 +177,13 @@ typedef enum
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (self.selectedRowIndexPath) {
-        return 6;
+        return 10;
     }
     return 5;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     if (indexPath.row==0) {
         MenuTableViewCell *menuCell = (MenuTableViewCell *)[tableView dequeueReusableCellWithIdentifier:TABLEVIEW_CELL_RESUSE_ID forIndexPath:indexPath];
         menuCell.delegate = self;
@@ -202,10 +206,10 @@ typedef enum
         return menuCell;
     }
     else if (indexPath.row==1) {
+        
         static NSString *cellIdentifier = @"cell";
         
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-        
         UITextView *textView=nil;
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
@@ -217,14 +221,14 @@ typedef enum
             [textView setBackgroundColor:[UIColor clearColor]];
             textView.autoresizingMask=UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
             textView.hidden=NO;
-            textView.layer.borderColor=[[UIColor colorWithRed:230.0/255.0 green:250.0/255.0 blue:250.0/255.0 alpha:1.0]CGColor];
-            textView.layer.borderWidth=3.0;
-            textView.layer.cornerRadius=8.0f;
-            [textView.layer setMasksToBounds:YES];
+           // textView.layer.borderColor=[[UIColor colorWithRed:230.0/255.0 green:250.0/255.0 blue:250.0/255.0 alpha:1.0]CGColor];
+           // textView.layer.borderWidth=3.0;
+           // textView.layer.cornerRadius=8.0f;
+           // [textView.layer setMasksToBounds:YES];
             textView.delegate=self;
             [textView setTag:1];
             if (self.str_noteContent==nil) {
-                [textView setText:@"请输入内容"];
+                [textView setText:@"  请输入内容"];
             }
             else {
                 textView.text=self.str_noteContent;
@@ -235,25 +239,140 @@ typedef enum
             
         }
         
-        return cell;
+         return cell;
+       
     }
     else if (indexPath.row==2) {
         static NSString *cellIdentifier = @"cell";
         
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
+        }
         
+        CGRect imageFrame=CGRectMake(10, 10, 80, 80);
+        UIImageView *image=[[UIImageView alloc]initWithFrame:imageFrame];
+        image.layer.borderWidth=1;
+        image.layer.borderColor=[[UIColor lightGrayColor] CGColor];
+        //[image setImage:[UIImage imageNamed:@"me.png"]];
+        //[image addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(@"chooseImage:")];
+        //cell.textLabel.text=@"今后更新用于地图开发";
+        image.userInteractionEnabled=YES;
+        UITapGestureRecognizer *singleTap1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(buttonPressed:)];
+        [image addGestureRecognizer:singleTap1];
+        [[cell contentView] addSubview:image];
+        
+         return cell;
+        
+    }
+    else if (indexPath.row==3) {
+        static NSString *cellIdentifier = @"cell";
+        
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+        }
+        
+        UIImageView *img_positon=[[UIImageView alloc]initWithFrame:CGRectMake(cell.contentView.frame.origin.x+10, cell.contentView.frame.origin.y+5, 44, 44)];
+        img_positon.image=[UIImage imageNamed:@"position.png"];
+        UILabel *lbl_text=[[UILabel alloc]initWithFrame:CGRectMake(cell.contentView.frame.origin.x+80,cell.contentView.frame.origin.y-3 , 100, 60)];
+        lbl_text.text=@"添加位置";
+        lbl_text.font=[UIFont systemFontOfSize:18];
+        
+        [[cell contentView] addSubview:img_positon];
+        [[cell contentView] addSubview:lbl_text];
+         return cell;
+
+    }
+    else if (indexPath.row==4) {
+        static NSString *cellIdentifier = @"cell";
+        
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         
-        CGRect imageFrame=CGRectMake(10, 10, 100, 80);
-        UIImageView *image=[[UIImageView alloc]initWithFrame:imageFrame];
-        [image setImage:[UIImage imageNamed:@"me.png"]];
-        //cell.textLabel.text=@"今后更新用于地图开发";
-        [cell addSubview:image];
+        UIImageView *img_alarm=[[UIImageView alloc]initWithFrame:CGRectMake(cell.contentView.frame.origin.x+10, cell.contentView.frame.origin.y+5, 44, 44)];
+        img_alarm.image=[UIImage imageNamed:@"alarm.png"];
+        UILabel *lbl_text=[[UILabel alloc]initWithFrame:CGRectMake(cell.contentView.frame.origin.x+80,cell.contentView.frame.origin.y-3 , 100, 60)];
+        lbl_text.text=@"设置提醒";
+        lbl_text.font=[UIFont systemFontOfSize:18];
+       // cell.textLabel.text=@"设置提醒";
+        UISwitch *sw_alarm=[[UISwitch alloc]initWithFrame:CGRectMake(120, 15, 50, 50)];
+        
+        
+        [sw_alarm setOn:NO animated:NO];
+        [sw_alarm addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
+        //[cell addSubview:sw_alarm];
+        cell.accessoryView=sw_alarm;
+        [[cell contentView] addSubview:img_alarm];
+        [[cell contentView] addSubview:lbl_text];
+        
+         return cell;
+       
+    }
+    else if (indexPath.row==5) {
+
+        static NSString *cellIdentifier = @"cell";
+        
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        
+        if (cell==nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.textLabel.text=@"重复";
+            cell.detailTextLabel.textColor=[UIColor colorWithRed:173/255.0f green:173/255.0f blue:173/255.0f alpha:1];
+            cell.detailTextLabel.text=@"只响一次";
+            cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+        }
+        
+        return cell;
+
+    }
+    else if (indexPath.row==5) {
+        static NSString *cellIdentifier = @"cell";
+        
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        
+        if (cell==nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.textLabel.text=@"铃声";
+            cell.detailTextLabel.textColor=[UIColor colorWithRed:173/255.0f green:173/255.0f blue:173/255.0f alpha:1];
+            cell.detailTextLabel.text=@"默认铃声";
+            cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+        }
+        
         return cell;
     }
+    else if (indexPath.row==6) {
+        static NSString *cellIdentifier = @"cell";
+        
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        
+        if (cell==nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.textLabel.text=@"振动";
+            cell.detailTextLabel.textColor=[UIColor colorWithRed:173/255.0f green:173/255.0f blue:173/255.0f alpha:1];
+            cell.detailTextLabel.text=@"响铃时振动";
+            UISwitch *sw_alarm=[[UISwitch alloc]initWithFrame:CGRectMake(120, 15, 50, 50)];
+            
+            
+            [sw_alarm setOn:NO animated:NO];
+            [sw_alarm addTarget:self action:@selector(vibration) forControlEvents:UIControlEventValueChanged];
+
+        }
+        
+        return cell;
+    }
+    
+    /*
     else if (indexPath.row==3) {
         static NSString *cellIdentifier = @"cell";
         
@@ -313,7 +432,9 @@ typedef enum
         return cell;
         
     }
+     */
     else {
+       
         static NSString *cellIdentifier = @"cell";
         
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
@@ -323,8 +444,8 @@ typedef enum
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         
-        return cell;
         
+      return cell;
     }
     
 }
@@ -336,6 +457,13 @@ typedef enum
 
 - (void) switchChanged:(id)sender {
     UISwitch* switchControl = sender;
+    if (switchControl.on==YES) {
+        _b_isOpenMenu=YES;
+    }
+    else {
+        _b_isOpenMenu=NO;
+    }
+    [self extendCellAtIndexPath:[NSIndexPath indexPathForRow:4 inSection:0]];
     NSLog( @"The switch is %@", switchControl.on ? @"ON" : @"OFF" );
 }
 
@@ -351,18 +479,21 @@ typedef enum
         return 114.0;
     }else if (indexPath.row==1)
     {
-        return 180;
+        return 160;
     }
     else if (indexPath.row==2)
     {
         return 100;
     }
-    else if ([self isExtendedCellIndexPath:indexPath]) {
-        return 180;
+    else if (indexPath.row==7) {
+        return 100;
+    }
+    else if (indexPath.row==8) {
+        return 160;
     }
     else
     {
-        return 64.0;
+        return 54.0;
     }
 }
 
@@ -374,7 +505,7 @@ typedef enum
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.row==3 && indexPath.section==0) {
+    if (indexPath.row==4 && indexPath.section==0) {
         [self extendCellAtIndexPath:indexPath];
     }
     /*
@@ -484,13 +615,14 @@ typedef enum
 //点击时间后下拉扩展cell事件
 -(void)extendCellAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row==3 && indexPath.section==0) {
+    if (indexPath.row==4 && indexPath.section==0) {
         [self.tableView beginUpdates];
         
         if (self.selectedRowIndexPath) {
             if ([self isSelectedRowIndexPath:indexPath]) {
                 NSIndexPath *tempIndexPath=self.selectedRowIndexPath;
                 self.selectedRowIndexPath=nil;
+                
                 [self removeCellBelowIndexPath:tempIndexPath];
             }
             else if ([self isExtendedCellIndexPath:indexPath]);
@@ -519,16 +651,26 @@ typedef enum
 
 -(void)insertCellBelowIndexPath:(NSIndexPath *)indexPath
 {
-    indexPath=[NSIndexPath indexPathForRow:(indexPath.row+1) inSection:indexPath.section];
-    NSArray *pathsArray=@[indexPath];
+    NSIndexPath* indexPath1=[NSIndexPath indexPathForRow:(indexPath.row+1) inSection:indexPath.section];
+    NSIndexPath* indexPath2=[NSIndexPath indexPathForRow:(indexPath.row+2) inSection:indexPath.section];
+    NSIndexPath* indexPath3=[NSIndexPath indexPathForRow:(indexPath.row+3) inSection:indexPath.section];
+    NSIndexPath* indexPath4=[NSIndexPath indexPathForRow:(indexPath.row+4) inSection:indexPath.section];
+    NSIndexPath* indexPath5=[NSIndexPath indexPathForRow:(indexPath.row+5) inSection:indexPath.section];
+    NSArray *pathsArray=@[indexPath1,indexPath2,indexPath3,indexPath4,indexPath5];
     [self.tableView insertRowsAtIndexPaths:pathsArray withRowAnimation:UITableViewRowAnimationTop];
 }
 
 -(void)removeCellBelowIndexPath:(NSIndexPath *)indexPath
 {
-    indexPath =[NSIndexPath indexPathForRow:(indexPath.row+1) inSection:indexPath.section];
-    NSArray *pathsArray=@[indexPath];
+    
+    NSIndexPath *indexPath1 =[NSIndexPath indexPathForRow:(indexPath.row+1) inSection:indexPath.section];
+    NSIndexPath *indexPath2 =[NSIndexPath indexPathForRow:(indexPath.row+2) inSection:indexPath.section];
+    NSIndexPath *indexPath3 =[NSIndexPath indexPathForRow:(indexPath.row+3) inSection:indexPath.section];
+    NSIndexPath *indexPath4 =[NSIndexPath indexPathForRow:(indexPath.row+4) inSection:indexPath.section];
+    NSIndexPath *indexPath5 =[NSIndexPath indexPathForRow:(indexPath.row+5) inSection:indexPath.section];
+    NSArray *pathsArray=@[indexPath1,indexPath2,indexPath3,indexPath4,indexPath5];
     [self.tableView deleteRowsAtIndexPaths:pathsArray withRowAnimation:UITableViewRowAnimationTop];
+    
 }
 
 -(void)setSelectedRowIndexPath:(NSIndexPath *)selectedRowIndexPath {
@@ -569,4 +711,31 @@ typedef enum
 -(void)MovePreviousVc:(UIButton*)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+-(void)buttonPressed:(UITapGestureRecognizer *)gestrueRecognizer {
+   // LZActionSheet *sheet=[LZActionSheet showActionSheetWithDelegate:self cancelButtonTitle:@"取消" otherButtonTitles:@[@"拍照",@"从相册中选择"] ];
+    UIColor *other_color=[UIColor colorWithRed:81/255.0f green:127/255.0f blue:238/255.0f alpha:1];
+    UIColor *cancel_color=[UIColor colorWithRed:246/255.0f green:88/255.0f blue:87/255.0f alpha:1];
+    LZActionSheet *sheet=[LZActionSheet showActionSheetWithDelegate:self cancelButtonTitle:@"取消" otherButtonTitles:@[@"拍照",@"从相册中选择"] cancelButtonColor:cancel_color otherButtonColor:other_color];
+    [sheet show];
+    NSLog(@"已点击图片");
+}
+
+//照片选择
+-(void)LZActionSheet:(LZActionSheet *)actionSheet didClickedButtonAtIndex:(NSInteger)index {
+    switch (index) {
+        case 0:
+            break;
+        case 1:
+            break;
+        default:
+            break;
+    }
+}
+
+//振动提醒
+-(void)vibration {
+    
+}
+
 @end

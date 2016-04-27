@@ -46,7 +46,7 @@
 }
 
 
-- (instancetype)initWithDelegate:(id)delegate cancelButtonTitle:(NSString *)cancleTitle otherButtonTitles:(NSArray *)otherButtonTitles{
+- (instancetype)initWithDelegate:(id)delegate cancelButtonTitle:(NSString *)cancleTitle otherButtonTitles:(NSArray *)otherButtonTitles cancelButtonColor:(UIColor *)color_cancel otherButtonColor:(UIColor *)color_other{
     if (self = [super init]) {
         
         self.btnArray = nil;
@@ -75,7 +75,7 @@
         
         // 操作action
         for (int i = 0; i < otherButtonTitles.count; i++) {
-            [self createBtnWithTitle:otherButtonTitles[i] backgroundColor:[UIColor colorWithWhite:1 alpha:1] titleColor:[UIColor colorWithRed:91.0/255.0f green:178.0/255.0f blue:243.0/255.0f alpha:1] tagIndex:i + LZActionSheetCancelBaseTag];
+            [self createBtnWithTitle:otherButtonTitles[i] backgroundColor:[UIColor colorWithWhite:1 alpha:1] titleColor:color_other tagIndex:i + LZActionSheetCancelBaseTag];
         }
         
         
@@ -86,7 +86,7 @@
         cancelBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
         cancelBtn.titleLabel.font = [UIFont systemFontOfSize:15.0];
         [cancelBtn setTitle:cancleTitle forState:UIControlStateNormal];
-        [cancelBtn setTitleColor:[UIColor colorWithRed:91.0/255.0f green:178.0/255.0f blue:243.0/255.0f alpha:1] forState:UIControlStateNormal];
+        [cancelBtn setTitleColor:color_cancel forState:UIControlStateNormal];
         [cancelBtn addTarget:self action:@selector(actionSheetClickedButtonAtIndex:) forControlEvents:UIControlEventTouchUpInside];
         self.cancelBtn = cancelBtn;
         [self.actionSheet addSubview:cancelBtn];
@@ -95,8 +95,8 @@
 
 }
 
-+ (instancetype)showActionSheetWithDelegate:(id)delegate cancelButtonTitle:(NSString *)cancleTitle otherButtonTitles:(NSArray *)otherButtonTitles{
-    return [[self alloc] initWithDelegate:delegate cancelButtonTitle:cancleTitle otherButtonTitles:otherButtonTitles];
++ (instancetype)showActionSheetWithDelegate:(id)delegate cancelButtonTitle:(NSString *)cancleTitle otherButtonTitles:(NSArray *)otherButtonTitles cancelButtonColor:(UIColor *)color_cancel otherButtonColor:(UIColor *)color_other{
+    return [[self alloc] initWithDelegate:delegate cancelButtonTitle:cancleTitle otherButtonTitles:otherButtonTitles cancelButtonColor:color_cancel otherButtonColor:color_other];
 }
 
 - (void)createBtnWithTitle:(NSString *)title backgroundColor:(UIColor *)backgroudColor titleColor:(UIColor *)textColor tagIndex:(NSInteger)tagIndex{
