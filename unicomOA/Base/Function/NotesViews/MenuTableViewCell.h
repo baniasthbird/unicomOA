@@ -31,6 +31,8 @@
 //下拉菜单视图
 @property (weak, nonatomic) IBOutlet UIView *menuView;
 
++(instancetype)cellWithTable:(UITableView*)tableView atIndexPath:(NSIndexPath*)indexPath;
+
 /**
  *  @author li_yong
  *

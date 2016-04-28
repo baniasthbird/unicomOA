@@ -51,6 +51,14 @@ typedef enum
 //是否开启下拉菜单
 @property BOOL b_isOpenMenu;
 
+@property (nonatomic,strong) NSTimer *timer;
+
+@property (nonatomic,strong) NSDate *date_select;
+
+@property (nonatomic,strong) NSString *str_date;
+
+@property (nonatomic,strong) NSString *str_notesFenLei;
+
 @end
 
 @implementation NewNotesViewController {
@@ -76,7 +84,6 @@ typedef enum
     //[barButtonItem setTitleTextAttributes:dict forState:UIControlStateNormal];
     self.navigationItem.leftBarButtonItem = barButtonItem;
     
-    
     [self buildDataSource];
     [self buildView];
     
@@ -85,6 +92,9 @@ typedef enum
     
     _b_isOpenMenu=NO;
     
+    _timer=[NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(ChangeCountDownLabels:) userInfo:nil repeats:YES];
+    
+    [_timer fire];
 }
 
 
@@ -92,24 +102,13 @@ typedef enum
 
 -(void)FinishNotes:(UIButton*)sender {
     
-    MenuTableViewCell *menuCell=(MenuTableViewCell*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    NSString *str_notesFenLei= menuCell.indexPathLabel.text;
+    NSDate *date=[NSDate date];
+    NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSString *dateString=[dateFormatter stringFromDate:date];
     
+    [delegate passValue:_str_notesFenLei Content:_str_noteContent Time:_str_date TimeNow:dateString];
     
-    UITableViewCell *cell=(UITableViewCell*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
-    UILabel *lbl_date=cell.subviews[1];
-    NSString *curTime=lbl_date.text;
-    
-    //self.arr_passvalue=[[NSArray alloc]initWithObjects:str_notesFenLei,str_notesContent,curTime, nil];
-    
-    //self.arr_passvalue=@[str_notesFenLei,str_notesContent,curTime];
-    
-   // [delegate passValue:self.arr_passvalue];
-    [delegate passValue:str_notesFenLei Content:_str_noteContent Time:curTime];
-    
-    //NotesViewController *viewController=[[NotesViewController alloc]initWithNibName:@"ValueInputView" bundle:[NSBundle mainBundle]];
-    
-    //[self.navigationController pushViewController:viewController animated:YES];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -186,6 +185,9 @@ typedef enum
     
     if (indexPath.row==0) {
         MenuTableViewCell *menuCell = (MenuTableViewCell *)[tableView dequeueReusableCellWithIdentifier:TABLEVIEW_CELL_RESUSE_ID forIndexPath:indexPath];
+       // MenuTableViewCell *menuCell = [MenuTableViewCell cellWithTable:tableView atIndexPath:indexPath];
+       
+       
         menuCell.delegate = self;
         menuCell.dataSource = self;
         menuCell.moreBtn.tag = indexPath.row;
@@ -209,7 +211,7 @@ typedef enum
         
         static NSString *cellIdentifier = @"cell";
         
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         UITextView *textView=nil;
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
@@ -245,7 +247,7 @@ typedef enum
     else if (indexPath.row==2) {
         static NSString *cellIdentifier = @"cell";
         
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -270,7 +272,7 @@ typedef enum
     else if (indexPath.row==3) {
         static NSString *cellIdentifier = @"cell";
         
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -291,7 +293,7 @@ typedef enum
     else if (indexPath.row==4) {
         static NSString *cellIdentifier = @"cell";
         
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -320,7 +322,7 @@ typedef enum
 
         static NSString *cellIdentifier = @"cell";
         
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         
         if (cell==nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
@@ -334,10 +336,10 @@ typedef enum
         return cell;
 
     }
-    else if (indexPath.row==5) {
+    else if (indexPath.row==6) {
         static NSString *cellIdentifier = @"cell";
         
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         
         if (cell==nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
@@ -350,10 +352,10 @@ typedef enum
         
         return cell;
     }
-    else if (indexPath.row==6) {
+    else if (indexPath.row==7) {
         static NSString *cellIdentifier = @"cell";
         
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         
         if (cell==nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
@@ -366,78 +368,62 @@ typedef enum
             
             [sw_alarm setOn:NO animated:NO];
             [sw_alarm addTarget:self action:@selector(vibration) forControlEvents:UIControlEventValueChanged];
+            cell.accessoryView=sw_alarm;
+        
 
         }
         
         return cell;
     }
-    
-    /*
-    else if (indexPath.row==3) {
+    else if (indexPath.row==8) {
         static NSString *cellIdentifier = @"cell";
         
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         
-        if (cell == nil) {
+        if (cell==nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            UILabel *lbl_count_down=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 100)];
+            lbl_count_down.textAlignment=NSTextAlignmentCenter;
+            lbl_count_down.font=[UIFont systemFontOfSize:20];
+            if (_str_date==nil) {
+                _str_date=@"0分后响铃";
+            }
+            lbl_count_down.text=_str_date;
+            [[cell contentView] addSubview:lbl_count_down];
         }
+        
+        
+        return cell;
+    }
+    else if (indexPath.row==9) {
+        /*
+        static NSString *cellIdentifier = @"cell";
+        
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
 
-        cell.textLabel.text=@"日期";
-        UILabel *lbl_time=[[UILabel alloc]initWithFrame:CGRectMake(100,10,2*cell.frame.size.width/3, cell.frame.size.height)];
-        if (self.str_time==nil) {
-            NSDate *date=[NSDate date];
-            NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
-            [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-            NSString *dateString=[dateFormatter stringFromDate:date];
-            lbl_time.textColor=[UIColor blackColor];
-            lbl_time.text=dateString;
+        if (cell==nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            UILabel *lbl_count_down=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 100)];
+            lbl_count_down.textAlignment=NSTextAlignmentCenter;
+            lbl_count_down.font=[UIFont systemFontOfSize:20];
+            lbl_count_down.text=@"2小时32分后响铃";
+            [[cell contentView] addSubview:lbl_count_down];
         }
-        else if (self.str_time!=nil) {
-            lbl_time.textColor=[UIColor blackColor];
-            lbl_time.text=self.str_time;
-        }
-       
-        [cell addSubview:lbl_time];
 
         return cell;
-        
-    }
-    else if (indexPath.row==4 && self.selectedRowIndexPath==nil)  {
-        static NSString *cellIdentifier = @"cell";
-        
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-        
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        }
-        
-        cell.textLabel.text=@"设置提醒";
-        UISwitch *sw_alarm=[[UISwitch alloc]initWithFrame:CGRectMake(120, 15, 50, 50)];
-       
-    
-        [sw_alarm setOn:NO animated:NO];
-        [sw_alarm addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
-        //[cell addSubview:sw_alarm];
-        cell.accessoryView=sw_alarm;
-        return  cell;
-        
-    }
-    else if ([self isExtendedCellIndexPath:indexPath])
-    {
+         */
         NSString *identifier = [TableViewCell reusableIdentifier];
         TableViewCell *cell = [[[NSBundle mainBundle]loadNibNamed:identifier owner:self options:nil]objectAtIndex:0];
         [cell addcontentView:[self viewForContainerAtIndexPath:indexPath]];
         return cell;
-        
     }
-     */
     else {
        
         static NSString *cellIdentifier = @"cell";
         
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         
         if (cell==nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
@@ -481,15 +467,12 @@ typedef enum
     {
         return 160;
     }
-    else if (indexPath.row==2)
+    else if (indexPath.row==2 || indexPath.row==8)
     {
         return 100;
     }
-    else if (indexPath.row==7) {
-        return 100;
-    }
-    else if (indexPath.row==8) {
-        return 160;
+    else if (indexPath.row==9) {
+        return 240;
     }
     else
     {
@@ -520,6 +503,9 @@ typedef enum
     
 }
 
+-(void)viewDidDisappear:(BOOL)animated {
+    [_timer invalidate];
+}
 
 #pragma mark -MenutableViewCellDataSource
 -(NSMutableArray *)dataSourceForMenuItem {
@@ -565,18 +551,23 @@ typedef enum
     switch (menuItemIndex) {
         case DateArrangeMent:
             menuTableViewCell.indexPathLabel.text=@"日程安排";
+            _str_notesFenLei=menuTableViewCell.indexPathLabel.text;
             break;
         case WorkingNotes:
             menuTableViewCell.indexPathLabel.text=@"工作笔记";
+            _str_notesFenLei=menuTableViewCell.indexPathLabel.text;
             break;
         case TourismPlan:
             menuTableViewCell.indexPathLabel.text=@"差旅安排";
+            _str_notesFenLei=menuTableViewCell.indexPathLabel.text;
             break;
         case MeetingArrangement:
             menuTableViewCell.indexPathLabel.text=@"会议记录";
+            _str_notesFenLei=menuTableViewCell.indexPathLabel.text;
             break;
         case DiningService:
             menuTableViewCell.indexPathLabel.text=@"宴会安排";
+            _str_notesFenLei=menuTableViewCell.indexPathLabel.text;
             break;
         default:
             break;
@@ -598,18 +589,23 @@ typedef enum
 
 
 -(UIView*)viewForContainerAtIndexPath:(NSIndexPath *)indexPath {
-    if ([self isExtendedCellIndexPath:indexPath]) {
-        UIDatePicker *datePicker=[[UIDatePicker alloc]init];
+    //if ([self isExtendedCellIndexPath:indexPath]) {
+    UIDatePicker *datePicker=[[UIDatePicker alloc]init];
+    datePicker.minimumDate=[NSDate date];
+    datePicker.maximumDate=[[NSDate alloc]initWithTimeIntervalSinceNow:1000000000];
+    if (_date_select!=nil) {
+        datePicker.date=_date_select;
+    }
        // [datePicker setLocale:[NSLocale alloc]:@"zh_Hans_CN"];
-        [datePicker setLocale:[[NSLocale alloc]initWithLocaleIdentifier:@"zh_Hans_CN"]];
-        [datePicker addTarget:self action:@selector(dateChanged:) forControlEvents:UIControlEventValueChanged];
-        UIView *dropDownView=datePicker;
+    [datePicker setLocale:[[NSLocale alloc]initWithLocaleIdentifier:@"zh_Hans_CN"]];
+    [datePicker addTarget:self action:@selector(dateChanged:) forControlEvents:UIControlEventValueChanged];
+    UIView *dropDownView=datePicker;
         
-        return dropDownView;
-    }
-    else {
-        return nil;
-    }
+    return dropDownView;
+  //  }
+   // else {
+   //     return nil;
+   // }
 }
 
 //点击时间后下拉扩展cell事件
@@ -698,14 +694,46 @@ typedef enum
 
 #pragma 日期
 -(void)dateChanged:(UIDatePicker*)sender {
-    NSDate *date=sender.date;
-    NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    NSString *dateString=[dateFormatter stringFromDate:date];
-    UITableViewCell *cell=[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:3 inSection:0]];
-    UILabel *lbl_date=cell.subviews[1];
-    lbl_date.text=dateString;
+    _date_select=sender.date;
+    UITableViewCell *cell=[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:8 inSection:0]];
+    UILabel *lbl_date=cell.subviews[0].subviews[0];
+    _str_date=[self CalcuDateStr:_date_select];
+    lbl_date.text=_str_date;
     lbl_date.textColor=[UIColor blackColor];
+}
+
+
+-(NSString*)CalcuDateStr:(NSDate*)date {
+    NSDate *date_now=[NSDate date];
+    NSTimeInterval secondsInterval=[date timeIntervalSinceDate:date_now];
+    NSInteger minutesInterval=(NSInteger)secondsInterval/60;
+    NSInteger hourInterval=0;
+    NSInteger dayInterval=0;
+    if (minutesInterval>60) {
+        hourInterval=minutesInterval/60;
+        minutesInterval=minutesInterval-60*hourInterval;
+    }
+    if (hourInterval>24) {
+        dayInterval=hourInterval/24;
+        hourInterval=hourInterval-dayInterval*24;
+    }
+    /*
+     NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
+     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+     NSString *dateString=[dateFormatter stringFromDate:date];
+     */
+    NSString *dateString=@"";
+    if (hourInterval==0 && dayInterval==0) {
+        dateString=[NSString stringWithFormat:@"%ld%@",(long)minutesInterval,@"分后响铃"];
+    }
+    else if (dayInterval==0) {
+        dateString=[NSString stringWithFormat:@"%ld%@%ld%@",(long)hourInterval,@"小时",(long)minutesInterval,@"分后响铃"];
+    }
+    else {
+        dateString=[NSString stringWithFormat:@"%ld%@%ld%@%ld%@",(long)dayInterval,@"天",(long)hourInterval,@"小时",(long)minutesInterval,@"分后响铃"];
+    }
+
+    return dateString;
 }
 
 -(void)MovePreviousVc:(UIButton*)sender {
@@ -736,6 +764,28 @@ typedef enum
 //振动提醒
 -(void)vibration {
     
+}
+
+
+
+
+-(void) ChangeCountDownLabels:(NSTimer*)timer {
+    if (_date_select!=nil) {
+         _str_date=[self CalcuDateStr:_date_select];
+    }
+    if ([self.tableView numberOfRowsInSection:0]==10) {
+        TableViewCell *cell=[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:9 inSection:0]];
+        UIDatePicker *picker=cell.subviews[0].subviews[1];
+        [picker setMinimumDate:[NSDate date]];
+        [picker setMaximumDate:[[NSDate alloc]initWithTimeIntervalSinceNow:1000000000]];
+        
+        
+        UITableViewCell *cell2=[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:8 inSection:0]];
+        UILabel *lbl_date=cell2.subviews[0].subviews[0];
+        lbl_date.text=_str_date;
+        
+       // [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:9 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+    }
 }
 
 @end

@@ -29,6 +29,15 @@
 
 @implementation MenuTableViewCell
 
++(instancetype)cellWithTable:(UITableView *)tableView atIndexPath:(NSIndexPath *)indexPath {
+    static NSString *cellID=@"cellID";
+    MenuTableViewCell *cell=[tableView cellForRowAtIndexPath:indexPath];
+    if (!cell) {
+        cell=[[MenuTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+    }
+    return cell;
+}
+
 - (void)awakeFromNib
 {
     // Initialization code

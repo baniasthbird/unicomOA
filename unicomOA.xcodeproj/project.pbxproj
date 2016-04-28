@@ -189,11 +189,12 @@
 		68EEDE7C1CBB9D07003295EB /* MyApplicationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EEDE7B1CBB9D07003295EB /* MyApplicationCell.m */; };
 		68F173C91C99034500A8BEA3 /* StaffInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F173C81C99034500A8BEA3 /* StaffInfoViewController.m */; };
 		68F173D11C99575200A8BEA3 /* HeadViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F173D01C99575200A8BEA3 /* HeadViewCell.m */; };
+		68F36D691CD1F3320027A97A /* aboutbg.png in Resources */ = {isa = PBXBuildFile; fileRef = 68F36D681CD1F3320027A97A /* aboutbg.png */; };
+		68F36D6B1CD1F6C70027A97A /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 68F36D6A1CD1F6C70027A97A /* logo.png */; };
 		68F8E1791CD042AA005D2727 /* bg_Nav.png in Resources */ = {isa = PBXBuildFile; fileRef = 68F8E1671CD042AA005D2727 /* bg_Nav.png */; };
 		68F8E17A1CD042AA005D2727 /* checkbox_checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 68F8E1681CD042AA005D2727 /* checkbox_checked.png */; };
 		68F8E17B1CD042AA005D2727 /* checkbox_unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = 68F8E1691CD042AA005D2727 /* checkbox_unchecked.png */; };
 		68F8E17C1CD042AA005D2727 /* LoginView.png in Resources */ = {isa = PBXBuildFile; fileRef = 68F8E16A1CD042AA005D2727 /* LoginView.png */; };
-		68F8E17D1CD042AA005D2727 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 68F8E16B1CD042AA005D2727 /* logo.png */; };
 		68F8E17E1CD042AA005D2727 /* logoimage.png in Resources */ = {isa = PBXBuildFile; fileRef = 68F8E16C1CD042AA005D2727 /* logoimage.png */; };
 		68F8E17F1CD042AA005D2727 /* membertablecell.png in Resources */ = {isa = PBXBuildFile; fileRef = 68F8E16D1CD042AA005D2727 /* membertablecell.png */; };
 		68F8E1801CD042AA005D2727 /* myApplication.png in Resources */ = {isa = PBXBuildFile; fileRef = 68F8E16E1CD042AA005D2727 /* myApplication.png */; };
@@ -589,11 +590,12 @@
 		68F173C81C99034500A8BEA3 /* StaffInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StaffInfoViewController.m; path = Base/Settings/Controller/StaffInfoViewController.m; sourceTree = "<group>"; };
 		68F173CF1C99575200A8BEA3 /* HeadViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HeadViewCell.h; path = Base/Settings/Modal/HeadViewCell.h; sourceTree = "<group>"; };
 		68F173D01C99575200A8BEA3 /* HeadViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HeadViewCell.m; path = Base/Settings/Modal/HeadViewCell.m; sourceTree = "<group>"; };
+		68F36D681CD1F3320027A97A /* aboutbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aboutbg.png; sourceTree = "<group>"; };
+		68F36D6A1CD1F6C70027A97A /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		68F8E1671CD042AA005D2727 /* bg_Nav.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_Nav.png; sourceTree = "<group>"; };
 		68F8E1681CD042AA005D2727 /* checkbox_checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkbox_checked.png; sourceTree = "<group>"; };
 		68F8E1691CD042AA005D2727 /* checkbox_unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkbox_unchecked.png; sourceTree = "<group>"; };
 		68F8E16A1CD042AA005D2727 /* LoginView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LoginView.png; sourceTree = "<group>"; };
-		68F8E16B1CD042AA005D2727 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		68F8E16C1CD042AA005D2727 /* logoimage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logoimage.png; sourceTree = "<group>"; };
 		68F8E16D1CD042AA005D2727 /* membertablecell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = membertablecell.png; sourceTree = "<group>"; };
 		68F8E16E1CD042AA005D2727 /* myApplication.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = myApplication.png; sourceTree = "<group>"; };
@@ -1470,12 +1472,13 @@
 		68F8E1661CD042AA005D2727 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				68F36D681CD1F3320027A97A /* aboutbg.png */,
 				68F8E18B1CD04409005D2727 /* alarm.png */,
 				68F8E1671CD042AA005D2727 /* bg_Nav.png */,
 				68F8E1681CD042AA005D2727 /* checkbox_checked.png */,
 				68F8E1691CD042AA005D2727 /* checkbox_unchecked.png */,
+				68F36D6A1CD1F6C70027A97A /* logo.png */,
 				68F8E16A1CD042AA005D2727 /* LoginView.png */,
-				68F8E16B1CD042AA005D2727 /* logo.png */,
 				68F8E16C1CD042AA005D2727 /* logoimage.png */,
 				68F8E16D1CD042AA005D2727 /* membertablecell.png */,
 				68F8E16E1CD042AA005D2727 /* myApplication.png */,
@@ -1621,8 +1624,8 @@
 				68F8E1801CD042AA005D2727 /* myApplication.png in Resources */,
 				68E77A301CB3A133006DA5B9 /* IQKeyboardManager.bundle in Resources */,
 				68F8E18C1CD04409005D2727 /* alarm.png in Resources */,
-				68F8E17D1CD042AA005D2727 /* logo.png in Resources */,
 				68E779E61CB34A8E006DA5B9 /* head1.jpg in Resources */,
+				68F36D691CD1F3320027A97A /* aboutbg.png in Resources */,
 				68F8E17E1CD042AA005D2727 /* logoimage.png in Resources */,
 				68F8E1811CD042AA005D2727 /* myApproval.png in Resources */,
 				68EEDE711CBB911A003295EB /* down_arrow@2x.png in Resources */,
@@ -1633,6 +1636,7 @@
 				68E779E51CB34A8E006DA5B9 /* contacts_major@2x.png in Resources */,
 				68E779F11CB34A8E006DA5B9 /* Level2_Cell.xib in Resources */,
 				2CFEADA61C769EBF0054730E /* friends.plist in Resources */,
+				68F36D6B1CD1F6C70027A97A /* logo.png in Resources */,
 				2C35B0551C7062160003BF6C /* Main.storyboard in Resources */,
 				68ED4E421CB4DC58000E8A7B /* the_arrow_0.png in Resources */,
 				68F8E18A1CD042AA005D2727 /* vote_checked.png in Resources */,

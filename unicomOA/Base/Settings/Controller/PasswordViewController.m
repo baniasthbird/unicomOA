@@ -38,7 +38,7 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor=[UIColor colorWithRed:243.0/255.0f green:243.0/255.0f blue:243.0/255.0f alpha:1];
     
-    _view_oldPassword=[[UIView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height/8, self.view.frame.size.width, 40)];
+    _view_oldPassword=[[UIView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.03, self.view.frame.size.width, 40)];
     _view_oldPassword.backgroundColor=[UIColor whiteColor];
     
     UILabel *lbl_oldName=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/16, 0, 100, 40)];
@@ -56,7 +56,7 @@
     
     [self.view addSubview:_view_oldPassword];
     
-    _view_newPassword=[[UIView alloc]initWithFrame:CGRectMake(0, 5*self.view.frame.size.height/16, self.view.frame.size.width, 40)];
+    _view_newPassword=[[UIView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.13, self.view.frame.size.width, 40)];
     _view_newPassword.backgroundColor=[UIColor whiteColor];
     UILabel *lbl_newPassword=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/16, 0, 100, 40)];
     lbl_newPassword.font=[UIFont systemFontOfSize:17];
@@ -73,7 +73,7 @@
     
     [self.view addSubview:_view_newPassword];
     
-    _view_confirmPassword=[[UIView alloc]initWithFrame:CGRectMake(0,13*self.view.frame.size.height/32, self.view.frame.size.width, 40)];
+    _view_confirmPassword=[[UIView alloc]initWithFrame:CGRectMake(0,self.view.frame.size.height*0.23, self.view.frame.size.width, 40)];
     _view_confirmPassword.backgroundColor=[UIColor whiteColor];
     UILabel *lbl_confirm=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/16, 0, 100, 40)];
     lbl_confirm.font=[UIFont systemFontOfSize:17];

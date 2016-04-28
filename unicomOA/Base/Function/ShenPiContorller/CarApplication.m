@@ -395,7 +395,7 @@
     NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
     [dateFormatter setDateFormat:@"yyyy/MM/dd"];
     NSString *dateString=[dateFormatter stringFromDate:date];
-    UITableViewCell *cell=[self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i-1 inSection:0]];
+    UITableViewCell *cell=[self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:8 inSection:0]];
     UILabel *lbl_date=cell.detailTextLabel;
     lbl_date.text=dateString;
     lbl_date.textColor=[UIColor blackColor];

@@ -82,12 +82,12 @@ NSInteger i_count=0;
     NSString *str_note = [_arr_Notes objectAtIndex:(_arr_Notes.count-1-indexPath.row)];
    // cell.textLabel.text=str_note;
     NSArray *arr_note= [str_note componentsSeparatedByString:@","];
-    if (arr_note.count==3) {
+    if (arr_note.count==4) {
         [cell.view_bg setFrame:CGRectMake(cell.contentView.frame.origin.x, cell.contentView.frame.origin.y,self.view.frame.size.width,40)];
         cell.lbl_arrangement.text=[arr_note objectAtIndex:0];
         cell.lbl_content.text=[arr_note objectAtIndex:1];
         cell.lbl_time.text=[arr_note objectAtIndex:2];
-        cell.lbl_time2.text=[arr_note objectAtIndex:2];
+        cell.lbl_time2.text=[arr_note objectAtIndex:3];
     }
     else {
         cell.lbl_arrangement.text=@"";
@@ -149,9 +149,9 @@ NSInteger i_count=0;
 
 
 
--(void)passValue:(NSString *)str_FenLei Content:(NSString *)str_Content Time:(NSString *)str_curTime{
+-(void)passValue:(NSString *)str_FenLei Content:(NSString *)str_Content Time:(NSString *)str_curTime TimeNow:(NSString *)str_nowTime{
     
-    NSString *str_tmp=[NSString stringWithFormat:@"%@,%@,%@",str_FenLei,str_Content,str_curTime];
+    NSString *str_tmp=[NSString stringWithFormat:@"%@,%@,%@,%@",str_FenLei,str_Content,str_curTime,str_nowTime];
     
     [_arr_Notes addObject:str_tmp];
     /*

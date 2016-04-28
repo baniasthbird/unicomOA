@@ -46,10 +46,10 @@
     UIButton *btn_newApplication;
     //我的申请
     if (iPhone5_5s) {
-        btn_myApplication=[self CreateButton:self.view.frame.size.width*0.02 y:self.view.frame.size.height*0.135 w:self.view.frame.size.width*0.96 h:self.view.frame.size.height*0.17 bgred:2.0f bggreen:166.0f bgblue:228.0f title:@"我的申请" icon:@"myApplication.png"];
-        btn_myApproval=[self CreateButton:self.view.frame.size.width*0.02 y:self.view.frame.size.height*0.32 w:self.view.frame.size.width*0.96 h:self.view.frame.size.height*0.17 bgred:28.0f bggreen:193.0f bgblue:255.0f title:@"我的审批" icon:@"myApproval.png"];
-        btn_sendme=[self CreateButton:self.view.frame.size.width*0.02 y:self.view.frame.size.height*0.505 w:self.view.frame.size.width*0.96 h:self.view.frame.size.height*0.17 bgred:75.0f bggreen:206.0f bgblue:255.0f title:@"抄送给我" icon:@"SendMe.png"];
-        btn_newApplication=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.38, self.view.frame.size.height*0.67, self.view.frame.size.width*0.4, self.view.frame.size.height*0.2)];
+        btn_myApplication=[self CreateButton:self.view.frame.size.width*0.15 y:self.view.frame.size.height*0.1 w:self.view.frame.size.width*0.7 h:self.view.frame.size.height*0.1 bgred:246.0f bggreen:88.0f bgblue:87.0f title:@"我的申请"];
+        btn_myApproval=[self CreateButton:self.view.frame.size.width*0.15 y:self.view.frame.size.height*0.3 w:self.view.frame.size.width*0.7 h:self.view.frame.size.height*0.1 bgred:25.0f bggreen:189.0f bgblue:144.0f title:@"我的审批"];
+        btn_sendme=[self CreateButton:self.view.frame.size.width*0.02 y:self.view.frame.size.height*0.505 w:self.view.frame.size.width*0.96 h:self.view.frame.size.height*0.17 bgred:75.0f bggreen:206.0f bgblue:255.0f title:@"抄送给我"];
+        btn_newApplication=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.38, self.view.frame.size.height*0.47, self.view.frame.size.width*0.4, self.view.frame.size.height*0.2)];
         [btn_newApplication setImage:[UIImage imageNamed:@"newApplication.png"] forState:UIControlStateNormal];
         [btn_newApplication setTitle:@"新建申请" forState:UIControlStateNormal];
         [btn_newApplication setTitleColor:[UIColor colorWithRed:0/255.0f green:165/255.0f blue:227/255.0f alpha:1] forState:UIControlStateNormal];
@@ -58,10 +58,10 @@
         btn_newApplication.titleEdgeInsets=UIEdgeInsetsMake(0, -120, -85, 0);
     }
     else {
-        btn_myApplication=[self CreateButton:self.view.frame.size.width*0.02 y:self.view.frame.size.height*0.115 w:self.view.frame.size.width*0.96 h:self.view.frame.size.height*0.17 bgred:2.0f bggreen:166.0f bgblue:228.0f title:@"我的申请" icon:@"myApplication.png"];
-        btn_myApproval=[self CreateButton:self.view.frame.size.width*0.02 y:self.view.frame.size.height*0.3 w:self.view.frame.size.width*0.96 h:self.view.frame.size.height*0.17 bgred:28.0f bggreen:193.0f bgblue:255.0f title:@"我的审批" icon:@"myApproval.png"];
-        btn_sendme=[self CreateButton:self.view.frame.size.width*0.02 y:self.view.frame.size.height*0.485 w:self.view.frame.size.width*0.96 h:self.view.frame.size.height*0.17 bgred:75.0f bggreen:206.0f bgblue:255.0f title:@"抄送给我" icon:@"SendMe.png"];
-        btn_newApplication=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.38, self.view.frame.size.height*0.65, self.view.frame.size.width*0.4, self.view.frame.size.height*0.2)];
+        btn_myApplication=[self CreateButton:self.view.frame.size.width*0.15 y:self.view.frame.size.height*0.15 w:self.view.frame.size.width*0.7 h:self.view.frame.size.height*0.1 bgred:246.0f bggreen:88.0f bgblue:87.0f title:@"我的申请" ];
+        btn_myApproval=[self CreateButton:self.view.frame.size.width*0.15 y:self.view.frame.size.height*0.35 w:self.view.frame.size.width*0.7 h:self.view.frame.size.height*0.1 bgred:25.0f bggreen:189.0f bgblue:144.0f title:@"我的审批" ];
+        btn_sendme=[self CreateButton:self.view.frame.size.width*0.02 y:self.view.frame.size.height*0.485 w:self.view.frame.size.width*0.96 h:self.view.frame.size.height*0.17 bgred:75.0f bggreen:206.0f bgblue:255.0f title:@"抄送给我" ];
+        btn_newApplication=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.38, self.view.frame.size.height*0.55, self.view.frame.size.width*0.4, self.view.frame.size.height*0.2)];
         [btn_newApplication setImage:[UIImage imageNamed:@"newApplication.png"] forState:UIControlStateNormal];
         [btn_newApplication setTitle:@"新建申请" forState:UIControlStateNormal];
         [btn_newApplication setTitleColor:[UIColor colorWithRed:0/255.0f green:165/255.0f blue:227/255.0f alpha:1] forState:UIControlStateNormal];
@@ -88,22 +88,24 @@
     
     [self.view addSubview:btn_myApplication];
     [self.view addSubview:btn_myApproval];
-    [self.view addSubview:btn_sendme];
+  //  [self.view addSubview:btn_sendme];
     [self.view addSubview:btn_newApplication];
     
     _arr_application=[[NSMutableArray alloc]initWithCapacity:0];
 
 }
 
--(UIButton*)CreateButton:(CGFloat)x y:(CGFloat)y w:(CGFloat)width h:(CGFloat)height bgred:(CGFloat)red bggreen:(CGFloat)green bgblue:(CGFloat)blue title:(NSString*)str_title icon:(NSString*)str_icon {
+-(UIButton*)CreateButton:(CGFloat)x y:(CGFloat)y w:(CGFloat)width h:(CGFloat)height bgred:(CGFloat)red bggreen:(CGFloat)green bgblue:(CGFloat)blue title:(NSString*)str_title  {
     UIButton *tmp_btn=[[UIButton alloc]initWithFrame:CGRectMake(x, y, width, height)];
     [tmp_btn setBackgroundColor:[UIColor colorWithRed:red/255.0f green:green/255.0f blue:blue/255.0f alpha:1]];
     [tmp_btn setTitle:str_title forState:UIControlStateNormal];
     tmp_btn.titleLabel.textAlignment=NSTextAlignmentCenter;
     tmp_btn.titleLabel.textColor=[UIColor whiteColor];
-    tmp_btn.titleLabel.font=[UIFont boldSystemFontOfSize:13];
-    [tmp_btn setImage:[UIImage imageNamed:str_icon] forState:UIControlStateNormal];
-    tmp_btn.imageEdgeInsets=UIEdgeInsetsMake(0, 0, 0, 20);
+    tmp_btn.titleLabel.font=[UIFont boldSystemFontOfSize:20];
+    tmp_btn.layer.cornerRadius=25.0f;
+    [tmp_btn.layer setMasksToBounds:YES];
+    //[tmp_btn setImage:[UIImage imageNamed:str_icon] forState:UIControlStateNormal];
+    //tmp_btn.imageEdgeInsets=UIEdgeInsetsMake(0, 0, 0, 20);
     
     return tmp_btn;
 }

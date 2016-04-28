@@ -35,7 +35,7 @@
     
     self.navigationItem.leftBarButtonItem = barButtonItem;
     
-    _view_newsSeting=[[UIView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height/8, self.view.frame.size.width, 40)];
+    _view_newsSeting=[[UIView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.03, self.view.frame.size.width, 40)];
     _view_newsSeting.backgroundColor=[UIColor whiteColor];
     UILabel *lbl_newsSetting=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/16, 0, 100, 40)];
     lbl_newsSetting.font=[UIFont systemFontOfSize:17];
@@ -53,7 +53,7 @@
     
     [self.view addSubview:_view_newsSeting];
     
-    _view_sound=[[UIView alloc]initWithFrame:CGRectMake(0, 5*self.view.frame.size.height/16, self.view.frame.size.width, 40)];
+    _view_sound=[[UIView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.13, self.view.frame.size.width, 40)];
     _view_sound.backgroundColor=[UIColor whiteColor];
     UILabel *lbl_sound=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/16, 0, 100, 40)];
     lbl_sound.font=[UIFont systemFontOfSize:17];
@@ -67,7 +67,7 @@
     [self.view addSubview:_view_sound];
     
     
-    _view_virable=[[UIView alloc]initWithFrame:CGRectMake(0, 13*self.view.frame.size.height/32, self.view.frame.size.width, 40)];
+    _view_virable=[[UIView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.31, self.view.frame.size.width, 40)];
     _view_virable.backgroundColor=[UIColor whiteColor];
     UILabel *lbl_virable=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/16, 0, 100, 40)];
     lbl_virable.font=[UIFont systemFontOfSize:17];
@@ -77,7 +77,8 @@
     UISwitch *sw_virable=[[UISwitch alloc]initWithFrame:CGRectMake(3*self.view.frame.size.width/4, self.view.frame.size.width/128, 40, 40)];
     [_view_virable addSubview:sw_virable];
     
-    _lbl_attention=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.height/32, 3*self.view.frame.size.height/16, self.view.frame.size.width, 40)];
+    _lbl_attention=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.height/32, 3*self.view.frame.size.height/16, 15*self.view.frame.size.width/16, 80)];
+    _lbl_attention.numberOfLines=0;
     _lbl_attention.text=@"在iPhone的“设置”-“通知”中找到“手机OA”进行修改";
     _lbl_attention.font=[UIFont systemFontOfSize:14];
     _lbl_attention.textColor=[UIColor colorWithRed:153.0/255.0f green:153.0/255.0f blue:153.0/255.0f alpha:1];

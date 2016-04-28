@@ -13,7 +13,7 @@
 
 @protocol UINoteViewPassValueDelegate
 
--(void)passValue:(NSString*)str_FenLei Content:(NSString*)str_Content Time:(NSString*)str_curTime;
+-(void)passValue:(NSString*)str_FenLei Content:(NSString*)str_Content Time:(NSString*)str_curTime TimeNow:(NSString*)str_nowTime;
 
 @end
 

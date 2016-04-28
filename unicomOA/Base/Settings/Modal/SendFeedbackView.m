@@ -30,9 +30,15 @@
     if (self) {
         self.backgroundColor=[UIColor whiteColor];
         
-        UILabel *placeholderLabel=[[UILabel alloc]init];  //添加一个占位label
+        UILabel *placeholderLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 40)];  //添加一个占位label
+        
+        placeholderLabel.font=[UIFont systemFontOfSize:14];
+        
+        placeholderLabel.textColor=[UIColor lightGrayColor];
         
         placeholderLabel.backgroundColor=[UIColor clearColor];
+        
+        placeholderLabel.text=@"为了第一时间帮助您解决问题，建议您留下联系方式";
         
         placeholderLabel.numberOfLines=0;   //设置可以输入多行蚊子时可以自动换行
         

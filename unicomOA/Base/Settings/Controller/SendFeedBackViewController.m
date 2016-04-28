@@ -36,9 +36,9 @@
     
     self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc] initWithCustomView:btn_send];
     
-    SendFeedbackView *textView=[[SendFeedbackView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height/8, self.view.frame.size.width, self.view.frame.size.height/3)];
+    SendFeedbackView *textView=[[SendFeedbackView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.03, self.view.frame.size.width, self.view.frame.size.height/3)];
     textView.myPlaceholder=@"为了第一时间帮助您解决问题，建议您留下联系方式";
-    textView.myPlaceholderColor=[UIColor colorWithRed:236.0/255.0f green:236.0/255.0f blue:236.0/255.0f alpha:1];
+    textView.myPlaceholderColor=[UIColor lightGrayColor];
     textView.delegate=self;
     
     [self.view addSubview:textView];
