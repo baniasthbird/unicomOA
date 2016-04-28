@@ -79,7 +79,7 @@
     [self setupTopView];
 
     
-    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, self.view.frame.size.height-150) style:UITableViewStylePlain];
+    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 40, self.view.frame.size.width, self.view.frame.size.height-150) style:UITableViewStylePlain];
     _tableView.delegate=self;
     _tableView.dataSource=self;
     _tableView.scrollEnabled=YES;
@@ -112,7 +112,7 @@
     .leftSpaceToView(self.view,0)
     .rightSpaceToView(self.view,0)
     .heightIs(44)
-    .topSpaceToView(self.view,64);
+    .topSpaceToView(self.view,0);
     
     self.levelButton = [[MCMenuButton alloc] initWithTitle:@"状态"];
     [self.topView addSubview:self.levelButton];

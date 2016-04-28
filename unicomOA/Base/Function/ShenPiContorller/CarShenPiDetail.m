@@ -33,11 +33,9 @@
     self.navigationItem.leftBarButtonItem=barButtonItem;
     
     
-    _btn_agree=[self CreateButton:0 y:self.view.frame.size.height-100 width:self.view.frame.size.width/3 height:50 text:@"同意"];
+    _btn_agree=[self CreateButton:self.view.frame.size.width/4 y:self.view.frame.size.height-150 width:self.view.frame.size.width/4 height:50 text:@"同意"];
     
-    
-    
-    _btn_disagree=[self CreateButton:self.view.frame.size.width/3 y:self.view.frame.size.height-100 width:self.view.frame.size.width/3 height:50 text:@"不同意"];
+    _btn_disagree=[self CreateButton:self.view.frame.size.width/2 y:self.view.frame.size.height-150 width:self.view.frame.size.width/4 height:50 text:@"不同意"];
     
     UIButton *btn_copy=[self CreateButton:2*self.view.frame.size.width/3 y:self.view.frame.size.height-100 width:self.view.frame.size.width/3 height:50 text:@"抄送"];
     
