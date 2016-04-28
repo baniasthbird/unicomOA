@@ -390,7 +390,6 @@
 
 #pragma 日期
 -(void)dateChanged:(UIDatePicker*)sender  {
-    NSInteger i=sender.tag;
     NSDate *date=sender.date;
     NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
     [dateFormatter setDateFormat:@"yyyy/MM/dd"];

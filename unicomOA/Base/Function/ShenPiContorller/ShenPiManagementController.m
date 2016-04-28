@@ -38,7 +38,7 @@
     [barButtonItem setTitleTextAttributes:dict forState:UIControlStateNormal];
     self.navigationItem.leftBarButtonItem = barButtonItem;
     
-    self.view.backgroundColor=[UIColor colorWithRed:243/255.0f green:243/255.0f blue:243/255.0f alpha:1];
+    self.view.backgroundColor=[UIColor whiteColor];
     
     UIButton *btn_myApplication;
     UIButton *btn_myApproval;

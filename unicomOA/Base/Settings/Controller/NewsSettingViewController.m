@@ -25,7 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor=[UIColor colorWithRed:243.0/255.0f green:243.0/255.0f blue:243.0/255.0f alpha:1];
+    self.view.backgroundColor=[UIColor colorWithRed:246.0/255.0f green:249.0/255.0f blue:254.0/255.0f alpha:1];
     
     self.title=@"新消息通知";
     

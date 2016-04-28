@@ -29,29 +29,45 @@
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier isUsingCar:(BOOL)b_Category withTitle:(NSString*)str_Title withStatus:(NSString *)str_status withTime:(NSString *)str_time {
     self=[super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        UILabel *lbl_category=[[UILabel alloc]initWithFrame:CGRectMake(10, 2, 80, 18)];
+        UILabel *lbl_category=[[UILabel alloc]initWithFrame:CGRectMake(5, 11, 80, 18)];
+        lbl_category.textAlignment=NSTextAlignmentLeft;
         UILabel *lbl_status=[[UILabel alloc]init];
         if (iPhone4_4s || iPhone5_5s) {
-            [lbl_status setFrame:CGRectMake(260, 2, 50, 18)];
+            [lbl_status setFrame:CGRectMake(270, 11, 50, 18)];
         }
         else if (iPhone6) {
-            [lbl_status setFrame:CGRectMake(280, 2, 50, 18)];
+            [lbl_status setFrame:CGRectMake(325, 11, 50, 18)];
         }
         else {
-            [lbl_status setFrame:CGRectMake(300, 2, 50, 18)];
+            [lbl_status setFrame:CGRectMake(364, 11, 50, 18)];
         }
         UIView *view_seperator=[[UIView alloc]init];
         if (iPhone5_5s || iPhone4_4s) {
-             [view_seperator setFrame:CGRectMake(0, 20, 320, 1)];
+             [view_seperator setFrame:CGRectMake(70, 20, 180, 1)];
         }
         else if (iPhone6){
-            [view_seperator setFrame:CGRectMake(0, 20, 375, 1)];
+            [view_seperator setFrame:CGRectMake(70, 20, 235, 1)];
         }
         else {
-            [view_seperator setFrame:CGRectMake(0, 20, 414, 1)];
+            [view_seperator setFrame:CGRectMake(70, 20, 274, 1)];
         }
        
-        view_seperator.backgroundColor=[UIColor colorWithRed:204/255.0f green:204/255.0f blue:204/255.0f alpha:1];
+        view_seperator.backgroundColor=[UIColor whiteColor];
+        
+        UIView *view_bg=[[UIView alloc]init];
+        
+        if (iPhone5_5s || iPhone4_4s) {
+            [view_bg setFrame:CGRectMake(0, 0, 320, 40)];
+            
+        }
+        else if (iPhone6){
+            [view_bg setFrame:CGRectMake(0, 0, 375, 40)];
+        }
+        else {
+            [view_bg setFrame:CGRectMake(0, 0, 414, 40)];
+        }
+        
+        
         //view_seperator.backgroundColor=[UIColor blackColor];
         if (b_Category==YES) {
             lbl_category.text=@"预约用车";
@@ -60,21 +76,21 @@
             lbl_category.text=@"复印";
         }
         lbl_status.text=str_status;
-        lbl_category.textColor=[UIColor blackColor];
-        lbl_category.font=[UIFont systemFontOfSize:13];
-        lbl_category.textAlignment=NSTextAlignmentCenter;
+        lbl_category.textColor=[UIColor whiteColor];
+        lbl_category.font=[UIFont systemFontOfSize:15];
         
         
-        lbl_status.font=[UIFont systemFontOfSize:13];
-        lbl_status.textAlignment=NSTextAlignmentCenter;
+        lbl_status.font=[UIFont systemFontOfSize:15];
+        lbl_status.textAlignment=NSTextAlignmentLeft;
+        lbl_status.textColor=[UIColor whiteColor];
         if ([lbl_status.text isEqualToString:@"同意"]) {
-            lbl_status.textColor=[UIColor colorWithRed:103/255.0f green:204/255.0f blue:0 alpha:1];
+            view_bg.backgroundColor=[UIColor colorWithRed:61/255.0f green:189/255.0f blue:143/255.0f alpha:1];
         }
         else if ([lbl_status.text isEqualToString:@"不同意"]) {
-            lbl_status.textColor=[UIColor colorWithRed:226/255.0f green:19/255.0f blue:20/255.0f alpha:1];
+            view_bg.backgroundColor=[UIColor colorWithRed:173/255.0f green:173/255.0f blue:173/255.0f alpha:1];
         }
         else {
-            lbl_status.textColor=[UIColor colorWithRed:247/255.0f green:153/255.0f blue:4/255.0f alpha:1];
+            view_bg.backgroundColor=[UIColor colorWithRed:246/255.0f green:187/255.0f blue:67/255.0f alpha:1];
         }
         
 
@@ -92,11 +108,14 @@
         lbl_time.textAlignment=NSTextAlignmentLeft;
         lbl_time.text=str_time;
         
+        [self.contentView addSubview:view_bg];
+        [self.contentView sendSubviewToBack:view_bg];
         [self.contentView addSubview:lbl_category];
         [self.contentView addSubview:lbl_status];
         [self.contentView addSubview:lbl_title];
         [self.contentView addSubview:lbl_time];
         [self.contentView addSubview:view_seperator];
+        
         
         
     }

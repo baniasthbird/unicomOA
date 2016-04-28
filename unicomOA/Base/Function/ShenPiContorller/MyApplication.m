@@ -106,7 +106,7 @@
 - (void)setupTopView
 {
     self.topView = [[UIView alloc] init];
-    self.topView.backgroundColor = [UIColor whiteColor];
+    self.topView.backgroundColor = [UIColor colorWithRed:246/255.0f green:249/255.0f blue:254/255.0f alpha:1];
     [self.view addSubview:self.topView];
     self.topView.sd_layout
     .leftSpaceToView(self.view,0)

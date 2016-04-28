@@ -36,7 +36,7 @@
     self.navigationItem.leftBarButtonItem = barButtonItem;
     
     // Do any additional setup after loading the view.
-    self.view.backgroundColor=[UIColor colorWithRed:243.0/255.0f green:243.0/255.0f blue:243.0/255.0f alpha:1];
+    self.view.backgroundColor=[UIColor colorWithRed:246.0/255.0f green:249.0/255.0f blue:244.0/255.0f alpha:1];
     
     _view_oldPassword=[[UIView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.03, self.view.frame.size.width, 40)];
     _view_oldPassword.backgroundColor=[UIColor whiteColor];
