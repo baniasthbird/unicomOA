@@ -40,27 +40,30 @@
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withName:(NSString *)str_Name withPlaceHolder:(NSString*)str_placeholder {
     self=[super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        self.textLabel.textColor=[UIColor colorWithRed:112/255.0f green:112/255.0f blue:112/255.0f alpha:1];
-        self.textLabel.font=[UIFont systemFontOfSize:13];
+        self.textLabel.textColor=[UIColor blackColor];
+        self.textLabel.font=[UIFont systemFontOfSize:16];
         self.textLabel.textAlignment=NSTextAlignmentLeft;
         self.textLabel.text=str_Name;
         
         if (iPhone6) {
-            _txt_title=[[UITextField alloc]initWithFrame:CGRectMake(self.frame.size.width*0.348, 3, self.frame.size.width*0.652, self.frame.size.height)];
+            _txt_title=[[UITextField alloc]initWithFrame:CGRectMake(self.frame.size.width*0.348, 5, self.frame.size.width*0.652, 40)];
         }
         else if (iPhone5_5s || iPhone4_4s) {
-            _txt_title=[[UITextField alloc]initWithFrame:CGRectMake(self.frame.size.width*0.348, 3, self.frame.size.width*0.652, self.frame.size.height)];
+            _txt_title=[[UITextField alloc]initWithFrame:CGRectMake(self.frame.size.width*0.348, 5, self.frame.size.width*0.652, 40)];
         }
         else {
-            _txt_title=[[UITextField alloc]initWithFrame:CGRectMake(self.frame.size.width*0.365, 3, self.frame.size.width*1.2, self.frame.size.height)];
+            _txt_title=[[UITextField alloc]initWithFrame:CGRectMake(self.frame.size.width*0.365, 5, self.frame.size.width*1.2, 40)];
         }
         
         _txt_title.textColor=[UIColor colorWithRed:110/255.0f green:112/255.0f blue:112/255.0f alpha:1];
         _txt_title.textAlignment=NSTextAlignmentLeft;
-        _txt_title.font=[UIFont systemFontOfSize:13];
+        _txt_title.font=[UIFont systemFontOfSize:16];
         _txt_title.placeholder=str_placeholder;
         _txt_title.autocorrectionType=UITextAutocorrectionTypeNo;
         _txt_title.autocapitalizationType=UITextAutocapitalizationTypeNone;
+        _txt_title.backgroundColor=[UIColor colorWithRed:246/255.0f green:249/255.0f blue:254/255.0f alpha:1];
+        _txt_title.layer.borderWidth=1;
+        _txt_title.layer.borderColor=[[UIColor colorWithRed:187/255.0f green:187/255.0f blue:187/255.0f alpha:1] CGColor];
         if ([str_Name isEqualToString:@"文件名称"])
         {
             _txt_title.keyboardType=UIKeyboardTypeDefault;

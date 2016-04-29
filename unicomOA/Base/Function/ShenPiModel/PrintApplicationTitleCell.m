@@ -41,24 +41,24 @@
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withName:(NSString *) str_name  withPlaceHolder:(NSString*)str_PlaceHolder keyboardType:(UIKeyboardType)type{
     self=[super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        self.textLabel.textColor=[UIColor colorWithRed:112/255.0f green:112/255.0f blue:112/255.0f alpha:1];
-        self.textLabel.font=[UIFont systemFontOfSize:13];
+        self.textLabel.textColor=[UIColor blackColor];
+        self.textLabel.font=[UIFont systemFontOfSize:16];
         self.textLabel.textAlignment=NSTextAlignmentLeft;
         self.textLabel.text=str_name;
         
         if (iPhone6) {
-            _txt_title=[[UITextField alloc]initWithFrame:CGRectMake(self.frame.size.width*0.348, -3, self.frame.size.width*0.652, self.frame.size.height+3)];
+            _txt_title=[[UITextField alloc]initWithFrame:CGRectMake(111, -3, 264, self.frame.size.height+3)];
         }
         else if (iPhone5_5s || iPhone4_4s) {
-             _txt_title=[[UITextField alloc]initWithFrame:CGRectMake(self.frame.size.width*0.348, -3, self.frame.size.width*0.652, self.frame.size.height+3)];
+             _txt_title=[[UITextField alloc]initWithFrame:CGRectMake(111, -3, 209, self.frame.size.height+3)];
         }
         else {
-             _txt_title=[[UITextField alloc]initWithFrame:CGRectMake(self.frame.size.width*0.365, -3, self.frame.size.width*1.2, self.frame.size.height+3)];
+             _txt_title=[[UITextField alloc]initWithFrame:CGRectMake(116, -3, 298, self.frame.size.height+3)];
         }
         
         _txt_title.textColor=[UIColor colorWithRed:110/255.0f green:112/255.0f blue:112/255.0f alpha:1];
         _txt_title.textAlignment=NSTextAlignmentLeft;
-        _txt_title.font=[UIFont systemFontOfSize:13];
+        _txt_title.font=[UIFont systemFontOfSize:16];
         _txt_title.placeholder=str_PlaceHolder;
         _txt_title.autocorrectionType=UITextAutocorrectionTypeNo;
         _txt_title.autocapitalizationType=UITextAutocapitalizationTypeNone;

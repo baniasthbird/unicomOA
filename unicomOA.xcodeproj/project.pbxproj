@@ -99,6 +99,10 @@
 		68579FA31CC0BBCE00597FBD /* ShenPiAgreeWithCarDeploy.m in Sources */ = {isa = PBXBuildFile; fileRef = 68579FA21CC0BBCE00597FBD /* ShenPiAgreeWithCarDeploy.m */; };
 		68579FA61CC0C21100597FBD /* CarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68579FA51CC0C21100597FBD /* CarModel.m */; };
 		68579FA91CC0C88600597FBD /* CarDeployCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68579FA81CC0C88600597FBD /* CarDeployCell.m */; };
+		68686D471CD305DF00C44D8D /* carmission.png in Resources */ = {isa = PBXBuildFile; fileRef = 68686D431CD305DF00C44D8D /* carmission.png */; };
+		68686D481CD305DF00C44D8D /* mission_done.png in Resources */ = {isa = PBXBuildFile; fileRef = 68686D441CD305DF00C44D8D /* mission_done.png */; };
+		68686D491CD305DF00C44D8D /* mission_unfinished.png in Resources */ = {isa = PBXBuildFile; fileRef = 68686D451CD305DF00C44D8D /* mission_unfinished.png */; };
+		68686D4A1CD305DF00C44D8D /* printmission.png in Resources */ = {isa = PBXBuildFile; fileRef = 68686D461CD305DF00C44D8D /* printmission.png */; };
 		68815DC71CCDC45400277807 /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68815DC61CCDC45400277807 /* CommentCell.m */; };
 		6882C3181CA8D78300CDEB1A /* LogoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6882C3171CA8D78300CDEB1A /* LogoView.m */; };
 		6882C3211CA92C4B00CDEB1A /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6882C3201CA92C4B00CDEB1A /* CommentViewController.m */; };
@@ -416,6 +420,10 @@
 		68579FA51CC0C21100597FBD /* CarModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CarModel.m; path = Base/Function/ShenPiModel/CarModel.m; sourceTree = "<group>"; };
 		68579FA71CC0C88600597FBD /* CarDeployCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CarDeployCell.h; path = Base/Function/ShenPiModel/CarDeployCell.h; sourceTree = "<group>"; };
 		68579FA81CC0C88600597FBD /* CarDeployCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CarDeployCell.m; path = Base/Function/ShenPiModel/CarDeployCell.m; sourceTree = "<group>"; };
+		68686D431CD305DF00C44D8D /* carmission.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = carmission.png; sourceTree = "<group>"; };
+		68686D441CD305DF00C44D8D /* mission_done.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mission_done.png; sourceTree = "<group>"; };
+		68686D451CD305DF00C44D8D /* mission_unfinished.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mission_unfinished.png; sourceTree = "<group>"; };
+		68686D461CD305DF00C44D8D /* printmission.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = printmission.png; sourceTree = "<group>"; };
 		68815DC51CCDC45400277807 /* CommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommentCell.h; path = Base/Function/NewsModel/CommentCell.h; sourceTree = "<group>"; };
 		68815DC61CCDC45400277807 /* CommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommentCell.m; path = Base/Function/NewsModel/CommentCell.m; sourceTree = "<group>"; };
 		6882C3161CA8D78300CDEB1A /* LogoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LogoView.h; path = Base/Contact/View/LogoView.h; sourceTree = "<group>"; };
@@ -1472,6 +1480,10 @@
 		68F8E1661CD042AA005D2727 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				68686D431CD305DF00C44D8D /* carmission.png */,
+				68686D441CD305DF00C44D8D /* mission_done.png */,
+				68686D451CD305DF00C44D8D /* mission_unfinished.png */,
+				68686D461CD305DF00C44D8D /* printmission.png */,
 				68F36D681CD1F3320027A97A /* aboutbg.png */,
 				68F8E18B1CD04409005D2727 /* alarm.png */,
 				68F8E1671CD042AA005D2727 /* bg_Nav.png */,
@@ -1610,6 +1622,7 @@
 				68F8E1851CD042AA005D2727 /* print.png in Resources */,
 				68F8E1831CD042AA005D2727 /* PHONEOA.png in Resources */,
 				68E779E71CB34A8E006DA5B9 /* head2.jpg in Resources */,
+				68686D4A1CD305DF00C44D8D /* printmission.png in Resources */,
 				68F8E17A1CD042AA005D2727 /* checkbox_checked.png in Resources */,
 				68E779EE1CB34A8E006DA5B9 /* the_arrow.png in Resources */,
 				68E779F01CB34A8E006DA5B9 /* Level1_Cell.xib in Resources */,
@@ -1620,11 +1633,13 @@
 				68F8E17F1CD042AA005D2727 /* membertablecell.png in Resources */,
 				68F8E17B1CD042AA005D2727 /* checkbox_unchecked.png in Resources */,
 				2C35B0571C7062160003BF6C /* Assets.xcassets in Resources */,
+				68686D481CD305DF00C44D8D /* mission_done.png in Resources */,
 				68E779E41CB34A8E006DA5B9 /* contacts_collect@2x.png in Resources */,
 				68F8E1801CD042AA005D2727 /* myApplication.png in Resources */,
 				68E77A301CB3A133006DA5B9 /* IQKeyboardManager.bundle in Resources */,
 				68F8E18C1CD04409005D2727 /* alarm.png in Resources */,
 				68E779E61CB34A8E006DA5B9 /* head1.jpg in Resources */,
+				68686D471CD305DF00C44D8D /* carmission.png in Resources */,
 				68F36D691CD1F3320027A97A /* aboutbg.png in Resources */,
 				68F8E17E1CD042AA005D2727 /* logoimage.png in Resources */,
 				68F8E1811CD042AA005D2727 /* myApproval.png in Resources */,
@@ -1637,6 +1652,7 @@
 				68E779F11CB34A8E006DA5B9 /* Level2_Cell.xib in Resources */,
 				2CFEADA61C769EBF0054730E /* friends.plist in Resources */,
 				68F36D6B1CD1F6C70027A97A /* logo.png in Resources */,
+				68686D491CD305DF00C44D8D /* mission_unfinished.png in Resources */,
 				2C35B0551C7062160003BF6C /* Main.storyboard in Resources */,
 				68ED4E421CB4DC58000E8A7B /* the_arrow_0.png in Resources */,
 				68F8E18A1CD042AA005D2727 /* vote_checked.png in Resources */,

@@ -22,11 +22,12 @@
     if (self) {
         
         _title = title;
-        _titleColor = [UIColor colorWithWhite:0.5 alpha:1.0];
+        _titleColor = [UIColor colorWithRed:173/255.0f green:173/255.0f blue:173/255.0f alpha:1];
+       // _titleColor=[UIColor whiteColor];
         _font = 16.0;
         
         [self setupContentLabel];
-        [self setupArrowView];
+      //  [self setupArrowView];
     }
     
     return self;
@@ -36,8 +37,10 @@
 {
     self.contenetLabel = [[UILabel alloc] init];
     self.contenetLabel.textColor = _titleColor;
+   // self.backgroundColor=[UIColor colorWithRed:80/255.0f green:125/255.0f blue:236/255.0f alpha:1];
     self.contenetLabel.font = [UIFont systemFontOfSize:_font];
     self.contenetLabel.textAlignment = NSTextAlignmentCenter;
+    
     [self addSubview:self.contenetLabel];
 }
 

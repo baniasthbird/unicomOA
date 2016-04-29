@@ -50,7 +50,7 @@
 
     
 
-    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.05, self.view.frame.size.width, self.view.frame.size.height*0.7) style:UITableViewStylePlain];
+    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height*0.7) style:UITableViewStylePlain];
     _tableView.delegate=self;
     _tableView.dataSource=self;
     _tableView.backgroundColor=[UIColor clearColor];
@@ -59,7 +59,7 @@
     
 
     
-    self.view.backgroundColor=[UIColor colorWithRed:243/255.0f green:243/255.0f blue:243/255.0f alpha:1];
+    self.view.backgroundColor=[UIColor whiteColor];
 
 
 }
@@ -131,16 +131,16 @@
     AddPrintFileCell *cell;
     if (_b_isEdit==NO) {
         if (indexPath.row==0) {
-            cell=[AddPrintFileCell cellWithTable:tableView withName:@"文件名称" withPlaceHolder:@"填写文件名称"];
+            cell=[AddPrintFileCell cellWithTable:tableView withName:@"文件名称" withPlaceHolder:@"  填写文件名称"];
         }
         else if (indexPath.row==1) {
-            cell=[AddPrintFileCell cellWithTable:tableView withName:@"复印页数" withPlaceHolder:@"填写复印页数"];
+            cell=[AddPrintFileCell cellWithTable:tableView withName:@"复印页数" withPlaceHolder:@"  填写复印页数"];
         }
         else if (indexPath.row==2) {
-            cell=[AddPrintFileCell cellWithTable:tableView withName:@"份数" withPlaceHolder:@"填写份数"];
+            cell=[AddPrintFileCell cellWithTable:tableView withName:@"份数" withPlaceHolder:@"  填写份数"];
         }
         else if (indexPath.row==3) {
-            cell=[AddPrintFileCell cellWithTable:tableView withName:@"晒图张数" withPlaceHolder:@"填写晒图张数"];
+            cell=[AddPrintFileCell cellWithTable:tableView withName:@"晒图张数" withPlaceHolder:@"  填写晒图张数"];
         }
         else if (indexPath.row==4) {
             AddPrintRadioCell  *cell=[AddPrintRadioCell cellWithTable:tableView withName:@"正式封皮" withSelectedValue:0];
@@ -148,10 +148,10 @@
             return cell;
         }
         else if (indexPath.row==5) {
-            cell=[AddPrintFileCell cellWithTable:tableView withName:@"精装册数" withPlaceHolder:@"填写精装册数"];
+            cell=[AddPrintFileCell cellWithTable:tableView withName:@"精装册数" withPlaceHolder:@"  填写精装册数"];
         }
         else if (indexPath.row==6) {
-            cell=[AddPrintFileCell cellWithTable:tableView withName:@"简装册数" withPlaceHolder:@"填写简装册数"];
+            cell=[AddPrintFileCell cellWithTable:tableView withName:@"简装册数" withPlaceHolder:@"  填写简装册数"];
         }
     }
     else {

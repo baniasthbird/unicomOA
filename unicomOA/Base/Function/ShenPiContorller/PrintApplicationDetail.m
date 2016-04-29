@@ -117,10 +117,10 @@
         cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:ID];
     }
     cell.textLabel.textAlignment=NSTextAlignmentLeft;
-    cell.textLabel.textColor=[UIColor colorWithRed:152/255.0f green:152/255.0f blue:152/255.0f alpha:1];
+    cell.textLabel.textColor=[UIColor blackColor];
     cell.detailTextLabel.textColor=[UIColor colorWithRed:152/255.0f green:152/255.0f blue:152/255.0f alpha:1];
-    cell.textLabel.font=[UIFont systemFontOfSize:13];
-    cell.detailTextLabel.font=[UIFont systemFontOfSize:13];
+    cell.textLabel.font=[UIFont systemFontOfSize:16];
+    cell.detailTextLabel.font=[UIFont systemFontOfSize:16];
     
     if (indexPath.section==0) {
         if (indexPath.row==0) {

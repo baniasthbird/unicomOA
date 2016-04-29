@@ -38,7 +38,7 @@
     
     SendFeedbackView *textView=[[SendFeedbackView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.03, self.view.frame.size.width, self.view.frame.size.height/3)];
     textView.myPlaceholder=@"为了第一时间帮助您解决问题，建议您留下联系方式";
-    textView.myPlaceholderColor=[UIColor lightGrayColor];
+    textView.myPlaceholderColor=[UIColor blackColor];
     textView.delegate=self;
     
     [self.view addSubview:textView];

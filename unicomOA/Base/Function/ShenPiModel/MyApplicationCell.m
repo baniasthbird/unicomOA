@@ -83,10 +83,10 @@
         lbl_status.font=[UIFont systemFontOfSize:15];
         lbl_status.textAlignment=NSTextAlignmentLeft;
         lbl_status.textColor=[UIColor whiteColor];
-        if ([lbl_status.text isEqualToString:@"同意"]) {
+        if ([lbl_status.text isEqualToString:@"已办"]) {
             view_bg.backgroundColor=[UIColor colorWithRed:61/255.0f green:189/255.0f blue:143/255.0f alpha:1];
         }
-        else if ([lbl_status.text isEqualToString:@"不同意"]) {
+        else if ([lbl_status.text isEqualToString:@"待办"]) {
             view_bg.backgroundColor=[UIColor colorWithRed:173/255.0f green:173/255.0f blue:173/255.0f alpha:1];
         }
         else {

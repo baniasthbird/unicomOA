@@ -25,8 +25,17 @@
 @property (nonatomic,strong,nonnull)MCMenuButton *levelButton;
 @property (nonatomic,strong,nonnull)MCMenuButton *groupButton;
 
+//菜单内容
 @property (nonatomic,strong,nonnull)NSArray *leftArray;
 @property (nonatomic,strong,nonnull)NSArray *rightArray;
+
+//菜单图片
+@property (nonatomic,strong,nonnull) NSArray *leftImgArray;
+@property (nonatomic,strong,nonnull) NSArray *rightImgArray;
+
+//菜单颜色
+@property (nonatomic,strong,nonnull) NSArray *leftArrayColor;
+@property (nonatomic,strong,nonnull) NSArray *rightArrayColor;
 
 @property (nonatomic,strong) UITableView *tableView;
 
@@ -64,14 +73,20 @@
     self.navigationItem.rightBarButtonItem = barButtonItem2;
     
     
-    self.view.backgroundColor=[UIColor colorWithRed:243/255.0f green:243/255.0f blue:243/255.0f alpha:1];
+    self.view.backgroundColor=[UIColor whiteColor];
     
     if ([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)]) {
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
 
-    self.leftArray=@[@"全部",@"审批中",@"同意",@"不同意"];
+    self.leftArray=@[@"全部",@"已办",@"待办"];
     self.rightArray=@[@"全部",@"复印",@"预约用车"];
+    
+    self.leftImgArray=@[@" ",@"mission_done.png",@"mission_unfinished.png"];
+    self.rightImgArray=@[@" ",@"printmission.png",@"carmission.png"];
+    
+    self.leftArrayColor=@[[UIColor blackColor],[UIColor colorWithRed:25/255.0f green:189/255.0f blue:144/255.0f alpha:1],[UIColor colorWithRed:246/255.0f green:88/255.0f blue:87/255.0f alpha:1]];
+    self.rightArrayColor=@[[UIColor blackColor],[UIColor colorWithRed:246/255.0f green:88/255.0f blue:87/255.0f alpha:1],[UIColor colorWithRed:80/255.0f green:125/255.0f blue:236/255.0f alpha:1]];
 
     _str_searchKeyword1=@"全部";
     _str_searchKeyword2=@"全部";
@@ -106,7 +121,7 @@
 - (void)setupTopView
 {
     self.topView = [[UIView alloc] init];
-    self.topView.backgroundColor = [UIColor colorWithRed:246/255.0f green:249/255.0f blue:254/255.0f alpha:1];
+    self.topView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.topView];
     self.topView.sd_layout
     .leftSpaceToView(self.view,0)
@@ -117,19 +132,33 @@
     self.levelButton = [[MCMenuButton alloc] initWithTitle:@"状态"];
     [self.topView addSubview:self.levelButton];
     self.levelButton.sd_layout
-    .leftSpaceToView(self.topView,0)
-    .topSpaceToView(self.topView,0)
-    .bottomSpaceToView(self.topView,0)
-    .widthRatioToView(self.topView,0.5);
+    .leftSpaceToView(self.topView,60)
+    .topSpaceToView(self.topView,5)
+    .bottomSpaceToView(self.topView,5)
+    .widthRatioToView(self.topView,0.4);
+    self.levelButton.layer.cornerRadius=20.0f;
+    self.levelButton.layer.borderWidth=1;
+    [self.levelButton.layer setMasksToBounds:YES];
+    self.levelButton.layer.borderColor=[[UIColor colorWithRed:215/255.0f green:215/255.0f blue:215/255.0f alpha:1] CGColor];
     
     self.groupButton = [[MCMenuButton alloc] initWithTitle:@"类型"];
     [self.topView addSubview:self.groupButton];
     self.groupButton.sd_layout
-    .leftSpaceToView(self.levelButton,0)
-    .topSpaceToView(self.topView,0)
-    .bottomSpaceToView(self.topView,0)
-    .widthRatioToView(self.topView,0.5);
+    .leftSpaceToView(self.levelButton,-30)
+    .topSpaceToView(self.topView,5)
+    .bottomSpaceToView(self.topView,5)
+    .widthRatioToView(self.topView,0.4);
+    self.groupButton.layer.cornerRadius=20.0f;
+    self.groupButton.layer.borderWidth=1;
+    [self.groupButton.layer setMasksToBounds:YES];
+    self.groupButton.layer.borderColor=[[UIColor colorWithRed:215/255.0f green:215/255.0f blue:215/255.0f alpha:1] CGColor];
     
+    self.levelButton.backgroundColor=[UIColor colorWithRed:80/255.0f green:125/255.0f blue:236/255.0f alpha:1];
+    [self.levelButton setTitleColor:[UIColor whiteColor]];
+    
+    self.groupButton.backgroundColor=[UIColor whiteColor];
+    [self.groupButton setTitleColor:[UIColor colorWithRed:173/255.0f green:173/255.0f blue:173/255.0f alpha:1]];
+
     
     UIView *lineView = [[UIView alloc] init];
     lineView.backgroundColor = [UIColor colorWithWhite:0.8 alpha:1.0];
@@ -144,12 +173,19 @@
         
         NSMutableArray *arrayM = [NSMutableArray array];
         
+        weakSelf.levelButton.backgroundColor=[UIColor colorWithRed:80/255.0f green:125/255.0f blue:236/255.0f alpha:1];
+        [weakSelf.levelButton setTitleColor:[UIColor whiteColor]];
+        
+        weakSelf.groupButton.backgroundColor=[UIColor whiteColor];
+        [weakSelf.groupButton setTitleColor:[UIColor colorWithRed:173/255.0f green:173/255.0f blue:173/255.0f alpha:1]];
         
         for (int i = 0 ; i < self.leftArray.count ; i++ ) {
             
             MCPopMenuItem *item = [[MCPopMenuItem alloc] init];
             item.itemid = @"0";
             item.itemtitle = weakSelf.leftArray[i];
+            item.itmeImageName=weakSelf.leftImgArray[i];
+            item.itemtitleColor=weakSelf.leftArrayColor[i];
             [arrayM addObject:item];
         }
         
@@ -170,12 +206,19 @@
         
         NSMutableArray *arrayM = [NSMutableArray array];
         
+        weakSelf.groupButton.backgroundColor=[UIColor colorWithRed:80/255.0f green:125/255.0f blue:236/255.0f alpha:1];
+        [weakSelf.groupButton setTitleColor:[UIColor whiteColor]];
+        
+        weakSelf.levelButton.backgroundColor=[UIColor whiteColor];
+        [weakSelf.levelButton setTitleColor:[UIColor colorWithRed:173/255.0f green:173/255.0f blue:173/255.0f alpha:1]];
+        
         for (int i = 0 ; i < self.rightArray.count ; i++ ) {
             
             MCPopMenuItem *item = [[MCPopMenuItem alloc] init];
             item.itemid = @"0";
             item.itemtitle = weakSelf.rightArray[i];
-            
+            item.itmeImageName=weakSelf.rightImgArray[i];
+            item.itemtitleColor=weakSelf.rightArrayColor[i];
             [arrayM addObject:item];
         }
         
@@ -320,21 +363,41 @@
         else if ([tmp isMemberOfClass:[CarService class]]) {
             tmp_Car=(CarService*)tmp;
         }
-        if ([str_condition isEqualToString:@"审批中"]) {
+        if ([str_condition isEqualToString:@"待办"]) {
             if (tmp_Print.shenpi_1!=nil && tmp_Print.shenpi_2==nil) {
-                if ([tmp_Print.shenpi_1.str_status isEqualToString:@"同意"]) {
+                if ([tmp_Print.shenpi_1.str_status isEqualToString:@"不同意"]) {
                     [arr_tmp addObject:tmp_Print];
                 }
             }
             if (tmp_Car.shenpi_1!=nil && tmp_Car.shenpi_2==nil) {
-                if ([tmp_Car.shenpi_1.str_status isEqualToString:@"同意"]) {
+                if ([tmp_Car.shenpi_1.str_status isEqualToString:@"不同意"]) {
+                    [arr_tmp addObject:tmp_Print];
+                }
+            }
+            if (tmp_Print.shenpi_1!=nil && tmp_Print.shenpi_2!=nil) {
+                if ([tmp_Print.shenpi_2.str_status isEqualToString:@"不同意"]) {
+                    [arr_tmp addObject:tmp_Print];
+                }
+            }
+            if (tmp_Car.shenpi_1!=nil && tmp_Car.shenpi_2!=nil) {
+                if ([tmp_Car.shenpi_2.str_status isEqualToString:@"不同意"]) {
                     [arr_tmp addObject:tmp_Car];
                 }
             }
         }
-        else if ([str_condition isEqualToString:@"同意"]) {
+        else if ([str_condition isEqualToString:@"已办"]) {
             if (tmp_Print.shenpi_1!=nil && tmp_Print.shenpi_2!=nil) {
                 if ([tmp_Print.shenpi_1.str_status isEqualToString:@"同意"] && [tmp_Print.shenpi_2.str_status isEqualToString:@"同意"]) {
+                    [arr_tmp addObject:tmp_Print];
+                }
+            }
+            if (tmp_Print.shenpi_1==nil && tmp_Print.shenpi_2==nil) {
+                if (tmp_Print!=nil) {
+                    [arr_tmp addObject:tmp_Print];
+                }
+            }
+            if (tmp_Print.shenpi_1!=nil && tmp_Print.shenpi_2==nil) {
+                if ([tmp_Print.shenpi_1.str_status isEqualToString:@"同意"]) {
                     [arr_tmp addObject:tmp_Print];
                 }
             }
@@ -343,26 +406,13 @@
                     [arr_tmp addObject:tmp_Car];
                 }
             }
-            
-        }
-        else if ([str_condition isEqualToString:@"不同意"]) {
-            if (tmp_Print.shenpi_1!=nil && tmp_Print.shenpi_2==nil) {
-                if ([tmp_Print.shenpi_1.str_status isEqualToString:@"不同意"]) {
-                    [arr_tmp addObject:tmp_Print];
-                }
-            }
-            else if (tmp_Print.shenpi_1!=nil && tmp_Print.shenpi_2!=nil) {
-                if ([tmp_Print.shenpi_2.str_status isEqualToString:@"不同意"]) {
-                    [arr_tmp addObject:tmp_Print];
-                }
-            }
-            if (tmp_Car.shenpi_1!=nil && tmp_Car.shenpi_2==nil) {
-                if ([tmp_Car.shenpi_1.str_status isEqualToString:@"不同意"]) {
+            if (tmp_Car.shenpi_1==nil && tmp_Car.shenpi_2==nil) {
+                if (tmp_Car!=nil) {
                     [arr_tmp addObject:tmp_Car];
                 }
             }
-            else if (tmp_Car.shenpi_1!=nil && tmp_Car.shenpi_2!=nil) {
-                if ([tmp_Car.shenpi_2.str_status isEqualToString:@"不同意"]) {
+            if (tmp_Car.shenpi_1!=nil && tmp_Car.shenpi_2==nil) {
+                if ([tmp_Car.shenpi_1.str_status isEqualToString:@"同意"]) {
                     [arr_tmp addObject:tmp_Car];
                 }
             }
@@ -407,22 +457,22 @@
     MyApplicationCell *cell;
     if (tmp_service!=nil) {
         if (tmp_service.shenpi_1==nil && tmp_service.shenpi_2==nil) {
-            cell=[MyApplicationCell cellWithTable:tableView withTitle:tmp_service.str_reason withStatus:@"未处理" isUsingCar:YES withTime:tmp_service.str_applicationTime];
+            cell=[MyApplicationCell cellWithTable:tableView withTitle:tmp_service.str_reason withStatus:@"已办" isUsingCar:YES withTime:tmp_service.str_applicationTime];
         }
         else if (tmp_service.shenpi_1!=nil && tmp_service.shenpi_2==nil) {
             if ([tmp_service.shenpi_1.str_status isEqualToString:@"同意"]) {
-                cell=[MyApplicationCell cellWithTable:tableView withTitle:tmp_service.str_reason withStatus:@"审批中" isUsingCar:YES withTime:tmp_service.shenpi_1.str_time];
+                cell=[MyApplicationCell cellWithTable:tableView withTitle:tmp_service.str_reason withStatus:@"已办" isUsingCar:YES withTime:tmp_service.shenpi_1.str_time];
             }
             else if ([tmp_service.shenpi_1.str_status isEqualToString:@"不同意"]) {
-                cell=[MyApplicationCell cellWithTable:tableView withTitle:tmp_service.str_reason withStatus:@"不同意" isUsingCar:YES withTime:tmp_service.shenpi_1.str_time];
+                cell=[MyApplicationCell cellWithTable:tableView withTitle:tmp_service.str_reason withStatus:@"待办" isUsingCar:YES withTime:tmp_service.shenpi_1.str_time];
             }
         }
         else if (tmp_service.shenpi_2!=nil ) {
             if ([tmp_service.shenpi_2.str_status isEqualToString:@"同意"]) {
-                cell=[MyApplicationCell cellWithTable:tableView withTitle:tmp_service.str_reason withStatus:@"同意" isUsingCar:YES withTime:tmp_service.shenpi_2.str_time];
+                cell=[MyApplicationCell cellWithTable:tableView withTitle:tmp_service.str_reason withStatus:@"已办" isUsingCar:YES withTime:tmp_service.shenpi_2.str_time];
             }
             else if ([tmp_service.shenpi_1.str_status isEqualToString:@"不同意"]) {
-                cell=[MyApplicationCell cellWithTable:tableView withTitle:tmp_service.str_reason withStatus:@"不同意" isUsingCar:YES withTime:tmp_service.shenpi_2.str_time];
+                cell=[MyApplicationCell cellWithTable:tableView withTitle:tmp_service.str_reason withStatus:@"待办" isUsingCar:YES withTime:tmp_service.shenpi_2.str_time];
             }
         }
         cell.car_service=tmp_service;
@@ -439,22 +489,22 @@
     MyApplicationCell *cell;
     if (tmp_service!=nil) {
         if (tmp_service.shenpi_1==nil && tmp_service.shenpi_2==nil) {
-            cell=[MyApplicationCell cellWithTable:tableView withTitle:[NSString stringWithFormat:@"%@%@",tmp_service.str_title,@"项目打印清单"] withStatus:@"未处理" isUsingCar:NO withTime:tmp_service.str_applicationTime];
+            cell=[MyApplicationCell cellWithTable:tableView withTitle:[NSString stringWithFormat:@"%@%@",tmp_service.str_title,@"项目打印清单"] withStatus:@"已办" isUsingCar:NO withTime:tmp_service.str_applicationTime];
         }
         else if (tmp_service.shenpi_1!=nil && tmp_service.shenpi_2==nil) {
             if ([tmp_service.shenpi_1.str_status isEqualToString:@"同意"]) {
-                cell=[MyApplicationCell cellWithTable:tableView withTitle:[NSString stringWithFormat:@"%@%@",tmp_service.str_title,@"项目打印清单"] withStatus:@"审批中" isUsingCar:NO withTime:tmp_service.shenpi_1.str_time];
+                cell=[MyApplicationCell cellWithTable:tableView withTitle:[NSString stringWithFormat:@"%@%@",tmp_service.str_title,@"项目打印清单"] withStatus:@"已办" isUsingCar:NO withTime:tmp_service.shenpi_1.str_time];
             }
             else if ([tmp_service.shenpi_1.str_status isEqualToString:@"不同意"]) {
-                cell=[MyApplicationCell cellWithTable:tableView withTitle:[NSString stringWithFormat:@"%@%@",tmp_service.str_title,@"项目打印清单"] withStatus:@"不同意" isUsingCar:NO withTime:tmp_service.shenpi_1.str_time];
+                cell=[MyApplicationCell cellWithTable:tableView withTitle:[NSString stringWithFormat:@"%@%@",tmp_service.str_title,@"项目打印清单"] withStatus:@"待办" isUsingCar:NO withTime:tmp_service.shenpi_1.str_time];
             }
         }
         else if (tmp_service.shenpi_2!=nil) {
             if ([tmp_service.shenpi_2.str_status isEqualToString:@"同意"]) {
-                cell=[MyApplicationCell cellWithTable:tableView withTitle:[NSString stringWithFormat:@"%@%@",tmp_service.str_title,@"项目打印清单"] withStatus:@"同意" isUsingCar:NO withTime:tmp_service.shenpi_2.str_time];
+                cell=[MyApplicationCell cellWithTable:tableView withTitle:[NSString stringWithFormat:@"%@%@",tmp_service.str_title,@"项目打印清单"] withStatus:@"已办" isUsingCar:NO withTime:tmp_service.shenpi_2.str_time];
             }
-            else if ([tmp_service.shenpi_1.str_status isEqualToString:@"不同意"]) {
-                cell=[MyApplicationCell cellWithTable:tableView withTitle:[NSString stringWithFormat:@"%@%@",tmp_service.str_title,@"项目打印清单"] withStatus:@"不同意" isUsingCar:NO withTime:tmp_service.shenpi_2.str_time];
+            else if ([tmp_service.shenpi_2.str_status isEqualToString:@"不同意"]) {
+                cell=[MyApplicationCell cellWithTable:tableView withTitle:[NSString stringWithFormat:@"%@%@",tmp_service.str_title,@"项目打印清单"] withStatus:@"待办" isUsingCar:NO withTime:tmp_service.shenpi_2.str_time];
             }
         }
         cell.print_service=tmp_service;

@@ -37,8 +37,8 @@
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withName:(NSString*)str_name withPlaceholder:(NSString*)str_placeholder{
     self=[super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        self.textLabel.textColor=[UIColor colorWithRed:112/255.0f green:112/255.0f blue:112/255.0f alpha:1];
-        self.textLabel.font=[UIFont systemFontOfSize:13];
+        self.textLabel.textColor=[UIColor blackColor];
+        self.textLabel.font=[UIFont systemFontOfSize:16];
         self.textLabel.textAlignment=NSTextAlignmentLeft;
         self.textLabel.text=str_name;
         
@@ -52,9 +52,9 @@
             _txt_detail=[[UITextView alloc]initWithFrame:CGRectMake(111, 6, 300, 100)];
         }
         
-        _txt_detail.textColor=[UIColor colorWithRed:110/255.0f green:112/255.0f blue:112/255.0f alpha:1];
+        _txt_detail.textColor=[UIColor colorWithRed:186/255.0f green:186/255.0f blue:186/255.0f alpha:1];
         _txt_detail.textAlignment=NSTextAlignmentLeft;
-        _txt_detail.font=[UIFont systemFontOfSize:13];
+        _txt_detail.font=[UIFont systemFontOfSize:16];
         _txt_detail.text=@"";
         _txt_detail.autocorrectionType=UITextAutocorrectionTypeNo;
         _txt_detail.autocapitalizationType=UITextAutocapitalizationTypeNone;
@@ -69,16 +69,16 @@
         }
         else if (iPhone6)
         {
-            _lbl_tip=[[UILabel alloc]initWithFrame:CGRectMake(111, 0,self.frame.size.width*0.6 , self.frame.size.height)];
+            _lbl_tip=[[UILabel alloc]initWithFrame:CGRectMake(111, 0,264 , self.frame.size.height)];
         }
         else {
-            _lbl_tip=[[UILabel alloc]initWithFrame:CGRectMake(116, 0,self.frame.size.width*0.6 , self.frame.size.height)];
+            _lbl_tip=[[UILabel alloc]initWithFrame:CGRectMake(116, 0,290 , self.frame.size.height)];
         }
         
         _lbl_tip.text=str_placeholder;
-        _lbl_tip.textColor=[UIColor colorWithRed:110/255.0f green:112/255.0f blue:112/255.0f alpha:1];
+        _lbl_tip.textColor=[UIColor colorWithRed:186/255.0f green:186/255.0f blue:186/255.0f alpha:1];
         _lbl_tip.textAlignment=NSTextAlignmentLeft;
-        _lbl_tip.font=[UIFont systemFontOfSize:13];
+        _lbl_tip.font=[UIFont systemFontOfSize:16];
         _lbl_tip.backgroundColor=[UIColor clearColor];
         _lbl_tip.enabled=NO;
         

@@ -12,5 +12,7 @@
 
 @property (nonatomic,nullable,copy)NSString *itemid;
 @property (nonatomic,nullable,copy)NSString *itemtitle;
+@property (nonatomic,nullable,copy)NSString *itmeImageName;
+@property (nonatomic,nullable,copy)UIColor *itemtitleColor;
 
 @end

@@ -42,6 +42,7 @@
     lbl_newsSetting.text=@"新消息通知";
     lbl_newsSetting.textColor=[UIColor blackColor];
     
+    
     UILabel *lbl_isSetting=[[UILabel alloc]initWithFrame:CGRectMake(2*self.view.frame.size.width/3,0 , 80, 40)];
     lbl_isSetting.font=[UIFont systemFontOfSize:16];
     lbl_isSetting.text=@"已开启";
@@ -53,7 +54,7 @@
     
     [self.view addSubview:_view_newsSeting];
     
-    _view_sound=[[UIView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.13, self.view.frame.size.width, 40)];
+    _view_sound=[[UIView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.23, self.view.frame.size.width, 40)];
     _view_sound.backgroundColor=[UIColor whiteColor];
     UILabel *lbl_sound=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/16, 0, 100, 40)];
     lbl_sound.font=[UIFont systemFontOfSize:17];
@@ -67,7 +68,7 @@
     [self.view addSubview:_view_sound];
     
     
-    _view_virable=[[UIView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.31, self.view.frame.size.width, 40)];
+    _view_virable=[[UIView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.23+40, self.view.frame.size.width, 40)];
     _view_virable.backgroundColor=[UIColor whiteColor];
     UILabel *lbl_virable=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/16, 0, 100, 40)];
     lbl_virable.font=[UIFont systemFontOfSize:17];
@@ -77,7 +78,7 @@
     UISwitch *sw_virable=[[UISwitch alloc]initWithFrame:CGRectMake(3*self.view.frame.size.width/4, self.view.frame.size.width/128, 40, 40)];
     [_view_virable addSubview:sw_virable];
     
-    _lbl_attention=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.height/32, 3*self.view.frame.size.height/16, 15*self.view.frame.size.width/16, 80)];
+    _lbl_attention=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.height/32, self.view.frame.size.height*0.03+45, 15*self.view.frame.size.width/16, 80)];
     _lbl_attention.numberOfLines=0;
     _lbl_attention.text=@"在iPhone的“设置”-“通知”中找到“手机OA”进行修改";
     _lbl_attention.font=[UIFont systemFontOfSize:14];

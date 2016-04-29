@@ -44,7 +44,8 @@
     [barButtonItem3 setTitleTextAttributes:dict forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItems=[NSArray arrayWithObjects:barButtonItem3,barButtonItem2, nil];
     
-    self.view.backgroundColor=[UIColor colorWithRed:243/255.0f green:243/255.0f blue:243/255.0f alpha:1];
+    //self.view.backgroundColor=[UIColor colorWithRed:243/255.0f green:243/255.0f blue:243/255.0f alpha:1];
+    self.view.backgroundColor=[UIColor colorWithRed:246/255.0f green:249/255.0f blue:254/255.0f alpha:1];
     
     _tableview=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped];
     _tableview.delegate=self;
@@ -107,19 +108,19 @@
     view.backgroundColor=[UIColor clearColor];
     CGRect view_title;
     if (iPhone5_5s || iPhone4_4s) {
-        view_title=CGRectMake(0, 0, self.view.frame.size.width*0.28, 30);
+        view_title=CGRectMake(0, 0, self.view.frame.size.width, 30);
     }
     else {
-        view_title=CGRectMake(0, 0, self.view.frame.size.width*0.2, 30);
+        view_title=CGRectMake(0, 0, self.view.frame.size.width, 30);
     }
     UILabel *lbl_sectionTitle=[[UILabel alloc]initWithFrame:view_title];
     lbl_sectionTitle.textAlignment=NSTextAlignmentLeft;
     lbl_sectionTitle.backgroundColor=[UIColor whiteColor];
     if (section==0) {
-        lbl_sectionTitle.text=@"基本信息";
+        lbl_sectionTitle.text=@"    基本信息";
     }
     else {
-        lbl_sectionTitle.text=@"复印文件";
+        lbl_sectionTitle.text=@"    复印文件";
     }
     [view addSubview:lbl_sectionTitle];
     return view;
@@ -154,15 +155,15 @@
     
     if (indexPath.section==0) {
         cell.backgroundColor=[UIColor whiteColor];
-        cell.textLabel.textColor=[UIColor colorWithRed:112/255.0f green:112/255.0f blue:112/255.0f alpha:1];
-        cell.textLabel.font=[UIFont systemFontOfSize:13];
+        cell.textLabel.textColor=[UIColor blackColor];
+        cell.textLabel.font=[UIFont systemFontOfSize:16];
         cell.textLabel.textAlignment=NSTextAlignmentLeft;
-        cell.detailTextLabel.textColor=[UIColor colorWithRed:112/255.0f green:112/255.0f blue:112/255.0f alpha:1];
-        cell.detailTextLabel.font=[UIFont systemFontOfSize:13];
+        cell.detailTextLabel.textColor=[UIColor colorWithRed:186/255.0f green:186/255.0f blue:186/255.0f alpha:1];
+        cell.detailTextLabel.font=[UIFont systemFontOfSize:16];
         if (indexPath.row==0) {
             cell.textLabel.text=@"申请流程";
             cell.detailTextLabel.text=@"复印申请";
-            cell.detailTextLabel.textColor=[UIColor blackColor];
+            cell.detailTextLabel.textColor=[UIColor colorWithRed:186/255.0f green:186/255.0f blue:186/255.0f alpha:1];
         }
         else if (indexPath.row==1) {
             

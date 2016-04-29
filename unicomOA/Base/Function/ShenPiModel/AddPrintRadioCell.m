@@ -33,8 +33,8 @@
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withName:(NSString*)str_Name withSelectedValue:(int)value {
     self=[super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        self.textLabel.textColor=[UIColor colorWithRed:112/255.0f green:112/255.0f blue:112/255.0f alpha:1];
-        self.textLabel.font=[UIFont systemFontOfSize:13];
+        self.textLabel.textColor=[UIColor blackColor];
+        self.textLabel.font=[UIFont systemFontOfSize:16];
         self.textLabel.textAlignment=NSTextAlignmentLeft;
         self.textLabel.text=str_Name;
         
@@ -55,10 +55,10 @@
         
         
         if (iPhone4_4s || iPhone5_5s || iPhone6) {
-           _radioGroup1 =[[RadioGroup alloc]initWithFrame:CGRectMake(108, 0, 160, 50) WithControl:controls];
+           _radioGroup1 =[[RadioGroup alloc]initWithFrame:CGRectMake(108, 0, 160, 30) WithControl:controls];
         }
         else if (iPhone6_plus) {
-            _radioGroup1 =[[RadioGroup alloc]initWithFrame:CGRectMake(113, 0, 160, 50) WithControl:controls];
+            _radioGroup1 =[[RadioGroup alloc]initWithFrame:CGRectMake(113, 0, 160, 30) WithControl:controls];
         }
         
         [_radioGroup1 addSubview:radio1];

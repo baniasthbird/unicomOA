@@ -70,16 +70,28 @@
     cell.textLabel.font=[UIFont systemFontOfSize:16];
     cell.textLabel.textAlignment=NSTextAlignmentLeft;
     
+    UIImageView *img_icon=[[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 30, 30)];
+    
+    UILabel *lbl_title=[[UILabel alloc]initWithFrame:CGRectMake(50, 10, 100, 30)];
+    lbl_title.textColor=[UIColor blackColor];
+    lbl_title.font=[UIFont systemFontOfSize:16];
+    lbl_title.textAlignment=NSTextAlignmentLeft;
+    
     
     if (indexPath.row==0) {
-        cell.imageView.image=[UIImage imageNamed:@"print.png"];
-        cell.textLabel.text=@"复印申请";
+        //cell.imageView.image=[UIImage imageNamed:@"printmission.png"];
+        img_icon.image=[UIImage imageNamed:@"printmission.png"];
+        lbl_title.text=@"复印申请";
     }
     else if (indexPath.row==1) {
-        cell.imageView.image=[UIImage imageNamed:@"uber.png"];
-        cell.textLabel.text=@"预约用车";
+       // cell.imageView.image=[UIImage imageNamed:@"carmission.png"];
+        img_icon.image=[UIImage imageNamed:@"carmission.png"];
+        lbl_title.text=@"预约用车";
     }
-    [cell.imageView setFrame:CGRectMake(0, 0, 50, 50)];
+    [cell.contentView addSubview:img_icon];
+    [cell.contentView addSubview:lbl_title];
+    //[cell.imageView setFrame:CGRectMake(10, 10, 10, 10)];
+    //[cell.imageView setFrame:CGRectMake(0, 0, 50, 50)];
 
     return  cell;
 }
