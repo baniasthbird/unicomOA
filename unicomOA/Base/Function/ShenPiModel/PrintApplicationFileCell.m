@@ -62,6 +62,9 @@
     if (self) {
         UIScrollView *scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, WHScreenW, cellHeight)];
         
+       
+       // self.backgroundColor=[UIColor clearColor];
+        
         scrollView.showsHorizontalScrollIndicator=NO;
         scrollView.showsVerticalScrollIndicator=NO;
         scrollView.delegate=self;
@@ -99,8 +102,8 @@
         _lbl_file_detail=[[UILabel alloc]initWithFrame:CGRectMake(0.0f, cellHeight*0.5, self.frame.size.width, cellHeight*0.5)];
         _lbl_filename.text=str_Title;
         _lbl_file_detail.text=[NSString stringWithFormat:@"%@  %d  %@  %d",@"复印页数",i_Pages,@"份数",i_copies];
-        _lbl_filename.textColor=[UIColor blackColor];
-        _lbl_file_detail.textColor=[UIColor blackColor];
+        _lbl_filename.textColor=[UIColor colorWithRed:182/255.0f green:182/255.0f blue:182/255.0f alpha:1];
+        _lbl_file_detail.textColor=[UIColor colorWithRed:182/255.0f green:182/255.0f blue:182/255.0f alpha:1];
         _lbl_file_detail.font=[UIFont systemFontOfSize:14];
         _lbl_filename.font=[UIFont systemFontOfSize:14];
         _lbl_filename.textAlignment=NSTextAlignmentCenter;
@@ -109,7 +112,7 @@
         [baseView addSubview:_lbl_filename];
         [baseView addSubview:_lbl_file_detail];
         _baseView=baseView;
-        baseView.backgroundColor=[UIColor whiteColor];
+        baseView.backgroundColor=[UIColor colorWithRed:246/255.0f green:249/255.0f blue:254/255.0f alpha:1];
         [baseView addGestureRecognizer:tapGesture];
         [scrollView addSubview:baseView];
         

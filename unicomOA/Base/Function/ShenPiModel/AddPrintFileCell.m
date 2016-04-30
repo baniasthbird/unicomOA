@@ -46,13 +46,13 @@
         self.textLabel.text=str_Name;
         
         if (iPhone6) {
-            _txt_title=[[UITextField alloc]initWithFrame:CGRectMake(self.frame.size.width*0.348, 5, self.frame.size.width*0.652, 40)];
+            _txt_title=[[UITextField alloc]initWithFrame:CGRectMake(111, 5, 255, 40)];
         }
         else if (iPhone5_5s || iPhone4_4s) {
-            _txt_title=[[UITextField alloc]initWithFrame:CGRectMake(self.frame.size.width*0.348, 5, self.frame.size.width*0.652, 40)];
+            _txt_title=[[UITextField alloc]initWithFrame:CGRectMake(111, 5, 200, 40)];
         }
         else {
-            _txt_title=[[UITextField alloc]initWithFrame:CGRectMake(self.frame.size.width*0.365, 5, self.frame.size.width*1.2, 40)];
+            _txt_title=[[UITextField alloc]initWithFrame:CGRectMake(117, 5, 288, 40)];
         }
         
         _txt_title.textColor=[UIColor colorWithRed:110/255.0f green:112/255.0f blue:112/255.0f alpha:1];

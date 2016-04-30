@@ -22,7 +22,8 @@
     
     self.title=@"申请详情";
     
-    self.view.backgroundColor=[UIColor colorWithRed:243/255.0f green:243/255.0f blue:243/255.0f alpha:1];
+    //self.view.backgroundColor=[UIColor colorWithRed:243/255.0f green:243/255.0f blue:243/255.0f alpha:1];
+    self.view.backgroundColor=[UIColor colorWithRed:246/255.0f green:249/255.0f blue:254/255.0f alpha:1];
     
     NSDictionary * dict=@{
                           NSForegroundColorAttributeName:   [UIColor whiteColor]};
@@ -77,10 +78,10 @@
             cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:ID];
         }
         cell.textLabel.textAlignment=NSTextAlignmentLeft;
-        cell.textLabel.textColor=[UIColor colorWithRed:152/255.0f green:152/255.0f blue:152/255.0f alpha:1];
+        cell.textLabel.textColor=[UIColor blackColor];
         cell.detailTextLabel.textColor=[UIColor colorWithRed:152/255.0f green:152/255.0f blue:152/255.0f alpha:1];
-        cell.textLabel.font=[UIFont systemFontOfSize:13];
-        cell.detailTextLabel.font=[UIFont systemFontOfSize:13];
+        cell.textLabel.font=[UIFont systemFontOfSize:16];
+        cell.detailTextLabel.font=[UIFont systemFontOfSize:16];
         if (indexPath.row==0) {
             cell.textLabel.text=@"申请流程";
             cell.detailTextLabel.text=@"预约用车";

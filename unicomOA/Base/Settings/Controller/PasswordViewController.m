@@ -35,7 +35,7 @@
     [barButtonItem setTitleTextAttributes:dict forState:UIControlStateNormal];
     self.navigationItem.leftBarButtonItem = barButtonItem;
     
-    // Do any additional setup after loading the view.
+    // Do any additional se tup after loading the view.
     self.view.backgroundColor=[UIColor colorWithRed:246.0/255.0f green:249.0/255.0f blue:254.0/255.0f alpha:1];
     
     _view_oldPassword=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.1, self.view.frame.size.height*0.03, self.view.frame.size.width*0.8, 40)];

@@ -46,7 +46,7 @@
     [barButtonItem2 setTitleTextAttributes:dict forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem=barButtonItem2;
     
-    self.view.backgroundColor=[UIColor colorWithRed:243/255.0f green:243/255.0f blue:243/255.0f alpha:1];
+    self.view.backgroundColor=[UIColor colorWithRed:246/255.0f green:249/255.0f blue:254/255.0f alpha:1];
 
     _tableview=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped];
     _tableview.delegate=self;
@@ -108,16 +108,11 @@
     UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
     view.backgroundColor=[UIColor clearColor];
     CGRect view_title;
-    if (iPhone5_5s || iPhone4_4s) {
-        view_title=CGRectMake(0, 0, self.view.frame.size.width*0.28, 30);
-    }
-    else {
-        view_title=CGRectMake(0, 0, self.view.frame.size.width*0.2, 30);
-    }
+    view_title=CGRectMake(0, 0, self.view.frame.size.width, 30);
     UILabel *lbl_sectionTitle=[[UILabel alloc]initWithFrame:view_title];
     lbl_sectionTitle.textAlignment=NSTextAlignmentLeft;
     lbl_sectionTitle.backgroundColor=[UIColor whiteColor];
-    lbl_sectionTitle.text=@"基本信息";
+    lbl_sectionTitle.text=@"  基本信息";
     
     [view addSubview:lbl_sectionTitle];
     return view;
@@ -154,11 +149,11 @@
     }
 
     cell.backgroundColor=[UIColor whiteColor];
-    cell.textLabel.textColor=[UIColor colorWithRed:112/255.0f green:112/255.0f blue:112/255.0f alpha:1];
-    cell.textLabel.font=[UIFont systemFontOfSize:13];
+    cell.textLabel.textColor=[UIColor blackColor];
+    cell.textLabel.font=[UIFont systemFontOfSize:16];
     cell.textLabel.textAlignment=NSTextAlignmentLeft;
     cell.detailTextLabel.textColor=[UIColor colorWithRed:112/255.0f green:112/255.0f blue:112/255.0f alpha:1];
-    cell.detailTextLabel.font=[UIFont systemFontOfSize:13];
+    cell.detailTextLabel.font=[UIFont systemFontOfSize:16];
     
     if ([self isExtendedCellIndexPath:indexPath])
     {

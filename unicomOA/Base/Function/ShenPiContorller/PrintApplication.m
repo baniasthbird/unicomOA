@@ -112,6 +112,7 @@
     }
     else {
         view_title=CGRectMake(0, 0, self.view.frame.size.width, 30);
+        
     }
     UILabel *lbl_sectionTitle=[[UILabel alloc]initWithFrame:view_title];
     lbl_sectionTitle.textAlignment=NSTextAlignmentLeft;
@@ -121,6 +122,7 @@
     }
     else {
         lbl_sectionTitle.text=@"    复印文件";
+        lbl_sectionTitle.backgroundColor=[UIColor clearColor];
     }
     [view addSubview:lbl_sectionTitle];
     return view;
