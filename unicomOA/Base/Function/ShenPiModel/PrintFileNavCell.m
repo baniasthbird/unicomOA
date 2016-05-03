@@ -26,6 +26,7 @@
 -(id) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withTtile:(NSString*)str_Title withPages:(int)i_Pages withCopies:(int)i_copies {
     self=[super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        self.backgroundColor=[UIColor clearColor];
         UILabel *lbl_filename=[[UILabel alloc]init];
         UILabel *lbl_pages=[[UILabel alloc]init];
         UILabel *lbl_pages_num=[[UILabel alloc]init];
@@ -55,10 +56,10 @@
         }
         
         lbl_filename.textColor=[UIColor blackColor];
-        lbl_pages.textColor=[UIColor blackColor];
-        lbl_pages_num.textColor=[UIColor blackColor];
-        lbl_copies.textColor=[UIColor blackColor];
-        lbl_copies_num.textColor=[UIColor blackColor];
+        lbl_pages.textColor=[UIColor colorWithRed:182/255.0f green:182/255.0f blue:182/255.0f alpha:1];
+        lbl_pages_num.textColor=[UIColor colorWithRed:182/255.0f green:182/255.0f blue:182/255.0f alpha:1];
+        lbl_copies.textColor=[UIColor colorWithRed:182/255.0f green:182/255.0f blue:182/255.0f alpha:1];
+        lbl_copies_num.textColor=[UIColor colorWithRed:182/255.0f green:182/255.0f blue:182/255.0f alpha:1];
         
         lbl_filename.font=[UIFont systemFontOfSize:13];
         lbl_pages.font=[UIFont systemFontOfSize:13];

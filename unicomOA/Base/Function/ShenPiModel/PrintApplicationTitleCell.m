@@ -46,20 +46,21 @@
         self.textLabel.textAlignment=NSTextAlignmentLeft;
         self.textLabel.text=str_name;
         
-        if (iPhone6) {
-            _txt_title=[[UITextField alloc]initWithFrame:CGRectMake(111, -3, 264, self.frame.size.height+3)];
-        }
-        else if (iPhone5_5s || iPhone4_4s) {
-             _txt_title=[[UITextField alloc]initWithFrame:CGRectMake(111, -3, 209, self.frame.size.height+3)];
-        }
-        else {
-             _txt_title=[[UITextField alloc]initWithFrame:CGRectMake(116, -3, 298, self.frame.size.height+3)];
-        }
-        
         _txt_title.textColor=[UIColor colorWithRed:110/255.0f green:112/255.0f blue:112/255.0f alpha:1];
         _txt_title.textAlignment=NSTextAlignmentLeft;
         _txt_title.font=[UIFont systemFontOfSize:16];
-        _txt_title.placeholder=str_PlaceHolder;
+        if (iPhone6) {
+            _txt_title=[[UITextField alloc]initWithFrame:CGRectMake(111, 0, 264, 40)];
+            _txt_title.attributedPlaceholder =[[NSAttributedString alloc] initWithString:str_PlaceHolder attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16]}];
+        }
+        else if (iPhone5_5s || iPhone4_4s) {
+             _txt_title=[[UITextField alloc]initWithFrame:CGRectMake(111, 0, 209, 40)];
+            _txt_title.attributedPlaceholder =[[NSAttributedString alloc] initWithString:str_PlaceHolder attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16]}];
+        }
+        else if (iPhone6_plus){
+            _txt_title=[[UITextField alloc]initWithFrame:CGRectMake(116, 0, 298, 40)];
+            _txt_title.attributedPlaceholder =[[NSAttributedString alloc] initWithString:str_PlaceHolder attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16]}];
+        }
         _txt_title.autocorrectionType=UITextAutocorrectionTypeNo;
         _txt_title.autocapitalizationType=UITextAutocapitalizationTypeNone;
         _txt_title.returnKeyType=UIReturnKeyDone;

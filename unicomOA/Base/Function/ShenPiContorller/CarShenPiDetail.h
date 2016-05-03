@@ -16,7 +16,13 @@
 
 @end
 
-@interface CarShenPiDetail : CarApplicationDetail
+@interface CarShenPiDetail : UIViewController
+
+//用车详情
+@property (nonatomic,strong) CarService *service;
+
+//tableView
+@property  UITableView *tableview;
 
 @property (nonatomic,strong) UserInfo *user_Info;
 

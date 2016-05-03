@@ -58,7 +58,12 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 40;
+    if (indexPath.row!=4) {
+        return 40;
+    }
+    else {
+        return 50;
+    }
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath  {
@@ -69,10 +74,10 @@
         cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:ID];
     }
     cell.textLabel.textAlignment=NSTextAlignmentLeft;
-    cell.textLabel.textColor=[UIColor colorWithRed:152/255.0f green:152/255.0f blue:152/255.0f alpha:1];
-    cell.detailTextLabel.textColor=[UIColor colorWithRed:152/255.0f green:152/255.0f blue:152/255.0f alpha:1];
-    cell.textLabel.font=[UIFont systemFontOfSize:13];
-    cell.detailTextLabel.font=[UIFont systemFontOfSize:13];
+    cell.textLabel.textColor=[UIColor blackColor];
+    cell.detailTextLabel.textColor=[UIColor colorWithRed:110/255.0f green:112/255.0f blue:112/255.0f alpha:1];
+    cell.textLabel.font=[UIFont systemFontOfSize:16];
+    cell.detailTextLabel.font=[UIFont systemFontOfSize:16];
     
     if (indexPath.row==0) {
         cell.textLabel.text=@"文件名称";

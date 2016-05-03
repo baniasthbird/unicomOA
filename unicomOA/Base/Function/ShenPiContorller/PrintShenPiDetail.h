@@ -6,7 +6,7 @@
 //  Copyright © 2016年 zr-mac. All rights reserved.
 //
 
-#import "PrintApplicationDetail.h"
+#import "PrintService.h"
 #import "UserInfo.h"
 
 @class PrintShenPiDetail;
@@ -16,7 +16,13 @@
 
 @end
 
-@interface PrintShenPiDetail : PrintApplicationDetail
+@interface PrintShenPiDetail : UIViewController
+
+//复印详情
+@property (nonatomic,strong) PrintService *service;
+
+//tableView
+@property (nonatomic,strong) UITableView *tableview;
 
 @property (nonatomic,strong) UserInfo *user_Info;
 

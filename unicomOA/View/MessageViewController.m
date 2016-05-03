@@ -7,15 +7,15 @@
 //
 
 #import "MessageViewController.h"
-#import "NewsManagementTableViewCell.h"
-#import "MyApplicationCell.h"
-#import "VotingCell.h"
+#import "RemindViewController.h"
 
 
 
 @interface MessageViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic,strong) UITableView *tableView;
+
+@property  NSUInteger count;
 
 @end
 
@@ -52,9 +52,12 @@
     _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
     _tableView.delegate=self;
     _tableView.dataSource=self;
+    _tableView.backgroundColor=[UIColor clearColor];
+    
     
     [self.view addSubview:_tableView];
     
+    _count=5;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -63,36 +66,45 @@
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 2;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section==0) {
-        return 2;
-    }
-    else if (section==1) {
-        //返回我的审批条数
         return 1;
     }
     else {
-        return 1;
+        return 3;
     }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (iPhone5_5s || iPhone4_4s) {
-        return 40;
-    }
-    else if (iPhone6) {
+    if (indexPath.section==0) {
         return 50;
     }
     else {
-        return 60;
+        return 100;
     }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 50;
+    if (section==1) {
+        return 30;
+    }
+    else {
+        return 0;
+    }
+    
+}
+
+
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    if (section==0) {
+        return 30;
+    }
+    else {
+        return 0;
+    }
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -100,9 +112,20 @@
     UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:identifier];
     if (cell==nil) {
         cell =[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        
+        if (indexPath.section==0) {
+            cell.textLabel.text=@"工作提醒";
+            cell.imageView.image=[UIImage imageNamed:@"remind.png"];
+            cell.textLabel.textColor=[UIColor blackColor];
+            cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+            [self updateTableViewCell:cell forCount:_count];
+        }
+        else {
+            cell.textLabel.text=@"aaa";
+        }
     }
     
-    cell.textLabel.text=@"aaa";
+    
     
     return cell;
     
@@ -125,19 +148,57 @@
     
     label.font=[UIFont systemFontOfSize:i_Float];
     
-    label.backgroundColor=[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1];
+   // label.backgroundColor=[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1];
     
-    if (section==0) {
-        label.text=@"新的消息";
+    if (section==1) {
+        label.text=@"    新闻公告";
     }
-    else if (section==1) {
-        label.text=@"我的审批";
+   
+    return label;
+}
+
+
+-(UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    UIView *view_end=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 30)];
+    view_end.backgroundColor=[UIColor whiteColor];
+    if (section==0) {
+        return view_end;
     }
     else {
-        label.text=@"新的投票";
+        return nil;
     }
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section==0) {
+        if (indexPath.row==0) {
+            RemindViewController *viewController=[[RemindViewController alloc]init];
+            viewController.userInfo=_userInfo;
+            [self.navigationController pushViewController:viewController animated:YES];
+        }
+    }
+}
+
+- (void)updateTableViewCell:(UITableViewCell *)cell forCount:(NSUInteger)count {
+    UILabel *lbl_count=[[UILabel alloc]init];
     
-    return label;
+    [lbl_count setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width-80, 10, 30, 30)];
+    
+    lbl_count.backgroundColor=[UIColor redColor];
+    lbl_count.textColor=[UIColor whiteColor];
+    lbl_count.text=[NSString stringWithFormat:@"%lu",(unsigned long)count];
+    lbl_count.textAlignment=NSTextAlignmentCenter;
+    
+    lbl_count.layer.cornerRadius=15.0f;
+    [lbl_count.layer setMasksToBounds:YES];
+    
+    [cell.contentView addSubview:lbl_count];
+    
+    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
+    
+    [_tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
+   // [_tableView reloadData];
+    
 }
 /*
 #pragma mark - Navigation

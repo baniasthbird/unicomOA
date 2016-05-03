@@ -475,24 +475,20 @@
 
 -(MyShenPiCell*)CreateCarCell:(CarService*)service tableView:(UITableView*)tableView atIndexPath:(NSIndexPath*)indexPath {
     MyShenPiCell *cell;
+    //zr 0503 因为角色不同，所以cell中显示的待办与已办不同，没处理时为待办，处理一个层级后，对于第一层级领导来说是已办，对于第二层级领导来说是待办，目前由于流程角色未分配，按照第二级审批完成变成已办处理
         if (service.shenpi_1==nil && service.shenpi_2==nil) {
-            cell=[MyShenPiCell cellWithTable:tableView withImage:_userInfo.str_Logo withName:service.str_name withCategroy:@"预约用车" withStatus:@"未处理" withTitle:service.str_reason withTime:service.str_applicationTime atIndex:indexPath];
+            cell=[MyShenPiCell cellWithTable:tableView withImage:_userInfo.str_Logo withName:service.str_name withCategroy:@"预约用车" withStatus:@"待办" withTitle:service.str_reason withTime:service.str_applicationTime atIndex:indexPath];
         }
         else if (service.shenpi_1!=nil && service.shenpi_2==nil) {
             if ([service.shenpi_1.str_status isEqualToString:@"同意"]) {
-                cell=[MyShenPiCell cellWithTable:tableView withImage:_userInfo.str_Logo withName:service.str_name withCategroy:@"预约用车" withStatus:@"审批中" withTitle:service.str_reason withTime:service.shenpi_1.str_time atIndex:indexPath];
+                cell=[MyShenPiCell cellWithTable:tableView withImage:_userInfo.str_Logo withName:service.str_name withCategroy:@"预约用车" withStatus:@"待办" withTitle:service.str_reason withTime:service.shenpi_1.str_time atIndex:indexPath];
             }
             else if ([service.shenpi_1.str_status isEqualToString:@"不同意"]) {
-                cell=[MyShenPiCell cellWithTable:tableView withImage:_userInfo.str_Logo withName:service.str_name withCategroy:@"预约用车" withStatus:@"不同意" withTitle:service.str_reason withTime:service.shenpi_1.str_time atIndex:indexPath];
+                cell=[MyShenPiCell cellWithTable:tableView withImage:_userInfo.str_Logo withName:service.str_name withCategroy:@"预约用车" withStatus:@"已办" withTitle:service.str_reason withTime:service.shenpi_1.str_time atIndex:indexPath];
             }
         }
         else if (service.shenpi_2!=nil) {
-            if ([service.shenpi_2.str_status isEqualToString:@"同意"]) {
-                cell=[MyShenPiCell cellWithTable:tableView withImage:_userInfo.str_Logo withName:service.str_name withCategroy:@"预约用车" withStatus:@"同意" withTitle:service.str_reason withTime:service.shenpi_2.str_time atIndex:indexPath];
-            }
-            else if ([service.shenpi_2.str_status isEqualToString:@"不同意"]) {
-                cell=[MyShenPiCell cellWithTable:tableView withImage:_userInfo.str_Logo withName:service.str_name withCategroy:@"预约用车" withStatus:@"不同意" withTitle:service.str_reason withTime:service.shenpi_2.str_time atIndex:indexPath];
-            }
+            cell=[MyShenPiCell cellWithTable:tableView withImage:_userInfo.str_Logo withName:service.str_name withCategroy:@"预约用车" withStatus:@"已办" withTitle:service.str_reason withTime:service.shenpi_2.str_time atIndex:indexPath];
         }
         cell.car_service=service;
         cell.str_category=@"预约用车";
@@ -502,23 +498,18 @@
 -(MyShenPiCell*)CreatePrintCell:(PrintService*)service tableView:(UITableView*)tableView atIndexPath:(NSIndexPath*)indexPath {
     MyShenPiCell *cell;
     if (service.shenpi_1==nil && service.shenpi_2==nil) {
-        cell=[MyShenPiCell cellWithTable:tableView withImage:_userInfo.str_Logo withName:service.str_name withCategroy:@"复印" withStatus:@"未处理" withTitle:service.str_title withTime:service.str_applicationTime atIndex:indexPath];
+        cell=[MyShenPiCell cellWithTable:tableView withImage:_userInfo.str_Logo withName:service.str_name withCategroy:@"复印" withStatus:@"待办" withTitle:service.str_title withTime:service.str_applicationTime atIndex:indexPath];
     }
     else if (service.shenpi_1!=nil && service.shenpi_2==nil) {
         if ([service.shenpi_1.str_status isEqualToString:@"同意"]) {
-            cell=[MyShenPiCell cellWithTable:tableView withImage:_userInfo.str_Logo withName:service.str_name withCategroy:@"复印" withStatus:@"审批中" withTitle:service.str_title withTime:service.shenpi_1.str_time atIndex:indexPath];
+            cell=[MyShenPiCell cellWithTable:tableView withImage:_userInfo.str_Logo withName:service.str_name withCategroy:@"复印" withStatus:@"待办" withTitle:service.str_title withTime:service.shenpi_1.str_time atIndex:indexPath];
         }
         else if ([service.shenpi_1.str_status isEqualToString:@"不同意"]) {
-            cell=[MyShenPiCell cellWithTable:tableView withImage:_userInfo.str_Logo withName:service.str_name withCategroy:@"复印" withStatus:@"不同意" withTitle:service.str_title withTime:service.shenpi_1.str_time atIndex:indexPath];
+            cell=[MyShenPiCell cellWithTable:tableView withImage:_userInfo.str_Logo withName:service.str_name withCategroy:@"复印" withStatus:@"已办" withTitle:service.str_title withTime:service.shenpi_1.str_time atIndex:indexPath];
         }
     }
     else if (service.shenpi_2!=nil) {
-        if ([service.shenpi_2.str_status isEqualToString:@"同意"]) {
-            cell=[MyShenPiCell cellWithTable:tableView withImage:_userInfo.str_Logo withName:service.str_name withCategroy:@"复印" withStatus:@"同意" withTitle:service.str_title withTime:service.shenpi_1.str_time atIndex:indexPath];
-        }
-        else if ([service.shenpi_2.str_status isEqualToString:@"不同意"]) {
-            cell=[MyShenPiCell cellWithTable:tableView withImage:_userInfo.str_Logo withName:service.str_name withCategroy:@"复印" withStatus:@"不同意" withTitle:service.str_title withTime:service.shenpi_1.str_time atIndex:indexPath];
-        }
+        cell=[MyShenPiCell cellWithTable:tableView withImage:_userInfo.str_Logo withName:service.str_name withCategroy:@"复印" withStatus:@"已办" withTitle:service.str_title withTime:service.shenpi_1.str_time atIndex:indexPath];
     }
     cell.print_service=service;
     cell.str_category=@"复印";

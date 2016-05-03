@@ -24,7 +24,7 @@
     
     self.title=@"申请详情";
     
-    self.view.backgroundColor=[UIColor colorWithRed:243/255.0f green:243/255.0f blue:243/255.0f alpha:1];
+    self.view.backgroundColor=[UIColor colorWithRed:246/255.0f green:249/255.0f blue:254/255.0f alpha:1];
     
     NSDictionary * dict=@{
                           NSForegroundColorAttributeName:   [UIColor whiteColor]};
@@ -78,23 +78,22 @@
     UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
     view.backgroundColor=[UIColor clearColor];
     CGRect view_title;
-    if (iPhone5_5s || iPhone4_4s) {
-        view_title=CGRectMake(0, 0, self.view.frame.size.width*0.28, 30);
-    }
-    else {
-        view_title=CGRectMake(0, 0, self.view.frame.size.width*0.2, 30);
-    }
+    view_title=CGRectMake(0, 0, self.view.frame.size.width, 30);
     UILabel *lbl_sectionTitle=[[UILabel alloc]initWithFrame:view_title];
     lbl_sectionTitle.textAlignment=NSTextAlignmentLeft;
-    lbl_sectionTitle.backgroundColor=[UIColor whiteColor];
     if (section==0) {
-        lbl_sectionTitle.text=@"基本信息";
+        lbl_sectionTitle.text=@"    基本信息";
+        lbl_sectionTitle.textColor=[UIColor colorWithRed:70/255.0f green:115/255.0f blue:230/255.0f alpha:1];
+        lbl_sectionTitle.backgroundColor=[UIColor whiteColor];
     }
     else if (section==1) {
-        lbl_sectionTitle.text=@"复印文件";
+        lbl_sectionTitle.text=@"    复印文件";
+        lbl_sectionTitle.textColor=[UIColor blackColor];
+        lbl_sectionTitle.backgroundColor=[UIColor clearColor];
     }
     else {
-        lbl_sectionTitle.text=@"审批结果";
+        //lbl_sectionTitle.text=@"    审批结果";
+        lbl_sectionTitle.backgroundColor=[UIColor whiteColor];
     }
     [view addSubview:lbl_sectionTitle];
     return view;

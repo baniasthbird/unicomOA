@@ -156,19 +156,19 @@
     }
     else {
         if (indexPath.row==0) {
-            NSString *str_name=_printFiles.str_filename;
+            NSString *str_name=[NSString stringWithFormat:@"%@%@",@"   ",_printFiles.str_filename];
             cell=[AddPrintFileCell cellWithTable:tableView withName:@"文件名称" withText:str_name];
         }
         else if (indexPath.row==1) {
-            NSString *str_page=[NSString stringWithFormat:@"%d",_printFiles.i_pages];
+            NSString *str_page=[NSString stringWithFormat:@"%@%d",@"   ",_printFiles.i_pages];
             cell=[AddPrintFileCell cellWithTable:tableView withName:@"复印页数" withText:str_page];
         }
         else if (indexPath.row==2) {
-            NSString *str_copies=[NSString stringWithFormat:@"%d",_printFiles.i_copies];
+            NSString *str_copies=[NSString stringWithFormat:@"%@%d",@"   ",_printFiles.i_copies];
             cell=[AddPrintFileCell cellWithTable:tableView withName:@"份数" withText:str_copies];
         }
         else if (indexPath.row==3) {
-            NSString *str_pic_pages=[NSString stringWithFormat:@"%d",_printFiles.i_pic_pages];
+            NSString *str_pic_pages=[NSString stringWithFormat:@"%@%d",@"   ",_printFiles.i_pic_pages];
             cell=[AddPrintFileCell cellWithTable:tableView withName:@"晒图张数" withText:str_pic_pages];
         }
         else if (indexPath.row==4) {
@@ -184,11 +184,11 @@
             return cell;
         }
         else if (indexPath.row==5) {
-            NSString *str_color_pages=[NSString stringWithFormat:@"%d",_printFiles.i_colorcopies];
+            NSString *str_color_pages=[NSString stringWithFormat:@"%@%d",@"   ",_printFiles.i_colorcopies];
             cell=[AddPrintFileCell cellWithTable:tableView withName:@"精装册数" withText:str_color_pages];
         }
         else if (indexPath.row==6) {
-            NSString *str_simple_pages=[NSString stringWithFormat:@"%d",_printFiles.i_simplecopies];
+            NSString *str_simple_pages=[NSString stringWithFormat:@"%@%d",@"   ",_printFiles.i_simplecopies];
             cell=[AddPrintFileCell cellWithTable:tableView withName:@"简装册数" withText:str_simple_pages];
         }
     }

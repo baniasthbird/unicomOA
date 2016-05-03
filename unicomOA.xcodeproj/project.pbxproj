@@ -106,6 +106,8 @@
 		68815DC71CCDC45400277807 /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68815DC61CCDC45400277807 /* CommentCell.m */; };
 		6882C3181CA8D78300CDEB1A /* LogoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6882C3171CA8D78300CDEB1A /* LogoView.m */; };
 		6882C3211CA92C4B00CDEB1A /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6882C3201CA92C4B00CDEB1A /* CommentViewController.m */; };
+		68A349B21CD8A90500E2851B /* remind.png in Resources */ = {isa = PBXBuildFile; fileRef = 68A349B11CD8A90500E2851B /* remind.png */; };
+		68A349B61CD8AA3A00E2851B /* RemindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A349B51CD8AA3A00E2851B /* RemindViewController.m */; };
 		68B5DAEA1CCEF4070081A6D0 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B5DAC91CCEF4070081A6D0 /* AFHTTPSessionManager.m */; };
 		68B5DAEB1CCEF4070081A6D0 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B5DACC1CCEF4070081A6D0 /* AFNetworkReachabilityManager.m */; };
 		68B5DAEC1CCEF4070081A6D0 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B5DACE1CCEF4070081A6D0 /* AFSecurityPolicy.m */; };
@@ -430,6 +432,9 @@
 		6882C3171CA8D78300CDEB1A /* LogoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LogoView.m; path = Base/Contact/View/LogoView.m; sourceTree = "<group>"; };
 		6882C31F1CA92C4B00CDEB1A /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommentViewController.h; path = Base/Function/NewsController/CommentViewController.h; sourceTree = "<group>"; };
 		6882C3201CA92C4B00CDEB1A /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommentViewController.m; path = Base/Function/NewsController/CommentViewController.m; sourceTree = "<group>"; };
+		68A349B11CD8A90500E2851B /* remind.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = remind.png; sourceTree = "<group>"; };
+		68A349B41CD8AA3A00E2851B /* RemindViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RemindViewController.h; path = Base/Message/RemindViewController.h; sourceTree = "<group>"; };
+		68A349B51CD8AA3A00E2851B /* RemindViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RemindViewController.m; path = Base/Message/RemindViewController.m; sourceTree = "<group>"; };
 		68B5DAC81CCEF4070081A6D0 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
 		68B5DAC91CCEF4070081A6D0 /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
 		68B5DACA1CCEF4070081A6D0 /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
@@ -672,6 +677,7 @@
 		2C35B0491C7062160003BF6C /* unicomOA */ = {
 			isa = PBXGroup;
 			children = (
+				68A349B31CD8A9FF00E2851B /* MessageViewBase */,
 				68F8E1661CD042AA005D2727 /* image */,
 				6846D35D1CABC483004BD285 /* OpenSource */,
 				2CFEADCD1C770D1D0054730E /* FunctionViewBase */,
@@ -1129,6 +1135,15 @@
 			name = OpenSource;
 			sourceTree = "<group>";
 		};
+		68A349B31CD8A9FF00E2851B /* MessageViewBase */ = {
+			isa = PBXGroup;
+			children = (
+				68A349B41CD8AA3A00E2851B /* RemindViewController.h */,
+				68A349B51CD8AA3A00E2851B /* RemindViewController.m */,
+			);
+			name = MessageViewBase;
+			sourceTree = "<group>";
+		};
 		68B5DAC61CCEF4070081A6D0 /* AFNetWorking */ = {
 			isa = PBXGroup;
 			children = (
@@ -1480,6 +1495,7 @@
 		68F8E1661CD042AA005D2727 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				68A349B11CD8A90500E2851B /* remind.png */,
 				2CBA8E1C1CD3B33400BDF625 /* carmission.png */,
 				2CBA8E1D1CD3B33400BDF625 /* mission_done.png */,
 				2CBA8E1E1CD3B33400BDF625 /* mission_unfinished.png */,
@@ -1641,6 +1657,7 @@
 				68E779E61CB34A8E006DA5B9 /* head1.jpg in Resources */,
 				2CBA8E201CD3B33400BDF625 /* carmission.png in Resources */,
 				68F36D691CD1F3320027A97A /* aboutbg.png in Resources */,
+				68A349B21CD8A90500E2851B /* remind.png in Resources */,
 				68F8E17E1CD042AA005D2727 /* logoimage.png in Resources */,
 				68F8E1811CD042AA005D2727 /* myApproval.png in Resources */,
 				68EEDE711CBB911A003295EB /* down_arrow@2x.png in Resources */,
@@ -1759,6 +1776,7 @@
 				2CDC2BDD1C8FBFC90067693B /* NewsManagementViewController.m in Sources */,
 				68E779DF1CB34A8E006DA5B9 /* CLTreeView_LEVEL1_Model.m in Sources */,
 				682B68B91CB64683002EC60F /* AddPrintFileCell.m in Sources */,
+				68A349B61CD8AA3A00E2851B /* RemindViewController.m in Sources */,
 				68ED4E2B1CB49432000E8A7B /* ShenPiManagementController.m in Sources */,
 				68E779DD1CB34A8E006DA5B9 /* CLTreeView_LEVEL0_Model.m in Sources */,
 				2CFEADCC1C76E56D0054730E /* SearchResultViewController.m in Sources */,

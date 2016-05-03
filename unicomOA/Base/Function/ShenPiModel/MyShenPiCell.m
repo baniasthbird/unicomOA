@@ -36,14 +36,14 @@
         
         img_Logo.layer.cornerRadius=30.0f;
         [img_Logo.layer setMasksToBounds:YES];
-        [lbl_Title setFrame:CGRectMake(10, 60, 200, 20)];
+        [lbl_Title setFrame:CGRectMake(10, 75, 200, 20)];
         [lbl_time setFrame:CGRectMake(10, 90, 200, 20)];
         if (iPhone4_4s || iPhone5_5s) {
             [img_Logo setFrame:CGRectMake(20, 5, 60, 60)];
             [_lbl_status setFrame:CGRectMake(250, 0, 70, 110)];
             [view_line setFrame:CGRectMake(0, 70, 250, 1)];
             [lbl_name setFrame:CGRectMake(100, 20, 100, 10)];
-            [lbl_category setFrame:CGRectMake(100, 45, 60, 10)];
+            [lbl_category setFrame:CGRectMake(100, 45, 120, 10)];
             
         }
         else if (iPhone6) {
@@ -51,14 +51,14 @@
             [_lbl_status setFrame:CGRectMake(300, 0, 75, 110)];
             [view_line setFrame:CGRectMake(0, 70, 300, 1)];
             [lbl_name setFrame:CGRectMake(130, 20, 100, 10)];
-            [lbl_category setFrame:CGRectMake(130, 45, 60, 10)];
+            [lbl_category setFrame:CGRectMake(130, 45, 120, 10)];
             }
         else {
             [img_Logo setFrame:CGRectMake(40, 5, 60, 60)];
             [_lbl_status setFrame:CGRectMake(350, 0, 64, 110)];
             [view_line setFrame:CGRectMake(0, 70, 350, 1)];
             [lbl_name setFrame:CGRectMake(150, 20, 100, 10)];
-            [lbl_category setFrame:CGRectMake(150, 45, 60, 10)];
+            [lbl_category setFrame:CGRectMake(150, 45, 120, 10)];
         }
         img_Logo.image=[UIImage imageNamed:str_Image];
         lbl_name.textColor=[UIColor blackColor];
@@ -67,10 +67,10 @@
         lbl_time.textColor=[UIColor colorWithRed:153/255.0f green:153/255.0f blue:153/255.0f alpha:1];
         view_line.backgroundColor=[UIColor colorWithRed:204/255.0f green:204/255.0f blue:204/255.0f alpha:1];
         
-        if ([_lbl_status.text isEqualToString:@"已办"]) {
+        if ([str_status isEqualToString:@"已办"]) {
             _lbl_status.backgroundColor=[UIColor colorWithRed:61/255.0f green:189/255.0f blue:144/255.0f alpha:1];
         }
-        else if ([_lbl_status.text isEqualToString:@"待办"]) {
+        else if ([str_status isEqualToString:@"待办"]) {
             _lbl_status.backgroundColor=[UIColor colorWithRed:173/255.0f green:173/255.0f blue:173/255.0f alpha:1];
         }
         else {

@@ -112,7 +112,7 @@
     UILabel *lbl_sectionTitle=[[UILabel alloc]initWithFrame:view_title];
     lbl_sectionTitle.textAlignment=NSTextAlignmentLeft;
     lbl_sectionTitle.backgroundColor=[UIColor whiteColor];
-    lbl_sectionTitle.text=@"  基本信息";
+    lbl_sectionTitle.text=@"    基本信息";
     
     [view addSubview:lbl_sectionTitle];
     return view;

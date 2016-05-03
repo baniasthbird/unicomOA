@@ -63,6 +63,7 @@
         _txt_detail.scrollEnabled=YES;
         _txt_detail.delegate=self;
         
+       
         //自定义文本框placeholder
         if (iPhone5_5s || iPhone4_4s) {
             _lbl_tip=[[UILabel alloc]initWithFrame:CGRectMake(111, 0,200 , 40)];
@@ -74,13 +75,15 @@
         else {
             _lbl_tip=[[UILabel alloc]initWithFrame:CGRectMake(116, 0,290 , self.frame.size.height)];
         }
-        
         _lbl_tip.text=str_placeholder;
         _lbl_tip.textColor=[UIColor colorWithRed:186/255.0f green:186/255.0f blue:186/255.0f alpha:1];
         _lbl_tip.textAlignment=NSTextAlignmentLeft;
         _lbl_tip.font=[UIFont systemFontOfSize:16];
         _lbl_tip.backgroundColor=[UIColor clearColor];
         _lbl_tip.enabled=NO;
+        _lbl_tip.numberOfLines=0;
+
+        
         
         //自定义文本框字数统计
         if (iPhone4_4s || iPhone5_5s) {

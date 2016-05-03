@@ -98,8 +98,8 @@
         //创建显示内容
         UIView *baseView=[[UIView alloc]initWithFrame:scrollView.bounds];
         
-        _lbl_filename=[[UILabel alloc]initWithFrame:CGRectMake(0.0f, 0.0f, self.frame.size.width, cellHeight*0.5)];
-        _lbl_file_detail=[[UILabel alloc]initWithFrame:CGRectMake(0.0f, cellHeight*0.5, self.frame.size.width, cellHeight*0.5)];
+        _lbl_filename=[[UILabel alloc]initWithFrame:CGRectMake(0.0f, 0.0f, [UIScreen mainScreen].bounds.size.width, cellHeight*0.5)];
+        _lbl_file_detail=[[UILabel alloc]initWithFrame:CGRectMake(0.0f, cellHeight*0.5, [UIScreen mainScreen].bounds.size.width, cellHeight*0.5)];
         _lbl_filename.text=str_Title;
         _lbl_file_detail.text=[NSString stringWithFormat:@"%@  %d  %@  %d",@"复印页数",i_Pages,@"份数",i_copies];
         _lbl_filename.textColor=[UIColor colorWithRed:182/255.0f green:182/255.0f blue:182/255.0f alpha:1];
