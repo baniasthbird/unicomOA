@@ -28,6 +28,7 @@
 		2C9DDEC91CD8E257009462E6 /* LYOneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C9DDEC51CD8E257009462E6 /* LYOneViewController.m */; };
 		2C9DDECA1CD8E257009462E6 /* LYTwoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C9DDEC71CD8E257009462E6 /* LYTwoViewController.m */; };
 		2C9DDECD1CD8E688009462E6 /* LYThreeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C9DDECC1CD8E688009462E6 /* LYThreeViewController.m */; };
+		2C9DDECF1CDA3653009462E6 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C9DDECE1CDA3653009462E6 /* libsqlite3.dylib */; };
 		2CA10C8B1CA18F17008D6394 /* ChangePhoneNumStep1.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA10C8A1CA18F17008D6394 /* ChangePhoneNumStep1.m */; };
 		2CA10C8E1CA1945F008D6394 /* ChangePhoneNumStep2.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA10C8D1CA1945F008D6394 /* ChangePhoneNumStep2.m */; };
 		2CB7DB5F1CA278C00057633D /* SMSCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB7DB5E1CA278C00057633D /* SMSCodeViewController.m */; };
@@ -105,7 +106,6 @@
 		6846D35C1CABAF4D004BD285 /* IVotingResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6846D35B1CABAF4D004BD285 /* IVotingResultViewController.m */; };
 		6846D3621CABC496004BD285 /* RadioBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 6846D35F1CABC496004BD285 /* RadioBox.m */; };
 		6846D3631CABC496004BD285 /* RadioGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 6846D3611CABC496004BD285 /* RadioGroup.m */; };
-		684A71421CD9D79E00A892B1 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 684A71411CD9D79E00A892B1 /* libsqlite3.dylib */; };
 		684A71571CD9DC2A00A892B1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 684A71561CD9DC2A00A892B1 /* UIKit.framework */; };
 		684A71591CD9DC4100A892B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 684A71581CD9DC4100A892B1 /* Foundation.framework */; };
 		684A715B1CD9DC4800A892B1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 684A715A1CD9DC4800A892B1 /* QuartzCore.framework */; };
@@ -287,6 +287,7 @@
 		2C9DDEC71CD8E257009462E6 /* LYTwoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYTwoViewController.m; sourceTree = "<group>"; };
 		2C9DDECB1CD8E688009462E6 /* LYThreeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYThreeViewController.h; sourceTree = "<group>"; };
 		2C9DDECC1CD8E688009462E6 /* LYThreeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYThreeViewController.m; sourceTree = "<group>"; };
+		2C9DDECE1CDA3653009462E6 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = ../../../../../../usr/lib/libsqlite3.dylib; sourceTree = "<group>"; };
 		2CA10C891CA18F17008D6394 /* ChangePhoneNumStep1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChangePhoneNumStep1.h; path = Base/Settings/Controller/ChangePhoneNumStep1.h; sourceTree = "<group>"; };
 		2CA10C8A1CA18F17008D6394 /* ChangePhoneNumStep1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChangePhoneNumStep1.m; path = Base/Settings/Controller/ChangePhoneNumStep1.m; sourceTree = "<group>"; };
 		2CA10C8C1CA1945F008D6394 /* ChangePhoneNumStep2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChangePhoneNumStep2.h; path = Base/Settings/Controller/ChangePhoneNumStep2.h; sourceTree = "<group>"; };
@@ -439,7 +440,6 @@
 		6846D35F1CABC496004BD285 /* RadioBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RadioBox.m; path = OpenSource/RadioControl/RadioBox.m; sourceTree = "<group>"; };
 		6846D3601CABC496004BD285 /* RadioGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RadioGroup.h; path = OpenSource/RadioControl/RadioGroup.h; sourceTree = "<group>"; };
 		6846D3611CABC496004BD285 /* RadioGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RadioGroup.m; path = OpenSource/RadioControl/RadioGroup.m; sourceTree = "<group>"; };
-		684A71411CD9D79E00A892B1 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = ../../../../../usr/lib/libsqlite3.dylib; sourceTree = "<group>"; };
 		684A71561CD9DC2A00A892B1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		684A71581CD9DC4100A892B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		684A715A1CD9DC4800A892B1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -659,12 +659,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C9DDECF1CDA3653009462E6 /* libsqlite3.dylib in Frameworks */,
 				685233931CD9F9DE0093E368 /* MapKit.framework in Frameworks */,
 				684A715D1CD9DC5F00A892B1 /* MobileCoreServices.framework in Frameworks */,
 				684A715B1CD9DC4800A892B1 /* QuartzCore.framework in Frameworks */,
 				684A71591CD9DC4100A892B1 /* Foundation.framework in Frameworks */,
 				684A71571CD9DC2A00A892B1 /* UIKit.framework in Frameworks */,
-				684A71421CD9D79E00A892B1 /* libsqlite3.dylib in Frameworks */,
 				28C9318FDF9FBC70396481EC /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -689,6 +689,7 @@
 		04DF743BC07CED8E72262A08 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2C9DDECE1CDA3653009462E6 /* libsqlite3.dylib */,
 				685233921CD9F9DE0093E368 /* MapKit.framework */,
 				FC70EFCE782F56C4A2701E0F /* libPods.a */,
 			);
@@ -702,7 +703,6 @@
 				684A715A1CD9DC4800A892B1 /* QuartzCore.framework */,
 				684A71581CD9DC4100A892B1 /* Foundation.framework */,
 				684A71561CD9DC2A00A892B1 /* UIKit.framework */,
-				684A71411CD9D79E00A892B1 /* libsqlite3.dylib */,
 				2C35B0491C7062160003BF6C /* unicomOA */,
 				2C35B0631C7062160003BF6C /* unicomOATests */,
 				2C35B06E1C7062160003BF6C /* unicomOAUITests */,

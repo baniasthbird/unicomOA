@@ -327,6 +327,13 @@
             viewController.userInfo=_userInfo;
             [self.navigationController pushViewController:viewController animated:YES];
         }
+        else {
+            PrintApplication *viewController=[[PrintApplication alloc]init];
+            viewController.service=cell.print_service;
+            viewController.userInfo=_userInfo;
+            viewController.delegate=self;
+            [self.navigationController pushViewController:viewController animated:YES];
+        }
     }
 }
 

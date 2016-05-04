@@ -36,17 +36,18 @@
     [barButtonItem2 setTitleTextAttributes:dict forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = barButtonItem2;
     
-    UITextView *txt_View=[[UITextView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height*0.45)];
+    UITextView *txt_View=[[UITextView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.02, self.view.frame.size.width, self.view.frame.size.height*0.45)];
     txt_View.backgroundColor=[UIColor whiteColor];
     txt_View.delegate=self;
+    txt_View.font=[UIFont systemFontOfSize:16];
     
     
     
-    _lbl_tip=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 20)];
-    _lbl_tip.text=@"填写意见说明（非必填）";
+    _lbl_tip=[[UILabel alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.02, 200, 20)];
+    _lbl_tip.text=@"  填写意见说明（非必填）";
     _lbl_tip.textColor=[UIColor colorWithRed:116/255.0f green:116/255.0f blue:116/255.0f alpha:1];
     _lbl_tip.textAlignment=NSTextAlignmentLeft;
-    _lbl_tip.font=[UIFont systemFontOfSize:13];
+    _lbl_tip.font=[UIFont systemFontOfSize:16];
     _lbl_tip.backgroundColor=[UIColor clearColor];
     _lbl_tip.enabled=NO;
     

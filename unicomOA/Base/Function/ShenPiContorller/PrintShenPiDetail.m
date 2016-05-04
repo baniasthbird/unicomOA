@@ -237,7 +237,7 @@
             UILabel *rightLabel=[[UILabel alloc]init];
             if (iPhone4_4s || iPhone5_5s) {
                 [leftLabel setFrame:CGRectMake(70, 0, 90, 40)];
-                [rightLabel setFrame:CGRectMake(160, 0,250, 40)];
+                [rightLabel setFrame:CGRectMake(160, 0,90, 40)];
             }
             else if (iPhone6) {
                 [leftLabel setFrame:CGRectMake(97.5, 0, 90, 40)];

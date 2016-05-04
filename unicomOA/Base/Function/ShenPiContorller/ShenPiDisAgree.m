@@ -36,22 +36,22 @@
     [barButtonItem2 setTitleTextAttributes:dict forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = barButtonItem2;
     
-    UITextView *txt_View=[[UITextView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.05, self.view.frame.size.width, self.view.frame.size.height*0.45)];
+    UITextView *txt_View=[[UITextView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.08, self.view.frame.size.width, self.view.frame.size.height*0.45)];
     txt_View.backgroundColor=[UIColor whiteColor];
     txt_View.delegate=self;
     
-    _lbl_tip=[[UILabel alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.05, 200, 20)];
-    _lbl_tip.text=@"填写意见说明（非必填）";
+    _lbl_tip=[[UILabel alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.08, 200, 20)];
+    _lbl_tip.text=@"    填写意见说明（非必填）";
     _lbl_tip.textColor=[UIColor colorWithRed:116/255.0f green:116/255.0f blue:116/255.0f alpha:1];
     _lbl_tip.textAlignment=NSTextAlignmentLeft;
-    _lbl_tip.font=[UIFont systemFontOfSize:13];
+    _lbl_tip.font=[UIFont systemFontOfSize:16];
     _lbl_tip.backgroundColor=[UIColor clearColor];
     _lbl_tip.enabled=NO;
     
-    UILabel *lbl_comment=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 20)];
-    lbl_comment.text=@"申请将退回给申请人";
+    UILabel *lbl_comment=[[UILabel alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.02, self.view.frame.size.width, 20)];
+    lbl_comment.text=@"    申请将退回给申请人";
     lbl_comment.textAlignment=NSTextAlignmentLeft;
-    lbl_comment.font=[UIFont boldSystemFontOfSize:13];
+    lbl_comment.font=[UIFont boldSystemFontOfSize:16];
     lbl_comment.textColor=[UIColor blackColor];
     
     
