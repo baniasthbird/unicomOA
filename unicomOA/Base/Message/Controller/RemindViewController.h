@@ -13,4 +13,13 @@
 
 @property (nonatomic,strong) UserInfo *userInfo;
 
+//工作流程
+@property NSInteger i_index1;
+
+//公文传阅
+@property NSInteger i_index2;
+
+//消息提醒
+@property NSInteger i_index3;
+
 @end

@@ -17,6 +17,7 @@
 #import "LYOneViewController.h"
 #import "LYTwoViewController.h"
 #import "LYThreeViewController.h"
+#import "UIView+MGBadgeView.h"
 
 @interface RemindViewController ()<UIScrollViewDelegate>
 
@@ -65,7 +66,7 @@
     [self setupChildViewControll];
     
     //设置分页按钮
-    [self setupPageButton];
+    [self setupPageButton:_i_index1 index_2:_i_index2 index_3:_i_index3];
 }
 /**
  *  设置可以左右滑动的ScrollView
@@ -105,22 +106,22 @@
     //设置两个控制器的尺寸
     _twoVC.view.frame = CGRectMake(kView_W, 0, kView_W, kView_H - CGRectGetMinY(self.pageLine.frame));
     _oneVC.view.frame = CGRectMake(0, 0, kView_W, kView_H - CGRectGetMinY(self.pageLine.frame));
-    _threeVC.view.frame=CGRectMake(kView_W, 0, kView_W, kView_H - CGRectGetMinY(self.pageLine.frame));
+    _threeVC.view.frame=CGRectMake(2*kView_W, 0, kView_W, kView_H - CGRectGetMinY(self.pageLine.frame));
 }
 /**
  *  设置分页按钮
  */
-- (void)setupPageButton{
+- (void)setupPageButton:(NSInteger)i_index1 index_2:(NSInteger)i_index2 index_3:(NSInteger)i_index3{
     //button的index值应当从0开始
-    UIButton *btn = [self setupButtonWithTitle:@"工作流程" Index:0];
+    UIButton *btn = [self setupButtonWithTitle:@"工作流程" Index:0  Badage:i_index1];
     self.selectBtn = btn;
     [btn setBackgroundColor:[UIColor colorWithRed:80/255.0f green:125/255.0f blue:236/255.0f alpha:1]];
     [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self setupButtonWithTitle:@"公文传阅" Index:1];
-    [self setupButtonWithTitle:@"消息提醒" Index:2];
+    [self setupButtonWithTitle:@"公文传阅" Index:1 Badage:i_index2];
+    [self setupButtonWithTitle:@"消息提醒" Index:2 Badage:i_index3];
 }
 
-- (UIButton *)setupButtonWithTitle:(NSString *)title Index:(NSInteger)index{
+- (UIButton *)setupButtonWithTitle:(NSString *)title Index:(NSInteger)index Badage:(NSInteger)i_badage{
     CGFloat y = 0;
     CGFloat w = (kView_W - kMrg * 2)/kPageCount;
     CGFloat h = kButton_H;
@@ -133,6 +134,10 @@
     [btn setTitleColor:[UIColor colorWithRed:173/255.0f green:173/255.0f blue:173/255.0f alpha:1] forState:(UIControlStateNormal)];
    // [btn setTitleColor:[UIColor whiteColor]  forState:UIControlStateSelected];
     btn.tag = index + kTag;
+    [btn.badgeView setBadgeValue:i_badage];
+    [btn.badgeView setOutlineWidth:0.0];
+    [btn.badgeView setPosition:MGBadgePositionBottomLeft];
+    [btn.badgeView setBadgeColor:[UIColor redColor]];
     
     [btn addTarget:self action:@selector(pageClick:) forControlEvents:(UIControlEventTouchUpInside)];
     [self.view addSubview:btn];

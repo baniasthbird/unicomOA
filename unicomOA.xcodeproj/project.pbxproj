@@ -110,6 +110,7 @@
 		68815DC71CCDC45400277807 /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68815DC61CCDC45400277807 /* CommentCell.m */; };
 		6882C3181CA8D78300CDEB1A /* LogoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6882C3171CA8D78300CDEB1A /* LogoView.m */; };
 		6882C3211CA92C4B00CDEB1A /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6882C3201CA92C4B00CDEB1A /* CommentViewController.m */; };
+		6884D2D01CD98B4A006215E5 /* UIView+MGBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6884D2CF1CD98B4A006215E5 /* UIView+MGBadgeView.m */; };
 		68A349B21CD8A90500E2851B /* remind.png in Resources */ = {isa = PBXBuildFile; fileRef = 68A349B11CD8A90500E2851B /* remind.png */; };
 		68B5DAEA1CCEF4070081A6D0 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B5DAC91CCEF4070081A6D0 /* AFHTTPSessionManager.m */; };
 		68B5DAEB1CCEF4070081A6D0 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B5DACC1CCEF4070081A6D0 /* AFNetworkReachabilityManager.m */; };
@@ -443,6 +444,8 @@
 		6882C3171CA8D78300CDEB1A /* LogoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LogoView.m; path = Base/Contact/View/LogoView.m; sourceTree = "<group>"; };
 		6882C31F1CA92C4B00CDEB1A /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommentViewController.h; path = Base/Function/NewsController/CommentViewController.h; sourceTree = "<group>"; };
 		6882C3201CA92C4B00CDEB1A /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommentViewController.m; path = Base/Function/NewsController/CommentViewController.m; sourceTree = "<group>"; };
+		6884D2CE1CD98B4A006215E5 /* UIView+MGBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MGBadgeView.h"; sourceTree = "<group>"; };
+		6884D2CF1CD98B4A006215E5 /* UIView+MGBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MGBadgeView.m"; sourceTree = "<group>"; };
 		68A349B11CD8A90500E2851B /* remind.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = remind.png; sourceTree = "<group>"; };
 		68B5DAC81CCEF4070081A6D0 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
 		68B5DAC91CCEF4070081A6D0 /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
@@ -1140,6 +1143,7 @@
 		6846D35D1CABC483004BD285 /* OpenSource */ = {
 			isa = PBXGroup;
 			children = (
+				6884D2CD1CD98B4A006215E5 /* UIView-MGBadgeView */,
 				68B5DAC61CCEF4070081A6D0 /* AFNetWorking */,
 				681FFC711CC7828F0086A934 /* LXAlertView */,
 				68EEDE5D1CBB911A003295EB /* MCMenuButton */,
@@ -1158,6 +1162,16 @@
 				6846D3611CABC496004BD285 /* RadioGroup.m */,
 			);
 			name = OpenSource;
+			sourceTree = "<group>";
+		};
+		6884D2CD1CD98B4A006215E5 /* UIView-MGBadgeView */ = {
+			isa = PBXGroup;
+			children = (
+				6884D2CE1CD98B4A006215E5 /* UIView+MGBadgeView.h */,
+				6884D2CF1CD98B4A006215E5 /* UIView+MGBadgeView.m */,
+			);
+			name = "UIView-MGBadgeView";
+			path = "OpenSource/UIView-MGBadgeView";
 			sourceTree = "<group>";
 		};
 		68A349B31CD8A9FF00E2851B /* MessageViewBase */ = {
@@ -1756,6 +1770,7 @@
 				6846D3531CAB5A1E004BD285 /* IVotingManamentController.m in Sources */,
 				68D05CC01C97AC050039220F /* SendFeedBackViewController.m in Sources */,
 				682B68B01CB618DD002EC60F /* PrintApplicationNoFileCell.m in Sources */,
+				6884D2D01CD98B4A006215E5 /* UIView+MGBadgeView.m in Sources */,
 				68EEDE571CBB2E19003295EB /* DYCAddress.m in Sources */,
 				2CB7DB651CA3C5970057633D /* MemberInfoViewController.m in Sources */,
 				682B68B61CB64482002EC60F /* AddPrintFile.m in Sources */,

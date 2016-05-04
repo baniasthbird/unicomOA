@@ -174,6 +174,10 @@
         if (indexPath.row==0) {
             RemindViewController *viewController=[[RemindViewController alloc]init];
             viewController.userInfo=_userInfo;
+            //传入各个新闻的数量 zr 0504
+            viewController.i_index1=2;
+            viewController.i_index2=1;
+            viewController.i_index3=2;
             [self.navigationController pushViewController:viewController animated:YES];
         }
     }
