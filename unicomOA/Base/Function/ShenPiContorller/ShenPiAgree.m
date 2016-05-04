@@ -18,7 +18,7 @@
 
 -(void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor=[UIColor colorWithRed:243/255.0f green:243/255.0f blue:243/255.0f alpha:1];
+    self.view.backgroundColor=[UIColor colorWithRed:246/255.0f green:249/255.0f blue:254/255.0f alpha:1];
     
     self.title=@"审批意见—同意";
     
@@ -36,13 +36,13 @@
     [barButtonItem2 setTitleTextAttributes:dict forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = barButtonItem2;
     
-    UITextView *txt_View=[[UITextView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.15, self.view.frame.size.width, self.view.frame.size.height*0.45)];
+    UITextView *txt_View=[[UITextView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height*0.45)];
     txt_View.backgroundColor=[UIColor whiteColor];
     txt_View.delegate=self;
     
     
     
-    _lbl_tip=[[UILabel alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.15, 200, 20)];
+    _lbl_tip=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 20)];
     _lbl_tip.text=@"填写意见说明（非必填）";
     _lbl_tip.textColor=[UIColor colorWithRed:116/255.0f green:116/255.0f blue:116/255.0f alpha:1];
     _lbl_tip.textAlignment=NSTextAlignmentLeft;

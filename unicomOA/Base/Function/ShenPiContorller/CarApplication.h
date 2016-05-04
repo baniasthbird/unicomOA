@@ -25,4 +25,7 @@
 
 @property (nonatomic,unsafe_unretained) id<CarApplicationDelegate> delegate;
 
+//用车详情
+@property (nonatomic,strong) CarService *service;
+
 @end

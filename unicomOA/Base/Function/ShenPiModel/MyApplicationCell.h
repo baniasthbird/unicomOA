@@ -20,5 +20,6 @@
 
 @property (strong,nonatomic) PrintService *print_service;
 
+@property BOOL b_status;
 
 @end

@@ -13,7 +13,7 @@
 @interface PrintApplicationDetailCell : UITableViewCell
 
 /** 快速创建cell的方法*/
-+ (instancetype)cellWithTable:(UITableView *)tableView withName:(NSString*)str_Name withPlaceHolder:(NSString*)str_placeHolder atIndexPath:(NSIndexPath*)indexPath;
++ (instancetype)cellWithTable:(UITableView *)tableView withName:(NSString*)str_Name withPlaceHolder:(NSString*)str_placeHolder withText:(NSString*)str_text atIndexPath:(NSIndexPath*)indexPath;
 
 @property (strong,nonatomic) UITextView *txt_detail;
 

@@ -29,4 +29,7 @@
 
 @property (nonatomic,unsafe_unretained) id<PrintApplicationDelegate> delegate;
 
+//复印详情
+@property (nonatomic,strong) PrintService *service;
+
 @end

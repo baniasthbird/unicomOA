@@ -15,8 +15,10 @@
 #import "CarApplicationDetail.h"
 #import "PrintApplicationDetail.h"
 #import "ShenPiStatus.h"
+#import "CarApplication.h"
+#import "PrintApplication.h"
 
-@interface MyApplication()<UITableViewDelegate,UITableViewDataSource,NewApplicationDelegate>
+@interface MyApplication()<UITableViewDelegate,UITableViewDataSource,NewApplicationDelegate,CarApplicationDelegate,PrintApplicationDelegate>
 
 /**
  *  头部筛选模块
@@ -303,16 +305,28 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     MyApplicationCell *cell=[tableView cellForRowAtIndexPath:indexPath];
     if (cell.car_service!=nil) {
-        CarApplicationDetail *viewController=[[CarApplicationDetail alloc]init];
-        viewController.service=cell.car_service;
-        viewController.userInfo=_userInfo;
-        [self.navigationController pushViewController:viewController animated:YES];
+        if (cell.b_status==YES) {
+            CarApplicationDetail *viewController=[[CarApplicationDetail alloc]init];
+            viewController.service=cell.car_service;
+            viewController.userInfo=_userInfo;
+            [self.navigationController pushViewController:viewController animated:YES];
+        }
+        else {
+            CarApplication *viewController=[[CarApplication alloc]init];
+            viewController.service=cell.car_service;
+            viewController.userInfo=_userInfo;
+            viewController.delegate=self;
+            [self.navigationController pushViewController:viewController animated:YES];
+        }
+       
     }
     else if (cell.print_service!=nil) {
-        PrintApplicationDetail *viewController=[[PrintApplicationDetail alloc]init];
-        viewController.service=cell.print_service;
-        viewController.userInfo=_userInfo;
-        [self.navigationController pushViewController:viewController animated:YES];
+        if (cell.b_status==YES) {
+            PrintApplicationDetail *viewController=[[PrintApplicationDetail alloc]init];
+            viewController.service=cell.print_service;
+            viewController.userInfo=_userInfo;
+            [self.navigationController pushViewController:viewController animated:YES];
+        }
     }
 }
 
@@ -458,21 +472,26 @@
     if (tmp_service!=nil) {
         if (tmp_service.shenpi_1==nil && tmp_service.shenpi_2==nil) {
             cell=[MyApplicationCell cellWithTable:tableView withTitle:tmp_service.str_reason withStatus:@"已办" isUsingCar:YES withTime:tmp_service.str_applicationTime];
+            cell.b_status=YES;
         }
         else if (tmp_service.shenpi_1!=nil && tmp_service.shenpi_2==nil) {
             if ([tmp_service.shenpi_1.str_status isEqualToString:@"同意"]) {
                 cell=[MyApplicationCell cellWithTable:tableView withTitle:tmp_service.str_reason withStatus:@"已办" isUsingCar:YES withTime:tmp_service.shenpi_1.str_time];
+                cell.b_status=YES;
             }
             else if ([tmp_service.shenpi_1.str_status isEqualToString:@"不同意"]) {
                 cell=[MyApplicationCell cellWithTable:tableView withTitle:tmp_service.str_reason withStatus:@"待办" isUsingCar:YES withTime:tmp_service.shenpi_1.str_time];
+                cell.b_status=NO;
             }
         }
         else if (tmp_service.shenpi_2!=nil ) {
             if ([tmp_service.shenpi_2.str_status isEqualToString:@"同意"]) {
                 cell=[MyApplicationCell cellWithTable:tableView withTitle:tmp_service.str_reason withStatus:@"已办" isUsingCar:YES withTime:tmp_service.shenpi_2.str_time];
+                cell.b_status=YES;
             }
             else if ([tmp_service.shenpi_1.str_status isEqualToString:@"不同意"]) {
                 cell=[MyApplicationCell cellWithTable:tableView withTitle:tmp_service.str_reason withStatus:@"待办" isUsingCar:YES withTime:tmp_service.shenpi_2.str_time];
+                cell.b_status=NO;
             }
         }
         cell.car_service=tmp_service;
@@ -490,21 +509,26 @@
     if (tmp_service!=nil) {
         if (tmp_service.shenpi_1==nil && tmp_service.shenpi_2==nil) {
             cell=[MyApplicationCell cellWithTable:tableView withTitle:[NSString stringWithFormat:@"%@%@",tmp_service.str_title,@"项目打印清单"] withStatus:@"已办" isUsingCar:NO withTime:tmp_service.str_applicationTime];
+            cell.b_status=YES;
         }
         else if (tmp_service.shenpi_1!=nil && tmp_service.shenpi_2==nil) {
             if ([tmp_service.shenpi_1.str_status isEqualToString:@"同意"]) {
                 cell=[MyApplicationCell cellWithTable:tableView withTitle:[NSString stringWithFormat:@"%@%@",tmp_service.str_title,@"项目打印清单"] withStatus:@"已办" isUsingCar:NO withTime:tmp_service.shenpi_1.str_time];
+                cell.b_status=YES;
             }
             else if ([tmp_service.shenpi_1.str_status isEqualToString:@"不同意"]) {
                 cell=[MyApplicationCell cellWithTable:tableView withTitle:[NSString stringWithFormat:@"%@%@",tmp_service.str_title,@"项目打印清单"] withStatus:@"待办" isUsingCar:NO withTime:tmp_service.shenpi_1.str_time];
+                cell.b_status=NO;
             }
         }
         else if (tmp_service.shenpi_2!=nil) {
             if ([tmp_service.shenpi_2.str_status isEqualToString:@"同意"]) {
                 cell=[MyApplicationCell cellWithTable:tableView withTitle:[NSString stringWithFormat:@"%@%@",tmp_service.str_title,@"项目打印清单"] withStatus:@"已办" isUsingCar:NO withTime:tmp_service.shenpi_2.str_time];
+                cell.b_status=YES;
             }
             else if ([tmp_service.shenpi_2.str_status isEqualToString:@"不同意"]) {
                 cell=[MyApplicationCell cellWithTable:tableView withTitle:[NSString stringWithFormat:@"%@%@",tmp_service.str_title,@"项目打印清单"] withStatus:@"待办" isUsingCar:NO withTime:tmp_service.shenpi_2.str_time];
+                cell.b_status=NO;
             }
         }
         cell.print_service=tmp_service;
@@ -516,5 +540,43 @@
     
 }
 
+-(void)PassCarValue:(NSString *)str_reason CarObject:(CarService *)carservice {
+    for (int i=0 ;i<_arr_MyApplication.count;i++) {
+        NSObject *obj=[_arr_MyApplication objectAtIndex:i];
+        if ([obj isMemberOfClass:[CarService class]]) {
+            CarService *service=(CarService*)obj;
+            if (service.str_name==carservice.str_name) {
+                if  ([service.shenpi_1.str_status isEqualToString:@"不同意"] || [service.shenpi_2.str_status isEqualToString:@"不同意"]) {
+                    [_arr_MyApplication removeObject:service];
+                    [_arr_MyApplication insertObject:carservice atIndex:i];
+                    break;
+                }
+            }
+        }
+    }
+    [_delegate PassArray:_arr_MyApplication];
+    [self.tableView reloadData];
+    
+}
+
+
+-(void)PassPrintValue:(NSString *)str_title PrintObject:(PrintService *)service {
+    for (int i=0 ;i<_arr_MyApplication.count;i++) {
+        NSObject *obj=[_arr_MyApplication objectAtIndex:i];
+        if ([obj isMemberOfClass:[PrintService class]]) {
+            PrintService *printservice=(PrintService*)obj;
+            if (printservice.str_name==service.str_name) {
+                if  ([printservice.shenpi_1.str_status isEqualToString:@"不同意"] || [printservice.shenpi_2.str_status isEqualToString:@"不同意"]) {
+                    [_arr_MyApplication removeObject:printservice];
+                    [_arr_MyApplication insertObject:service atIndex:i];
+                    break;
+                }
+            }
+        }
+    }
+    [_delegate PassArray:_arr_MyApplication];
+    [self.tableView reloadData];
+
+}
 
 @end

@@ -193,13 +193,28 @@
     }
     else if (indexPath.row==5) {
         // textfield
-        PrintApplicationTitleCell *cell=[PrintApplicationTitleCell cellWithTable:tableView withName:@"用车人数" withPlaceHolder:@"填写用车人数" atIndexPath:indexPath keyboardType:UIKeyboardTypeNumberPad];
+        PrintApplicationTitleCell *cell;
+        if (_service==nil) {
+            //cell=[PrintApplicationTitleCell cellWithTable:tableView withName:@"用车人数" withPlaceHolder:@"填写用车人数"  atIndexPath:indexPath keyboardType:UIKeyboardTypeNumberPad];
+            cell=[PrintApplicationTitleCell cellWithTable:tableView withName:@"用车人数" withPlaceHolder:@"填写用车人数" withText:nil atIndexPath:indexPath keyboardType:UIKeyboardTypeNumberPad];
+        }
+        else {
+            NSString *str_usrnum=[NSString stringWithFormat:@"%d",_service.i_usernum];
+            cell=[PrintApplicationTitleCell cellWithTable:tableView withName:@"用车人数" withPlaceHolder:@"填写用车人数" withText:str_usrnum atIndexPath:indexPath keyboardType:UIKeyboardTypeNumberPad];
+        }
+        
         return cell;
         
     }
     else if (indexPath.row==6) {
         cell.textLabel.text=@"使用人";
-        cell.detailTextLabel.text=@"选择使用人";
+        if (_service!=nil) {
+            cell.detailTextLabel.text=_service.str_usrname;
+        }
+        else {
+            cell.detailTextLabel.text=@"选择使用人";
+        }
+        
     }
     else if (indexPath.row==7) {
         cell.textLabel.text=@"用车时间";
@@ -228,36 +243,79 @@
         }
         else {
             cell.textLabel.text=@"目的地";
-            cell.detailTextLabel.text=@"郑州";
+            if (_service!=nil) {
+                cell.detailTextLabel.text=_service.str_destination;
+            }
+            else {
+                cell.detailTextLabel.text=@"郑州";
+            }
+            
         }
     }
     else if (indexPath.row==10) {
         if ([self isExtendedCellIndexPath:[NSIndexPath indexPathForRow:8 inSection:0]] || [self isExtendedCellIndexPath:[NSIndexPath indexPathForRow:9 inSection:0]]) {
             cell.textLabel.text=@"目的地";
-            cell.detailTextLabel.text=@"郑州";
+            if (_service!=nil) {
+                cell.detailTextLabel.text=_service.str_destination;
+            }
+            else {
+                cell.detailTextLabel.text=@"郑州";
+            }
         }
         else {
             // textfield
-            PrintApplicationTitleCell *cell=[PrintApplicationTitleCell cellWithTable:tableView withName:@"用车事由" withPlaceHolder:@"填写用车事由" atIndexPath:indexPath keyboardType:UIKeyboardTypeDefault];
+            PrintApplicationTitleCell *cell;
+            if (_service==nil) {
+                cell=[PrintApplicationTitleCell cellWithTable:tableView withName:@"用车事由" withPlaceHolder:@"填写用车事由" withText:nil atIndexPath:indexPath keyboardType:UIKeyboardTypeDefault];
+            }
+            else {
+                NSString *str_reason=_service.str_reason;
+                cell=[PrintApplicationTitleCell cellWithTable:tableView withName:@"用车事由" withPlaceHolder:@"填写用车事由" withText:str_reason atIndexPath:indexPath keyboardType:UIKeyboardTypeDefault];
+            }
+            
             return cell;
         }
         
     }
     else if (indexPath.row==11) {
         if ([self isExtendedCellIndexPath:[NSIndexPath indexPathForRow:8 inSection:0]] || [self isExtendedCellIndexPath:[NSIndexPath indexPathForRow:9 inSection:0]] || [self isExtendedCellIndexPath:[NSIndexPath indexPathForRow:10 inSection:0]]) {
-            PrintApplicationTitleCell *cell=[PrintApplicationTitleCell cellWithTable:tableView withName:@"用车事由" withPlaceHolder:@"填写用车事由" atIndexPath:indexPath keyboardType:UIKeyboardTypeDefault];
+            PrintApplicationTitleCell *cell;
+            if (_service==nil) {
+                cell=[PrintApplicationTitleCell cellWithTable:tableView withName:@"用车事由" withPlaceHolder:@"填写用车事由" withText:nil atIndexPath:indexPath keyboardType:UIKeyboardTypeDefault];
+            }
+            else {
+                NSString *str_reason=_service.str_reason;
+                cell=[PrintApplicationTitleCell cellWithTable:tableView withName:@"用车事由" withPlaceHolder:@"填写用车事由" withText:str_reason atIndexPath:indexPath keyboardType:UIKeyboardTypeDefault];
+            }
             return cell;
+            
         }
         else {
             //textView
-            PrintApplicationDetailCell *cell=[PrintApplicationDetailCell cellWithTable:tableView withName:@"备注信息" withPlaceHolder:@"请输入备注信息" atIndexPath:indexPath];
+            PrintApplicationDetailCell *cell;
+            if (_service==nil) {
+                cell=[PrintApplicationDetailCell cellWithTable:tableView withName:@"备注信息" withPlaceHolder:@"请输入备注信息" withText:nil atIndexPath:indexPath];
+            }
+            else {
+                NSString *str_detail=_service.str_remark;
+                cell=[PrintApplicationDetailCell cellWithTable:tableView withName:@"备注信息" withPlaceHolder:@"请输入备注信息" withText:str_detail atIndexPath:indexPath];
+            }
+           
             return cell;
             
         }
     }
        else {
-        PrintApplicationDetailCell *cell=[PrintApplicationDetailCell cellWithTable:tableView withName:@"备注信息" withPlaceHolder:@"请输入备注信息" atIndexPath:indexPath];
-        return cell;
+           PrintApplicationDetailCell *cell;
+           if (_service==nil) {
+               cell=[PrintApplicationDetailCell cellWithTable:tableView withName:@"备注信息" withPlaceHolder:@"请输入备注信息" withText:nil atIndexPath:indexPath];
+           }
+           else {
+               NSString *str_detail=_service.str_remark;
+               cell=[PrintApplicationDetailCell cellWithTable:tableView withName:@"备注信息" withPlaceHolder:@"请输入备注信息" withText:str_detail atIndexPath:indexPath];
+           }
+           
+           return cell;
     }
     
     return  cell;

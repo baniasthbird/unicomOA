@@ -24,17 +24,17 @@
     [super awakeFromNib];
 }
 
-+(instancetype)cellWithTable:(UITableView *)tableView withName:(NSString *)str_Name withPlaceHolder:(NSString *)str_placeHolder  atIndexPath:(NSIndexPath *)indexPath {
++(instancetype)cellWithTable:(UITableView *)tableView withName:(NSString *)str_Name withPlaceHolder:(NSString *)str_placeHolder  withText:(NSString*)str_text atIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellID=@"cellID";
     PrintApplicationDetailCell *cell=[tableView cellForRowAtIndexPath:indexPath];
     if (!cell) {
-        cell=[[PrintApplicationDetailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID withName:str_Name withPlaceholder:str_placeHolder];
+        cell=[[PrintApplicationDetailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID withName:str_Name withPlaceholder:str_placeHolder withText:str_text];
     }
     return cell;
 }
 
 
--(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withName:(NSString*)str_name withPlaceholder:(NSString*)str_placeholder{
+-(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withName:(NSString*)str_name withPlaceholder:(NSString*)str_placeholder withText:(NSString*)str_text{
     self=[super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.textLabel.textColor=[UIColor blackColor];
@@ -62,6 +62,9 @@
         _txt_detail.returnKeyType=UIReturnKeyDone;
         _txt_detail.scrollEnabled=YES;
         _txt_detail.delegate=self;
+        if (str_text!=nil) {
+            _txt_detail.text=str_text;
+        }
         
        
         //自定义文本框placeholder

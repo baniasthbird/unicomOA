@@ -34,7 +34,7 @@
 
 -(void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor=[UIColor colorWithRed:243/255.0f green:243/255.0f blue:243/255.0f alpha:1];
+    self.view.backgroundColor=[UIColor colorWithRed:246/255.0f green:249/255.0f blue:254/255.0f alpha:1];
     
     self.title=@"审批意见—同意-派遣车辆";
     
@@ -52,13 +52,13 @@
     [barButtonItem2 setTitleTextAttributes:dict forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = barButtonItem2;
     
-    UITextView *txt_View=[[UITextView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.55, self.view.frame.size.width, self.view.frame.size.height*0.3)];
+    UITextView *txt_View=[[UITextView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.37, self.view.frame.size.width, self.view.frame.size.height*0.3)];
     txt_View.backgroundColor=[UIColor whiteColor];
     txt_View.delegate=self;
     
     _tmp_model=[[CarModel alloc]init];
     
-    _lbl_tip=[[UILabel alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.58, 200, 20)];
+    _lbl_tip=[[UILabel alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.37, 200, 20)];
     _lbl_tip.text=@"填写意见说明（非必填）";
     _lbl_tip.textColor=[UIColor colorWithRed:116/255.0f green:116/255.0f blue:116/255.0f alpha:1];
     _lbl_tip.textAlignment=NSTextAlignmentLeft;
@@ -85,7 +85,7 @@
     
     
     
-    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.18, self.view.frame.size.width, self.view.frame.size.height*0.3) style:UITableViewStylePlain];
+    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.03, self.view.frame.size.width, self.view.frame.size.height*0.3) style:UITableViewStylePlain];
     _tableView.delegate=self;
     _tableView.dataSource=self;
     _tableView.backgroundColor=[UIColor whiteColor];
@@ -182,7 +182,7 @@
 }
 
 -(UILabel*)createTitleLabel:(NSString*)str_name x:(CGFloat)x {
-    UILabel *tmp_tabletitle=[[UILabel alloc]initWithFrame:CGRectMake(x, self.view.frame.size.height*0.145, self.view.frame.size.width/4, 20)];
+    UILabel *tmp_tabletitle=[[UILabel alloc]initWithFrame:CGRectMake(x, 0, self.view.frame.size.width/4, 20)];
     tmp_tabletitle.textColor=[UIColor blackColor];
     tmp_tabletitle.font=[UIFont boldSystemFontOfSize:15];
     tmp_tabletitle.textAlignment=NSTextAlignmentCenter;

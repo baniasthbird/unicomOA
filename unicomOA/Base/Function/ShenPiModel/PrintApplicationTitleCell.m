@@ -21,12 +21,12 @@
     [super awakeFromNib];
 }
 
-+(instancetype)cellWithTable:(UITableView *)tableView withName:(NSString *)str_Name withPlaceHolder:(NSString *)str_Placeholder atIndexPath:(NSIndexPath *)indexPath keyboardType:(UIKeyboardType)type{
++(instancetype)cellWithTable:(UITableView *)tableView withName:(NSString *)str_Name withPlaceHolder:(NSString *)str_Placeholder withText:(NSString*)str_text atIndexPath:(NSIndexPath *)indexPath keyboardType:(UIKeyboardType)type{
     static NSString *cellID=@"cellID";
     //PrintApplicationTitleCell *cell=[tableView dequeueReusableCellWithIdentifier:cellID];
     PrintApplicationTitleCell *cell=[tableView cellForRowAtIndexPath:indexPath];
     if (!cell) {
-        cell=[[PrintApplicationTitleCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID withName:str_Name withPlaceHolder:str_Placeholder keyboardType:type];
+        cell=[[PrintApplicationTitleCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID withName:str_Name withPlaceHolder:str_Placeholder withText:str_text  keyboardType:type];
     }
     /*
     else {
@@ -38,7 +38,7 @@
     return cell;
 }
 
--(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withName:(NSString *) str_name  withPlaceHolder:(NSString*)str_PlaceHolder keyboardType:(UIKeyboardType)type{
+-(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withName:(NSString *) str_name  withPlaceHolder:(NSString*)str_PlaceHolder withText:(NSString*)str_text keyboardType:(UIKeyboardType)type{
     self=[super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.textLabel.textColor=[UIColor blackColor];
@@ -51,15 +51,20 @@
         _txt_title.font=[UIFont systemFontOfSize:16];
         if (iPhone6) {
             _txt_title=[[UITextField alloc]initWithFrame:CGRectMake(111, 0, 264, 40)];
-            _txt_title.attributedPlaceholder =[[NSAttributedString alloc] initWithString:str_PlaceHolder attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16]}];
+            
         }
         else if (iPhone5_5s || iPhone4_4s) {
              _txt_title=[[UITextField alloc]initWithFrame:CGRectMake(111, 0, 209, 40)];
-            _txt_title.attributedPlaceholder =[[NSAttributedString alloc] initWithString:str_PlaceHolder attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16]}];
         }
         else if (iPhone6_plus){
             _txt_title=[[UITextField alloc]initWithFrame:CGRectMake(116, 0, 298, 40)];
+        }
+        if (str_PlaceHolder!=nil && str_text==nil) {
             _txt_title.attributedPlaceholder =[[NSAttributedString alloc] initWithString:str_PlaceHolder attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16]}];
+        }
+        else if (str_text!=nil) {
+            _txt_title.text=str_text;
+            _txt_title.font=[UIFont systemFontOfSize:16];
         }
         _txt_title.autocorrectionType=UITextAutocorrectionTypeNo;
         _txt_title.autocapitalizationType=UITextAutocapitalizationTypeNone;

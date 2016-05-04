@@ -170,7 +170,15 @@
         else if (indexPath.row==1) {
             
             //textfield
-            PrintApplicationTitleCell *cell=[PrintApplicationTitleCell cellWithTable:tableView withName:@"复印标题" withPlaceHolder:@"请输入复印标题，最多50个字" atIndexPath:indexPath keyboardType:UIKeyboardTypeDefault];
+            PrintApplicationTitleCell *cell;
+            if (_service==nil) {
+                cell=[PrintApplicationTitleCell cellWithTable:tableView withName:@"复印标题" withPlaceHolder:@"请输入复印标题，最多50个字" withText:nil atIndexPath:indexPath keyboardType:UIKeyboardTypeDefault];
+            }
+            else {
+                NSString *str_text=_service.str_title;
+                cell=[PrintApplicationTitleCell cellWithTable:tableView withName:@"复印标题" withPlaceHolder:@"请输入复印标题，最多50个字" withText:str_text atIndexPath:indexPath keyboardType:UIKeyboardTypeDefault];
+            }
+            
             return cell;
             
         }
@@ -178,9 +186,17 @@
             
             //textview
            // PrintApplicationDetailCell *cell=[PrintApplicationDetailCell cellWithTable:tableView withName:@"备注信息" atIndexPath:indexPath];
-            PrintApplicationDetailCell *cell=[PrintApplicationDetailCell cellWithTable:tableView withName:@"备注信息" withPlaceHolder:@"请输入备注信息，最多500个字" atIndexPath:indexPath];
+            PrintApplicationDetailCell *cell;
+            if (_service==nil) {
+                cell=[PrintApplicationDetailCell cellWithTable:tableView withName:@"备注信息" withPlaceHolder:@"请输入备注信息，最多500个字"   withText:nil atIndexPath:indexPath];
+            }
+            else {
+                NSString *str_detail=_service.str_remark;
+                cell=[PrintApplicationDetailCell cellWithTable:tableView withName:@"备注信息" withPlaceHolder:@"请输入备注信息，最多500个字"   withText:str_detail atIndexPath:indexPath];
+                
+            }
             
-            //cell.textLabel.text=@"备注信息";
+            
             return cell;
             
         }
@@ -210,24 +226,43 @@
     else if (indexPath.section==1) {
         //cell.backgroundColor=[UIColor clearColor];
         //cell.textLabel.text=@"无复印文件，请点击右上角『添加』按钮，进行文件添加";
-        if (_b_hasFile==NO)
-        {
-            PrintApplicationNoFileCell* cell=[PrintApplicationNoFileCell cellWithTable:tableView withName:@""];
-            return cell;
+        if (_service==nil) {
+            if (_b_hasFile==NO)
+            {
+                PrintApplicationNoFileCell* cell=[PrintApplicationNoFileCell cellWithTable:tableView withName:@""];
+                return cell;
+            }
+            else {
+                // PrintFiles *tmp_File=[_arr_printFiles objectAtIndex:(_arr_printFiles.count-1-indexPath.row)];
+                PrintFiles *tmp_File=[_arr_printFiles objectAtIndex:(indexPath.row)];
+                // PrintApplicationFileCell *cell=[PrintApplicationFileCell cellWithTable:tableView withTitle:@"周口太昊陵项目竣工验收图纸" withPages:24 withCopies:3 withCellHeight:100];
+                PrintApplicationFileCell *cell=[PrintApplicationFileCell cellWithTable:tableView withTitle:tmp_File.str_filename withPages:tmp_File.i_pages withCopies:tmp_File.i_copies withCellHeight:100 withPrintFile:tmp_File];
+                
+                cell.file=tmp_File;
+                cell.delegate=self;
+                cell.myTag=indexPath.row;
+                
+                return cell;
+            }
         }
         else {
-           // PrintFiles *tmp_File=[_arr_printFiles objectAtIndex:(_arr_printFiles.count-1-indexPath.row)];
-            PrintFiles *tmp_File=[_arr_printFiles objectAtIndex:(indexPath.row)];
-           // PrintApplicationFileCell *cell=[PrintApplicationFileCell cellWithTable:tableView withTitle:@"周口太昊陵项目竣工验收图纸" withPages:24 withCopies:3 withCellHeight:100];
-            PrintApplicationFileCell *cell=[PrintApplicationFileCell cellWithTable:tableView withTitle:tmp_File.str_filename withPages:tmp_File.i_pages withCopies:tmp_File.i_copies withCellHeight:100 withPrintFile:tmp_File];
-            
-            cell.file=tmp_File;
-            cell.delegate=self;
-            cell.myTag=indexPath.row;
-            
-            return cell;
+            if (_service.arr_PrintFiles.count==0) {
+                PrintApplicationNoFileCell* cell=[PrintApplicationNoFileCell cellWithTable:tableView withName:@""];
+                return cell;
+            }
+            else {
+                PrintFiles *tmp_File=[_service.arr_PrintFiles objectAtIndex:(indexPath.row)];
+                // PrintApplicationFileCell *cell=[PrintApplicationFileCell cellWithTable:tableView withTitle:@"周口太昊陵项目竣工验收图纸" withPages:24 withCopies:3 withCellHeight:100];
+                PrintApplicationFileCell *cell=[PrintApplicationFileCell cellWithTable:tableView withTitle:tmp_File.str_filename withPages:tmp_File.i_pages withCopies:tmp_File.i_copies withCellHeight:100 withPrintFile:tmp_File];
+                
+                cell.file=tmp_File;
+                cell.delegate=self;
+                cell.myTag=indexPath.row;
+                
+                return cell;
+            }
         }
-       
+        
     }
 
     return cell;
