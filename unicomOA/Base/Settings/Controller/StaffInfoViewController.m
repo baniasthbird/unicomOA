@@ -7,11 +7,13 @@
 //
 
 #import "StaffInfoViewController.h"
-#import "HeadViewCell.h"
 #import "ChangePhoneNumViewController.h"
 #import "SettingViewController.h"
+#import "LZActionSheet.h"
 
-@interface StaffInfoViewController ()
+@interface StaffInfoViewController ()<LZActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+
+@property (nonatomic,strong) UIImageView *img_Head;
 
 @end
 
@@ -51,15 +53,12 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
     return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
     if (section==0) {
         return 4;
     }
@@ -82,8 +81,32 @@
     
     if (indexPath.section==0 && indexPath.row==0) {
        // cell=[[HeadViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
-        HeadViewCell *cell=[[HeadViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
-        return cell;
+       // HeadViewCell *cell=[[HeadViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
+       // return cell;
+        //UITableViewCell *cell_photo=[tableView cellForRowAtIndexPath:indexPath];
+        
+        UILabel *lbl_title=[[UILabel alloc]initWithFrame:CGRectMake(0, 20, [UIScreen mainScreen].bounds.size.width/3, 60)];
+        lbl_title.text=@" 头像";
+        lbl_title.textAlignment=NSTextAlignmentLeft;
+        lbl_title.font=[UIFont systemFontOfSize:24];
+        lbl_title.textColor=[UIColor blackColor];
+        
+        UIImage *imageHead=[UIImage imageNamed:_userInfo.str_Logo];
+        _img_Head=[[UIImageView alloc]initWithImage:imageHead];
+        [_img_Head.layer setMasksToBounds:YES];
+        _img_Head.layer.cornerRadius=37.0f;
+        [_img_Head setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width*0.68, 13, 74, 74)];
+        _img_Head.userInteractionEnabled=YES;
+        
+        UITapGestureRecognizer *singleTap1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(buttonPressed:)];
+        
+        [_img_Head addGestureRecognizer:singleTap1];
+        
+        [cell.contentView addSubview:lbl_title];
+        [cell.contentView addSubview:_img_Head];
+        
+        //return cell_photo;
+        
         
     }
     else if (indexPath.section==0 && indexPath.row==1) {
@@ -187,6 +210,79 @@
      
      //[self.navigationController popViewControllerAnimated:YES];
 }
+
+
+
+
+-(void)buttonPressed:(UITapGestureRecognizer *)gestrueRecognizer {
+    UIColor *other_color=[UIColor colorWithRed:81/255.0f green:127/255.0f blue:238/255.0f alpha:1];
+    UIColor *cancel_color=[UIColor colorWithRed:246/255.0f green:88/255.0f blue:87/255.0f alpha:1];
+    LZActionSheet *sheet=[LZActionSheet showActionSheetWithDelegate:self cancelButtonTitle:@"取消" otherButtonTitles:@[@"拍照",@"从相册中选择"] cancelButtonColor:cancel_color otherButtonColor:other_color];
+    [sheet show];
+    NSLog(@"已点击图片");
+}
+
+
+
+-(void)LZActionSheet:(LZActionSheet *)actionSheet didClickedButtonAtIndex:(NSInteger)index {
+    switch (index) {
+        case 0: {
+            UIImagePickerController *imagePickerController=[[UIImagePickerController alloc] init];
+            imagePickerController.delegate=self;
+            imagePickerController.allowsEditing=YES;
+            imagePickerController.sourceType=UIImagePickerControllerSourceTypeCamera;
+            [self presentViewController:imagePickerController animated:YES completion:^{
+                
+            }];
+        }
+            break;
+        case 1: {
+            UIImagePickerController *imagePickerController=[[UIImagePickerController alloc] init];
+            imagePickerController.delegate=self;
+            imagePickerController.allowsEditing=YES;
+            imagePickerController.sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
+            [self presentViewController:imagePickerController animated:YES completion:^{
+                
+            }];
+        }
+            break;
+        default:
+            break;
+    }
+    
+}
+
+
+//拍照完成或选择头像完成后的事件
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    [picker dismissViewControllerAnimated:YES completion:^{
+    }];
+    
+    UIImage *image=[info objectForKey:UIImagePickerControllerOriginalImage];
+    
+    //保存图片至本地
+    [self saveImage:image withName:@"demo.png"];
+    
+    NSString *fullPath=[[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"demo.png"];
+    
+    UIImage *saveImage=[[UIImage alloc]initWithContentsOfFile:fullPath];
+    
+    [_img_Head setImage:saveImage];
+    
+    _userInfo.str_Logo=fullPath;
+}
+
+
+-(void)saveImage:(UIImage *)currentImage withName:(NSString *)imageName {
+    NSData *imageData=UIImageJPEGRepresentation(currentImage, 1);  //1为不缩放保存
+    //获取沙盒目录
+    NSString *fullPath=[[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:imageName];
+    [imageData writeToFile:fullPath atomically:NO];
+}
+
+
+
+
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -29,7 +29,7 @@ typedef enum
     DiningService
 }OperationType;
 
-@interface NewNotesViewController()<UITableViewDataSource,UITableViewDelegate,UITextViewDelegate,MenuTableViewCellDelegate,MenutableViewCellDataSource,LZActionSheetDelegate>
+@interface NewNotesViewController()<UITableViewDataSource,UITableViewDelegate,UITextViewDelegate,MenuTableViewCellDelegate,MenutableViewCellDataSource,LZActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
     
 //列表
 @property (strong,nonatomic) UITableView *tableView;
@@ -58,6 +58,8 @@ typedef enum
 @property (nonatomic,strong) NSString *str_date;
 
 @property (nonatomic,strong) NSString *str_notesFenLei;
+
+@property (nonatomic,strong) UIImageView *image;
 
 @end
 
@@ -255,16 +257,16 @@ typedef enum
         }
         
         CGRect imageFrame=CGRectMake(10, 10, 80, 80);
-        UIImageView *image=[[UIImageView alloc]initWithFrame:imageFrame];
-        image.layer.borderWidth=1;
-        image.layer.borderColor=[[UIColor lightGrayColor] CGColor];
+        _image=[[UIImageView alloc]initWithFrame:imageFrame];
+        _image.layer.borderWidth=1;
+        _image.layer.borderColor=[[UIColor lightGrayColor] CGColor];
         //[image setImage:[UIImage imageNamed:@"me.png"]];
         //[image addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(@"chooseImage:")];
         //cell.textLabel.text=@"今后更新用于地图开发";
-        image.userInteractionEnabled=YES;
+        _image.userInteractionEnabled=YES;
         UITapGestureRecognizer *singleTap1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(buttonPressed:)];
-        [image addGestureRecognizer:singleTap1];
-        [[cell contentView] addSubview:image];
+        [_image addGestureRecognizer:singleTap1];
+        [[cell contentView] addSubview:_image];
         
          return cell;
         
@@ -752,9 +754,31 @@ typedef enum
 //照片选择
 -(void)LZActionSheet:(LZActionSheet *)actionSheet didClickedButtonAtIndex:(NSInteger)index {
     switch (index) {
-        case 0:
+        case 0: {
+             UIImagePickerController *imagePickerController=[[UIImagePickerController alloc] init];
+            imagePickerController.delegate=self;
+            imagePickerController.allowsEditing=YES;
+            imagePickerController.sourceType=UIImagePickerControllerSourceTypeCamera;
+            [self presentViewController:imagePickerController animated:YES completion:^{
+                
+            }];
+        }
+           
+            
             break;
-        case 1:
+        case 1: {
+            UIImagePickerController *imagePickerController=[[UIImagePickerController alloc] init];
+            imagePickerController.delegate=self;
+            imagePickerController.allowsEditing=YES;
+            imagePickerController.sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
+            [self presentViewController:imagePickerController animated:YES completion:^{
+                
+            }];
+
+            
+        }
+           
+
             break;
         default:
             break;
@@ -788,4 +812,29 @@ typedef enum
     }
 }
 
+
+//拍照完成或选择头像完成后的事件
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    [picker dismissViewControllerAnimated:YES completion:^{
+    }];
+    
+    UIImage *image=[info objectForKey:UIImagePickerControllerOriginalImage];
+    
+    //保存图片至本地
+    [self saveImage:image withName:@"demo.png"];
+    
+    NSString *fullPath=[[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"demo.png"];
+    
+    UIImage *saveImage=[[UIImage alloc]initWithContentsOfFile:fullPath];
+    
+    [_image setImage:saveImage];
+}
+
+
+-(void)saveImage:(UIImage *)currentImage withName:(NSString *)imageName {
+    NSData *imageData=UIImageJPEGRepresentation(currentImage, 1);  //1为不缩放保存
+    //获取沙盒目录
+    NSString *fullPath=[[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:imageName];
+    [imageData writeToFile:fullPath atomically:NO];
+}
 @end
