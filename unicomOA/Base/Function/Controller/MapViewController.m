@@ -166,6 +166,11 @@
     if (gestureRecognizer.state==UIGestureRecognizerStateEnded) {
         return;
     }
+    [_mapView.annotations enumerateObjectsUsingBlock:^(id<MKAnnotation>  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+       
+            [_mapView removeAnnotation:obj];
+        
+    }];
     
     CGPoint touchPoint=[gestureRecognizer locationInView:_mapView];
     CLLocationCoordinate2D touchMapCoordinate=[_mapView convertPoint:touchPoint toCoordinateFromView:_mapView];
@@ -232,6 +237,7 @@
 
 
 -(void)MoveNextVc:(UIButton*)sender {
-    
+    [_delegate PassMapValue:_mapView];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 @end
