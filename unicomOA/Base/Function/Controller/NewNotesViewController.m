@@ -17,6 +17,8 @@
 #import "IQKeyboardReturnKeyHandler.h"
 #import "IQUIView+IQKeyboardToolbar.h"
 #import "LZActionSheet.h"
+#import "MapViewController.h"
+
 
 #define TABLEVIEW_CELL_RESUSE_ID @"TABLEVIEW_CELL_REUSE_ID"
 
@@ -29,7 +31,7 @@ typedef enum
     DiningService
 }OperationType;
 
-@interface NewNotesViewController()<UITableViewDataSource,UITableViewDelegate,UITextViewDelegate,MenuTableViewCellDelegate,MenutableViewCellDataSource,LZActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface NewNotesViewController()<UITableViewDataSource,UITableViewDelegate,UITextViewDelegate,MenuTableViewCellDelegate,MenutableViewCellDataSource,LZActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,MapViewControllerDelegate>
     
 //列表
 @property (strong,nonatomic) UITableView *tableView;
@@ -490,6 +492,13 @@ typedef enum
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.row==3 && indexPath.section==0) {
+        MapViewController *viewController=[[MapViewController alloc]init];
+        viewController.userInfo=_usrInfo;
+        viewController.delegate=self;
+        [self.navigationController pushViewController:viewController animated:YES];
+    }
+    
     if (indexPath.row==4 && indexPath.section==0) {
         [self extendCellAtIndexPath:indexPath];
     }
@@ -836,5 +845,10 @@ typedef enum
     //获取沙盒目录
     NSString *fullPath=[[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:imageName];
     [imageData writeToFile:fullPath atomically:NO];
+}
+
+
+-(void)PassMapValue:(MKMapView *)mapView {
+    
 }
 @end

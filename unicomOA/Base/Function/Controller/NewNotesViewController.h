@@ -8,11 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "NotePassValueDelegate.h"
+#import "UserInfo.h"
 
 
 @interface NewNotesViewController : UIViewController {
     NSObject<UINoteViewPassValueDelegate> *delegate;
 }
+
+@property (nonatomic,strong) UserInfo *usrInfo;
 
 @property(nonatomic,retain) NSObject<UINoteViewPassValueDelegate> *delegate;
 

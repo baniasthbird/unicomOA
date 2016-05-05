@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "NIDropDown.h"
 #import "VotingCell.h"
+#import "UserInfo.h"
 
 @interface IVotingManamentController : UIViewController<UITableViewDataSource,UITableViewDelegate,NIDropDownDelegate,VotingTapDelegate> {
     NIDropDown *dropDown;
@@ -19,5 +20,7 @@
 @property (nonatomic,strong) UIButton *btn_Select;
 
 @property (nonatomic,strong) UISearchBar *searchBar;
+
+@property (nonatomic,strong) UserInfo *user_Info;
 
 @end

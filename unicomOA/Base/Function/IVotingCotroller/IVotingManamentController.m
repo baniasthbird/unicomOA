@@ -190,12 +190,14 @@
     if (b_isVoting==YES) {
         IVotingDisplayController *viewController=[[IVotingDisplayController alloc]init];
         viewController.str_title=cell.lbl_Titile.text;
+        viewController.user_Info=_user_Info;
         [self.navigationController pushViewController:viewController animated:YES];
     }
     else  {
         IVotingResultViewController *viewController=[[IVotingResultViewController alloc]init];
         viewController.str_title=cell.lbl_Titile.text;
         viewController.str_condition=@"已经结束";
+        viewController.user_Info=_user_Info;
         [self.navigationController pushViewController:viewController animated:YES];
     }
     NSLog(@"进入投票页");

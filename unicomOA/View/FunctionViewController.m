@@ -241,6 +241,7 @@
 
 -(void)IVotingItemClick:(UIImageButton *)button {
     IVotingManamentController *viewController=[[IVotingManamentController alloc]init];
+    viewController.user_Info=_userInfo;
     [self.navigationController pushViewController:viewController animated:YES];
 
 }
@@ -248,6 +249,7 @@
 
 -(void)NotesItemClick:(UIImageButton *)button {
     NotesViewController *notesView=[[NotesViewController alloc]init];
+    notesView.user_Info=_userInfo;
     [self.navigationController pushViewController:notesView animated:YES];
 }
 

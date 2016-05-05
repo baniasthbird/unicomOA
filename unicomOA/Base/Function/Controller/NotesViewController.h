@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "NotePassValueDelegate.h"
 #import "NotesTableVIewCell.h"
+#import "UserInfo.h"
 
 @interface NotesViewController : UITableViewController<UINoteViewPassValueDelegate,NotesTableSlidCellDelegate>
 
+@property (nonatomic,strong) UserInfo *user_Info;
 
 @end

@@ -207,6 +207,7 @@
     IVotingResultViewController *viewController=[[IVotingResultViewController alloc]init];
     viewController.str_title=_str_title;
     viewController.str_condition=@"投票进行中";
+    viewController.user_Info=_user_Info;
     [self.navigationController pushViewController:viewController animated:YES];
 }
 

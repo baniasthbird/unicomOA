@@ -66,6 +66,7 @@ NSInteger i_count=0;
 -(void)NewNotes:(UIButton *)newBtn {
     NewNotesViewController *viewController=[[NewNotesViewController alloc]init];
     viewController.delegate=self;
+    viewController.usrInfo=_user_Info;
     [self.navigationController pushViewController:viewController animated:YES];
    // [self.navigationController presentViewController:viewController animated:YES completion:nil];
 }

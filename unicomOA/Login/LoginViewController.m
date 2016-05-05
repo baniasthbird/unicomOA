@@ -45,7 +45,7 @@
 static NSString *kServerSessionCookie=@"JSESSIONID";
 static NSString *kLocalCookieName=@"UnicomOACookie";
 static NSString *kLocalUserData=@"UnicomOALocalUser";
-static NSString *kBaseUrl=@"http://192.168.12.25:8080/default/org.gocom.components.coframe.auth.LoginManager.login.biz.ext";
+static NSString *kBaseUrl=@"http://192.168.12.12:8080/default/mobile/user/com.hnsi.erp.mobile.user.LoginManager.login.biz.ext";
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -220,15 +220,18 @@ static NSString *kBaseUrl=@"http://192.168.12.25:8080/default/org.gocom.componen
     
     
    // [self postLogin];
-   // if (_i_Success==YES) {
-    
-            OAViewController *viewController=[[OAViewController alloc]init];
-            viewController.user_Info=userInfo;
-            [self.navigationController pushViewController:viewController animated:YES];
-    
-    //    }
+
+    [self LocalEnter:userInfo];
+  
    
     
+}
+
+//离线测试用
+-(void)LocalEnter:(UserInfo*)userInfo {
+    OAViewController *viewController=[[OAViewController alloc]init];
+    viewController.user_Info=userInfo;
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 //注册
@@ -363,89 +366,6 @@ static NSString *kBaseUrl=@"http://192.168.12.25:8080/default/org.gocom.componen
 
 
 -(void)postLogin {
-    /*
-    //创建会话对象
-    NSURLSession *session=[NSURLSession sharedSession];
-    
-    
-    
-    //根据会话对象创建task
-    NSURL *url=[NSURL URLWithString:@"http://192.168.12.25:8080/default/org.gocom.components.coframe.auth.LoginManager.login.biz.ext"];
-    
-    //创建可变的请求对象
-    NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:url];
-    
-    //修改请求方法为POST
-    request.HTTPMethod=@"POST";
-    
-    //设置请求体
-    request.HTTPBody=[@"userId=sysadmin&password=000000" dataUsingEncoding:NSUTF8StringEncoding];
-    
-    //根据会话对象创建一个task
-    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        
-     
-                 //8.解析数据
-                 NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                 NSLog(@"%@",dict);
-     
-        NSLog(@"response:%@",response);
-        //NSLog(@"data:%@",data);
-        //8.解析数据 是否登录成功
-        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-        NSLog(@"%@",dict);
-        //记录cookie，以便登录第二个连接
-        NSHTTPURLResponse *httpresponse=(NSHTTPURLResponse*)response;
-        NSArray *cookies=[NSHTTPCookie cookiesWithResponseHeaderFields:[httpresponse allHeaderFields] forURL:url];
-        NSHTTPCookie *cookie_1=[cookies objectAtIndex:0];
-        
-        //创建会话对象
-        NSURLSession *session=[NSURLSession sharedSession];
-        
-        
-        
-        //根据会话对象创建task
-        NSURL *url=[NSURL URLWithString:@"http://192.168.12.25:8080/default/project/networkOptimization/equipment/com.hnsi.erp.project.networkOptimization.equipment.queryEquipmentListForAdmin.biz.ext"];
-        
-        //创建可变的请求对象
-        NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:url];
-        
-        
-        //修改请求方法为POST
-        request.HTTPMethod=@"POST";
-        
-        //设置请求体
-        request.HTTPBody=[@"userId=sysadmin&password=000000" dataUsingEncoding:NSUTF8StringEncoding];
-        
-        //设置cookie
-        [request setHTTPShouldHandleCookies:YES];
-
-        [request setValue:[NSString stringWithFormat:@"%@=%@", [cookie_1 name], [cookie_1 value]] forHTTPHeaderField:@"Cookie"];
-        
-        //根据会话对象创建一个task
-        NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-            
-     
-             //8.解析数据
-             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-             NSLog(@"%@",dict);
-     
-            NSLog(@"response:%@",response);
-            //NSLog(@"data:%@",data);
-            //8.解析数据 是否登录成功
-            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-            NSLog(@"%@",dict);
-        }];
-        
-        
-        
-        [dataTask resume];
-    
-    }];
-
-    [dataTask resume];
-   */
-    
     
     [_session POST:kBaseUrl parameters:_params progress:^(NSProgress * _Nonnull uploadProgress) {
         

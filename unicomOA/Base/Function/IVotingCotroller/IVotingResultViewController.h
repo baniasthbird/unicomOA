@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UserInfo.h"
 
 @interface IVotingResultViewController : UIViewController
 
 @property (strong,nonatomic) NSString *str_title;
 
 @property (strong,nonatomic) NSString *str_condition;
+
+@property (strong,nonatomic) UserInfo *user_Info;
 
 @end
