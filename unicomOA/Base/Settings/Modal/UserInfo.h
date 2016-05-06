@@ -10,7 +10,7 @@
 
 //用户信息
 
-@interface UserInfo : NSObject
+@interface UserInfo : NSObject<NSCoding>
 
 @property (nonatomic,strong) NSString *str_name;
 

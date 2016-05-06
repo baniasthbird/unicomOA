@@ -13,6 +13,7 @@
 #import "ServerIPViewController.h"
 #import "UserInfo.h"
 #import "AFHTTPSessionManager.h"
+#import "LXAlertView.h"
 
 
 
@@ -71,7 +72,7 @@ static NSString *kBaseUrl=@"http://192.168.12.12:8080/default/mobile/user/com.hn
     [_session.requestSerializer setHTTPShouldHandleCookies:YES];
     
     _params=[NSMutableDictionary dictionary];
-    _params[@"userId"]=@"sysadmin";
+    _params[@"username"]=@"sysadmin";
     _params[@"password"]=@"000000";
     
     [self createLabels];
@@ -207,30 +208,23 @@ static NSString *kBaseUrl=@"http://192.168.12.12:8080/default/mobile/user/com.hn
     NSArray *tabBarItems = self.navigationController.tabBarController.tabBar.items;
     UITabBarItem *personCenterTabBarItem = [tabBarItems objectAtIndex:2];
     personCenterTabBarItem.badgeValue = @"2";
-    UserInfo *userInfo=[[UserInfo alloc]init];
-    userInfo.str_name=@"张三";
-    userInfo.str_username=@"张三";
-    userInfo.str_gender=@"男";
-    userInfo.str_department=@"综合部";
-    userInfo.str_position=@"部门经理";
-    userInfo.str_cellphone=@"13812345678";
-    userInfo.str_email=@"未绑定";
-    userInfo.str_phonenum=@"未填写";
-    userInfo.str_Logo=@"headLogo.png";
     
     
-   // [self postLogin];
+    [self postLogin];
 
-    [self LocalEnter:userInfo];
+   
+    [self LocalEnter];
   
    
     
 }
 
 //离线测试用
--(void)LocalEnter:(UserInfo*)userInfo {
+-(void)LocalEnter {
+    UserInfo *userInfo=[self CreateUserInfo];
+    [self saveUserInfo:userInfo];
     OAViewController *viewController=[[OAViewController alloc]init];
-    viewController.user_Info=userInfo;
+    //viewController.user_Info=userInfo;
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
@@ -372,9 +366,24 @@ static NSString *kBaseUrl=@"http://192.168.12.12:8080/default/mobile/user/com.hn
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"请求成功:%@",responseObject);
         NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        NSLog(@"请求JSON成功:%@",JSON);
-        [self saveLoginSession];
-        [self postLogin2];
+        NSString *str_success= [JSON objectForKey:@"success"];
+        NSInteger i_success=[str_success integerValue];
+        if (i_success==0) {
+            NSString *str_message=[JSON objectForKey:@"msg"];
+            str_message=[NSString stringWithFormat:@"%@%@",@"未能登录成功，",str_message];
+            LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"警告" message:str_message cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+                NSLog(@"点击index====%ld",clickIndex);
+            }];
+            [alert showLXAlertView];
+        }
+        else if (i_success==1) {
+            NSLog(@"请求JSON成功:%@",JSON);
+            [self saveLoginSession];
+            NSDictionary *dic_usr=[JSON objectForKey:@"userInfo"];
+            // [self postLogin2];
+            [self MoveToNextPage:dic_usr];
+        }
+       
         
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -395,19 +404,7 @@ static NSString *kBaseUrl=@"http://192.168.12.12:8080/default/mobile/user/com.hn
         NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         NSLog(@"请求JSON成功:%@",JSON);
         
-        UserInfo *userInfo=[[UserInfo alloc]init];
-        userInfo.str_name=@"张三";
-        userInfo.str_username=@"张三";
-        userInfo.str_gender=@"男";
-        userInfo.str_department=@"综合部";
-        userInfo.str_position=@"部门经理";
-        userInfo.str_cellphone=@"13812345678";
-        userInfo.str_email=@"未绑定";
-        userInfo.str_phonenum=@"未填写";
-        userInfo.str_Logo=@"headLogo.png";
-        OAViewController *viewController=[[OAViewController alloc]init];
-        viewController.user_Info=userInfo;
-        [self.navigationController pushViewController:viewController animated:YES];
+       // [self MoveToNextPage];
         
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -436,6 +433,14 @@ static NSString *kBaseUrl=@"http://192.168.12.12:8080/default/mobile/user/com.hn
     }
 }
 
+-(void)saveUserInfo:(UserInfo*)userInfo {
+    NSData *data=[NSKeyedArchiver archivedDataWithRootObject:userInfo];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:data forKey:@"user"];
+    [defaults synchronize];
+}
+
+
 // 4.
 - (void)removeLoginSession
 {
@@ -462,5 +467,42 @@ static NSString *kBaseUrl=@"http://192.168.12.12:8080/default/mobile/user/com.hn
     return [[NSUserDefaults standardUserDefaults] objectForKey:kLocalCookieName] != nil;
 }
 
+//登录成功转至下一页
+-(void)MoveToNextPage:(NSDictionary*)dic_usr {
+    UserInfo *userInfo=[[UserInfo alloc]init];
+    NSString *str_name=[dic_usr objectForKey:@"name"];
+    NSString *str_orgname=[dic_usr objectForKey:@"orgName"];
+    userInfo.str_name=str_name;
+    userInfo.str_username=str_name;
+    userInfo.str_gender=@"男";
+    userInfo.str_department=[NSString stringWithFormat:@"%@ %@",str_orgname,@"综合部"];
+    userInfo.str_position=@"部门经理";
+    userInfo.str_cellphone=@"13812345678";
+    userInfo.str_email=@"未绑定";
+    userInfo.str_phonenum=@"未填写";
+    userInfo.str_Logo=@"headLogo.png";
+    
+    [self saveUserInfo:userInfo];
+    OAViewController *viewController=[[OAViewController alloc]init];
+  //  viewController.user_Info=userInfo;
+    [self.navigationController pushViewController:viewController animated:YES];
+}
+
+
+-(UserInfo*)CreateUserInfo {
+    UserInfo *userInfo=[[UserInfo alloc]init];
+    userInfo.str_name=@"张三";
+    userInfo.str_username=@"张三";
+    userInfo.str_gender=@"男";
+    userInfo.str_department=@"综合部";
+    userInfo.str_position=@"部门经理";
+    userInfo.str_cellphone=@"13812345678";
+    userInfo.str_email=@"未绑定";
+    userInfo.str_phonenum=@"未填写";
+    userInfo.str_Logo=@"headLogo.png";
+    
+    return userInfo;
+    
+}
 
 @end

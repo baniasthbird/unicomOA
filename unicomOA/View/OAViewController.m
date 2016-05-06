@@ -53,10 +53,7 @@
 }
 
 
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
+-(UserInfo*)CreateUserInfo {
     UserInfo *userInfo=[[UserInfo alloc]init];
     userInfo.str_name=@"张三";
     userInfo.str_username=@"张三";
@@ -67,10 +64,24 @@
     userInfo.str_email=@"未绑定";
     userInfo.str_phonenum=@"未填写";
     userInfo.str_Logo=@"headLogo.png";
+    
+    return userInfo;
+
+}
+
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    //UserInfo *userInfo=[self CreateUserInfo];
+    /*
+       */
     // Do any additional setup after loading the view.
 
     //self.view.backgroundColor=[UIColor colorWithRed:70/255.0f green:156/255.0f blue:241/255.0f alpha:1];
     //[self.tabBar addSubview:_tabBarView];
+    NSData *data=[[NSUserDefaults standardUserDefaults] objectForKey:@"user"];
+    UserInfo *userInfo=[NSKeyedUnarchiver unarchiveObjectWithData:data];
     
     MessageViewController *message=[[MessageViewController alloc]init];
     message.delegate=self;
