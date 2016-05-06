@@ -61,7 +61,15 @@ typedef enum
 
 @property (nonatomic,strong) NSString *str_notesFenLei;
 
+@property (nonatomic,strong) NSString *str_location_content;
+
 @property (nonatomic,strong) UIImageView *image;
+
+//位置坐标
+@property  CLLocationCoordinate2D coord_placemark;
+
+//位置地址
+@property (nonatomic,strong) CLPlacemark *addr_placemark;
 
 @end
 
@@ -283,10 +291,10 @@ typedef enum
             cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
         }
         
-        UIImageView *img_positon=[[UIImageView alloc]initWithFrame:CGRectMake(cell.contentView.frame.origin.x+10, cell.contentView.frame.origin.y+5, 44, 44)];
+        UIImageView *img_positon=[[UIImageView alloc]initWithFrame:CGRectMake(cell.contentView.frame.origin.x+10, cell.contentView.frame.origin.y+50, 44, 44)];
         img_positon.image=[UIImage imageNamed:@"position.png"];
-        UILabel *lbl_text=[[UILabel alloc]initWithFrame:CGRectMake(cell.contentView.frame.origin.x+80,cell.contentView.frame.origin.y-3 , 100, 60)];
-        lbl_text.text=@"添加位置";
+        UILabel *lbl_text=[[UILabel alloc]initWithFrame:CGRectMake(cell.contentView.frame.origin.x+80,cell.contentView.frame.origin.y-3 , self.view.frame.size.width-80, 140)];
+        lbl_text.text=@"位置信息";
         lbl_text.font=[UIFont systemFontOfSize:18];
         
         [[cell contentView] addSubview:img_positon];
@@ -478,9 +486,12 @@ typedef enum
     else if (indexPath.row==9) {
         return 240;
     }
-    else
+    else if (indexPath.row==3)
     {
-        return 54.0;
+        return 162;
+    }
+    else {
+        return 54.0f;
     }
 }
 
@@ -496,6 +507,10 @@ typedef enum
         MapViewController *viewController=[[MapViewController alloc]init];
         viewController.userInfo=_usrInfo;
         viewController.delegate=self;
+        if (_addr_placemark!=nil && _coord_placemark.longitude!=0 && _coord_placemark.latitude!=0) {
+            viewController.placemark=_addr_placemark;
+            viewController.touchMapCoord=_coord_placemark;
+        }
         [self.navigationController pushViewController:viewController animated:YES];
     }
     
@@ -848,7 +863,31 @@ typedef enum
 }
 
 
--(void)PassMapValue:(MKMapView *)mapView {
-    
+-(void)PassMapValue:(CLPlacemark *)placemark Coordinate:(CLLocationCoordinate2D)touchmapcoord {
+    _coord_placemark=touchmapcoord;
+    _addr_placemark=placemark;
+    UITableViewCell *cell=[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
+    UIView *subview=[cell.subviews objectAtIndex:0];
+    UIView *sub_subview= [subview.subviews objectAtIndex:1];
+    UILabel *lbl_sub_subview=(UILabel*)sub_subview;
+    NSString *str_state=placemark.administrativeArea;
+    NSString *str_city=placemark.locality;
+    NSString *str_county=placemark.subLocality;
+    NSString *str_street=placemark.thoroughfare;
+    NSString *str_substreet=placemark.subThoroughfare;
+    [lbl_sub_subview setFrame:CGRectMake(160, 0, self.view.frame.size.width-160, 140)];
+    if (str_street!=nil && str_substreet!=nil) {
+        _str_location_content=[NSString stringWithFormat:@"%@%@\n%@%@\n%@",str_state,str_city,str_county,str_street,str_substreet];
+    }
+    else if (str_street!=nil && str_substreet==nil) {
+         _str_location_content=[NSString stringWithFormat:@"%@%@\n%@%@",str_state,str_city,str_county,str_street];
+    }
+    else if (str_street==nil && str_substreet==nil) {
+         _str_location_content=[NSString stringWithFormat:@"%@%@\n%@",str_state,str_city,str_county];
+    }
+    lbl_sub_subview.text=_str_location_content;
+    lbl_sub_subview.numberOfLines=0;
+   NSIndexPath *indexPath=[NSIndexPath indexPathForRow:3 inSection:0];
+    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationNone];
 }
 @end

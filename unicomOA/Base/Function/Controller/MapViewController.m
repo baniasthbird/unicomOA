@@ -7,7 +7,7 @@
 //
 
 #import "MapViewController.h"
-#import <CoreLocation/CoreLocation.h>
+
 
 
 @interface MapViewController()<CLLocationManagerDelegate,MKMapViewDelegate>
@@ -18,6 +18,7 @@
 
 @property (nonatomic,strong) CLGeocoder *geocoder;
 
+@property (nonatomic,strong) CLLocation *location_now;
 
 @end
 
@@ -45,7 +46,7 @@
     self.navigationItem.rightBarButtonItem = barButtonItem2;
     
     _geocoder=[[CLGeocoder alloc]init];
-    [self getCoordinateByAddress:@"洛阳"];
+    [self getCoordinateByAddress:@"杭州"];
     
     self.mapView=[[MKMapView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     [_mapView setMapType:MKMapTypeStandard];
@@ -59,21 +60,54 @@
     [_mapView addGestureRecognizer:lpress];
     
     _mapView.delegate=self;
-    CLLocationCoordinate2D coordinate;
-    coordinate.latitude=34.7748310668;
-    coordinate.longitude=113.6813931308;
+    if (_touchMapCoord.longitude==0 && _touchMapCoord.latitude==0) {
+        CLLocationCoordinate2D coordinate;
+        coordinate.latitude=34.7748310668;
+        coordinate.longitude=113.6813931308;
+        
+        MKCoordinateSpan span;
+        span.latitudeDelta=0.1;
+        span.longitudeDelta=0.1;
+        
+        MKCoordinateRegion region;
+        region.center=coordinate;
+        region.span=span;
+        
+        [_mapView setRegion:region];
+        
+         _mapView.userTrackingMode=MKUserTrackingModeFollow;
+    }
+    else {
+        MKCoordinateSpan span;
+        span.latitudeDelta=0.1;
+        span.longitudeDelta=0.1;
+        
+        MKCoordinateRegion region;
+        region.center=_touchMapCoord;
+        region.span=span;
+        
+        MKPointAnnotation *pointAnnotation=nil;
+        
+        pointAnnotation=[[MKPointAnnotation alloc]init];
+        
+        pointAnnotation.coordinate=_touchMapCoord;
+        
+        pointAnnotation.title=@"设置地点";
+        
+        [_mapView addAnnotation:pointAnnotation];
+        
+        [_mapView setRegion:region];
+        
+        _mapView.showsUserLocation=YES;
+
+    }
     
-    MKCoordinateSpan span;
-    span.latitudeDelta=0.1;
-    span.longitudeDelta=0.1;
+    UIButton *btn_locate=[[UIButton alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height-145, 30, 30)];
+    btn_locate.backgroundColor=[UIColor colorWithRed:75/255.0f green:187/255.0f blue:251/255.0f alpha:1];
+    [btn_locate setBackgroundImage:[UIImage imageNamed:@"locate.png"] forState:UIControlStateNormal];
+    [btn_locate addTarget:self action:@selector(LocateNow:) forControlEvents:UIControlEventTouchUpInside];
     
-    MKCoordinateRegion region;
-    region.center=coordinate;
-    region.span=span;
-    
-    [_mapView setRegion:region];
-    _mapView.userTrackingMode=MKUserTrackingModeFollow;
-    
+   
     _manager=[[CLLocationManager alloc]init];
     
     //设置代理
@@ -107,17 +141,30 @@
     
     
     [self.view addSubview:_mapView];
-    
-    
+    [_mapView addSubview:btn_locate];
 }
 
-
+-(void)LocateNow:(UIButton*)sender  {
+    if (_location_now!=nil) {
+       
+        MKCoordinateSpan span;
+        span.latitudeDelta=0.03;
+        span.longitudeDelta=0.03;
+        
+        MKCoordinateRegion region;
+        region.center= _location_now.coordinate;
+        region.span=span;
+        
+        [_mapView setRegion:region];
+    }
+}
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
     CLLocation *location=[locations lastObject];
     NSDate *eventDate=location.timestamp;
     NSTimeInterval howRecent=[eventDate timeIntervalSinceNow];
     if (fabs(howRecent)<15.0f) {
+        _location_now=location;
         //If the event is recent, do something with it
         NSLog(@"latitude %+.6f, longitude %+.6f\n",
               location.coordinate.latitude,
@@ -151,8 +198,8 @@
     //反地理编码
     CLLocation *location=[[CLLocation alloc]initWithLatitude:latitude longitude:longitude];
     [_geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
-        CLPlacemark *placemark=[placemarks firstObject];
-        NSLog(@"详细信息:%@",placemark.addressDictionary);
+        _placemark=[placemarks firstObject];
+        NSLog(@"详细信息:%@",_placemark.addressDictionary);
     }];
 }
 
@@ -173,13 +220,15 @@
     }];
     
     CGPoint touchPoint=[gestureRecognizer locationInView:_mapView];
-    CLLocationCoordinate2D touchMapCoordinate=[_mapView convertPoint:touchPoint toCoordinateFromView:_mapView];
+    _touchMapCoord=[_mapView convertPoint:touchPoint toCoordinateFromView:_mapView];
+    
+    [self getAddressByLatitude:_touchMapCoord.latitude longitutde:_touchMapCoord.longitude];
     
     MKPointAnnotation *pointAnnotation=nil;
     
     pointAnnotation=[[MKPointAnnotation alloc]init];
     
-    pointAnnotation.coordinate=touchMapCoordinate;
+    pointAnnotation.coordinate=_touchMapCoord;
     
     pointAnnotation.title=@"设置地点";
     
@@ -226,9 +275,7 @@
 }
 
 
--(void)startUpdatingLocation {
-    
-}
+
 
 
 -(void)MovePreviousVc:(UIButton*)sender {
@@ -237,7 +284,11 @@
 
 
 -(void)MoveNextVc:(UIButton*)sender {
-    [_delegate PassMapValue:_mapView];
-    [self.navigationController popViewControllerAnimated:YES];
+   // [_delegate PassMapValue:_mapView];
+    if (_placemark!=nil && _touchMapCoord.latitude!=0 && _touchMapCoord.longitude!=0) {
+        [_delegate PassMapValue:_placemark Coordinate:_touchMapCoord];
+
+    }
+        [self.navigationController popViewControllerAnimated:YES];
 }
 @end

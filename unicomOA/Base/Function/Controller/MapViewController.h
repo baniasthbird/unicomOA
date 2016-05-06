@@ -9,12 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "UserInfo.h"
 #import <MapKit/MapKit.h>
+#import <CoreLocation/CoreLocation.h>
 
 @class  MapViewController;
 
 @protocol MapViewControllerDelegate <NSObject>
 
--(void)PassMapValue:(MKMapView*)mapView;
+-(void)PassMapValue:(CLPlacemark*)placemark Coordinate:(CLLocationCoordinate2D)touchmapcoord;
 
 @end
 
@@ -24,5 +25,9 @@
 @property (nonatomic,strong) UserInfo *userInfo;
 
 @property (nonatomic,unsafe_unretained) id<MapViewControllerDelegate> delegate;
+
+@property  CLLocationCoordinate2D touchMapCoord;
+
+@property (nonatomic,strong) CLPlacemark *placemark;
 
 @end

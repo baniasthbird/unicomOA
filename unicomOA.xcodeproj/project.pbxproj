@@ -103,6 +103,7 @@
 		6838153F1CBCCB2A00E6AFD3 /* PrintApplicationDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 6838153E1CBCCB2A00E6AFD3 /* PrintApplicationDetail.m */; };
 		683815421CBCDAA400E6AFD3 /* PrintFileDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 683815411CBCDAA400E6AFD3 /* PrintFileDetail.m */; };
 		683815451CBCE28500E6AFD3 /* PrintFileNavCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 683815441CBCE28500E6AFD3 /* PrintFileNavCell.m */; };
+		683EFF5F1CDC7B9C0049326B /* locate.png in Resources */ = {isa = PBXBuildFile; fileRef = 683EFF5E1CDC7B9C0049326B /* locate.png */; };
 		6846D3531CAB5A1E004BD285 /* IVotingManamentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6846D3521CAB5A1E004BD285 /* IVotingManamentController.m */; };
 		6846D3561CAB62B1004BD285 /* VotingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6846D3551CAB62B1004BD285 /* VotingCell.m */; };
 		6846D3591CABA8AC004BD285 /* IVotingDisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6846D3581CABA8AC004BD285 /* IVotingDisplayController.m */; };
@@ -420,6 +421,9 @@
 		683815411CBCDAA400E6AFD3 /* PrintFileDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrintFileDetail.m; path = Base/Function/ShenPiContorller/PrintFileDetail.m; sourceTree = "<group>"; };
 		683815431CBCE28500E6AFD3 /* PrintFileNavCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrintFileNavCell.h; path = Base/Function/ShenPiModel/PrintFileNavCell.h; sourceTree = "<group>"; };
 		683815441CBCE28500E6AFD3 /* PrintFileNavCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrintFileNavCell.m; path = Base/Function/ShenPiModel/PrintFileNavCell.m; sourceTree = "<group>"; };
+		683EFF5C1CDC22D40049326B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		683EFF5D1CDC22D40049326B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		683EFF5E1CDC7B9C0049326B /* locate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = locate.png; sourceTree = "<group>"; };
 		6846D3511CAB5A1E004BD285 /* IVotingManamentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IVotingManamentController.h; path = Base/Function/IVotingCotroller/IVotingManamentController.h; sourceTree = "<group>"; };
 		6846D3521CAB5A1E004BD285 /* IVotingManamentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IVotingManamentController.m; path = Base/Function/IVotingCotroller/IVotingManamentController.m; sourceTree = "<group>"; };
 		6846D3541CAB62B1004BD285 /* VotingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VotingCell.h; path = Base/Function/IVotingModel/VotingCell.h; sourceTree = "<group>"; };
@@ -1474,6 +1478,7 @@
 		68F8E1661CD042AA005D2727 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				683EFF5E1CDC7B9C0049326B /* locate.png */,
 				68A349B11CD8A90500E2851B /* remind.png */,
 				2CBA8E1C1CD3B33400BDF625 /* carmission.png */,
 				2CBA8E1D1CD3B33400BDF625 /* mission_done.png */,
@@ -1638,6 +1643,7 @@
 				68E779EF1CB34A8E006DA5B9 /* Level0_Cell.xib in Resources */,
 				68EEDE591CBB2E19003295EB /* SYS_AREA.xml in Resources */,
 				68F8E17F1CD042AA005D2727 /* membertablecell.png in Resources */,
+				683EFF5F1CDC7B9C0049326B /* locate.png in Resources */,
 				68F8E17B1CD042AA005D2727 /* checkbox_unchecked.png in Resources */,
 				2C35B0571C7062160003BF6C /* Assets.xcassets in Resources */,
 				2CBA8E211CD3B33400BDF625 /* mission_done.png in Resources */,
@@ -1927,6 +1933,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				2C35B0541C7062160003BF6C /* Base */,
+				683EFF5C1CDC22D40049326B /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -1935,6 +1942,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				2C35B0591C7062160003BF6C /* Base */,
+				683EFF5D1CDC22D40049326B /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
