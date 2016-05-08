@@ -233,13 +233,15 @@ static NSString *kBaseUrl=@"http://192.168.12.12:8080/default/mobile/user/com.hn
 }
 
 -(void) InitDataBase {
-    DataBase *db_local=[DataBase sharedinstanceDB];
+    _db=[DataBase sharedinstanceDB];
     //创建数据库
-    [db_local initTables];
+    [_db initTables];
     //添加IP数据
-    [db_local InsertIPTable:@"192.168.12.12" port:@"8080" IP_Mark:@"TestServer"];
+    [_db InsertIPTable:@"192.168.12.12" port:@"8080" IP_Mark:@"TestServer"];
     //添加接口数据
-    [db_local InsertInterFaceTable];
+    [_db InsertInterFaceTable];
+    
+    
     
 }
 

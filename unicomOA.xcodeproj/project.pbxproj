@@ -23,6 +23,7 @@
 		2C5460BD1C854733005C5AB9 /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5460BB1C854733005C5AB9 /* TableViewCell.m */; };
 		2C5460BE1C854733005C5AB9 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C5460BC1C854733005C5AB9 /* TableViewCell.xib */; };
 		2C703CF21CDECD1100C7EF77 /* DataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C703CF11CDECD1100C7EF77 /* DataBase.m */; };
+		2C703CF51CDF76AC00C7EF77 /* libFMDB.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C703CF41CDF76AC00C7EF77 /* libFMDB.a */; };
 		2C74F0791CAEACDA00CC5C5F /* PhoneLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C74F0781CAEACDA00CC5C5F /* PhoneLabelView.m */; };
 		2C99721E1CA21E0E00B803FC /* ChangePhoneNumStep3.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C99721D1CA21E0E00B803FC /* ChangePhoneNumStep3.m */; };
 		2C9DDEC81CD8E257009462E6 /* RemindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C9DDEC31CD8E257009462E6 /* RemindViewController.m */; };
@@ -268,6 +269,7 @@
 		2C703CF01CDECD1100C7EF77 /* DataBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataBase.h; path = DevKit/db/DataBase.h; sourceTree = "<group>"; };
 		2C703CF11CDECD1100C7EF77 /* DataBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataBase.m; path = DevKit/db/DataBase.m; sourceTree = "<group>"; };
 		2C703CF31CDEE0E900C7EF77 /* DBDef.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DBDef.h; sourceTree = "<group>"; };
+		2C703CF41CDF76AC00C7EF77 /* libFMDB.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFMDB.a; path = "../../../../Library/Developer/Xcode/DerivedData/unicomOA-awshgoxpwijpeqfufvzpieuvcfmu/Build/Products/Debug-iphonesimulator/libFMDB.a"; sourceTree = "<group>"; };
 		2C74F0771CAEACDA00CC5C5F /* PhoneLabelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhoneLabelView.h; path = Base/Contact/View/PhoneLabelView.h; sourceTree = "<group>"; };
 		2C74F0781CAEACDA00CC5C5F /* PhoneLabelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhoneLabelView.m; path = Base/Contact/View/PhoneLabelView.m; sourceTree = "<group>"; };
 		2C99721C1CA21E0E00B803FC /* ChangePhoneNumStep3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChangePhoneNumStep3.h; path = Base/Settings/Controller/ChangePhoneNumStep3.h; sourceTree = "<group>"; };
@@ -626,6 +628,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C703CF51CDF76AC00C7EF77 /* libFMDB.a in Frameworks */,
 				68008F511CDAE27F001A4D64 /* CoreLocation.framework in Frameworks */,
 				68008F4F1CDADE49001A4D64 /* libAFNetworking.a in Frameworks */,
 				2C9DDECF1CDA3653009462E6 /* libsqlite3.dylib in Frameworks */,
@@ -658,6 +661,7 @@
 		04DF743BC07CED8E72262A08 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2C703CF41CDF76AC00C7EF77 /* libFMDB.a */,
 				68008F501CDAE27F001A4D64 /* CoreLocation.framework */,
 				68008F4E1CDADE49001A4D64 /* libAFNetworking.a */,
 				2C9DDECE1CDA3653009462E6 /* libsqlite3.dylib */,
