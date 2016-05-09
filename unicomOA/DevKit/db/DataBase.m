@@ -29,7 +29,11 @@
     }
 }
 
-
+- (void)deallocDataBase
+{
+    _database = nil;
+}
+    
 //单例
 +(DataBase *)sharedinstanceDB {
     static DataBase *sharedInstanceDB=nil;
@@ -45,18 +49,19 @@
     self=[super init];
     if (self) {
         NSString *dbname=@"Mydatabase.db";
-        NSLog(@"database init");
         _database=[[FMDatabase alloc] initWithPath:[self databasePath:dbname]];
+         NSLog(@"database init");
     }
     return self;
 }
 
 -(NSString *)databasePath:(NSString*)userName {
-    NSString *dir=[NSString stringWithFormat:@"%@/%@/%@",NSHomeDirectory(),@"Library",userName];
-    if ([[NSFileManager defaultManager] fileExistsAtPath:dir]) {
+    NSString *dir = [NSString stringWithFormat:@"%@/%@/%@", NSHomeDirectory(), @"Library",userName];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:dir]){
         [[NSFileManager defaultManager] createDirectoryAtPath:dir withIntermediateDirectories:YES attributes:nil error:nil];
     }
-    return [NSString stringWithFormat:@"%@/note.db",dir];
+    return  [NSString stringWithFormat:@"%@/note.db",dir];
+   
 }
 
 //初始化数据库所有的表
@@ -272,7 +277,7 @@
 -(NSString*)fetchInterface:(NSString *)str_key {
     [_database open];
     NSString *str_interface_value=@"";
-    NSString *sql=[NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@ = %@ ", INTERFACE_TABLENAME,INTERFACE_NAME,str_key];
+    NSString *sql=[NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@ = '%@' ", INTERFACE_TABLENAME,INTERFACE_NAME,str_key];
     FMResultSet *rs=[_database executeQuery:sql];
     while ([rs next]) {
         str_interface_value=[rs stringForColumn:INTERFACE_VALUE];

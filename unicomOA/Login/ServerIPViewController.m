@@ -8,12 +8,20 @@
 
 #import "ServerIPViewController.h"
 #import "LoginViewController.h"
+#import "DataBase.h"
+#import "LXAlertView.h"
 
-@interface ServerIPViewController ()
+@interface ServerIPViewController ()<UITextFieldDelegate>
+
+@property (nonatomic,strong) UITextField *txt_IP;
+
+@property (nonatomic,strong) UITextField *txt_Port;
 
 @end
 
-@implementation ServerIPViewController
+@implementation ServerIPViewController {
+    DataBase *db;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -26,6 +34,7 @@
     lbl_label.font=[UIFont boldSystemFontOfSize:22];
     lbl_label.textColor=[UIColor blackColor];
     
+    db=[DataBase sharedinstanceDB];
     
     NSDictionary * dict=@{
                           NSForegroundColorAttributeName:   [UIColor whiteColor]};
@@ -34,27 +43,54 @@
     
     self.view.backgroundColor=[UIColor colorWithRed:240.0/255.0f green:240.0/255.0f blue:240.0/255.0f alpha:1];
     
-    UITextField *txt_IP=[[UITextField alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.15, self.view.frame.size.width*0.9, self.view.frame.size.height*0.05)];
+    UIView *view_IP=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.15, self.view.frame.size.width*0.9, self.view.frame.size.height*0.05)];
+    view_IP.backgroundColor=[UIColor whiteColor];
     
-    UITextField *txt_Port=[[UITextField alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.24, self.view.frame.size.width*0.9, self.view.frame.size.height*0.05)];
+    UIView *view_Port=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.24, self.view.frame.size.width*0.9, self.view.frame.size.height*0.05)];
+    view_Port.backgroundColor=[UIColor whiteColor];
     
-    txt_IP.layer.cornerRadius=18.0f;
-    [txt_IP.layer setMasksToBounds:YES];
+    _txt_IP=[[UITextField alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.1, self.view.frame.size.height*0.15, self.view.frame.size.width*0.8, self.view.frame.size.height*0.05)];
     
-    txt_IP.backgroundColor=[UIColor whiteColor];
+    _txt_Port=[[UITextField alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.1, self.view.frame.size.height*0.24, self.view.frame.size.width*0.8, self.view.frame.size.height*0.05)];
     
-    txt_IP.placeholder=@"  请输入服务器地址";
+    _txt_IP.backgroundColor=[UIColor clearColor];
     
-    txt_Port.layer.cornerRadius=18.0f;
-    [txt_Port.layer setMasksToBounds:YES];
+    _txt_Port.backgroundColor=[UIColor clearColor];
     
-    txt_Port.backgroundColor=[UIColor whiteColor];
+    CGFloat i_cornerRadius=0;
+    if (iPhone6 || iPhone6_plus) {
+        i_cornerRadius=18.0f;
+    }
+    else {
+        i_cornerRadius=13.0f;
+    }
+    //_txt_IP.layer.cornerRadius=i_cornerRadius;
+    view_IP.layer.cornerRadius=i_cornerRadius;
+    view_Port.layer.cornerRadius=i_cornerRadius;
+    [_txt_IP.layer setMasksToBounds:YES];
     
-    txt_Port.placeholder=@"  请输入服务器端口";
+    _txt_IP.backgroundColor=[UIColor whiteColor];
+    
+    _txt_IP.placeholder=@"  请输入服务器地址";
+    
+    _txt_IP.delegate=self;
+    
+    //_txt_Port.layer.cornerRadius=i_cornerRadius;
+    [_txt_Port.layer setMasksToBounds:YES];
+    
+    _txt_Port.backgroundColor=[UIColor whiteColor];
+    
+    _txt_Port.placeholder=@"  请输入服务器端口";
+    
+    _txt_Port.delegate=self;
+    
+    _txt_IP.keyboardType=UIKeyboardTypeDecimalPad;
+    
+    _txt_Port.keyboardType=UIKeyboardTypeNumberPad;
     
     
     UIButton *btn_OK=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.2, self.view.frame.size.height*0.45, self.view.frame.size.width*0.6, self.view.frame.size.height*0.05)];
-    btn_OK.layer.cornerRadius=18.0f;
+    btn_OK.layer.cornerRadius=i_cornerRadius;
     [btn_OK.layer setMasksToBounds:YES];
     btn_OK.backgroundColor=[UIColor colorWithRed:69/255.0f green:115/255.0f blue:230/255.0f alpha:1];
     [btn_OK setTitle:@"确定" forState:UIControlStateNormal];
@@ -62,11 +98,16 @@
     btn_OK.titleLabel.font=[UIFont systemFontOfSize:22];
     [btn_OK addTarget:self action:@selector(backToLogin:) forControlEvents:UIControlEventTouchUpInside];
     
+    
     [self.view addSubview:lbl_label];
     
-    [self.view addSubview:txt_IP];
+    [self.view addSubview:view_IP];
     
-    [self.view addSubview:txt_Port];
+    [self.view addSubview:view_Port];
+    
+    [self.view addSubview:_txt_IP];
+    
+    [self.view addSubview:_txt_Port];
     
     [self.view addSubview:btn_OK];
     
@@ -87,12 +128,61 @@
 }
 
 -(void)backToLogin:(UIButton*)sender {
-    LoginViewController *vc=[[LoginViewController alloc]init];
-    [self.navigationController pushViewController:vc animated:YES];
+    //将修改后的服务器IP及地址存储至数据库
+    NSString *str_ip=_txt_IP.text;
+    NSString *str_port=_txt_Port.text;
+    BOOL b_Flag=YES;
+    if (str_ip!=nil && str_port!=nil) {
+        @try {
+            NSArray *arr_ip=[str_ip componentsSeparatedByString:@"."];
+            int i_port=[str_port intValue];
+            if (i_port>65535) {
+                b_Flag=NO;
+            }
+            for (int i=0;i<arr_ip.count;i++) {
+                NSString *str_ip_part=[arr_ip objectAtIndex:i];
+                int i_part=[str_ip_part intValue];
+                if (i_part>255) {
+                    b_Flag=NO;
+                    break;
+                }
+            }
+            if (b_Flag==NO) {
+                LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"警告" message:@"请输入正确的IP地址或端口号" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+                }];
+                [alert showLXAlertView];
+                return;
+            }
+            else {
+                [db UpdateIPTable:str_ip port:str_port IP_Mark:@"Server"];
+                LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"提示" message:@"更新服务器配置成功" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+                }];
+                [alert showLXAlertView];
+            }
+        } @catch (NSException *exception) {
+            LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"警告" message:@"请输入正确的IP地址或端口号" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+                NSLog(@"点击index====%ld",clickIndex);
+            }];
+            [alert showLXAlertView];
+            return;
+        } @finally {
+            
+        }
+        
+    }
+    
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 -(void)MovePreviousVc:(UIButton*)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self.txt_IP resignFirstResponder];
+    [self.txt_Port resignFirstResponder];
+    return YES;
 }
 
 

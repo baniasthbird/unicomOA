@@ -10,6 +10,8 @@
 #import "CLTree.h"
 #import "MemberInfoViewController.h"
 #import "DataSource.h"
+#import "DataBase.h"
+#import "AFNetworking.h"
 
 
 @interface ContactViewControllerNew()
@@ -22,9 +24,13 @@
 
 @property (strong,nonatomic) UITableView *tableView;
 
+@property (nonatomic,strong) AFHTTPSessionManager *session;
+
 @end
 
-@implementation ContactViewControllerNew
+@implementation ContactViewControllerNew {
+    DataBase *db;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -69,6 +75,12 @@
     [bg_base addSubview:bg_View];
     [bg_base sendSubviewToBack:bg_View];
     
+    db=[DataBase sharedinstanceDB];
+    
+    _session=[AFHTTPSessionManager manager];
+    _session.responseSerializer= [AFHTTPResponseSerializer serializer];
+    [_session.requestSerializer setHTTPShouldHandleCookies:YES];
+
     
     self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, i_Height, self.view.frame.size.width, self.view.frame.size.height-100)];
     self.tableView.delegate=self;
@@ -124,6 +136,8 @@
      */
     //初始化将要显示的数据
     [self reloadDataForDisplayArray];
+    
+    
     
 }
 

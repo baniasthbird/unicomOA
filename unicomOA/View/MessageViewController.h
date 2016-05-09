@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "OAViewController.h"
 #import "UserInfo.h"
+#import "DataBase.h"
+#import "AFNetworking.h"
 
 @interface MessageViewController : UIViewController
 

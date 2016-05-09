@@ -15,13 +15,20 @@
 #import "AboutViewController.h"
 #import "StaffInfoViewController.h"
 #import "LXAlertView.h"
+#import "AFHTTPSessionManager.h"
+#import "DataBase.h"
 
 
 @interface SettingViewController ()
 @property (strong,nonatomic) NSMutableArray *groups;
+
+//连接
+@property (nonatomic,strong) AFHTTPSessionManager *session;
 @end
 
-@implementation SettingViewController
+@implementation SettingViewController {
+    DataBase *db;
+}
 
 
 - (NSMutableArray *) groups
@@ -84,7 +91,11 @@
     [self.navigationItem setHidesBackButton:YES];
     
     self.view.backgroundColor=[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1];
+    db=[DataBase sharedinstanceDB];
     
+    _session=[AFHTTPSessionManager manager];
+    _session.responseSerializer= [AFHTTPResponseSerializer serializer];
+    [_session.requestSerializer setHTTPShouldHandleCookies:YES];
     
     //添加第一组
     LGSettingSection *section1=[LGSettingSection initWithHeaderTitle:@"" footerTitle:nil];
@@ -346,9 +357,54 @@
 
 
 -(void)QuitUser:(UIButton*)sender {
+    NSString *str_ip=@"";
+    NSString *str_port=@"";
+    NSMutableArray *t_array=[db fetchIPAddress];
+    if (t_array.count==1) {
+        NSArray *arr_ip=[t_array objectAtIndex:0];
+        str_ip=[arr_ip objectAtIndex:0];
+        str_port=[arr_ip objectAtIndex:1];
+    }
+    NSString *str_interface=[db fetchInterface:@"Logout"];
+    NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_interface];
+    
+    [_session POST:str_url parameters:nil progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"请求成功:%@",responseObject);
+        NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        NSLog(@"请求JSON成功:%@",JSON);
+        NSString *str_success= [JSON objectForKey:@"success"];
+        int i_success=[str_success intValue];
+        if (i_success==1) {
+            NSLog(@"退出成功");
+            //显示未登陆
+            [self ClearUserInfo];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        //离线模式
+        
+    }];
     
 }
 
+
+
+//更改UserInfo为空，显示未登录
+-(void)ClearUserInfo {
+    self.userInfo=nil;
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:nil forKey:@"user"];
+    UITableViewCell *cell=[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    UILabel *lbl_txt=(UILabel*)[cell.subviews objectAtIndex:2];
+    lbl_txt.text=@"";
+    UIImageView *img=(UIImageView*)[cell.subviews objectAtIndex:3];
+    img.image=nil;
+    NSIndexPath *index=[NSIndexPath indexPathForRow:0 inSection:0];
+    //[self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:index,nil] withRowAnimation:UITableViewRowAnimationNone];
+    [self.tableView reloadData];
+}
 
 /*
  

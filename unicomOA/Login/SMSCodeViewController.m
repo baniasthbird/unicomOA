@@ -13,6 +13,8 @@
 
 @property (nonatomic,strong) UIButton *btn_send;
 
+@property (nonatomic,strong) UITextField *txt_Field;
+
 @end
 
 @implementation SMSCodeViewController
@@ -37,12 +39,17 @@
     [barButtonItem setTitleTextAttributes:dict forState:UIControlStateNormal];
     self.navigationItem.leftBarButtonItem = barButtonItem;
 
-    UITextField *txt_Field=[[UITextField alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.06, self.view.frame.size.width*0.9, 50)];
-    txt_Field.placeholder=@"请输入短信验证码";
-    txt_Field.backgroundColor=[UIColor whiteColor];
-    txt_Field.keyboardType=UIKeyboardTypeNumberPad;
-    txt_Field.layer.cornerRadius=25.0f;
-    [txt_Field.layer setMasksToBounds:YES];
+    UIView *view_Field=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.06, self.view.frame.size.width*0.9, 50)];
+    view_Field.backgroundColor=[UIColor whiteColor];
+    view_Field.layer.cornerRadius=25.0f;
+    
+    
+    _txt_Field=[[UITextField alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.1, self.view.frame.size.height*0.06, self.view.frame.size.width*0.8, 50)];
+    _txt_Field.placeholder=@"请输入短信验证码";
+    _txt_Field.backgroundColor=[UIColor clearColor];
+    _txt_Field.keyboardType=UIKeyboardTypeNumberPad;
+   // _txt_Field.layer.cornerRadius=25.0f;
+    [_txt_Field.layer setMasksToBounds:YES];
     CGFloat i_Float=0;
     if (iPhone6_plus || iPhone6) {
         i_Float=20;
@@ -58,16 +65,16 @@
     [attributedStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:173/255.0f green:173/255.0f blue:173/255.0f alpha:1] range:NSMakeRange(0, attributedStr.length)];
     [attributedStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:i_Float] range:NSMakeRange(0, attributedStr.length)];
     
-    txt_Field.attributedPlaceholder=attributedStr;
+    _txt_Field.attributedPlaceholder=attributedStr;
     
-    txt_Field.font=[UIFont systemFontOfSize:i_Float];
+    _txt_Field.font=[UIFont systemFontOfSize:i_Float];
     
     
     if (iPhone6 || iPhone6_plus) {
         _btn_send=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.08, self.view.frame.size.height*0.16, self.view.frame.size.width*0.4, self.view.frame.size.height*0.05)];
     }
     else {
-        _btn_send=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.08, self.view.frame.size.height*0.16, self.view.frame.size.width*0.5, self.view.frame.size.height*0.06)];
+        _btn_send=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.08, self.view.frame.size.height*0.18, self.view.frame.size.width*0.5, self.view.frame.size.height*0.06)];
     }
     
     _btn_send.backgroundColor=[UIColor colorWithRed:70/255.0f green:155/255.0f blue:230/255.0f alpha:1];
@@ -78,8 +85,10 @@
     [_btn_send.layer setMasksToBounds:YES];
     [_btn_send addTarget:self action:@selector(startTime) forControlEvents:UIControlEventTouchUpInside];
 
-    [self.view addSubview:txt_Field];
+     [self.view addSubview:view_Field];
+    [self.view addSubview:_txt_Field];
     [self.view addSubview:_btn_send];
+   
 }
 
 - (void)didReceiveMemoryWarning {

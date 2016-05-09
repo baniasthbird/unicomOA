@@ -9,7 +9,7 @@
 #import "forgetPasswordViewController.h"
 #import "SMSCodeViewController.h"
 
-@interface forgetPasswordViewController()
+@interface forgetPasswordViewController()<UITextFieldDelegate>
 {
     UIView *bgView;
     //UITextField *phone;
@@ -25,6 +25,7 @@
 @property(copy, nonatomic) NSString *smsId;
 @property (nonatomic, strong) UITextField *phone;
 
+@property (nonatomic,strong) UITextField *txt_Num;
 
 @end
 
@@ -44,14 +45,18 @@
     
     self.view.backgroundColor=[UIColor colorWithRed:240/255.0f green:240/255.0f blue:240/255.0f alpha:1];
     
-    UITextField *txt_Num=[[UITextField alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.06, self.view.frame.size.width*0.9, 50)];
-    txt_Num.backgroundColor=[UIColor whiteColor];
-    txt_Num.placeholder=@"   请输入手机号码";
-    txt_Num.keyboardType=UIKeyboardTypeNumberPad;
+    UIView *view_Num=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.06, self.view.frame.size.width*0.9, 50)];
+    view_Num.layer.cornerRadius=25.0f;
+    view_Num.backgroundColor=[UIColor whiteColor];
     
-    txt_Num.layer.cornerRadius=25.0f;
+    _txt_Num=[[UITextField alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.1, self.view.frame.size.height*0.06, self.view.frame.size.width*0.8, 50)];
+    _txt_Num.backgroundColor=[UIColor whiteColor];
+    _txt_Num.placeholder=@"请输入手机号码";
+    _txt_Num.keyboardType=UIKeyboardTypeNumberPad;
+    _txt_Num.backgroundColor=[UIColor clearColor];
+  //  _txt_Num.layer.cornerRadius=25.0f;
     
-    [txt_Num.layer setMasksToBounds:YES];
+    [_txt_Num.layer setMasksToBounds:YES];
     
     NSMutableAttributedString *attributedStr=[[NSMutableAttributedString alloc]initWithString:@"    请输入手机号码"];
     
@@ -65,9 +70,9 @@
     }
     [attributedStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:i_Float] range:NSMakeRange(0, attributedStr.length)];
     
-    txt_Num.attributedPlaceholder=attributedStr;
+    _txt_Num.attributedPlaceholder=attributedStr;
 
-    txt_Num.font=[UIFont systemFontOfSize:i_Float];
+    _txt_Num.font=[UIFont systemFontOfSize:i_Float];
     
     
     
@@ -76,7 +81,8 @@
     lbl_txt1.textColor=[UIColor colorWithRed:136/255.0f green:136/255.0f blue:136/255.0f alpha:1];
     lbl_txt1.font=[UIFont boldSystemFontOfSize:i_Float];
     
-    [self.view addSubview:txt_Num];
+    [self.view addSubview:view_Num];
+    [self.view addSubview:_txt_Num];
     [self.view addSubview:lbl_txt1];
     
     
@@ -307,6 +313,10 @@
     
 }
 
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [_txt_Num resignFirstResponder];
+    return YES;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

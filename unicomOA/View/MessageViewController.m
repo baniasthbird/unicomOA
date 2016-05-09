@@ -17,9 +17,13 @@
 
 @property  NSUInteger count;
 
+@property (nonatomic,strong) AFHTTPSessionManager *session;
+
 @end
 
-@implementation MessageViewController
+@implementation MessageViewController {
+    DataBase *db;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -56,6 +60,14 @@
     
     
     [self.view addSubview:_tableView];
+    
+    db=[DataBase sharedinstanceDB];
+    
+    _session=[AFHTTPSessionManager manager];
+    _session.responseSerializer= [AFHTTPResponseSerializer serializer];
+    [_session.requestSerializer setHTTPShouldHandleCookies:YES];
+    
+    
     
     _count=5;
 }

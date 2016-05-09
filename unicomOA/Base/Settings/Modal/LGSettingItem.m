@@ -15,7 +15,13 @@
     
     LGSettingItem *item = [[LGSettingItem alloc]init];
     item.title = title;
-    item.height = 45;
+    if (iPhone4_4s || iPhone5_5s) {
+        item.height = 40;
+    }
+    else {
+        item.height=45;
+    }
+    
     item.type = UITableViewCellAccessoryDisclosureIndicator;
     return item;
 }

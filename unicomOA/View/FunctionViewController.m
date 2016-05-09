@@ -15,6 +15,8 @@
 #import "UIView+Frame.h"
 #import "WZLBadgeImport.h"
 #import "ShenPiManagementController.h"
+#import "DataBase.h"
+#import "AFNetworking.h"
 
 #define kImageWidth 100      //UITAbleViewCell里面图片的宽度
 #define kImageHeight 100     //UITableViewCell里面图片的高度
@@ -24,9 +26,13 @@
 @property(nonatomic,strong) UITableView *tableView;
 @property(nonatomic,strong) UIImage *image;
 
+@property (nonatomic,strong) AFHTTPSessionManager *session;
+
 @end
 
-@implementation FunctionViewController
+@implementation FunctionViewController {
+    DataBase *db;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -38,8 +44,6 @@
         
         self.navigationController.navigationBar.titleTextAttributes=dict;
         self.title = @"应用";
-       
-        
     }
     return self;
 }
@@ -84,6 +88,13 @@
     self.tableView.backgroundColor=[UIColor clearColor];
     
     [self.view addSubview:img_View];
+    
+    db=[DataBase sharedinstanceDB];
+    
+    _session=[AFHTTPSessionManager manager];
+    _session.responseSerializer= [AFHTTPResponseSerializer serializer];
+    [_session.requestSerializer setHTTPShouldHandleCookies:YES];
+
 }
 
 - (void)didReceiveMemoryWarning {

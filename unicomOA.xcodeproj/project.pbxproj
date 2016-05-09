@@ -23,7 +23,6 @@
 		2C5460BD1C854733005C5AB9 /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5460BB1C854733005C5AB9 /* TableViewCell.m */; };
 		2C5460BE1C854733005C5AB9 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C5460BC1C854733005C5AB9 /* TableViewCell.xib */; };
 		2C703CF21CDECD1100C7EF77 /* DataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C703CF11CDECD1100C7EF77 /* DataBase.m */; };
-		2C703CF51CDF76AC00C7EF77 /* libFMDB.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C703CF41CDF76AC00C7EF77 /* libFMDB.a */; };
 		2C74F0791CAEACDA00CC5C5F /* PhoneLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C74F0781CAEACDA00CC5C5F /* PhoneLabelView.m */; };
 		2C99721E1CA21E0E00B803FC /* ChangePhoneNumStep3.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C99721D1CA21E0E00B803FC /* ChangePhoneNumStep3.m */; };
 		2C9DDEC81CD8E257009462E6 /* RemindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C9DDEC31CD8E257009462E6 /* RemindViewController.m */; };
@@ -121,6 +120,8 @@
 		68579FA61CC0C21100597FBD /* CarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68579FA51CC0C21100597FBD /* CarModel.m */; };
 		68579FA91CC0C88600597FBD /* CarDeployCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68579FA81CC0C88600597FBD /* CarDeployCell.m */; };
 		68815DC71CCDC45400277807 /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68815DC61CCDC45400277807 /* CommentCell.m */; };
+		6882288D1CE013A1007F5861 /* libFMDB.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6882288C1CE013A1007F5861 /* libFMDB.a */; };
+		6882288F1CE01D96007F5861 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6882288E1CE01D96007F5861 /* libsqlite3.0.tbd */; };
 		6882C3181CA8D78300CDEB1A /* LogoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6882C3171CA8D78300CDEB1A /* LogoView.m */; };
 		6882C3211CA92C4B00CDEB1A /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6882C3201CA92C4B00CDEB1A /* CommentViewController.m */; };
 		6884D2D01CD98B4A006215E5 /* UIView+MGBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6884D2CF1CD98B4A006215E5 /* UIView+MGBadgeView.m */; };
@@ -269,7 +270,6 @@
 		2C703CF01CDECD1100C7EF77 /* DataBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataBase.h; path = DevKit/db/DataBase.h; sourceTree = "<group>"; };
 		2C703CF11CDECD1100C7EF77 /* DataBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataBase.m; path = DevKit/db/DataBase.m; sourceTree = "<group>"; };
 		2C703CF31CDEE0E900C7EF77 /* DBDef.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DBDef.h; sourceTree = "<group>"; };
-		2C703CF41CDF76AC00C7EF77 /* libFMDB.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFMDB.a; path = "../../../../Library/Developer/Xcode/DerivedData/unicomOA-awshgoxpwijpeqfufvzpieuvcfmu/Build/Products/Debug-iphonesimulator/libFMDB.a"; sourceTree = "<group>"; };
 		2C74F0771CAEACDA00CC5C5F /* PhoneLabelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhoneLabelView.h; path = Base/Contact/View/PhoneLabelView.h; sourceTree = "<group>"; };
 		2C74F0781CAEACDA00CC5C5F /* PhoneLabelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhoneLabelView.m; path = Base/Contact/View/PhoneLabelView.m; sourceTree = "<group>"; };
 		2C99721C1CA21E0E00B803FC /* ChangePhoneNumStep3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChangePhoneNumStep3.h; path = Base/Settings/Controller/ChangePhoneNumStep3.h; sourceTree = "<group>"; };
@@ -455,6 +455,8 @@
 		68579FA81CC0C88600597FBD /* CarDeployCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CarDeployCell.m; path = Base/Function/ShenPiModel/CarDeployCell.m; sourceTree = "<group>"; };
 		68815DC51CCDC45400277807 /* CommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommentCell.h; path = Base/Function/NewsModel/CommentCell.h; sourceTree = "<group>"; };
 		68815DC61CCDC45400277807 /* CommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommentCell.m; path = Base/Function/NewsModel/CommentCell.m; sourceTree = "<group>"; };
+		6882288C1CE013A1007F5861 /* libFMDB.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFMDB.a; path = "../../../Library/Developer/Xcode/DerivedData/unicomOA-casyuftkadckdjdwnuvyvlrozdco/Build/Products/Debug-iphonesimulator/libFMDB.a"; sourceTree = "<group>"; };
+		6882288E1CE01D96007F5861 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		6882C3161CA8D78300CDEB1A /* LogoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LogoView.h; path = Base/Contact/View/LogoView.h; sourceTree = "<group>"; };
 		6882C3171CA8D78300CDEB1A /* LogoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LogoView.m; path = Base/Contact/View/LogoView.m; sourceTree = "<group>"; };
 		6882C31F1CA92C4B00CDEB1A /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommentViewController.h; path = Base/Function/NewsController/CommentViewController.h; sourceTree = "<group>"; };
@@ -628,7 +630,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C703CF51CDF76AC00C7EF77 /* libFMDB.a in Frameworks */,
+				6882288F1CE01D96007F5861 /* libsqlite3.0.tbd in Frameworks */,
+				6882288D1CE013A1007F5861 /* libFMDB.a in Frameworks */,
 				68008F511CDAE27F001A4D64 /* CoreLocation.framework in Frameworks */,
 				68008F4F1CDADE49001A4D64 /* libAFNetworking.a in Frameworks */,
 				2C9DDECF1CDA3653009462E6 /* libsqlite3.dylib in Frameworks */,
@@ -661,7 +664,8 @@
 		04DF743BC07CED8E72262A08 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				2C703CF41CDF76AC00C7EF77 /* libFMDB.a */,
+				6882288E1CE01D96007F5861 /* libsqlite3.0.tbd */,
+				6882288C1CE013A1007F5861 /* libFMDB.a */,
 				68008F501CDAE27F001A4D64 /* CoreLocation.framework */,
 				68008F4E1CDADE49001A4D64 /* libAFNetworking.a */,
 				2C9DDECE1CDA3653009462E6 /* libsqlite3.dylib */,

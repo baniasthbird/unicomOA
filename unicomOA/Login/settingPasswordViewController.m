@@ -9,21 +9,28 @@
 #import "settingPasswordViewController.h"
 #import "settingHeaderViewController.h"
 #import "LoginViewController.h"
+#import "AFNetWorking.h"
+#import "DataBase.h"
 
 @interface settingPasswordViewController ()
 {
-    
     BOOL b_isSecure;
-
 }
 
 @property (nonatomic,strong) UITextField *txt_Pwd;
 
 @property (nonatomic,strong) UITextField *txt_Pwd2;
 
+@property (nonatomic,strong) UITextField *txt_OldPwd;
+
+//连接
+@property (nonatomic,strong) AFHTTPSessionManager *session;
+
 @end
 
-@implementation settingPasswordViewController
+@implementation settingPasswordViewController {
+    DataBase *db;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -53,37 +60,70 @@
         i_Float=16;
     }
 
+    db=[DataBase sharedinstanceDB];
+    _session=[AFHTTPSessionManager manager];
+    _session.responseSerializer= [AFHTTPResponseSerializer serializer];
+    [_session.requestSerializer setHTTPShouldHandleCookies:YES];
+
+    
+    UIView *view_OldPwd;
+    UIView *view_Pwd;
+    UIView *view_Pwd2;
     
     if (iPhone6_plus || iPhone6) {
-        _txt_Pwd=[self CreateTextFiled:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.06, self.view.frame.size.width*0.9, 50) placeholder:@"     请输入新密码" security:YES fontsize:i_Float];
+        view_OldPwd=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.06, self.view.frame.size.width*0.9, 50)];
+        view_Pwd=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.2, self.view.frame.size.width*0.9, 50)];
         
+        view_Pwd2=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.34, self.view.frame.size.width*0.9, 50)];
         
-        _txt_Pwd2=[self CreateTextFiled:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.20, self.view.frame.size.width*0.9, 50) placeholder:@"     再次输入密码" security:YES fontsize:i_Float];
+        _txt_OldPwd=[self CreateTextFiled:CGRectMake(self.view.frame.size.width*0.1, self.view.frame.size.height*0.06, self.view.frame.size.width*0.8, 50) placeholder:@"请输入原始密码" security:YES fontsize:i_Float];
+        
+        _txt_Pwd=[self CreateTextFiled:CGRectMake(self.view.frame.size.width*0.1, self.view.frame.size.height*0.2, self.view.frame.size.width*0.8, 50) placeholder:@"请输入新密码" security:YES fontsize:i_Float];
+
+        _txt_Pwd2=[self CreateTextFiled:CGRectMake(self.view.frame.size.width*0.1, self.view.frame.size.height*0.34, self.view.frame.size.width*0.8, 50) placeholder:@"再次输入密码" security:YES fontsize:i_Float];
     }
     else {
+        view_OldPwd=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.06, self.view.frame.size.width*0.9, 50)];
         
-        _txt_Pwd=[self CreateTextFiled:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.06, self.view.frame.size.width*0.9, 50) placeholder:@"     请输入新密码" security:YES fontsize:i_Float];
+        view_Pwd=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.25, self.view.frame.size.width*0.9, 50)];
+        
+        view_Pwd2=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.44, self.view.frame.size.width*0.9, 50)];
+        
+         _txt_OldPwd=[self CreateTextFiled:CGRectMake(self.view.frame.size.width*0.1, self.view.frame.size.height*0.06, self.view.frame.size.width*0.8, 50) placeholder:@"请输入原始密码" security:YES fontsize:i_Float];
+        
+        _txt_Pwd=[self CreateTextFiled:CGRectMake(self.view.frame.size.width*0.1, self.view.frame.size.height*0.25, self.view.frame.size.width*0.8, 50) placeholder:@"请输入新密码" security:YES fontsize:i_Float];
         
         
-        _txt_Pwd2=[self CreateTextFiled:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.25, self.view.frame.size.width*0.9, 50) placeholder:@"     再次输入密码" security:YES fontsize:i_Float];
+        _txt_Pwd2=[self CreateTextFiled:CGRectMake(self.view.frame.size.width*0.1, self.view.frame.size.height*0.44, self.view.frame.size.width*0.8, 50) placeholder:@"再次输入密码" security:YES fontsize:i_Float];
         
     }
     
+    view_OldPwd.backgroundColor=[UIColor whiteColor];
+    view_OldPwd.layer.cornerRadius=25.0f;
+    
+    view_Pwd.backgroundColor=[UIColor whiteColor];
+    view_Pwd.layer.cornerRadius=25.0f;
+    
+    view_Pwd2.backgroundColor=[UIColor whiteColor];
+    view_Pwd2.layer.cornerRadius=25.0f;
 
+    
     b_isSecure=YES;
+    
+    
     
     //UISwitch *sw_pwd=[[UISwitch alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.3, self.view.frame.size.height*0., self.view.frame.size.height*0.08, self.view.frame.size.height*0.08)];
     
     UIButton *checkbox=[[UIButton alloc]initWithFrame:CGRectZero];
     
     if (iPhone6_plus) {
-        checkbox.frame=CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.14, 30, 30);
+        checkbox.frame=CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.28, 30, 30);
     }
     else if (iPhone6) {
-        checkbox.frame=CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.145, 30, 30);
+        checkbox.frame=CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.285, 30, 30);
     }
     else {
-        checkbox.frame=CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.18, 30, 30);
+        checkbox.frame=CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.36, 30, 30);
     }
     
     
@@ -98,13 +138,13 @@
     
     UILabel *lbl_Pwd;
     if (iPhone6) {
-       lbl_Pwd =[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.18, self.view.frame.size.height*0.125, self.view.frame.size.width*0.5, self.view.frame.size.height*0.08)];
+       lbl_Pwd =[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.18, self.view.frame.size.height*0.265, self.view.frame.size.width*0.5, self.view.frame.size.height*0.08)];
     }
     else if (iPhone6_plus) {
-         lbl_Pwd =[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.18, self.view.frame.size.height*0.12, self.view.frame.size.width*0.5, self.view.frame.size.height*0.08)];
+         lbl_Pwd =[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.18, self.view.frame.size.height*0.26, self.view.frame.size.width*0.5, self.view.frame.size.height*0.08)];
     }
     else {
-        lbl_Pwd =[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.18, self.view.frame.size.height*0.16, self.view.frame.size.width*0.5, self.view.frame.size.height*0.08)];
+        lbl_Pwd =[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.18, self.view.frame.size.height*0.345, self.view.frame.size.width*0.5, self.view.frame.size.height*0.08)];
     }
     
     
@@ -113,21 +153,16 @@
     
     lbl_Pwd.textColor=[UIColor blackColor];
     
+    [self.view addSubview:view_OldPwd];
+    [self.view addSubview:view_Pwd];
+    [self.view addSubview:view_Pwd2];
+    [self.view addSubview:_txt_OldPwd];
     [self.view addSubview:_txt_Pwd];
     [self.view addSubview:lbl_Pwd];
     //[self.view addSubview:sw_pwd];
     [self.view addSubview:_txt_Pwd2];
     [self.view addSubview:checkbox];
     
-    /*
-    UIBarButtonItem *addBtn = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:@selector(clickaddBtn)];
-    [addBtn setImage:[UIImage imageNamed:@"goback_back_orange_on"]];
-    [addBtn setImageInsets:UIEdgeInsetsMake(0, -15, 0, 15)];
-    addBtn.tintColor=[UIColor colorWithRed:248/255.0f green:144/255.0f blue:34/255.0f alpha:1];
-    [self.navigationItem setLeftBarButtonItem:addBtn];
-    
-    [self createTextFields];
-     */
 }
 
 
@@ -136,8 +171,19 @@
 }
 
 -(void)MoveNextVc:(UIButton*)sender {
-    LoginViewController *vc=[[LoginViewController alloc]init];
-    [self.navigationController pushViewController:vc animated:YES];
+    NSString *str_ip=@"";
+    NSString *str_port=@"";
+    NSMutableArray *t_array=[db fetchIPAddress];
+    if (t_array.count==1) {
+        NSArray *arr_ip=[t_array objectAtIndex:0];
+        str_ip=[arr_ip objectAtIndex:0];
+        str_port=[arr_ip objectAtIndex:1];
+    }
+    NSString *str_interface=[db fetchInterface:@"ChangePassword"];
+    NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_interface];
+    
+    
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -158,7 +204,7 @@
     
     txt_tmp.backgroundColor=[UIColor whiteColor];
     txt_tmp.keyboardType=UIKeyboardTypeDefault;
-    txt_tmp.layer.cornerRadius=25.0f;
+    //txt_tmp.layer.cornerRadius=25.0f;
     [txt_tmp.layer setMasksToBounds:YES];
     
     txt_tmp.secureTextEntry=b_secure;

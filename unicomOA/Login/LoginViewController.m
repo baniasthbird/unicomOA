@@ -19,13 +19,15 @@
 
 
 
-@interface LoginViewController()
+@interface LoginViewController()<UITextFieldDelegate>
 {
     UIImageView *View;
     UIView *bgView;
     UITextField *pwd;
     UITextField *user;
 }
+
+
 
 @property(copy,nonatomic) NSString * accountNumber;
 @property(copy,nonatomic) NSString *mmmm;
@@ -37,13 +39,15 @@
 
 @property BOOL i_Success;
 
-@property DataBase *db;
+
 
 @end
 
 
 
-@implementation LoginViewController
+@implementation LoginViewController {
+     DataBase *db;
+}
 
 static NSString *kServerSessionCookie=@"JSESSIONID";
 static NSString *kLocalCookieName=@"UnicomOACookie";
@@ -82,7 +86,7 @@ static NSString *kBaseUrl=@"http://192.168.12.12:8080/default/mobile/user/com.hn
     [self createTextFields];
     
     [self InitDataBase];
-    
+    db=[DataBase sharedinstanceDB];
 }
 
 -(void)createLabels {
@@ -233,13 +237,13 @@ static NSString *kBaseUrl=@"http://192.168.12.12:8080/default/mobile/user/com.hn
 }
 
 -(void) InitDataBase {
-    _db=[DataBase sharedinstanceDB];
+    DataBase *db_local=[DataBase sharedinstanceDB];
     //创建数据库
-    [_db initTables];
+    [db_local initTables];
     //添加IP数据
-    [_db InsertIPTable:@"192.168.12.12" port:@"8080" IP_Mark:@"TestServer"];
+    [db_local InsertIPTable:@"192.168.12.12" port:@"8080" IP_Mark:@"TestServer"];
     //添加接口数据
-    [_db InsertInterFaceTable];
+    [db_local InsertInterFaceTable];
     
     
     
@@ -308,6 +312,7 @@ static NSString *kBaseUrl=@"http://192.168.12.12:8080/default/mobile/user/com.hn
     //user.text=@"13419693608";
     user.keyboardType=UIKeyboardTypeNumberPad;
     user.clearButtonMode = UITextFieldViewModeWhileEditing;
+    user.delegate=self;
     
     pwd=[self createTextFielfFrame:CGRectMake(60, self.view.frame.size.height/2, self.view.frame.size.width-120, 30) font:[UIFont systemFontOfSize:20]  placeholder:@"密码" ];
     pwd.clearButtonMode = UITextFieldViewModeWhileEditing;
@@ -315,6 +320,7 @@ static NSString *kBaseUrl=@"http://192.168.12.12:8080/default/mobile/user/com.hn
     //密文样式
     pwd.secureTextEntry=YES;
     pwd.attributedPlaceholder=[[NSAttributedString alloc] initWithString:@"密码" attributes:@{NSForegroundColorAttributeName:placeholderColor}];
+    pwd.delegate=self;
     //pwd.keyboardType=UIKeyboardTypeNumberPad;
     
     
@@ -353,7 +359,7 @@ static NSString *kBaseUrl=@"http://192.168.12.12:8080/default/mobile/user/com.hn
     
 }
 
--(UIAlertController *)createAlertController: (NSString *)str_title message:(NSString*) str_message
+-(UIAlertController *)createAlertController: (NSString *)str_title message:(NSString*)str_message
 {
     UIAlertController *alertController=[UIAlertController alertControllerWithTitle:str_title message:str_message preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okAction=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil];
@@ -379,14 +385,14 @@ static NSString *kBaseUrl=@"http://192.168.12.12:8080/default/mobile/user/com.hn
 -(void)postLogin {
     NSString *str_ip=@"";
     NSString *str_port=@"";
-    NSMutableArray *t_array=[_db fetchIPAddress];
+    NSMutableArray *t_array=[db fetchIPAddress];
     if (t_array.count==1) {
         NSArray *arr_ip=[t_array objectAtIndex:0];
         str_ip=[arr_ip objectAtIndex:0];
         str_port=[arr_ip objectAtIndex:1];
     }
-    NSString *str_interface=[_db fetchInterface:@"Login"];
-    NSString *str_url=[NSString stringWithFormat:@"%@:%@%@",str_ip,str_port,str_interface];
+    NSString *str_interface=[db fetchInterface:@"Login"];
+    NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_interface];
 
     
     [_session POST:str_url parameters:_params progress:^(NSProgress * _Nonnull uploadProgress) {
@@ -531,6 +537,12 @@ static NSString *kBaseUrl=@"http://192.168.12.12:8080/default/mobile/user/com.hn
     
     return userInfo;
     
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [user resignFirstResponder];
+    [pwd resignFirstResponder];
+    return YES;
 }
 
 @end
