@@ -22,6 +22,8 @@
 		2C5460A81C82F5C3005C5AB9 /* UserEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5460A71C82F5C3005C5AB9 /* UserEntity.m */; };
 		2C5460BD1C854733005C5AB9 /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5460BB1C854733005C5AB9 /* TableViewCell.m */; };
 		2C5460BE1C854733005C5AB9 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C5460BC1C854733005C5AB9 /* TableViewCell.xib */; };
+		2C703CF21CDECD1100C7EF77 /* DataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C703CF11CDECD1100C7EF77 /* DataBase.m */; };
+		2C703CF51CDF76AC00C7EF77 /* libFMDB.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C703CF41CDF76AC00C7EF77 /* libFMDB.a */; };
 		2C74F0791CAEACDA00CC5C5F /* PhoneLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C74F0781CAEACDA00CC5C5F /* PhoneLabelView.m */; };
 		2C99721E1CA21E0E00B803FC /* ChangePhoneNumStep3.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C99721D1CA21E0E00B803FC /* ChangePhoneNumStep3.m */; };
 		2C9DDEC81CD8E257009462E6 /* RemindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C9DDEC31CD8E257009462E6 /* RemindViewController.m */; };
@@ -264,6 +266,10 @@
 		2C5460BA1C854733005C5AB9 /* TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TableViewCell.h; path = Base/Function/NotesViews/TableViewCell.h; sourceTree = "<group>"; };
 		2C5460BB1C854733005C5AB9 /* TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TableViewCell.m; path = Base/Function/NotesViews/TableViewCell.m; sourceTree = "<group>"; };
 		2C5460BC1C854733005C5AB9 /* TableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TableViewCell.xib; path = Base/Function/NotesViews/TableViewCell.xib; sourceTree = "<group>"; };
+		2C703CF01CDECD1100C7EF77 /* DataBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataBase.h; path = DevKit/db/DataBase.h; sourceTree = "<group>"; };
+		2C703CF11CDECD1100C7EF77 /* DataBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataBase.m; path = DevKit/db/DataBase.m; sourceTree = "<group>"; };
+		2C703CF31CDEE0E900C7EF77 /* DBDef.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DBDef.h; sourceTree = "<group>"; };
+		2C703CF41CDF76AC00C7EF77 /* libFMDB.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFMDB.a; path = "../../../../Library/Developer/Xcode/DerivedData/unicomOA-awshgoxpwijpeqfufvzpieuvcfmu/Build/Products/Debug-iphonesimulator/libFMDB.a"; sourceTree = "<group>"; };
 		2C74F0771CAEACDA00CC5C5F /* PhoneLabelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhoneLabelView.h; path = Base/Contact/View/PhoneLabelView.h; sourceTree = "<group>"; };
 		2C74F0781CAEACDA00CC5C5F /* PhoneLabelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhoneLabelView.m; path = Base/Contact/View/PhoneLabelView.m; sourceTree = "<group>"; };
 		2C99721C1CA21E0E00B803FC /* ChangePhoneNumStep3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChangePhoneNumStep3.h; path = Base/Settings/Controller/ChangePhoneNumStep3.h; sourceTree = "<group>"; };
@@ -622,6 +628,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C703CF51CDF76AC00C7EF77 /* libFMDB.a in Frameworks */,
 				68008F511CDAE27F001A4D64 /* CoreLocation.framework in Frameworks */,
 				68008F4F1CDADE49001A4D64 /* libAFNetworking.a in Frameworks */,
 				2C9DDECF1CDA3653009462E6 /* libsqlite3.dylib in Frameworks */,
@@ -654,6 +661,7 @@
 		04DF743BC07CED8E72262A08 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2C703CF41CDF76AC00C7EF77 /* libFMDB.a */,
 				68008F501CDAE27F001A4D64 /* CoreLocation.framework */,
 				68008F4E1CDADE49001A4D64 /* libAFNetworking.a */,
 				2C9DDECE1CDA3653009462E6 /* libsqlite3.dylib */,
@@ -692,6 +700,7 @@
 		2C35B0491C7062160003BF6C /* unicomOA */ = {
 			isa = PBXGroup;
 			children = (
+				2C703CEB1CDECCAA00C7EF77 /* DevKit */,
 				68A349B31CD8A9FF00E2851B /* MessageViewBase */,
 				68F8E1661CD042AA005D2727 /* image */,
 				6846D35D1CABC483004BD285 /* OpenSource */,
@@ -721,6 +730,7 @@
 				2CFEAD3A1C71CAFB0054730E /* WxHxD.h */,
 				2CFEADA41C769EBF0054730E /* friends.plist */,
 				2CFEADA51C769EBF0054730E /* messages.plist */,
+				2C703CF31CDEE0E900C7EF77 /* DBDef.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -764,6 +774,23 @@
 				2CB7DB611CA2C3150057633D /* ServerIPViewController.m */,
 			);
 			name = Login;
+			sourceTree = "<group>";
+		};
+		2C703CEB1CDECCAA00C7EF77 /* DevKit */ = {
+			isa = PBXGroup;
+			children = (
+				2C703CEC1CDECCB800C7EF77 /* db */,
+			);
+			name = DevKit;
+			sourceTree = "<group>";
+		};
+		2C703CEC1CDECCB800C7EF77 /* db */ = {
+			isa = PBXGroup;
+			children = (
+				2C703CF01CDECD1100C7EF77 /* DataBase.h */,
+				2C703CF11CDECD1100C7EF77 /* DataBase.m */,
+			);
+			name = db;
 			sourceTree = "<group>";
 		};
 		2C9DDEC11CD8E257009462E6 /* Controller */ = {
@@ -1813,6 +1840,7 @@
 				2CFEADD71C79CCDE0054730E /* NotesViewController.m in Sources */,
 				2CFEADD21C770D6F0054730E /* UIImageButton.m in Sources */,
 				2CDC2BDD1C8FBFC90067693B /* NewsManagementViewController.m in Sources */,
+				2C703CF21CDECD1100C7EF77 /* DataBase.m in Sources */,
 				68E779DF1CB34A8E006DA5B9 /* CLTreeView_LEVEL1_Model.m in Sources */,
 				682B68B91CB64683002EC60F /* AddPrintFileCell.m in Sources */,
 				68ED4E2B1CB49432000E8A7B /* ShenPiManagementController.m in Sources */,
@@ -2048,7 +2076,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.nsc.unicomOA;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				USER_HEADER_SEARCH_PATHS = "${SRCROOT} /**";
+				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 			};
 			name = Debug;
 		};
@@ -2068,7 +2096,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.nsc.unicomOA;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				USER_HEADER_SEARCH_PATHS = "${SRCROOT} /**";
+				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 			};
 			name = Release;
 		};

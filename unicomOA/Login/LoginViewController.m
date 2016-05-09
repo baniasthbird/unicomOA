@@ -14,6 +14,7 @@
 #import "UserInfo.h"
 #import "AFHTTPSessionManager.h"
 #import "LXAlertView.h"
+#import "DataBase.h"
 
 
 
@@ -36,6 +37,7 @@
 
 @property BOOL i_Success;
 
+@property DataBase *db;
 
 @end
 
@@ -78,6 +80,8 @@ static NSString *kBaseUrl=@"http://192.168.12.12:8080/default/mobile/user/com.hn
     [self createLabels];
     [self createButtons];
     [self createTextFields];
+    
+    [self InitDataBase];
     
 }
 
@@ -212,8 +216,8 @@ static NSString *kBaseUrl=@"http://192.168.12.12:8080/default/mobile/user/com.hn
     
     [self postLogin];
 
-   
-    [self LocalEnter];
+  // [self LocalEnter];
+    
   
    
     
@@ -226,6 +230,19 @@ static NSString *kBaseUrl=@"http://192.168.12.12:8080/default/mobile/user/com.hn
     OAViewController *viewController=[[OAViewController alloc]init];
     //viewController.user_Info=userInfo;
     [self.navigationController pushViewController:viewController animated:YES];
+}
+
+-(void) InitDataBase {
+    _db=[DataBase sharedinstanceDB];
+    //创建数据库
+    [_db initTables];
+    //添加IP数据
+    [_db InsertIPTable:@"192.168.12.12" port:@"8080" IP_Mark:@"TestServer"];
+    //添加接口数据
+    [_db InsertInterFaceTable];
+    
+    
+    
 }
 
 //注册
@@ -360,8 +377,19 @@ static NSString *kBaseUrl=@"http://192.168.12.12:8080/default/mobile/user/com.hn
 
 
 -(void)postLogin {
+    NSString *str_ip=@"";
+    NSString *str_port=@"";
+    NSMutableArray *t_array=[_db fetchIPAddress];
+    if (t_array.count==1) {
+        NSArray *arr_ip=[t_array objectAtIndex:0];
+        str_ip=[arr_ip objectAtIndex:0];
+        str_port=[arr_ip objectAtIndex:1];
+    }
+    NSString *str_interface=[_db fetchInterface:@"Login"];
+    NSString *str_url=[NSString stringWithFormat:@"%@:%@%@",str_ip,str_port,str_interface];
+
     
-    [_session POST:kBaseUrl parameters:_params progress:^(NSProgress * _Nonnull uploadProgress) {
+    [_session POST:str_url parameters:_params progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"请求成功:%@",responseObject);
@@ -387,9 +415,9 @@ static NSString *kBaseUrl=@"http://192.168.12.12:8080/default/mobile/user/com.hn
         
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"请求失败:%@",error.description);
+        NSLog(@"请求失败:%@ %@",error.description,@"进入离线模式");
         _i_Success=NO;
-        return;
+       [self LocalEnter];
     } ];
     
 }
