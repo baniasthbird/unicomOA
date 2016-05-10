@@ -217,13 +217,21 @@ static NSString *kBaseUrl=@"http://192.168.12.12:8080/default/mobile/user/com.hn
     UITabBarItem *personCenterTabBarItem = [tabBarItems objectAtIndex:2];
     personCenterTabBarItem.badgeValue = @"2";
     
-    
-    [self postLogin];
+    if ([self isLocal]) {
+        [self LocalEnter];
+    }
+    else {
+        [self postLogin];
+    }
+ 
+}
 
-  // [self LocalEnter];
-    
-  
-   
+//判断是在线还是离线
+-(BOOL)isLocal {
+    NSString *File=[[NSBundle mainBundle] pathForResource:@"Info" ofType:@"plist"];
+    NSMutableDictionary *dict=[[NSMutableDictionary alloc] initWithContentsOfFile:File];
+    BOOL isLocal=  [dict objectForKey:@"blocal"];
+    return isLocal;
     
 }
 

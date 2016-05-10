@@ -17,6 +17,7 @@
 #import "LXAlertView.h"
 #import "AFHTTPSessionManager.h"
 #import "DataBase.h"
+#import "LoginViewController.h"
 
 
 @interface SettingViewController ()
@@ -189,6 +190,7 @@
     
     
     if (indexPath.section==0 && indexPath.row==0) {
+        
         UIImageView *img_View=[[UIImageView alloc]initWithFrame:CGRectMake((self.view.frame.size.width-item.height*0.8)/2, item.height*0.2, item.height*0.8, item.height*0.8)];
         if (iPhone6_plus || iPhone6) {
             img_View.layer.cornerRadius=55.0f;
@@ -198,9 +200,18 @@
         }
         
         img_View.layer.masksToBounds=YES;
-        img_View.image=item.image;
+        
         UILabel *lbl_title=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, item.height*0.77, 50, 20)];
-        lbl_title.text=item.title;
+        
+        if (self.userInfo!=nil) {
+            img_View.image=item.image;
+            lbl_title.text=item.title;
+        }
+        else {
+        
+        }
+
+        
         lbl_title.textColor=[UIColor colorWithRed:72/255.0f green:117/255.0f blue:230/255.0f alpha:1];
         lbl_title.font=[UIFont systemFontOfSize:20];
         [cell addSubview:lbl_title];
@@ -357,38 +368,60 @@
 
 
 -(void)QuitUser:(UIButton*)sender {
-    NSString *str_ip=@"";
-    NSString *str_port=@"";
-    NSMutableArray *t_array=[db fetchIPAddress];
-    if (t_array.count==1) {
-        NSArray *arr_ip=[t_array objectAtIndex:0];
-        str_ip=[arr_ip objectAtIndex:0];
-        str_port=[arr_ip objectAtIndex:1];
-    }
-    NSString *str_interface=[db fetchInterface:@"Logout"];
-    NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_interface];
-    
-    [_session POST:str_url parameters:nil progress:^(NSProgress * _Nonnull uploadProgress) {
-        
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"请求成功:%@",responseObject);
-        NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        NSLog(@"请求JSON成功:%@",JSON);
-        NSString *str_success= [JSON objectForKey:@"success"];
-        int i_success=[str_success intValue];
-        if (i_success==1) {
-            NSLog(@"退出成功");
-            //显示未登陆
-            [self ClearUserInfo];
+    if ([self isLocal]) {
+       // [self ClearUserInfo];
+        //显示请登录
+       
+        //[self QuitApp];
+            }
+    else {
+        NSString *str_ip=@"";
+        NSString *str_port=@"";
+        NSMutableArray *t_array=[db fetchIPAddress];
+        if (t_array.count==1) {
+            NSArray *arr_ip=[t_array objectAtIndex:0];
+            str_ip=[arr_ip objectAtIndex:0];
+            str_port=[arr_ip objectAtIndex:1];
         }
+        NSString *str_interface=[db fetchInterface:@"Logout"];
+        NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_interface];
         
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        //离线模式
-        
-    }];
+        [_session POST:str_url parameters:nil progress:^(NSProgress * _Nonnull uploadProgress) {
+            
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            NSLog(@"请求成功:%@",responseObject);
+            NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            NSLog(@"请求JSON成功:%@",JSON);
+            NSString *str_success= [JSON objectForKey:@"success"];
+            int i_success=[str_success intValue];
+            if (i_success==1) {
+                NSLog(@"退出成功");
+                //显示登陆
+                //显示未登陆
+               // [self ClearUserInfo];
+                [self QuitApp];
+            }
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            //离线模式
+            
+        }];
+    }
     
 }
 
+//退出应用
+-(void)QuitApp {
+    LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"提示" message:@"是否确定退出应用？" cancelBtnTitle:@"取消" otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+        if (clickIndex==0) {
+            return;
+        }
+        else if (clickIndex==1) {
+            exit(0);
+        }
+    }];
+    [alert showLXAlertView];
+}
 
 
 //更改UserInfo为空，显示未登录
@@ -405,6 +438,18 @@
     //[self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:index,nil] withRowAnimation:UITableViewRowAnimationNone];
     [self.tableView reloadData];
 }
+
+
+//判断是在线还是离线
+-(BOOL)isLocal {
+    NSString *File=[[NSBundle mainBundle] pathForResource:@"Info" ofType:@"plist"];
+    NSMutableDictionary *dict=[[NSMutableDictionary alloc] initWithContentsOfFile:File];
+    BOOL isLocal=  [dict objectForKey:@"blocal"];
+    return isLocal;
+    
+}
+
+
 
 /*
  

@@ -68,13 +68,60 @@
     [_session.requestSerializer setHTTPShouldHandleCookies:YES];
     
     
+    if ([self isLocal]) {
+        _count=5;
+    }
+    else {
+        [self NewsCount];
+    }
     
-    _count=5;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+//获得最新消息
+-(void)NewsCount {
+    NSString *str_taskCount= [db fetchInterface:@"TaskCount"];
+    NSString *str_ip=@"";
+    NSString *str_port=@"";
+    NSMutableArray *t_array=[db fetchIPAddress];
+    if (t_array.count==1) {
+        NSArray *arr_ip=[t_array objectAtIndex:0];
+        str_ip=[arr_ip objectAtIndex:0];
+        str_port=[arr_ip objectAtIndex:1];
+    }
+    if ([self isLocal]) {
+        
+    }
+    else {
+       NSString *str_url1=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_taskCount];
+       [_session POST:str_url1 parameters:nil progress:^(NSProgress * _Nonnull uploadProgress) {
+           
+       } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+           NSLog(@"请求成功:%@",responseObject);
+           NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+           NSString *str_success= [JSON objectForKey:@"success"];
+
+           if ([str_success isEqualToString:@"true"]) {
+               NSString *str_docnum= [JSON objectForKey:@"docNum"];
+               NSString *str_flownum= [JSON objectForKey:@"flowNum"];
+               NSString *str_msgnum= [JSON objectForKey:@"msgNum"];
+               int i_docnum=[str_docnum intValue];
+               int i_flownum=[str_flownum intValue];
+               int i_msgnum=[str_msgnum intValue];
+               _count=i_docnum+i_flownum+i_msgnum;
+               
+           }
+           
+           
+       } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+           
+       }];
+    }
+
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -215,6 +262,15 @@
     [_tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
    // [_tableView reloadData];
     
+}
+
+
+//判断是在线还是离线
+-(BOOL)isLocal {
+    NSString *File=[[NSBundle mainBundle] pathForResource:@"Info" ofType:@"plist"];
+    NSMutableDictionary *dict=[[NSMutableDictionary alloc] initWithContentsOfFile:File];
+    BOOL isLocal=  [dict objectForKey:@"blocal"];
+    return isLocal;
 }
 /*
 #pragma mark - Navigation
