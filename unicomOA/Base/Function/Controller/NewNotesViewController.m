@@ -18,6 +18,7 @@
 #import "IQUIView+IQKeyboardToolbar.h"
 #import "LZActionSheet.h"
 #import "MapViewController.h"
+#import "DataBase.h"
 
 
 #define TABLEVIEW_CELL_RESUSE_ID @"TABLEVIEW_CELL_REUSE_ID"
@@ -68,13 +69,19 @@ typedef enum
 //位置坐标
 @property  CLLocationCoordinate2D coord_placemark;
 
+@property CGFloat i_cellHeight_pos;
+
 //位置地址
 @property (nonatomic,strong) CLPlacemark *addr_placemark;
+
+//照片地址
+@property (nonatomic,strong) NSString *str_pic_path;
 
 @end
 
 @implementation NewNotesViewController {
     IQKeyboardReturnKeyHandler *returnKeyHandler;
+    DataBase *db;
 }
 
 @synthesize delegate;
@@ -104,6 +111,8 @@ typedef enum
     
     _b_isOpenMenu=NO;
     
+    _i_cellHeight_pos=100;
+    
     _timer=[NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(ChangeCountDownLabels:) userInfo:nil repeats:YES];
     
     [_timer fire];
@@ -113,11 +122,24 @@ typedef enum
 
 
 -(void)FinishNotes:(UIButton*)sender {
-    
     NSDate *date=[NSDate date];
     NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSString *dateString=[dateFormatter stringFromDate:date];
+    
+    NSMutableDictionary *dic=[NSMutableDictionary alloc];
+    [dic setValue:_str_notesFenLei forKey:@"FenLei"];
+    [dic setValue:_str_noteContent forKey:@"Content"];
+    if (_coord_placemark.longitude!=0 && _coord_placemark.latitude!=0) {
+        NSString *str_coordx=[NSString stringWithFormat:@"%f",_coord_placemark.latitude];
+        NSString *str_coordy=[NSString stringWithFormat:@"%f",_coord_placemark.longitude];
+        [dic setValue:str_coordx forKey:@"coord_x"];
+        [dic setValue:str_coordy forKey:@"coord_y"];
+    }
+    [dic setValue:dateString forKey:@"notes_date"];
+    [dic setObject:_str_pic_path forKey:@"pic_path"];
+    db=[DataBase sharedinstanceDB];
+    [db InsertNotesTable:dic];
     
     [delegate passValue:_str_notesFenLei Content:_str_noteContent Time:_str_date TimeNow:dateString];
     
@@ -230,11 +252,13 @@ typedef enum
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             //cell.textLabel.text=@"备忘录记录";
             textView=[[UITextView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, cell.frame.size.height)];
+            textView.delegate=self;
             [textView setTextColor:[UIColor blackColor]];
             [textView setFont:[UIFont systemFontOfSize:12.0f]];
             [textView setBackgroundColor:[UIColor clearColor]];
             textView.autoresizingMask=UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
             textView.hidden=NO;
+            
            // textView.layer.borderColor=[[UIColor colorWithRed:230.0/255.0 green:250.0/255.0 blue:250.0/255.0 alpha:1.0]CGColor];
            // textView.layer.borderWidth=3.0;
            // textView.layer.cornerRadius=8.0f;
@@ -291,9 +315,9 @@ typedef enum
             cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
         }
         
-        UIImageView *img_positon=[[UIImageView alloc]initWithFrame:CGRectMake(cell.contentView.frame.origin.x+10, cell.contentView.frame.origin.y+50, 44, 44)];
+        UIImageView *img_positon=[[UIImageView alloc]initWithFrame:CGRectMake(cell.contentView.frame.origin.x+10, cell.contentView.frame.origin.y+_i_cellHeight_pos/2-22, 44, 44)];
         img_positon.image=[UIImage imageNamed:@"position.png"];
-        UILabel *lbl_text=[[UILabel alloc]initWithFrame:CGRectMake(cell.contentView.frame.origin.x+80,cell.contentView.frame.origin.y-3 , self.view.frame.size.width-80, 140)];
+        UILabel *lbl_text=[[UILabel alloc]initWithFrame:CGRectMake(cell.contentView.frame.origin.x+80,cell.contentView.frame.origin.y , self.view.frame.size.width-80, _i_cellHeight_pos)];
         lbl_text.text=@"位置信息";
         lbl_text.font=[UIFont systemFontOfSize:18];
         
@@ -488,7 +512,7 @@ typedef enum
     }
     else if (indexPath.row==3)
     {
-        return 162;
+        return 100;
     }
     else {
         return 54.0f;
@@ -601,14 +625,14 @@ typedef enum
 }
 
 -(void)textViewDidBeginEditing:(UITextView *)textView {
-    if ([textView.text isEqualToString:@"请输入内容"]) {
+    if ([textView.text isEqualToString:@"  请输入内容"]) {
         textView.text=@"";
     }
 }
 
 -(void)textViewDidEndEditing:(UITextView *)textView {
     if (textView.text.length<1) {
-        textView.text=@"请输入内容";
+        textView.text=@"  请输入内容";
     }
 }
 
@@ -860,6 +884,7 @@ typedef enum
     //获取沙盒目录
     NSString *fullPath=[[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:imageName];
     [imageData writeToFile:fullPath atomically:NO];
+    _str_pic_path=fullPath;
 }
 
 
@@ -875,7 +900,7 @@ typedef enum
     NSString *str_county=placemark.subLocality;
     NSString *str_street=placemark.thoroughfare;
     NSString *str_substreet=placemark.subThoroughfare;
-    [lbl_sub_subview setFrame:CGRectMake(160, 0, self.view.frame.size.width-160, 140)];
+    [lbl_sub_subview setFrame:CGRectMake(160, 0, self.view.frame.size.width-160, _i_cellHeight_pos)];
     if (str_street!=nil && str_substreet!=nil) {
         _str_location_content=[NSString stringWithFormat:@"%@%@\n%@%@\n%@",str_state,str_city,str_county,str_street,str_substreet];
     }

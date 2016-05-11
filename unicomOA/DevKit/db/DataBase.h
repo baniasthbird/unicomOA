@@ -27,7 +27,7 @@
 
 -(void)InsertIPTable:(NSString*)str_ipaddr port:(NSString*)str_port IP_Mark:(NSString*)str_mark;
 -(void)InsertInterFaceTable;
--(void)InsertNotesTable;
+-(void)InsertNotesTable:(NSMutableDictionary *)dic_notes;
 -(void)InsertCarApplicationTable;
 
 -(void)UpdateIPTable:(NSString*)str_ipaddr port:(NSString*)str_port IP_Mark:(NSString*)str_mark;

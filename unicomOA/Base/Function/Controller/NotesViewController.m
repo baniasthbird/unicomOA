@@ -11,6 +11,7 @@
 #import "FunctionViewController.h"
 #import "UserEntity.h"
 #import "LZActionSheet.h"
+#import "DataBase.h"
 
 
 @interface NotesViewController()<UITableViewDelegate,UITableViewDataSource,LZActionSheetDelegate>
@@ -21,7 +22,9 @@
 
 NSInteger i_count=0;
 
-@implementation NotesViewController
+@implementation NotesViewController {
+    DataBase *db;
+}
 
 -(void)viewDidLoad {
     [super viewDidLoad];

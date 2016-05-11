@@ -293,8 +293,29 @@
     }
 }
 
+//NOTES_TABLENAME,NOTES_ID,NOTES_FENLEI,NOTES_CONTENT,NOTES_MEETING_DATE,NOTES_DATE,NOTES_PIC_PATH,NOTES_COOR_X,NOTES_COOR_Y
+
 //添加数据至备忘录表
--(void)InsertNotesTable {
+-(void)InsertNotesTable:(NSMutableDictionary *)dic_notes {
+    if ([_database open]) {
+        NSString *str_fenlei=[dic_notes objectForKey:@"FenLei"];
+        NSString *str_content=[dic_notes objectForKey:@"Content"];
+        NSString *str_meeting_date=[dic_notes objectForKey:@"meeting_date"];
+        NSString *str_notes_date=[dic_notes objectForKey:@"notes_date"];
+        NSString *str_pic_path=[dic_notes objectForKey:@"pic_path"];
+        NSString *str_coord_x=[dic_notes objectForKey:@"coord_x"];
+        NSString *str_coord_y=[dic_notes objectForKey:@"coord_y"];
+        
+        //备忘录
+        NSString *insertSql=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' , '%@', '%@', '%@', '%@', '%@') VALUES ('%@' , '%@' , '%@' , '%@' , '%@' , '%@' , '%@')",NOTES_TABLENAME,NOTES_FENLEI,NOTES_CONTENT,NOTES_MEETING_DATE,NOTES_DATE,NOTES_PIC_PATH,NOTES_COOR_X,NOTES_COOR_Y,str_fenlei,str_content,str_meeting_date,str_notes_date,str_pic_path,str_coord_x,str_coord_y];
+        
+        BOOL res=[_database executeUpdate:insertSql];
+        if (res) {
+            NSLog(@"数据成功添加至备忘录表");
+        }
+        
+    }
+    
     
 }
 
@@ -325,8 +346,11 @@
     [_database close];
     
     return array;
-
 }
+
+//根据条件查找某一条备忘录
+//-(NSMutableDictionary*)fetchNotes:(
+
 
 //更新备忘录表
 -(void)UpdateNotesTable:(NSMutableDictionary *)dic_notes {

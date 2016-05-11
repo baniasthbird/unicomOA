@@ -15,6 +15,7 @@
 #import "AFHTTPSessionManager.h"
 #import "LXAlertView.h"
 #import "DataBase.h"
+#import "AFNetworkReachabilityManager.h"
 
 
 
@@ -34,6 +35,9 @@
 @property(copy,nonatomic) NSString *str_user;
 //连接
 @property (nonatomic,strong) AFHTTPSessionManager *session;
+
+//是否可连接
+@property (nonatomic,strong) AFNetworkReachabilityManager *reach_manager;
 //POST参数
 @property (nonatomic,strong) NSMutableDictionary *params;
 
@@ -72,6 +76,8 @@ static NSString *kBaseUrl=@"http://192.168.12.12:8080/default/mobile/user/com.hn
     
     
     _i_Success=NO;
+    
+    //_reach_manager=[AFNetworkReachabilityManager managerForAddress:<#(nonnull const void *)#>];
     
     _session=[AFHTTPSessionManager manager];
     _session.responseSerializer= [AFHTTPResponseSerializer serializer];
@@ -223,8 +229,11 @@ static NSString *kBaseUrl=@"http://192.168.12.12:8080/default/mobile/user/com.hn
     }
     else {
      */
-        [self postLogin];
+     //   [self postLogin];
    // }
+    
+    [self LocalEnter];
+
  
 }
 
