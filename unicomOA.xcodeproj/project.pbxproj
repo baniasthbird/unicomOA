@@ -125,6 +125,11 @@
 		6882C3181CA8D78300CDEB1A /* LogoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6882C3171CA8D78300CDEB1A /* LogoView.m */; };
 		6882C3211CA92C4B00CDEB1A /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6882C3201CA92C4B00CDEB1A /* CommentViewController.m */; };
 		6884D2D01CD98B4A006215E5 /* UIView+MGBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6884D2CF1CD98B4A006215E5 /* UIView+MGBadgeView.m */; };
+		689713641CE2CF02008BB4AB /* RemindCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 689713631CE2CF02008BB4AB /* RemindCell.m */; };
+		689713671CE30420008BB4AB /* FlowListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 689713661CE30420008BB4AB /* FlowListCell.m */; };
+		6897136A1CE32C9A008BB4AB /* DocCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 689713691CE32C9A008BB4AB /* DocCell.m */; };
+		689713701CE336E1008BB4AB /* UnReadMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6897136F1CE336E1008BB4AB /* UnReadMessageCell.m */; };
+		689713731CE33B88008BB4AB /* NewsListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 689713721CE33B88008BB4AB /* NewsListCell.m */; };
 		68A349B21CD8A90500E2851B /* remind.png in Resources */ = {isa = PBXBuildFile; fileRef = 68A349B11CD8A90500E2851B /* remind.png */; };
 		68C0A5BC1CBF6667008BEE27 /* ShenPiStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C0A5BB1CBF6667008BEE27 /* ShenPiStatus.m */; };
 		68D05CBA1C9791000039220F /* PasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D05CB91C9791000039220F /* PasswordViewController.m */; };
@@ -463,6 +468,16 @@
 		6882C3201CA92C4B00CDEB1A /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommentViewController.m; path = Base/Function/NewsController/CommentViewController.m; sourceTree = "<group>"; };
 		6884D2CE1CD98B4A006215E5 /* UIView+MGBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MGBadgeView.h"; sourceTree = "<group>"; };
 		6884D2CF1CD98B4A006215E5 /* UIView+MGBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MGBadgeView.m"; sourceTree = "<group>"; };
+		689713621CE2CF02008BB4AB /* RemindCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RemindCell.h; path = Base/Message/View/RemindCell.h; sourceTree = "<group>"; };
+		689713631CE2CF02008BB4AB /* RemindCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RemindCell.m; path = Base/Message/View/RemindCell.m; sourceTree = "<group>"; };
+		689713651CE30420008BB4AB /* FlowListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FlowListCell.h; path = Base/Message/View/FlowListCell.h; sourceTree = "<group>"; };
+		689713661CE30420008BB4AB /* FlowListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FlowListCell.m; path = Base/Message/View/FlowListCell.m; sourceTree = "<group>"; };
+		689713681CE32C9A008BB4AB /* DocCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DocCell.h; path = Base/Message/View/DocCell.h; sourceTree = "<group>"; };
+		689713691CE32C9A008BB4AB /* DocCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DocCell.m; path = Base/Message/View/DocCell.m; sourceTree = "<group>"; };
+		6897136E1CE336E1008BB4AB /* UnReadMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UnReadMessageCell.h; path = Base/Message/View/UnReadMessageCell.h; sourceTree = "<group>"; };
+		6897136F1CE336E1008BB4AB /* UnReadMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UnReadMessageCell.m; path = Base/Message/View/UnReadMessageCell.m; sourceTree = "<group>"; };
+		689713711CE33B88008BB4AB /* NewsListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsListCell.h; path = Base/Message/View/NewsListCell.h; sourceTree = "<group>"; };
+		689713721CE33B88008BB4AB /* NewsListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsListCell.m; path = Base/Message/View/NewsListCell.m; sourceTree = "<group>"; };
 		68A349B11CD8A90500E2851B /* remind.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = remind.png; sourceTree = "<group>"; };
 		68C0A5BA1CBF6667008BEE27 /* ShenPiStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShenPiStatus.h; path = Base/Function/ShenPiModel/ShenPiStatus.h; sourceTree = "<group>"; };
 		68C0A5BB1CBF6667008BEE27 /* ShenPiStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShenPiStatus.m; path = Base/Function/ShenPiModel/ShenPiStatus.m; sourceTree = "<group>"; };
@@ -1209,9 +1224,27 @@
 			path = "OpenSource/UIView-MGBadgeView";
 			sourceTree = "<group>";
 		};
+		689713611CE2CEC6008BB4AB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				689713621CE2CF02008BB4AB /* RemindCell.h */,
+				689713631CE2CF02008BB4AB /* RemindCell.m */,
+				689713651CE30420008BB4AB /* FlowListCell.h */,
+				689713661CE30420008BB4AB /* FlowListCell.m */,
+				689713681CE32C9A008BB4AB /* DocCell.h */,
+				689713691CE32C9A008BB4AB /* DocCell.m */,
+				6897136E1CE336E1008BB4AB /* UnReadMessageCell.h */,
+				6897136F1CE336E1008BB4AB /* UnReadMessageCell.m */,
+				689713711CE33B88008BB4AB /* NewsListCell.h */,
+				689713721CE33B88008BB4AB /* NewsListCell.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		68A349B31CD8A9FF00E2851B /* MessageViewBase */ = {
 			isa = PBXGroup;
 			children = (
+				689713611CE2CEC6008BB4AB /* View */,
 				2C9DDEC11CD8E257009462E6 /* Controller */,
 			);
 			name = MessageViewBase;
@@ -1787,7 +1820,9 @@
 				68579FA31CC0BBCE00597FBD /* ShenPiAgreeWithCarDeploy.m in Sources */,
 				68EEDE771CBB911A003295EB /* MCPopMenuViewController.m in Sources */,
 				2C5460BD1C854733005C5AB9 /* TableViewCell.m in Sources */,
+				689713641CE2CF02008BB4AB /* RemindCell.m in Sources */,
 				68F950B91C9F9E9000CA1519 /* ChangePhoneNumViewController.m in Sources */,
+				689713731CE33B88008BB4AB /* NewsListCell.m in Sources */,
 				2CA10C8E1CA1945F008D6394 /* ChangePhoneNumStep2.m in Sources */,
 				68815DC71CCDC45400277807 /* CommentCell.m in Sources */,
 				68E779DC1CB34A8E006DA5B9 /* CLTreeView_LEVEL0_Cell.m in Sources */,
@@ -1865,6 +1900,7 @@
 				68C0A5BC1CBF6667008BEE27 /* ShenPiStatus.m in Sources */,
 				68EEDE581CBB2E19003295EB /* DYCAddressPickerView.m in Sources */,
 				683815301CBC79F500E6AFD3 /* CarService.m in Sources */,
+				689713701CE336E1008BB4AB /* UnReadMessageCell.m in Sources */,
 				683815421CBCDAA400E6AFD3 /* PrintFileDetail.m in Sources */,
 				2C3F219C1C85837F00EBD122 /* NotesTableVIewCell.m in Sources */,
 				68E779FA1CB37D6A006DA5B9 /* FriendGroup.m in Sources */,
@@ -1882,6 +1918,7 @@
 				68DEEBD41CBE0FD4003DB7AA /* CarShenPiDetail.m in Sources */,
 				68052C2D1CAD167400A93BDA /* UITabBarItem+WZLBadge.m in Sources */,
 				68EEDE731CBB911A003295EB /* MCPopMenuCell.m in Sources */,
+				6897136A1CE32C9A008BB4AB /* DocCell.m in Sources */,
 				2CFEADD31C770D6F0054730E /* UITableGridViewCell.m in Sources */,
 				68E77A2A1CB3A133006DA5B9 /* IQTextView.m in Sources */,
 				68579FA91CC0C88600597FBD /* CarDeployCell.m in Sources */,
@@ -1892,6 +1929,7 @@
 				2CE321101CC2810800B36793 /* DataSource.m in Sources */,
 				2CFEADC61C76A65E0054730E /* UIImage+ResizeImage.m in Sources */,
 				6846D35C1CABAF4D004BD285 /* IVotingResultViewController.m in Sources */,
+				689713671CE30420008BB4AB /* FlowListCell.m in Sources */,
 				68E779E01CB34A8E006DA5B9 /* CLTreeView_LEVEL2_Cell.m in Sources */,
 				68052C1C1CAD166800A93BDA /* UIView+Frame.m in Sources */,
 				683815331CBC7A2100E6AFD3 /* PrintService.m in Sources */,

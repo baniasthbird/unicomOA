@@ -67,6 +67,8 @@
     
     //设置分页按钮
     [self setupPageButton:_i_index1 index_2:_i_index2 index_3:_i_index3];
+    
+    
 }
 /**
  *  设置可以左右滑动的ScrollView
@@ -113,7 +115,7 @@
  */
 - (void)setupPageButton:(NSInteger)i_index1 index_2:(NSInteger)i_index2 index_3:(NSInteger)i_index3{
     //button的index值应当从0开始
-    UIButton *btn = [self setupButtonWithTitle:@"工作流程" Index:0  Badage:i_index1];
+    UIButton *btn = [self setupButtonWithTitle:@"待办流程" Index:0  Badage:i_index1];
     self.selectBtn = btn;
     [btn setBackgroundColor:[UIColor colorWithRed:80/255.0f green:125/255.0f blue:236/255.0f alpha:1]];
     [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -136,8 +138,16 @@
     btn.tag = index + kTag;
     [btn.badgeView setBadgeValue:i_badage];
     [btn.badgeView setOutlineWidth:0.0];
-    [btn.badgeView setPosition:MGBadgePositionBottomLeft];
+    [btn.badgeView setPosition:MGBadgePositionCenterRight];
     [btn.badgeView setBadgeColor:[UIColor redColor]];
+    if (iPhone6 || iPhone6_plus) {
+       btn.titleEdgeInsets=UIEdgeInsetsMake(0, -30, 0, 0);
+    }
+    else {
+        btn.titleEdgeInsets=UIEdgeInsetsMake(0, -35, 0, 0);
+        btn.titleLabel.font=[UIFont systemFontOfSize:14];
+    }
+    
     
     [btn addTarget:self action:@selector(pageClick:) forControlEvents:(UIControlEventTouchUpInside)];
     [self.view addSubview:btn];

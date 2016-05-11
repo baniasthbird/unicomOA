@@ -198,16 +198,16 @@
             NSString *insertSql7=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",INTERFACE_TABLENAME,INTERFACE_NAME,INTERFACE_VALUE,@"UnreadMessage",@"/default/mobile/oa/com.hnsi.erp.mobile.oa.TaskSearch.msgList.biz.ext"];
             BOOL res7=[_database executeUpdate:insertSql7];
             
-            //未读消息列表
+            //未读公文列表
             NSString *insertSql8=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",INTERFACE_TABLENAME,INTERFACE_NAME,INTERFACE_VALUE,@"UnreadDoc",@"/default/mobile/oa/com.hnsi.erp.mobile.oa.TaskSearch.docList.biz.ext"];
             BOOL res8=[_database executeUpdate:insertSql8];
             
             //待办事项数量统计
-            NSString *insertSql9=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",INTERFACE_TABLENAME,INTERFACE_NAME,INTERFACE_VALUE,@"TaskCount",@"/default/mobile/oa/ com.hnsi.erp.mobile.oa.TaskSearch.count.biz.ext"];
+            NSString *insertSql9=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",INTERFACE_TABLENAME,INTERFACE_NAME,INTERFACE_VALUE,@"TaskCount",@"/default/mobile/oa/com.hnsi.erp.mobile.oa.TaskSearch.count.biz.ext"];
             BOOL res9=[_database executeUpdate:insertSql9];
             
             //新闻数量统计
-            NSString *insertSql10=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",INTERFACE_TABLENAME,INTERFACE_NAME,INTERFACE_VALUE,@"NewsListCount",@"/default/mobile/oa/ com.hnsi.erp.mobile.oa.NewsSearch.count.biz.ext"];
+            NSString *insertSql10=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",INTERFACE_TABLENAME,INTERFACE_NAME,INTERFACE_VALUE,@"NewsListCount",@"/default/mobile/oa/com.hnsi.erp.mobile.oa.NewsSearch.count.biz.ext"];
             BOOL res10=[_database executeUpdate:insertSql10];
             
             //新闻列表

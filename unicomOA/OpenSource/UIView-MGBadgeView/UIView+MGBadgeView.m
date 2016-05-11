@@ -20,8 +20,13 @@ static int const kMGBadgeViewTag = 9876;
 - (instancetype)initWithFrame:(CGRect)frame {
     
     if(self = [super initWithFrame:frame]) {
+        if (iPhone6 || iPhone6_plus) {
+            _font = [UIFont boldSystemFontOfSize:13.0];
+        }
+        else {
+             _font = [UIFont boldSystemFontOfSize:11.0];
+        }
         
-        _font = [UIFont boldSystemFontOfSize:13.0];
         _badgeColor = [UIColor blueColor];
         _textColor = [UIColor whiteColor];
         _outlineColor = [UIColor whiteColor];
@@ -29,7 +34,7 @@ static int const kMGBadgeViewTag = 9876;
         _minDiameter = 25.0;
         _position = MGBadgePositionBest;
         _displayIfZero = NO;
-        _horizontalOffset = 0.0;
+        _horizontalOffset = -20.0f;
         _verticalOffset = 0.0;
         
         self.backgroundColor = [UIColor clearColor];

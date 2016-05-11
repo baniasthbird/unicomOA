@@ -217,12 +217,14 @@ static NSString *kBaseUrl=@"http://192.168.12.12:8080/default/mobile/user/com.hn
     UITabBarItem *personCenterTabBarItem = [tabBarItems objectAtIndex:2];
     personCenterTabBarItem.badgeValue = @"2";
     
+    /*
     if ([self isLocal]) {
         [self LocalEnter];
     }
     else {
+     */
         [self postLogin];
-    }
+   // }
  
 }
 
@@ -408,24 +410,24 @@ static NSString *kBaseUrl=@"http://192.168.12.12:8080/default/mobile/user/com.hn
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"请求成功:%@",responseObject);
         NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        NSString *str_success= [JSON objectForKey:@"success"];
-        NSInteger i_success=[str_success integerValue];
-        if (i_success==0) {
-            NSString *str_message=[JSON objectForKey:@"msg"];
+        if (JSON.count==1) {
+            NSDictionary *dic_exp=[JSON objectForKey:@"exception"];
+            NSString *str_message=[dic_exp objectForKey:@"message"];
             str_message=[NSString stringWithFormat:@"%@%@",@"未能登录成功，",str_message];
             LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"警告" message:str_message cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
-                NSLog(@"点击index====%ld",clickIndex);
+               
             }];
             [alert showLXAlertView];
+
+            
         }
-        else if (i_success==1) {
+        else if (JSON.count==3) {
             NSLog(@"请求JSON成功:%@",JSON);
             [self saveLoginSession];
             NSDictionary *dic_usr=[JSON objectForKey:@"userInfo"];
             // [self postLogin2];
             [self MoveToNextPage:dic_usr];
         }
-       
         
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -512,16 +514,26 @@ static NSString *kBaseUrl=@"http://192.168.12.12:8080/default/mobile/user/com.hn
 //登录成功转至下一页
 -(void)MoveToNextPage:(NSDictionary*)dic_usr {
     UserInfo *userInfo=[[UserInfo alloc]init];
-    NSString *str_name=[dic_usr objectForKey:@"name"];
-    NSString *str_orgname=[dic_usr objectForKey:@"orgName"];
+    NSString *str_name=[dic_usr objectForKey:@"empname"];
+    NSString *str_orgname=[dic_usr objectForKey:@"orgname"];
+    NSString *str_gender=[dic_usr objectForKey:@"sex"];
+    NSObject *obj_email=[dic_usr objectForKey:@"oemail"];
+    NSString *str_email=[dic_usr objectForKey:@"oemail"];
+    NSString *str_cellphone=[dic_usr objectForKey:@"mobileno"];
+    NSString *str_posiname=[dic_usr objectForKey:@"posiname"];
+    NSString *str_tel=[dic_usr objectForKey:@"otel"];
     userInfo.str_name=str_name;
     userInfo.str_username=str_name;
-    userInfo.str_gender=@"男";
-    userInfo.str_department=[NSString stringWithFormat:@"%@ %@",str_orgname,@"综合部"];
-    userInfo.str_position=@"部门经理";
-    userInfo.str_cellphone=@"13812345678";
-    userInfo.str_email=@"未绑定";
-    userInfo.str_phonenum=@"未填写";
+    userInfo.str_gender=str_gender;
+    userInfo.str_department=str_orgname;
+    userInfo.str_position=str_posiname;
+    userInfo.str_cellphone=str_cellphone;
+   //    userInfo.str_email=str_email;
+    if (obj_email==[NSNull null]) {
+        str_email=@"未绑定";
+    }
+    userInfo.str_email=str_email;
+    userInfo.str_phonenum=str_tel;
     userInfo.str_Logo=@"headLogo.png";
     
     [self saveUserInfo:userInfo];
