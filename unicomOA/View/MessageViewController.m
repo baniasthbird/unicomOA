@@ -31,6 +31,7 @@
 
 @property CGFloat i_Height;
 
+
 @end
 
 @implementation MessageViewController {
@@ -97,8 +98,13 @@
     }
     else {
      */
-        [self NewsCount];
-    [self NewsList];
+    
+    NSMutableDictionary *news_param=[NSMutableDictionary dictionary];
+    news_param[@"pageIndex"]=@"1";
+    news_param[@"classId"]=@"0";
+    [self NewsList:news_param];
+    [self NewsCount];
+   
     //}
     
 }
@@ -147,7 +153,7 @@
 
 
 //获得最新新闻
--(void)NewsList {
+-(void)NewsList:(NSMutableDictionary*)param {
     NSString *str_newsList= [db fetchInterface:@"NewsList"];
     NSString *str_ip=@"";
     NSString *str_port=@"";
@@ -158,7 +164,7 @@
         str_port=[arr_ip objectAtIndex:1];
     }
     NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_newsList];
-    [_session POST:str_url parameters:nil progress:^(NSProgress * _Nonnull uploadProgress) {
+    [_session POST:str_url parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"获取新闻列表成功:%@",responseObject);
@@ -167,7 +173,11 @@
         int i_success=[str_success intValue];
         if (i_success==1) {
              _arr_NewsList=[JSON objectForKey:@"list"];
-            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
+            if ([_arr_NewsList count]>0) {
+                 [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
+           // [self.tableView reloadData];
+            }
+           
         }
         
 
@@ -220,18 +230,20 @@
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *identifier=@"Cell";
-    UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:identifier];
-    if (cell==nil) {
-        cell =[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-        
+   
         if (indexPath.section==0) {
             RemindCell *r_cell=[RemindCell cellWithTable:tableView Count:_count];
             return r_cell;
         }
-        else {
-            if (_arr_NewsList==nil) {
-                cell.textLabel.text=@"aaa";
+        else  {
+            if ([_arr_NewsList count]==0) {
+                static NSString *identifier=@"Cell";
+                UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:identifier];
+                if (cell==nil) {
+                    cell =[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+                    cell.textLabel.text=@"aaa";
+                }
+                return cell;
             }
             else {
                 NSDictionary *dic_content=[_arr_NewsList objectAtIndex:indexPath.row];
@@ -240,20 +252,27 @@
                 
             }
         }
-    }
     
     
-    
-    return cell;
-    
+
 }
 
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     CGRect frameRect = CGRectMake(0, 0, self.view.frame.size.width, 40);
     
-    UILabel *label = [[UILabel alloc] initWithFrame:frameRect];
+    UIView *view = [[UIView alloc] initWithFrame:frameRect];
+    
+    UIImageView *img=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"newsbodcast.png"]];
+    
+    [img setFrame:CGRectMake(20, 7, 20, 20)];
+    
+    [view addSubview:img];
+    
+    UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(80, 0, self.view.frame.size.width-80, 37)];
     
     label.textAlignment=NSTextAlignmentLeft;
+    
+   
     
     CGFloat i_Float=0;
     if (iPhone4_4s || iPhone5_5s) {
@@ -268,16 +287,19 @@
    // label.backgroundColor=[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1];
     
     if (section==1) {
-        label.text=@"    新闻公告";
+        label.text=@"新闻公告";
+        label.textColor=[UIColor colorWithRed:80/255.0f green:125/255.0f blue:236/255.0f alpha:1];
     }
+    
+    [view addSubview:label];
    
-    return label;
+    return view;
 }
 
 
 -(UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     UIView *view_end=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 30)];
-    view_end.backgroundColor=[UIColor whiteColor];
+    view_end.backgroundColor=[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1];
     if (section==0) {
         return view_end;
     }
@@ -297,6 +319,10 @@
             viewController.i_index3=_i_msg_num;
             [self.navigationController pushViewController:viewController animated:YES];
         }
+    }
+    else if (indexPath.section==1) {
+        //目前详细信息接口未接入，稍后再试
+        
     }
 }
 

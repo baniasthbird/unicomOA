@@ -51,9 +51,9 @@ NSInteger i_count=0;
     self.tableView.dataSource=self;
     self.tableView.delegate=self;
     
-    _arr_Notes=[NSMutableArray arrayWithCapacity:0];
+    db=[DataBase sharedinstanceDB];
     
-    
+    _arr_Notes=[db fetchAllNotes];
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -70,7 +70,9 @@ NSInteger i_count=0;
     NewNotesViewController *viewController=[[NewNotesViewController alloc]init];
     viewController.delegate=self;
     viewController.usrInfo=_user_Info;
+    viewController.i_index=i_count;
     [self.navigationController pushViewController:viewController animated:YES];
+    i_count=i_count+1;
    // [self.navigationController presentViewController:viewController animated:YES completion:nil];
 }
 
@@ -78,6 +80,16 @@ NSInteger i_count=0;
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+//判断是否是新的一天
+-(BOOL)newDay {
+    NSDate *now_date=[NSDate date];
+    NSTimeZone *zone = [NSTimeZone systemTimeZone];
+    NSInteger interval = [zone secondsFromGMTForDate: now_date];
+    NSDate *localeDate = [now_date  dateByAddingTimeInterval: interval];
+    
+    return YES;
+    
+}
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NotesTableVIewCell *cell=[NotesTableVIewCell cellWithTable:tableView withCellHeight:180 atIndexPath:indexPath];

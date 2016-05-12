@@ -229,10 +229,10 @@ static NSString *kBaseUrl=@"http://192.168.12.12:8080/default/mobile/user/com.hn
     }
     else {
      */
-     //   [self postLogin];
+        [self postLogin];
    // }
     
-    [self LocalEnter];
+  //  [self LocalEnter];
 
  
 }

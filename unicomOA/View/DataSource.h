@@ -12,4 +12,6 @@
 
 -(NSMutableArray*) addTestData;
 
+-(NSMutableArray*)addRealData:(NSMutableArray*)staffArray departArray:(NSMutableArray*)departArray;
+
 @end

@@ -28,6 +28,7 @@
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier Count:(NSInteger)count {
     self=[super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        self.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
         self.textLabel.text=@"工作提醒:";
         self.imageView.image=[UIImage imageNamed:@"remind.png"];
         _lbl_count=[[UILabel alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width-80, 10, 30, 30)];
@@ -35,6 +36,7 @@
         _lbl_count.text=[NSString stringWithFormat:@"%lu",count];
         _lbl_count.textAlignment=NSTextAlignmentCenter;
         _lbl_count.textColor=[UIColor whiteColor];
+        _lbl_count.font=[UIFont systemFontOfSize:13];
         
         _lbl_count.layer.cornerRadius=15.0f;
         [_lbl_count.layer setMasksToBounds:YES];

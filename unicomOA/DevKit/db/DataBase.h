@@ -28,17 +28,17 @@
 -(void)InsertIPTable:(NSString*)str_ipaddr port:(NSString*)str_port IP_Mark:(NSString*)str_mark;
 -(void)InsertInterFaceTable;
 -(void)InsertNotesTable:(NSMutableDictionary *)dic_notes;
--(void)InsertCarApplicationTable;
+
 
 -(void)UpdateIPTable:(NSString*)str_ipaddr port:(NSString*)str_port IP_Mark:(NSString*)str_mark;
 -(void)UpdateInterFaceTable:(NSMutableDictionary*)dic_inerface;
 -(void)UpdateNotesTable:(NSMutableDictionary*)dic_notes;
--(void)UpdateCarApplicationTable:(NSMutableDictionary*)dic_carApplication;
+
 
 -(NSMutableArray*)fetchIPAddress;
 -(NSMutableArray*)fetchAllInterface;
 -(NSMutableArray*)fetchAllNotes;
--(NSMutableArray*)fetchAllCarApplication;
+
 
 
 //获得单一数据

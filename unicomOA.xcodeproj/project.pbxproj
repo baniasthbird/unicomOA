@@ -136,6 +136,7 @@
 		68D05CC01C97AC050039220F /* SendFeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D05CBF1C97AC050039220F /* SendFeedBackViewController.m */; };
 		68D05CC41C97B3530039220F /* SendFeedbackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D05CC31C97B3530039220F /* SendFeedbackView.m */; };
 		68D05CC71C97F6470039220F /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D05CC61C97F6470039220F /* AboutViewController.m */; };
+		68DA1EC61CE4640B0065517B /* newsbodcast.png in Resources */ = {isa = PBXBuildFile; fileRef = 68DA1EC51CE4640B0065517B /* newsbodcast.png */; };
 		68DEEBC51CBDCED6003DB7AA /* MyShenPiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DEEBC41CBDCED6003DB7AA /* MyShenPiViewController.m */; };
 		68DEEBC81CBDDA91003DB7AA /* MyShenPiCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DEEBC71CBDDA91003DB7AA /* MyShenPiCell.m */; };
 		68DEEBD41CBE0FD4003DB7AA /* CarShenPiDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DEEBD31CBE0FD4003DB7AA /* CarShenPiDetail.m */; };
@@ -489,6 +490,7 @@
 		68D05CC31C97B3530039220F /* SendFeedbackView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SendFeedbackView.m; path = Base/Settings/Modal/SendFeedbackView.m; sourceTree = "<group>"; };
 		68D05CC51C97F6470039220F /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AboutViewController.h; path = Base/Settings/Controller/AboutViewController.h; sourceTree = "<group>"; };
 		68D05CC61C97F6470039220F /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AboutViewController.m; path = Base/Settings/Controller/AboutViewController.m; sourceTree = "<group>"; };
+		68DA1EC51CE4640B0065517B /* newsbodcast.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newsbodcast.png; sourceTree = "<group>"; };
 		68DEEBC31CBDCED6003DB7AA /* MyShenPiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyShenPiViewController.h; path = Base/Function/ShenPiContorller/MyShenPiViewController.h; sourceTree = "<group>"; };
 		68DEEBC41CBDCED6003DB7AA /* MyShenPiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyShenPiViewController.m; path = Base/Function/ShenPiContorller/MyShenPiViewController.m; sourceTree = "<group>"; };
 		68DEEBC61CBDDA91003DB7AA /* MyShenPiCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyShenPiCell.h; path = Base/Function/ShenPiModel/MyShenPiCell.h; sourceTree = "<group>"; };
@@ -1542,6 +1544,7 @@
 		68F8E1661CD042AA005D2727 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				68DA1EC51CE4640B0065517B /* newsbodcast.png */,
 				683EFF5E1CDC7B9C0049326B /* locate.png */,
 				68A349B11CD8A90500E2851B /* remind.png */,
 				2CBA8E1C1CD3B33400BDF625 /* carmission.png */,
@@ -1700,6 +1703,7 @@
 				68E779E71CB34A8E006DA5B9 /* head2.jpg in Resources */,
 				2CBA8E231CD3B33400BDF625 /* printmission.png in Resources */,
 				68F8E17A1CD042AA005D2727 /* checkbox_checked.png in Resources */,
+				68DA1EC61CE4640B0065517B /* newsbodcast.png in Resources */,
 				68E779EE1CB34A8E006DA5B9 /* the_arrow.png in Resources */,
 				68E779F01CB34A8E006DA5B9 /* Level1_Cell.xib in Resources */,
 				68ED4E3E1CB4CDC4000E8A7B /* headLogo.png in Resources */,

@@ -81,6 +81,8 @@
     _session.responseSerializer= [AFHTTPResponseSerializer serializer];
     [_session.requestSerializer setHTTPShouldHandleCookies:YES];
 
+   
+    [self AddressList];
     
     self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, i_Height, self.view.frame.size.width, self.view.frame.size.height-100)];
     self.tableView.delegate=self;
@@ -139,6 +141,46 @@
     
     
     
+}
+
+
+-(void)AddressList {
+    NSString *str_ip=@"";
+    NSString *str_port=@"";
+    NSMutableArray *t_array=[db fetchIPAddress];
+    if (t_array.count==1) {
+        NSArray *arr_ip=[t_array objectAtIndex:0];
+        str_ip=[arr_ip objectAtIndex:0];
+        str_port=[arr_ip objectAtIndex:1];
+    }
+    NSString *str_addresslist=[db fetchInterface:@"AddressList"];
+    NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_addresslist];
+    [_session POST:str_url parameters:nil progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"获取通讯录列表成功:%@",responseObject);
+        NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        NSString *str_success= [JSON objectForKey:@"success"];
+        int i_success=[str_success intValue];
+        if (i_success==1) {
+            NSMutableArray *staffArray=[JSON objectForKey:@"empList"];
+            NSMutableArray *departArray=[JSON objectForKey:@"orgList"];
+             DataSource *dt_tmp=[[DataSource alloc]init];
+            _dataArray=[dt_tmp addRealData:staffArray departArray:departArray];
+            
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"获取通讯录失败");
+    }];
+}
+
+
+//组织通讯录
+-(void)ManageData:(NSMutableArray*)staffData departData:(NSMutableArray*)departData {
+    if (staffData!=nil && departData!=nil) {
+        
+    }
 }
 
 /*

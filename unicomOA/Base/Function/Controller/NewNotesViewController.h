@@ -19,6 +19,8 @@
 
 @property(nonatomic,retain) NSObject<UINoteViewPassValueDelegate> *delegate;
 
+@property   NSInteger i_index;
+
 //传值
 @property (strong,nonatomic) NSString *str_noteContent;
 

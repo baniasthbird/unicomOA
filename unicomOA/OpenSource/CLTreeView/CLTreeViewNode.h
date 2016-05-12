@@ -15,6 +15,7 @@
 @property (nonatomic) id nodeData;//节点数据
 @property (nonatomic) BOOL isExpanded;//节点是否展开
 @property (strong,nonatomic) NSMutableArray *sonNodes;//子节点
+@property (nonatomic) int tag;      //节点tag
 
 @end
 
