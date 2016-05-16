@@ -9,11 +9,11 @@
 #import "MessageViewController.h"
 #import "RemindViewController.h"
 #import "RemindCell.h"
-#import "NewsListCell.h"
+#import "NewsManagementTableViewCell.h"
 
 
 
-@interface MessageViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface MessageViewController ()<UITableViewDelegate,UITableViewDataSource,NewsTapDelegate>
 
 @property (nonatomic,strong) UITableView *tableView;
 
@@ -205,7 +205,7 @@
         return 50;
     }
     else {
-        return _i_Height;
+        return 110;
     }
 }
 
@@ -246,8 +246,22 @@
                 return cell;
             }
             else {
+                NewsManagementTableViewCell *cell;
+                if (iPhone6 || iPhone6_plus)
+                {
+                    cell=[NewsManagementTableViewCell cellWithTable:tableView withCellHeight:110 titleX:self.view.frame.size.width/32 titleY:0.0f titleW:15*self.view.frame.size.width/16 titleH:50.0f DepartX:self.view.frame.size.width/32 DepartY:60.0f DepartW:3*self.view.frame.size.width/8 DepartH:40.0f TimeX:self.view.frame.size.width/2 TimeY:60.0f TimeW:self.view.frame.size.width/3 TimeH:40.0f];
+                }
+                else if (iPhone5_5s || iPhone4_4s) {
+                    cell=[NewsManagementTableViewCell cellWithTable:tableView withCellHeight:110 titleX:self.view.frame.size.width/32 titleY:0.0f titleW:15*self.view.frame.size.width/16 titleH:50.0f DepartX:self.view.frame.size.width/32 DepartY:60.0f DepartW:3*self.view.frame.size.width/8 DepartH:40.0f TimeX:self.view.frame.size.width*0.4 TimeY:60.0f TimeW:self.view.frame.size.width*0.5 TimeH:40.0f];
+                }
                 NSDictionary *dic_content=[_arr_NewsList objectAtIndex:indexPath.row];
-                NewsListCell *cell=[NewsListCell cellWithTable:tableView dic:dic_content cellHeight:_i_Height];
+                cell.delegate=self;
+                cell.myTag=indexPath.row;
+                cell.lbl_Title.text=[dic_content objectForKey:@"title"];
+                cell.lbl_department.text=[dic_content objectForKey:@"operatorName"];
+                cell.lbl_time.text=[dic_content objectForKey:@"startDate"];
+               // NewsListCell *cell=[NewsListCell cellWithTable:tableView dic:dic_content cellHeight:_i_Height];
+               // return cell;
                 return cell;
                 
             }
@@ -334,6 +348,15 @@
     NSMutableDictionary *dict=[[NSMutableDictionary alloc] initWithContentsOfFile:File];
     BOOL isLocal=  [dict objectForKey:@"blocal"];
     return isLocal;
+}
+
+//点击新闻事件
+-(void)tapCell:(NewsManagementTableViewCell *)cell atIndex:(NSInteger)index {
+    
+}
+
+-(void)sideslipCellRemoveCell:(NewsManagementTableViewCell *)cell atIndex:(NSInteger)index {
+    
 }
 /*
 #pragma mark - Navigation

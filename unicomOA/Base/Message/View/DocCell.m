@@ -31,29 +31,37 @@
         NSString *str_workItemName=[dic_flowContent objectForKey:@"sendName"];
         //发送时间
         NSString *str_startTime=[dic_flowContent objectForKey:@"sendTime"];
-        //流程类别Label
-        UILabel *lbl_processChName=[[UILabel alloc]initWithFrame:CGRectMake(self.contentView.frame.origin.x, self.contentView.frame.origin.y
-                                                                            , [UIScreen mainScreen].bounds.size.width/2, i_cellHeight/2-5)];
-        lbl_processChName.text=[NSString stringWithFormat:@"%@%@",@"类别:",str_processChName];
-        lbl_processChName.font=[UIFont systemFontOfSize:10];
-        lbl_processChName.textAlignment=NSTextAlignmentLeft;
         
         //流程标题Label
-        UILabel *lbl_processInstName=[[UILabel alloc]initWithFrame:CGRectMake(self.contentView.frame.origin.x+[UIScreen mainScreen].bounds.size.width/2, self.contentView.frame.origin.y, [UIScreen mainScreen].bounds.size.width/2, i_cellHeight/2)];
-        lbl_processInstName.text=[NSString stringWithFormat:@"%@%@",@"公文标题:",str_processInstName];
-        lbl_processInstName.font=[UIFont systemFontOfSize:10];
+        UILabel *lbl_processInstName=[[UILabel alloc]initWithFrame:CGRectMake(self.contentView.frame.origin.x, self.contentView.frame.origin.y+2, [UIScreen mainScreen].bounds.size.width, i_cellHeight*0.3)];
+        lbl_processInstName.text=[NSString stringWithFormat:@"%@%@",@"    公文标题:",str_processInstName];
+        lbl_processInstName.font=[UIFont systemFontOfSize:15];
         lbl_processInstName.textAlignment=NSTextAlignmentLeft;
+
+        
+        
+        //流程类别Label
+        UILabel *lbl_processChName=[[UILabel alloc]initWithFrame:CGRectMake(self.contentView.frame.origin.x, self.contentView.frame.origin.y
+                                                                            +i_cellHeight*0.35, [UIScreen mainScreen].bounds.size.width, i_cellHeight*0.3)];
+        lbl_processChName.text=[NSString stringWithFormat:@"%@%@",@"      类别:",str_processChName];
+        lbl_processChName.font=[UIFont systemFontOfSize:10];
+        lbl_processChName.textAlignment=NSTextAlignmentLeft;
+        lbl_processChName.textColor=[UIColor colorWithRed:173/255.0f green:173/255.0f blue:173/255.0f alpha:1];
+
+        
         
         //当前节点名称
-        UILabel *lbl_workItemName=[[UILabel alloc]initWithFrame:CGRectMake(self.contentView.frame.origin.x,self.contentView.frame.origin.y+ i_cellHeight/2, [UIScreen mainScreen].bounds.size.width/2, i_cellHeight/2)];
-        lbl_workItemName.text=[NSString stringWithFormat:@"%@%@",@"发送人:",str_workItemName];
+        UILabel *lbl_workItemName=[[UILabel alloc]initWithFrame:CGRectMake(self.contentView.frame.origin.x,self.contentView.frame.origin.y+ i_cellHeight*0.7, [UIScreen mainScreen].bounds.size.width/2, i_cellHeight*0.3)];
+        lbl_workItemName.text=[NSString stringWithFormat:@"%@%@",@"      发送人:",str_workItemName];
         lbl_workItemName.font=[UIFont systemFontOfSize:10];
         lbl_workItemName.textAlignment=NSTextAlignmentLeft;
+        lbl_workItemName.textColor=[UIColor colorWithRed:173/255.0f green:173/255.0f blue:173/255.0f alpha:1];
         
-        UILabel *lbl_startTime=[[UILabel alloc]initWithFrame:CGRectMake(self.contentView.frame.origin.x+[UIScreen mainScreen].bounds.size.width/2, self.contentView.frame.origin.y+i_cellHeight/2, [UIScreen mainScreen].bounds.size.width/2, i_cellHeight/2)];
+        UILabel *lbl_startTime=[[UILabel alloc]initWithFrame:CGRectMake(self.contentView.frame.origin.x+[UIScreen mainScreen].bounds.size.width/2, self.contentView.frame.origin.y+i_cellHeight*0.7, [UIScreen mainScreen].bounds.size.width*0.33, i_cellHeight*0.3)];
         lbl_startTime.text=[NSString stringWithFormat:@"%@%@",@"发送时间:",str_startTime];
         lbl_startTime.font=[UIFont systemFontOfSize:10];
-        lbl_startTime.textAlignment=NSTextAlignmentLeft;
+        lbl_startTime.textAlignment=NSTextAlignmentRight;
+        lbl_startTime.textColor=[UIColor colorWithRed:173/255.0f green:173/255.0f blue:173/255.0f alpha:1];
         
         
         [self.contentView addSubview:lbl_processChName];

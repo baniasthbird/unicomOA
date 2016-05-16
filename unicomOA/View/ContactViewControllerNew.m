@@ -167,6 +167,7 @@
             NSMutableArray *departArray=[JSON objectForKey:@"orgList"];
              DataSource *dt_tmp=[[DataSource alloc]init];
             _dataArray=[dt_tmp addRealData:staffArray departArray:departArray];
+            [self reloadDataForDisplayArray];
             
         }
         
@@ -418,6 +419,7 @@
         [self.navigationController pushViewController:viewController animated:YES];
     }
     else {
+        NSObject *obj=[tableView cellForRowAtIndexPath:indexPath];
         CLTreeView_LEVEL0_Cell *cell = (CLTreeView_LEVEL0_Cell*)[tableView cellForRowAtIndexPath:indexPath];
         if(cell.node.isExpanded ){
             [self rotateArrow:cell with:M_PI_2];

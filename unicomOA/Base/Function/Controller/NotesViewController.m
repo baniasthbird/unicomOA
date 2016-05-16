@@ -70,9 +70,8 @@ NSInteger i_count=0;
     NewNotesViewController *viewController=[[NewNotesViewController alloc]init];
     viewController.delegate=self;
     viewController.usrInfo=_user_Info;
-    viewController.i_index=i_count;
+    viewController.i_index=[self newDay];
     [self.navigationController pushViewController:viewController animated:YES];
-    i_count=i_count+1;
    // [self.navigationController presentViewController:viewController animated:YES completion:nil];
 }
 
@@ -81,13 +80,37 @@ NSInteger i_count=0;
 }
 
 //判断是否是新的一天
--(BOOL)newDay {
+-(NSInteger)newDay {
     NSDate *now_date=[NSDate date];
     NSTimeZone *zone = [NSTimeZone systemTimeZone];
     NSInteger interval = [zone secondsFromGMTForDate: now_date];
     NSDate *localeDate = [now_date  dateByAddingTimeInterval: interval];
+    NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSString *dateString=[dateFormatter stringFromDate:localeDate];
+    NSArray *arr_day=[dateString componentsSeparatedByString:@" "];
+    NSString *str_day=[arr_day objectAtIndex:0];
+
+    NSMutableArray *arr_notes=[db fetchAllNotes];
+    BOOL b_Day=NO;
+    for (int i=0;i<arr_notes.count;i++)
+    {
+        NSMutableDictionary *dic=(NSMutableDictionary*)[arr_notes objectAtIndex:i];
+        if (dic!=nil) {
+            NSString *str_notes_date=[dic objectForKey:@"notes_date"];
+            NSArray *arr_notes_day=[str_notes_date componentsSeparatedByString:@" "];
+            NSString *str_notes_day=[arr_notes_day objectAtIndex:0];
+            if ([str_notes_day isEqualToString:str_day]) {
+                i_count=i_count+1;
+                b_Day=YES;
+            }
+        }
+    }
+    if (b_Day==NO) {
+        i_count=0;
+    }
     
-    return YES;
+    return i_count;
     
 }
 
@@ -95,9 +118,16 @@ NSInteger i_count=0;
     NotesTableVIewCell *cell=[NotesTableVIewCell cellWithTable:tableView withCellHeight:180 atIndexPath:indexPath];
     cell.delegate=self;
     cell.myTag= indexPath.row;
-    NSString *str_note = [_arr_Notes objectAtIndex:(_arr_Notes.count-1-indexPath.row)];
+    NSDictionary *dic_note = [_arr_Notes objectAtIndex:(_arr_Notes.count-1-indexPath.row)];
    // cell.textLabel.text=str_note;
-    NSArray *arr_note= [str_note componentsSeparatedByString:@","];
+    cell.lbl_arrangement.text=[dic_note objectForKey:@"fenlei"];
+    cell.lbl_content.text=[dic_note objectForKey:@"content"];
+    cell.lbl_time.text=[dic_note objectForKey:@"notes_date"];
+    NSString *str_index=[dic_note objectForKey:@"index"];
+    cell.tag=[str_index integerValue];
+    cell.myNotes=dic_note;
+   
+    /*
     if (arr_note.count==4) {
         [cell.view_bg setFrame:CGRectMake(cell.contentView.frame.origin.x, cell.contentView.frame.origin.y,self.view.frame.size.width,40)];
         cell.lbl_arrangement.text=[arr_note objectAtIndex:0];
@@ -111,7 +141,7 @@ NSInteger i_count=0;
         cell.lbl_time.text=@"";
         cell.lbl_time2.text=@"";
     }
-    
+    */
     return cell;
     /*
     static NSString *cellIdentifier = @"cell";
@@ -142,18 +172,18 @@ NSInteger i_count=0;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell=[self.tableView cellForRowAtIndexPath:indexPath];
-    NSString *str_text=cell.textLabel.text;
-    NSArray *array= [str_text componentsSeparatedByString:@","];
-    
-    
-    
+    NotesTableVIewCell *cell=(NotesTableVIewCell*)[self.tableView cellForRowAtIndexPath:indexPath];
+    NSDictionary *dic_note=cell.myNotes;
     
     NewNotesViewController *new_controller=[[NewNotesViewController alloc]init];
     
-    new_controller.str_FenLei=[array objectAtIndex:0];
-    new_controller.str_noteContent=[array objectAtIndex:1];
-    new_controller.str_time=[array objectAtIndex:2];
+    new_controller.str_FenLei=[dic_note objectForKey:@"fenlei"];
+    new_controller.str_noteContent=[dic_note objectForKey:@"content"];
+    new_controller.str_time=[dic_note objectForKey:@"notes_date"];
+    new_controller.str_coordx=[dic_note objectForKey:@"coord_x"];
+    new_controller.str_coordy=[dic_note objectForKey:@"coord_y"];
+    new_controller.str_pic_path=[dic_note objectForKey:@"pic_path"];
+    
     
     [self.navigationController pushViewController:new_controller animated:YES];
 }
@@ -164,12 +194,27 @@ NSInteger i_count=0;
 }
 
 
+-(void)passValue:(NSString *)str_FenLei Content:(NSString *)str_Content Time:(NSString *)str_curTime TimeNow:(NSString *)str_nowTime PicPath:(NSString *)str_picpath coordx:(NSString *)coord_x coordy:(NSString *)coord_y address:(NSString *)str_address index:(NSString *)str_index{
+   // NSString *str_tmp=[NSString stringWithFormat:@"%@,%@,%@,%@",str_FenLei,str_Content,str_curTime,str_nowTime];
+    NSMutableDictionary *dic_notes=[NSMutableDictionary dictionaryWithCapacity:9];
+    [dic_notes setValue:str_FenLei forKey:@"fenlei"];
+    [dic_notes setValue:str_Content forKey:@"content"];
+    [dic_notes setValue:str_curTime forKey:@"notes_date"];
+    [dic_notes setValue:str_nowTime forKey:@"meeting_date"];
+    [dic_notes setValue:str_picpath forKey:@"pic_path"];
+    [dic_notes setValue:coord_x forKey:@"coord_x"];
+    [dic_notes setValue:coord_y forKey:@"coord_y"];
+    [dic_notes setValue:str_index forKey:@"index"];
+    [dic_notes setValue:str_address forKey:@"address"];
+    
+    [_arr_Notes addObject:dic_notes];
+    
+    [self.tableView reloadData];
+}
 
 -(void)passValue:(NSString *)str_FenLei Content:(NSString *)str_Content Time:(NSString *)str_curTime TimeNow:(NSString *)str_nowTime{
     
-    NSString *str_tmp=[NSString stringWithFormat:@"%@,%@,%@,%@",str_FenLei,str_Content,str_curTime,str_nowTime];
-    
-    [_arr_Notes addObject:str_tmp];
+   
     /*
     NSMutableArray *indexPaths=[[NSMutableArray alloc]init];
     NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
@@ -177,7 +222,7 @@ NSInteger i_count=0;
     
     [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
     */
-    [self.tableView reloadData];
+    
    /*
     [self.tableView setEditing:YES];
     static NSString *cellIdentifier = @"cell";
@@ -207,7 +252,11 @@ NSInteger i_count=0;
 
 
 -(void)sideslipCellRemoveCell:(NotesTableVIewCell *)cell atIndex:(NSInteger)index {
-
+    
+    NSInteger del_index=cell.tag;
+    NSString *str_index=[NSString stringWithFormat:@"%ld",(long)del_index];
+   // NSString *str_index=cell.lbl_time2.text;
+    [db DeleteNotesTable:str_index];
     [self.arr_Notes removeObjectAtIndex:_arr_Notes.count-1-index];
     [self.tableView reloadData];
     
@@ -236,6 +285,10 @@ NSInteger i_count=0;
             break;
         }
         case 1: {
+            NotesTableVIewCell *cell=(NotesTableVIewCell*)actionSheet.notes_tag;
+            NSInteger del_index=cell.tag;
+            NSString *str_index=[NSString stringWithFormat:@"%ld",(long)del_index];
+            [db DeleteNotesTable:str_index];
             [self.arr_Notes removeObjectAtIndex:_arr_Notes.count-1-actionSheet.note_index];
             [self.tableView reloadData];
         }

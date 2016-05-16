@@ -15,6 +15,8 @@
 #import "UIView+Frame.h"
 #import "WZLBadgeImport.h"
 #import "UIImageButton.h"
+#import "DataBase.h"
+#import "AFNetworking.h"
 
 
 @interface NewsManagementViewController ()
@@ -23,9 +25,28 @@
 
 @property (strong,nonatomic) NSMutableArray *arr_Focus;
 
+@property (nonatomic,strong) AFHTTPSessionManager *session;
+
+@property (nonatomic,strong) NSArray *arr_NewsList;
+
+@property (nonatomic,strong) UILabel *lbl_label;
+
+//公告数量总计
+@property NSInteger i_newsList;
+
+//新闻数量多的时候的索引
+@property NSInteger i_pageIndex;
+
+//新闻分类的索引
+@property NSInteger i_classId;
+
+@property (nonatomic,strong) NSMutableDictionary *news_param;
+
 @end
 
-@implementation NewsManagementViewController
+@implementation NewsManagementViewController {
+    DataBase *db;
+}
 
 
 - (void)viewDidLoad {
@@ -48,8 +69,29 @@
     [btn_back addTarget:self action:@selector(BackToAppCenter:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]initWithCustomView:btn_back];
     
+    _i_pageIndex=1;
+    _i_classId=0;
+    
+    db=[DataBase sharedinstanceDB];
+    
+    _session=[AFHTTPSessionManager manager];
+    _session.responseSerializer= [AFHTTPResponseSerializer serializer];
+    [_session.requestSerializer setHTTPShouldHandleCookies:YES];
     
     [self buildView];
+    
+    [self NewsListCount];
+    
+    _news_param=[NSMutableDictionary dictionary];
+    _news_param[@"pageIndex"]=@"1";
+    _news_param[@"classId"]=@"0";
+    [self NewsList:_news_param];
+    
+    
+    
+    
+    
+    
     // Do any additional setup after loading the view.
 }
 
@@ -57,6 +99,78 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+//获得新闻数量
+-(void)NewsListCount {
+    NSString *str_newsListCount= [db fetchInterface:@"NewsListCount"];
+    NSString *str_ip=@"";
+    NSString *str_port=@"";
+    NSMutableArray *t_array=[db fetchIPAddress];
+    if (t_array.count==1) {
+        NSArray *arr_ip=[t_array objectAtIndex:0];
+        str_ip=[arr_ip objectAtIndex:0];
+        str_port=[arr_ip objectAtIndex:1];
+    }
+    NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_newsListCount];
+    [_session POST:str_url parameters:nil progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"获取新闻数量统计成功");
+        NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        NSString *str_success= [JSON objectForKey:@"success"];
+        int i_success=[str_success intValue];
+        if (i_success==1) {
+            NSString *str_num=[JSON objectForKey:@"num"];
+            _i_newsList=[str_num integerValue];
+            NSInteger i_page=_i_newsList/10+1;
+            _lbl_label.text=[NSString stringWithFormat:@"/%ld",(long)i_page];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"获取新闻数量统计失败");
+    }];
+
+}
+
+//获得最新新闻
+-(void)NewsList:(NSMutableDictionary*)param {
+    NSString *str_newsList= [db fetchInterface:@"NewsList"];
+    NSString *str_ip=@"";
+    NSString *str_port=@"";
+    NSMutableArray *t_array=[db fetchIPAddress];
+    if (t_array.count==1) {
+        NSArray *arr_ip=[t_array objectAtIndex:0];
+        str_ip=[arr_ip objectAtIndex:0];
+        str_port=[arr_ip objectAtIndex:1];
+    }
+    NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_newsList];
+    [_session POST:str_url parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"获取新闻列表成功:%@",responseObject);
+        NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        NSString *str_success= [JSON objectForKey:@"success"];
+        int i_success=[str_success intValue];
+        if (i_success==1) {
+            _arr_NewsList=[JSON objectForKey:@"list"];
+            if ([_arr_NewsList count]>0) {
+                [self.tableView reloadData];
+                // [self.tableView reloadData];
+            }
+            else {
+                [self.tableView reloadData];
+            }
+            
+        }
+        
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"获取新闻列表失败");
+    }];
+    
+}
+
+
 
 /*
 #pragma mark - Navigation
@@ -74,7 +188,9 @@
 }
 
 -(void)buildView {
-    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.005, self.view.frame.size.height*0.13, self.view.frame.size.width*0.99, self.view.frame.size.height) style:UITableViewStylePlain];
+    
+    
+    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.005, self.view.frame.size.height*0.13, self.view.frame.size.width*0.99, self.view.frame.size.height*0.58) style:UITableViewStylePlain];
     
     _tableView.separatorStyle=UITableViewCellSeparatorStyleSingleLine;
     
@@ -101,6 +217,22 @@
         _btn_Select.titleLabel.font=[UIFont systemFontOfSize:15];
     }
     
+    
+    UIButton *btn_previous=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.15, self.view.frame.size.height-150,self.view.frame.size.width*0.2, 25)];
+    [btn_previous setTitle:@"上一步" forState:UIControlStateNormal];
+    [btn_previous setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    btn_previous.layer.borderWidth=1;
+    [btn_previous addTarget:self action:@selector(Previous:) forControlEvents:UIControlEventTouchUpInside];
+    [btn_previous setBackgroundColor:[UIColor yellowColor]];
+    
+    UIButton *btn_next=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.65, self.view.frame.size.height-150, self.view.frame.size.width*0.2, 25)];
+    [btn_next setTitle:@"下一步" forState:UIControlStateNormal];
+    btn_previous.layer.borderWidth=1;
+    [btn_next addTarget:self action:@selector(Next:) forControlEvents:UIControlEventTouchUpInside];
+    [btn_next setBackgroundColor:[UIColor lightGrayColor]];
+
+    _lbl_label=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.5,self.view.frame.size.height-150 , self.view.frame.size.width*0.1, 25)];
+    _lbl_label.font=[UIFont systemFontOfSize:10];
     
     /*
     _btn_Select.layer.borderWidth=1;
@@ -142,8 +274,11 @@
     [self.view addSubview:_btn_Select];
     [self.view addSubview:_tableView];
     [self.view addSubview:_searchBar];
+    [self.view addSubview:btn_previous];
+    [self.view addSubview:btn_next];
+    [self.view addSubview:_lbl_label];
     
-    self.view.backgroundColor=[UIColor whiteColor];
+    self.view.backgroundColor=[UIColor colorWithRed:246/255.0f green:249/255.0f blue:254/255.0f alpha:1];
     
     _arr_News=[NSMutableArray arrayWithCapacity:2];
     
@@ -171,7 +306,13 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
+    if (_i_newsList!=0) {
+        return _arr_NewsList.count;
+    }
+    else {
+        return 2;
+    }
+    
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -181,15 +322,24 @@
          cell=[NewsManagementTableViewCell cellWithTable:tableView withCellHeight:110 titleX:self.view.frame.size.width/32 titleY:0.0f titleW:15*self.view.frame.size.width/16 titleH:50.0f DepartX:self.view.frame.size.width/32 DepartY:60.0f DepartW:3*self.view.frame.size.width/8 DepartH:40.0f TimeX:self.view.frame.size.width/2 TimeY:60.0f TimeW:self.view.frame.size.width/3 TimeH:40.0f];
     }
     else if (iPhone5_5s || iPhone4_4s) {
-        cell=[NewsManagementTableViewCell cellWithTable:tableView withCellHeight:110 titleX:self.view.frame.size.width/32 titleY:0.0f titleW:15*self.view.frame.size.width/16 titleH:50.0f DepartX:self.view.frame.size.width/32 DepartY:60.0f DepartW:3*self.view.frame.size.width/8 DepartH:40.0f TimeX:self.view.frame.size.width/2 TimeY:60.0f TimeW:self.view.frame.size.width*0.4 TimeH:40.0f];
+        cell=[NewsManagementTableViewCell cellWithTable:tableView withCellHeight:110 titleX:self.view.frame.size.width/32 titleY:0.0f titleW:15*self.view.frame.size.width/16 titleH:50.0f DepartX:self.view.frame.size.width/32 DepartY:60.0f DepartW:3*self.view.frame.size.width/8 DepartH:40.0f TimeX:self.view.frame.size.width*0.4 TimeY:60.0f TimeW:self.view.frame.size.width*0.5 TimeH:40.0f];
     }
     
    
     cell.delegate=self;
     cell.myTag=indexPath.row;
-    cell.lbl_Title.text=[NSString stringWithFormat:@"%@|%ld",@"国家发展改革委关于放开部分建设项目服务收费标准有关问题的通知",(long)indexPath.row];
-    cell.lbl_department.text=@"综合管理部 张三";
-    cell.lbl_time.text=@"2016-01-26 16:45";
+    if (_arr_NewsList.count==0) {
+        cell.lbl_Title.text=[NSString stringWithFormat:@"%@|%ld",@"国家发展改革委关于放开部分建设项目服务收费标准有关问题的通知",(long)indexPath.row];
+        cell.lbl_department.text=@"综合管理部 张三";
+        cell.lbl_time.text=@"2016-01-26 16:45";
+    }
+    else {
+        NSDictionary *dic_content=[_arr_NewsList objectAtIndex:indexPath.row];
+        cell.lbl_Title.text=[dic_content objectForKey:@"title"];
+        cell.lbl_department.text=[dic_content objectForKey:@"operatorName"];
+        cell.lbl_time.text=[dic_content objectForKey:@"startDate"];
+    }
+    
     
     if (_b_hasnews==NO) {
         if (indexPath.section==0 && indexPath.row==1) {
@@ -246,7 +396,12 @@
     dropDown=nil;
 }
 
--(void)niDropDownDelegateMethod:(NIDropDown *)sender {
+-(void)niDropDownDelegateMethod:(NIDropDown *)sender index:(NSInteger)i_index{
+    
+    _news_param[@"pageIndex"]=@"1";
+    _i_classId=i_index;
+    _news_param[@"classId"]=[NSString stringWithFormat:@"%ld",(long)i_index];
+    [self NewsList:_news_param];
     [self rel];
     NSLog(@"%@",_btn_Select.titleLabel.text);
 }
@@ -285,6 +440,27 @@
         [_arr_Focus addObject:str_title];
     }
     NSLog(@"传值成功");
+}
+
+
+-(void)Previous:(UIButton*)btn {
+    if (_i_pageIndex>1) {
+        _i_pageIndex=_i_pageIndex-1;
+        _news_param[@"pageIndex"]=[NSString stringWithFormat:@"%ld",(long)_i_pageIndex];
+        _news_param[@"classId"]=[NSString stringWithFormat:@"%ld",(long)_i_classId];
+        [self NewsList:_news_param];
+    }
+}
+
+-(void)Next:(UIButton*)btn {
+    NSInteger i_count=_i_newsList/10+1;
+    if (_i_pageIndex<i_count) {
+        _i_pageIndex=_i_pageIndex+1;
+        _news_param[@"pageIndex"]=[NSString stringWithFormat:@"%ld",(long)_i_pageIndex];
+        _news_param[@"classId"]=[NSString stringWithFormat:@"%ld",(long)_i_classId];
+        [self NewsList:_news_param];
+    }
+
 }
 
 @end

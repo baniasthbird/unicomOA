@@ -42,6 +42,8 @@
 /**标记*/
 @property (nonatomic, assign) NSInteger myTag;
 
+@property (nonatomic, strong) NSDictionary *myNotes;
+
 /** 快速创建cell的方法*/
 + (instancetype)cellWithTable:(UITableView *)tableView withCellHeight:(CGFloat) cellHeight atIndexPath:(NSIndexPath*)indexPath;
 

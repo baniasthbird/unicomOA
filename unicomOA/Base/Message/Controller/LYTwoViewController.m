@@ -45,13 +45,13 @@
     self.view.backgroundColor = [UIColor colorWithRed:246/255.0f green:249/255.0f blue:254/255.0f alpha:1];
     CGFloat i_Height=0;
     if (iPhone6) {
-        i_Height=50;
+        i_Height=70;
     }
     else if (iPhone5_5s) {
-        i_Height=37;
+        i_Height=50;
     }
     else if (iPhone6_plus) {
-        i_Height=55;
+        i_Height=80;
     }
     
     _session=[AFHTTPSessionManager manager];

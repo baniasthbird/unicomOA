@@ -9,8 +9,9 @@
 #import "MemberInfoViewController.h"
 #import "LogoView.h"
 #import "PhoneLabelView.h"
+@import MessageUI;
 
-@interface MemberInfoViewController ()
+@interface MemberInfoViewController ()<MFMessageComposeViewControllerDelegate>
 
 @end
 
@@ -277,6 +278,21 @@
 
 
 -(void)SendMessage:(UIButton*)sender {
+    if (_str_cellphone!=nil) {
+        if (![MFMessageComposeViewController canSendText]) {
+            NSLog(@"不能发短信");
+            return;
+        }
+        else {
+            MFMessageComposeViewController *vc=[[MFMessageComposeViewController alloc]init];
+            vc.messageComposeDelegate=self;
+            
+            vc.recipients=@[_str_cellphone];
+            vc.body=@"你好，这是我的测试短信";
+            
+            [self presentViewController:vc animated:YES completion:nil];
+        }
+    }
     
 }
 /*
@@ -325,8 +341,18 @@
 
 //点击电话后，拨打电话功能
 -(void)labelTouchUpInside:(UITapGestureRecognizer *)recognizer {
-    int i=0;
-    i=i+1;
+    if (_str_cellphone!=nil) {
+        //判断是否是正常的手机号码 zr 0516 继续完善
+        
+        NSMutableString *str=[[NSMutableString alloc]initWithFormat:@"tel:%@",_str_cellphone];
+        UIWebView *callWebView=[[UIWebView alloc]init];
+        [callWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
+        [self.view addSubview:callWebView];
+    }
+}
+
+-(void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

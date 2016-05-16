@@ -302,13 +302,16 @@
         NSString *str_fenlei=[dic_notes objectForKey:@"FenLei"];
         NSString *str_content=[dic_notes objectForKey:@"Content"];
         NSString *str_meeting_date=[dic_notes objectForKey:@"meeting_date"];
+        if (str_meeting_date==nil) {
+            str_meeting_date=@"";
+        }
         NSString *str_notes_date=[dic_notes objectForKey:@"notes_date"];
         NSString *str_pic_path=[dic_notes objectForKey:@"pic_path"];
         NSString *str_coord_x=[dic_notes objectForKey:@"coord_x"];
         NSString *str_coord_y=[dic_notes objectForKey:@"coord_y"];
         
         //备忘录
-        NSString *insertSql=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@','%@', '%@' , '%@', '%@', '%@', '%@', '%@') VALUES ('%@','%@' , '%@' , '%@' , '%@' , '%@' , '%@' , '%@')",NOTES_INDEX,NOTES_TABLENAME,NOTES_FENLEI,NOTES_CONTENT,NOTES_MEETING_DATE,NOTES_DATE,NOTES_PIC_PATH,NOTES_COOR_X,NOTES_COOR_Y,str_index,str_fenlei,str_content,str_meeting_date,str_notes_date,str_pic_path,str_coord_x,str_coord_y];
+        NSString *insertSql=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@','%@', '%@' , '%@', '%@', '%@', '%@', '%@') VALUES ('%@','%@' , '%@' , '%@' , '%@' , '%@' , '%@' , '%@')",NOTES_TABLENAME,NOTES_INDEX,NOTES_FENLEI,NOTES_CONTENT,NOTES_MEETING_DATE,NOTES_DATE,NOTES_PIC_PATH,NOTES_COOR_X,NOTES_COOR_Y,str_index,str_fenlei,str_content,str_meeting_date,str_notes_date,str_pic_path,str_coord_x,str_coord_y];
         
         BOOL res=[_database executeUpdate:insertSql];
         if (res) {
@@ -319,8 +322,22 @@
         }
         
     }
-    
-    
+}
+
+
+-(void)DeleteNotesTable:(NSString *)str_index {
+    if ([_database open]) {
+        NSString *deleteSql=[NSString stringWithFormat:@"DELETE FROM NOTES_TABLENAME WHERE NOTES_INDEX like '%%%@%%' ",str_index];
+        
+        BOOL res=[_database executeUpdate:deleteSql];
+        if (res) {
+            NSLog(@"成功删除该条备忘录");
+        }
+        else {
+            NSLog(@"删除该条备忘录失败");
+        }
+
+    }
 }
 
 -(NSMutableArray*)fetchAllNotes {
@@ -331,6 +348,7 @@
     
     FMResultSet *rs=[_database executeQuery:sql];
     while ([rs next]) {
+        NSString *str_index=[rs stringForColumn:NOTES_INDEX];
         NSString *str_notes_fenlei=[rs stringForColumn:NOTES_FENLEI];
         NSString *str_notes_content=[rs stringForColumn:NOTES_CONTENT];
         NSString *str_notes_meeting_date=[rs stringForColumn:NOTES_MEETING_DATE];
@@ -343,8 +361,16 @@
         CLLocationCoordinate2D coord;
         coord.longitude=d_coor_x;
         coord.latitude=d_coor_y;
-        NSArray *arr_interface=@[str_notes_fenlei,str_notes_content,str_notes_meeting_date,str_notes_date,str_notes_pic_path,str_coord_x,str_coord_y];
-        [array addObject:arr_interface];
+        NSMutableDictionary *dic_interface=[NSMutableDictionary dictionaryWithCapacity:8];
+        [dic_interface setValue:str_index forKey:@"index"];
+        [dic_interface setValue:str_notes_fenlei forKey:@"fenlei"];
+        [dic_interface setValue:str_notes_content forKey:@"content"];
+        [dic_interface setValue:str_notes_meeting_date forKey:@"meeting_date"];
+        [dic_interface setValue:str_notes_date forKey:@"notes_date"];
+        [dic_interface setValue:str_notes_pic_path forKey:@"pic_path"];
+        [dic_interface setValue:str_coord_x forKey:@"coord_x"];
+        [dic_interface setValue:str_coord_y forKey:@"coord_y"];
+        [array addObject:dic_interface];
     }
     
     [_database close];

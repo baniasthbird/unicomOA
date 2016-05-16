@@ -74,8 +74,7 @@ typedef enum
 //位置地址
 @property (nonatomic,strong) CLPlacemark *addr_placemark;
 
-//照片地址
-@property (nonatomic,strong) NSString *str_pic_path;
+
 
 @end
 
@@ -127,21 +126,39 @@ typedef enum
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSString *dateString=[dateFormatter stringFromDate:date];
     
-    NSMutableDictionary *dic=[NSMutableDictionary alloc];
+    [dateFormatter setDateFormat:@"MMdd"];
+    NSString *str_index1=[dateFormatter stringFromDate:date];
+    NSString *str_index2=[NSString stringWithFormat:@"%ld",(long)_i_index];
+    NSString *str_index=[NSString stringWithFormat:@"%@%@",str_index1,str_index2];
+    
+    NSMutableDictionary *dic=[NSMutableDictionary dictionaryWithCapacity:8];
+    [dic setValue:str_index forKey:@"index"];
     [dic setValue:_str_notesFenLei forKey:@"FenLei"];
     [dic setValue:_str_noteContent forKey:@"Content"];
+    NSString *str_coordx=@"";
+    NSString *str_coordy=@"";
     if (_coord_placemark.longitude!=0 && _coord_placemark.latitude!=0) {
-        NSString *str_coordx=[NSString stringWithFormat:@"%f",_coord_placemark.latitude];
-        NSString *str_coordy=[NSString stringWithFormat:@"%f",_coord_placemark.longitude];
+        str_coordx=[NSString stringWithFormat:@"%f",_coord_placemark.latitude];
+        str_coordy=[NSString stringWithFormat:@"%f",_coord_placemark.longitude];
         [dic setValue:str_coordx forKey:@"coord_x"];
         [dic setValue:str_coordy forKey:@"coord_y"];
     }
+    else {
+        [dic setValue:@"0" forKey:@"coord_x"];
+        [dic setValue:@"0" forKey:@"coord_y"];
+    }
+    
     [dic setValue:dateString forKey:@"notes_date"];
+    if (_str_pic_path==nil) {
+        _str_pic_path=@"";
+    }
     [dic setObject:_str_pic_path forKey:@"pic_path"];
     db=[DataBase sharedinstanceDB];
     [db InsertNotesTable:dic];
     
-    [delegate passValue:_str_notesFenLei Content:_str_noteContent Time:_str_date TimeNow:dateString];
+    //[delegate passValue:_str_notesFenLei Content:_str_noteContent Time:_str_date TimeNow:dateString];
+    //[delegate passValue:_str_notesFenLei Content:_str_noteContent Time:_str_date TimeNow:dateString PicPath:_str_pic_path coordx:str_coordx coordy:str_coordy address:_str_location_content];
+    [delegate passValue:_str_notesFenLei Content:_str_noteContent Time:_str_date TimeNow:dateString PicPath:_str_pic_path coordx:str_coordx coordy:str_coordy address:_str_location_content index:str_index];
     
     [self.navigationController popViewControllerAnimated:YES];
 }

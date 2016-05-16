@@ -39,6 +39,7 @@
 -(NSMutableArray*)fetchAllInterface;
 -(NSMutableArray*)fetchAllNotes;
 
+-(void)DeleteNotesTable:(NSString*)str_index;
 
 
 //获得单一数据

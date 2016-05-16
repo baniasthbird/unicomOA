@@ -28,5 +28,11 @@
 
 @property (strong,nonatomic) NSString *str_time;
 
+@property (strong,nonatomic) NSString *str_pic_path;
+
+@property (strong,nonatomic) NSString *str_coordx;
+
+@property (strong,nonatomic) NSString *str_coordy;
+
 
 @end

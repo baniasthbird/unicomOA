@@ -37,8 +37,26 @@
                     CLTreeViewNode *node=[self CreateLevel0Node:str_orgname];
                     NSString *str_orgid=[tmp_dic objectForKey:@"orgid"];
                     node.tag=[str_orgid intValue];
-                    [self AddSubNode:node departarray:departArray];
-                    [self AddStaff:node staffArray:staffArray];
+                    node=[self AddSubNode:node departarray:departArray];
+                    if (node.sonNodes==nil) {
+                       node=[self AddStaff:node staffArray:staffArray];
+                       [self SetNode0Num:node num:node.sonNodes.count];
+                    }
+                    else {
+                        NSMutableArray *arr_subnodes=[[NSMutableArray alloc]init];
+                        NSInteger i_count=0;
+                        for (int i=0;i<node.sonNodes.count;i++) {
+                            CLTreeViewNode *subNodes=[node.sonNodes objectAtIndex:i];
+                            subNodes=[self AddStaff:subNodes staffArray:staffArray];
+                            [arr_subnodes addObject:subNodes];
+                            [self SetNode0Num:subNodes num:subNodes.sonNodes.count];
+                            i_count=i_count+subNodes.sonNodes.count;
+                        }
+                        node.sonNodes=arr_subnodes;
+                        [self SetNode0Num:node num:i_count];
+                        
+                    }
+                   // [self AddStaff:node staffArray:staffArray];
                     [arr_tmp addObject:node];
                 }
                 
@@ -163,7 +181,7 @@
             long i_parentid=[(NSNumber*)obj longLongValue];
             if (i_parentid==i_orgid) {
                 NSString *str_orgname=[dic_sub objectForKey:@"orgname"];
-                CLTreeViewNode *sub_node=[self CreateLevel1Node:str_orgname];
+                CLTreeViewNode *sub_node=[self CreateLevel1Node:str_orgname sonCnt:@"0"];
                 NSString *str_orgid=[dic_sub objectForKey:@"orgid"];
                 int i_orgid=[str_orgid intValue];
                 sub_node.tag=i_orgid;
@@ -179,18 +197,8 @@
 
 //添加职员
 -(CLTreeViewNode*)AddStaff:(CLTreeViewNode*)node staffArray:(NSMutableArray*)staffArray {
-    int i_orgid=-1;
+    int i_orgid=node.tag;
     NSMutableArray *arr_staff=[[NSMutableArray alloc]init];
-    if (node.sonNodes==nil) {
-        i_orgid=node.tag;
-    }
-    else {
-        for (int i=0;i<node.sonNodes.count;i++) {
-            CLTreeViewNode *subnode=[node.sonNodes objectAtIndex:i];
-            subnode =[self AddStaff:subnode staffArray:staffArray];
-            
-        }
-    }
     //暂时不处理人员的orgid为1的情况
     for (int i=0;i<[staffArray count];i++) {
         NSDictionary *dic=[staffArray objectAtIndex:i];

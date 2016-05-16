@@ -180,7 +180,7 @@
     dropDown=nil;
 }
 
--(void)niDropDownDelegateMethod:(NIDropDown *)sender {
+-(void)niDropDownDelegateMethod:(NIDropDown *)sender index:(NSInteger)i_index{
     [self rel];
     NSLog(@"%@",_btn_Select.titleLabel.text);
 }

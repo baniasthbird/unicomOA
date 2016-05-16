@@ -117,8 +117,10 @@
     //button的index值应当从0开始
     UIButton *btn = [self setupButtonWithTitle:@"待办流程" Index:0  Badage:i_index1];
     self.selectBtn = btn;
-    [btn setBackgroundColor:[UIColor colorWithRed:80/255.0f green:125/255.0f blue:236/255.0f alpha:1]];
-    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [btn setBackgroundColor:[UIColor whiteColor]];
+    [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    btn.layer.borderWidth=1;
+    btn.layer.borderColor=[[UIColor colorWithRed:214/255.0f green:214/255.0f blue:214/255.0f alpha:1] CGColor];
     [self setupButtonWithTitle:@"公文传阅" Index:1 Badage:i_index2];
     [self setupButtonWithTitle:@"消息提醒" Index:2 Badage:i_index3];
 }
@@ -132,9 +134,11 @@
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     [btn setTitle:title forState:(UIControlStateNormal)];
     btn.frame = CGRectMake(x, y, w, h);
-    [btn setBackgroundColor:[UIColor whiteColor]];
-    [btn setTitleColor:[UIColor colorWithRed:173/255.0f green:173/255.0f blue:173/255.0f alpha:1] forState:(UIControlStateNormal)];
-   // [btn setTitleColor:[UIColor whiteColor]  forState:UIControlStateSelected];
+    [btn setBackgroundColor:[UIColor colorWithRed:246/255.0f green:249/255.0f blue:254/255.0f alpha:1]];
+    //[btn setTitleColor:[UIColor blackColor forState:(UIControlStateNormal)];
+    [btn setTitleColor:[UIColor blackColor]  forState:UIControlStateNormal];
+    btn.layer.borderWidth=1;
+    btn.layer.borderColor=[[UIColor colorWithRed:214/255.0f green:214/255.0f blue:214/255.0f alpha:1] CGColor];
     btn.tag = index + kTag;
     [btn.badgeView setBadgeValue:i_badage];
     [btn.badgeView setOutlineWidth:0.0];
@@ -158,7 +162,7 @@
 }
 - (void)pageClick:(UIButton *)btn{
     self.currentPages = btn.tag - kTag;
-    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+    [btn setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
     [btn setBackgroundColor:[UIColor colorWithRed:80/255.0f green:125/255.0f blue:236/255.0f alpha:1]];
     [self gotoCurrentPage];
 }
@@ -171,11 +175,11 @@
         return;
     }
     
-    [self.selectBtn setBackgroundColor:[UIColor whiteColor]];
-    [self.selectBtn setTitleColor:[UIColor colorWithRed:173/255.0f green:173/255.0f blue:173/255.0f alpha:1] forState:UIControlStateNormal];
+    [self.selectBtn setBackgroundColor:[UIColor colorWithRed:246/255.0f green:249/255.0f blue:254/255.0f alpha:1]];
+    [self.selectBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     self.selectBtn = btn;
-    [btn setBackgroundColor:[UIColor colorWithRed:80/255.0f green:125/255.0f blue:236/255.0f alpha:1]];
-    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [btn setBackgroundColor:[UIColor whiteColor]];
+    [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     self.pageLine.center = CGPointMake(btn.center.x, CGRectGetMaxY(btn.frame));
 }
 /**
