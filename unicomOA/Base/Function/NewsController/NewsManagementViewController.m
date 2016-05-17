@@ -17,9 +17,10 @@
 #import "UIImageButton.h"
 #import "DataBase.h"
 #import "AFNetworking.h"
+#import "LXAlertView.h"
 
 
-@interface NewsManagementViewController ()
+@interface NewsManagementViewController ()<UITextFieldDelegate>
 
 @property (strong,nonatomic) NSMutableArray *arr_News;
 
@@ -31,6 +32,8 @@
 
 @property (nonatomic,strong) UILabel *lbl_label;
 
+@property (nonatomic,strong) UITextField *txt_pages;
+
 //公告数量总计
 @property NSInteger i_newsList;
 
@@ -39,6 +42,8 @@
 
 //新闻分类的索引
 @property NSInteger i_classId;
+
+@property NSInteger i_pageTotal;
 
 @property (nonatomic,strong) NSMutableDictionary *news_param;
 
@@ -57,7 +62,7 @@
     [btn_focus setTitle:@"关注列表" forState:UIControlStateNormal];
     [btn_focus setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btn_focus addTarget:self action:@selector(FocusNews:) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithCustomView:btn_focus];
+  //  self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithCustomView:btn_focus];
     
     
     
@@ -152,6 +157,12 @@
         NSString *str_success= [JSON objectForKey:@"success"];
         int i_success=[str_success intValue];
         if (i_success==1) {
+            NSObject *obj=[JSON objectForKey:@"totalPage"];
+            NSNumber *l_totalPage=(NSNumber*)obj;
+            _i_pageTotal=[l_totalPage integerValue];
+            NSNumberFormatter *numberFormatter=[[NSNumberFormatter alloc]init];
+            NSString *str_totalPage=[numberFormatter stringFromNumber:l_totalPage];
+            _lbl_label.text=[NSString stringWithFormat:@"/%@",str_totalPage];
             _arr_NewsList=[JSON objectForKey:@"list"];
             if ([_arr_NewsList count]>0) {
                 [self.tableView reloadData];
@@ -219,14 +230,14 @@
     
     
     UIButton *btn_previous=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.15, self.view.frame.size.height-150,self.view.frame.size.width*0.2, 25)];
-    [btn_previous setTitle:@"上一步" forState:UIControlStateNormal];
+    [btn_previous setTitle:@"上一页" forState:UIControlStateNormal];
     [btn_previous setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     btn_previous.layer.borderWidth=1;
     [btn_previous addTarget:self action:@selector(Previous:) forControlEvents:UIControlEventTouchUpInside];
     [btn_previous setBackgroundColor:[UIColor yellowColor]];
     
     UIButton *btn_next=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.65, self.view.frame.size.height-150, self.view.frame.size.width*0.2, 25)];
-    [btn_next setTitle:@"下一步" forState:UIControlStateNormal];
+    [btn_next setTitle:@"下一页" forState:UIControlStateNormal];
     btn_previous.layer.borderWidth=1;
     [btn_next addTarget:self action:@selector(Next:) forControlEvents:UIControlEventTouchUpInside];
     [btn_next setBackgroundColor:[UIColor lightGrayColor]];
@@ -234,6 +245,12 @@
     _lbl_label=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.5,self.view.frame.size.height-150 , self.view.frame.size.width*0.1, 25)];
     _lbl_label.font=[UIFont systemFontOfSize:10];
     
+    
+    _txt_pages=[[UITextField alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.45,self.view.frame.size.height-150,self.view.frame.size.width*0.05, 25)];
+    _txt_pages.placeholder=@"1";
+    _txt_pages.delegate=self;
+    _txt_pages.keyboardType=UIKeyboardTypePhonePad;
+    _txt_pages.font=[UIFont systemFontOfSize:10];
     /*
     _btn_Select.layer.borderWidth=1;
     _btn_Select.layer.borderColor=[[UIColor lightGrayColor] CGColor];
@@ -277,6 +294,7 @@
     [self.view addSubview:btn_previous];
     [self.view addSubview:btn_next];
     [self.view addSubview:_lbl_label];
+    [self.view addSubview:_txt_pages];
     
     self.view.backgroundColor=[UIColor colorWithRed:246/255.0f green:249/255.0f blue:254/255.0f alpha:1];
     
@@ -338,6 +356,12 @@
         cell.lbl_Title.text=[dic_content objectForKey:@"title"];
         cell.lbl_department.text=[dic_content objectForKey:@"operatorName"];
         cell.lbl_time.text=[dic_content objectForKey:@"startDate"];
+        NSObject *obj=[dic_content objectForKey:@"id"];
+        if (obj!=nil) {
+            NSNumber *num_index=(NSNumber*)obj;
+            NSInteger i_index=[num_index integerValue];
+            cell.tag=i_index;
+        }
     }
     
     
@@ -426,7 +450,7 @@
     
     
     NewsDisplayViewController *news_controller=[[NewsDisplayViewController alloc]init];
-    news_controller.news_index=&(index);
+    news_controller.news_index=cell.tag;
     news_controller.str_label=cell.lbl_Title.text;
     news_controller.str_depart=cell.lbl_department.text;
     news_controller.delegate=self;
@@ -449,13 +473,39 @@
         _news_param[@"pageIndex"]=[NSString stringWithFormat:@"%ld",(long)_i_pageIndex];
         _news_param[@"classId"]=[NSString stringWithFormat:@"%ld",(long)_i_classId];
         [self NewsList:_news_param];
+        self.txt_pages.text=[NSString stringWithFormat:@"%ld",(long)_i_pageIndex];
     }
 }
 
 -(void)Next:(UIButton*)btn {
-    NSInteger i_count=_i_newsList/10+1;
-    if (_i_pageIndex<i_count) {
+    if (_i_pageIndex<_i_pageTotal) {
         _i_pageIndex=_i_pageIndex+1;
+        _news_param[@"pageIndex"]=[NSString stringWithFormat:@"%ld",(long)_i_pageIndex];
+        _news_param[@"classId"]=[NSString stringWithFormat:@"%ld",(long)_i_classId];
+        [self NewsList:_news_param];
+        self.txt_pages.text=[NSString stringWithFormat:@"%ld",(long)_i_pageIndex];
+    }
+
+}
+
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [_txt_pages resignFirstResponder];
+    return YES;
+}
+
+
+-(IBAction)textFieldDidEndEditing:(UITextField *)textField {
+    NSString *str_text=_txt_pages.text;
+    NSInteger i_text=[str_text integerValue];
+    if (i_text>_i_pageTotal) {
+        LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"警告" message:@"输入页数超过范围" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+            _txt_pages.text=@"1";
+        }];
+        [alert showLXAlertView];
+    }
+    else {
+        _i_pageIndex=[str_text integerValue];
         _news_param[@"pageIndex"]=[NSString stringWithFormat:@"%ld",(long)_i_pageIndex];
         _news_param[@"classId"]=[NSString stringWithFormat:@"%ld",(long)_i_classId];
         [self NewsList:_news_param];

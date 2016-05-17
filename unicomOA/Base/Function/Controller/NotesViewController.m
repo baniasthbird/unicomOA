@@ -122,7 +122,7 @@ NSInteger i_count=0;
    // cell.textLabel.text=str_note;
     cell.lbl_arrangement.text=[dic_note objectForKey:@"fenlei"];
     cell.lbl_content.text=[dic_note objectForKey:@"content"];
-    cell.lbl_time.text=[dic_note objectForKey:@"notes_date"];
+    cell.lbl_time2.text=[dic_note objectForKey:@"notes_date"];
     NSString *str_index=[dic_note objectForKey:@"index"];
     cell.tag=[str_index integerValue];
     cell.myNotes=dic_note;
@@ -177,12 +177,9 @@ NSInteger i_count=0;
     
     NewNotesViewController *new_controller=[[NewNotesViewController alloc]init];
     
-    new_controller.str_FenLei=[dic_note objectForKey:@"fenlei"];
-    new_controller.str_noteContent=[dic_note objectForKey:@"content"];
-    new_controller.str_time=[dic_note objectForKey:@"notes_date"];
-    new_controller.str_coordx=[dic_note objectForKey:@"coord_x"];
-    new_controller.str_coordy=[dic_note objectForKey:@"coord_y"];
-    new_controller.str_pic_path=[dic_note objectForKey:@"pic_path"];
+    new_controller.dic_notes=dic_note;
+    
+   
     
     
     [self.navigationController pushViewController:new_controller animated:YES];
@@ -199,16 +196,29 @@ NSInteger i_count=0;
     NSMutableDictionary *dic_notes=[NSMutableDictionary dictionaryWithCapacity:9];
     [dic_notes setValue:str_FenLei forKey:@"fenlei"];
     [dic_notes setValue:str_Content forKey:@"content"];
-    [dic_notes setValue:str_curTime forKey:@"notes_date"];
-    [dic_notes setValue:str_nowTime forKey:@"meeting_date"];
+    [dic_notes setValue:str_nowTime forKey:@"notes_date"];
+    [dic_notes setValue:str_curTime forKey:@"meeting_date"];
     [dic_notes setValue:str_picpath forKey:@"pic_path"];
     [dic_notes setValue:coord_x forKey:@"coord_x"];
     [dic_notes setValue:coord_y forKey:@"coord_y"];
     [dic_notes setValue:str_index forKey:@"index"];
     [dic_notes setValue:str_address forKey:@"address"];
     
-    [_arr_Notes addObject:dic_notes];
-    
+    BOOL b_Add=NO;
+    for (int i=0;i<_arr_Notes.count;i++) {
+        NSDictionary *dic_tmp=(NSDictionary*)[_arr_Notes objectAtIndex:i];
+        NSString *str_tmpindex=(NSString*)[dic_tmp objectForKey:@"index"];
+        NSInteger i_tmpindex=[str_tmpindex integerValue];
+        NSInteger i_index=[str_index integerValue];
+        if (i_tmpindex==i_index) {
+            [_arr_Notes replaceObjectAtIndex:i withObject:dic_notes];
+            b_Add=YES;
+            break;
+        }
+    }
+    if (b_Add==NO) {
+       [_arr_Notes addObject:dic_notes];
+    }
     [self.tableView reloadData];
 }
 
@@ -278,9 +288,11 @@ NSInteger i_count=0;
     switch (index) {
         case 0: {
             NewNotesViewController *new_controller=[[NewNotesViewController alloc]init];
-            new_controller.str_FenLei=actionSheet.notes_tag.lbl_arrangement.text;
-            new_controller.str_noteContent=actionSheet.notes_tag.lbl_content.text;
-            new_controller.str_time=actionSheet.notes_tag.lbl_time.text;
+            NotesTableVIewCell *cell=(NotesTableVIewCell*)actionSheet.notes_tag;
+            NSDictionary *dic_note=(NSDictionary*)cell.myNotes;
+            new_controller.dic_notes=dic_note;
+            new_controller.delegate=self;
+            
             [self.navigationController pushViewController:new_controller animated:YES];
             break;
         }

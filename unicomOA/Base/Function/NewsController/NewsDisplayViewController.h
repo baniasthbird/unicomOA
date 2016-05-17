@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "UserInfo.h"
+@import WebKit;
 
 @protocol FocusNewsPassDelegate
 
@@ -23,11 +24,11 @@
 
 @property (strong,nonatomic) UILabel *lbl_label;
 
-@property (strong,nonatomic) UITextView *txt_content;
+@property (strong,nonatomic) WKWebView *wb_content;
 
 @property (strong,nonatomic) UILabel *lbl_depart;
 
-@property (assign) NSInteger *news_index;
+@property (assign) NSInteger news_index;
 
 @property (strong,nonatomic) UserInfo *userInfo;
 

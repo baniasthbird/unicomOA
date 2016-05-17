@@ -260,6 +260,12 @@
                 cell.lbl_Title.text=[dic_content objectForKey:@"title"];
                 cell.lbl_department.text=[dic_content objectForKey:@"operatorName"];
                 cell.lbl_time.text=[dic_content objectForKey:@"startDate"];
+                NSObject *obj=[dic_content objectForKey:@"id"];
+                if (obj!=nil) {
+                    NSNumber *num_index=(NSNumber*)obj;
+                    NSInteger i_index=[num_index integerValue];
+                    cell.tag=i_index;
+                }
                // NewsListCell *cell=[NewsListCell cellWithTable:tableView dic:dic_content cellHeight:_i_Height];
                // return cell;
                 return cell;

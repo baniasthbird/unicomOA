@@ -15,4 +15,6 @@
 
 @property (nonatomic,strong) UserInfo *userInfo;
 
+@property NSInteger news_index;
+
 @end

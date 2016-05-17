@@ -87,7 +87,7 @@
     }
 
     //生成备忘录表
-    NSString *sqlCreateTableNotes=[NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS '%@' ('%@' INTEGER PRIMARY KEY AUTOINCREMENT, '%@' INTEGER , '%@' TEXT , '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' REAL, '%@' REAL)",NOTES_TABLENAME,NOTES_ID,NOTES_INDEX,NOTES_FENLEI,NOTES_CONTENT,NOTES_MEETING_DATE,NOTES_DATE,NOTES_PIC_PATH,NOTES_COOR_X,NOTES_COOR_Y];
+    NSString *sqlCreateTableNotes=[NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS '%@' ('%@' INTEGER PRIMARY KEY AUTOINCREMENT, '%@' INTEGER , '%@' TEXT , '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT)",NOTES_TABLENAME,NOTES_ID,NOTES_INDEX,NOTES_FENLEI,NOTES_CONTENT,NOTES_MEETING_DATE,NOTES_DATE,NOTES_PIC_PATH,NOTES_COOR_X,NOTES_COOR_Y,NOTES_ADDR];
     BOOL resNotes = [_database executeUpdate:sqlCreateTableNotes];
     if (!resNotes) {
         NSLog(@"error when creating NOTES table");
@@ -215,7 +215,7 @@
             BOOL res11=[_database executeUpdate:insertSql11];
             
             //新闻详细内容
-            NSString *insertSql12=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",INTERFACE_TABLENAME,INTERFACE_NAME,INTERFACE_VALUE,@"NewsContent",@"/default/mobile/oa/com.hnsi.erp.mobile.oa.NewsSearch.list.biz.ext"];
+            NSString *insertSql12=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",INTERFACE_TABLENAME,INTERFACE_NAME,INTERFACE_VALUE,@"NewsContent",@"/default/mobile/oa/com.hnsi.erp.mobile.oa.NewsSearch.getNews.biz.ext"];
             BOOL res12=[_database executeUpdate:insertSql12];
             
             //新闻评论列表
@@ -309,9 +309,10 @@
         NSString *str_pic_path=[dic_notes objectForKey:@"pic_path"];
         NSString *str_coord_x=[dic_notes objectForKey:@"coord_x"];
         NSString *str_coord_y=[dic_notes objectForKey:@"coord_y"];
+        NSString *str_addr=[dic_notes objectForKey:@"addr"];
         
         //备忘录
-        NSString *insertSql=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@','%@', '%@' , '%@', '%@', '%@', '%@', '%@') VALUES ('%@','%@' , '%@' , '%@' , '%@' , '%@' , '%@' , '%@')",NOTES_TABLENAME,NOTES_INDEX,NOTES_FENLEI,NOTES_CONTENT,NOTES_MEETING_DATE,NOTES_DATE,NOTES_PIC_PATH,NOTES_COOR_X,NOTES_COOR_Y,str_index,str_fenlei,str_content,str_meeting_date,str_notes_date,str_pic_path,str_coord_x,str_coord_y];
+        NSString *insertSql=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@','%@', '%@' , '%@', '%@', '%@', '%@', '%@', '%@') VALUES ('%@','%@' , '%@' , '%@' , '%@' , '%@' , '%@' , '%@', '%@')",NOTES_TABLENAME,NOTES_INDEX,NOTES_FENLEI,NOTES_CONTENT,NOTES_MEETING_DATE,NOTES_DATE,NOTES_PIC_PATH,NOTES_COOR_X,NOTES_COOR_Y,NOTES_ADDR,str_index,str_fenlei,str_content,str_meeting_date,str_notes_date,str_pic_path,str_coord_x,str_coord_y,str_addr];
         
         BOOL res=[_database executeUpdate:insertSql];
         if (res) {
@@ -361,6 +362,7 @@
         CLLocationCoordinate2D coord;
         coord.longitude=d_coor_x;
         coord.latitude=d_coor_y;
+        NSString *str_address=[rs stringForColumn:NOTES_ADDR];
         NSMutableDictionary *dic_interface=[NSMutableDictionary dictionaryWithCapacity:8];
         [dic_interface setValue:str_index forKey:@"index"];
         [dic_interface setValue:str_notes_fenlei forKey:@"fenlei"];
@@ -370,6 +372,7 @@
         [dic_interface setValue:str_notes_pic_path forKey:@"pic_path"];
         [dic_interface setValue:str_coord_x forKey:@"coord_x"];
         [dic_interface setValue:str_coord_y forKey:@"coord_y"];
+        [dic_interface setValue:str_address forKey:@"address"];
         [array addObject:dic_interface];
     }
     
@@ -378,6 +381,36 @@
     return array;
 }
 
+
+-(void)UpdateNotesTable:(NSMutableDictionary *)dic_notes {
+    if ([_database open]) {
+        NSString *str_index=[dic_notes objectForKey:@"index"];
+        NSString *str_fenlei=[dic_notes objectForKey:@"FenLei"];
+        NSString *str_content=[dic_notes objectForKey:@"Content"];
+        NSString *str_meeting_date=[dic_notes objectForKey:@"meeting_date"];
+        if (str_meeting_date==nil) {
+            str_meeting_date=@"";
+        }
+        NSString *str_notes_date=[dic_notes objectForKey:@"notes_date"];
+        NSString *str_pic_path=[dic_notes objectForKey:@"pic_path"];
+        NSString *str_coord_x=[dic_notes objectForKey:@"coord_x"];
+        NSString *str_coord_y=[dic_notes objectForKey:@"coord_y"];
+        NSString *str_addr=[dic_notes objectForKey:@"addr"];
+        
+       
+        //备忘录
+     //   NSString *updateSql=[NSString stringWithFormat:@"UPDATE NOTES_TABLENAME SET NOTES_ID = ? , NOTES_FENLEI = ? , NOTES_CONTENT = ? , NOTES_MEETING_DATE = ? , NOTES_DATE = ?, NOTES_PIC_PATH = ? , NOTES_COOR_X = ? , NOTES_COOR_Y = ? , NOTES_ADDRESS = ? WHERE NOTES_INDEX = ?",str_index,str_fenlei,str_content,str_meeting_date,str_notes_date,str_pic_path,str_coord_x,str_coord_y,str_addr,str_index];
+        
+        BOOL res=[_database executeUpdate:@"UPDATE NOTES_TABLENAME SET NOTES_ID = ? , NOTES_FENLEI = ? , NOTES_CONTENT = ? , NOTES_MEETING_DATE = ? , NOTES_DATE = ?, NOTES_PIC_PATH = ? , NOTES_COOR_X = ? , NOTES_COOR_Y = ? , NOTES_ADDRESS = ? WHERE NOTES_INDEX = ?",str_index,str_fenlei,str_content,str_meeting_date,str_notes_date,str_pic_path,str_coord_x,str_coord_y,str_addr,str_index];
+        if (res) {
+            NSLog(@"数据更新至备忘录表成功");
+        }
+        else {
+            NSLog(@"更新数据至备忘录表失败");
+        }
+
+    }
+}
 //根据条件查找某一条备忘录
 //-(NSMutableDictionary*)fetchNotes:(
 

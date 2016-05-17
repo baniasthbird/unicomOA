@@ -33,6 +33,7 @@
 #define NOTES_PIC_PATH  @"NOTES_PIC_PATH"
 #define NOTES_COOR_X    @"NOTES_COOR_X"
 #define NOTES_COOR_Y    @"NOTES_COOR_Y"
+#define NOTES_ADDR      @"NOTES_ADDRESS"
 
 
 //预约用车表

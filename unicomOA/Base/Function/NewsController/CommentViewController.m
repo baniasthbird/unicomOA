@@ -11,6 +11,8 @@
 #import "IQKeyboardReturnKeyHandler.h"
 #import "IQUIView+IQKeyboardToolbar.h"
 #import "CommentCell.h"
+#import "DataBase.h"
+#import "AFNetworking.h"
 
 @interface CommentViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 
@@ -22,6 +24,16 @@
 
 @property (nonatomic,strong) NSMutableArray *arr_comment_add;
 
+@property (nonatomic,strong) AFHTTPSessionManager *session;
+
+@property (nonatomic,strong) NSMutableDictionary *param;
+
+//评论数量多时的页面总数
+@property NSInteger i_totalPage;
+
+//评论数量多时引用的索引
+@property NSInteger i_pageIndex;
+
 @end
 
 @implementation CommentViewController
@@ -29,6 +41,7 @@
     int prewTag;
     float prewMoveY;
     IQKeyboardReturnKeyHandler *returnKeyHandler;
+    DataBase *db;
 }
 
 
@@ -52,14 +65,26 @@
     
     CGFloat i_Height=0;
     if (iPhone6) {
-        i_Height=self.view.frame.size.height*0.75;
+        i_Height=self.view.frame.size.height*0.7;
     }
     else if (iPhone6_plus) {
-        i_Height=self.view.frame.size.height*0.78;
+        i_Height=self.view.frame.size.height*0.73;
     }
     else {
-        i_Height=self.view.frame.size.height*0.735;
+        i_Height=self.view.frame.size.height*0.685;
     }
+    
+    db=[DataBase sharedinstanceDB];
+    
+    _session=[AFHTTPSessionManager manager];
+    _session.responseSerializer= [AFHTTPResponseSerializer serializer];
+    [_session.requestSerializer setHTTPShouldHandleCookies:YES];
+    
+    _param=[NSMutableDictionary dictionary];
+    _param[@"pageIndex"]=@"1";
+    _param[@"newsId"]=[NSString stringWithFormat:@"%ld",(long)_news_index];
+    _i_pageIndex=1;
+    [self CommentDisplay:_param];
     
     self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, i_Height) style:UITableViewStylePlain];
     self.tableView.dataSource=self;
@@ -68,12 +93,29 @@
     
     [self.view addSubview:self.tableView];
     
-    UIView *lbl_line=[[UIView alloc]initWithFrame:CGRectMake(0, i_Height, self.view.frame.size.width, 1)];
+    
+    UIButton *btn_previous=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.15, self.view.frame.size.height-170,self.view.frame.size.width*0.2, 25)];
+    [btn_previous setTitle:@"上一页" forState:UIControlStateNormal];
+    [btn_previous setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    btn_previous.layer.borderWidth=1;
+    [btn_previous addTarget:self action:@selector(Previous:) forControlEvents:UIControlEventTouchUpInside];
+    [btn_previous setBackgroundColor:[UIColor yellowColor]];
+    
+    UIButton *btn_next=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.65, self.view.frame.size.height-170, self.view.frame.size.width*0.2, 25)];
+    [btn_next setTitle:@"下一页" forState:UIControlStateNormal];
+    btn_previous.layer.borderWidth=1;
+    [btn_next addTarget:self action:@selector(Next:) forControlEvents:UIControlEventTouchUpInside];
+    [btn_next setBackgroundColor:[UIColor lightGrayColor]];
+    
+    [self.view addSubview:btn_previous];
+    [self.view addSubview:btn_next];
+    
+    UIView *lbl_line=[[UIView alloc]initWithFrame:CGRectMake(0, i_Height+0.05, self.view.frame.size.width, 1)];
     lbl_line.backgroundColor=[UIColor colorWithRed:189/255.0f green:189/255.0f blue:189/255.0f alpha:1];
     
     [self.view addSubview:lbl_line];
     
-    UIButton *btn_comment=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.8, i_Height+self.view.frame.size.height*0.01, self.view.frame.size.width*0.18, self.view.frame.size.height*0.05)];
+    UIButton *btn_comment=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.8, i_Height+self.view.frame.size.height*0.06, self.view.frame.size.width*0.18, self.view.frame.size.height*0.05)];
     btn_comment.backgroundColor=[UIColor colorWithRed:99/255.0f green:115/255.0f blue:230/255.0f alpha:1];
     [btn_comment setTitle:@"发表" forState:UIControlStateNormal];
     [btn_comment setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -82,7 +124,7 @@
     
     [self.view addSubview:btn_comment];
     
-    _txt_comment=[[UITextField alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.03, i_Height+self.view.frame.size.height*0.01, self.view.frame.size.width*0.75, self.view.frame.size.height*0.05)];
+    _txt_comment=[[UITextField alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.03, i_Height+self.view.frame.size.height*0.06, self.view.frame.size.width*0.75, self.view.frame.size.height*0.05)];
     _txt_comment.delegate=self;
     _txt_comment.backgroundColor=[UIColor whiteColor];
     _txt_comment.layer.borderWidth=1;
@@ -92,11 +134,8 @@
     [self.view addSubview:_txt_comment];
     
     _arr_comment=[[NSMutableArray alloc]initWithCapacity:5];
-    [_arr_comment addObject:@"党的政策好|综合部张三"];
-    [_arr_comment addObject:@"绝对支持|开发部李四"];
-    [_arr_comment addObject:@"服从领导，坚决贯彻|开发部王五"];
-    [_arr_comment addObject:@"绝对支持|开发部李四"];
-    [_arr_comment addObject:@"绝对支持|开发部李四"];
+ 
+    self.view.backgroundColor=[UIColor colorWithRed:246/255.0f green:249/255.0f blue:254/255.0f alpha:1];
     
     _arr_comment_add=[[NSMutableArray alloc]initWithCapacity:5];
     [_arr_comment_add addObject:@"党的政策好|综合部张三"];
@@ -145,15 +184,16 @@
     
     return cell;
      */
-    NSString *str_display=[_arr_comment objectAtIndex:indexPath.row];
-    NSArray *arr_display=[str_display componentsSeparatedByString:@"|"];
-    CommentCell *cell;
-    if (arr_display.count==2) {
-        cell=[CommentCell cellWithTable:tableView staff:[arr_display objectAtIndex:1] time:@"2016-01-27" content:[arr_display objectAtIndex:0] image:@"head1.jpg" thumbnum:8 atIndexPath:indexPath];
-    }
-    else {
-        cell=[CommentCell cellWithTable:tableView staff:[arr_display objectAtIndex:1] time:[arr_display objectAtIndex:2] content:[arr_display objectAtIndex:0] image:@"head1.jpg" thumbnum:0 atIndexPath:indexPath];
-    }
+    
+    
+    NSDictionary *dic_display=[_arr_comment objectAtIndex:indexPath.row];
+    NSString *str_staff=[dic_display objectForKey:@"operatorName"];
+    NSString *str_time=[dic_display objectForKey:@"addTime"];
+    NSString *str_content=[dic_display objectForKey:@"content"];
+    
+    CommentCell *cell=[CommentCell cellWithTable:tableView staff:str_staff time:str_time content:str_content image:@"head1.jpg" thumbnum:8 atIndexPath:indexPath];
+    
+    
     [cell.btn_thumb addTarget:self action:@selector(Thumb:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
     
@@ -196,6 +236,36 @@
 
 -(void)MovePreviousVc:(UIButton*)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)CommentDisplay:(NSMutableDictionary*)param {
+    NSString *str_newsContent= [db fetchInterface:@"NewsComment"];
+    NSString *str_ip=@"";
+    NSString *str_port=@"";
+    NSMutableArray *t_array=[db fetchIPAddress];
+    if (t_array.count==1) {
+        NSArray *arr_ip=[t_array objectAtIndex:0];
+        str_ip=[arr_ip objectAtIndex:0];
+        str_port=[arr_ip objectAtIndex:1];
+    }
+    NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_newsContent];
+    [_session POST:str_url parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"获取评论列表成功");
+        NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        NSString *str_success= [JSON objectForKey:@"success"];
+        int i_success=[str_success intValue];
+        if (i_success==1) {
+            _arr_comment=[JSON objectForKey:@"list"];
+            NSObject *obj=[JSON objectForKey:@"totalPage"];
+            NSNumber *l_totalPage=(NSNumber*)obj;
+            _i_totalPage=[l_totalPage integerValue];
+            [self.tableView reloadData];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"获取评论列表失败");
+    }];
 }
 
 //program UITextField delegate
@@ -281,6 +351,26 @@
     }
    
 }
+
+-(void)Previous:(UIButton*)btn {
+    if (_i_pageIndex>1) {
+        _i_pageIndex=_i_pageIndex-1;
+        _param[@"pageIndex"]=[NSString stringWithFormat:@"%ld",(long)_i_pageIndex];
+        _param[@"newsId"]=[NSString stringWithFormat:@"%ld",(long)_news_index];
+        [self CommentDisplay:_param];
+    }
+}
+
+-(void)Next:(UIButton*)btn {
+    if (_i_pageIndex<_i_totalPage) {
+        _i_pageIndex=_i_pageIndex+1;
+        _param[@"pageIndex"]=[NSString stringWithFormat:@"%ld",(long)_i_pageIndex];
+        _param[@"newsId"]=[NSString stringWithFormat:@"%ld",(long)_news_index];
+        [self CommentDisplay:_param];
+    }
+    
+}
+
 
 /*
 #pragma mark - Navigation

@@ -8,14 +8,22 @@
 
 #import "NewsDisplayViewController.h"
 #import "CommentViewController.h"
+#import "DataBase.h"
+#import "AFNetworking.h"
+
 
 @interface NewsDisplayViewController ()
 
+@property (nonatomic,strong) AFHTTPSessionManager *session;
+
+@property (nonatomic,strong) NSMutableDictionary *param;
 
 
 @end
 
-@implementation NewsDisplayViewController
+@implementation NewsDisplayViewController {
+    DataBase *db;
+}
 
 
 @synthesize delegate;
@@ -35,7 +43,19 @@ int i_comment_num;
     
     //[barButtonItem setTitleTextAttributes:dict forState:UIControlStateNormal];
     self.navigationItem.leftBarButtonItem = barButtonItem;
+    
+    
+    db=[DataBase sharedinstanceDB];
+    
+    _session=[AFHTTPSessionManager manager];
+    _session.responseSerializer= [AFHTTPResponseSerializer serializer];
+    [_session.requestSerializer setHTTPShouldHandleCookies:YES];
+    
+    _param=[NSMutableDictionary dictionary];
+    _param[@"id"]=[NSString stringWithFormat:@"%ld",(long)_news_index];
+    
 
+    [self NewsContent:_param];
     
     if (iPhone6 || iPhone6_plus) {
         _lbl_label=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, 5, 15*self.view.frame.size.width/16, self.view.frame.size.height*0.08)];
@@ -68,24 +88,35 @@ int i_comment_num;
         _lbl_depart.text=@"     综合管理部          张三   2016-01-26 ";
     }
     
+    WKWebViewConfiguration *config=[[WKWebViewConfiguration alloc]init];
+    //设置偏好设置
+    config.preferences=[[WKPreferences alloc]init];
+    config.preferences.minimumFontSize=18;
+    config.preferences.javaScriptEnabled=NO;
+    config.preferences.javaScriptCanOpenWindowsAutomatically=NO;
+    config.processPool=[[WKProcessPool alloc]init];
     
     if (iPhone6 || iPhone6_plus) {
-       _txt_content=[[UITextView alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height*0.13, 15*self.view.frame.size.width/16, self.view.frame.size.height*0.60)];
+        
+        _wb_content=[[WKWebView alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height*0.13, 15*self.view.frame.size.width/16, self.view.frame.size.height*0.60) configuration:config];
+       //_txt_content=[[UITextView alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height*0.13, 15*self.view.frame.size.width/16, self.view.frame.size.height*0.60)];
     }
     else if (iPhone4_4s || iPhone5_5s) {
-         _txt_content=[[UITextView alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height*0.20, 15*self.view.frame.size.width/16, self.view.frame.size.height*0.51)];
+        _wb_content=[[WKWebView alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height*0.20, 15*self.view.frame.size.width/16, self.view.frame.size.height*0.51) configuration:config];
+         //_txt_content=[[UITextView alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height*0.20, 15*self.view.frame.size.width/16, self.view.frame.size.height*0.51)];
     }
     
     //[_lbl_content setLineBreakMode:NSLineBreakByWordWrapping];
     
-    _txt_content.font=[UIFont systemFontOfSize:14];
-    _txt_content.textColor=[UIColor blackColor];
-    _txt_content.text=@"国务院有关部门、直属机构，各省、自治区、直辖市发展改革委、物价局：\n        为贯彻落实党的十八届三中全会精神和国务院关于进一步简政放权、推进职能转变的要求，根据当前市场竞争情况，经商住房和城乡建设部同意，决定放开部分建设项目服务收费标准。现就有关事项通知如下：\n        放开除政府投资项目及政府委托服务以外的建设项目前期工作咨询、工程勘察设计、招标代理、工程监理等4项服务收费标准，实行市场调节价。采用直接投资和资本金注入的政府投资项目，以及政府委托的上述服务收费，继续实行政府指导价管理，执行规定的收费标准；实行市场调节价的专业服务收费，由委托双方依据服务成本、服务质量和市场供求状况等协商确定。\n        各级价格主管部门要强化市场价格监测，加强市场价格行为监管和反价格垄断执法，依法查处各类价格违法行为，维护正常的市场秩序，保障市场主体合法权益。\n        在放开收费标准过程中遇到的问题和建议，请及时报告我委（价格司）。\n        上述规定自2014年8月1日起执行。此前有关规定与本通知不符的，按本通知规定执行。\n                   国家发展改革委                2014年7月10日";
-    _txt_content.scrollEnabled=YES;
-    _txt_content.editable=NO;
+    //_txt_content.font=[UIFont systemFontOfSize:14];
+    //_txt_content.textColor=[UIColor blackColor];
+    //_txt_content.text=@"国务院有关部门、直属机构，各省、自治区、直辖市发展改革委、物价局：\n        为贯彻落实党的十八届三中全会精神和国务院关于进一步简政放权、推进职能转变的要求，根据当前市场竞争情况，经商住房和城乡建设部同意，决定放开部分建设项目服务收费标准。现就有关事项通知如下：\n        放开除政府投资项目及政府委托服务以外的建设项目前期工作咨询、工程勘察设计、招标代理、工程监理等4项服务收费标准，实行市场调节价。采用直接投资和资本金注入的政府投资项目，以及政府委托的上述服务收费，继续实行政府指导价管理，执行规定的收费标准；实行市场调节价的专业服务收费，由委托双方依据服务成本、服务质量和市场供求状况等协商确定。\n        各级价格主管部门要强化市场价格监测，加强市场价格行为监管和反价格垄断执法，依法查处各类价格违法行为，维护正常的市场秩序，保障市场主体合法权益。\n        在放开收费标准过程中遇到的问题和建议，请及时报告我委（价格司）。\n        上述规定自2014年8月1日起执行。此前有关规定与本通知不符的，按本通知规定执行。\n                   国家发展改革委                2014年7月10日";
+   // _txt_content.scrollEnabled=YES;
+   // _txt_content.editable=NO;
+    _wb_content.backgroundColor=[UIColor redColor];
     [self.view addSubview:_lbl_depart];
     [self.view addSubview:_lbl_label];
-    [self.view addSubview:_txt_content];
+    [self.view addSubview:_wb_content];
     
    // self.delegate=self;
     
@@ -158,6 +189,7 @@ int i_comment_num;
 -(void)CommentEvent:(UIButton*)btn {
     CommentViewController *viewController=[[CommentViewController alloc]init];
     viewController.userInfo=_userInfo;
+    viewController.news_index=_news_index;
    // viewController.str=[NSString stringWithFormat:@"%d",i_comment_num];
     [self.navigationController pushViewController:viewController animated:YES];
 }
@@ -180,6 +212,46 @@ int i_comment_num;
     btn_tmp.titleLabel.textAlignment=NSTextAlignmentCenter;
     
     return btn_tmp;
+}
+
+
+
+-(void)NewsContent:(NSMutableDictionary*)param {
+    NSString *str_newsContent= [db fetchInterface:@"NewsContent"];
+    NSString *str_ip=@"";
+    NSString *str_port=@"";
+    NSMutableArray *t_array=[db fetchIPAddress];
+    if (t_array.count==1) {
+        NSArray *arr_ip=[t_array objectAtIndex:0];
+        str_ip=[arr_ip objectAtIndex:0];
+        str_port=[arr_ip objectAtIndex:1];
+    }
+    NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_newsContent];
+    [_session POST:str_url parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        NSDictionary *dic_news= [JSON objectForKey:@"news"];
+        if (dic_news.count>0) {
+            _lbl_label.text=[dic_news objectForKey:@"title"];
+            NSString *str_depart=[dic_news objectForKey:@"operationDeptName"];
+            NSString *str_operator=[dic_news objectForKey:@"operatorName"];
+            NSString *str_date=[dic_news objectForKey:@"addTime"];
+            NSArray *arr_date=[str_date componentsSeparatedByString:@" "];
+            NSString *str_day=[arr_date objectAtIndex:0];
+            _lbl_depart.text=[NSString stringWithFormat:@"    %@    %@    %@",str_depart,str_operator,str_day];
+            NSString *str_content=[dic_news objectForKey:@"content"];
+            [_wb_content loadHTMLString:str_content baseURL:nil];
+            NSString *str_readnum=[dic_news objectForKey:@"readNum"];
+            i_num=[str_readnum intValue];
+            
+            [self.view setNeedsDisplay];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"返回新闻内容失败");
+    }];
+    
+
 }
 
 /*

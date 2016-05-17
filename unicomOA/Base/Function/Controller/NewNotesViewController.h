@@ -21,18 +21,7 @@
 
 @property   NSInteger i_index;
 
-//传值
-@property (strong,nonatomic) NSString *str_noteContent;
-
-@property (strong,nonatomic) NSString *str_FenLei;
-
-@property (strong,nonatomic) NSString *str_time;
-
-@property (strong,nonatomic) NSString *str_pic_path;
-
-@property (strong,nonatomic) NSString *str_coordx;
-
-@property (strong,nonatomic) NSString *str_coordy;
+@property NSDictionary *dic_notes;
 
 
 @end

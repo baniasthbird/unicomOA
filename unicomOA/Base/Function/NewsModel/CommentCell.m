@@ -49,8 +49,8 @@
         if (iPhone4_4s || iPhone5_5s) {
             [_img_View setFrame:CGRectMake(5, 5, 30, 30)];
             [_lbl_title setFrame:CGRectMake(50, 10, 250, 10)];
-            [_lbl_time setFrame:CGRectMake(50, 25, 100, 10)];
-            [_lbl_content setFrame:CGRectMake(50, 45, 250, 20)];
+            [_lbl_time setFrame:CGRectMake(50, 25, 150, 10)];
+            [_lbl_content setFrame:CGRectMake(50, 45, 250, 40)];
             [_btn_thumb setFrame:CGRectMake(280, 75, 40, 20)];
             _img_View.layer.cornerRadius=15.0f;
             _lbl_title.font=[UIFont systemFontOfSize:18];
@@ -61,8 +61,8 @@
         else if (iPhone6) {
             [_img_View setFrame:CGRectMake(5, 5, 40, 40)];
             [_lbl_title setFrame:CGRectMake(60, 13, 240, 15)];
-            [_lbl_time setFrame:CGRectMake(60, 33, 120, 15)];
-            [_lbl_content setFrame:CGRectMake(60, 53, 300, 25)];
+            [_lbl_time setFrame:CGRectMake(60, 33, 180, 15)];
+            [_lbl_content setFrame:CGRectMake(60, 53, 300, 50)];
             [_btn_thumb setFrame:CGRectMake(325, 83, 45, 25)];
             _img_View.layer.cornerRadius=20.0f;
             _lbl_title.font=[UIFont systemFontOfSize:20];
@@ -73,8 +73,8 @@
         else {
             [_img_View setFrame:CGRectMake(5, 5, 50, 50)];
             [_lbl_title setFrame:CGRectMake(70, 20, 230, 20)];
-            [_lbl_time setFrame:CGRectMake(70, 45, 150, 20)];
-            [_lbl_content setFrame:CGRectMake(70, 70, 330, 30)];
+            [_lbl_time setFrame:CGRectMake(70, 45, 200, 20)];
+            [_lbl_content setFrame:CGRectMake(70, 70, 330, 60)];
             [_btn_thumb setFrame:CGRectMake(355, 110, 50, 30)];
             _img_View.layer.cornerRadius=25.0f;
             _lbl_title.font=[UIFont systemFontOfSize:22];
@@ -82,6 +82,7 @@
             _lbl_content.font=[UIFont systemFontOfSize:15];
             _btn_thumb.titleLabel.font=[UIFont systemFontOfSize:15];
         }
+        _lbl_content.numberOfLines=0;
         [_img_View.layer setMasksToBounds:YES];
         _img_View.image=[UIImage imageNamed:str_image];
         _lbl_title.textColor=[UIColor blackColor];
