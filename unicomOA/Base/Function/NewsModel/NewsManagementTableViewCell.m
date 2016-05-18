@@ -24,16 +24,16 @@
 
 #pragma mark 创建cell
 
-+(instancetype)cellWithTable:(UITableView *)tableView withCellHeight:(CGFloat)cellHeight titleX:(CGFloat)i_TitleX titleY:(CGFloat)i_TitleY titleW:(CGFloat)i_TitleW titleH:(CGFloat)i_TitleH DepartX:(CGFloat)i_DepartX DepartY:(CGFloat)i_DepartY DepartW:(CGFloat)i_DepartW DepartH:(CGFloat)i_DepartH TimeX:(CGFloat)i_TimeX TimeY:(CGFloat)i_TimeY TimeW:(CGFloat)i_TimeW TimeH:(CGFloat)i_TimeH{
++(instancetype)cellWithTable:(UITableView *)tableView withCellHeight:(CGFloat)cellHeight titleX:(CGFloat)i_TitleX titleY:(CGFloat)i_TitleY titleW:(CGFloat)i_TitleW titleH:(CGFloat)i_TitleH DepartX:(CGFloat)i_DepartX DepartY:(CGFloat)i_DepartY DepartW:(CGFloat)i_DepartW DepartH:(CGFloat)i_DepartH TimeX:(CGFloat)i_TimeX TimeY:(CGFloat)i_TimeY TimeW:(CGFloat)i_TimeW TimeH:(CGFloat)i_TimeH canScroll:(BOOL)b_scroll{
     static NSString *cellID=@"sideslipCell";
     NewsManagementTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:cellID];
     if (!cell) {
-        cell=[[NewsManagementTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID withCellHeight:cellHeight titleX:i_TitleX titleY:i_TitleY titleW:i_TitleW titleH:i_TitleH depart_X:i_DepartX depart_Y:i_DepartY depart_W:i_DepartW depart_H:i_DepartH time_X:i_TimeX time_Y:i_TimeY time_W:i_TimeW time_H:i_TimeH];
+        cell=[[NewsManagementTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID withCellHeight:cellHeight titleX:i_TitleX titleY:i_TitleY titleW:i_TitleW titleH:i_TitleH depart_X:i_DepartX depart_Y:i_DepartY depart_W:i_DepartW depart_H:i_DepartH time_X:i_TimeX time_Y:i_TimeY time_W:i_TimeW time_H:i_TimeH canScroll:b_scroll];
     }
     return cell;
 }
 
--(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withCellHeight:(CGFloat)cellHeight titleX:(CGFloat)i_titleX titleY:(CGFloat)i_titleY titleW:(CGFloat)i_titleW titleH:(CGFloat)i_titleH depart_X:(CGFloat)i_departX depart_Y:(CGFloat)i_departY depart_W:(CGFloat)i_departW depart_H:(CGFloat)i_departH time_X:(CGFloat)i_timeX time_Y:(CGFloat)i_timeY time_W:(CGFloat)i_tiemW time_H:(CGFloat)i_timeH
+-(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withCellHeight:(CGFloat)cellHeight titleX:(CGFloat)i_titleX titleY:(CGFloat)i_titleY titleW:(CGFloat)i_titleW titleH:(CGFloat)i_titleH depart_X:(CGFloat)i_departX depart_Y:(CGFloat)i_departY depart_W:(CGFloat)i_departW depart_H:(CGFloat)i_departH time_X:(CGFloat)i_timeX time_Y:(CGFloat)i_timeY time_W:(CGFloat)i_tiemW time_H:(CGFloat)i_timeH canScroll:(BOOL)b_scroll
 {
     if (self=[super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         _cellHeight=cellHeight;
@@ -42,6 +42,8 @@
         scrollView.showsHorizontalScrollIndicator=NO;
         scrollView.showsVerticalScrollIndicator=NO;
         scrollView.delegate=self;
+        
+        scrollView.scrollEnabled=b_scroll;
         
         //按钮个数
         NSInteger btnCount=1;

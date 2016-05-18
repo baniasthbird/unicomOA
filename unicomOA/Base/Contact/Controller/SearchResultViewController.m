@@ -7,6 +7,7 @@
 //
 
 #import "SearchResultViewController.h"
+#import "MemberInfoViewController.h"
 
 @implementation SearchResultViewController
 
@@ -15,7 +16,8 @@
     if (cell==nil) {
         cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
-    cell.textLabel.text=self.dataArray[indexPath.row];
+    NSDictionary *dic=self.dataArray[indexPath.row];
+    cell.textLabel.text=[dic objectForKey:@"empname"];
     return cell;
 }
 
@@ -25,6 +27,21 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.dataArray.count;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSDictionary *dic=self.dataArray[indexPath.row];
+    MemberInfoViewController *vc=[[MemberInfoViewController alloc]init];
+    vc.str_Name=[dic objectForKey:@"empname"];
+    vc.str_Gender=[dic objectForKey:@"sex"];
+    vc.str_img=@"head.png";
+    vc.str_department=[dic objectForKey:@"orgname"];
+    vc.str_carrer=[dic objectForKey:@"posiname"];
+    vc.str_cellphone=[dic objectForKey:@"mobileno"];
+    vc.str_phonenum=[dic objectForKey:@"otel"];
+    vc.str_email=[dic objectForKey:@"oemail"];
+    [self.navigationController pushViewController:vc animated:YES];
+    
 }
 
 @end

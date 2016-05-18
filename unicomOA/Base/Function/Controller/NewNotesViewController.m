@@ -350,7 +350,8 @@ typedef enum
         //cell.textLabel.text=@"今后更新用于地图开发";
         _image.userInteractionEnabled=YES;
         if (_str_pic_path!=nil) {
-            UIImage *saveImage=[[UIImage alloc]initWithContentsOfFile:_str_pic_path];
+            NSString *fullPath=  [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:_str_pic_path];
+            UIImage *saveImage=[[UIImage alloc]initWithContentsOfFile:fullPath];
             _image.image=saveImage;
         }
         UITapGestureRecognizer *singleTap1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(buttonPressed:)];
@@ -935,10 +936,20 @@ typedef enum
     
     UIImage *image=[info objectForKey:UIImagePickerControllerOriginalImage];
     
-    //保存图片至本地
-    [self saveImage:image withName:@"demo.png"];
     
-    NSString *fullPath=[[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"demo.png"];
+    NSDate *date=[NSDate date];
+    NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"MMdd"];
+    NSString *str_index1=[dateFormatter stringFromDate:date];
+    NSString *str_index2=[NSString stringWithFormat:@"%ld",(long)_i_index];
+    NSString *str_index=[NSString stringWithFormat:@"%@%@",str_index1,str_index2];
+    
+    NSString *str_imagename=[NSString stringWithFormat:@"%@%@",str_index,@".png"];
+    //保存图片至本地
+    [self saveImage:image withName:str_imagename];
+    
+    
+    NSString *fullPath=[[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:str_imagename];
     
     UIImage *saveImage=[[UIImage alloc]initWithContentsOfFile:fullPath];
     
@@ -951,7 +962,7 @@ typedef enum
     //获取沙盒目录
     NSString *fullPath=[[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:imageName];
     [imageData writeToFile:fullPath atomically:NO];
-    _str_pic_path=fullPath;
+    _str_pic_path=imageName;
 }
 
 

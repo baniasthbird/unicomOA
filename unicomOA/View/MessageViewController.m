@@ -10,6 +10,7 @@
 #import "RemindViewController.h"
 #import "RemindCell.h"
 #import "NewsManagementTableViewCell.h"
+#import "NewsDisplayViewController.h"
 
 
 
@@ -249,10 +250,10 @@
                 NewsManagementTableViewCell *cell;
                 if (iPhone6 || iPhone6_plus)
                 {
-                    cell=[NewsManagementTableViewCell cellWithTable:tableView withCellHeight:110 titleX:self.view.frame.size.width/32 titleY:0.0f titleW:15*self.view.frame.size.width/16 titleH:50.0f DepartX:self.view.frame.size.width/32 DepartY:60.0f DepartW:3*self.view.frame.size.width/8 DepartH:40.0f TimeX:self.view.frame.size.width/2 TimeY:60.0f TimeW:self.view.frame.size.width/3 TimeH:40.0f];
+                    cell=[NewsManagementTableViewCell cellWithTable:tableView withCellHeight:110 titleX:self.view.frame.size.width/32 titleY:0.0f titleW:15*self.view.frame.size.width/16 titleH:50.0f DepartX:self.view.frame.size.width/32 DepartY:60.0f DepartW:3*self.view.frame.size.width/8 DepartH:40.0f TimeX:self.view.frame.size.width/2 TimeY:60.0f TimeW:self.view.frame.size.width/3 TimeH:40.0f canScroll:NO];
                 }
                 else if (iPhone5_5s || iPhone4_4s) {
-                    cell=[NewsManagementTableViewCell cellWithTable:tableView withCellHeight:110 titleX:self.view.frame.size.width/32 titleY:0.0f titleW:15*self.view.frame.size.width/16 titleH:50.0f DepartX:self.view.frame.size.width/32 DepartY:60.0f DepartW:3*self.view.frame.size.width/8 DepartH:40.0f TimeX:self.view.frame.size.width*0.4 TimeY:60.0f TimeW:self.view.frame.size.width*0.5 TimeH:40.0f];
+                    cell=[NewsManagementTableViewCell cellWithTable:tableView withCellHeight:110 titleX:self.view.frame.size.width/32 titleY:0.0f titleW:15*self.view.frame.size.width/16 titleH:50.0f DepartX:self.view.frame.size.width/32 DepartY:60.0f DepartW:3*self.view.frame.size.width/8 DepartH:40.0f TimeX:self.view.frame.size.width*0.4 TimeY:60.0f TimeW:self.view.frame.size.width*0.5 TimeH:40.0f canScroll:NO];
                 }
                 NSDictionary *dic_content=[_arr_NewsList objectAtIndex:indexPath.row];
                 cell.delegate=self;
@@ -358,7 +359,12 @@
 
 //点击新闻事件
 -(void)tapCell:(NewsManagementTableViewCell *)cell atIndex:(NSInteger)index {
-    
+    NewsDisplayViewController *news_controller=[[NewsDisplayViewController alloc]init];
+    news_controller.news_index=cell.tag;
+    news_controller.str_label=cell.lbl_Title.text;
+    news_controller.str_depart=cell.lbl_department.text;
+    news_controller.userInfo=_userInfo;
+    [self.navigationController pushViewController:news_controller animated:YES];
 }
 
 -(void)sideslipCellRemoveCell:(NewsManagementTableViewCell *)cell atIndex:(NSInteger)index {

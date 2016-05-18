@@ -13,6 +13,7 @@
 #import "CommentCell.h"
 #import "DataBase.h"
 #import "AFNetworking.h"
+#import "LXAlertView.h"
 
 @interface CommentViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 
@@ -27,6 +28,12 @@
 @property (nonatomic,strong) AFHTTPSessionManager *session;
 
 @property (nonatomic,strong) NSMutableDictionary *param;
+
+@property (nonatomic,strong) NSMutableDictionary *addComment_param;
+
+@property (nonatomic,strong) UILabel *lbl_label;
+
+@property (nonatomic,strong) UITextField *txt_pages;
 
 //评论数量多时的页面总数
 @property NSInteger i_totalPage;
@@ -94,21 +101,33 @@
     [self.view addSubview:self.tableView];
     
     
-    UIButton *btn_previous=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.15, self.view.frame.size.height-170,self.view.frame.size.width*0.2, 25)];
+    UIButton *btn_previous=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.15, i_Height+self.view.frame.size.height*0.01,self.view.frame.size.width*0.2, 25)];
     [btn_previous setTitle:@"上一页" forState:UIControlStateNormal];
     [btn_previous setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     btn_previous.layer.borderWidth=1;
     [btn_previous addTarget:self action:@selector(Previous:) forControlEvents:UIControlEventTouchUpInside];
     [btn_previous setBackgroundColor:[UIColor yellowColor]];
     
-    UIButton *btn_next=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.65, self.view.frame.size.height-170, self.view.frame.size.width*0.2, 25)];
+    UIButton *btn_next=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.65, i_Height+self.view.frame.size.height*0.01, self.view.frame.size.width*0.2, 25)];
     [btn_next setTitle:@"下一页" forState:UIControlStateNormal];
     btn_previous.layer.borderWidth=1;
     [btn_next addTarget:self action:@selector(Next:) forControlEvents:UIControlEventTouchUpInside];
     [btn_next setBackgroundColor:[UIColor lightGrayColor]];
     
+    _lbl_label=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.5,i_Height+self.view.frame.size.height*0.01 , self.view.frame.size.width*0.1, 25)];
+    _lbl_label.font=[UIFont systemFontOfSize:10];
+    
+    
+    _txt_pages=[[UITextField alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.45,i_Height+self.view.frame.size.height*0.01,self.view.frame.size.width*0.05, 25)];
+    _txt_pages.placeholder=@"1";
+    _txt_pages.delegate=self;
+    _txt_pages.keyboardType=UIKeyboardTypePhonePad;
+    _txt_pages.font=[UIFont systemFontOfSize:10];
+    
     [self.view addSubview:btn_previous];
     [self.view addSubview:btn_next];
+    [self.view addSubview:_lbl_label];
+    [self.view addSubview:_txt_pages];
     
     UIView *lbl_line=[[UIView alloc]initWithFrame:CGRectMake(0, i_Height+0.05, self.view.frame.size.width, 1)];
     lbl_line.backgroundColor=[UIColor colorWithRed:189/255.0f green:189/255.0f blue:189/255.0f alpha:1];
@@ -220,6 +239,11 @@
     NSString *str_comment=[NSString stringWithFormat:@"%@|%@%@|%@",_txt_comment.text,_userInfo.str_department,_userInfo.str_name,locationString];
     [_arr_comment addObject:str_comment];
     [self.tableView reloadData];
+    
+    _addComment_param=[NSMutableDictionary dictionary];
+    _addComment_param[@"content"]=_txt_comment.text;
+    _addComment_param[@"newsId"]=[NSString stringWithFormat:@"%ld",(long)_news_index];
+    [self AddComment:_addComment_param];
 }
 
 
@@ -239,7 +263,7 @@
 }
 
 -(void)CommentDisplay:(NSMutableDictionary*)param {
-    NSString *str_newsContent= [db fetchInterface:@"NewsComment"];
+    NSString *str_newsComment= [db fetchInterface:@"NewsComment"];
     NSString *str_ip=@"";
     NSString *str_port=@"";
     NSMutableArray *t_array=[db fetchIPAddress];
@@ -248,7 +272,7 @@
         str_ip=[arr_ip objectAtIndex:0];
         str_port=[arr_ip objectAtIndex:1];
     }
-    NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_newsContent];
+    NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_newsComment];
     [_session POST:str_url parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -261,10 +285,36 @@
             NSObject *obj=[JSON objectForKey:@"totalPage"];
             NSNumber *l_totalPage=(NSNumber*)obj;
             _i_totalPage=[l_totalPage integerValue];
+            _lbl_label.text=[NSString stringWithFormat:@"/%ld",(long)_i_totalPage];
             [self.tableView reloadData];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"获取评论列表失败");
+    }];
+}
+
+-(void)AddComment:(NSMutableDictionary*)param {
+    NSString *str_AddComment= [db fetchInterface:@"AddComment"];
+    NSString *str_ip=@"";
+    NSString *str_port=@"";
+    NSMutableArray *t_array=[db fetchIPAddress];
+    if (t_array.count==1) {
+        NSArray *arr_ip=[t_array objectAtIndex:0];
+        str_ip=[arr_ip objectAtIndex:0];
+        str_port=[arr_ip objectAtIndex:1];
+    }
+    NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_AddComment];
+    [_session POST:str_url parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"追加评论成功");
+        NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        NSString *str_success= [JSON objectForKey:@"success"];
+        int i_success=[str_success intValue];
+        if (i_success==1) {
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"追加评论失败");
     }];
 }
 
@@ -358,6 +408,7 @@
         _param[@"pageIndex"]=[NSString stringWithFormat:@"%ld",(long)_i_pageIndex];
         _param[@"newsId"]=[NSString stringWithFormat:@"%ld",(long)_news_index];
         [self CommentDisplay:_param];
+        self.txt_pages.text=[NSString stringWithFormat:@"%ld",(long)_i_pageIndex];
     }
 }
 
@@ -367,10 +418,28 @@
         _param[@"pageIndex"]=[NSString stringWithFormat:@"%ld",(long)_i_pageIndex];
         _param[@"newsId"]=[NSString stringWithFormat:@"%ld",(long)_news_index];
         [self CommentDisplay:_param];
+        self.txt_pages.text=[NSString stringWithFormat:@"%ld",(long)_i_pageIndex];
     }
     
 }
 
+-(IBAction)textFieldDidEndEditing:(UITextField *)textField {
+    NSString *str_text=_txt_pages.text;
+    NSInteger i_text=[str_text integerValue];
+    if (i_text>_i_totalPage) {
+        LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"警告" message:@"输入页数超过范围" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+            _txt_pages.text=@"1";
+        }];
+        [alert showLXAlertView];
+    }
+    else {
+        _i_pageIndex=[str_text integerValue];
+        _param[@"pageIndex"]=[NSString stringWithFormat:@"%ld",(long)_i_pageIndex];
+        _param[@"newsId"]=[NSString stringWithFormat:@"%ld",(long)_news_index];
+        [self CommentDisplay:_param];
+    }
+
+}
 
 /*
 #pragma mark - Navigation
