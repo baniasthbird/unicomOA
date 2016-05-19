@@ -94,6 +94,7 @@
 		681FFC761CC7828F0086A934 /* LXAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 681FFC731CC7828F0086A934 /* LXAlertView.m */; };
 		681FFC771CC7828F0086A934 /* UILabel+LXAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 681FFC751CC7828F0086A934 /* UILabel+LXAdd.m */; };
 		6822656F1C96B4C400AB29C0 /* NewsSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6822656E1C96B4C400AB29C0 /* NewsSettingViewController.m */; };
+		6825E1081CED507400EA4D87 /* ShenPiAppVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6825E1071CED507400EA4D87 /* ShenPiAppVC.m */; };
 		682B68B01CB618DD002EC60F /* PrintApplicationNoFileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 682B68AF1CB618DD002EC60F /* PrintApplicationNoFileCell.m */; };
 		682B68B61CB64482002EC60F /* AddPrintFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 682B68B51CB64482002EC60F /* AddPrintFile.m */; };
 		682B68B91CB64683002EC60F /* AddPrintFileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 682B68B81CB64683002EC60F /* AddPrintFileCell.m */; };
@@ -414,6 +415,8 @@
 		681FFC751CC7828F0086A934 /* UILabel+LXAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+LXAdd.m"; sourceTree = "<group>"; };
 		6822656D1C96B4C400AB29C0 /* NewsSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsSettingViewController.h; path = Base/Settings/Controller/NewsSettingViewController.h; sourceTree = "<group>"; };
 		6822656E1C96B4C400AB29C0 /* NewsSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsSettingViewController.m; path = Base/Settings/Controller/NewsSettingViewController.m; sourceTree = "<group>"; };
+		6825E1061CED507400EA4D87 /* ShenPiAppVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShenPiAppVC.h; path = Base/Function/ShenPiContorller/ShenPiAppVC.h; sourceTree = "<group>"; };
+		6825E1071CED507400EA4D87 /* ShenPiAppVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShenPiAppVC.m; path = Base/Function/ShenPiContorller/ShenPiAppVC.m; sourceTree = "<group>"; };
 		682B68AE1CB618DD002EC60F /* PrintApplicationNoFileCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrintApplicationNoFileCell.h; path = Base/Function/ShenPiModel/PrintApplicationNoFileCell.h; sourceTree = "<group>"; };
 		682B68AF1CB618DD002EC60F /* PrintApplicationNoFileCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrintApplicationNoFileCell.m; path = Base/Function/ShenPiModel/PrintApplicationNoFileCell.m; sourceTree = "<group>"; };
 		682B68B41CB64482002EC60F /* AddPrintFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddPrintFile.h; path = Base/Function/ShenPiContorller/AddPrintFile.h; sourceTree = "<group>"; };
@@ -1467,6 +1470,8 @@
 				68579FA21CC0BBCE00597FBD /* ShenPiAgreeWithCarDeploy.m */,
 				2CE321111CC3B86300B36793 /* SendMeViewController.h */,
 				2CE321121CC3B86300B36793 /* SendMeViewController.m */,
+				6825E1061CED507400EA4D87 /* ShenPiAppVC.h */,
+				6825E1071CED507400EA4D87 /* ShenPiAppVC.m */,
 			);
 			name = ShenPiController;
 			sourceTree = "<group>";
@@ -1882,6 +1887,7 @@
 				68DEEBDD1CBE1D29003DB7AA /* ShenPiDisAgree.m in Sources */,
 				2C35B04F1C7062160003BF6C /* AppDelegate.m in Sources */,
 				68E77A2D1CB3A133006DA5B9 /* IQTitleBarButtonItem.m in Sources */,
+				6825E1081CED507400EA4D87 /* ShenPiAppVC.m in Sources */,
 				68E779DE1CB34A8E006DA5B9 /* CLTreeView_LEVEL1_Cell.m in Sources */,
 				68ED4E451CB4E215000E8A7B /* MyApplication.m in Sources */,
 				2C35B04C1C7062160003BF6C /* main.m in Sources */,

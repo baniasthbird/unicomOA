@@ -12,6 +12,7 @@
 #import "DataBase.h"
 #import "AFNetworking.h"
 #import "LXAlertView.h"
+#import "ShenPiAppVC.h"
 
 @interface NewApplication()<UITableViewDelegate,UITableViewDataSource,CarApplicationDelegate,PrintApplicationDelegate>
 
@@ -67,13 +68,15 @@
     [self AvaliableSOP];
     
     
-    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.05, self.view.frame.size.width, self.view.frame.size.height*0.3) style:UITableViewStylePlain];
+    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height*0.8) style:UITableViewStylePlain];
     _tableView.delegate=self;
     _tableView.dataSource=self;
     _tableView.backgroundColor=[UIColor clearColor];
     
     _tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
+    
+    self.view.backgroundColor=[UIColor colorWithRed:246/255.0f green:249/255.0f blue:254/255.0f alpha:1];
     
 }
 
@@ -101,6 +104,8 @@
     else {
         NSString *str_index=[NSString stringWithFormat:@"%ld",(long)section];
         NSString *str_rownum= [_dic_rowsection objectForKey:str_index];
+        //NSArray *arr_rownum=[str_rownum componentsSeparatedByString:@","];
+        //NSInteger i_rownum=(NSInteger)[arr_rownum objectAtIndex:0];
         NSInteger i_rownum=[str_rownum integerValue];
         return i_rownum;
     }
@@ -126,36 +131,25 @@
         NSDictionary *dic_sub_data=[arr_sub_data objectAtIndex:indexPath.row];
         NSString *str_label=[dic_sub_data objectForKey:@"label"];
         cell.textLabel.text=str_label;
+        NSString *str_url=[dic_sub_data objectForKey:@"url"];
+        cell.accessibilityLabel=str_url;
+        
     }
     
-    
-   // UIImageView *img_icon=[[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 30, 30)];
-    /*
-    UILabel *lbl_title=[[UILabel alloc]initWithFrame:CGRectMake(50, 10, 100, 30)];
-    lbl_title.textColor=[UIColor blackColor];
-    lbl_title.font=[UIFont systemFontOfSize:16];
-    lbl_title.textAlignment=NSTextAlignmentLeft;
-    */
-    
-    if (indexPath.row==0) {
-        //cell.imageView.image=[UIImage imageNamed:@"printmission.png"];
-    //    img_icon.image=[UIImage imageNamed:@"printmission.png"];
-     //   lbl_title.text=@"复印申请";
-    }
-    else if (indexPath.row==1) {
-       // cell.imageView.image=[UIImage imageNamed:@"carmission.png"];
-   //     img_icon.image=[UIImage imageNamed:@"carmission.png"];
-    //    lbl_title.text=@"预约用车";
-    }
-  //  [cell.contentView addSubview:img_icon];
-  //  [cell.contentView addSubview:lbl_title];
-    //[cell.imageView setFrame:CGRectMake(10, 10, 10, 10)];
-    //[cell.imageView setFrame:CGRectMake(0, 0, 50, 50)];
 
     return  cell;
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 25;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 25;
+}
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    /*
     if (indexPath.row==0) {
         PrintApplication *viewController=[[PrintApplication alloc]init];
         viewController.delegate=self;
@@ -168,12 +162,37 @@
         viewController.userInfo=_userInfo;
         [self.navigationController pushViewController:viewController animated:YES];
     }
+    */
+    UITableViewCell *cell=[tableView cellForRowAtIndexPath:indexPath];
+    NSString *str_url=cell.accessibilityLabel;
+    ShenPiAppVC *vc=[[ShenPiAppVC alloc]init];
+    vc.str_url=str_url;
+    [self.navigationController pushViewController:vc animated:YES];
+    
     
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 50;
 }
+
+
+-(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    if ([_arr_groupList count]==0) {
+        return nil;
+    }
+    else {
+        NSDictionary *dic=[_arr_groupList objectAtIndex:section];
+        NSString *str_label=[dic objectForKey:@"label"];
+        UILabel *lbl_label=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 10)];
+        lbl_label.text=[NSString stringWithFormat:@"    %@",str_label];
+        lbl_label.textAlignment=NSTextAlignmentLeft;
+        lbl_label.textColor=[UIColor blackColor];
+        return lbl_label;
+    }
+    
+}
+
 
 -(void)PassCarValue:(NSString *)str_reason CarObject:(CarService *)carservice {
     [_delegate PassValueFromCarApplication:str_reason CarObject:carservice];
@@ -223,6 +242,7 @@
     for (int i=0;i<arr_groupList.count;i++) {
         NSDictionary *dic_group=[arr_groupList objectAtIndex:i];
         NSString *str_key=[dic_group objectForKey:@"key"];
+       // NSString *str_name=[dic_group objectForKey:@"label"];
         for (int j=0;j<arr_sop.count;j++) {
             NSDictionary *dic_sop=[arr_sop objectAtIndex:j];
             NSString *str_keygroup=[dic_sop objectForKey:@"groupKey"];
@@ -252,9 +272,9 @@
             if ([str_keygroup isEqualToString:str_key]) {
                 [arr_array addObject:dic_sop];
             }
-            NSString *str_index=[NSString stringWithFormat:@"%d",i];
-            [dic_tmp setValue:arr_array forKey:str_index];
         }
+        NSString *str_index=[NSString stringWithFormat:@"%d",i];
+        [dic_tmp setValue:arr_array forKey:str_index];
     }
     return dic_tmp;
 }

@@ -24,23 +24,24 @@
     [super awakeFromNib];
 }
 
-+(instancetype)cellWithTable:(UITableView *)tableView withName:(NSString *)str_Name withPlaceHolder:(NSString *)str_placeHolder  withText:(NSString*)str_text atIndexPath:(NSIndexPath *)indexPath {
++(instancetype)cellWithTable:(UITableView *)tableView withName:(NSString *)str_Name withPlaceHolder:(NSString *)str_placeHolder  withText:(NSString*)str_text atIndexPath:(NSIndexPath *)indexPath atHeight:(CGFloat)i_Height{
     static NSString *cellID=@"cellID";
     PrintApplicationDetailCell *cell=[tableView cellForRowAtIndexPath:indexPath];
     if (!cell) {
-        cell=[[PrintApplicationDetailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID withName:str_Name withPlaceholder:str_placeHolder withText:str_text];
+        cell=[[PrintApplicationDetailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID withName:str_Name withPlaceholder:str_placeHolder withText:str_text atHeight:i_Height];
     }
     return cell;
 }
 
 
--(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withName:(NSString*)str_name withPlaceholder:(NSString*)str_placeholder withText:(NSString*)str_text{
+-(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withName:(NSString*)str_name withPlaceholder:(NSString*)str_placeholder withText:(NSString*)str_text atHeight:(CGFloat)i_Height{
     self=[super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.textLabel.textColor=[UIColor blackColor];
         self.textLabel.font=[UIFont systemFontOfSize:16];
         self.textLabel.textAlignment=NSTextAlignmentLeft;
         self.textLabel.text=str_name;
+        
         
         if (iPhone4_4s || iPhone5_5s) {
             _txt_detail=[[UITextView alloc]initWithFrame:CGRectMake(106, 5, 210, 100)];

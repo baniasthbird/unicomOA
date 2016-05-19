@@ -66,7 +66,8 @@
     _tableview=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-190) style:UITableViewStylePlain];
     _tableview.delegate=self;
     _tableview.dataSource=self;
-    _tableview.scrollEnabled=NO;
+     _tableview.allowsSelection=NO;
+
     
     [self.view addSubview:_tableview];
     

@@ -294,11 +294,11 @@
             //textView
             PrintApplicationDetailCell *cell;
             if (_service==nil) {
-                cell=[PrintApplicationDetailCell cellWithTable:tableView withName:@"备注信息" withPlaceHolder:@"请输入备注信息" withText:nil atIndexPath:indexPath];
+                cell=[PrintApplicationDetailCell cellWithTable:tableView withName:@"备注信息" withPlaceHolder:@"请输入备注信息" withText:nil atIndexPath:indexPath atHeight:180];
             }
             else {
                 NSString *str_detail=_service.str_remark;
-                cell=[PrintApplicationDetailCell cellWithTable:tableView withName:@"备注信息" withPlaceHolder:@"请输入备注信息" withText:str_detail atIndexPath:indexPath];
+                cell=[PrintApplicationDetailCell cellWithTable:tableView withName:@"备注信息" withPlaceHolder:@"请输入备注信息" withText:str_detail atIndexPath:indexPath atHeight:180];
             }
            
             return cell;
@@ -308,11 +308,11 @@
        else {
            PrintApplicationDetailCell *cell;
            if (_service==nil) {
-               cell=[PrintApplicationDetailCell cellWithTable:tableView withName:@"备注信息" withPlaceHolder:@"请输入备注信息" withText:nil atIndexPath:indexPath];
+               cell=[PrintApplicationDetailCell cellWithTable:tableView withName:@"备注信息" withPlaceHolder:@"请输入备注信息" withText:nil atIndexPath:indexPath atHeight:180];
            }
            else {
                NSString *str_detail=_service.str_remark;
-               cell=[PrintApplicationDetailCell cellWithTable:tableView withName:@"备注信息" withPlaceHolder:@"请输入备注信息" withText:str_detail atIndexPath:indexPath];
+               cell=[PrintApplicationDetailCell cellWithTable:tableView withName:@"备注信息" withPlaceHolder:@"请输入备注信息" withText:str_detail atIndexPath:indexPath atHeight:180];
            }
            
            return cell;
