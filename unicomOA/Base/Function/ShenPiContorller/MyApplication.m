@@ -17,6 +17,11 @@
 #import "ShenPiStatus.h"
 #import "CarApplication.h"
 #import "PrintApplication.h"
+#import "DataBase.h"
+#import "AFNetworking.h"
+#import "LXAlertView.h"
+
+
 
 @interface MyApplication()<UITableViewDelegate,UITableViewDataSource,NewApplicationDelegate,CarApplicationDelegate,PrintApplicationDelegate>
 
@@ -48,10 +53,23 @@
 @property (nonatomic,strong) NSString *str_searchKeyword2;
 
 
+@property (nonatomic,strong) AFHTTPSessionManager *session;
+
+//展现流程数据的url
+@property (nonatomic,strong) NSDictionary *dic_url;
+
+//流程数据数组
+@property (nonatomic,strong) NSArray *arr_TaskList;
+
+//流程总页数
+@property (nonatomic,strong) NSString *str_totalPage;
+
 @end
 
 
-@implementation MyApplication
+@implementation MyApplication {
+    DataBase *db;
+}
 
 -(void)viewDidLoad {
     [super viewDidLoad];
@@ -94,14 +112,22 @@
     _str_searchKeyword2=@"全部";
     _arr_MySearchResult=[[NSMutableArray alloc]init];
     [self setupTopView];
-
     
+    db=[DataBase sharedinstanceDB];
+    
+    _session=[AFHTTPSessionManager manager];
+    _session.responseSerializer= [AFHTTPResponseSerializer serializer];
+    [_session.requestSerializer setHTTPShouldHandleCookies:YES];
+
     _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 40, self.view.frame.size.width, self.view.frame.size.height-150) style:UITableViewStylePlain];
     _tableView.delegate=self;
     _tableView.dataSource=self;
     _tableView.scrollEnabled=YES;
     _tableView.backgroundColor=[UIColor clearColor];
     [self.view addSubview:_tableView];
+    
+    
+    [self PrePareTaskData];
     
 }
 
@@ -274,6 +300,11 @@
     NSString *ID=[NSString stringWithFormat:@"Cell%ld%ld",(long)[indexPath section],(long)[indexPath row]];
     MyApplicationCell *cell=[tableView dequeueReusableCellWithIdentifier:ID];
     if (cell==nil) {
+        if ([_arr_TaskList count]>0) {
+           // NSDictionary *dic_TaskList=[_arr_TaskList objectAtIndex:indexPath.row];
+            cell=[self CreateCell:tableView index:indexPath.row];
+        }
+        /*
         if ([_str_searchKeyword1 isEqualToString:@"全部"] && [_str_searchKeyword2 isEqualToString:@"全部"]) {
             if ([[_arr_MyApplication objectAtIndex:indexPath.section] isMemberOfClass:[CarService class]]) {
                 CarService *tmp_service=[_arr_MyApplication objectAtIndex:indexPath.section];
@@ -299,6 +330,9 @@
     }
     cell.backgroundColor=[UIColor whiteColor];
     
+    return cell;
+    */
+    }
     return cell;
 }
 
@@ -473,6 +507,26 @@
     return arr_tmp;
 }
 
+
+
+-(MyApplicationCell*)CreateCell:(UITableView*)tableView index:(NSInteger)i_index {
+    NSDictionary *dic_task=[_arr_TaskList objectAtIndex:i_index];
+    //流程类别
+    NSString *str_categroy=[dic_task objectForKey:@"processChName"];
+    //流程标题
+    NSString *str_title=[dic_task objectForKey:@"processInstName"];
+    //当前节点名称
+    //NSString *str_node=[dic_task objectForKey:@"workItemName"];
+    //时间
+    NSString *str_startTime=[dic_task objectForKey:@"startTime"];
+    
+    MyApplicationCell *cell=[MyApplicationCell cellWithTable:tableView withTitle:str_title withStatus:@"待办" category:str_categroy withTime:str_startTime];
+    cell.dic_task=dic_task;
+    
+    return cell;
+}
+
+/*
 //分解，创建预约用车cell
 -(MyApplicationCell*)CreateCarCell:(CarService*)tmp_service tableview:(UITableView*)tableView {
     MyApplicationCell *cell;
@@ -509,7 +563,9 @@
     }
     
 }
+*/
 
+/*
 //分解，创建复印cell
 -(MyApplicationCell*)CreatePrintCell:(PrintService*)tmp_service tableview:(UITableView *)tableView {
     MyApplicationCell *cell;
@@ -546,7 +602,7 @@
     }
     
 }
-
+*/
 -(void)PassCarValue:(NSString *)str_reason CarObject:(CarService *)carservice {
     for (int i=0 ;i<_arr_MyApplication.count;i++) {
         NSObject *obj=[_arr_MyApplication objectAtIndex:i];
@@ -583,6 +639,40 @@
     }
     [_delegate PassArray:_arr_MyApplication];
     [self.tableView reloadData];
+}
+
+
+//整理数据
+-(void)PrePareTaskData {
+    NSString *str_ip=@"";
+    NSString *str_port=@"";
+    NSMutableArray *t_array=[db fetchIPAddress];
+    if (t_array.count==1) {
+        NSArray *arr_ip=[t_array objectAtIndex:0];
+        str_ip=[arr_ip objectAtIndex:0];
+        str_port=[arr_ip objectAtIndex:1];
+    }
+    
+    NSString *str_urldata=[db fetchInterface:@"UnFinishTaskShenPiList"];
+    NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_urldata];
+    NSMutableDictionary *param=[NSMutableDictionary dictionary];
+    param[@"pageIndex"]=@"1";
+    [_session POST:str_url parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"获取审批列表成功");
+        NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        NSString *str_success= [JSON objectForKey:@"success"];
+        BOOL b_success=[str_success boolValue];
+        if (b_success==YES) {
+            _dic_url=[JSON objectForKey:@"urlMap"];
+            _arr_TaskList=[JSON objectForKey:@"taskList"];
+            _str_totalPage=[JSON objectForKey:@"totalPage"];
+            [self.tableView reloadData];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"获取审批列表失败");
+    }];
 
 }
 

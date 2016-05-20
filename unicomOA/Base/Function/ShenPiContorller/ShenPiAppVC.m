@@ -12,12 +12,15 @@
 #import "LXAlertView.h"
 #import "PrintApplicationTitleCell.h"
 #import "PrintApplicationDetailCell.h"
+#import "DYCAddress.h"
+#import "DYCAddressPickerView.h"
+#import "Address.h"
+#import "TableViewCell.h"
 
-@interface ShenPiAppVC()<UITableViewDelegate,UITableViewDataSource>
+@interface ShenPiAppVC()<UITableViewDelegate,UITableViewDataSource,DYCAddressDelegate,DYCAddressPickerViewDelegate>
 
 @property (nonatomic,strong) AFHTTPSessionManager *session;
 
-@property (nonatomic,strong) NSString *str_url_login;
 //控件组
 @property (nonatomic,strong) NSArray *arr_groupList;
 //初始控件列表
@@ -27,6 +30,11 @@
 @property (nonatomic,strong) NSDictionary *dic_clt;
 
 @property (nonatomic,strong) UITableView *tableview;
+
+@property (strong,nonatomic) NSIndexPath *selectedRowIndexPath;
+
+//提交数据的url
+@property (strong,nonatomic) NSString *str_url_postdata;
 
 @end
 
@@ -38,7 +46,12 @@
 -(void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title=@"新建申请";
+    if (_str_title!=nil) {
+        self.title=[NSString stringWithFormat:@"%@%@%@",@"新建",_str_title,@"申请"];
+    }
+    else {
+        self.title=@"新建申请";
+    }
     
     NSDictionary * dict=@{
                           NSForegroundColorAttributeName:   [UIColor whiteColor]};
@@ -101,6 +114,7 @@
                 _arr_groupList=[JSON objectForKey:@"groupList"];
                 _arr_ctlList=[JSON objectForKey:@"ctlList"];
                 _dic_clt=[self manageData:_arr_groupList ctlList:_arr_ctlList];
+                _str_url_postdata=[JSON objectForKey:@"url"];
                 [self.tableview reloadData];
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -118,7 +132,7 @@
 }
 
 -(void)SubmitToPrint:(UIButton*)sender {
-    
+    //提交申请
 }
 
 
@@ -161,14 +175,28 @@
         NSString *str_index=[NSString stringWithFormat:@"%ld",(long)section];
         NSArray *arr_ctl= [_dic_clt objectForKey:str_index];
         NSInteger i_count=0;
+        BOOL b_isExpanded=NO;
         for (int i=0;i<[arr_ctl count];i++) {
             NSDictionary *dic_tmp=[arr_ctl objectAtIndex:i];
             NSString *str_type= [dic_tmp objectForKey:@"type"];
             if (![str_type isEqualToString:@"hidden"]) {
                 i_count=i_count+1;
+                if ([str_type isEqualToString:@"date"] || [str_type isEqualToString:@"picker"]) {
+                    b_isExpanded=YES;
+                }
             }
         }
-        return i_count;
+        if (b_isExpanded==NO) {
+            return i_count;
+        }
+        else {
+            if (self.selectedRowIndexPath) {
+                return  i_count+1;
+            }
+            else {
+                return i_count;
+            }
+        }
     }
 }
 
@@ -199,9 +227,33 @@
         return 40;
     }
     else {
+        NSIndexPath *index_selected=self.selectedRowIndexPath;
         NSString *str_index=[NSString stringWithFormat:@"%ld",indexPath.section];
         NSArray *arr_ctl= [_dic_clt objectForKey:str_index];
-        NSDictionary *dic_tmp = [arr_ctl objectAtIndex:indexPath.row];
+        NSDictionary *dic_tmp;
+        if (index_selected!=nil) {
+            if (indexPath.section==index_selected.section) {
+                if (indexPath.row<=index_selected.row) {
+                    dic_tmp=[arr_ctl objectAtIndex:indexPath.row];
+                }
+                else if (indexPath.row>index_selected.row){
+                    if (indexPath.row==index_selected.row+1) {
+                        return 180;
+                    }
+                    else {
+                        dic_tmp=[arr_ctl objectAtIndex:indexPath.row-1];
+                    }
+                   
+                }
+            }
+            else {
+                dic_tmp=[arr_ctl objectAtIndex:indexPath.row];
+            }
+            
+        }
+        else {
+            dic_tmp = [arr_ctl objectAtIndex:indexPath.row];
+        }
         NSString *str_type=[dic_tmp objectForKey:@"type"];
         if ([str_type isEqualToString:@"textarea"]) {
             return 180;
@@ -209,6 +261,7 @@
         else {
             return 40;
         }
+
     }
     
 }
@@ -233,64 +286,115 @@
         NSString *str_index=[NSString stringWithFormat:@"%ld",indexPath.section];
         NSArray *arr_ctl= [_dic_clt objectForKey:str_index];
         NSMutableArray *arr_m_ctl=[self DispalyUIWithoutHidden:arr_ctl];
-        NSDictionary *dic_tmp = [arr_m_ctl objectAtIndex:indexPath.row];
-        NSString *str_type=[dic_tmp objectForKey:@"type"];
-        if (![str_type isEqualToString:@"hidden"]) {
-            if ([str_type isEqualToString:@"text"] || [str_type isEqualToString:@"int"]) {
-                NSString *str_readonly=[dic_tmp objectForKey:@"readonly"];
-                BOOL b_readonly=[str_readonly boolValue];
-                if (b_readonly==YES) {
-                    NSString *str_label=[dic_tmp objectForKey:@"label"];
-                    NSString *str_value=[dic_tmp objectForKey:@"value"];
-                    cell.textLabel.text=str_label;
-                    cell.detailTextLabel.text=str_value;
+        //if (indexPath.row<[arr_m_ctl count]) {
+        NSDictionary *dic_tmp;
+        if (self.selectedRowIndexPath!=nil) {
+            if (indexPath.section==self.selectedRowIndexPath.section) {
+                if (indexPath.row<=self.selectedRowIndexPath.row) {
+                    dic_tmp= [arr_m_ctl objectAtIndex:indexPath.row];
                 }
-                else {
-                    NSString *str_label=[dic_tmp objectForKey:@"label"];
-                    NSObject *obj_prompt=[dic_tmp objectForKey:@"prompt"];
-                    NSObject *obj_value=[dic_tmp objectForKey:@"value"];
-                    NSString *str_prompt=@"";
-                    NSString *str_value=@"";
-                    if (obj_prompt!=[NSNull null]) {
-                        str_prompt=(NSString*)obj_prompt;
+                else if (indexPath.row>self.selectedRowIndexPath.row) {
+                    if (indexPath.row==self.selectedRowIndexPath.row+1) {
+                        NSDictionary *dic_previous=[arr_m_ctl objectAtIndex:indexPath.row-1];
+                        NSString *str_type=[dic_previous objectForKey:@"type"];
+                        NSString *identifier = [TableViewCell reusableIdentifier];
+                        TableViewCell *cell = [[[NSBundle mainBundle]loadNibNamed:identifier owner:self options:nil]objectAtIndex:0];
+                        if ([str_type isEqualToString:@"date"]) {
+                            [cell addcontentView:[self viewForContainerAtIndexPath:indexPath isDate:YES]];
+                        }
+                        else if ([str_type isEqualToString:@"picker"]) {
+                            [cell addcontentView:[self viewForContainerAtIndexPath:indexPath isDate:NO]];
+                        }
+                        return cell;
                     }
-                    if (obj_value!=[NSNull null]) {
-                        str_value=(NSString*)obj_value;
-                    }
-                    if ([str_type isEqualToString:@"text"]) {
-                        cell=[PrintApplicationTitleCell cellWithTable:tableView withName:str_label withPlaceHolder:str_prompt withText:str_value atIndexPath:indexPath keyboardType:UIKeyboardTypeDefault];
-                    }
-                    else if ([str_type isEqualToString:@"int"]) {
-                        cell=[PrintApplicationTitleCell cellWithTable:tableView withName:str_label withPlaceHolder:str_prompt withText:str_value atIndexPath:indexPath keyboardType:UIKeyboardTypeNumberPad];
+                    else {
+                        dic_tmp=[arr_m_ctl objectAtIndex:indexPath.row-1];
                     }
                     
-                    return cell;
                 }
             }
-            else if ([str_type isEqualToString:@"textarea"]) {
-                NSString *str_readonly=[dic_tmp objectForKey:@"readonly"];
-                BOOL b_readonly=[str_readonly boolValue];
-                if (b_readonly==YES) {
-                    
-                }
-                else {
-                    NSString *str_label=[dic_tmp objectForKey:@"label"];
-                    NSObject *obj_prompt=[dic_tmp objectForKey:@"prompt"];
-                    NSObject *obj_value=[dic_tmp objectForKey:@"value"];
-                    NSString *str_prompt=@"";
-                    NSString *str_value=@"";
-                    if (obj_prompt!=[NSNull null]) {
-                        str_prompt=(NSString*)obj_prompt;
-                    }
-                    if (obj_value!=[NSNull null]) {
-                        str_value=(NSString*)obj_value;
-                    }
-                    cell=[PrintApplicationDetailCell cellWithTable:tableView withName:str_label withPlaceHolder:str_prompt withText:str_value atIndexPath:indexPath atHeight:180];
-                    return cell;
-                }
-                
+            else {
+                dic_tmp= [arr_m_ctl objectAtIndex:indexPath.row];
             }
+            
         }
+        else {
+            dic_tmp=[arr_m_ctl objectAtIndex:indexPath.row];
+        }
+            NSString *str_type=[dic_tmp objectForKey:@"type"];
+            if (![str_type isEqualToString:@"hidden"]) {
+                if ([str_type isEqualToString:@"text"] || [str_type isEqualToString:@"int"]) {
+                    NSString *str_readonly=[dic_tmp objectForKey:@"readonly"];
+                    BOOL b_readonly=[str_readonly boolValue];
+                    if (b_readonly==YES) {
+                        NSString *str_label=[dic_tmp objectForKey:@"label"];
+                        NSString *str_value=[dic_tmp objectForKey:@"value"];
+                        cell.textLabel.text=str_label;
+                        cell.detailTextLabel.text=str_value;
+                        cell.accessibilityHint=@"NotExpanded";
+                    }
+                    else {
+                        NSString *str_label=[dic_tmp objectForKey:@"label"];
+                        NSObject *obj_prompt=[dic_tmp objectForKey:@"prompt"];
+                        NSObject *obj_value=[dic_tmp objectForKey:@"value"];
+                        NSString *str_prompt=@"";
+                        NSString *str_value=@"";
+                        if (obj_prompt!=[NSNull null]) {
+                            str_prompt=(NSString*)obj_prompt;
+                        }
+                        if (obj_value!=[NSNull null]) {
+                            str_value=(NSString*)obj_value;
+                        }
+                        if ([str_type isEqualToString:@"text"]) {
+                            cell=[PrintApplicationTitleCell cellWithTable:tableView withName:str_label withPlaceHolder:str_prompt withText:str_value atIndexPath:indexPath keyboardType:UIKeyboardTypeDefault];
+                        }
+                        else if ([str_type isEqualToString:@"int"]) {
+                            cell=[PrintApplicationTitleCell cellWithTable:tableView withName:str_label withPlaceHolder:str_prompt withText:str_value atIndexPath:indexPath keyboardType:UIKeyboardTypeNumberPad];
+                        }
+                        
+                        return cell;
+                    }
+                }
+                else if ([str_type isEqualToString:@"textarea"]) {
+                    NSString *str_readonly=[dic_tmp objectForKey:@"readonly"];
+                    BOOL b_readonly=[str_readonly boolValue];
+                    if (b_readonly==YES) {
+                        
+                    }
+                    else {
+                        NSString *str_label=[dic_tmp objectForKey:@"label"];
+                        NSObject *obj_prompt=[dic_tmp objectForKey:@"prompt"];
+                        NSObject *obj_value=[dic_tmp objectForKey:@"value"];
+                        NSString *str_prompt=@"";
+                        NSString *str_value=@"";
+                        if (obj_prompt!=[NSNull null]) {
+                            str_prompt=(NSString*)obj_prompt;
+                        }
+                        if (obj_value!=[NSNull null]) {
+                            str_value=(NSString*)obj_value;
+                        }
+                        cell=[PrintApplicationDetailCell cellWithTable:tableView withName:str_label withPlaceHolder:str_prompt withText:str_value atIndexPath:indexPath atHeight:180];
+                        return cell;
+                    }
+                }
+                else if ([str_type isEqualToString:@"date"]) {
+                    NSString *str_label=[dic_tmp objectForKey:@"label"];
+                    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                    [dateFormatter setDateFormat:@"yyyy/MM/dd"];
+                    NSString *strDate = [dateFormatter stringFromDate:[NSDate date]];
+                    cell.textLabel.text=str_label;
+                    cell.detailTextLabel.text=strDate;
+                    cell.accessibilityHint=@"canExpandDate";
+                }
+                else if ([str_type isEqualToString:@"picker"]) {
+                    NSString *str_label=[dic_tmp objectForKey:@"label"];
+                    cell.textLabel.text=str_label;
+                    cell.detailTextLabel.text=@"郑州";
+                    cell.accessibilityHint=@"canExpandPicker";
+                }
+            }
+      //  }
+        
         
             
             /*
@@ -350,7 +454,13 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    if (![self isExtendedCellIndexPath:indexPath]) {
+        UITableViewCell *cell=[tableView cellForRowAtIndexPath:indexPath];
+        if ([cell.accessibilityHint isEqualToString:@"canExpandDate"] || [cell.accessibilityHint isEqualToString:@"canExpandPicker"]) {
+            [self.tableview deselectRowAtIndexPath:indexPath animated:YES];
+            [self extendCellAtIndexPath:indexPath];
+         }
+    }
 }
 
 
@@ -365,6 +475,153 @@
         }
     }
     return arr_m_ctl;
+}
+
+
+#pragma mark  点击时间后下拉扩展cell事件
+
+-(void)extendCellAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self.tableview beginUpdates];
+    
+    if (self.selectedRowIndexPath) {
+        if ([self isSelectedRowIndexPath:indexPath]) {
+            NSIndexPath *tempIndexPath=self.selectedRowIndexPath;
+            self.selectedRowIndexPath=nil;
+            [self removeCellBelowIndexPath:tempIndexPath];
+        }
+        else if ([self isExtendedCellIndexPath:indexPath]);
+        else {
+            NSIndexPath *tempIndexPath=self.selectedRowIndexPath;
+            if (indexPath.row>self.selectedRowIndexPath.row && indexPath.section==self.selectedRowIndexPath.section) {
+                indexPath=[NSIndexPath indexPathForRow:(indexPath.row-1) inSection:indexPath.section];
+            }
+            self.selectedRowIndexPath=indexPath;
+            [self removeCellBelowIndexPath:tempIndexPath];
+            [self insertCellBelowIndexPath:indexPath];
+            
+        }
+        
+    }
+    else {
+        self.selectedRowIndexPath=indexPath;
+        [self insertCellBelowIndexPath:indexPath];
+    }
+    
+    [self.tableview endUpdates];
+    [self.tableview scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    
+    
+}
+
+-(void)insertCellBelowIndexPath:(NSIndexPath *)indexPath
+{
+    indexPath=[NSIndexPath indexPathForRow:(indexPath.row+1) inSection:indexPath.section];
+    NSArray *pathsArray=@[indexPath];
+    [self.tableview insertRowsAtIndexPaths:pathsArray withRowAnimation:UITableViewRowAnimationTop];
+}
+
+-(void)removeCellBelowIndexPath:(NSIndexPath *)indexPath
+{
+    indexPath =[NSIndexPath indexPathForRow:(indexPath.row+1) inSection:indexPath.section];
+    NSArray *pathsArray=@[indexPath];
+    [self.tableview deleteRowsAtIndexPaths:pathsArray withRowAnimation:UITableViewRowAnimationTop];
+}
+
+-(void)setSelectedRowIndexPath:(NSIndexPath *)selectedRowIndexPath {
+    _selectedRowIndexPath=selectedRowIndexPath;
+}
+
+-(BOOL)isExtendedCellIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath && self.selectedRowIndexPath) {
+        if (indexPath.row==self.selectedRowIndexPath.row+1 && indexPath.section==self.selectedRowIndexPath.section) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+-(BOOL)isSelectedRowIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath && self.selectedRowIndexPath) {
+        if (indexPath.row==self.selectedRowIndexPath.row && indexPath.section ==self.selectedRowIndexPath.section) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+//判断是添加日期PickerView还是地市PickerView
+-(UIView*)viewForContainerAtIndexPath:(NSIndexPath *)indexPath isDate:(BOOL)b_IsDate{
+    if ([self isExtendedCellIndexPath:indexPath]) {
+        if (b_IsDate==YES) {
+            UIDatePicker *datePicker=[[UIDatePicker alloc]init];
+            [datePicker setDatePickerMode:UIDatePickerModeDate];
+            // [datePicker setLocale:[NSLocale alloc]:@"zh_Hans_CN"];
+            [datePicker setLocale:[[NSLocale alloc]initWithLocaleIdentifier:@"zh_Hans_CN"]];
+            [datePicker addTarget:self action:@selector(dateChanged:) forControlEvents:UIControlEventValueChanged];
+            [datePicker setTag:indexPath.row];
+            UIView *dropDownView=datePicker;
+            
+            return dropDownView;
+        }
+        else {
+            DYCAddress *address = [[DYCAddress alloc] init];
+            address.dataDelegate = self;
+            [address handlerAddress];
+            DYCAddressPickerView *pickerView = [[DYCAddressPickerView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 180) withAddressArray:address.array];
+            pickerView.DYCDelegate = self;
+            pickerView.backgroundColor = [UIColor clearColor];
+            UIView *dropDownView=pickerView;
+            return dropDownView;
+        }
+        
+    }
+    else {
+        return nil;
+    }
+}
+
+-(void)dateChanged:(UIDatePicker*)sender  {
+    NSDate *date=sender.date;
+    NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"yyyy/MM/dd"];
+    NSString *dateString=[dateFormatter stringFromDate:date];
+    if (self.selectedRowIndexPath!=nil) {
+        UITableViewCell *cell=[self.tableview cellForRowAtIndexPath:self.selectedRowIndexPath];
+        UILabel *lbl_date=cell.detailTextLabel;
+        lbl_date.text=dateString;
+        lbl_date.textColor=[UIColor blackColor];
+    }
+    
+}
+
+-(void)selectAddressProvince:(Address *)province andCity:(Address *)city andCounty:(Address *)county {
+    //UITableViewCell *cell=[self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:9 inSection:0]];
+    if (self.selectedRowIndexPath!=nil) {
+        UITableViewCell *cell=[_tableview cellForRowAtIndexPath:self.selectedRowIndexPath];
+        cell.detailTextLabel.text=[NSString stringWithFormat:@"%@ %@ %@",province.name,city.name,county.name];
+        cell.detailTextLabel.textColor=[UIColor blackColor];
+    }
+    /*
+    for (NSString *key in _dic_clt) {
+        NSArray *arr_sub_ctl=_dic_clt[key];
+        for (int i=0;i<[arr_sub_ctl count];i++) {
+            NSDictionary *dic_sub=[arr_sub_ctl objectAtIndex:i];
+            NSString *str_type=[dic_sub objectForKey:@"type"];
+            if ([str_type isEqualToString:@"picker"]) {
+                NSIndexPath *index=[NSIndexPath indexPathForRow:i inSection:[key integerValue]];
+                UITableViewCell *cell=[_tableview cellForRowAtIndexPath:index];
+                cell.detailTextLabel.text=[NSString stringWithFormat:@"%@ %@ %@",province.name,city.name,county.name];
+                cell.detailTextLabel.textColor=[UIColor blackColor];
+            }
+        }
+    }
+     */
+}
+
+-(void)addressList:(NSArray *)array {
+    
 }
 
 @end

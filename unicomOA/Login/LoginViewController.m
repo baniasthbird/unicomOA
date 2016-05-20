@@ -56,7 +56,7 @@
 static NSString *kServerSessionCookie=@"JSESSIONID";
 static NSString *kLocalCookieName=@"UnicomOACookie";
 static NSString *kLocalUserData=@"UnicomOALocalUser";
-static NSString *kBaseUrl=@"http://192.168.12.12:8080/default/mobile/user/com.hnsi.erp.mobile.user.LoginManager.login.biz.ext";
+static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.hnsi.erp.mobile.user.LoginManager.login.biz.ext";
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -84,8 +84,9 @@ static NSString *kBaseUrl=@"http://192.168.12.12:8080/default/mobile/user/com.hn
     [_session.requestSerializer setHTTPShouldHandleCookies:YES];
     
     _params=[NSMutableDictionary dictionary];
-    _params[@"username"]=@"sysadmin";
-    _params[@"password"]=@"000000";
+   // _params[@"username"]=@"sysadmin";
+   // _params[@"password"]=@"000000";
+   
     
     [self createLabels];
     [self createButtons];
@@ -260,7 +261,7 @@ static NSString *kBaseUrl=@"http://192.168.12.12:8080/default/mobile/user/com.hn
     //创建数据库
     [db_local initTables];
     //添加IP数据
-    [db_local InsertIPTable:@"192.168.12.12" port:@"8080" IP_Mark:@"TestServer"];
+    [db_local InsertIPTable:@"192.168.12.151" port:@"8080" IP_Mark:@"TestServer"];
     //添加接口数据
     [db_local InsertInterFaceTable];
     
@@ -329,7 +330,8 @@ static NSString *kBaseUrl=@"http://192.168.12.12:8080/default/mobile/user/com.hn
     user=[self createTextFielfFrame:CGRectMake(60, self.view.frame.size.height/2-50, self.view.frame.size.width-120, 30) font:[UIFont systemFontOfSize:20] placeholder:@"用户名"];
     user.attributedPlaceholder=[[NSAttributedString alloc] initWithString:@"用户名" attributes:@{NSForegroundColorAttributeName:placeholderColor}];
     //user.text=@"13419693608";
-    user.keyboardType=UIKeyboardTypeNumberPad;
+    user.keyboardType=UIKeyboardTypeDefault;
+    user.textColor=[UIColor whiteColor];
     user.clearButtonMode = UITextFieldViewModeWhileEditing;
     user.delegate=self;
     
@@ -338,6 +340,7 @@ static NSString *kBaseUrl=@"http://192.168.12.12:8080/default/mobile/user/com.hn
     //pwd.text=@"123456";
     //密文样式
     pwd.secureTextEntry=YES;
+    pwd.textColor=[UIColor whiteColor];
     pwd.attributedPlaceholder=[[NSAttributedString alloc] initWithString:@"密码" attributes:@{NSForegroundColorAttributeName:placeholderColor}];
     pwd.delegate=self;
     //pwd.keyboardType=UIKeyboardTypeNumberPad;
@@ -413,6 +416,12 @@ static NSString *kBaseUrl=@"http://192.168.12.12:8080/default/mobile/user/com.hn
     NSString *str_interface=[db fetchInterface:@"Login"];
     NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_interface];
 
+    NSString *str_username=user.text;
+    str_username= [str_username stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    NSString *str_password=pwd.text;
+    str_password=[str_password stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    _params[@"username"]=str_username;
+    _params[@"password"]=str_password;
     
     [_session POST:str_url parameters:_params progress:^(NSProgress * _Nonnull uploadProgress) {
         
@@ -432,10 +441,23 @@ static NSString *kBaseUrl=@"http://192.168.12.12:8080/default/mobile/user/com.hn
         }
         else if (JSON.count==3) {
             NSLog(@"请求JSON成功:%@",JSON);
-            [self saveLoginSession];
-            NSDictionary *dic_usr=[JSON objectForKey:@"userInfo"];
-            // [self postLogin2];
-            [self MoveToNextPage:dic_usr];
+            NSString *str_success=[JSON objectForKey:@"success"];
+            BOOL b_success=[str_success boolValue];
+            if (b_success==YES) {
+                [self saveLoginSession];
+                NSDictionary *dic_usr=[JSON objectForKey:@"userInfo"];
+                // [self postLogin2];
+                [self MoveToNextPage:dic_usr];
+            }
+            else {
+                NSString *str_msg=[JSON objectForKey:@"msg"];
+                LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"警告" message:str_msg cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+                    
+                }];
+                [alert showLXAlertView];
+
+            }
+            
         }
         
         

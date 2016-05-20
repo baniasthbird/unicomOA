@@ -234,8 +234,8 @@
             NSString *insertSql16=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",INTERFACE_TABLENAME,INTERFACE_NAME,INTERFACE_VALUE,@"UnFinishTaskShenPiList",@"/default/mobile/oa/com.hnsi.erp.mobile.oa.TaskAuditSearch.pendingList.biz.ext"];
             BOOL res16=[_database executeUpdate:insertSql16];
             
-            //待办流程审批列表
-            NSString *insertSql17=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",INTERFACE_TABLENAME,INTERFACE_NAME,INTERFACE_VALUE,@"FinishTaskShenPiList",@"/default/mobile/oa/ com.hnsi.erp.mobile.oa.TaskAuditSearch.pendingList.biz.ext"];
+            //已办流程审批列表
+            NSString *insertSql17=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",INTERFACE_TABLENAME,INTERFACE_NAME,INTERFACE_VALUE,@"FinishTaskShenPiList",@" /default/mobile/oa/com.hnsi.erp.mobile.oa.TaskAuditSearch.finishedList.biz.ext"];
             BOOL res17=[_database executeUpdate:insertSql17];
             
             //审批记录

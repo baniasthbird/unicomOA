@@ -22,6 +22,8 @@
 
 @property (strong,nonatomic) NSIndexPath *selectedRowIndexPath;
 
+
+
 @end
 
 @implementation CarApplication

@@ -16,17 +16,17 @@
 
 
 //类型，状态，标题，时间
-+(instancetype)cellWithTable:(UITableView *)tableView withTitle:(NSString *)str_Title withStatus:(NSString *)str_status isUsingCar:(BOOL)b_Category withTime:(NSString*)str_time{
++(instancetype)cellWithTable:(UITableView *)tableView withTitle:(NSString *)str_Title withStatus:(NSString *)str_status category:(NSString*)str_Category withTime:(NSString*)str_time{
     static NSString *cellID=@"cellID";
     MyApplicationCell *cell=[tableView dequeueReusableCellWithIdentifier:cellID];
    // if (!cell) {
-        cell=[[MyApplicationCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID isUsingCar:b_Category withTitle:str_Title withStatus:str_status withTime:str_time];
+        cell=[[MyApplicationCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID category:str_Category withTitle:str_Title withStatus:str_status withTime:str_time];
     //}
     return cell;
 }
 
 
--(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier isUsingCar:(BOOL)b_Category withTitle:(NSString*)str_Title withStatus:(NSString *)str_status withTime:(NSString *)str_time {
+-(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier category:(NSString*)str_Category withTitle:(NSString*)str_Title withStatus:(NSString *)str_status withTime:(NSString *)str_time {
     self=[super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         UILabel *lbl_category=[[UILabel alloc]initWithFrame:CGRectMake(5, 11, 80, 18)];
@@ -69,12 +69,8 @@
         
         
         //view_seperator.backgroundColor=[UIColor blackColor];
-        if (b_Category==YES) {
-            lbl_category.text=@"预约用车";
-        }
-        else {
-            lbl_category.text=@"复印";
-        }
+      
+        lbl_category.text=str_Category;
         lbl_status.text=str_status;
         lbl_category.textColor=[UIColor whiteColor];
         lbl_category.font=[UIFont systemFontOfSize:15];
