@@ -75,15 +75,16 @@
     UIButton *btn_previous=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.15, self.view.frame.size.height-190,self.view.frame.size.width*0.2, 25)];
     [btn_previous setTitle:@"上一步" forState:UIControlStateNormal];
     [btn_previous setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    btn_previous.layer.borderWidth=1;
+   // btn_previous.layer.borderWidth=1;
     [btn_previous addTarget:self action:@selector(Previous:) forControlEvents:UIControlEventTouchUpInside];
-    [btn_previous setBackgroundColor:[UIColor yellowColor]];
+   // [btn_previous setBackgroundColor:[UIColor yellowColor]];
     
     UIButton *btn_next=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.65, self.view.frame.size.height-190, self.view.frame.size.width*0.2, 25)];
     [btn_next setTitle:@"下一步" forState:UIControlStateNormal];
-    btn_previous.layer.borderWidth=1;
+    [btn_next setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+   // btn_previous.layer.borderWidth=1;
     [btn_next addTarget:self action:@selector(Next:) forControlEvents:UIControlEventTouchUpInside];
-    [btn_next setBackgroundColor:[UIColor lightGrayColor]];
+  //  [btn_next setBackgroundColor:[UIColor lightGrayColor]];
     
     _lbl_totalpages=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.5,self.view.frame.size.height-190 , self.view.frame.size.width*0.1, 25)];
     _lbl_totalpages.font=[UIFont systemFontOfSize:10];

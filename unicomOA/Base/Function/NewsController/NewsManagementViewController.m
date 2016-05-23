@@ -121,11 +121,12 @@
     [_session POST:str_url parameters:nil progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"获取新闻数量统计成功");
+       
         NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         NSString *str_success= [JSON objectForKey:@"success"];
         BOOL b_success=[str_success intValue];
         if (b_success==YES) {
+             NSLog(@"获取新闻数量统计成功");
             NSString *str_num=[JSON objectForKey:@"num"];
             _i_newsList=[str_num integerValue];
             NSInteger i_page=_i_newsList/10+1;
@@ -152,11 +153,12 @@
     [_session POST:str_url parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"获取新闻列表成功:%@",responseObject);
+        
         NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         NSString *str_success= [JSON objectForKey:@"success"];
-        int i_success=[str_success intValue];
-        if (i_success==1) {
+        BOOL b_success=[str_success boolValue];
+        if (b_success==1) {
+            NSLog(@"获取新闻列表成功:%@",responseObject);
             NSObject *obj=[JSON objectForKey:@"totalPage"];
             NSNumber *l_totalPage=(NSNumber*)obj;
             _i_pageTotal=[l_totalPage integerValue];
@@ -232,15 +234,16 @@
     UIButton *btn_previous=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.15, self.view.frame.size.height-150,self.view.frame.size.width*0.2, 25)];
     [btn_previous setTitle:@"上一页" forState:UIControlStateNormal];
     [btn_previous setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    btn_previous.layer.borderWidth=1;
+    //btn_previous.layer.borderWidth=1;
     [btn_previous addTarget:self action:@selector(Previous:) forControlEvents:UIControlEventTouchUpInside];
-    [btn_previous setBackgroundColor:[UIColor yellowColor]];
+    //[btn_previous setBackgroundColor:[UIColor yellowColor]];
     
     UIButton *btn_next=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.65, self.view.frame.size.height-150, self.view.frame.size.width*0.2, 25)];
     [btn_next setTitle:@"下一页" forState:UIControlStateNormal];
-    btn_previous.layer.borderWidth=1;
+     [btn_next setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+   // btn_previous.layer.borderWidth=1;
     [btn_next addTarget:self action:@selector(Next:) forControlEvents:UIControlEventTouchUpInside];
-    [btn_next setBackgroundColor:[UIColor lightGrayColor]];
+    //[btn_next setBackgroundColor:[UIColor lightGrayColor]];
 
     _lbl_label=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.5,self.view.frame.size.height-150 , self.view.frame.size.width*0.1, 25)];
     _lbl_label.font=[UIFont systemFontOfSize:10];
@@ -364,13 +367,13 @@
         }
     }
     
-    
+    /*
     if (_b_hasnews==NO) {
         if (indexPath.section==0 && indexPath.row==1) {
             cell.backgroundColor=[UIColor colorWithRed:242/255.0f green:242/255.0f blue:242/255.0f alpha:1];
         }
     }
-    
+    */
     
     return cell;
     
@@ -436,7 +439,8 @@
 
 -(void)tapCell:(NewsManagementTableViewCell *)cell atIndex:(NSInteger)index {
 #pragma mark 红点通知消除
-    if (_b_hasnews==NO) {
+    //if (_b_hasnews==NO) {
+    /*
         if (cell.backgroundColor!=[UIColor clearColor])
         {
             NSString *str_badgevalue= [self.tabBarController.tabBar.items objectAtIndex:2].badgeValue;
@@ -446,7 +450,8 @@
             cell.backgroundColor=[UIColor clearColor];
             
         }
-    }
+     */
+   // }
     
     
     NewsDisplayViewController *news_controller=[[NewsDisplayViewController alloc]init];

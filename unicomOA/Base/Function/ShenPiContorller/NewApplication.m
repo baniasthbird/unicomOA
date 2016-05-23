@@ -13,6 +13,7 @@
 #import "AFNetworking.h"
 #import "LXAlertView.h"
 #import "ShenPiAppVC.h"
+#import "LXAlertView.h"
 
 @interface NewApplication()<UITableViewDelegate,UITableViewDataSource,CarApplicationDelegate,PrintApplicationDelegate>
 
@@ -217,16 +218,19 @@
     [_session POST:str_url parameters:nil progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"获取能发起的流程成功");
         NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         NSString *str_success= [JSON objectForKey:@"success"];
         BOOL b_success=[str_success boolValue];
         if (b_success==YES) {
+            NSLog(@"获取能发起的流程成功");
             _arr_sop=[JSON objectForKey:@"list"];
             _arr_groupList=[JSON objectForKey:@"groupList"];
             _dic_rowsection=[self manageRowSectionData:_arr_sop groupList:_arr_groupList];
             _dic_data=[self manageData:_arr_sop groupList:_arr_groupList];
             [self.tableView reloadData];
+        }
+        else {
+            
         }
 
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

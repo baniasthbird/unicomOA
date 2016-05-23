@@ -20,6 +20,7 @@
 #import "MapViewController.h"
 #import "DataBase.h"
 #import "PositionCell.h"
+@import AudioToolbox;
 
 
 #define TABLEVIEW_CELL_RESUSE_ID @"TABLEVIEW_CELL_REUSE_ID"
@@ -149,6 +150,11 @@ typedef enum
     NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSString *dateString=[dateFormatter stringFromDate:date];
+    NSString *meetingString=@"";
+    if (_date_select!=nil) {
+        meetingString=[dateFormatter stringFromDate:_date_select];
+    }
+
     
     [dateFormatter setDateFormat:@"MMdd"];
     NSString *str_index1=[dateFormatter stringFromDate:date];
@@ -173,6 +179,7 @@ typedef enum
     }
     
     [dic setValue:dateString forKey:@"notes_date"];
+    
     if (_str_pic_path==nil) {
         _str_pic_path=@"";
     }
@@ -181,6 +188,10 @@ typedef enum
         _str_location_content=@"";
     }
     [dic setObject:_str_location_content forKey:@"addr"];
+    [dic setValue:meetingString forKey:@"meeting_date"];
+
+    
+    
     db=[DataBase sharedinstanceDB];
     if (_dic_notes==nil) {
         [db InsertNotesTable:dic];
@@ -192,7 +203,7 @@ typedef enum
     
     //[delegate passValue:_str_notesFenLei Content:_str_noteContent Time:_str_date TimeNow:dateString];
     //[delegate passValue:_str_notesFenLei Content:_str_noteContent Time:_str_date TimeNow:dateString PicPath:_str_pic_path coordx:str_coordx coordy:str_coordy address:_str_location_content];
-    [delegate passValue:_str_FenLei Content:_str_noteContent Time:_str_date TimeNow:dateString PicPath:_str_pic_path coordx:str_coordx coordy:str_coordy address:_str_location_content index:str_index];
+    [delegate passValue:_str_FenLei Content:_str_noteContent Time:meetingString TimeNow:dateString PicPath:_str_pic_path coordx:str_coordx coordy:str_coordy address:_str_location_content index:str_index];
     
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -470,7 +481,7 @@ typedef enum
             UISwitch *sw_alarm=[[UISwitch alloc]initWithFrame:CGRectMake(120, 15, 50, 50)];
             
             
-            [sw_alarm setOn:NO animated:NO];
+            [sw_alarm setOn:NO animated:YES];
             [sw_alarm addTarget:self action:@selector(vibration) forControlEvents:UIControlEventValueChanged];
             cell.accessoryView=sw_alarm;
         
@@ -903,7 +914,7 @@ typedef enum
 
 //振动提醒
 -(void)vibration {
-    
+    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
 }
 
 

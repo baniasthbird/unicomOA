@@ -191,7 +191,7 @@
             BOOL res5=[_database executeUpdate:insertSql5];
             
             //待办流程提醒
-            NSString *insertSql6=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",INTERFACE_TABLENAME,INTERFACE_NAME,INTERFACE_VALUE,@"TaskRemind",@"/default/mobile/oa/com.hnsi.erp.mobile.oa.TaskManager.flowList.biz.ext"];
+            NSString *insertSql6=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",INTERFACE_TABLENAME,INTERFACE_NAME,INTERFACE_VALUE,@"TaskRemind",@"/default/mobile/oa/com.hnsi.erp.mobile.oa.TaskSearch.flowList.biz.ext"];
             BOOL res6=[_database executeUpdate:insertSql6];
             
             //未读消息列表

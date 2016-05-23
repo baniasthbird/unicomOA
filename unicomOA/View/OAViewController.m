@@ -114,7 +114,7 @@
     [self changeViewController:button];
     
     UITabBarItem *item= [self.tabBar.items objectAtIndex:2];
-    item.badgeValue=@"2";
+   // item.badgeValue=@"2";
    // [self.tabBar.items objectAtIndex:2].badgeValue=@"1";
     
 }

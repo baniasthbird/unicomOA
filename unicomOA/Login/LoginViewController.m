@@ -420,8 +420,10 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     str_username= [str_username stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     NSString *str_password=pwd.text;
     str_password=[str_password stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    _params[@"username"]=str_username;
-    _params[@"password"]=str_password;
+   // _params[@"username"]=str_username;
+   // _params[@"password"]=str_password;
+     _params[@"username"]=@"sysadmin";
+     _params[@"password"]=@"000000";
     
     [_session POST:str_url parameters:_params progress:^(NSProgress * _Nonnull uploadProgress) {
         

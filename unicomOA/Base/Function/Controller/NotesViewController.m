@@ -123,6 +123,7 @@ NSInteger i_count=0;
     cell.lbl_arrangement.text=[dic_note objectForKey:@"fenlei"];
     cell.lbl_content.text=[dic_note objectForKey:@"content"];
     cell.lbl_time2.text=[dic_note objectForKey:@"notes_date"];
+    cell.lbl_time.text=[dic_note objectForKey:@"meeting_date"];
     NSString *str_index=[dic_note objectForKey:@"index"];
     cell.tag=[str_index integerValue];
     cell.myNotes=dic_note;

@@ -183,14 +183,14 @@
                 btn_Notes=[self createImageButton:30+kImageWidth*0.5 CenterY:25+kImageHeight*0.5 title:@"" image:@"Notes.png"];
                [btn_Notes addTarget:self action:@selector(NotesItemClick:) forControlEvents:UIControlEventTouchUpInside];
         }
-        btn_News.badgeBgColor=[UIColor redColor];
-        btn_News.badgeCenterOffset=CGPointMake(0, btn_News.size.height*0.08);
-        [btn_News showBadgeWithStyle:WBadgeStyleRedDot value:1 animationType:WBadgeAnimTypeNone];
+       // btn_News.badgeBgColor=[UIColor redColor];
+       // btn_News.badgeCenterOffset=CGPointMake(0, btn_News.size.height*0.08);
+        //[btn_News showBadgeWithStyle:WBadgeStyleRedDot value:1 animationType:WBadgeAnimTypeNone];
         
         
-        btn_ShenPi.badgeBgColor=[UIColor redColor];
-        btn_ShenPi.badgeCenterOffset=CGPointMake(0, btn_ShenPi.size.height*0.08);
-        [btn_ShenPi showBadgeWithStyle:WBadgeStyleNumber value:1 animationType:WBadgeAnimTypeNone];
+        //btn_ShenPi.badgeBgColor=[UIColor redColor];
+        //btn_ShenPi.badgeCenterOffset=CGPointMake(0, btn_ShenPi.size.height*0.08);
+        //[btn_ShenPi showBadgeWithStyle:WBadgeStyleNumber value:1 animationType:WBadgeAnimTypeNone];
         
         if (indexPath.row==0) {
             [cell addSubview:btn_News];
