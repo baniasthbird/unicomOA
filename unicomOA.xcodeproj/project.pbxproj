@@ -93,6 +93,7 @@
 		680861D61CEAD33300257AAA /* PositionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 680861D51CEAD33300257AAA /* PositionCell.m */; };
 		681FFC761CC7828F0086A934 /* LXAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 681FFC731CC7828F0086A934 /* LXAlertView.m */; };
 		681FFC771CC7828F0086A934 /* UILabel+LXAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 681FFC751CC7828F0086A934 /* UILabel+LXAdd.m */; };
+		68212DF31CF3FAE40022955A /* Soundselectvc.m in Sources */ = {isa = PBXBuildFile; fileRef = 68212DF21CF3FAE40022955A /* Soundselectvc.m */; };
 		6822656F1C96B4C400AB29C0 /* NewsSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6822656E1C96B4C400AB29C0 /* NewsSettingViewController.m */; };
 		6825E1081CED507400EA4D87 /* ShenPiAppVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6825E1071CED507400EA4D87 /* ShenPiAppVC.m */; };
 		682B68B01CB618DD002EC60F /* PrintApplicationNoFileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 682B68AF1CB618DD002EC60F /* PrintApplicationNoFileCell.m */; };
@@ -413,6 +414,9 @@
 		681FFC731CC7828F0086A934 /* LXAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXAlertView.m; sourceTree = "<group>"; };
 		681FFC741CC7828F0086A934 /* UILabel+LXAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+LXAdd.h"; sourceTree = "<group>"; };
 		681FFC751CC7828F0086A934 /* UILabel+LXAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+LXAdd.m"; sourceTree = "<group>"; };
+		68212DF01CF3EA6A0022955A /* Thunder Song.m4r */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Thunder Song.m4r"; sourceTree = "<group>"; };
+		68212DF11CF3FAE40022955A /* Soundselectvc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Soundselectvc.h; path = Base/Function/Controller/Soundselectvc.h; sourceTree = "<group>"; };
+		68212DF21CF3FAE40022955A /* Soundselectvc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Soundselectvc.m; path = Base/Function/Controller/Soundselectvc.m; sourceTree = "<group>"; };
 		6822656D1C96B4C400AB29C0 /* NewsSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsSettingViewController.h; path = Base/Settings/Controller/NewsSettingViewController.h; sourceTree = "<group>"; };
 		6822656E1C96B4C400AB29C0 /* NewsSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsSettingViewController.m; path = Base/Settings/Controller/NewsSettingViewController.m; sourceTree = "<group>"; };
 		6825E1061CED507400EA4D87 /* ShenPiAppVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShenPiAppVC.h; path = Base/Function/ShenPiContorller/ShenPiAppVC.h; sourceTree = "<group>"; };
@@ -727,6 +731,7 @@
 		2C35B0491C7062160003BF6C /* unicomOA */ = {
 			isa = PBXGroup;
 			children = (
+				68212DF01CF3EA6A0022955A /* Thunder Song.m4r */,
 				2C703CEB1CDECCAA00C7EF77 /* DevKit */,
 				68A349B31CD8A9FF00E2851B /* MessageViewBase */,
 				68F8E1661CD042AA005D2727 /* image */,
@@ -996,6 +1001,8 @@
 				2CFEADD91C79D9480054730E /* NewNotesViewController.m */,
 				68008F521CDAE446001A4D64 /* MapViewController.h */,
 				68008F531CDAE446001A4D64 /* MapViewController.m */,
+				68212DF11CF3FAE40022955A /* Soundselectvc.h */,
+				68212DF21CF3FAE40022955A /* Soundselectvc.m */,
 			);
 			name = NotesController;
 			sourceTree = "<group>";
@@ -1941,6 +1948,7 @@
 				68DEEBE31CBE30E6003DB7AA /* UserInfo.m in Sources */,
 				68EEDE781CBB911A003295EB /* UITableView+SDAutoTableViewCellHeight.m in Sources */,
 				2C9DDECA1CD8E257009462E6 /* LYTwoViewController.m in Sources */,
+				68212DF31CF3FAE40022955A /* Soundselectvc.m in Sources */,
 				2CFEAD301C7181F30054730E /* NTButton.m in Sources */,
 				2CE321101CC2810800B36793 /* DataSource.m in Sources */,
 				2CFEADC61C76A65E0054730E /* UIImage+ResizeImage.m in Sources */,

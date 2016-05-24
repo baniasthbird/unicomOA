@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import "LoginViewController.h"
+#import "LXAlertView.h"
+#import <AudioToolbox/AudioToolbox.h>
 
 @interface AppDelegate ()
 
@@ -50,6 +52,27 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+-(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+    NSString *str_content=notification.alertBody;
+    NSString *str_soundname=notification.soundName;
+    LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"提示" message:str_content cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+        
+    }];
+    [alert showLXAlertView];
+    
+    NSURL *path=[NSURL URLWithString:@"/System/Library/Audio/UISounds/alarm.caf"];
+    SystemSoundID sound;
+    if (path) {
+        OSStatus error = AudioServicesCreateSystemSoundID((__bridge CFURLRef)[NSURL fileURLWithPath:str_soundname],&sound);
+        
+        if (error != kAudioServicesNoError) {//获取的声音的时候，出现错误
+            error = AudioServicesCreateSystemSoundID((__bridge CFURLRef)path,&sound);
+        }
+    }
+    
+    AudioServicesPlaySystemSound(sound);
 }
 
 @end

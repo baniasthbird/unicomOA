@@ -16,6 +16,7 @@
 #import "DYCAddressPickerView.h"
 #import "Address.h"
 #import "TableViewCell.h"
+#import "LXAlertView.h"
 
 @interface ShenPiAppVC()<UITableViewDelegate,UITableViewDataSource,DYCAddressDelegate,DYCAddressPickerViewDelegate>
 
@@ -35,6 +36,8 @@
 
 //提交数据的url
 @property (strong,nonatomic) NSString *str_url_postdata;
+
+@property NSInteger i_rowCount;
 
 @end
 
@@ -63,12 +66,13 @@
     self.navigationItem.leftBarButtonItem = barButtonItem;
     
     
-    UIBarButtonItem *barButtonItem2 = [[UIBarButtonItem alloc] initWithTitle:@"提交" style:UIBarButtonItemStyleDone target:self action:@selector(SubmitToPrint:)];
+    UIBarButtonItem *barButtonItem2 = [[UIBarButtonItem alloc] initWithTitle:@"提交" style:UIBarButtonItemStyleDone target:self action:@selector(Submit:)];
     [barButtonItem2 setTitleTextAttributes:dict forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem=barButtonItem2;
     
     self.view.backgroundColor=[UIColor colorWithRed:246/255.0f green:249/255.0f blue:254/255.0f alpha:1];
     
+    _i_rowCount=0;
     db=[DataBase sharedinstanceDB];
     
     _session=[AFHTTPSessionManager manager];
@@ -131,8 +135,57 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
--(void)SubmitToPrint:(UIButton*)sender {
+-(void)Submit:(UIButton*)sender {
     //提交申请
+   // NSMutableDictionary *dic_submit=[[NSMutableDictionary alloc]init];
+    NSMutableArray *arr_submit=[[NSMutableArray alloc]init];
+    NSMutableArray *arr_m_ctlList=(NSMutableArray*)_arr_ctlList;
+    NSMutableDictionary *dic_sub=[NSMutableDictionary dictionary];
+    for (int i=0;i<[arr_m_ctlList count];i++) {
+        NSDictionary *dic_ctl= [arr_m_ctlList objectAtIndex:i];
+        NSString *str_key=[dic_ctl objectForKey:@"key"];
+        NSObject *obj_value=[dic_ctl objectForKey:@"value"];
+        if (obj_value!=nil && obj_value!=[NSNull null]) {
+            NSString *str_value=(NSString*)obj_value;
+            if (![str_value isEqualToString:@""]) {
+                dic_sub[str_key]=str_value;
+            }
+          //  [arr_submit addObject:dic_sub];
+        }
+        
+    }
+    
+    if (_i_rowCount!=0) {
+        for (int i=0;i<_i_rowCount;i++) {
+            UITableViewCell *cell=[self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+            if (![cell isMemberOfClass:[UITableViewCell class]]) {
+                NSString *str_key=cell.accessibilityHint;
+                NSString *str_value=@"";
+                if ([cell isMemberOfClass:[PrintApplicationTitleCell class]]) {
+                    PrintApplicationTitleCell *print_cell=(PrintApplicationTitleCell*)cell;
+                    str_value=print_cell.txt_title.text;
+                     dic_sub[str_key]=str_value;
+                                   }
+                else if ([cell isMemberOfClass:[PrintApplicationDetailCell class]]) {
+                    PrintApplicationDetailCell *detail_cell=(PrintApplicationDetailCell*)cell;
+                    str_value=detail_cell.txt_detail.text;
+                    dic_sub[str_key]=str_value;
+                }
+            }
+            else {
+                if (cell.accessibilityValue!=nil) {
+                    NSString *str_key=cell.accessibilityValue;
+                    NSString *str_value=cell.detailTextLabel.text;
+                     dic_sub[str_key]=str_value;
+                    
+                }
+            }
+            
+        }
+    }
+    
+    [self SubmitUrl:dic_sub];
+
 }
 
 
@@ -187,13 +240,16 @@
             }
         }
         if (b_isExpanded==NO) {
+            _i_rowCount=i_count;
             return i_count;
         }
         else {
             if (self.selectedRowIndexPath) {
+                _i_rowCount=i_count+1;
                 return  i_count+1;
             }
             else {
+                _i_rowCount=i_count;
                 return i_count;
             }
         }
@@ -335,7 +391,13 @@
                     }
                     else {
                         NSString *str_label=[dic_tmp objectForKey:@"label"];
+                        NSString *str_require=[dic_tmp objectForKey:@"require"];
+                        BOOL b_require=[str_require boolValue];
+                        if (b_require==YES) {
+                            str_label=[NSString stringWithFormat:@"%@%@",str_label,@"（必填）"];
+                        }
                         NSObject *obj_prompt=[dic_tmp objectForKey:@"prompt"];
+                        NSString *str_key=[dic_tmp objectForKey:@"key"];
                         NSObject *obj_value=[dic_tmp objectForKey:@"value"];
                         NSString *str_prompt=@"";
                         NSString *str_value=@"";
@@ -346,13 +408,17 @@
                             str_value=(NSString*)obj_value;
                         }
                         if ([str_type isEqualToString:@"text"]) {
-                            cell=[PrintApplicationTitleCell cellWithTable:tableView withName:str_label withPlaceHolder:str_prompt withText:str_value atIndexPath:indexPath keyboardType:UIKeyboardTypeDefault];
+                            PrintApplicationTitleCell *cell=[PrintApplicationTitleCell cellWithTable:tableView withName:str_label withPlaceHolder:str_prompt withText:str_value atIndexPath:indexPath keyboardType:UIKeyboardTypeDefault];
+                            cell.accessibilityHint=str_key;
+                            return cell;
                         }
                         else if ([str_type isEqualToString:@"int"]) {
-                            cell=[PrintApplicationTitleCell cellWithTable:tableView withName:str_label withPlaceHolder:str_prompt withText:str_value atIndexPath:indexPath keyboardType:UIKeyboardTypeNumberPad];
+                            PrintApplicationTitleCell *cell=[PrintApplicationTitleCell cellWithTable:tableView withName:str_label withPlaceHolder:str_prompt withText:str_value atIndexPath:indexPath keyboardType:UIKeyboardTypeNumberPad];
+                            cell.accessibilityHint=str_key;
+                            return cell;
                         }
                         
-                        return cell;
+                        
                     }
                 }
                 else if ([str_type isEqualToString:@"textarea"]) {
@@ -363,6 +429,12 @@
                     }
                     else {
                         NSString *str_label=[dic_tmp objectForKey:@"label"];
+                        NSString *str_require=[dic_tmp objectForKey:@"require"];
+                        BOOL b_require=[str_require boolValue];
+                        if (b_require==YES) {
+                            str_label=[NSString stringWithFormat:@"%@%@",str_label,@"（必填）"];
+                        }
+                        NSString *str_key=[dic_tmp objectForKey:@"key"];
                         NSObject *obj_prompt=[dic_tmp objectForKey:@"prompt"];
                         NSObject *obj_value=[dic_tmp objectForKey:@"value"];
                         NSString *str_prompt=@"";
@@ -373,7 +445,8 @@
                         if (obj_value!=[NSNull null]) {
                             str_value=(NSString*)obj_value;
                         }
-                        cell=[PrintApplicationDetailCell cellWithTable:tableView withName:str_label withPlaceHolder:str_prompt withText:str_value atIndexPath:indexPath atHeight:180];
+                        PrintApplicationDetailCell *cell=[PrintApplicationDetailCell cellWithTable:tableView withName:str_label withPlaceHolder:str_prompt withText:str_value atIndexPath:indexPath atHeight:180];
+                        cell.accessibilityHint=str_key;
                         return cell;
                     }
                 }
@@ -382,15 +455,19 @@
                     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
                     [dateFormatter setDateFormat:@"yyyy/MM/dd"];
                     NSString *strDate = [dateFormatter stringFromDate:[NSDate date]];
+                    NSString *str_key=[dic_tmp objectForKey:@"key"];
                     cell.textLabel.text=str_label;
                     cell.detailTextLabel.text=strDate;
                     cell.accessibilityHint=@"canExpandDate";
+                    cell.accessibilityValue=str_key;
                 }
                 else if ([str_type isEqualToString:@"picker"]) {
                     NSString *str_label=[dic_tmp objectForKey:@"label"];
+                    NSString *str_key=[dic_tmp objectForKey:@"key"];
                     cell.textLabel.text=str_label;
                     cell.detailTextLabel.text=@"郑州";
                     cell.accessibilityHint=@"canExpandPicker";
+                    cell.accessibilityValue=str_key;
                 }
             }
       //  }
@@ -623,5 +700,43 @@
 -(void)addressList:(NSArray *)array {
     
 }
+
+
+
+
+-(void)SubmitUrl:(NSMutableDictionary*)dic_param{
+    if (_str_url_postdata!=nil) {
+        
+        NSString *str_ip=@"";
+        NSString *str_port=@"";
+        NSMutableArray *t_array=[db fetchIPAddress];
+        if (t_array.count==1) {
+            NSArray *arr_ip=[t_array objectAtIndex:0];
+            str_ip=[arr_ip objectAtIndex:0];
+            str_port=[arr_ip objectAtIndex:1];
+        }
+        
+        
+        NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,_str_url_postdata];
+        [_session POST:str_url parameters:dic_param progress:^(NSProgress * _Nonnull uploadProgress) {
+            
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            NSString *str_success= [JSON objectForKey:@"success"];
+            BOOL b_success=[str_success boolValue];
+            if (b_success==YES) {
+                LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"提示" message:@"提交申请成功" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+                    
+                }];
+                [alert showLXAlertView];
+
+            }
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            
+        }];
+    }
+
+}
+
 
 @end

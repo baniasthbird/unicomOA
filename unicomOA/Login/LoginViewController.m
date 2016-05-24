@@ -74,7 +74,7 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     View.backgroundColor=[UIColor whiteColor];
     [self.view addSubview:View];
     
-    
+  //  NSString *bundleid=[ [NSBundle mainBundle] bundleIdentifier];
     _i_Success=NO;
     
     //_reach_manager=[AFNetworkReachabilityManager managerForAddress:<#(nonnull const void *)#>];

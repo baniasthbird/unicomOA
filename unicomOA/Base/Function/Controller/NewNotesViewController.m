@@ -20,7 +20,8 @@
 #import "MapViewController.h"
 #import "DataBase.h"
 #import "PositionCell.h"
-@import AudioToolbox;
+#import "Soundselectvc.h"
+
 
 
 #define TABLEVIEW_CELL_RESUSE_ID @"TABLEVIEW_CELL_REUSE_ID"
@@ -73,6 +74,10 @@ typedef enum
 @property (nonatomic,strong) NSString *str_FenLei;
 
 @property (nonatomic,strong) UIImageView *image;
+
+
+//是否支持震动
+@property BOOL b_viriable;
 
 
 
@@ -200,6 +205,7 @@ typedef enum
         [db UpdateNotesTable:dic];
     }
     
+    [self scheduleLocalNotificationWithDate:_date_select];
     
     //[delegate passValue:_str_notesFenLei Content:_str_noteContent Time:_str_date TimeNow:dateString];
     //[delegate passValue:_str_notesFenLei Content:_str_noteContent Time:_str_date TimeNow:dateString PicPath:_str_pic_path coordx:str_coordx coordy:str_coordy address:_str_location_content];
@@ -620,6 +626,13 @@ typedef enum
     if (indexPath.row==4 && indexPath.section==0) {
         [self extendCellAtIndexPath:indexPath];
     }
+    
+    if (_b_isOpenMenu==YES) {
+        if (indexPath.row==6 && indexPath.section==0) {
+            Soundselectvc *vc=[[Soundselectvc alloc]init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    }
     /*
     if (indexPath.row!=3) {
         for (UIView *view in self.view.subviews) {
@@ -914,7 +927,7 @@ typedef enum
 
 //振动提醒
 -(void)vibration {
-    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+   // AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
 }
 
 
@@ -1002,4 +1015,34 @@ typedef enum
    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:3 inSection:0];
     [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationNone];
 }
+
+//点击确定 设置好时间之后添加本地提醒  用UILocalNotification来实现。
+-(void)scheduleLocalNotificationWithDate:(NSDate *)fireDate {
+    if (_b_isOpenMenu==YES) {
+        //0.创建推送
+        UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+        //1.设置推送类型
+        UIUserNotificationType type = UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
+        //2.设置setting
+        UIUserNotificationSettings *setting  = [UIUserNotificationSettings settingsForTypes:type categories:nil];
+        //3.主动授权
+        [[UIApplication sharedApplication] registerUserNotificationSettings:setting];
+        //4.设置推送时间
+        [localNotification setFireDate:fireDate];
+        //5.设置时区
+        localNotification.timeZone = [NSTimeZone defaultTimeZone];
+        //6.推送内容
+        NSString *str_content=[NSString stringWithFormat:@"%@  %@",_str_FenLei,_str_noteContent];
+        [localNotification setAlertBody:str_content];
+        //7.推送声音
+        [localNotification setSoundName:@"Thunder Song.m4r"];
+        
+        
+        //8.添加推送到UIApplication
+        [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+
+    }
+}
+
+
 @end

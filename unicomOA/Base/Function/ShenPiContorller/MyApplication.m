@@ -58,8 +58,7 @@
 //展现流程数据的url
 @property (nonatomic,strong) NSDictionary *dic_url;
 
-//流程数据数组
-@property (nonatomic,strong) NSArray *arr_TaskList;
+
 
 //流程总页数
 @property (nonatomic,strong) NSString *str_totalPage;
@@ -300,9 +299,9 @@
     NSString *ID=[NSString stringWithFormat:@"Cell%ld%ld",(long)[indexPath section],(long)[indexPath row]];
     MyApplicationCell *cell=[tableView dequeueReusableCellWithIdentifier:ID];
     if (cell==nil) {
-        if ([_arr_TaskList count]>0) {
+        if ([_arr_MyApplication count]>0) {
            // NSDictionary *dic_TaskList=[_arr_TaskList objectAtIndex:indexPath.row];
-            cell=[self CreateCell:tableView index:indexPath.row];
+            cell=[self CreateCell:tableView index:indexPath.section];
         }
         /*
         if ([_str_searchKeyword1 isEqualToString:@"全部"] && [_str_searchKeyword2 isEqualToString:@"全部"]) {
@@ -510,7 +509,7 @@
 
 
 -(MyApplicationCell*)CreateCell:(UITableView*)tableView index:(NSInteger)i_index {
-    NSDictionary *dic_task=[_arr_TaskList objectAtIndex:i_index];
+    NSDictionary *dic_task=[_arr_MyApplication objectAtIndex:i_index];
     //流程类别
     NSString *str_categroy=[dic_task objectForKey:@"processChName"];
     //流程标题
@@ -666,7 +665,7 @@
         BOOL b_success=[str_success boolValue];
         if (b_success==YES) {
             _dic_url=[JSON objectForKey:@"urlMap"];
-            _arr_TaskList=[JSON objectForKey:@"taskList"];
+            _arr_MyApplication=[JSON objectForKey:@"taskList"];
             _str_totalPage=[JSON objectForKey:@"totalPage"];
             [self.tableView reloadData];
         }
