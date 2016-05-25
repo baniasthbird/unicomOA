@@ -10,6 +10,8 @@
 #import "CommentViewController.h"
 #import "DataBase.h"
 #import "AFNetworking.h"
+#import "UILabel+LabelHeightAndWidth.h"
+
 
 
 @interface NewsDisplayViewController ()
@@ -19,6 +21,10 @@
 @property (nonatomic,strong) NSMutableDictionary *param;
 
 @property (nonatomic,strong) NSString *str_headscale;
+
+@property CGFloat h_depart;
+
+@property CGFloat h_title;
 
 @end
 
@@ -58,30 +64,28 @@ int i_comment_num;
 
     [self NewsContent:_param];
     
-    if (iPhone6 || iPhone6_plus) {
-        _lbl_label=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, 5, 15*self.view.frame.size.width/16, self.view.frame.size.height*0.08)];
-    }
-    else if (iPhone4_4s || iPhone5_5s) {
-         _lbl_label=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, 5, 15*self.view.frame.size.width/16, self.view.frame.size.height*0.14)];
-    }
+  
+    _lbl_label=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, 5, 15*self.view.frame.size.width/16, self.view.frame.size.height*0.2)];
+    
     _lbl_label.numberOfLines=0;
-    _lbl_label.textAlignment=NSTextAlignmentCenter;
+    _lbl_label.textAlignment=NSTextAlignmentLeft;
     [_lbl_label setLineBreakMode:NSLineBreakByWordWrapping];
-    _lbl_label.font=[UIFont systemFontOfSize:20];
+    _lbl_label.font=[UIFont systemFontOfSize:24];
     _lbl_label.textColor=[UIColor blackColor];
     _lbl_label.text=_str_label;
+    _h_title=[UILabel_LabelHeightAndWidth getHeightByWidth:_lbl_label.frame.size.width title:_str_label font:[UIFont systemFontOfSize:24]];
+    _lbl_label.frame=CGRectMake(self.view.frame.size.width/32, 5, 15*self.view.frame.size.width/16, _h_title);
+    [_lbl_label sizeToFit];
     
-    if (iPhone6 || iPhone6_plus) {
-         _lbl_depart=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height*0.07, 15*self.view.frame.size.width/16, self.view.frame.size.height*0.08)];
-    }
-    else if (iPhone5_5s || iPhone4_4s) {
-        _lbl_depart=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height*0.14, 15*self.view.frame.size.width/16, self.view.frame.size.height*0.08)];
-    }
-   
+    
+    _lbl_depart=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, _h_title+5, 15*self.view.frame.size.width/16, self.view.frame.size.height*0.02)];
     _lbl_depart.numberOfLines=1;
     [_lbl_depart setLineBreakMode:NSLineBreakByWordWrapping];
     _lbl_depart.textColor=[UIColor lightGrayColor];
     _lbl_depart.font=[UIFont systemFontOfSize:14];
+    _lbl_depart.textAlignment=NSTextAlignmentLeft;
+    
+    
     if (iPhone6 || iPhone6_plus) {
         _lbl_depart.text=@"           综合管理部                        张三   2016-01-26 ";
     }
@@ -98,15 +102,10 @@ int i_comment_num;
     config.processPool=[[WKProcessPool alloc]init];
     
     
-    if (iPhone6 || iPhone6_plus) {
-        
-        _wb_content=[[WKWebView alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height*0.13, 15*self.view.frame.size.width/16, self.view.frame.size.height*0.60) configuration:config];
-       //_txt_content=[[UITextView alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height*0.13, 15*self.view.frame.size.width/16, self.view.frame.size.height*0.60)];
-    }
-    else if (iPhone4_4s || iPhone5_5s) {
-        _wb_content=[[WKWebView alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height*0.20, 15*self.view.frame.size.width/16, self.view.frame.size.height*0.51) configuration:config];
+   
+    _wb_content=[[WKWebView alloc]initWithFrame:CGRectMake(0, _h_title+27, self.view.frame.size.width, self.view.frame.size.height-120-_h_title) configuration:config];
          //_txt_content=[[UITextView alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height*0.20, 15*self.view.frame.size.width/16, self.view.frame.size.height*0.51)];
-    }
+    
     
     _str_headscale=[NSString stringWithFormat:@"%@ %@%@ %@%@ %@",@"<meta",@"name=",@"""viewport""",@"content=",@"""initial-scale=1.0""",@"/>"];
     //[_lbl_content setLineBreakMode:NSLineBreakByWordWrapping];
@@ -149,7 +148,7 @@ int i_comment_num;
     lbl_line.backgroundColor=[UIColor lightGrayColor];
     
     
-    [self.view addSubview:lbl_line];
+    //[self.view addSubview:lbl_line];
     NSString *str_readnum=[NSString stringWithFormat:@"%@%d",@"阅读",i_num];
     btn_read=[self createButton:0 y:i_Height w:self.view.frame.size.width*0.329 h:self.view.frame.size.height*0.08 title:str_readnum image:@"read"];
    // [btn_read addTarget:self action:@selector(ReadNum:) forControlEvents:UIControlEventTouchUpInside];
@@ -160,9 +159,9 @@ int i_comment_num;
     btn_comment=[self createButton:self.view.frame.size.width*0.66 y:i_Height w:self.view.frame.size.width*0.34 h:self.view.frame.size.height*0.08 title:@"评论" image:@"comment"];
     [btn_comment addTarget:self action:@selector(CommentEvent:) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.view addSubview:btn_comment];
-    [self.view addSubview:btn_focus];
-    [self.view addSubview:btn_read];
+   // [self.view addSubview:btn_comment];
+   // [self.view addSubview:btn_focus];
+   // [self.view addSubview:btn_read];
     
     self.view.backgroundColor=[UIColor whiteColor];
 }
@@ -242,7 +241,11 @@ int i_comment_num;
             NSString *str_date=[dic_news objectForKey:@"addTime"];
             NSArray *arr_date=[str_date componentsSeparatedByString:@" "];
             NSString *str_day=[arr_date objectAtIndex:0];
-            _lbl_depart.text=[NSString stringWithFormat:@"    %@    %@    %@",str_depart,str_operator,str_day];
+            NSString *str_departlabel=[NSString stringWithFormat:@"%@    %@    %@",str_depart,str_operator,str_day];
+            _lbl_depart.text=str_departlabel;
+            _h_depart=[UILabel_LabelHeightAndWidth getHeightByWidth:_lbl_depart.frame.size.width title:str_departlabel font:[UIFont systemFontOfSize:14]];
+            _lbl_depart.frame=CGRectMake(self.view.frame.size.width/32, _h_title+5, 15*self.view.frame.size.width/16, _h_depart);
+            [_lbl_depart sizeToFit];
             NSString *str_content=[dic_news objectForKey:@"content"];
             str_content=[NSString stringWithFormat:@"%@%@",_str_headscale,str_content];
             [_wb_content loadHTMLString:str_content baseURL:nil];

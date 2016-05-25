@@ -11,7 +11,7 @@
 #import "RemindCell.h"
 #import "NewsManagementTableViewCell.h"
 #import "NewsDisplayViewController.h"
-
+#import "UILabel+LabelHeightAndWidth.h"
 
 
 @interface MessageViewController ()<UITableViewDelegate,UITableViewDataSource,NewsTapDelegate>
@@ -20,18 +20,15 @@
 
 @property  NSInteger count;
 
-@property int i_doc_num;
+@property NSInteger i_doc_num;
 
-@property int i_flow_num;
+@property NSInteger i_flow_num;
 
-@property int i_msg_num;
+@property NSInteger i_msg_num;
 
 @property (nonatomic,strong) AFHTTPSessionManager *session;
 
 @property (nonatomic,strong) NSArray *arr_NewsList;
-
-@property CGFloat i_Height;
-
 
 @end
 
@@ -66,17 +63,7 @@
                           NSForegroundColorAttributeName:   [UIColor whiteColor]};
     
     self.navigationController.navigationBar.titleTextAttributes=dict;
-    
-    _i_Height=0;
-    if (iPhone6) {
-        _i_Height=50;
-    }
-    else if (iPhone5_5s) {
-        _i_Height=37;
-    }
-    else if (iPhone6_plus) {
-        _i_Height=55;
-    }
+
     
     
     _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
@@ -93,12 +80,6 @@
     _session.responseSerializer= [AFHTTPResponseSerializer serializer];
     [_session.requestSerializer setHTTPShouldHandleCookies:YES];
     
-    /*
-    if ([self isLocal]) {
-        _count=5;
-    }
-    else {
-     */
     
     NSMutableDictionary *news_param=[NSMutableDictionary dictionary];
     news_param[@"pageIndex"]=@"1";
@@ -141,7 +122,7 @@
                _i_doc_num=[str_docnum intValue];
                _i_flow_num=[str_flownum intValue];
                _i_msg_num=[str_msgnum intValue];
-               _count=_i_doc_num+_i_flow_num+_i_msg_num;
+              // _count=_i_doc_num+_i_flow_num+_i_msg_num;
                NSIndexSet *indexSet=[NSIndexSet indexSetWithIndex:0];
                [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
            }
@@ -197,7 +178,13 @@
         return 1;
     }
     else {
-        return 3;
+        if (iPhone6 || iPhone6_plus) {
+            return 5;
+        }
+        else {
+            return 3;
+        }
+        
     }
 }
 
@@ -233,7 +220,7 @@
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
    
         if (indexPath.section==0) {
-            RemindCell *r_cell=[RemindCell cellWithTable:tableView Count:_count];
+            RemindCell *r_cell=[RemindCell cellWithTable:tableView DocNum:_i_doc_num FlowNum:_i_flow_num MsgNum:_i_msg_num];
             return r_cell;
         }
         else  {
@@ -259,8 +246,32 @@
                 cell.delegate=self;
                 cell.myTag=indexPath.row;
                 cell.lbl_Title.text=[dic_content objectForKey:@"title"];
+                CGFloat h_Title=[UILabel_LabelHeightAndWidth getHeightByWidth:15*self.view.frame.size.width/16 title:[dic_content objectForKey:@"title"] font:[UIFont systemFontOfSize:24]];
+                cell.lbl_Title.frame=CGRectMake(self.view.frame.size.width/32, 5, 15*self.view.frame.size.width/16, h_Title);
+                [cell.lbl_Title sizeToFit];
                 cell.lbl_department.text=[dic_content objectForKey:@"operatorName"];
+                CGFloat w_depart=[UILabel_LabelHeightAndWidth getWidthWithTitle:[dic_content objectForKey:@"operatorName"] font:[UIFont systemFontOfSize:14]];
+                if (h_Title<90) {
+                    cell.lbl_department.frame=CGRectMake(self.view.frame.size.width/32, 90, w_depart, 20);
+                }
+                else {
+                    cell.lbl_department.frame=CGRectMake(self.view.frame.size.width/32, h_Title+10, w_depart, 40);
+                }
+                
+                [cell.lbl_department sizeToFit];
+                
+               
                 cell.lbl_time.text=[dic_content objectForKey:@"startDate"];
+                CGFloat w_time=[UILabel_LabelHeightAndWidth getWidthWithTitle:[dic_content objectForKey:@"operatorName"] font:[UIFont systemFontOfSize:14]];
+                if (h_Title<90) {
+                    cell.lbl_time.frame=CGRectMake(self.view.frame.size.width/32+w_depart+10, 90, w_time, 20);
+                }
+                else {
+                    cell.lbl_time.frame=CGRectMake(self.view.frame.size.width/32+w_depart+10, 90, h_Title+10, 20);
+
+                }
+                
+                [cell.lbl_time sizeToFit];
                 NSObject *obj=[dic_content objectForKey:@"id"];
                 if (obj!=nil) {
                     NSNumber *num_index=(NSNumber*)obj;
@@ -332,6 +343,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==0) {
         if (indexPath.row==0) {
+            /*
             RemindViewController *viewController=[[RemindViewController alloc]init];
             viewController.userInfo=_userInfo;
             //传入各个新闻的数量 zr 0504
@@ -339,6 +351,7 @@
             viewController.i_index2=_i_doc_num;
             viewController.i_index3=_i_msg_num;
             [self.navigationController pushViewController:viewController animated:YES];
+             */
         }
     }
     else if (indexPath.section==1) {

@@ -108,6 +108,7 @@
 		683815421CBCDAA400E6AFD3 /* PrintFileDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 683815411CBCDAA400E6AFD3 /* PrintFileDetail.m */; };
 		683815451CBCE28500E6AFD3 /* PrintFileNavCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 683815441CBCE28500E6AFD3 /* PrintFileNavCell.m */; };
 		683EFF5F1CDC7B9C0049326B /* locate.png in Resources */ = {isa = PBXBuildFile; fileRef = 683EFF5E1CDC7B9C0049326B /* locate.png */; };
+		68462DCC1CF587540044A806 /* UILabel+LabelHeightAndWidth.m in Sources */ = {isa = PBXBuildFile; fileRef = 68462DCB1CF587540044A806 /* UILabel+LabelHeightAndWidth.m */; };
 		6846D3531CAB5A1E004BD285 /* IVotingManamentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6846D3521CAB5A1E004BD285 /* IVotingManamentController.m */; };
 		6846D3561CAB62B1004BD285 /* VotingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6846D3551CAB62B1004BD285 /* VotingCell.m */; };
 		6846D3591CABA8AC004BD285 /* IVotingDisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6846D3581CABA8AC004BD285 /* IVotingDisplayController.m */; };
@@ -446,6 +447,8 @@
 		683EFF5C1CDC22D40049326B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		683EFF5D1CDC22D40049326B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		683EFF5E1CDC7B9C0049326B /* locate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = locate.png; sourceTree = "<group>"; };
+		68462DCA1CF587540044A806 /* UILabel+LabelHeightAndWidth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UILabel+LabelHeightAndWidth.h"; path = "Base/Function/NewsModel/UILabel+LabelHeightAndWidth.h"; sourceTree = "<group>"; };
+		68462DCB1CF587540044A806 /* UILabel+LabelHeightAndWidth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UILabel+LabelHeightAndWidth.m"; path = "Base/Function/NewsModel/UILabel+LabelHeightAndWidth.m"; sourceTree = "<group>"; };
 		6846D3511CAB5A1E004BD285 /* IVotingManamentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IVotingManamentController.h; path = Base/Function/IVotingCotroller/IVotingManamentController.h; sourceTree = "<group>"; };
 		6846D3521CAB5A1E004BD285 /* IVotingManamentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IVotingManamentController.m; path = Base/Function/IVotingCotroller/IVotingManamentController.m; sourceTree = "<group>"; };
 		6846D3541CAB62B1004BD285 /* VotingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VotingCell.h; path = Base/Function/IVotingModel/VotingCell.h; sourceTree = "<group>"; };
@@ -872,6 +875,8 @@
 				2CDC2BE31C8FFD6C0067693B /* NIDropDown.m */,
 				2CDC2BF01C9117FE0067693B /* NewsManagementTableViewCell.h */,
 				2CDC2BF11C9117FE0067693B /* NewsManagementTableViewCell.m */,
+				68462DCA1CF587540044A806 /* UILabel+LabelHeightAndWidth.h */,
+				68462DCB1CF587540044A806 /* UILabel+LabelHeightAndWidth.m */,
 			);
 			name = NewsModel;
 			sourceTree = "<group>";
@@ -1950,6 +1955,7 @@
 				2C9DDECA1CD8E257009462E6 /* LYTwoViewController.m in Sources */,
 				68212DF31CF3FAE40022955A /* Soundselectvc.m in Sources */,
 				2CFEAD301C7181F30054730E /* NTButton.m in Sources */,
+				68462DCC1CF587540044A806 /* UILabel+LabelHeightAndWidth.m in Sources */,
 				2CE321101CC2810800B36793 /* DataSource.m in Sources */,
 				2CFEADC61C76A65E0054730E /* UIImage+ResizeImage.m in Sources */,
 				6846D35C1CABAF4D004BD285 /* IVotingResultViewController.m in Sources */,

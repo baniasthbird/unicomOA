@@ -12,6 +12,7 @@
 #import "DataSource.h"
 #import "DataBase.h"
 #import "AFNetworking.h"
+#import "UILabel+LabelHeightAndWidth.h"
 
 
 @interface ContactViewControllerNew()
@@ -31,6 +32,8 @@
 @implementation ContactViewControllerNew {
     DataBase *db;
 }
+
+CGFloat i_Height=-1;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -59,7 +62,7 @@
     
     self.view.backgroundColor=[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1];
     
-    CGFloat i_Height=-1;
+    
     if (iPhone4_4s || iPhone5_5s) {
         i_Height=68;
     }
@@ -84,7 +87,7 @@
    
     [self AddressList];
     
-    self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, i_Height, self.view.frame.size.width, self.view.frame.size.height-100)];
+    self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 20, self.view.frame.size.width, self.view.frame.size.height-100)];
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
     self.tableView.backgroundColor=[UIColor clearColor];
@@ -102,7 +105,7 @@
     
     [self.searchcontroller.searchBar sizeToFit];
     
-    self.searchcontroller.searchBar.placeholder=@"搜索姓名/拼音/电话";
+    self.searchcontroller.searchBar.placeholder=@"搜索姓名";
     
     [[[[self.searchcontroller.searchBar.subviews objectAtIndex:0] subviews]objectAtIndex:0]removeFromSuperview];
     
@@ -117,7 +120,7 @@
 
     [bg_base addSubview:self.searchcontroller.searchBar];
     
-    [self.view addSubview:bg_base];
+  //  [self.view addSubview:bg_base];
     
     UILabel *lbl_title=[[UILabel alloc]initWithFrame:CGRectMake(0, i_Height, self.view.frame.size.width, 40)];
     lbl_title.text=@"      组织结构";
@@ -126,7 +129,7 @@
     lbl_title.font=[UIFont systemFontOfSize:15];
     
     
-    self.tableView.tableHeaderView=lbl_title;
+    self.tableView.tableHeaderView=self.searchcontroller.searchBar;
     
     self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     
@@ -246,6 +249,15 @@
     return _displayArray.count;
 }
 
+-(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UILabel *lbl_title=[[UILabel alloc]initWithFrame:CGRectMake(0, i_Height, self.view.frame.size.width, 40)];
+    lbl_title.text=@"      组织结构";
+    lbl_title.textColor=[UIColor blackColor];
+    lbl_title.textAlignment=NSTextAlignmentLeft;
+    lbl_title.font=[UIFont systemFontOfSize:15];
+    return lbl_title;
+}
+
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *indentifier = @"level0cell";
@@ -316,6 +328,9 @@
         CLTreeView_LEVEL2_Model *nodeData = node.nodeData;
         ((CLTreeView_LEVEL2_Cell*)cell).name.text = nodeData.name;
         ((CLTreeView_LEVEL2_Cell*)cell).signture.text = nodeData.signture;
+        CGFloat w_depart=[UILabel_LabelHeightAndWidth getWidthWithTitle:nodeData.signture font:[UIFont systemFontOfSize:13]];
+        ((CLTreeView_LEVEL2_Cell*)cell).signture.frame=CGRectMake([UIScreen mainScreen].bounds.size.width-w_depart-10, 10, w_depart, 30);
+        [((CLTreeView_LEVEL2_Cell*)cell).signture sizeToFit];
         if(nodeData.headImgPath != nil){
             //本地图片
             [((CLTreeView_LEVEL2_Cell*)cell).headImg setImage:[UIImage imageNamed:nodeData.headImgPath]];
@@ -331,16 +346,7 @@
  cell高度默认为50
  --------------------------------------- */
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (iPhone4_4s || iPhone5_5s) {
-        return  60;
-    }
-    else if (iPhone6) {
-        return 70;
-    }
-    else {
-        return 80;
-    }
-    
+    return 50;
 }
 
 /*---------------------------------------

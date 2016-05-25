@@ -102,20 +102,20 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     UILabel *lbl_title2;
     UILabel *lbl_title3;
     if (iPhone6 || iPhone6_plus) {
-        lbl_title1=[self CreateLabel:CGRectMake(10, self.view.frame.size.height/2-170, self.view.frame.size.width-20, 50) title:@"河南省信息咨询" titleColor:[UIColor whiteColor] font:[UIFont fontWithName:@"STHeitiSC-Medium" size:25]];
+        lbl_title1=[self CreateLabel:CGRectMake(10, self.view.frame.size.height/2-170, self.view.frame.size.width-20, 50) title:@"HNTI综合信息管理系统" titleColor:[UIColor whiteColor] font:[UIFont fontWithName:@"STHeitiSC-Medium" size:25]];
         lbl_title2=[self CreateLabel:CGRectMake(10, self.view.frame.size.height/2-130, self.view.frame.size.width-20, 50) title:@"设计研究有限公司" titleColor:[UIColor whiteColor] font:[UIFont fontWithName:@"STHeitiSC-Medium" size:20]];
-        lbl_title3=[self CreateLabel:CGRectMake(10, self.view.frame.size.height-50, self.view.frame.size.width-20,30 ) title:@"原河南省电信规划设计院" titleColor:[UIColor whiteColor] font:[UIFont systemFontOfSize:15]];
+        lbl_title3=[self CreateLabel:CGRectMake(10, self.view.frame.size.height-50, self.view.frame.size.width-20,30 ) title:@"河南省信息咨询设计研究有限公司" titleColor:[UIColor whiteColor] font:[UIFont systemFontOfSize:15]];
     }
     else if (iPhone5_5s) {
-        lbl_title1=[self CreateLabel:CGRectMake(10, self.view.frame.size.height/2-140, self.view.frame.size.width-20, 50) title:@"河南省信息咨询" titleColor:[UIColor whiteColor] font:[UIFont fontWithName:@"STHeitiSC-Medium" size:25]];
+        lbl_title1=[self CreateLabel:CGRectMake(10, self.view.frame.size.height/2-140, self.view.frame.size.width-20, 50) title:@"HNTI综合信息管理系统" titleColor:[UIColor whiteColor] font:[UIFont fontWithName:@"STHeitiSC-Medium" size:25]];
         lbl_title2=[self CreateLabel:CGRectMake(10, self.view.frame.size.height/2-100, self.view.frame.size.width-20, 50) title:@"设计研究有限公司" titleColor:[UIColor whiteColor] font:[UIFont fontWithName:@"STHeitiSC-Medium" size:20]];
-        lbl_title3=[self CreateLabel:CGRectMake(10, self.view.frame.size.height-50, self.view.frame.size.width-20,30 ) title:@"原河南省电信规划设计院" titleColor:[UIColor whiteColor] font:[UIFont systemFontOfSize:15]];
+        lbl_title3=[self CreateLabel:CGRectMake(10, self.view.frame.size.height-50, self.view.frame.size.width-20,30 ) title:@"河南省信息咨询设计研究有限公司" titleColor:[UIColor whiteColor] font:[UIFont systemFontOfSize:15]];
         
     }
     
     
     [self.view addSubview:lbl_title1];
-    [self.view addSubview:lbl_title2];
+  //  [self.view addSubview:lbl_title2];
     [self.view addSubview:lbl_title3];
 }
 
@@ -334,6 +334,7 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     user.textColor=[UIColor whiteColor];
     user.clearButtonMode = UITextFieldViewModeWhileEditing;
     user.delegate=self;
+    user.text=@"sysadmin";
     
     pwd=[self createTextFielfFrame:CGRectMake(60, self.view.frame.size.height/2, self.view.frame.size.width-120, 30) font:[UIFont systemFontOfSize:20]  placeholder:@"密码" ];
     pwd.clearButtonMode = UITextFieldViewModeWhileEditing;
@@ -343,6 +344,7 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     pwd.textColor=[UIColor whiteColor];
     pwd.attributedPlaceholder=[[NSAttributedString alloc] initWithString:@"密码" attributes:@{NSForegroundColorAttributeName:placeholderColor}];
     pwd.delegate=self;
+    pwd.text=@"000000";
     //pwd.keyboardType=UIKeyboardTypeNumberPad;
     
     
@@ -420,10 +422,10 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     str_username= [str_username stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     NSString *str_password=pwd.text;
     str_password=[str_password stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-   // _params[@"username"]=str_username;
-   // _params[@"password"]=str_password;
-     _params[@"username"]=@"sysadmin";
-     _params[@"password"]=@"000000";
+    _params[@"username"]=str_username;
+    _params[@"password"]=str_password;
+     //_params[@"username"]=@"sysadmin";
+    // _params[@"password"]=@"000000";
     
     [_session POST:str_url parameters:_params progress:^(NSProgress * _Nonnull uploadProgress) {
         
@@ -446,7 +448,7 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
             NSString *str_success=[JSON objectForKey:@"success"];
             BOOL b_success=[str_success boolValue];
             if (b_success==YES) {
-                [self saveLoginSession];
+                [self saveLoginSession:str_url];
                 NSDictionary *dic_usr=[JSON objectForKey:@"userInfo"];
                 // [self postLogin2];
                 [self MoveToNextPage:dic_usr];
@@ -493,11 +495,11 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
 }
 
 
-- (void)saveLoginSession
+- (void)saveLoginSession:(NSString*)str_url
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    NSArray *allCookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:kBaseUrl]];
+    NSArray *allCookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:str_url]];
     for (NSHTTPCookie *cookie in allCookies) {
         if ([cookie.name isEqualToString:kServerSessionCookie]) {
             NSMutableDictionary* cookieDictionary = [NSMutableDictionary dictionaryWithDictionary:[defaults dictionaryForKey:kLocalCookieName]];

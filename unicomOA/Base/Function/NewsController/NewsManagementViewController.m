@@ -28,7 +28,7 @@
 
 @property (nonatomic,strong) AFHTTPSessionManager *session;
 
-@property (nonatomic,strong) NSArray *arr_NewsList;
+@property (nonatomic,strong) NSMutableArray *arr_NewsList;
 
 @property (nonatomic,strong) UILabel *lbl_label;
 
@@ -76,6 +76,8 @@
     
     _i_pageIndex=1;
     _i_classId=0;
+    
+    _arr_NewsList=[[NSMutableArray alloc]init];
     
     db=[DataBase sharedinstanceDB];
     
@@ -139,6 +141,7 @@
 }
 
 //获得最新新闻
+//0525 筛选在下拉刷新后有问题，逻辑需重新梳理
 -(void)NewsList:(NSMutableDictionary*)param {
     NSString *str_newsList= [db fetchInterface:@"NewsList"];
     NSString *str_ip=@"";
@@ -165,15 +168,11 @@
             NSNumberFormatter *numberFormatter=[[NSNumberFormatter alloc]init];
             NSString *str_totalPage=[numberFormatter stringFromNumber:l_totalPage];
             _lbl_label.text=[NSString stringWithFormat:@"/%@",str_totalPage];
-            _arr_NewsList=[JSON objectForKey:@"list"];
-            if ([_arr_NewsList count]>0) {
-                [self.tableView reloadData];
-                // [self.tableView reloadData];
+            NSArray *arr_tmp=[JSON objectForKey:@"list"];
+            for (int i=0;i<[arr_tmp count];i++) {
+                [_arr_NewsList addObject:[arr_tmp objectAtIndex:i]];
             }
-            else {
-                [self.tableView reloadData];
-            }
-            
+            [self.tableView reloadData];
         }
         
         
@@ -203,7 +202,7 @@
 -(void)buildView {
     
     
-    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.005, self.view.frame.size.height*0.13, self.view.frame.size.width*0.99, self.view.frame.size.height*0.58) style:UITableViewStylePlain];
+    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.005, self.view.frame.size.height*0.13, self.view.frame.size.width*0.99, self.view.frame.size.height*0.7) style:UITableViewStylePlain];
     
     _tableView.separatorStyle=UITableViewCellSeparatorStyleSingleLine;
     
@@ -294,10 +293,10 @@
     [self.view addSubview:_btn_Select];
     [self.view addSubview:_tableView];
     [self.view addSubview:_searchBar];
-    [self.view addSubview:btn_previous];
-    [self.view addSubview:btn_next];
-    [self.view addSubview:_lbl_label];
-    [self.view addSubview:_txt_pages];
+   // [self.view addSubview:btn_previous];
+   // [self.view addSubview:btn_next];
+   // [self.view addSubview:_lbl_label];
+   // [self.view addSubview:_txt_pages];
     
     self.view.backgroundColor=[UIColor colorWithRed:246/255.0f green:249/255.0f blue:254/255.0f alpha:1];
     
@@ -327,7 +326,7 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (_i_newsList!=0) {
+    if (_arr_NewsList!=nil) {
         return _arr_NewsList.count;
     }
     else {
@@ -428,6 +427,8 @@
     _news_param[@"pageIndex"]=@"1";
     _i_classId=i_index;
     _news_param[@"classId"]=[NSString stringWithFormat:@"%ld",(long)i_index];
+    [_arr_NewsList removeAllObjects];
+    _i_pageIndex=0;
     [self NewsList:_news_param];
     [self rel];
     NSLog(@"%@",_btn_Select.titleLabel.text);
@@ -517,5 +518,24 @@
     }
 
 }
+
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    CGFloat height=scrollView.frame.size.height;
+    CGFloat contentYoffset=scrollView.contentOffset.y;
+    CGFloat distanceFromBottom=scrollView.contentSize.height-contentYoffset;
+    //NSLog(@"height:%f contentYoffset:%f frame.y:%f",height,contentYoffset,scrollView.frame.origin.y);
+    if (distanceFromBottom<height) {
+        //  NSLog((@"end of table"));
+        if (_i_pageIndex<_i_pageTotal) {
+            _i_pageIndex=_i_pageIndex+1;
+            _news_param[@"pageIndex"]=[NSString stringWithFormat:@"%ld",(long)_i_pageIndex];
+            _news_param[@"classId"]=[NSString stringWithFormat:@"%ld",(long)_i_classId];
+            [self NewsList:_news_param];
+           // self.txt_pages.text=[NSString stringWithFormat:@"%ld",(long)_i_pageIndex];
+        }
+    }
+}
+
 
 @end

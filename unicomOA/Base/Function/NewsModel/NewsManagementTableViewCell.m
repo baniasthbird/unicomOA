@@ -7,6 +7,7 @@
 //
 
 #import "NewsManagementTableViewCell.h"
+#import "UILabel+LabelHeightAndWidth.h"
 
 #define WHScreenW [UIScreen mainScreen].bounds.size.width
 
@@ -77,7 +78,7 @@
         lbl_Title=[[UILabel alloc]initWithFrame:CGRectMake(i_titleX, i_titleY, i_titleW, i_titleH)];
         lbl_department=[[UILabel alloc]initWithFrame:CGRectMake(i_departX, i_departY, i_departW, i_departH)];
         lbl_time=[[UILabel alloc]initWithFrame:CGRectMake(i_timeX, i_timeY, i_tiemW, i_timeH)];
-        lbl_Title.font=[UIFont systemFontOfSize:18];
+        lbl_Title.font=[UIFont systemFontOfSize:24];
         lbl_Title.textColor=[UIColor blackColor];
         lbl_Title.numberOfLines=0;
         

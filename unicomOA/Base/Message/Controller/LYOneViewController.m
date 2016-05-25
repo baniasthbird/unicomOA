@@ -18,7 +18,7 @@
 
 @property (nonatomic,strong) NSString *str_totalPage;
 
-@property (nonatomic,strong) NSArray *arr_ContentList;
+@property (nonatomic,strong) NSMutableArray *arr_ContentList;
 
 @property CGFloat i_Height;
 
@@ -55,6 +55,8 @@
         _i_Height=80;
     }
     
+    _arr_ContentList=[[NSMutableArray alloc]init];
+    
     _session=[AFHTTPSessionManager manager];
     _session.responseSerializer= [AFHTTPResponseSerializer serializer];
     [_session.requestSerializer setHTTPShouldHandleCookies:YES];
@@ -64,7 +66,7 @@
     [self GetFlowList:_param];
     
     
-    _tableview=[[UITableView alloc]initWithFrame:CGRectMake(0, 2, self.view.frame.size.width, self.view.frame.size.height-190) style:UITableViewStylePlain];
+    _tableview=[[UITableView alloc]initWithFrame:CGRectMake(0, 2, self.view.frame.size.width, self.view.frame.size.height-140) style:UITableViewStylePlain];
     _tableview.allowsSelection=NO;
     _tableview.delegate=self;
     _tableview.dataSource=self;
@@ -100,10 +102,10 @@
     _txt_pages.font=[UIFont systemFontOfSize:10];
   //  [_txt_pages addTarget:self action:@selector(ValueChanged:) forControlEvents:UIControlEventValueChanged];
     
-    [self.view addSubview:btn_previous];
-    [self.view addSubview:btn_next];
-    [self.view addSubview:_lbl_totalpages];
-    [self.view addSubview:_txt_pages];
+ //   [self.view addSubview:btn_previous];
+ //   [self.view addSubview:btn_next];
+ //   [self.view addSubview:_lbl_totalpages];
+ //   [self.view addSubview:_txt_pages];
 }
 
 
@@ -129,7 +131,11 @@
         if (i_success==1) {
             _str_totalPage=[JSON objectForKey:@"totalPage"];
             _lbl_totalpages.text=[NSString stringWithFormat:@"%@%@",@"\\",_str_totalPage];
-            _arr_ContentList=[JSON objectForKey:@"list"];
+            NSArray *arr_tmp=[JSON objectForKey:@"list"];
+            for (int i=0;i<[arr_tmp count];i++) {
+                [_arr_ContentList addObject:[arr_tmp objectAtIndex:i]];
+            }
+            //[_arr_ContentList addObject:arr_tmp];
             [self.tableview reloadData];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -151,7 +157,13 @@
 
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    if (_arr_ContentList!=nil) {
+        return [_arr_ContentList count];
+    }
+    else {
+        return 10;
+    }
+    
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -225,6 +237,25 @@
     }
 
 }
+
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    CGFloat height=scrollView.frame.size.height;
+    CGFloat contentYoffset=scrollView.contentOffset.y;
+    CGFloat distanceFromBottom=scrollView.contentSize.height-contentYoffset;
+    //NSLog(@"height:%f contentYoffset:%f frame.y:%f",height,contentYoffset,scrollView.frame.origin.y);
+    if (distanceFromBottom<height) {
+      //  NSLog((@"end of table"));
+        if (_i_index<[_str_totalPage integerValue]) {
+            _i_index=_i_index+1;
+            _param[@"pageIndex"]=[NSString stringWithFormat:@"%ld",(long)_i_index];
+            [self GetFlowList:_param];
+            self.txt_pages.text=[NSString stringWithFormat:@"%ld",(long)_i_index];
+            
+        }
+    }
+}
+
 /*
 #pragma mark - Navigation
 

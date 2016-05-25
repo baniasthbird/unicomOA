@@ -72,13 +72,13 @@
     
     CGFloat i_Height=0;
     if (iPhone6) {
-        i_Height=self.view.frame.size.height*0.7;
+        i_Height=self.view.frame.size.height*0.82;
     }
     else if (iPhone6_plus) {
-        i_Height=self.view.frame.size.height*0.73;
+        i_Height=self.view.frame.size.height*0.85;
     }
     else {
-        i_Height=self.view.frame.size.height*0.685;
+        i_Height=self.view.frame.size.height*0.8;
     }
     
     db=[DataBase sharedinstanceDB];
@@ -124,10 +124,10 @@
     _txt_pages.keyboardType=UIKeyboardTypePhonePad;
     _txt_pages.font=[UIFont systemFontOfSize:10];
     
-    [self.view addSubview:btn_previous];
-    [self.view addSubview:btn_next];
-    [self.view addSubview:_lbl_label];
-    [self.view addSubview:_txt_pages];
+   // [self.view addSubview:btn_previous];
+   // [self.view addSubview:btn_next];
+   // [self.view addSubview:_lbl_label];
+   // [self.view addSubview:_txt_pages];
     
     UIView *lbl_line=[[UIView alloc]initWithFrame:CGRectMake(0, i_Height+0.05, self.view.frame.size.width, 1)];
     lbl_line.backgroundColor=[UIColor colorWithRed:189/255.0f green:189/255.0f blue:189/255.0f alpha:1];
@@ -281,7 +281,10 @@
         NSString *str_success= [JSON objectForKey:@"success"];
         int i_success=[str_success intValue];
         if (i_success==1) {
-            _arr_comment=[JSON objectForKey:@"list"];
+            NSArray *arr_tmp=[JSON objectForKey:@"list"];
+            for (int i=0;i<[arr_tmp count];i++) {
+                [_arr_comment addObject:[arr_tmp objectAtIndex:i]];
+            }
             NSObject *obj=[JSON objectForKey:@"totalPage"];
             NSNumber *l_totalPage=(NSNumber*)obj;
             _i_totalPage=[l_totalPage integerValue];
@@ -440,6 +443,25 @@
     }
 
 }
+
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    CGFloat height=scrollView.frame.size.height;
+    CGFloat contentYoffset=scrollView.contentOffset.y;
+    CGFloat distanceFromBottom=scrollView.contentSize.height-contentYoffset;
+    //NSLog(@"height:%f contentYoffset:%f frame.y:%f",height,contentYoffset,scrollView.frame.origin.y);
+    if (distanceFromBottom<height) {
+        //  NSLog((@"end of table"));
+        if (_i_pageIndex<_i_totalPage) {
+            _i_pageIndex=_i_pageIndex+1;
+            _param[@"pageIndex"]=[NSString stringWithFormat:@"%ld",(long)_i_pageIndex];
+            _param[@"newsId"]=[NSString stringWithFormat:@"%ld",(long)_news_index];
+            [self CommentDisplay:_param];
+            //self.txt_pages.text=[NSString stringWithFormat:@"%ld",(long)_i_pageIndex];
+        }
+    }
+}
+
 
 /*
 #pragma mark - Navigation

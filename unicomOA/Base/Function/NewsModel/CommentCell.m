@@ -48,8 +48,8 @@
     if (self) {
         if (iPhone4_4s || iPhone5_5s) {
             [_img_View setFrame:CGRectMake(5, 5, 30, 30)];
-            [_lbl_title setFrame:CGRectMake(50, 10, 250, 10)];
-            [_lbl_time setFrame:CGRectMake(50, 25, 150, 10)];
+            [_lbl_title setFrame:CGRectMake(50, 10, 250, 20)];
+            [_lbl_time setFrame:CGRectMake(50, 32, 150, 10)];
             [_lbl_content setFrame:CGRectMake(50, 45, 250, 40)];
             [_btn_thumb setFrame:CGRectMake(280, 75, 40, 20)];
             _img_View.layer.cornerRadius=15.0f;
@@ -60,8 +60,8 @@
         }
         else if (iPhone6) {
             [_img_View setFrame:CGRectMake(5, 5, 40, 40)];
-            [_lbl_title setFrame:CGRectMake(60, 13, 240, 15)];
-            [_lbl_time setFrame:CGRectMake(60, 33, 180, 15)];
+            [_lbl_title setFrame:CGRectMake(60, 13, 240, 20)];
+            [_lbl_time setFrame:CGRectMake(60, 35, 180, 15)];
             [_lbl_content setFrame:CGRectMake(60, 53, 300, 50)];
             [_btn_thumb setFrame:CGRectMake(325, 83, 45, 25)];
             _img_View.layer.cornerRadius=20.0f;

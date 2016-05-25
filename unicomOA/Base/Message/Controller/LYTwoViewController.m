@@ -18,7 +18,7 @@
 
 @property (nonatomic,strong) NSString *str_totalPage;
 
-@property (nonatomic,strong) NSArray *arr_ContentList;
+@property (nonatomic,strong) NSMutableArray *arr_ContentList;
 
 @property CGFloat i_Height;
 
@@ -54,6 +54,8 @@
         i_Height=80;
     }
     
+    _arr_ContentList=[[NSMutableArray alloc]init];
+    
     _session=[AFHTTPSessionManager manager];
     _session.responseSerializer= [AFHTTPResponseSerializer serializer];
     [_session.requestSerializer setHTTPShouldHandleCookies:YES];
@@ -63,7 +65,7 @@
     [self GetFlowList:_param];
     
     
-    _tableview=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-190) style:UITableViewStylePlain];
+    _tableview=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-140) style:UITableViewStylePlain];
     _tableview.delegate=self;
     _tableview.dataSource=self;
      _tableview.allowsSelection=NO;
@@ -126,7 +128,10 @@
         if (i_success==1) {
             _str_totalPage=[JSON objectForKey:@"totalPage"];
             _lbl_totalpages.text=[NSString stringWithFormat:@"%@%@",@"\\",_str_totalPage];
-            _arr_ContentList=[JSON objectForKey:@"list"];
+            NSArray *arr_tmp=[JSON objectForKey:@"list"];
+            for (int i=0;i<[arr_tmp count];i++) {
+                [_arr_ContentList addObject:[arr_tmp objectAtIndex:i]];
+            }
             [self.tableview reloadData];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -145,7 +150,13 @@
 
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    if (_arr_ContentList!=nil) {
+        return [_arr_ContentList count];
+    }
+    else {
+        return 10;
+    }
+
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -230,6 +241,24 @@
         [self GetFlowList:_param];
     }
     
+}
+
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    CGFloat height=scrollView.frame.size.height;
+    CGFloat contentYoffset=scrollView.contentOffset.y;
+    CGFloat distanceFromBottom=scrollView.contentSize.height-contentYoffset;
+    //NSLog(@"height:%f contentYoffset:%f frame.y:%f",height,contentYoffset,scrollView.frame.origin.y);
+    if (distanceFromBottom<height) {
+        //  NSLog((@"end of table"));
+        if (_i_index<[_str_totalPage integerValue]) {
+            _i_index=_i_index+1;
+            _param[@"pageIndex"]=[NSString stringWithFormat:@"%ld",(long)_i_index];
+            [self GetFlowList:_param];
+            self.txt_pages.text=[NSString stringWithFormat:@"%ld",(long)_i_index];
+            
+        }
+    }
 }
 
 /*

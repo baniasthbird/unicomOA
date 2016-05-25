@@ -135,6 +135,14 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+
+//根据js ajax规范，修改key值，调整.为/
+-(NSString*)modifykey:(NSString*)str_key {
+    NSString *str_return=[str_key stringByReplacingOccurrencesOfString:@"." withString:@"/"];
+    return str_return;
+}
+
+
 -(void)Submit:(UIButton*)sender {
     //提交申请
    // NSMutableDictionary *dic_submit=[[NSMutableDictionary alloc]init];
@@ -144,6 +152,7 @@
     for (int i=0;i<[arr_m_ctlList count];i++) {
         NSDictionary *dic_ctl= [arr_m_ctlList objectAtIndex:i];
         NSString *str_key=[dic_ctl objectForKey:@"key"];
+        str_key=[self modifykey:str_key];
         NSObject *obj_value=[dic_ctl objectForKey:@"value"];
         if (obj_value!=nil && obj_value!=[NSNull null]) {
             NSString *str_value=(NSString*)obj_value;
@@ -160,6 +169,7 @@
             UITableViewCell *cell=[self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
             if (![cell isMemberOfClass:[UITableViewCell class]]) {
                 NSString *str_key=cell.accessibilityHint;
+                str_key=[self modifykey:str_key];
                 NSString *str_value=@"";
                 if ([cell isMemberOfClass:[PrintApplicationTitleCell class]]) {
                     PrintApplicationTitleCell *print_cell=(PrintApplicationTitleCell*)cell;
@@ -173,8 +183,9 @@
                 }
             }
             else {
-                if (cell.accessibilityValue!=nil) {
+                if (cell.accessibilityValue!=nil && ![cell.accessibilityValue isEqual:@""]) {
                     NSString *str_key=cell.accessibilityValue;
+                    str_key=[self modifykey:str_key];
                     NSString *str_value=cell.detailTextLabel.text;
                      dic_sub[str_key]=str_value;
                     
@@ -453,7 +464,7 @@
                 else if ([str_type isEqualToString:@"date"]) {
                     NSString *str_label=[dic_tmp objectForKey:@"label"];
                     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-                    [dateFormatter setDateFormat:@"yyyy/MM/dd"];
+                    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
                     NSString *strDate = [dateFormatter stringFromDate:[NSDate date]];
                     NSString *str_key=[dic_tmp objectForKey:@"key"];
                     cell.textLabel.text=str_label;
@@ -662,7 +673,7 @@
 -(void)dateChanged:(UIDatePicker*)sender  {
     NSDate *date=sender.date;
     NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:@"yyyy/MM/dd"];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     NSString *dateString=[dateFormatter stringFromDate:date];
     if (self.selectedRowIndexPath!=nil) {
         UITableViewCell *cell=[self.tableview cellForRowAtIndexPath:self.selectedRowIndexPath];
@@ -732,7 +743,7 @@
 
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            
+            NSLog(@"申请失败：%@",error);
         }];
     }
 

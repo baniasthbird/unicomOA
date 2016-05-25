@@ -12,6 +12,6 @@
 
 @interface RemindCell : UITableViewCell
 
-+ (instancetype)cellWithTable:(UITableView*)tableView Count:(NSInteger)count;
++ (instancetype)cellWithTable:(UITableView*)tableView DocNum:(NSInteger)i_doc_num FlowNum:(NSInteger)i_flow_num MsgNum:(NSInteger)i_msg_num;
 
 @end

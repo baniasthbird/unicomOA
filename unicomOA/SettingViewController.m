@@ -31,6 +31,7 @@
     DataBase *db;
 }
 
+static NSString *kServerSessionCookie=@"JSESSIONID";
 
 - (NSMutableArray *) groups
 {
@@ -201,7 +202,7 @@
         
         img_View.layer.masksToBounds=YES;
         
-        UILabel *lbl_title=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, item.height*0.77, 50, 20)];
+        UILabel *lbl_title=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, item.height*0.77, 100, 20)];
         
         if (self.userInfo!=nil) {
             img_View.image=item.image;
@@ -368,13 +369,6 @@
 
 
 -(void)QuitUser:(UIButton*)sender {
-    if ([self isLocal]) {
-       // [self ClearUserInfo];
-        //显示请登录
-       
-        //[self QuitApp];
-            }
-    else {
         NSString *str_ip=@"";
         NSString *str_port=@"";
         NSMutableArray *t_array=[db fetchIPAddress];
@@ -406,7 +400,7 @@
             //离线模式
             
         }];
-    }
+    
     
 }
 
@@ -417,7 +411,16 @@
             return;
         }
         else if (clickIndex==1) {
-            exit(0);
+            //清除所有的存储本地的数据
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            NSDictionary *dic = [defaults dictionaryRepresentation];
+            for (id  key in dic) {
+                [defaults removeObjectForKey:key];
+            }
+            [defaults synchronize];
+            LoginViewController *vc=[[LoginViewController alloc]init];
+            NSArray *arr_vc=[NSArray arrayWithObjects:vc, nil];
+            [self.navigationController setViewControllers:arr_vc animated:YES];
         }
     }];
     [alert showLXAlertView];
@@ -434,7 +437,7 @@
     lbl_txt.text=@"";
     UIImageView *img=(UIImageView*)[cell.subviews objectAtIndex:3];
     img.image=nil;
-    NSIndexPath *index=[NSIndexPath indexPathForRow:0 inSection:0];
+    //NSIndexPath *index=[NSIndexPath indexPathForRow:0 inSection:0];
     //[self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:index,nil] withRowAnimation:UITableViewRowAnimationNone];
     [self.tableView reloadData];
 }

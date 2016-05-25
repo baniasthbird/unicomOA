@@ -37,7 +37,7 @@
     
 #pragma mark 公司名
     UILabel *lbl_company=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2-image.size.width*2, self.view.frame.size.height/8+image.size.height/3, image.size.width*4, 80)];
-    lbl_company.text=@"河南省信息咨询设计研究院";
+    lbl_company.text=@"HNTI综合信息管理系统";
     lbl_company.textColor=[UIColor whiteColor];
     lbl_company.font=[UIFont boldSystemFontOfSize:24];
     lbl_company.textAlignment=NSTextAlignmentCenter;
@@ -71,7 +71,7 @@
     lbl_copyright.textAlignment=NSTextAlignmentCenter;
     lbl_copyright.font=[UIFont systemFontOfSize:14];
     lbl_copyright.textColor=[UIColor whiteColor];
-    lbl_copyright.text=@"版权所有：河南软信科技有限公司";
+    lbl_copyright.text=@"技术支持：河南软信科技有限公司";
     
     UILabel *lbl_copyright_en=[[UILabel alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.73, self.view.frame.size.width, 15)];
     lbl_copyright_en.textAlignment=NSTextAlignmentCenter;
@@ -84,8 +84,8 @@
     [self.view addSubview:img_logo];
     [self.view addSubview:lbl_company];
     [self.view addSubview:lbl_version];
-    [self.view addSubview:btn_service];
-    [self.view addSubview:btn_secret];
+  //  [self.view addSubview:btn_service];
+  //  [self.view addSubview:btn_secret];
     [self.view addSubview:lbl_copyright];
     [self.view addSubview:lbl_copyright_en];
     
