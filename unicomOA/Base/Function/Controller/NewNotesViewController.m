@@ -13,9 +13,9 @@
 #import "MenuTableViewCell.h"
 #import "UserEntity.h"
 #import "TableViewCell.h"
-#import "IQKeyboardManager.h"
-#import "IQKeyboardReturnKeyHandler.h"
-#import "IQUIView+IQKeyboardToolbar.h"
+//#import "IQKeyboardManager.h"
+//#import "IQKeyboardReturnKeyHandler.h"
+//#import "IQUIView+IQKeyboardToolbar.h"
 #import "LZActionSheet.h"
 #import "MapViewController.h"
 #import "DataBase.h"
@@ -94,7 +94,7 @@ typedef enum
 @end
 
 @implementation NewNotesViewController {
-    IQKeyboardReturnKeyHandler *returnKeyHandler;
+   // IQKeyboardReturnKeyHandler *returnKeyHandler;
     DataBase *db;
 }
 
@@ -122,8 +122,8 @@ typedef enum
     [self buildView];
     
     
-    returnKeyHandler=[[IQKeyboardReturnKeyHandler alloc]initWithViewController:self];
-    [returnKeyHandler setLastTextFieldReturnKeyType:UIReturnKeyDone];
+  //  returnKeyHandler=[[IQKeyboardReturnKeyHandler alloc]initWithViewController:self];
+  //  [returnKeyHandler setLastTextFieldReturnKeyType:UIReturnKeyDone];
     
     _b_isOpenMenu=NO;
     

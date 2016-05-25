@@ -7,9 +7,9 @@
 //
 
 #import "CommentViewController.h"
-#import "IQKeyboardManager.h"
-#import "IQKeyboardReturnKeyHandler.h"
-#import "IQUIView+IQKeyboardToolbar.h"
+//#import "IQKeyboardManager.h"
+//#import "IQKeyboardReturnKeyHandler.h"
+//#import "IQUIView+IQKeyboardToolbar.h"
 #import "CommentCell.h"
 #import "DataBase.h"
 #import "AFNetworking.h"
@@ -47,7 +47,7 @@
 {
     int prewTag;
     float prewMoveY;
-    IQKeyboardReturnKeyHandler *returnKeyHandler;
+   // IQKeyboardReturnKeyHandler *returnKeyHandler;
     DataBase *db;
 }
 
@@ -163,8 +163,8 @@
     [_arr_comment_add addObject:@"绝对支持|开发部李四"];
     [_arr_comment_add addObject:@"绝对支持|开发部李四"];
     
-    returnKeyHandler=[[IQKeyboardReturnKeyHandler alloc]initWithViewController:self];
-    [returnKeyHandler setLastTextFieldReturnKeyType:UIReturnKeyDone];
+    //returnKeyHandler=[[IQKeyboardReturnKeyHandler alloc]initWithViewController:self];
+    //[returnKeyHandler setLastTextFieldReturnKeyType:UIReturnKeyDone];
     
     
 }
@@ -391,7 +391,7 @@
   */
 
 -(void)dealloc {
-    returnKeyHandler=nil;
+   // returnKeyHandler=nil;
 }
 
 

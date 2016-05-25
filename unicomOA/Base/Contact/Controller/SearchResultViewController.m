@@ -13,8 +13,12 @@
 
 -(void)viewDidLoad {
     //self.tableView.frame=CGRectMake(0, 80, self.view.frame.size.width, self.view.frame.size.height);
+    [super viewDidLoad];
 }
 
+-(void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"cell"];

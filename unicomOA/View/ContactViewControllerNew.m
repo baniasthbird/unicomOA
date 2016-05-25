@@ -97,13 +97,17 @@ CGFloat i_Height=-1;
     self.tableView.sectionHeaderHeight=40;
     
     
-    self.resultViewController=[[SearchResultViewController alloc]init];
+    self.resultViewController=[[SearchResultViewController alloc]initWithStyle:UITableViewStylePlain];
+    
+   // [self.navigationController addChildViewController:self.resultViewController];
     
     self.searchcontroller=[[UISearchController alloc] initWithSearchResultsController:self.resultViewController];
     
+    self.searchcontroller.searchResultsUpdater=self;
+    
     self.searchcontroller.searchBar.delegate=self;
     
-    [self.searchcontroller.searchBar sizeToFit];
+    //[self.searchcontroller.searchBar sizeToFit];
     
     self.searchcontroller.searchBar.placeholder=@"搜索姓名";
     
@@ -111,9 +115,8 @@ CGFloat i_Height=-1;
     
     [self.searchcontroller.searchBar setFrame:CGRectMake(0, 20, self.view.frame.size.width, i_Height-40)];
     
-    self.searchcontroller.searchResultsUpdater=self;
     
-    self.searchcontroller.dimsBackgroundDuringPresentation=NO;
+  //  self.searchcontroller.dimsBackgroundDuringPresentation=NO;
     
     self.definesPresentationContext=YES;
     
@@ -458,6 +461,7 @@ CGFloat i_Height=-1;
 #pragma mark- UISearchResultUpdating
 
 -(void)updateSearchResultsForSearchController:(UISearchController *)searchController {
+    
     if (self.searchArray!=nil) {
         [self.searchArray removeAllObjects];
     }
@@ -468,7 +472,6 @@ CGFloat i_Height=-1;
         param[@"name"]=searchtext;
         [self FindContact:param];
     }
-    
     
 }
 
@@ -507,6 +510,15 @@ CGFloat i_Height=-1;
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"查询通讯录失败");
     }];
+}
+
+
+-(BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
+    return YES;
+}
+
+-(BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar {
+    return YES;
 }
 
 
