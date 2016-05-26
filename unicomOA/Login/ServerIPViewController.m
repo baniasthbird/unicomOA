@@ -25,7 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.navigationController.navigationBarHidden = NO;
     self.title=@"服务器设置";
     
     UILabel *lbl_label=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.03, self.view.frame.size.width*0.9, self.view.frame.size.height*0.05)];
@@ -97,6 +97,12 @@
     [btn_OK setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     btn_OK.titleLabel.font=[UIFont systemFontOfSize:22];
     [btn_OK addTarget:self action:@selector(backToLogin:) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.view.userInteractionEnabled = YES;
+    
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fingerTapped:)];
+    
+    [self.view addGestureRecognizer:singleTap];
     
     
     [self.view addSubview:lbl_label];
@@ -180,11 +186,15 @@
 
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [self.txt_IP resignFirstResponder];
-    [self.txt_Port resignFirstResponder];
+    [textField resignFirstResponder];
     return YES;
 }
 
+
+-(void)fingerTapped:(UITapGestureRecognizer *)gestureRecognizer {
+    [_txt_IP resignFirstResponder];
+    [_txt_Port resignFirstResponder];
+}
 
 /*
 #pragma mark - Navigation

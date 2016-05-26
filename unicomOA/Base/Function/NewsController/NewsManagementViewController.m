@@ -18,9 +18,10 @@
 #import "DataBase.h"
 #import "AFNetworking.h"
 #import "LXAlertView.h"
+#import "UILabel+LabelHeightAndWidth.h"
 
 
-@interface NewsManagementViewController ()<UITextFieldDelegate>
+@interface NewsManagementViewController ()<UITextFieldDelegate,UISearchBarDelegate>
 
 @property (strong,nonatomic) NSMutableArray *arr_News;
 
@@ -51,6 +52,10 @@
 
 @implementation NewsManagementViewController {
     DataBase *db;
+    //搜索后得到的数组
+    NSMutableArray *arr_searchList;
+    
+    NSMutableArray *arr_tmpList;
 }
 
 
@@ -74,10 +79,20 @@
     [btn_back addTarget:self action:@selector(BackToAppCenter:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]initWithCustomView:btn_back];
     
+    self.view.userInteractionEnabled = YES;
+    
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fingerTapped:)];
+    
+    [self.view addGestureRecognizer:singleTap];
+    
     _i_pageIndex=1;
     _i_classId=0;
     
     _arr_NewsList=[[NSMutableArray alloc]init];
+    
+    arr_searchList=[[NSMutableArray alloc]init];
+    
+    arr_tmpList=[[NSMutableArray alloc]init];
     
     db=[DataBase sharedinstanceDB];
     
@@ -277,6 +292,7 @@
     */
     _searchBar.layer.cornerRadius=18.0f;
     _searchBar.placeholder=@"  请输入搜索关键字";
+    _searchBar.delegate=self;
     for (UIView *view in _searchBar.subviews) {
         if ([view isKindOfClass:NSClassFromString(@"UIView")] && view.subviews.count>0) {
             [[view.subviews objectAtIndex:0] removeFromSuperview];
@@ -326,11 +342,11 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (_arr_NewsList!=nil) {
+    if ([_arr_NewsList count]>0 && _arr_NewsList!=nil) {
         return _arr_NewsList.count;
     }
     else {
-        return 2;
+        return 0;
     }
     
 }
@@ -349,15 +365,57 @@
     cell.delegate=self;
     cell.myTag=indexPath.row;
     if (_arr_NewsList.count==0) {
+        /*
         cell.lbl_Title.text=[NSString stringWithFormat:@"%@|%ld",@"国家发展改革委关于放开部分建设项目服务收费标准有关问题的通知",(long)indexPath.row];
+        CGFloat h_Title=[UILabel_LabelHeightAndWidth getHeightByWidth:15*self.view.frame.size.width/16 title:cell.lbl_Title.text font:[UIFont systemFontOfSize:24]];
+        cell.lbl_Title.frame=CGRectMake(self.view.frame.size.width/32, 5, 15*self.view.frame.size.width/16, h_Title);
+        [cell.lbl_Title sizeToFit];
         cell.lbl_department.text=@"综合管理部 张三";
+        CGFloat w_depart=[UILabel_LabelHeightAndWidth getWidthWithTitle:cell.lbl_department.text font:[UIFont systemFontOfSize:14]];
+        if (h_Title<90) {
+            cell.lbl_department.frame=CGRectMake(self.view.frame.size.width/32, 90, w_depart, 20);
+        }
+        else {
+            cell.lbl_department.frame=CGRectMake(self.view.frame.size.width/32, h_Title+10, w_depart, 40);
+        }
+        [cell.lbl_department sizeToFit];
         cell.lbl_time.text=@"2016-01-26 16:45";
+        CGFloat w_time=[UILabel_LabelHeightAndWidth getWidthWithTitle:cell.lbl_time.text font:[UIFont systemFontOfSize:14]];
+        if (h_Title<90) {
+            cell.lbl_time.frame=CGRectMake(self.view.frame.size.width/32+w_depart+10, 90, w_time, 20);
+        }
+        else {
+            cell.lbl_time.frame=CGRectMake(self.view.frame.size.width/32+w_depart+10, 90, h_Title+10, 20);
+            
+        }
+        [cell.lbl_time sizeToFit];
+         */
     }
     else {
         NSDictionary *dic_content=[_arr_NewsList objectAtIndex:indexPath.row];
         cell.lbl_Title.text=[dic_content objectForKey:@"title"];
+        CGFloat h_Title=[UILabel_LabelHeightAndWidth getHeightByWidth:15*self.view.frame.size.width/16 title:[dic_content objectForKey:@"title"] font:[UIFont systemFontOfSize:24]];
+        cell.lbl_Title.frame=CGRectMake(self.view.frame.size.width/32, 5, 15*self.view.frame.size.width/16, h_Title);
+        [cell.lbl_Title sizeToFit];
         cell.lbl_department.text=[dic_content objectForKey:@"operatorName"];
+        CGFloat w_depart=[UILabel_LabelHeightAndWidth getWidthWithTitle:[dic_content objectForKey:@"operatorName"] font:[UIFont systemFontOfSize:14]];
+        if (h_Title<90) {
+            cell.lbl_department.frame=CGRectMake(self.view.frame.size.width/32, 90, w_depart, 20);
+        }
+        else {
+            cell.lbl_department.frame=CGRectMake(self.view.frame.size.width/32, h_Title+10, w_depart, 40);
+        }
+        [cell.lbl_department sizeToFit];
         cell.lbl_time.text=[dic_content objectForKey:@"startDate"];
+        CGFloat w_time=[UILabel_LabelHeightAndWidth getWidthWithTitle:[dic_content objectForKey:@"operatorName"] font:[UIFont systemFontOfSize:14]];
+        if (h_Title<90) {
+            cell.lbl_time.frame=CGRectMake(self.view.frame.size.width/32+w_depart+10, 90, w_time, 20);
+        }
+        else {
+            cell.lbl_time.frame=CGRectMake(self.view.frame.size.width/32+w_depart+10, 90, h_Title+10, 20);
+            
+        }
+        [cell.lbl_time sizeToFit];
         NSObject *obj=[dic_content objectForKey:@"id"];
         if (obj!=nil) {
             NSNumber *num_index=(NSNumber*)obj;
@@ -496,7 +554,7 @@
 
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [_txt_pages resignFirstResponder];
+    [textField resignFirstResponder];
     return YES;
 }
 
@@ -537,5 +595,47 @@
     }
 }
 
+
+
+
+
+-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+   // NSMutableArray *arr_tmpList=[[NSMutableArray alloc]init];
+    [arr_tmpList removeAllObjects];
+    [arr_searchList removeAllObjects];
+    [searchBar resignFirstResponder];
+    if (![searchBar.text isEqualToString:@""]) {
+        NSString *str_content=searchBar.text;
+        for (int i=0;i<[_arr_NewsList count];i++) {
+            NSDictionary *dic_tmp=[_arr_NewsList objectAtIndex:i];
+            NSString *str_title=[dic_tmp objectForKey:@"title"];
+            NSRange foundObj=[str_title rangeOfString:str_content options:NSCaseInsensitiveSearch];
+            if (foundObj.length>0) {
+                [arr_searchList addObject:dic_tmp];
+            }
+        }
+        if ([arr_searchList count]>0) {
+            
+            arr_tmpList=[_arr_NewsList mutableCopy];
+            [_arr_NewsList removeAllObjects];
+            _arr_NewsList=[arr_searchList mutableCopy];
+        }
+        else {
+            arr_tmpList=[_arr_NewsList mutableCopy];
+            [_arr_NewsList removeAllObjects];
+            
+        }
+        [self.tableView reloadData];
+    }
+}
+
+
+-(void)fingerTapped:(UITapGestureRecognizer *)gestureRecognizer {
+    [_searchBar resignFirstResponder];
+    if ([_searchBar.text isEqualToString:@""]) {
+        _arr_NewsList=[arr_tmpList mutableCopy];
+        [self.tableView reloadData];
+    }
+}
 
 @end

@@ -197,7 +197,7 @@
         ChangePhoneNumViewController *viewController=[[ChangePhoneNumViewController alloc]init];
         viewController.str_phonenum=cell.detailTextLabel.text;
         viewController.user_Info=_userInfo;
-        [self.navigationController pushViewController:viewController animated:YES];
+     //   [self.navigationController pushViewController:viewController animated:YES];
     }
 }
 

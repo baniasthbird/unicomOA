@@ -43,13 +43,33 @@
     MemberInfoViewController *vc=[[MemberInfoViewController alloc]init];
     vc.str_Name=[dic objectForKey:@"empname"];
     vc.str_Gender=[dic objectForKey:@"sex"];
-    vc.str_img=@"head.png";
+    vc.str_img=@"headLogo.png";
     vc.str_department=[dic objectForKey:@"orgname"];
     vc.str_carrer=[dic objectForKey:@"posiname"];
-    vc.str_cellphone=[dic objectForKey:@"mobileno"];
-    vc.str_phonenum=[dic objectForKey:@"otel"];
-    vc.str_email=[dic objectForKey:@"oemail"];
-    [self.navigationController pushViewController:vc animated:YES];
+    NSObject *obj_cell=[dic objectForKey:@"mobileno"];
+    NSObject *obj_tel=[dic objectForKey:@"otel"];
+    NSObject *obj_email=[dic objectForKey:@"oemail"];
+    NSString *str_cell=@"";
+    NSString *str_tel=@"";
+    NSString *str_email=@"";
+    if (obj_cell!=[NSNull null]) {
+        str_cell=(NSString*)obj_cell;
+    }
+    if (obj_tel!=[NSNull null]) {
+        str_tel=(NSString*)obj_tel;
+    }
+    if (obj_email!=[NSNull null]) {
+        str_email=(NSString*)obj_email;
+    }
+    vc.str_cellphone=str_cell;
+    vc.str_phonenum=str_tel;
+    vc.str_email=str_email;
+    if (_nav!=nil) {
+        [_nav pushViewController:vc animated:YES];
+    }
+    //[self.navigationController pushViewController:vc animated:YES];
+    
+   // [self presentViewController:vc animated:YES completion:nil];
     
 }
 

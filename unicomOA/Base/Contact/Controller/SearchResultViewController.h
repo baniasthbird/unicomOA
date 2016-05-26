@@ -12,4 +12,6 @@
 
 @property (strong,nonatomic) NSArray *dataArray;
 
+@property (strong,nonatomic) UINavigationController *nav;
+
 @end

@@ -14,7 +14,7 @@
 #import "IVotingManamentController.h"
 #import "UIView+Frame.h"
 #import "WZLBadgeImport.h"
-#import "ShenPiManagementController.h"
+#import "MyShenPiViewController.h"
 #import "DataBase.h"
 #import "AFNetworking.h"
 
@@ -244,7 +244,12 @@
                                           otherButtonTitles:nil, nil];
     [alert show];
      */
+    /*
     ShenPiManagementController *viewController=[[ShenPiManagementController alloc] init];
+    viewController.userInfo=_userInfo;
+    [self.navigationController pushViewController:viewController animated:YES];
+    */
+    MyShenPiViewController *viewController=[[MyShenPiViewController alloc] init];
     viewController.userInfo=_userInfo;
     [self.navigationController pushViewController:viewController animated:YES];
 

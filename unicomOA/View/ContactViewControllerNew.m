@@ -123,7 +123,7 @@ CGFloat i_Height=-1;
 
     [bg_base addSubview:self.searchcontroller.searchBar];
     
-  //  [self.view addSubview:bg_base];
+ //   [self.view addSubview:bg_base];
     
     UILabel *lbl_title=[[UILabel alloc]initWithFrame:CGRectMake(0, i_Height, self.view.frame.size.width, 40)];
     lbl_title.text=@"      组织结构";
@@ -500,10 +500,12 @@ CGFloat i_Height=-1;
             NSArray *arr_result=[JSON objectForKey:@"empList"];
             if ([arr_result count]>0) {
                 _resultViewController.dataArray=arr_result;
+                _resultViewController.nav=self.navigationController;
                 
             }
             else {
                 _resultViewController.dataArray=nil;
+                _resultViewController.nav=nil;
             }
             [_resultViewController.tableView reloadData];
         }

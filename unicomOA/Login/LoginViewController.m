@@ -16,7 +16,7 @@
 #import "LXAlertView.h"
 #import "DataBase.h"
 #import "AFNetworkReachabilityManager.h"
-
+#import "settingPasswordViewController.h"
 
 
 
@@ -93,6 +93,13 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     [self createTextFields];
     
     [self InitDataBase];
+    
+    self.view.userInteractionEnabled = YES;
+    
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fingerTapped:)];
+    
+    [self.view addGestureRecognizer:singleTap];
+
     db=[DataBase sharedinstanceDB];
 }
 
@@ -220,9 +227,9 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
         return;
     }
      */
-    NSArray *tabBarItems = self.navigationController.tabBarController.tabBar.items;
-    UITabBarItem *personCenterTabBarItem = [tabBarItems objectAtIndex:2];
-    personCenterTabBarItem.badgeValue = @"2";
+  //  NSArray *tabBarItems = self.navigationController.tabBarController.tabBar.items;
+  //  UITabBarItem *personCenterTabBarItem = [tabBarItems objectAtIndex:2];
+  //  personCenterTabBarItem.badgeValue = @"2";
     
     /*
     if ([self isLocal]) {
@@ -230,10 +237,10 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     }
     else {
      */
-   // [self postLogin];
+    [self postLogin];
    // }
     
-   [self LocalEnter];
+   //[self LocalEnter];
 
  
 }
@@ -283,7 +290,10 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
 
 -(void)fogetPwd:(UIButton *)button
 {
-    [self.navigationController pushViewController:[[forgetPasswordViewController alloc]init] animated:YES];
+   // PasswordViewController *vc=[[PasswordViewController alloc]init];
+   // [self.navigationController pushViewController:vc animated:YES];
+    
+    [self.navigationController pushViewController:[[settingPasswordViewController alloc]init] animated:YES];
 }
 
 
@@ -595,9 +605,14 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [user resignFirstResponder];
-    [pwd resignFirstResponder];
+    [textField resignFirstResponder];
     return YES;
+}
+
+
+-(void)fingerTapped:(UITapGestureRecognizer *)gestureRecognizer {
+    [pwd resignFirstResponder];
+    [user resignFirstResponder];
 }
 
 @end

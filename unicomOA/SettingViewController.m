@@ -121,7 +121,7 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
     //添加第二组
     LGSettingSection *section2=[LGSettingSection initWithHeaderTitle:@"" footerTitle:nil];
     //添加行
-    [section2 addItemWithTitle:@"新消息通知"];
+   // [section2 addItemWithTitle:@"新消息通知"];
     [section2 addItemWithTitle:@"修改密码"];
     [section2 addItemWithTitle:@"清除缓存"];
     [self.groups addObject:section2];
@@ -129,7 +129,7 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
     //添加第三组
     LGSettingSection *section3=[LGSettingSection initWithHeaderTitle:@"" footerTitle:nil];
     //添加行
-    [section3 addItemWithTitle:@"意见反馈"];
+  //  [section3 addItemWithTitle:@"意见反馈"];
     [section3 addItemWithTitle:@"关于"];
     [self.groups addObject:section3];
     
@@ -147,6 +147,7 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
     [self.groups addObject:section4];
     
     self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
+    self.tableView.scrollEnabled=NO;
      
 }
 
@@ -193,12 +194,7 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
     if (indexPath.section==0 && indexPath.row==0) {
         
         UIImageView *img_View=[[UIImageView alloc]initWithFrame:CGRectMake((self.view.frame.size.width-item.height*0.8)/2, item.height*0.2, item.height*0.8, item.height*0.8)];
-        if (iPhone6_plus || iPhone6) {
-            img_View.layer.cornerRadius=55.0f;
-        }
-        else {
-            img_View.layer.cornerRadius=45.0f;
-        }
+        img_View.layer.cornerRadius=item.height*0.4;
         
         img_View.layer.masksToBounds=YES;
         
@@ -307,20 +303,23 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
 #pragma mark 点击事件
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     //NSLog(@"点击了第%ld组，第%ld行",indexPath.section,indexPath.row);
+    
     if (indexPath.section==0 && indexPath.row==0) {
         StaffInfoViewController *staffController=[[StaffInfoViewController alloc]init];
         staffController.userInfo=_userInfo;
         [self.navigationController pushViewController:staffController animated:YES];
     }
-    else if (indexPath.section==1 && indexPath.row==0) {
+    /*
+    else if (indexPath.section==0 && indexPath.row==0) {
         NewsSettingViewController *newsController=[[NewsSettingViewController alloc]init];
         [self.navigationController pushViewController:newsController animated:YES];
     }
-    else if (indexPath.section==1 && indexPath.row==1) {
+    */
+    else if (indexPath.section==1 && indexPath.row==0) {
         PasswordViewController *passwordController=[[PasswordViewController alloc]init];
         [self.navigationController pushViewController:passwordController animated:YES];
     }
-    else if (indexPath.section==1 && indexPath.row==2) {
+    else if (indexPath.section==1 && indexPath.row==1) {
         /*
         NSString *alert_title=@"警告";
         NSString *alert_message=@"是否清空所有的缓存数据";
@@ -354,13 +353,17 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
         
     }
     else if (indexPath.section==2 && indexPath.row==0) {
-        SendFeedBackViewController *sendController=[[SendFeedBackViewController alloc]init];
-        [self.navigationController pushViewController:sendController animated:YES];
+      //  SendFeedBackViewController *sendController=[[SendFeedBackViewController alloc]init];
+      //  [self.navigationController pushViewController:sendController animated:YES];
+        AboutViewController *aboutController=[[AboutViewController alloc]init];
+        [self.navigationController pushViewController:aboutController animated:YES];
     }
+    /*
     else if (indexPath.section==2 && indexPath.row==1) {
         AboutViewController *aboutController=[[AboutViewController alloc]init];
         [self.navigationController pushViewController:aboutController animated:YES];
     }
+    */
     else {
         NSLog(@"点击了第%ld组，第%ld行",indexPath.section,indexPath.row);
     }
@@ -406,6 +409,7 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
 
 //退出应用
 -(void)QuitApp {
+    
     LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"提示" message:@"是否确定退出应用？" cancelBtnTitle:@"取消" otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
         if (clickIndex==0) {
             return;
@@ -418,9 +422,13 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
                 [defaults removeObjectForKey:key];
             }
             [defaults synchronize];
-            LoginViewController *vc=[[LoginViewController alloc]init];
-            NSArray *arr_vc=[NSArray arrayWithObjects:vc, nil];
-            [self.navigationController setViewControllers:arr_vc animated:YES];
+            LoginViewController *login=[[LoginViewController alloc]init];
+            UINavigationController *nav=[[UINavigationController alloc]initWithRootViewController:login];
+            [[UIApplication sharedApplication] keyWindow].rootViewController=nav;
+            
+            [self presentViewController:[[UIApplication sharedApplication] keyWindow].rootViewController animated:YES completion:nil];
+           // NSArray *arr_vc=[NSArray arrayWithObjects:vc, nil];
+           // [self.navigationController setViewControllers:arr_vc animated:YES];
         }
     }];
     [alert showLXAlertView];
