@@ -18,7 +18,7 @@
 
 @end
 
-@interface NewsManagementViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,NIDropDownDelegate,NewsTapDelegate,FocusNewsPassDelegate>
+@interface NewsManagementViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,NIDropDownDelegate,NewsTapDelegate,FocusNewsPassDelegate,UITextFieldDelegate,UISearchBarDelegate>
 {
     NIDropDown *dropDown;
 }

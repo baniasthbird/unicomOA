@@ -21,7 +21,7 @@
 #import "UILabel+LabelHeightAndWidth.h"
 
 
-@interface NewsManagementViewController ()<UITextFieldDelegate,UISearchBarDelegate>
+@interface NewsManagementViewController ()
 
 @property (strong,nonatomic) NSMutableArray *arr_News;
 
@@ -79,11 +79,11 @@
     [btn_back addTarget:self action:@selector(BackToAppCenter:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]initWithCustomView:btn_back];
     
-    self.view.userInteractionEnabled = YES;
+    //self.view.userInteractionEnabled = YES;
     
-    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fingerTapped:)];
+    //UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fingerTapped:)];
     
-    [self.view addGestureRecognizer:singleTap];
+    //[self.view addGestureRecognizer:singleTap];
     
     _i_pageIndex=1;
     _i_classId=0;
@@ -630,9 +630,10 @@
 }
 
 
--(void)fingerTapped:(UITapGestureRecognizer *)gestureRecognizer {
-    [_searchBar resignFirstResponder];
-    if ([_searchBar.text isEqualToString:@""]) {
+
+-(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    if ([searchText isEqualToString:@""]) {
+        [searchBar resignFirstResponder];
         _arr_NewsList=[arr_tmpList mutableCopy];
         [self.tableView reloadData];
     }
