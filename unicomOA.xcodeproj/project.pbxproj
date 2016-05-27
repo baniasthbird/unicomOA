@@ -123,6 +123,8 @@
 		68579FA31CC0BBCE00597FBD /* ShenPiAgreeWithCarDeploy.m in Sources */ = {isa = PBXBuildFile; fileRef = 68579FA21CC0BBCE00597FBD /* ShenPiAgreeWithCarDeploy.m */; };
 		68579FA61CC0C21100597FBD /* CarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68579FA51CC0C21100597FBD /* CarModel.m */; };
 		68579FA91CC0C88600597FBD /* CarDeployCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68579FA81CC0C88600597FBD /* CarDeployCell.m */; };
+		68723EB61CF839DA0019ACD8 /* UnFinishVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 68723EB51CF839DA0019ACD8 /* UnFinishVc.m */; };
+		68723EB91CF839F50019ACD8 /* FinishVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 68723EB81CF839F50019ACD8 /* FinishVc.m */; };
 		68815DC71CCDC45400277807 /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68815DC61CCDC45400277807 /* CommentCell.m */; };
 		6882288D1CE013A1007F5861 /* libFMDB.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6882288C1CE013A1007F5861 /* libFMDB.a */; };
 		6882288F1CE01D96007F5861 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6882288E1CE01D96007F5861 /* libsqlite3.0.tbd */; };
@@ -457,6 +459,10 @@
 		68579FA51CC0C21100597FBD /* CarModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CarModel.m; path = Base/Function/ShenPiModel/CarModel.m; sourceTree = "<group>"; };
 		68579FA71CC0C88600597FBD /* CarDeployCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CarDeployCell.h; path = Base/Function/ShenPiModel/CarDeployCell.h; sourceTree = "<group>"; };
 		68579FA81CC0C88600597FBD /* CarDeployCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CarDeployCell.m; path = Base/Function/ShenPiModel/CarDeployCell.m; sourceTree = "<group>"; };
+		68723EB41CF839DA0019ACD8 /* UnFinishVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UnFinishVc.h; path = Base/Function/ShenPiContorller/UnFinishVc.h; sourceTree = "<group>"; };
+		68723EB51CF839DA0019ACD8 /* UnFinishVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UnFinishVc.m; path = Base/Function/ShenPiContorller/UnFinishVc.m; sourceTree = "<group>"; };
+		68723EB71CF839F50019ACD8 /* FinishVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FinishVc.h; path = Base/Function/ShenPiContorller/FinishVc.h; sourceTree = "<group>"; };
+		68723EB81CF839F50019ACD8 /* FinishVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FinishVc.m; path = Base/Function/ShenPiContorller/FinishVc.m; sourceTree = "<group>"; };
 		68815DC51CCDC45400277807 /* CommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommentCell.h; path = Base/Function/NewsModel/CommentCell.h; sourceTree = "<group>"; };
 		68815DC61CCDC45400277807 /* CommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommentCell.m; path = Base/Function/NewsModel/CommentCell.m; sourceTree = "<group>"; };
 		6882288C1CE013A1007F5861 /* libFMDB.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFMDB.a; path = "../../../Library/Developer/Xcode/DerivedData/unicomOA-casyuftkadckdjdwnuvyvlrozdco/Build/Products/Debug-iphonesimulator/libFMDB.a"; sourceTree = "<group>"; };
@@ -1356,6 +1362,10 @@
 				2CE321121CC3B86300B36793 /* SendMeViewController.m */,
 				6825E1061CED507400EA4D87 /* ShenPiAppVC.h */,
 				6825E1071CED507400EA4D87 /* ShenPiAppVC.m */,
+				68723EB41CF839DA0019ACD8 /* UnFinishVc.h */,
+				68723EB51CF839DA0019ACD8 /* UnFinishVc.m */,
+				68723EB71CF839F50019ACD8 /* FinishVc.h */,
+				68723EB81CF839F50019ACD8 /* FinishVc.m */,
 			);
 			name = ShenPiController;
 			sourceTree = "<group>";
@@ -1764,6 +1774,7 @@
 				2C35B04F1C7062160003BF6C /* AppDelegate.m in Sources */,
 				6825E1081CED507400EA4D87 /* ShenPiAppVC.m in Sources */,
 				68E779DE1CB34A8E006DA5B9 /* CLTreeView_LEVEL1_Cell.m in Sources */,
+				68723EB61CF839DA0019ACD8 /* UnFinishVc.m in Sources */,
 				68ED4E451CB4E215000E8A7B /* MyApplication.m in Sources */,
 				2C35B04C1C7062160003BF6C /* main.m in Sources */,
 				2CFEADD71C79CCDE0054730E /* NotesViewController.m in Sources */,
@@ -1827,6 +1838,7 @@
 				2C99721E1CA21E0E00B803FC /* ChangePhoneNumStep3.m in Sources */,
 				2CFEAD361C7188500054730E /* OAViewController.m in Sources */,
 				2CFEAD181C7168980054730E /* forgetPasswordViewController.m in Sources */,
+				68723EB91CF839F50019ACD8 /* FinishVc.m in Sources */,
 				68EEDE561CBB2E19003295EB /* Address.m in Sources */,
 				2CFEADC51C76A65E0054730E /* NSString+Extension.m in Sources */,
 				6882C3211CA92C4B00CDEB1A /* CommentViewController.m in Sources */,

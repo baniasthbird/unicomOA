@@ -24,4 +24,6 @@
 
 @property (nonatomic,strong) UILabel *lbl_status;
 
+@property (nonatomic,strong) NSDictionary *dic_task;
+
 @end

@@ -15,6 +15,11 @@
 #import "PrintService.h"
 #import "CarShenPiDetail.h"
 #import "PrintShenPiDetail.h"
+#import "DataBase.h"
+#import "AFNetworking.h"
+#import "LXAlertView.h"
+#import "UnFinishVc.h"
+#import "FinishVc.h"
 
 
 @interface MyShenPiViewController()<UITableViewDelegate,UITableViewDataSource,CarShenPiDetailDelegate,PrintShenPiDetailDelegate>
@@ -47,9 +52,36 @@
 //审批类型搜索关键字
 @property (nonatomic,strong) NSString *str_searchKeyword2;
 
+
+@property (nonatomic,strong) AFHTTPSessionManager *session;
+
+
+
+//待办流程总页数
+@property NSInteger i_page_Total1;
+
+@property NSInteger i_page_Total2;
+//待办流程当前页
+@property NSInteger i_pageIndex1;
+//已办流程当前页
+@property NSInteger i_pageIndex2;
 @end
 
-@implementation MyShenPiViewController
+@implementation MyShenPiViewController {
+    DataBase *db;
+    //获取我的审批列表，包括已办与待办
+    NSMutableArray *arr_MyReview;
+    //待办请求参数字典
+    NSMutableDictionary *dic_param1;
+    //已办请求参数字典
+    NSMutableDictionary *dic_param2;
+    //展现待办流程数据的url
+    NSDictionary *dic_url1;
+    //展现已办流程数据的url
+    NSDictionary *dic_url2;
+    
+   
+}
 
 -(void)viewDidLoad {
     [super viewDidLoad];
@@ -77,21 +109,16 @@
     }
     
     _arr_SearchResult=[[NSMutableArray alloc]init];
+    dic_param1=[NSMutableDictionary dictionary];
+    dic_param2=[NSMutableDictionary dictionary];
+   
     
-    self.leftArray=@[@"全部",@"已办",@"待办"];
-    self.rightArray=@[@"全部",@"复印",@"预约用车"];
+    arr_MyReview=[[NSMutableArray alloc]init];
+    db=[DataBase sharedinstanceDB];
     
-    self.leftImgArray=@[@" ",@"mission_done.png",@"mission_unfinished.png"];
-    self.rightImgArray=@[@" ",@"printmission.png",@"carmission.png"];
-    
-    self.leftArrayColor=@[[UIColor blackColor],[UIColor colorWithRed:25/255.0f green:189/255.0f blue:144/255.0f alpha:1],[UIColor colorWithRed:246/255.0f green:88/255.0f blue:87/255.0f alpha:1]];
-    self.rightArrayColor=@[[UIColor blackColor],[UIColor colorWithRed:246/255.0f green:88/255.0f blue:87/255.0f alpha:1],[UIColor colorWithRed:80/255.0f green:125/255.0f blue:236/255.0f alpha:1]];
-
-    
-    _str_searchKeyword1=@"全部";
-    _str_searchKeyword2=@"全部";
-    
-    [self setupTopView];
+    _session=[AFHTTPSessionManager manager];
+    _session.responseSerializer= [AFHTTPResponseSerializer serializer];
+    [_session.requestSerializer setHTTPShouldHandleCookies:YES];
     
     _i_sectionClicked=-1;
     
@@ -101,6 +128,32 @@
     _tableView.scrollEnabled=YES;
     _tableView.backgroundColor=[UIColor clearColor];
     [self.view addSubview:_tableView];
+
+    _i_pageIndex1=1;
+    _i_pageIndex2=1;
+    dic_param1[@"pageIndex"]=@"1";
+    dic_param2[@"pageIndex"]=@"1";
+    [self PrePareData:dic_param1 interface:@"UnFinishTaskShenPiList"];
+    [self PrePareData:dic_param2 interface:@"FinishTaskShenPiList"];
+    
+    self.leftArray=@[@"全部",@"已办",@"待办"];
+    self.rightArray=@[@"全部",@"复印",@"预约用车",@"信息发布"];
+    
+    self.leftImgArray=@[@" ",@"mission_done.png",@"mission_unfinished.png"];
+   // self.rightImgArray=@[@" ",@"printmission.png",@"carmission.png"];
+    
+    self.leftArrayColor=@[[UIColor blackColor],[UIColor colorWithRed:25/255.0f green:189/255.0f blue:144/255.0f alpha:1],[UIColor colorWithRed:246/255.0f green:88/255.0f blue:87/255.0f alpha:1]];
+    self.rightArrayColor=@[[UIColor blackColor],[UIColor colorWithRed:246/255.0f green:88/255.0f blue:87/255.0f alpha:1],[UIColor colorWithRed:80/255.0f green:125/255.0f blue:236/255.0f alpha:1],[UIColor colorWithRed:80/255.0f green:125/255.0f blue:236/255.0f alpha:1]];
+
+    
+    _str_searchKeyword1=@"全部";
+    _str_searchKeyword2=@"全部";
+    
+    [self setupTopView];
+    
+    
+    
+    
     
 }
 
@@ -243,21 +296,27 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (iPhone4_4s || iPhone5_5s)
-        return 20;
-    else if (iPhone6)
-        return 30;
-    else
-        return 40;
+    if (section==0) {
+        if (iPhone4_4s || iPhone5_5s)
+            return 10;
+        else if (iPhone6)
+            return 10;
+        else
+            return 20;
+    }
+    else {
+        return 0;
+    }
+    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     if (iPhone4_4s || iPhone5_5s)
-        return 20;
+        return 10;
     else if (iPhone6)
-        return 30;
+        return 10;
     else
-        return 40;
+        return 20;
     
 }
 
@@ -271,41 +330,39 @@
     MyShenPiCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
     
     if (cell==nil) {
-       if ([_str_searchKeyword1 isEqualToString:@"全部"] && [_str_searchKeyword2 isEqualToString:@"全部"])
-       {
-           NSObject *obj=[_arr_MyShenPi objectAtIndex:indexPath.section];
-           
-           if ([obj isMemberOfClass:[CarService class]]) {
-               CarService *service=(CarService*)obj;
-               cell=[self CreateCarCell:service tableView:tableView atIndexPath:indexPath];
-           }
-           else if ([obj isMemberOfClass:[PrintService class]]) {
-               PrintService *service=(PrintService*)obj;
-               cell=[self CreatePrintCell:service tableView:tableView atIndexPath:indexPath];
-           }
-       }
-       else {
-           NSObject *obj=[_arr_SearchResult objectAtIndex:indexPath.section];
-           
-           if ([obj isMemberOfClass:[CarService class]]) {
-               CarService *service=(CarService*)obj;
-               cell=[self CreateCarCell:service tableView:tableView atIndexPath:indexPath];
-           }
-           else if ([obj isMemberOfClass:[PrintService class]]) {
-               PrintService *service=(PrintService*)obj;
-               cell=[self CreatePrintCell:service tableView:tableView atIndexPath:indexPath];
-           }
-
-           
-       }
-       
-        
+           cell=[self CreateCell:tableView indexPath:indexPath];
     }
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     MyShenPiCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    NSDictionary *dic_tmp=cell.dic_task;
+    NSString *str_url=@"";
+    if ([cell.lbl_status.text isEqualToString:@"待办"]) {
+        NSString *str_key=[dic_tmp objectForKey:@"processDefName"];
+        str_url=[dic_url1 objectForKey:str_key];
+        NSString *str_processInstID=[dic_tmp objectForKey:@"processInstID"];
+        NSString *str_activityDefID=[dic_tmp objectForKey:@"activityDefID"];
+        NSString *str_workItemID=[dic_tmp objectForKey:@"workItemID"];
+        UnFinishVc *vc=[[UnFinishVc alloc]init];
+        vc.str_url=str_url;
+        vc.str_processInstID=str_processInstID;
+        vc.str_activityDefID=str_activityDefID;
+        vc.str_workItemID=str_workItemID;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    else if ([cell.lbl_status.text isEqualToString:@"已办"]) {
+        NSString *str_key=[dic_tmp objectForKey:@"processDefName"];
+        str_url=[dic_url2 objectForKey:str_key];
+        NSString *str_processInstID=[dic_tmp objectForKey:@"processInstId"];
+        FinishVc *vc=[[FinishVc alloc]init];
+        vc.str_url=str_url;
+        vc.str_processInstID=str_processInstID;
+        [self.navigationController pushViewController:vc animated:YES];
+
+    }
+    /*
      _i_sectionClicked=indexPath.section;
     if ([cell.str_category isEqualToString:@"预约用车"]) {
         CarShenPiDetail *viewController=[[CarShenPiDetail alloc]init];
@@ -334,6 +391,7 @@
 
         [self.navigationController pushViewController:viewController animated:YES];
     }
+     */
 }
 
 //刷新表格，后期刷新单个section
@@ -364,6 +422,33 @@
 -(NSMutableArray*)CreateSearchResult:(NSString*)str_condition1 con2:(NSString*)str_condition2 {
     NSMutableArray *arr_result=[[NSMutableArray alloc]init];
     if (_arr_MyShenPi.count>0) {
+        if ([str_condition1 isEqualToString:@"全部"] && [str_condition2 isEqualToString:@"全部"]) {
+            //根据类型筛选
+            [arr_MyReview removeAllObjects];
+            _i_pageIndex1=1;
+            _i_pageIndex2=1;
+            dic_param1[@"pageIndex"]=@"1";
+            dic_param2[@"pageIndex"]=@"1";
+            [self PrePareData:dic_param1 interface:@"UnFinishTaskShenPiList"];
+            [self PrePareData:dic_param2 interface:@"FinishTaskShenPiList"];
+        }
+        else if ([str_condition2 isEqualToString:@"全部"])
+        {
+                //根据已办待办筛选
+                [arr_MyReview removeAllObjects];
+                if ([str_condition1 isEqualToString:@"已办"]) {
+                    _i_pageIndex2=1;
+                    dic_param2[@"pageIndex"]=@"1";
+                    [self PrePareData:dic_param2 interface:@"FinishTaskShenPiList"];
+                }
+                else if ([str_condition1 isEqualToString:@"待办"]) {
+                    _i_pageIndex1=1;
+                    dic_param1[@"pageIndex"]=@"1";
+                    [self PrePareData:dic_param1 interface:@"UnFinishTaskShenPiList"];
+                }
+            
+        }
+        /*
         if ([str_condition1 isEqualToString:@"全部"]) {
             arr_result= [self CreateSearchResultAdvanced:_arr_MyShenPi con2:str_condition2];
         }
@@ -371,7 +456,7 @@
             arr_result=[self CreateSearchResultFirst:_arr_MyShenPi con1:str_condition1];
             arr_result=[self CreateSearchResultAdvanced:arr_result con2:str_condition2];
         }
-        
+        */
     }
     return arr_result;
 }
@@ -515,6 +600,155 @@
     cell.str_category=@"复印";
     return cell;
     
+}
+
+
+//整理数据
+-(void)PrePareData:(NSMutableDictionary*)param interface:(NSString*)str_interface{
+    NSString *str_ip=@"";
+    NSString *str_port=@"";
+    NSMutableArray *t_array=[db fetchIPAddress];
+    if (t_array.count==1) {
+        NSArray *arr_ip=[t_array objectAtIndex:0];
+        str_ip=[arr_ip objectAtIndex:0];
+        str_port=[arr_ip objectAtIndex:1];
+    }
+    NSString *str_urldata=[db fetchInterface:str_interface];
+    NSCharacterSet *whitespace = [NSCharacterSet  whitespaceAndNewlineCharacterSet];
+    str_urldata= [str_urldata stringByTrimmingCharactersInSet:whitespace];
+    NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_urldata];
+    [_session POST:str_url parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        NSString *str_success= [JSON objectForKey:@"success"];
+        BOOL b_success=[str_success boolValue];
+        if (b_success==YES) {
+            NSLog(@"获取审批列表成功");
+            NSString *str_listname=@"";
+            if ([str_interface isEqualToString:@"UnFinishTaskShenPiList"]) {
+                str_listname=@"taskList";
+                dic_url1=[JSON objectForKey:@"urlMap"];
+            }
+            else if ([str_interface isEqualToString:@"FinishTaskShenPiList"]) {
+                str_listname=@"list";
+                dic_url2=[JSON objectForKey:@"urlMap"];
+            }
+            NSArray *arr_list=[JSON objectForKey:str_listname];
+            for (int i=0;i<[arr_list count];i++) {
+                [arr_MyReview addObject:[arr_list objectAtIndex:i]];
+            }
+            NSString *str_totalPage=[JSON objectForKey:@"totalPage"];
+            if ([str_interface isEqualToString:@"UnFinishTaskShenPiList"]) {
+                _i_page_Total1=[str_totalPage integerValue];
+            }
+            else if ([str_interface isEqualToString:@"FinishTaskShenPiList"]) {
+                _i_page_Total2=[str_totalPage integerValue];
+            }
+            /*
+            if ([_str_searchKeyword2 isEqualToString:@"全部"] && [_str_searchKeyword1 isEqualToString:@"全部"]) {
+                if (_i_pageIndex1<_i_page_Total1 && _i_pageIndex2<_i_page_Total2) {
+                    
+                }
+                else if (_i_pageIndex1==_i_page_Total1 && _i_pageIndex2<_i_page_Total2) {
+                    
+                }
+                else if (_i_pageIndex1<_i_page_Total1 && _i_pageIndex2==_i_page_Total2) {
+                    
+                }
+             
+            }
+             */
+            if ([_str_searchKeyword2 isEqualToString:@"全部"] && [_str_searchKeyword1 isEqualToString:@"全部"]) {
+                _arr_MyShenPi=[arr_MyReview mutableCopy];
+            }
+            else if ([_str_searchKeyword2 isEqualToString:@"全部"]) {
+                _arr_SearchResult=[arr_MyReview mutableCopy];
+            }
+            
+            [self.tableView reloadData];
+           // [self.tableView reloadData];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"获取审批列表失败");
+    }];
+    
+}
+
+
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    CGFloat height=scrollView.frame.size.height;
+    CGFloat contentYoffset=scrollView.contentOffset.y;
+    CGFloat distanceFromBottom=scrollView.contentSize.height-contentYoffset;
+    //NSLog(@"height:%f contentYoffset:%f frame.y:%f",height,contentYoffset,scrollView.frame.origin.y);
+    if (distanceFromBottom<height) {
+        //  NSLog((@"end of table"));
+        if ([_str_searchKeyword1 isEqualToString:@"全部"])
+        {
+            //  [self PareData:dic_param];
+            //   [self PareData:dic_param interface:@"FinishTaskShenPiList"];
+            if (_i_pageIndex1<_i_page_Total1) {
+                _i_pageIndex1=_i_pageIndex1+1;
+                dic_param1[@"pageIndex"]=[NSString stringWithFormat:@"%ld",(long)_i_pageIndex1];
+                [self PrePareData:dic_param1 interface:@"UnFinishTaskShenPiList"];
+            }
+            if (_i_pageIndex2<_i_page_Total2) {
+                _i_pageIndex2=_i_pageIndex2+1;
+                dic_param2[@"pageIndex"]=[NSString stringWithFormat:@"%ld",(long)_i_pageIndex2];
+                [self PrePareData:dic_param2 interface:@"FinishTaskShenPiList"];
+            }
+        }
+        else if ([_str_searchKeyword1 isEqualToString:@"已办"]) {
+            if (_i_pageIndex2<_i_page_Total2) {
+                _i_pageIndex2=_i_pageIndex2+1;
+                dic_param2[@"pageIndex"]=[NSString stringWithFormat:@"%ld",(long)_i_pageIndex2];
+                [self PrePareData:dic_param2 interface:@"FinishTaskShenPiList"];
+            }
+        }
+        else if ([_str_searchKeyword1 isEqualToString:@"待办"]) {
+            if (_i_pageIndex1<_i_page_Total1) {
+                _i_pageIndex1=_i_pageIndex1+1;
+                dic_param1[@"pageIndex"]=[NSString stringWithFormat:@"%ld",(long)_i_pageIndex1];
+                [self PrePareData:dic_param1 interface:@"UnFinishTaskShenPiList"];
+            }
+        }
+        
+    }
+}
+
+-(MyShenPiCell*)CreateCell:(UITableView*)tableView indexPath:(NSIndexPath*)indexPath {
+    NSDictionary *dic_task;
+    if ([_str_searchKeyword2 isEqualToString:@"全部"] && [_str_searchKeyword1 isEqualToString:@"全部"]) {
+        dic_task=[_arr_MyShenPi objectAtIndex:indexPath.section];
+    }
+    else if ([_str_searchKeyword2 isEqualToString:@"全部"]) {
+        dic_task=[_arr_SearchResult objectAtIndex:indexPath.section];
+    }
+    //流程类别
+    NSString *str_categroy=[dic_task objectForKey:@"processChName"];
+    //流程标题
+    NSString *str_title=[dic_task objectForKey:@"processInstName"];
+    
+    NSString *str_endTime=[dic_task objectForKey:@"endTime"];
+    NSString *str_status=@"";
+    if (str_endTime!=nil) {
+        str_status=@"已办";
+    }
+    else {
+        str_status=@"待办";
+    }
+    //当前节点名称
+    //NSString *str_node=[dic_task objectForKey:@"workItemName"];
+    //时间
+    NSString *str_startTime=[dic_task objectForKey:@"startTime"];
+    
+    //MyShenPiCell *cell=[MyShenPiCell cellWithTable:tableView withTitle:str_title withStatus:@"待办" category:str_categroy withTime:str_startTime];
+   // cell.dic_task=dic_task;
+    MyShenPiCell *cell=[MyShenPiCell cellWithTable:tableView withImage:_userInfo.str_Logo withName:str_title withCategroy:str_categroy withStatus:str_status withTitle:str_title withTime:str_startTime atIndex:indexPath];
+    cell.dic_task=dic_task;
+    return cell;
 }
 
 

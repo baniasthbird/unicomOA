@@ -7,6 +7,7 @@
 //
 
 #import "MyShenPiCell.h"
+#import "UILabel+LabelHeightAndWidth.h"
 
 @implementation MyShenPiCell
 
@@ -36,29 +37,29 @@
         
         img_Logo.layer.cornerRadius=30.0f;
         [img_Logo.layer setMasksToBounds:YES];
-        [lbl_Title setFrame:CGRectMake(10, 75, 200, 20)];
-        [lbl_time setFrame:CGRectMake(10, 90, 200, 20)];
+       // [lbl_Title setFrame:CGRectMake(10, 75, 200, 20)];
+        [lbl_time setFrame:CGRectMake(10, 95, [UIScreen mainScreen].bounds.size.width-20, 15)];
         if (iPhone4_4s || iPhone5_5s) {
-            [img_Logo setFrame:CGRectMake(20, 5, 60, 60)];
+            [img_Logo setFrame:CGRectMake(10, 15, 60, 60)];
             [_lbl_status setFrame:CGRectMake(250, 0, 70, 110)];
-            [view_line setFrame:CGRectMake(0, 70, 250, 1)];
-            [lbl_name setFrame:CGRectMake(100, 20, 100, 10)];
-            [lbl_category setFrame:CGRectMake(100, 45, 120, 10)];
+            [view_line setFrame:CGRectMake(0, 90, 250, 1)];
+            [lbl_name setFrame:CGRectMake(100, 20, [UIScreen mainScreen].bounds.size.width-180, 70)];
+            [lbl_category setFrame:CGRectMake(75, 5, 120, 10)];
             
         }
         else if (iPhone6) {
-            [img_Logo setFrame:CGRectMake(30, 5, 60, 60)];
+            [img_Logo setFrame:CGRectMake(10, 15, 60, 60)];
             [_lbl_status setFrame:CGRectMake(300, 0, 75, 110)];
-            [view_line setFrame:CGRectMake(0, 70, 300, 1)];
-            [lbl_name setFrame:CGRectMake(130, 20, 100, 10)];
-            [lbl_category setFrame:CGRectMake(130, 45, 120, 10)];
+            [view_line setFrame:CGRectMake(0, 90, 300, 1)];
+            [lbl_name setFrame:CGRectMake(130, 20, [UIScreen mainScreen].bounds.size.width-180, 70)];
+            [lbl_category setFrame:CGRectMake(75, 5, 120, 10)];
             }
         else {
-            [img_Logo setFrame:CGRectMake(40, 5, 60, 60)];
+            [img_Logo setFrame:CGRectMake(10, 15, 60, 60)];
             [_lbl_status setFrame:CGRectMake(350, 0, 64, 110)];
-            [view_line setFrame:CGRectMake(0, 70, 350, 1)];
-            [lbl_name setFrame:CGRectMake(150, 20, 100, 10)];
-            [lbl_category setFrame:CGRectMake(150, 45, 120, 10)];
+            [view_line setFrame:CGRectMake(0, 90, 350, 1)];
+            [lbl_name setFrame:CGRectMake(150, 20, [UIScreen mainScreen].bounds.size.width-180, 70)];
+            [lbl_category setFrame:CGRectMake(75, 5, 120, 10)];
         }
         img_Logo.image=[UIImage imageNamed:str_Image];
         lbl_name.textColor=[UIColor blackColor];
@@ -79,13 +80,27 @@
         }
         
         
-        lbl_name.font=[UIFont systemFontOfSize:16];
+        lbl_name.font=[UIFont systemFontOfSize:14];
         lbl_category.font=[UIFont systemFontOfSize:16];
         _lbl_status.font=[UIFont systemFontOfSize:16];
         lbl_Title.font=[UIFont systemFontOfSize:13];
         lbl_time.font=[UIFont systemFontOfSize:13];
         
-        lbl_name.text=[NSString stringWithFormat:@"%@:%@",@"申请人",str_Name];
+        lbl_name.text=[NSString stringWithFormat:@"%@:%@",@"标题",str_Name];
+        lbl_name.numberOfLines=0;
+        
+        CGFloat h_name=[UILabel_LabelHeightAndWidth getHeightByWidth:100 title:lbl_name.text font:[UIFont systemFontOfSize:14]];
+        if (iPhone4_4s || iPhone5_5s) {
+            lbl_name.frame=CGRectMake(75, 20, [UIScreen mainScreen].bounds.size.width-170, h_name);
+        }
+        else if (iPhone6) {
+            lbl_name.frame=CGRectMake(75, 20, [UIScreen mainScreen].bounds.size.width-170, h_name);
+        }
+        else if (iPhone6_plus) {
+            lbl_name.frame=CGRectMake(75, 20, [UIScreen mainScreen].bounds.size.width-170, h_name);
+        }
+        [lbl_name sizeToFit];
+        
         lbl_category.text=str_Categroy;
         _lbl_status.text=str_status;
         lbl_Title.text=str_Title;

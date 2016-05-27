@@ -146,7 +146,6 @@
 -(void)Submit:(UIButton*)sender {
     //提交申请
    // NSMutableDictionary *dic_submit=[[NSMutableDictionary alloc]init];
-    NSMutableArray *arr_submit=[[NSMutableArray alloc]init];
     NSMutableArray *arr_m_ctlList=(NSMutableArray*)_arr_ctlList;
     NSMutableDictionary *dic_sub=[NSMutableDictionary dictionary];
     for (int i=0;i<[arr_m_ctlList count];i++) {
