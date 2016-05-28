@@ -11,6 +11,8 @@
 
 @interface PrintFileDetail : UIViewController
 
-@property (nonatomic,strong) PrintFiles *file;
+@property (nonatomic,strong) NSArray *arr_data;
+
+@property (nonatomic,strong) NSArray *arr_title;
 
 @end

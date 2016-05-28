@@ -34,6 +34,7 @@
     UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"  " style:UIBarButtonItemStyleDone target:self action:@selector(MovePreviousVc:)];
     barButtonItem.tintColor=[UIColor whiteColor];
     [barButtonItem setImage:[UIImage imageNamed:@"returnlogo.png"]];
+    self.navigationItem.leftBarButtonItem=barButtonItem;
     
     _tableview=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped];
     _tableview.delegate=self;
@@ -54,16 +55,11 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 7;
+    return [_arr_title count];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row!=4) {
-        return 40;
-    }
-    else {
-        return 50;
-    }
+    return 40;
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath  {
@@ -79,6 +75,12 @@
     cell.textLabel.font=[UIFont systemFontOfSize:16];
     cell.detailTextLabel.font=[UIFont systemFontOfSize:16];
     
+    cell.textLabel.text=[_arr_title objectAtIndex:indexPath.row];
+    NSString *str_tmp=[_arr_data objectAtIndex:indexPath.row];
+    cell.detailTextLabel.text=str_tmp;
+    
+    return cell;
+    /*
     if (indexPath.row==0) {
         cell.textLabel.text=@"文件名称";
         cell.detailTextLabel.text=_file.str_filename;
@@ -125,6 +127,7 @@
         cell.detailTextLabel.text=[NSString stringWithFormat:@"%d",_file.i_simplecopies];
     }
     return cell;
+     */
 }
 
 

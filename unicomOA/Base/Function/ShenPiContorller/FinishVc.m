@@ -11,6 +11,7 @@
 #import "AFNetworking.h"
 #import "LXAlertView.h"
 #import "PrintFileNavCell.h"
+#import "PrintFileDetail.h"
 
 @interface FinishVc ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -29,6 +30,8 @@
     NSString *str_url_postdata;
     
     NSDictionary *dic_ctl;
+    
+    NSMutableArray *arr_m_ctl;
 }
 
 - (void)viewDidLoad {
@@ -67,6 +70,7 @@
     tableView.delegate=self;
     tableView.dataSource=self;
     tableView.backgroundColor=[UIColor clearColor];
+    tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     
     [self.view addSubview:tableView];
 }
@@ -100,32 +104,43 @@
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        NSDictionary *dic_result= [JSON objectForKey:@"result"];
-        if (dic_result!=nil) {
-            NSString *str_success=[dic_result objectForKey:@"success"];
-            BOOL b_success=[str_success boolValue];
-            if (b_success==YES) {
-                NSLog(@"获取界面成功!");
-                arr_groupList=[dic_result objectForKey:@"groupList"];
-                arr_ctlList=[dic_result objectForKey:@"ctlList"];
-                dic_ctl=[self manageData:arr_groupList ctlList:arr_ctlList];
-                str_url_postdata=[dic_result objectForKey:@"url"];
-                [tableView reloadData];
-            }
+        NSDictionary *dic_exp=[JSON objectForKey:@"exception"];
+        if (dic_exp!=nil) {
+            NSString *str_msg=[dic_exp objectForKey:@"message"];
+            LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"异常" message:str_msg cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+               
+            }];
+            [alert showLXAlertView];
+            return;
         }
         else {
-             NSString *str_success=[JSON objectForKey:@"success"];
-            BOOL b_success=[str_success boolValue];
-            if (b_success==YES) {
-                NSLog(@"获取界面成功!");
-                arr_groupList=[JSON objectForKey:@"groupList"];
-                arr_ctlList=[JSON objectForKey:@"ctlList"];
-                dic_ctl=[self manageData:arr_groupList ctlList:arr_ctlList];
-                str_url_postdata=[JSON objectForKey:@"url"];
-                [tableView reloadData];
+            NSDictionary *dic_result= [JSON objectForKey:@"result"];
+            if (dic_result!=nil) {
+                NSString *str_success=[dic_result objectForKey:@"success"];
+                BOOL b_success=[str_success boolValue];
+                if (b_success==YES) {
+                    NSLog(@"获取界面成功!");
+                    arr_groupList=[dic_result objectForKey:@"groupList"];
+                    arr_ctlList=[dic_result objectForKey:@"ctlList"];
+                    dic_ctl=[self manageData:arr_groupList ctlList:arr_ctlList];
+                    str_url_postdata=[dic_result objectForKey:@"url"];
+                    [tableView reloadData];
+                }
+            }
+            else {
+                NSString *str_success=[JSON objectForKey:@"success"];
+                BOOL b_success=[str_success boolValue];
+                if (b_success==YES) {
+                    NSLog(@"获取界面成功!");
+                    arr_groupList=[JSON objectForKey:@"groupList"];
+                    arr_ctlList=[JSON objectForKey:@"ctlList"];
+                    dic_ctl=[self manageData:arr_groupList ctlList:arr_ctlList];
+                    str_url_postdata=[JSON objectForKey:@"url"];
+                    [tableView reloadData];
+                }
             }
         }
-            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"获取界面失败");
     }];
     
@@ -183,11 +198,19 @@
         for (int i=0;i<[arr_ctl count];i++) {
             NSDictionary *dic_tmp=[arr_ctl objectAtIndex:i];
             NSString *str_type= [dic_tmp objectForKey:@"type"];
-            if (![str_type isEqualToString:@"hidden"]) {
+            if ([str_type isEqualToString:@"hidden"]) {
+                //i_count=i_count+1;
+            }
+            else if ([str_type isEqualToString:@"tableView"]) {
+                NSArray *arr_list=[dic_tmp objectForKey:@"tableData"];
+                i_count=i_count+[arr_list count];
+            }
+            else {
                 i_count=i_count+1;
             }
         }
         return i_count;
+
     }
 }
 
@@ -203,40 +226,110 @@
     cell.textLabel.textAlignment=NSTextAlignmentLeft;
     cell.detailTextLabel.textColor=[UIColor colorWithRed:112/255.0f green:112/255.0f blue:112/255.0f alpha:1];
     cell.detailTextLabel.font=[UIFont systemFontOfSize:16];
+    
+    UIView *leftView=[[UIView alloc]init];
+    UIView *rightView=[[UIView alloc]init];
+    if (iPhone5_5s || iPhone4_4s) {
+        [leftView setFrame:CGRectMake(0, 0, 100, cell.frame.size.height)];
+        [rightView setFrame:CGRectMake(100, 0, 220, cell.frame.size.height)];
+    }
+    else if (iPhone6) {
+        [leftView setFrame:CGRectMake(0, 0, 105, cell.frame.size.height)];
+        [rightView setFrame:CGRectMake(105, 0, 270, cell.frame.size.height)];
+    }
+    else {
+        [leftView setFrame:CGRectMake(0, 0, 113, cell.frame.size.height)];
+        [rightView setFrame:CGRectMake(113, 0, 301, cell.frame.size.height)];
+    }
+    if (indexPath.row%2==0) {
+        if (indexPath.row!=0) {
+            leftView.backgroundColor=[UIColor colorWithRed:245/255.0f green:245/255.0f blue:245/255.0f alpha:1];
+            rightView.backgroundColor=[UIColor whiteColor];
+        }
+    }
+    else {
+        leftView.backgroundColor=[UIColor colorWithRed:235/255.0f green:235/255.0f blue:235/255.0f alpha:1];
+        rightView.backgroundColor=[UIColor colorWithRed:245/255.0f green:245/255.0f blue:245/255.0f alpha:1];
+    }
+
+    
+    
     if ([dic_ctl count]==0) {
-        cell.textLabel.text=@"aaa";
+        cell.textLabel.text=@"";
         return cell;
     }
     else {
-        NSString *str_index=[NSString stringWithFormat:@"%ld",indexPath.section];
-        NSArray *arr_ctl= [dic_ctl objectForKey:str_index];
-        NSMutableArray *arr_m_ctl=[self DispalyUIWithoutHidden:arr_ctl];
+        if (indexPath.row==0) {
+            NSString *str_index=[NSString stringWithFormat:@"%ld",indexPath.section];
+            NSArray *arr_ctl= [dic_ctl objectForKey:str_index];
+            arr_m_ctl=[self DispalyUIAdvance:arr_ctl];
+        }
         NSDictionary  *dic_tmp=[arr_m_ctl objectAtIndex:indexPath.row];
         NSString *str_type=[dic_tmp objectForKey:@"type"];
         if ([str_type isEqualToString:@"text"] || [str_type isEqualToString:@"int"] || [str_type isEqualToString:@"date"] || [str_type isEqualToString:@"textarea"]) {
             NSString *str_label=[dic_tmp objectForKey:@"label"];
-            NSString *str_value=[dic_tmp objectForKey:@"value"];
+            NSObject *obj_value=[dic_tmp objectForKey:@"value"];
+            NSString *str_value=@"";
+            if (obj_value!=[NSNull null]) {
+                str_value=(NSString*)obj_value;
+            }
             cell.textLabel.text=str_label;
             cell.detailTextLabel.text=str_value;
+            cell.textLabel.backgroundColor=[UIColor clearColor];
+            cell.detailTextLabel.backgroundColor=[UIColor clearColor];
+            return cell;
         }
         else if ([str_type isEqualToString:@"tableView"]) {
-            NSArray *arr_file=[dic_tmp objectForKey:@"tableData"];
-            if ([arr_file count]>0) {
-                PrintFiles *tmp_File=[[PrintFiles alloc]init];
-                
-                PrintFileNavCell *cell=[PrintFileNavCell cellWithTable:tb withTitle:tmp_File.str_filename withPages:tmp_File.i_pages withCopies:tmp_File.i_copies  atIndexPath:indexPath];
-                // cell.file=tmp_File;
-                
-                return cell;
+            NSArray *arr_title=[dic_tmp objectForKey:@"tableTitle"];
+            NSArray *arr_data=[dic_tmp objectForKey:@"tableDataContent"];
+            NSString *str_titlename=[arr_title objectAtIndex:0];
+            NSString *str_title=[arr_data objectAtIndex:0];
+            PrintFileNavCell *cell=[PrintFileNavCell cellWithTable:tb withTitle:str_title withTileName:str_titlename atIndexPath:indexPath];
+            cell.file_data=arr_data;
+            cell.file_title=arr_title;
+            return cell;   
+        }
+        else if ([str_type isEqualToString:@"list"]) {
+            NSString *str_label=[dic_tmp objectForKey:@"label"];
+            NSObject *obj_value=[dic_tmp objectForKey:@"value"];
+            NSString *str_value=@"";
+            if (obj_value!=[NSNull null]) {
+                str_value=(NSString*)obj_value;
             }
-           
+            NSArray *arr_listData=[dic_tmp objectForKey:@"listData"];
+            NSInteger i_value=[str_value integerValue];
+            NSString *str_detail_value=@"";
+            NSString *str_value2=[NSString stringWithFormat:@"%ld",(long)i_value];
+
+            for (int l=0;l<[arr_listData count];l++) {
+                NSDictionary *dic= [arr_listData objectAtIndex:l];
+                NSString *str_tmp=[dic objectForKey:@"value"];
+                if ([str_tmp isEqualToString:str_value2]) {
+                    str_detail_value=[dic objectForKey:@"label"];
+                }
+                
+            }
+            cell.textLabel.text=str_label;
+            cell.detailTextLabel.text=str_detail_value;
+            cell.textLabel.backgroundColor=[UIColor clearColor];
+            cell.detailTextLabel.backgroundColor=[UIColor clearColor];
+        }
+        else if ([str_type isEqualToString:@"html"]) {
+            NSString *str_label=[dic_tmp objectForKey:@"label"];
+            cell.textLabel.text=str_label;
+            cell.textLabel.backgroundColor=[UIColor clearColor];
+            cell.detailTextLabel.backgroundColor=[UIColor clearColor];
         }
         else {
-            cell.textLabel.text=@"aaa";
+            cell.textLabel.text=@"";
         }
        
         
     }
+    [cell.contentView addSubview:leftView];
+    [cell.contentView addSubview:rightView];
+    [cell.contentView sendSubviewToBack:leftView];
+    [cell.contentView sendSubviewToBack:rightView];
     return  cell;
 }
 
@@ -250,8 +343,12 @@
     lbl_sectionTitle.backgroundColor=[UIColor whiteColor];
     NSDictionary *dic_group=[arr_groupList objectAtIndex:section];
     NSString *str_label=[dic_group objectForKey:@"label"];
-    lbl_sectionTitle.text=[NSString stringWithFormat:@"     %@",str_label];
-    
+    if (str_label!=nil) {
+        lbl_sectionTitle.text=[NSString stringWithFormat:@"     %@",str_label];
+    }
+    else {
+        lbl_sectionTitle.text=@"请稍后,正在加载中...";
+    }
     [view addSubview:lbl_sectionTitle];
     return view;
 }
@@ -260,18 +357,42 @@
     return 30;
 }
 
+-(void)tableView:(UITableView *)tb didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell=[tb cellForRowAtIndexPath:indexPath];
+    if ([cell isMemberOfClass:[PrintFileNavCell class]]) {
+        PrintFileNavCell *cell_nav=(PrintFileNavCell*)cell;
+        NSArray *tmp_Files=cell_nav.file_data;
+        NSArray *tmp_Title=cell_nav.file_title;
+        PrintFileDetail *viewController=[[PrintFileDetail alloc]init];
+        viewController.arr_data=tmp_Files;
+        viewController.arr_title=tmp_Title;
+        [self.navigationController pushViewController:viewController animated:YES];
+    }
+}
 
 //去掉hidden属性的UI数据
--(NSMutableArray*)DispalyUIWithoutHidden:(NSArray*)arr_ctl {
-    NSMutableArray *arr_m_ctl=[arr_ctl mutableCopy];
-    for (int i=0;i<[arr_m_ctl count];i++) {
-        NSDictionary *dic_sub_ctl=[arr_m_ctl objectAtIndex:i];
+-(NSMutableArray*)DispalyUIAdvance:(NSArray*)arr_ctl {
+    NSMutableArray *arr_my_ctl=[arr_ctl mutableCopy];
+    for (int i=0;i<[arr_my_ctl count];i++) {
+        NSDictionary *dic_sub_ctl=[arr_my_ctl objectAtIndex:i];
         NSString *str_sub_type=[dic_sub_ctl objectForKey:@"type"];
         if ([str_sub_type isEqualToString:@"hidden"]) {
-            [arr_m_ctl removeObject:dic_sub_ctl];
+            [arr_my_ctl removeObject:dic_sub_ctl];
+        }
+        else if ([str_sub_type isEqualToString:@"tableView"]) {
+            NSArray *arr_tabledata=[dic_sub_ctl objectForKey:@"tableData"];
+            NSUInteger i_count=[arr_tabledata count];
+            [arr_my_ctl removeAllObjects];
+            for (int i=0;i<i_count;i++) {
+                [arr_my_ctl addObject:dic_sub_ctl];
+            }
+            for (int i=0;i<i_count;i++) {
+                NSDictionary *dic_tmp_ctl=[arr_my_ctl objectAtIndex:i];
+                [dic_tmp_ctl setValue:[arr_tabledata objectAtIndex:i] forKey:@"tableDataContent"];
+            }
         }
     }
-    return arr_m_ctl;
+    return arr_my_ctl;
 }
 
 /*

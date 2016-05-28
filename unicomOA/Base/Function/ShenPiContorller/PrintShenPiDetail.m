@@ -293,6 +293,7 @@
         [cell.contentView sendSubviewToBack:leftView];
         [cell.contentView sendSubviewToBack:rightView];
     }
+    /*
     else if (indexPath.section==1) {
         PrintFiles *tmp_File=[_service.arr_PrintFiles objectAtIndex:(indexPath.row)];
         // PrintApplicationFileCell *cell=[PrintApplicationFileCell cellWithTable:tableView withTitle:@"周口太昊陵项目竣工验收图纸" withPages:24 withCopies:3 withCellHeight:100];
@@ -300,6 +301,7 @@
         cell.file=tmp_File;
         return cell;
     }
+    */
     else if (indexPath.section==2) {
         if (indexPath.row==0) {
             if (_service.shenpi_1!=nil) {
@@ -336,6 +338,7 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    /*
     if (indexPath.section==1) {
         PrintFileNavCell *cell=[tableView cellForRowAtIndexPath:indexPath];
         PrintFiles *tmp_Files=cell.file;
@@ -343,6 +346,7 @@
         viewController.file=tmp_Files;
         [self.navigationController pushViewController:viewController animated:YES];
     }
+     */
 }
 
 

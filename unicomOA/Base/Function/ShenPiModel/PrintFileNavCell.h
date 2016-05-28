@@ -9,12 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "PrintFiles.h"
 
-//申请详情中的复印文件
+//tableview类型的cell
 @interface PrintFileNavCell : UITableViewCell
 
-@property (nonatomic,strong) PrintFiles *file;
+@property (nonatomic,strong) NSArray *file_data;
+
+@property (nonatomic,strong) NSArray *file_title;
 
 /** 快速创建cell的方法*/
-+ (instancetype)cellWithTable:(UITableView *)tableView withTitle:(NSString*)str_Title withPages:(int)str_Pages withCopies:(int)str_copies  atIndexPath:(NSIndexPath*)indexPath;
++ (instancetype)cellWithTable:(UITableView *)tableView withTitle:(NSString*)str_Title withTileName:(NSString*)str_TitleName atIndexPath:(NSIndexPath*)indexPath;
 
 @end

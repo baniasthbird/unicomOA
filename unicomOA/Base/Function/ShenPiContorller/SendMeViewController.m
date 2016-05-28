@@ -14,7 +14,7 @@
 #import "CarService.h"
 #import "PrintService.h"
 #import "CarApplicationDetail.h"
-#import "PrintApplicationDetail.h"
+#import "PrintApplicationDetailCell.h"
 
 @interface SendMeViewController()<UITableViewDelegate,UITableViewDataSource>
 
@@ -432,9 +432,9 @@
         [self.navigationController pushViewController:viewController animated:YES];
     }
     else if ([cell.str_category isEqualToString:@"复印"]) {
-        PrintApplicationDetail *viewController=[[PrintApplicationDetail alloc]init];
-        viewController.service=cell.print_service;
-        [self.navigationController pushViewController:viewController animated:YES];
+       // PrintApplicationDetailCell *viewController=[[PrintApplicationDetailCell alloc]init];
+       // viewController.service=cell.print_service;
+       // [self.navigationController pushViewController:viewController animated:YES];
     }
 }
 
