@@ -16,6 +16,8 @@
 
 @property (nonatomic,strong) NSArray *file_title;
 
+@property (nonatomic,strong) NSString *str_label;
+
 /** 快速创建cell的方法*/
 + (instancetype)cellWithTable:(UITableView *)tableView withTitle:(NSString*)str_Title withTileName:(NSString*)str_TitleName atIndexPath:(NSIndexPath*)indexPath;
 

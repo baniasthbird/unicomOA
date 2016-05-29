@@ -15,4 +15,6 @@
 
 @property (nonatomic,strong) NSArray *arr_title;
 
+@property (nonatomic,strong) NSString *str_title;
+
 @end

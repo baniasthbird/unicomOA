@@ -920,6 +920,7 @@ void _IQShowLog(NSString *logString);
 /*  UIKeyboardWillShowNotification. */
 -(void)keyboardWillShow:(NSNotification*)aNotification
 {
+    
     _kbShowNotification = aNotification;
 	
 	if ([self privateIsEnabled] == NO)	return;
@@ -992,6 +993,7 @@ void _IQShowLog(NSString *logString);
     }
 
     _IQShowLog([NSString stringWithFormat:@"****** %@ ended ******",NSStringFromSelector(_cmd)]);
+     
 }
 
 /*  UIKeyboardWillHideNotification. So setting rootViewController to it's default frame. */
@@ -1229,6 +1231,9 @@ void _IQShowLog(NSString *logString);
                 shouldIgnore = YES;
                 break;
             }
+        }
+        if ([_textFieldView isKindOfClass:NSClassFromString(@"UISearchBarTextField")]) {
+            shouldIgnore=YES;
         }
         
         //If shouldn't ignore.

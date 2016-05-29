@@ -130,6 +130,8 @@
 		6846EC581CF99C7C00A400C5 /* IQToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6846EC461CF99C7C00A400C5 /* IQToolbar.m */; };
 		6846EC591CF99C7C00A400C5 /* IQUIView+IQKeyboardToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6846EC481CF99C7C00A400C5 /* IQUIView+IQKeyboardToolbar.m */; };
 		6846EC5A1CF99C7C00A400C5 /* IQKeyboardManager.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6846EC4B1CF99C7C00A400C5 /* IQKeyboardManager.bundle */; };
+		6846EC5D1CFA733900A400C5 /* ListFileController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6846EC5C1CFA733900A400C5 /* ListFileController.m */; };
+		6846EC601CFA897A00A400C5 /* NewsDetailVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 6846EC5F1CFA897A00A400C5 /* NewsDetailVc.m */; };
 		684A71571CD9DC2A00A892B1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 684A71561CD9DC2A00A892B1 /* UIKit.framework */; };
 		684A71591CD9DC4100A892B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 684A71581CD9DC4100A892B1 /* Foundation.framework */; };
 		684A715B1CD9DC4800A892B1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 684A715A1CD9DC4800A892B1 /* QuartzCore.framework */; };
@@ -495,6 +497,10 @@
 		6846EC481CF99C7C00A400C5 /* IQUIView+IQKeyboardToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IQUIView+IQKeyboardToolbar.m"; sourceTree = "<group>"; };
 		6846EC491CF99C7C00A400C5 /* KeyboardManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardManager.h; sourceTree = "<group>"; };
 		6846EC4B1CF99C7C00A400C5 /* IQKeyboardManager.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = IQKeyboardManager.bundle; sourceTree = "<group>"; };
+		6846EC5B1CFA733900A400C5 /* ListFileController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ListFileController.h; path = Base/Function/ShenPiContorller/ListFileController.h; sourceTree = "<group>"; };
+		6846EC5C1CFA733900A400C5 /* ListFileController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ListFileController.m; path = Base/Function/ShenPiContorller/ListFileController.m; sourceTree = "<group>"; };
+		6846EC5E1CFA897A00A400C5 /* NewsDetailVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsDetailVc.h; path = Base/Function/ShenPiContorller/NewsDetailVc.h; sourceTree = "<group>"; };
+		6846EC5F1CFA897A00A400C5 /* NewsDetailVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsDetailVc.m; path = Base/Function/ShenPiContorller/NewsDetailVc.m; sourceTree = "<group>"; };
 		684A71561CD9DC2A00A892B1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		684A71581CD9DC4100A892B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		684A715A1CD9DC4800A892B1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -1494,6 +1500,10 @@
 				68723EB51CF839DA0019ACD8 /* UnFinishVc.m */,
 				68723EB71CF839F50019ACD8 /* FinishVc.h */,
 				68723EB81CF839F50019ACD8 /* FinishVc.m */,
+				6846EC5B1CFA733900A400C5 /* ListFileController.h */,
+				6846EC5C1CFA733900A400C5 /* ListFileController.m */,
+				6846EC5E1CFA897A00A400C5 /* NewsDetailVc.h */,
+				6846EC5F1CFA897A00A400C5 /* NewsDetailVc.m */,
 			);
 			name = ShenPiController;
 			sourceTree = "<group>";
@@ -1970,6 +1980,7 @@
 				68462DCC1CF587540044A806 /* UILabel+LabelHeightAndWidth.m in Sources */,
 				2CE321101CC2810800B36793 /* DataSource.m in Sources */,
 				2CFEADC61C76A65E0054730E /* UIImage+ResizeImage.m in Sources */,
+				6846EC601CFA897A00A400C5 /* NewsDetailVc.m in Sources */,
 				6846D35C1CABAF4D004BD285 /* IVotingResultViewController.m in Sources */,
 				689713671CE30420008BB4AB /* FlowListCell.m in Sources */,
 				68E779E01CB34A8E006DA5B9 /* CLTreeView_LEVEL2_Cell.m in Sources */,
@@ -1994,6 +2005,7 @@
 				2CFEAD441C72B8B90054730E /* LGSettingItem.m in Sources */,
 				2CFEAD1D1C7173690054730E /* newPassWordViewController.m in Sources */,
 				68E779F91CB37D6A006DA5B9 /* Friend.m in Sources */,
+				6846EC5D1CFA733900A400C5 /* ListFileController.m in Sources */,
 				2CFEADBD1C76A6440054730E /* MessageCell.m in Sources */,
 				6838153C1CBCB5E700E6AFD3 /* ShenPiResultCell.m in Sources */,
 				683815451CBCE28500E6AFD3 /* PrintFileNavCell.m in Sources */,
