@@ -11,6 +11,7 @@
 #import "DataBase.h"
 #import "AFNetworking.h"
 #import "UILabel+LabelHeightAndWidth.h"
+#import "LXAlertView.h"
 
 
 
@@ -30,6 +31,8 @@
 
 @implementation NewsDisplayViewController {
     DataBase *db;
+    
+    UIActivityIndicatorView *indicator;
 }
 
 
@@ -50,7 +53,7 @@ int i_comment_num;
     
     //[barButtonItem setTitleTextAttributes:dict forState:UIControlStateNormal];
     self.navigationItem.leftBarButtonItem = barButtonItem;
-    
+    indicator=[self AddLoop];
     
     db=[DataBase sharedinstanceDB];
     
@@ -118,6 +121,10 @@ int i_comment_num;
     [self.view addSubview:_lbl_depart];
     [self.view addSubview:_lbl_label];
     [self.view addSubview:_wb_content];
+    
+    [indicator startAnimating];
+    [self.view addSubview:indicator];
+
     
    // self.delegate=self;
     
@@ -219,50 +226,90 @@ int i_comment_num;
 
 
 -(void)NewsContent:(NSMutableDictionary*)param {
-    NSString *str_newsContent= [db fetchInterface:@"NewsContent"];
-    NSString *str_ip=@"";
-    NSString *str_port=@"";
-    NSMutableArray *t_array=[db fetchIPAddress];
-    if (t_array.count==1) {
-        NSArray *arr_ip=[t_array objectAtIndex:0];
-        str_ip=[arr_ip objectAtIndex:0];
-        str_port=[arr_ip objectAtIndex:1];
-    }
-    NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_newsContent];
-    [_session POST:str_url parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
-        
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        NSDictionary *dic_news= [JSON objectForKey:@"news"];
-        if (dic_news.count>0) {
-            _lbl_label.text=[dic_news objectForKey:@"title"];
-            NSString *str_depart=[dic_news objectForKey:@"operationDeptName"];
-            NSString *str_operator=[dic_news objectForKey:@"operatorName"];
-            NSString *str_date=[dic_news objectForKey:@"addTime"];
-            NSArray *arr_date=[str_date componentsSeparatedByString:@" "];
-            NSString *str_day=[arr_date objectAtIndex:0];
-            NSString *str_departlabel=[NSString stringWithFormat:@"%@    %@    %@",str_depart,str_operator,str_day];
-            _lbl_depart.text=str_departlabel;
-            _h_depart=[UILabel_LabelHeightAndWidth getHeightByWidth:_lbl_depart.frame.size.width title:str_departlabel font:[UIFont systemFontOfSize:14]];
-            _lbl_depart.frame=CGRectMake(self.view.frame.size.width/32, _h_title+5, 15*self.view.frame.size.width/16, _h_depart);
-            [_lbl_depart sizeToFit];
-            NSString *str_content=[dic_news objectForKey:@"content"];
-            str_content=[NSString stringWithFormat:@"%@%@",_str_headscale,str_content];
-            [_wb_content loadHTMLString:str_content baseURL:nil];
-            NSString *str_readnum=[dic_news objectForKey:@"readNum"];
-            i_num=[str_readnum intValue];
-            
-            [self.view setNeedsDisplay];
+    NSString *str_connection=[self GetConnectionStatus];
+    if ([str_connection isEqualToString:@"wifi"] || [str_connection isEqualToString:@"GPRS"]) {
+        NSString *str_newsContent= [db fetchInterface:@"NewsContent"];
+        NSString *str_ip=@"";
+        NSString *str_port=@"";
+        NSMutableArray *t_array=[db fetchIPAddress];
+        if (t_array.count==1) {
+            NSArray *arr_ip=[t_array objectAtIndex:0];
+            str_ip=[arr_ip objectAtIndex:0];
+            str_port=[arr_ip objectAtIndex:1];
         }
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"返回新闻内容失败");
-    }];
+        NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_newsContent];
+        [_session POST:str_url parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
+            
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            NSDictionary *dic_news= [JSON objectForKey:@"news"];
+            if (dic_news.count>0) {
+                [indicator stopAnimating];
+                _lbl_label.text=[dic_news objectForKey:@"title"];
+                NSString *str_depart=[dic_news objectForKey:@"operationDeptName"];
+                NSString *str_operator=[dic_news objectForKey:@"operatorName"];
+                NSString *str_date=[dic_news objectForKey:@"addTime"];
+                NSArray *arr_date=[str_date componentsSeparatedByString:@" "];
+                NSString *str_day=[arr_date objectAtIndex:0];
+                NSString *str_departlabel=[NSString stringWithFormat:@"%@    %@    %@",str_depart,str_operator,str_day];
+                _lbl_depart.text=str_departlabel;
+                _h_depart=[UILabel_LabelHeightAndWidth getHeightByWidth:_lbl_depart.frame.size.width title:str_departlabel font:[UIFont systemFontOfSize:14]];
+                _lbl_depart.frame=CGRectMake(self.view.frame.size.width/32, _h_title+5, 15*self.view.frame.size.width/16, _h_depart);
+                [_lbl_depart sizeToFit];
+                NSString *str_content=[dic_news objectForKey:@"content"];
+                str_content=[NSString stringWithFormat:@"%@%@",_str_headscale,str_content];
+                [_wb_content loadHTMLString:str_content baseURL:nil];
+                NSString *str_readnum=[dic_news objectForKey:@"readNum"];
+                i_num=[str_readnum intValue];
+                
+                [self.view setNeedsDisplay];
+            }
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"返回新闻内容失败");
+        }];
+
+    }
+    else {
+        LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"警告" message:@"无网络连接" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+            
+        }];
+        [alert showLXAlertView];
+    }
     
 
 }
 
+-(NSString*)GetConnectionStatus {
+    NSString *currentNetWorkState=[[NSUserDefaults standardUserDefaults] objectForKey:@"connection"];
+    return currentNetWorkState;
+}
 
 
+
+//添加菊花等待图标
+-(UIActivityIndicatorView*)AddLoop {
+    //初始化:
+    UIActivityIndicatorView *l_indicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 80, 80)];
+    
+    l_indicator.tag = 103;
+    
+    //设置显示样式,见UIActivityIndicatorViewStyle的定义
+    l_indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
+    
+    
+    //设置背景色
+    l_indicator.backgroundColor = [UIColor blackColor];
+    
+    //设置背景透明
+    l_indicator.alpha = 0.5;
+    
+    //设置背景为圆角矩形
+    l_indicator.layer.cornerRadius = 6;
+    l_indicator.layer.masksToBounds = YES;
+    //设置显示位置
+    [l_indicator setCenter:CGPointMake(self.view.frame.size.width / 2.0, self.view.frame.size.height / 2.0)];
+    return l_indicator;
+}
 /*
  
 #pragma mark - Navigation

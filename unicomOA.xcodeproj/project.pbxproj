@@ -132,6 +132,9 @@
 		6846EC5A1CF99C7C00A400C5 /* IQKeyboardManager.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6846EC4B1CF99C7C00A400C5 /* IQKeyboardManager.bundle */; };
 		6846EC5D1CFA733900A400C5 /* ListFileController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6846EC5C1CFA733900A400C5 /* ListFileController.m */; };
 		6846EC601CFA897A00A400C5 /* NewsDetailVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 6846EC5F1CFA897A00A400C5 /* NewsDetailVc.m */; };
+		6846EC631CFAA68000A400C5 /* ShenPiQueryLogVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6846EC621CFAA68000A400C5 /* ShenPiQueryLogVC.m */; };
+		6846EC6C1CFAD48300A400C5 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 6846EC691CFAD48300A400C5 /* Reachability.m */; };
+		6846EC6D1CFAD48300A400C5 /* YBMonitorNetWorkState.m in Sources */ = {isa = PBXBuildFile; fileRef = 6846EC6B1CFAD48300A400C5 /* YBMonitorNetWorkState.m */; };
 		684A71571CD9DC2A00A892B1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 684A71561CD9DC2A00A892B1 /* UIKit.framework */; };
 		684A71591CD9DC4100A892B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 684A71581CD9DC4100A892B1 /* Foundation.framework */; };
 		684A715B1CD9DC4800A892B1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 684A715A1CD9DC4800A892B1 /* QuartzCore.framework */; };
@@ -501,6 +504,12 @@
 		6846EC5C1CFA733900A400C5 /* ListFileController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ListFileController.m; path = Base/Function/ShenPiContorller/ListFileController.m; sourceTree = "<group>"; };
 		6846EC5E1CFA897A00A400C5 /* NewsDetailVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsDetailVc.h; path = Base/Function/ShenPiContorller/NewsDetailVc.h; sourceTree = "<group>"; };
 		6846EC5F1CFA897A00A400C5 /* NewsDetailVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsDetailVc.m; path = Base/Function/ShenPiContorller/NewsDetailVc.m; sourceTree = "<group>"; };
+		6846EC611CFAA68000A400C5 /* ShenPiQueryLogVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShenPiQueryLogVC.h; path = Base/Function/ShenPiContorller/ShenPiQueryLogVC.h; sourceTree = "<group>"; };
+		6846EC621CFAA68000A400C5 /* ShenPiQueryLogVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShenPiQueryLogVC.m; path = Base/Function/ShenPiContorller/ShenPiQueryLogVC.m; sourceTree = "<group>"; };
+		6846EC681CFAD48300A400C5 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = OpenSource/Network/Reachability.h; sourceTree = "<group>"; };
+		6846EC691CFAD48300A400C5 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = OpenSource/Network/Reachability.m; sourceTree = "<group>"; };
+		6846EC6A1CFAD48300A400C5 /* YBMonitorNetWorkState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YBMonitorNetWorkState.h; path = OpenSource/Network/YBMonitorNetWorkState.h; sourceTree = "<group>"; };
+		6846EC6B1CFAD48300A400C5 /* YBMonitorNetWorkState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YBMonitorNetWorkState.m; path = OpenSource/Network/YBMonitorNetWorkState.m; sourceTree = "<group>"; };
 		684A71561CD9DC2A00A892B1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		684A71581CD9DC4100A892B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		684A715A1CD9DC4800A892B1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -1228,6 +1237,7 @@
 		6846D35D1CABC483004BD285 /* OpenSource */ = {
 			isa = PBXGroup;
 			children = (
+				6846EC671CFAD43200A400C5 /* NetWork */,
 				6846EC261CF99C7C00A400C5 /* IQKeyboardManager */,
 				6884D2CD1CD98B4A006215E5 /* UIView-MGBadgeView */,
 				681FFC711CC7828F0086A934 /* LXAlertView */,
@@ -1326,6 +1336,17 @@
 				6846EC4B1CF99C7C00A400C5 /* IQKeyboardManager.bundle */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		6846EC671CFAD43200A400C5 /* NetWork */ = {
+			isa = PBXGroup;
+			children = (
+				6846EC681CFAD48300A400C5 /* Reachability.h */,
+				6846EC691CFAD48300A400C5 /* Reachability.m */,
+				6846EC6A1CFAD48300A400C5 /* YBMonitorNetWorkState.h */,
+				6846EC6B1CFAD48300A400C5 /* YBMonitorNetWorkState.m */,
+			);
+			name = NetWork;
 			sourceTree = "<group>";
 		};
 		6884D2CD1CD98B4A006215E5 /* UIView-MGBadgeView */ = {
@@ -1504,6 +1525,8 @@
 				6846EC5C1CFA733900A400C5 /* ListFileController.m */,
 				6846EC5E1CFA897A00A400C5 /* NewsDetailVc.h */,
 				6846EC5F1CFA897A00A400C5 /* NewsDetailVc.m */,
+				6846EC611CFAA68000A400C5 /* ShenPiQueryLogVC.h */,
+				6846EC621CFAA68000A400C5 /* ShenPiQueryLogVC.m */,
 			);
 			name = ShenPiController;
 			sourceTree = "<group>";
@@ -1862,6 +1885,7 @@
 				68DEEBE01CBE1D61003DB7AA /* ShenPiCopy.m in Sources */,
 				68DEEBC51CBDCED6003DB7AA /* MyShenPiViewController.m in Sources */,
 				2CE320F11CB7FF4800B36793 /* CarApplication.m in Sources */,
+				6846EC6C1CFAD48300A400C5 /* Reachability.m in Sources */,
 				68579FA31CC0BBCE00597FBD /* ShenPiAgreeWithCarDeploy.m in Sources */,
 				6846EC4D1CF99C7C00A400C5 /* IQUIScrollView+Additions.m in Sources */,
 				68EEDE771CBB911A003295EB /* MCPopMenuViewController.m in Sources */,
@@ -1894,6 +1918,7 @@
 				68008F541CDAE446001A4D64 /* MapViewController.m in Sources */,
 				682B68B61CB64482002EC60F /* AddPrintFile.m in Sources */,
 				68ED4E581CB507B9000E8A7B /* PrintApplicationFileCell.m in Sources */,
+				6846EC631CFAA68000A400C5 /* ShenPiQueryLogVC.m in Sources */,
 				68D05CC71C97F6470039220F /* AboutViewController.m in Sources */,
 				68579FA61CC0C21100597FBD /* CarModel.m in Sources */,
 				6822656F1C96B4C400AB29C0 /* NewsSettingViewController.m in Sources */,
@@ -1953,6 +1978,7 @@
 				68E779FA1CB37D6A006DA5B9 /* FriendGroup.m in Sources */,
 				682B68BC1CB64FDE002EC60F /* AddPrintRadioCell.m in Sources */,
 				2CFEADF01C7C06CB0054730E /* MenuItemModel.m in Sources */,
+				6846EC6D1CFAD48300A400C5 /* YBMonitorNetWorkState.m in Sources */,
 				2CFEADF31C7C27020054730E /* UIViewExt.m in Sources */,
 				2CFEAD191C7168980054730E /* LoginViewController.m in Sources */,
 				2CFEAD451C72B8B90054730E /* LGSettingSection.m in Sources */,

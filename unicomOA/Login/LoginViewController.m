@@ -17,10 +17,11 @@
 #import "DataBase.h"
 #import "AFNetworkReachabilityManager.h"
 #import "settingPasswordViewController.h"
+#import "YBMonitorNetWorkState.h"
 
 
 
-@interface LoginViewController()<UITextFieldDelegate>
+@interface LoginViewController()<UITextFieldDelegate,YBMonitorNetWorkStateDelegate>
 {
     UIImageView *View;
     UIView *bgView;
@@ -50,7 +51,10 @@
 
 
 @implementation LoginViewController {
-     DataBase *db;
+    DataBase *db;
+    NSString *str_reachable;
+    
+    UIActivityIndicatorView *indicator;
 }
 
 static NSString *kServerSessionCookie=@"JSESSIONID";
@@ -101,6 +105,13 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     [self.view addGestureRecognizer:singleTap];
 
     db=[DataBase sharedinstanceDB];
+    
+    // 设置代理
+    [YBMonitorNetWorkState shareMonitorNetWorkState].delegate = self;
+    // 添加网络监听
+    [[YBMonitorNetWorkState shareMonitorNetWorkState] addMonitorNetWorkState];
+    
+    [self netWorkStateChanged];
 }
 
 -(void)createLabels {
@@ -237,6 +248,9 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     }
     else {
      */
+    
+    
+    
     [self postLogin];
    // }
     
@@ -415,6 +429,31 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     
 }
 
+//添加菊花等待图标
+-(UIActivityIndicatorView*)AddLoop {
+        //初始化:
+        UIActivityIndicatorView *l_indicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 80, 80)];
+        
+        l_indicator.tag = 103;
+        
+        //设置显示样式,见UIActivityIndicatorViewStyle的定义
+        l_indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
+        
+        
+        //设置背景色
+        l_indicator.backgroundColor = [UIColor blackColor];
+        
+        //设置背景透明
+        l_indicator.alpha = 0.5;
+        
+        //设置背景为圆角矩形
+        l_indicator.layer.cornerRadius = 6;
+        l_indicator.layer.masksToBounds = YES;
+        //设置显示位置
+        [l_indicator setCenter:CGPointMake(self.view.frame.size.width / 2.0, self.view.frame.size.height / 2.0)];
+    return l_indicator;
+}
+
 
 -(void)postLogin {
     NSString *str_ip=@"";
@@ -428,6 +467,8 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     NSString *str_interface=[db fetchInterface:@"Login"];
     NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_interface];
 
+    [_session.requestSerializer setTimeoutInterval:20.0];
+    
     NSString *str_username=user.text;
     str_username= [str_username stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     NSString *str_password=pwd.text;
@@ -437,49 +478,62 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
      //_params[@"username"]=@"sysadmin";
     // _params[@"password"]=@"000000";
     
-    [_session POST:str_url parameters:_params progress:^(NSProgress * _Nonnull uploadProgress) {
-        
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"请求成功:%@",responseObject);
-        NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        if (JSON.count==1) {
-            NSDictionary *dic_exp=[JSON objectForKey:@"exception"];
-            NSString *str_message=[dic_exp objectForKey:@"message"];
-            str_message=[NSString stringWithFormat:@"%@%@",@"未能登录成功，",str_message];
-            LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"警告" message:str_message cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
-               
-            }];
-            [alert showLXAlertView];
-
-            
-        }
-        else if (JSON.count==3) {
-            NSLog(@"请求JSON成功:%@",JSON);
-            NSString *str_success=[JSON objectForKey:@"success"];
-            BOOL b_success=[str_success boolValue];
-            if (b_success==YES) {
-                [self saveLoginSession:str_url];
-                NSDictionary *dic_usr=[JSON objectForKey:@"userInfo"];
-                // [self postLogin2];
-                [self MoveToNextPage:dic_usr];
-            }
-            else {
-                NSString *str_msg=[JSON objectForKey:@"msg"];
-                LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"警告" message:str_msg cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+    indicator=[self AddLoop];
+    [indicator startAnimating];
+    [self.view addSubview:indicator];
+    
+    if ([str_reachable isEqualToString:@"wifi"] || [str_reachable isEqualToString:@"GPRS"])
+    {
+        [_session POST:str_url parameters:_params progress:^(NSProgress * _Nonnull uploadProgress) {
+            NSLog(@"正在加载");
+           
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            if (JSON.count==1) {
+                NSDictionary *dic_exp=[JSON objectForKey:@"exception"];
+                NSString *str_message=[dic_exp objectForKey:@"message"];
+                str_message=[NSString stringWithFormat:@"%@%@",@"未能登录成功，",str_message];
+                LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"警告" message:str_message cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
                     
                 }];
                 [alert showLXAlertView];
-
             }
+            else if (JSON.count==3) {
+                [indicator stopAnimating];
+                NSLog(@"请求JSON成功");
+                NSString *str_success=[JSON objectForKey:@"success"];
+                BOOL b_success=[str_success boolValue];
+                if (b_success==YES) {
+                    [self saveLoginSession:str_url];
+                    NSDictionary *dic_usr=[JSON objectForKey:@"userInfo"];
+                    // [self postLogin2];
+                    [self MoveToNextPage:dic_usr];
+                }
+                else {
+                    NSString *str_msg=[JSON objectForKey:@"msg"];
+                    LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"警告" message:str_msg cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+                        
+                    }];
+                    [alert showLXAlertView];
+                }
+            }
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"警告" message:@"请求失败，进入离线模式" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+                
+            }];
+            [alert showLXAlertView];
+            NSLog(@"请求失败:%@ %@",error.description,@"进入离线模式");
+            _i_Success=NO;
+            [self LocalEnter];
+        } ];
+    }
+    else {
+        LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"警告" message:@"无网络连接" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
             
-        }
-        
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"请求失败:%@ %@",error.description,@"进入离线模式");
-        _i_Success=NO;
-       [self LocalEnter];
-    } ];
+        }];
+        [alert showLXAlertView];
+    }
+    
     
 }
 
@@ -528,6 +582,7 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     [defaults setObject:data forKey:@"user"];
     [defaults synchronize];
 }
+
 
 
 // 4.
@@ -613,6 +668,19 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
 -(void)fingerTapped:(UITapGestureRecognizer *)gestureRecognizer {
     [pwd resignFirstResponder];
     [user resignFirstResponder];
+}
+
+
+#pragma mark 网络监听代理方法，当网络状态发生改变的时候出发
+-(void)netWorkStateChanged {
+    // 获取当前网络类型
+    NSString *currentNetWorkState = [[YBMonitorNetWorkState shareMonitorNetWorkState] getCurrentNetWorkType];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:currentNetWorkState forKey:@"connection"];
+    [defaults synchronize];
+    
+    str_reachable=currentNetWorkState;
+
 }
 
 @end

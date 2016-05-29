@@ -110,39 +110,49 @@
 
 
 -(void)GetFlowList:(NSMutableDictionary*)param {
-    db=[DataBase sharedinstanceDB];
-    NSString *str_ip=@"";
-    NSString *str_port=@"";
-    NSMutableArray *t_array=[db fetchIPAddress];
-    if (t_array.count==1) {
-        NSArray *arr_ip=[t_array objectAtIndex:0];
-        str_ip=[arr_ip objectAtIndex:0];
-        str_port=[arr_ip objectAtIndex:1];
-    }
-    NSString *str_FlowList=[db fetchInterface:@"TaskRemind"];
-    NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_FlowList];
-    [_session POST:str_url parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
-        
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"请求待办流程成功:%@",responseObject);
-        NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        NSString *str_success=[JSON objectForKey:@"success"];
-        int i_success=[str_success intValue];
-        if (i_success==1) {
-            _str_totalPage=[JSON objectForKey:@"totalPage"];
-            _lbl_totalpages.text=[NSString stringWithFormat:@"%@%@",@"\\",_str_totalPage];
-            NSArray *arr_tmp=[JSON objectForKey:@"list"];
-            for (int i=0;i<[arr_tmp count];i++) {
-                [_arr_ContentList addObject:[arr_tmp objectAtIndex:i]];
-            }
-            //[_arr_ContentList addObject:arr_tmp];
-            [self.tableview reloadData];
+    NSString *str_connection=[self GetConnectionStatus];
+    if ([str_connection isEqualToString:@"wifi"] || [str_connection isEqualToString:@"GPRS"]) {
+        db=[DataBase sharedinstanceDB];
+        NSString *str_ip=@"";
+        NSString *str_port=@"";
+        NSMutableArray *t_array=[db fetchIPAddress];
+        if (t_array.count==1) {
+            NSArray *arr_ip=[t_array objectAtIndex:0];
+            str_ip=[arr_ip objectAtIndex:0];
+            str_port=[arr_ip objectAtIndex:1];
         }
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-         NSLog(@"请求失败");
-        
-    }];
+        NSString *str_FlowList=[db fetchInterface:@"TaskRemind"];
+        NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_FlowList];
+        [_session POST:str_url parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
+            
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            NSLog(@"请求待办流程成功:%@",responseObject);
+            NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            NSString *str_success=[JSON objectForKey:@"success"];
+            int i_success=[str_success intValue];
+            if (i_success==1) {
+                _str_totalPage=[JSON objectForKey:@"totalPage"];
+                _lbl_totalpages.text=[NSString stringWithFormat:@"%@%@",@"\\",_str_totalPage];
+                NSArray *arr_tmp=[JSON objectForKey:@"list"];
+                for (int i=0;i<[arr_tmp count];i++) {
+                    [_arr_ContentList addObject:[arr_tmp objectAtIndex:i]];
+                }
+                //[_arr_ContentList addObject:arr_tmp];
+                [self.tableview reloadData];
+            }
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"请求失败");
+            
+        }];
 
+    }
+    else {
+        LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"警告" message:@"无网络连接" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+            
+        }];
+        [alert showLXAlertView];
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -256,6 +266,10 @@
     }
 }
 
+-(NSString*)GetConnectionStatus {
+    NSString *currentNetWorkState=[[NSUserDefaults standardUserDefaults] objectForKey:@"connection"];
+    return currentNetWorkState;
+}
 /*
 #pragma mark - Navigation
 

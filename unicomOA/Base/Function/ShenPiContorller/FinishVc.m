@@ -13,6 +13,7 @@
 #import "PrintFileNavCell.h"
 #import "PrintFileDetail.h"
 #import "NewsDetailVc.h"
+#import "ShenPiQueryLogVC.h"
 
 @interface FinishVc ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -33,6 +34,8 @@
     NSDictionary *dic_ctl;
     
     NSMutableDictionary *dic_m_ctl;
+    
+    UIActivityIndicatorView *indicator;
 }
 
 - (void)viewDidLoad {
@@ -63,6 +66,8 @@
     _session.responseSerializer= [AFHTTPResponseSerializer serializer];
     [_session.requestSerializer setHTTPShouldHandleCookies:YES];
     
+    indicator=[self AddLoop];
+    
     NSMutableDictionary *dic_param=[NSMutableDictionary dictionary];
     dic_param[@"processInstID"]=_str_processInstID;
     [self PrePareData:dic_param];
@@ -74,6 +79,9 @@
     tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     
     [self.view addSubview:tableView];
+    
+    [indicator startAnimating];
+    [self.view addSubview:indicator];
 }
 
 
@@ -89,63 +97,75 @@
 
 
 -(void)PrePareData:(NSMutableDictionary*)param {
-    NSString *str_ip=@"";
-    NSString *str_port=@"";
-    NSMutableArray *t_array=[db fetchIPAddress];
-    if (t_array.count==1) {
-        NSArray *arr_ip=[t_array objectAtIndex:0];
-        str_ip=[arr_ip objectAtIndex:0];
-        str_port=[arr_ip objectAtIndex:1];
-    }
-    NSString *str_urldata=_str_url;
-    NSCharacterSet *whitespace = [NSCharacterSet  whitespaceAndNewlineCharacterSet];
-    str_urldata= [str_urldata stringByTrimmingCharactersInSet:whitespace];
-    NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_urldata];
-    [_session POST:str_url parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
-        
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        NSDictionary *dic_exp=[JSON objectForKey:@"exception"];
-        if (dic_exp!=nil) {
-            NSString *str_msg=[dic_exp objectForKey:@"message"];
-            LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"异常" message:str_msg cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
-               
-            }];
-            [alert showLXAlertView];
-            return;
+    NSString *str_connection=[self GetConnectionStatus];
+    if ([str_connection isEqualToString:@"wifi"] || [str_connection isEqualToString:@"GPRS"]) {
+        NSString *str_ip=@"";
+        NSString *str_port=@"";
+        NSMutableArray *t_array=[db fetchIPAddress];
+        if (t_array.count==1) {
+            NSArray *arr_ip=[t_array objectAtIndex:0];
+            str_ip=[arr_ip objectAtIndex:0];
+            str_port=[arr_ip objectAtIndex:1];
         }
-        else {
-            NSDictionary *dic_result= [JSON objectForKey:@"result"];
-            if (dic_result!=nil) {
-                NSString *str_success=[dic_result objectForKey:@"success"];
-                BOOL b_success=[str_success boolValue];
-                if (b_success==YES) {
-                    NSLog(@"获取界面成功!");
-                    arr_groupList=[dic_result objectForKey:@"groupList"];
-                    arr_ctlList=[dic_result objectForKey:@"ctlList"];
-                    dic_ctl=[self manageData:arr_groupList ctlList:arr_ctlList];
-                    dic_m_ctl=[self DispalyUIAdvance:dic_ctl];
-                    str_url_postdata=[dic_result objectForKey:@"url"];
-                    [tableView reloadData];
-                }
+        NSString *str_urldata=_str_url;
+        NSCharacterSet *whitespace = [NSCharacterSet  whitespaceAndNewlineCharacterSet];
+        str_urldata= [str_urldata stringByTrimmingCharactersInSet:whitespace];
+        NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_urldata];
+        [_session POST:str_url parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
+            
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            NSDictionary *dic_exp=[JSON objectForKey:@"exception"];
+            if (dic_exp!=nil) {
+                [indicator stopAnimating];
+                NSString *str_msg=[dic_exp objectForKey:@"message"];
+                LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"异常" message:str_msg cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+                    
+                }];
+                [alert showLXAlertView];
+                return;
             }
             else {
-                NSString *str_success=[JSON objectForKey:@"success"];
-                BOOL b_success=[str_success boolValue];
-                if (b_success==YES) {
-                    NSLog(@"获取界面成功!");
-                    arr_groupList=[JSON objectForKey:@"groupList"];
-                    arr_ctlList=[JSON objectForKey:@"ctlList"];
-                    dic_ctl=[self manageData:arr_groupList ctlList:arr_ctlList];
-                    dic_m_ctl=[self DispalyUIAdvance:dic_ctl];
-                    str_url_postdata=[JSON objectForKey:@"url"];
-                    [tableView reloadData];
+                NSDictionary *dic_result= [JSON objectForKey:@"result"];
+                if (dic_result!=nil) {
+                    NSString *str_success=[dic_result objectForKey:@"success"];
+                    BOOL b_success=[str_success boolValue];
+                    if (b_success==YES) {
+                        [indicator stopAnimating];
+                        NSLog(@"获取界面成功!");
+                        arr_groupList=[dic_result objectForKey:@"groupList"];
+                        arr_ctlList=[dic_result objectForKey:@"ctlList"];
+                        dic_ctl=[self manageData:arr_groupList ctlList:arr_ctlList];
+                        dic_m_ctl=[self DispalyUIAdvance:dic_ctl];
+                        str_url_postdata=[dic_result objectForKey:@"url"];
+                        [tableView reloadData];
+                    }
+                }
+                else {
+                    NSString *str_success=[JSON objectForKey:@"success"];
+                    BOOL b_success=[str_success boolValue];
+                    if (b_success==YES) {
+                        [indicator stopAnimating];
+                        NSLog(@"获取界面成功!");
+                        arr_groupList=[JSON objectForKey:@"groupList"];
+                        arr_ctlList=[JSON objectForKey:@"ctlList"];
+                        dic_ctl=[self manageData:arr_groupList ctlList:arr_ctlList];
+                        dic_m_ctl=[self DispalyUIAdvance:dic_ctl];
+                        str_url_postdata=[JSON objectForKey:@"url"];
+                        [tableView reloadData];
+                    }
                 }
             }
-        }
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"获取界面失败");
-    }];
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"获取界面失败");
+        }];
+    }
+    else {
+        LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"警告" message:@"无网络连接" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+            
+        }];
+        [alert showLXAlertView];
+    }
     
 }
 
@@ -175,10 +195,16 @@
 -(void)Submit:(UIButton*)sender {
     //提交申请
     // NSMutableDictionary *dic_submit=[[NSMutableDictionary alloc]init];
-   
+    ShenPiQueryLogVC *vc=[[ShenPiQueryLogVC alloc]init];
+    vc.str_processInstID=_str_processInstID;
+    [self.navigationController pushViewController:vc animated:YES];
     
 }
 
+-(NSString*)GetConnectionStatus {
+    NSString *currentNetWorkState=[[NSUserDefaults standardUserDefaults] objectForKey:@"connection"];
+    return currentNetWorkState;
+}
 
 #pragma mark tableView方法
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -427,6 +453,32 @@
         }
     }
     return dic_my_ctl;
+}
+
+
+//添加菊花等待图标
+-(UIActivityIndicatorView*)AddLoop {
+    //初始化:
+    UIActivityIndicatorView *l_indicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 80, 80)];
+    
+    l_indicator.tag = 103;
+    
+    //设置显示样式,见UIActivityIndicatorViewStyle的定义
+    l_indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
+    
+    
+    //设置背景色
+    l_indicator.backgroundColor = [UIColor blackColor];
+    
+    //设置背景透明
+    l_indicator.alpha = 0.5;
+    
+    //设置背景为圆角矩形
+    l_indicator.layer.cornerRadius = 6;
+    l_indicator.layer.masksToBounds = YES;
+    //设置显示位置
+    [l_indicator setCenter:CGPointMake(self.view.frame.size.width / 2.0, self.view.frame.size.height / 2.0)];
+    return l_indicator;
 }
 
 /*

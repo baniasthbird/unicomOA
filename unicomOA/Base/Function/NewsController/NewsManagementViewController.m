@@ -56,6 +56,8 @@
     NSMutableArray *arr_searchList;
     
     NSMutableArray *arr_tmpList;
+    
+    UIActivityIndicatorView *indicator;
 }
 
 
@@ -94,6 +96,8 @@
     
     arr_tmpList=[[NSMutableArray alloc]init];
     
+    indicator=[self AddLoop];
+    
     db=[DataBase sharedinstanceDB];
     
     _session=[AFHTTPSessionManager manager];
@@ -109,7 +113,9 @@
     _news_param[@"classId"]=@"0";
     [self NewsList:_news_param];
     
-    
+    [indicator startAnimating];
+    [self.view addSubview:indicator];
+
     
     
     
@@ -158,42 +164,53 @@
 //获得最新新闻
 //0525 筛选在下拉刷新后有问题，逻辑需重新梳理
 -(void)NewsList:(NSMutableDictionary*)param {
-    NSString *str_newsList= [db fetchInterface:@"NewsList"];
-    NSString *str_ip=@"";
-    NSString *str_port=@"";
-    NSMutableArray *t_array=[db fetchIPAddress];
-    if (t_array.count==1) {
-        NSArray *arr_ip=[t_array objectAtIndex:0];
-        str_ip=[arr_ip objectAtIndex:0];
-        str_port=[arr_ip objectAtIndex:1];
-    }
-    NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_newsList];
-    [_session POST:str_url parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
-        
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
-        NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        NSString *str_success= [JSON objectForKey:@"success"];
-        BOOL b_success=[str_success boolValue];
-        if (b_success==1) {
-            NSLog(@"获取新闻列表成功:%@",responseObject);
-            NSObject *obj=[JSON objectForKey:@"totalPage"];
-            NSNumber *l_totalPage=(NSNumber*)obj;
-            _i_pageTotal=[l_totalPage integerValue];
-            NSNumberFormatter *numberFormatter=[[NSNumberFormatter alloc]init];
-            NSString *str_totalPage=[numberFormatter stringFromNumber:l_totalPage];
-            _lbl_label.text=[NSString stringWithFormat:@"/%@",str_totalPage];
-            NSArray *arr_tmp=[JSON objectForKey:@"list"];
-            for (int i=0;i<[arr_tmp count];i++) {
-                [_arr_NewsList addObject:[arr_tmp objectAtIndex:i]];
-            }
-            [self.tableView reloadData];
+    NSString *str_connection=[self GetConnectionStatus];
+    if ([str_connection isEqualToString:@"wifi"] || [str_connection isEqualToString:@"GPRS"]) {
+        NSString *str_newsList= [db fetchInterface:@"NewsList"];
+        NSString *str_ip=@"";
+        NSString *str_port=@"";
+        NSMutableArray *t_array=[db fetchIPAddress];
+        if (t_array.count==1) {
+            NSArray *arr_ip=[t_array objectAtIndex:0];
+            str_ip=[arr_ip objectAtIndex:0];
+            str_port=[arr_ip objectAtIndex:1];
         }
-        
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"获取新闻列表失败");
-    }];
+        NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_newsList];
+        [_session POST:str_url parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
+            
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            
+            NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            NSString *str_success= [JSON objectForKey:@"success"];
+            BOOL b_success=[str_success boolValue];
+            if (b_success==1) {
+                [indicator stopAnimating];
+                NSLog(@"获取新闻列表成功:%@",responseObject);
+                NSObject *obj=[JSON objectForKey:@"totalPage"];
+                NSNumber *l_totalPage=(NSNumber*)obj;
+                _i_pageTotal=[l_totalPage integerValue];
+                NSNumberFormatter *numberFormatter=[[NSNumberFormatter alloc]init];
+                NSString *str_totalPage=[numberFormatter stringFromNumber:l_totalPage];
+                _lbl_label.text=[NSString stringWithFormat:@"/%@",str_totalPage];
+                NSArray *arr_tmp=[JSON objectForKey:@"list"];
+                for (int i=0;i<[arr_tmp count];i++) {
+                    [_arr_NewsList addObject:[arr_tmp objectAtIndex:i]];
+                }
+                [self.tableView reloadData];
+            }
+            
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"获取新闻列表失败");
+        }];
+
+    }
+    else {
+        LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"警告" message:@"无网络连接" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+            
+        }];
+        [alert showLXAlertView];
+    }
     
 }
 
@@ -638,5 +655,38 @@
         [self.tableView reloadData];
     }
 }
+
+
+-(NSString*)GetConnectionStatus {
+    NSString *currentNetWorkState=[[NSUserDefaults standardUserDefaults] objectForKey:@"connection"];
+    return currentNetWorkState;
+}
+
+
+//添加菊花等待图标
+-(UIActivityIndicatorView*)AddLoop {
+    //初始化:
+    UIActivityIndicatorView *l_indicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 80, 80)];
+    
+    l_indicator.tag = 103;
+    
+    //设置显示样式,见UIActivityIndicatorViewStyle的定义
+    l_indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
+    
+    
+    //设置背景色
+    l_indicator.backgroundColor = [UIColor blackColor];
+    
+    //设置背景透明
+    l_indicator.alpha = 0.5;
+    
+    //设置背景为圆角矩形
+    l_indicator.layer.cornerRadius = 6;
+    l_indicator.layer.masksToBounds = YES;
+    //设置显示位置
+    [l_indicator setCenter:CGPointMake(self.view.frame.size.width / 2.0, self.view.frame.size.height / 2.0)];
+    return l_indicator;
+}
+
 
 @end

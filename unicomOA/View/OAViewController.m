@@ -113,7 +113,7 @@
     NTButton *button=self.tabBar.subviews[0];
     [self changeViewController:button];
     
-    UITabBarItem *item= [self.tabBar.items objectAtIndex:2];
+  //  UITabBarItem *item= [self.tabBar.items objectAtIndex:2];
    // item.badgeValue=@"2";
    // [self.tabBar.items objectAtIndex:2].badgeValue=@"1";
     

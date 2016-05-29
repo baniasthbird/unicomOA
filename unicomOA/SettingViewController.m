@@ -18,9 +18,10 @@
 #import "AFHTTPSessionManager.h"
 #import "DataBase.h"
 #import "LoginViewController.h"
+#import "YBMonitorNetWorkState.h"
 
 
-@interface SettingViewController ()
+@interface SettingViewController ()<YBMonitorNetWorkStateDelegate>
 @property (strong,nonatomic) NSMutableArray *groups;
 
 //连接
@@ -142,6 +143,12 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
     item4.type=UITableViewCellAccessoryNone   ;
     [section4 addItem:item4];
     
+    // 设置代理
+    [YBMonitorNetWorkState shareMonitorNetWorkState].delegate = self;
+    // 添加网络监听
+    [[YBMonitorNetWorkState shareMonitorNetWorkState] addMonitorNetWorkState];
+    
+    [self netWorkStateChanged];
 
    // [section4 addItemWithTitle:@"退出当前账号"];
     [self.groups addObject:section4];
@@ -372,6 +379,8 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
 
 
 -(void)QuitUser:(UIButton*)sender {
+    NSString *str_connection=[self GetConnectionStatus];
+    if ([str_connection isEqualToString:@"wifi"] || [str_connection isEqualToString:@"GPRS"]) {
         NSString *str_ip=@"";
         NSString *str_port=@"";
         NSMutableArray *t_array=[db fetchIPAddress];
@@ -395,7 +404,7 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
                 NSLog(@"退出成功");
                 //显示登陆
                 //显示未登陆
-               // [self ClearUserInfo];
+                // [self ClearUserInfo];
                 [self QuitApp];
             }
             
@@ -403,6 +412,13 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
             //离线模式
             
         }];
+    }
+    else {
+        LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"警告" message:@"无网络连接" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+            
+        }];
+        [alert showLXAlertView];
+    }
     
     
 }
@@ -460,7 +476,10 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
     
 }
 
-
+-(NSString*)GetConnectionStatus {
+    NSString *currentNetWorkState=[[NSUserDefaults standardUserDefaults] objectForKey:@"connection"];
+    return currentNetWorkState;
+}
 
 /*
  

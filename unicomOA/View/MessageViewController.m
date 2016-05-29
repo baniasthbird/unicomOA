@@ -12,9 +12,11 @@
 #import "NewsManagementTableViewCell.h"
 #import "NewsDisplayViewController.h"
 #import "UILabel+LabelHeightAndWidth.h"
+#import "YBMonitorNetWorkState.h"
+#import "LXAlertView.h"
 
 
-@interface MessageViewController ()<UITableViewDelegate,UITableViewDataSource,NewsTapDelegate>
+@interface MessageViewController ()<UITableViewDelegate,UITableViewDataSource,NewsTapDelegate,YBMonitorNetWorkStateDelegate>
 
 @property (nonatomic,strong) UITableView *tableView;
 
@@ -34,6 +36,7 @@
 
 @implementation MessageViewController {
     DataBase *db;
+    UIActivityIndicatorView *indicator;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -74,12 +77,18 @@
     
     [self.view addSubview:_tableView];
     
+   
+    
+    
     db=[DataBase sharedinstanceDB];
     
     _session=[AFHTTPSessionManager manager];
     _session.responseSerializer= [AFHTTPResponseSerializer serializer];
     [_session.requestSerializer setHTTPShouldHandleCookies:YES];
     
+    indicator=[self AddLoop];
+    [indicator startAnimating];
+    [self.view addSubview:indicator];
     
     NSMutableDictionary *news_param=[NSMutableDictionary dictionary];
     news_param[@"pageIndex"]=@"1";
@@ -96,76 +105,108 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+-(NSString*)GetConnectionStatus {
+    NSString *currentNetWorkState=[[NSUserDefaults standardUserDefaults] objectForKey:@"connection"];
+    return currentNetWorkState;
+}
+
 //获得最新消息
 -(void)NewsCount {
-    NSString *str_taskCount= [db fetchInterface:@"TaskCount"];
-    NSString *str_ip=@"";
-    NSString *str_port=@"";
-    NSMutableArray *t_array=[db fetchIPAddress];
-    if (t_array.count==1) {
-        NSArray *arr_ip=[t_array objectAtIndex:0];
-        str_ip=[arr_ip objectAtIndex:0];
-        str_port=[arr_ip objectAtIndex:1];
+    NSString *str_connection=[self GetConnectionStatus];
+    if ([str_connection isEqualToString:@"wifi"] || [str_connection isEqualToString:@"GPRS"]) {
+        NSString *str_taskCount= [db fetchInterface:@"TaskCount"];
+        NSString *str_ip=@"";
+        NSString *str_port=@"";
+        NSMutableArray *t_array=[db fetchIPAddress];
+        if (t_array.count==1) {
+            NSArray *arr_ip=[t_array objectAtIndex:0];
+            str_ip=[arr_ip objectAtIndex:0];
+            str_port=[arr_ip objectAtIndex:1];
+        }
+        
+        NSString *str_url1=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_taskCount];
+        [_session POST:str_url1 parameters:nil progress:^(NSProgress * _Nonnull uploadProgress) {
+            
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            [indicator stopAnimating];
+            NSLog(@"请求未读消息成功:%@",responseObject);
+            NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            NSString *str_success= [JSON objectForKey:@"success"];
+            int i_success=[str_success intValue];
+            if (i_success==1) {
+                NSString *str_docnum= [JSON objectForKey:@"docNum"];
+                NSString *str_flownum= [JSON objectForKey:@"flowNum"];
+                NSString *str_msgnum= [JSON objectForKey:@"msgNum"];
+                _i_doc_num=[str_docnum intValue];
+                _i_flow_num=[str_flownum intValue];
+                _i_msg_num=[str_msgnum intValue];
+                // _count=_i_doc_num+_i_flow_num+_i_msg_num;
+                NSIndexSet *indexSet=[NSIndexSet indexSetWithIndex:0];
+                [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
+            }
+            
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"请求失败");
+        }];
     }
-    NSString *str_url1=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_taskCount];
-       [_session POST:str_url1 parameters:nil progress:^(NSProgress * _Nonnull uploadProgress) {
-           
-       } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-           NSLog(@"请求未读消息成功:%@",responseObject);
-           NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-           NSString *str_success= [JSON objectForKey:@"success"];
-           int i_success=[str_success intValue];
-           if (i_success==1) {
-               NSString *str_docnum= [JSON objectForKey:@"docNum"];
-               NSString *str_flownum= [JSON objectForKey:@"flowNum"];
-               NSString *str_msgnum= [JSON objectForKey:@"msgNum"];
-               _i_doc_num=[str_docnum intValue];
-               _i_flow_num=[str_flownum intValue];
-               _i_msg_num=[str_msgnum intValue];
-              // _count=_i_doc_num+_i_flow_num+_i_msg_num;
-               NSIndexSet *indexSet=[NSIndexSet indexSetWithIndex:0];
-               [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
-           }
-           
-           
-       } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-           NSLog(@"请求失败");
-       }];
+    else {
+        LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"警告" message:@"无网络连接" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+            
+        }];
+        [alert showLXAlertView];
+    }
+    
 }
 
 
 //获得最新新闻
 -(void)NewsList:(NSMutableDictionary*)param {
-    NSString *str_newsList= [db fetchInterface:@"NewsList"];
-    NSString *str_ip=@"";
-    NSString *str_port=@"";
-    NSMutableArray *t_array=[db fetchIPAddress];
-    if (t_array.count==1) {
-        NSArray *arr_ip=[t_array objectAtIndex:0];
-        str_ip=[arr_ip objectAtIndex:0];
-        str_port=[arr_ip objectAtIndex:1];
-    }
-    NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_newsList];
-    [_session POST:str_url parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
-        
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"获取新闻列表成功:%@",responseObject);
-        NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        NSString *str_success= [JSON objectForKey:@"success"];
-        int i_success=[str_success intValue];
-        if (i_success==1) {
-             _arr_NewsList=[JSON objectForKey:@"list"];
-            if ([_arr_NewsList count]>0) {
-                 [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
-           // [self.tableView reloadData];
-            }
-           
+    
+    NSString *str_connection=[self GetConnectionStatus];
+    if ([str_connection isEqualToString:@"wifi"] || [str_connection isEqualToString:@"GPRS"]) {
+        NSString *str_newsList= [db fetchInterface:@"NewsList"];
+        NSString *str_ip=@"";
+        NSString *str_port=@"";
+        NSMutableArray *t_array=[db fetchIPAddress];
+        if (t_array.count==1) {
+            NSArray *arr_ip=[t_array objectAtIndex:0];
+            str_ip=[arr_ip objectAtIndex:0];
+            str_port=[arr_ip objectAtIndex:1];
         }
         
-
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
-    }];
+        NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_newsList];
+        [_session POST:str_url parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
+            
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            NSLog(@"获取新闻列表成功:%@",responseObject);
+            NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            NSString *str_success= [JSON objectForKey:@"success"];
+            int i_success=[str_success intValue];
+            if (i_success==1) {
+                _arr_NewsList=[JSON objectForKey:@"list"];
+                if ([_arr_NewsList count]>0) {
+                    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
+                    // [self.tableView reloadData];
+                }
+                
+            }
+            
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            
+        }];
+
+    }
+    else {
+        LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"警告" message:@"无网络连接" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+            
+        }];
+        [alert showLXAlertView];
+    }
+    
     
 }
 
@@ -383,6 +424,34 @@
 -(void)sideslipCellRemoveCell:(NewsManagementTableViewCell *)cell atIndex:(NSInteger)index {
     
 }
+
+
+//添加菊花等待图标
+-(UIActivityIndicatorView*)AddLoop {
+    //初始化:
+    UIActivityIndicatorView *l_indicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 80, 80)];
+    
+    l_indicator.tag = 103;
+    
+    //设置显示样式,见UIActivityIndicatorViewStyle的定义
+    l_indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
+    
+    
+    //设置背景色
+    l_indicator.backgroundColor = [UIColor blackColor];
+    
+    //设置背景透明
+    l_indicator.alpha = 0.5;
+    
+    //设置背景为圆角矩形
+    l_indicator.layer.cornerRadius = 6;
+    l_indicator.layer.masksToBounds = YES;
+    //设置显示位置
+    [l_indicator setCenter:CGPointMake(self.view.frame.size.width / 2.0, self.view.frame.size.height / 2.0)];
+    return l_indicator;
+}
+
+
 /*
 #pragma mark - Navigation
 

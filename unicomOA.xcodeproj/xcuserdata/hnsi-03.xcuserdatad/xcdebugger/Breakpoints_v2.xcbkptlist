@@ -452,11 +452,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/Base/Function/NewsController/NewsDisplayViewController.m"
-            timestampString = "485854477.00445"
+            timestampString = "486209193.422855"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -548,11 +548,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/View/ContactViewControllerNew.m"
-            timestampString = "485867926.468339"
+            timestampString = "486208672.489974"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "260"
-            endingLineNumber = "260"
+            startingLineNumber = "283"
+            endingLineNumber = "283"
             landmarkName = "-tableView:viewForHeaderInSection:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1140,11 +1140,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/View/ContactViewControllerNew.m"
-            timestampString = "485867926.468339"
+            timestampString = "486208672.489974"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -1444,11 +1444,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/View/MessageViewController.m"
-            timestampString = "485849576.858739"
+            timestampString = "486208672.489974"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "135"
-            endingLineNumber = "135"
+            startingLineNumber = "162"
+            endingLineNumber = "162"
             landmarkName = "@implementation MessageViewController"
             landmarkType = "3">
          </BreakpointContent>

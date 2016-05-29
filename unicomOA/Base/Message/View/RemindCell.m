@@ -63,7 +63,6 @@
         _lbl_count.textColor=[UIColor whiteColor];
         _lbl_count.font=[UIFont systemFontOfSize:13];
         CGSize titleSize = [self.textLabel.text sizeWithFont:self.textLabel.font constrainedToSize:CGSizeMake(MAXFLOAT, 30)];
-        UILabel *lbl_1=self.textLabel;
         //   CGSize titleSize= self.textLabel.text boundingRectWithSize:<#(CGSize)#> options:<#(NSStringDrawingOptions)#> attributes:<#(nullable NSDictionary<NSString *,id> *)#> context:<#(nullable NSStringDrawingContext *)#>
         CGFloat width1=[UILabel_LabelHeightAndWidth getWidthWithTitle:_lbl_count.text font:_lbl_count.font];
         _lbl_count.frame=CGRectMake(titleSize.width+55, 10, width1, width1);

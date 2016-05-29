@@ -13,6 +13,7 @@
 #import "DataBase.h"
 #import "AFNetworking.h"
 #import "UILabel+LabelHeightAndWidth.h"
+#import "LXAlertView.h"
 
 
 @interface ContactViewControllerNew()
@@ -31,6 +32,7 @@
 
 @implementation ContactViewControllerNew {
     DataBase *db;
+    UIActivityIndicatorView *indicator;
 }
 
 CGFloat i_Height=-1;
@@ -77,6 +79,10 @@ CGFloat i_Height=-1;
     bg_View.image=[UIImage imageNamed:@"bg_Nav.png"];
     [bg_base addSubview:bg_View];
     [bg_base sendSubviewToBack:bg_View];
+    
+    indicator=[self AddLoop];
+    [indicator startAnimating];
+    [self.view addSubview:indicator];
     
     db=[DataBase sharedinstanceDB];
     
@@ -149,37 +155,54 @@ CGFloat i_Height=-1;
     
 }
 
+-(NSString*)GetConnectionStatus {
+    NSString *currentNetWorkState=[[NSUserDefaults standardUserDefaults] objectForKey:@"connection"];
+    return currentNetWorkState;
+}
+
 
 -(void)AddressList {
-    NSString *str_ip=@"";
-    NSString *str_port=@"";
-    NSMutableArray *t_array=[db fetchIPAddress];
-    if (t_array.count==1) {
-        NSArray *arr_ip=[t_array objectAtIndex:0];
-        str_ip=[arr_ip objectAtIndex:0];
-        str_port=[arr_ip objectAtIndex:1];
-    }
-    NSString *str_addresslist=[db fetchInterface:@"AddressList"];
-    NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_addresslist];
-    [_session POST:str_url parameters:nil progress:^(NSProgress * _Nonnull uploadProgress) {
-        
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"获取通讯录列表成功:%@",responseObject);
-        NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        NSString *str_success= [JSON objectForKey:@"success"];
-        int i_success=[str_success intValue];
-        if (i_success==1) {
-            NSMutableArray *staffArray=[JSON objectForKey:@"empList"];
-            NSMutableArray *departArray=[JSON objectForKey:@"orgList"];
-             DataSource *dt_tmp=[[DataSource alloc]init];
-            _dataArray=[dt_tmp addRealData:staffArray departArray:departArray];
-            [self reloadDataForDisplayArray];
-            
+    NSString *str_connection=[self GetConnectionStatus];
+    if ([str_connection isEqualToString:@"wifi"] || [str_connection isEqualToString:@"GPRS"]) {
+        NSString *str_ip=@"";
+        NSString *str_port=@"";
+        NSMutableArray *t_array=[db fetchIPAddress];
+        if (t_array.count==1) {
+            NSArray *arr_ip=[t_array objectAtIndex:0];
+            str_ip=[arr_ip objectAtIndex:0];
+            str_port=[arr_ip objectAtIndex:1];
         }
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"获取通讯录失败");
-    }];
+        NSString *str_addresslist=[db fetchInterface:@"AddressList"];
+        NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_addresslist];
+        [_session POST:str_url parameters:nil progress:^(NSProgress * _Nonnull uploadProgress) {
+            
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            [indicator stopAnimating];
+            NSLog(@"获取通讯录列表成功:%@",responseObject);
+            NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            NSString *str_success= [JSON objectForKey:@"success"];
+            int i_success=[str_success intValue];
+            if (i_success==1) {
+                NSMutableArray *staffArray=[JSON objectForKey:@"empList"];
+                NSMutableArray *departArray=[JSON objectForKey:@"orgList"];
+                DataSource *dt_tmp=[[DataSource alloc]init];
+                _dataArray=[dt_tmp addRealData:staffArray departArray:departArray];
+                [self reloadDataForDisplayArray];
+                
+            }
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"获取通讯录失败");
+        }];
+
+    }
+    else {
+        LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"警告" message:@"无网络连接" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+            
+        }];
+        [alert showLXAlertView];
+    }
+    
 }
 
 
@@ -461,7 +484,7 @@ CGFloat i_Height=-1;
 #pragma mark- UISearchResultUpdating
 
 -(void)updateSearchResultsForSearchController:(UISearchController *)searchController {
-    
+    [indicator startAnimating];
     if (self.searchArray!=nil) {
         [self.searchArray removeAllObjects];
     }
@@ -479,48 +502,78 @@ CGFloat i_Height=-1;
 
 //根据搜索栏查找
 -(void)FindContact:(NSMutableDictionary*)param {
-    NSString *str_ip=@"";
-    NSString *str_port=@"";
-    NSMutableArray *t_array=[db fetchIPAddress];
-    if (t_array.count==1) {
-        NSArray *arr_ip=[t_array objectAtIndex:0];
-        str_ip=[arr_ip objectAtIndex:0];
-        str_port=[arr_ip objectAtIndex:1];
-    }
-    NSString *str_listsearch=[db fetchInterface:@"ListSearch"];
-    NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_listsearch];
-    [_session POST:str_url parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
-        
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"查询通讯录成功");
-        NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        NSString *str_success= [JSON objectForKey:@"success"];
-        BOOL b_success=[str_success boolValue];
-        if (b_success==YES) {
-            NSArray *arr_result=[JSON objectForKey:@"empList"];
-            if ([arr_result count]>0) {
-                _resultViewController.dataArray=arr_result;
-                _resultViewController.nav=self.navigationController;
-                
-            }
-            else {
-                _resultViewController.dataArray=nil;
-                _resultViewController.nav=nil;
-            }
-            [_resultViewController.tableView reloadData];
+    NSString *str_connection=[self GetConnectionStatus];
+    if ([str_connection isEqualToString:@"wifi"] || [str_connection isEqualToString:@"GPRS"]) {
+        NSString *str_ip=@"";
+        NSString *str_port=@"";
+        NSMutableArray *t_array=[db fetchIPAddress];
+        if (t_array.count==1) {
+            NSArray *arr_ip=[t_array objectAtIndex:0];
+            str_ip=[arr_ip objectAtIndex:0];
+            str_port=[arr_ip objectAtIndex:1];
         }
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"查询通讯录失败");
-    }];
+        NSString *str_listsearch=[db fetchInterface:@"ListSearch"];
+        NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_listsearch];
+        [_session POST:str_url parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
+            
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            [indicator stopAnimating];
+            NSLog(@"查询通讯录成功");
+            NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            NSString *str_success= [JSON objectForKey:@"success"];
+            BOOL b_success=[str_success boolValue];
+            if (b_success==YES) {
+                NSArray *arr_result=[JSON objectForKey:@"empList"];
+                if ([arr_result count]>0) {
+                    _resultViewController.dataArray=arr_result;
+                    _resultViewController.nav=self.navigationController;
+                    
+                }
+                else {
+                    _resultViewController.dataArray=nil;
+                    _resultViewController.nav=nil;
+                }
+                [_resultViewController.tableView reloadData];
+            }
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"查询通讯录失败");
+        }];
+    }
+    else {
+        LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"警告" message:@"无网络连接" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+            
+        }];
+        [alert showLXAlertView];        
+    }
+    
 }
 
 
--(BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
-    return YES;
-}
 
--(BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar {
-    return YES;
+
+//添加菊花等待图标
+-(UIActivityIndicatorView*)AddLoop {
+    //初始化:
+    UIActivityIndicatorView *l_indicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 80, 80)];
+    
+    l_indicator.tag = 103;
+    
+    //设置显示样式,见UIActivityIndicatorViewStyle的定义
+    l_indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
+    
+    
+    //设置背景色
+    l_indicator.backgroundColor = [UIColor blackColor];
+    
+    //设置背景透明
+    l_indicator.alpha = 0.5;
+    
+    //设置背景为圆角矩形
+    l_indicator.layer.cornerRadius = 6;
+    l_indicator.layer.masksToBounds = YES;
+    //设置显示位置
+    [l_indicator setCenter:CGPointMake(self.view.frame.size.width / 2.0, self.view.frame.size.height / 2.0)];
+    return l_indicator;
 }
 
 
