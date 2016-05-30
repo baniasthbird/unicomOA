@@ -55,7 +55,7 @@
 
 @property (nonatomic,strong) AFHTTPSessionManager *session;
 
-
+@property (nonatomic,strong) UIRefreshControl *refreshControl;
 
 //待办流程总页数
 @property NSInteger i_page_Total1;
@@ -119,6 +119,7 @@
     _session=[AFHTTPSessionManager manager];
     _session.responseSerializer= [AFHTTPResponseSerializer serializer];
     [_session.requestSerializer setHTTPShouldHandleCookies:YES];
+    [_session.requestSerializer setTimeoutInterval:10.0f];
     
     _i_sectionClicked=-1;
     
@@ -127,8 +128,19 @@
     _tableView.dataSource=self;
     _tableView.scrollEnabled=YES;
     _tableView.backgroundColor=[UIColor clearColor];
-    [self.view addSubview:_tableView];
+    
+    //设置refreshControl的属性
+    _refreshControl=[[UIRefreshControl alloc]init];
+    _refreshControl.attributedTitle=[[NSAttributedString alloc]initWithString:@"加载中..." attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14], NSForegroundColorAttributeName:[UIColor blackColor]}];
+    [self.refreshControl addTarget:self action:@selector(handleRefresh:) forControlEvents:UIControlEventValueChanged];
+    
+    [self.tableView addSubview:_refreshControl];
 
+    
+    
+    [self.view addSubview:_tableView];
+    
+   
     _i_pageIndex1=1;
     _i_pageIndex2=1;
     dic_param1[@"pageIndex"]=@"1";
@@ -663,11 +675,18 @@
                 // [self.tableView reloadData];
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            NSLog(@"获取审批列表失败");
+            [indicator stopAnimating];
+            //停止刷新
+            [self.refreshControl endRefreshing];
+            LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"提示" message:@"无法连接到服务器" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+                
+            }];
+            [alert showLXAlertView];
         }];
 
     }
     else {
+        [indicator stopAnimating];
         LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"警告" message:@"无网络连接" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
             
         }];
@@ -779,6 +798,23 @@
     return l_indicator;
 }
 
+-(void)handleRefresh:(id)paramSender {
+    // 模拟2秒后刷新数据
+    int64_t delayInSeconds = 2.0f;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        
+        //tableview中插入一条数据
+        //[self NewsList:_news_param];
+        dic_param1[@"pageIndex"]=@"1";
+        dic_param2[@"pageIndex"]=@"1";
+        [self PrePareData:dic_param1 interface:@"UnFinishTaskShenPiList"];
+        [self PrePareData:dic_param2 interface:@"FinishTaskShenPiList"];
+    });
+    
+    
+}
 
 
 @end

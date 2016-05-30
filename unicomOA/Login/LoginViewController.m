@@ -71,6 +71,25 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
 {
     [super viewDidLoad];
     
+    if (_b_update==YES) {
+        LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"提示" message:@"有新版本，是否下载" cancelBtnTitle:@"稍后下载" otherBtnTitle:@"立即下载" clickIndexBlock:^(NSInteger clickIndex) {
+            if (clickIndex==0) {
+                //稍后下载
+                
+            }
+            else {
+                //立即下载
+                NSString *DownLoadLink;
+                DownLoadLink = @"https://app.hnsi.cn/hnti_soa/";
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:DownLoadLink]];
+                exit(0);
+
+            }
+        }];
+        [alert showLXAlertView];
+
+    }
+    
     [self.navigationItem setHidesBackButton:YES];
     //设置NavigationBar的背景色
     View=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
@@ -518,13 +537,14 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
                 }
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"警告" message:@"请求失败，进入离线模式" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+            [indicator stopAnimating];
+            LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"警告" message:@"网络连接失败" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
                 
             }];
             [alert showLXAlertView];
-            NSLog(@"请求失败:%@ %@",error.description,@"进入离线模式");
+            NSLog(@"请求失败:%@",error.description);
             _i_Success=NO;
-            [self LocalEnter];
+           // [self LocalEnter];
         } ];
     }
     else {

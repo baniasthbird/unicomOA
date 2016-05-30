@@ -23,6 +23,8 @@
 
 @property (nonatomic,strong) AFHTTPSessionManager *session;
 
+@property (nonatomic,strong) UIRefreshControl *refreshControl;
+
 
 @end
 
@@ -91,6 +93,13 @@
     tableView.dataSource=self;
     tableView.backgroundColor=[UIColor clearColor];
     
+    _refreshControl=[[UIRefreshControl alloc]init];
+    _refreshControl.attributedTitle=[[NSAttributedString alloc]initWithString:@"加载中..." attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14], NSForegroundColorAttributeName:[UIColor blackColor]}];
+    [self.refreshControl addTarget:self action:@selector(handleRefresh:) forControlEvents:UIControlEventValueChanged];
+    
+    [tableView addSubview:_refreshControl];
+    
+    
     [self.view addSubview:tableView];
     
     [indicator startAnimating];
@@ -140,6 +149,7 @@
                     NSString *str_success=[dic_result objectForKey:@"success"];
                     BOOL b_success=[str_success boolValue];
                     if (b_success==YES) {
+                        [_refreshControl endRefreshing];
                         [indicator stopAnimating];
                         NSLog(@"获取界面成功!");
                         arr_groupList=[dic_result objectForKey:@"groupList"];
@@ -155,6 +165,7 @@
                     BOOL b_success=[str_success boolValue];
                     if (b_success==YES) {
                         [indicator stopAnimating];
+                        [_refreshControl endRefreshing];
                         NSLog(@"获取界面成功!");
                         arr_groupList=[JSON objectForKey:@"groupList"];
                         arr_ctlList=[JSON objectForKey:@"ctlList"];
@@ -165,6 +176,7 @@
                     }
                     else {
                         [indicator stopAnimating];
+                        [_refreshControl endRefreshing];
                         NSString *str_msg= [JSON objectForKey:@"msg"];
                         LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"提示" message:str_msg cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
                             
@@ -175,10 +187,17 @@
                 }
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            NSLog(@"获取界面失败");
+            [indicator stopAnimating];
+            [_refreshControl endRefreshing];
+            LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"提示" message:@"无法连接到服务器" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+                
+            }];
+            [alert showLXAlertView];
         }];
     }
     else {
+        [indicator stopAnimating];
+        [_refreshControl endRefreshing];
         LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"警告" message:@"无网络连接" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
             
         }];
@@ -604,6 +623,25 @@
     return l_indicator;
 }
 
+
+-(void)handleRefresh:(id)paramSender {
+    // 模拟2秒后刷新数据
+    int64_t delayInSeconds = 2.0f;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        NSMutableDictionary *dic_param=[NSMutableDictionary dictionary];
+        dic_param[@"processInstID"]=_str_processInstID;
+        dic_param[@"activityDefID"]=_str_activityDefID;
+        dic_param[@"workItemID"]=_str_workItemID;
+        [self PrePareData:dic_param];
+        //tableview中插入一条数据
+        //[self NewsList:_news_param];
+        
+    });
+    
+    
+}
 
 /*
 #pragma mark - Navigation

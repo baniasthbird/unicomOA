@@ -143,12 +143,6 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
     item4.type=UITableViewCellAccessoryNone   ;
     [section4 addItem:item4];
     
-    // 设置代理
-    [YBMonitorNetWorkState shareMonitorNetWorkState].delegate = self;
-    // 添加网络监听
-    [[YBMonitorNetWorkState shareMonitorNetWorkState] addMonitorNetWorkState];
-    
-    [self netWorkStateChanged];
 
    // [section4 addItemWithTitle:@"退出当前账号"];
     [self.groups addObject:section4];

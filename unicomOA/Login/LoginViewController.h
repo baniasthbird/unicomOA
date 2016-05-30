@@ -10,4 +10,6 @@
 
 @interface LoginViewController : ViewController
 
+@property BOOL b_update;
+
 @end

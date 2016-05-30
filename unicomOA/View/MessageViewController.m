@@ -32,6 +32,8 @@
 
 @property (nonatomic,strong) NSArray *arr_NewsList;
 
+@property (nonatomic,strong) UIRefreshControl *refreshControl;
+
 @end
 
 @implementation MessageViewController {
@@ -74,6 +76,14 @@
     _tableView.dataSource=self;
     _tableView.backgroundColor=[UIColor clearColor];
     
+    _refreshControl=[[UIRefreshControl alloc] init];
+    
+    //设置refreshControl的属性
+    _refreshControl.attributedTitle=[[NSAttributedString alloc]initWithString:@"加载中..." attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14], NSForegroundColorAttributeName:[UIColor blackColor]}];
+    [self.refreshControl addTarget:self action:@selector(handleRefresh:) forControlEvents:UIControlEventValueChanged];
+    
+    [self.tableView addSubview:_refreshControl];
+    
     
     [self.view addSubview:_tableView];
     
@@ -85,6 +95,7 @@
     _session=[AFHTTPSessionManager manager];
     _session.responseSerializer= [AFHTTPResponseSerializer serializer];
     [_session.requestSerializer setHTTPShouldHandleCookies:YES];
+    [_session.requestSerializer setTimeoutInterval:10.0f];
     
     indicator=[self AddLoop];
     [indicator startAnimating];
@@ -135,6 +146,7 @@
             NSString *str_success= [JSON objectForKey:@"success"];
             int i_success=[str_success intValue];
             if (i_success==1) {
+                 [self.refreshControl endRefreshing];
                 NSString *str_docnum= [JSON objectForKey:@"docNum"];
                 NSString *str_flownum= [JSON objectForKey:@"flowNum"];
                 NSString *str_msgnum= [JSON objectForKey:@"msgNum"];
@@ -148,10 +160,16 @@
             
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+             [self.refreshControl endRefreshing];
+            LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"提示" message:@"网络连接连接失败" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+                
+            }];
+            [alert showLXAlertView];
             NSLog(@"请求失败");
         }];
     }
     else {
+        
         LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"警告" message:@"无网络连接" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
             
         }];
@@ -178,6 +196,7 @@
         
         
         NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_newsList];
+        
         [_session POST:str_url parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
             
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -451,6 +470,26 @@
     return l_indicator;
 }
 
+-(void)handleRefresh:(id)paramSender {
+    // 模拟2秒后刷新数据
+    int64_t delayInSeconds = 2.0f;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        //停止刷新
+       
+        //tableview中插入一条数据
+        NSMutableDictionary *news_param=[NSMutableDictionary dictionary];
+        news_param[@"pageIndex"]=@"1";
+        news_param[@"classId"]=@"0";
+        [self NewsList:news_param];
+        [self NewsCount];
+
+        
+    });
+    
+    
+}
 
 /*
 #pragma mark - Navigation

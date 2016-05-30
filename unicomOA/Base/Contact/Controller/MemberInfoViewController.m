@@ -288,7 +288,7 @@
             vc.messageComposeDelegate=self;
             
             vc.recipients=@[_str_cellphone];
-            vc.body=@"你好，这是我的测试短信";
+            vc.body=@"";
             
             [self presentViewController:vc animated:YES completion:nil];
         }

@@ -20,9 +20,9 @@
 +(instancetype)cellWithTable:(UITableView *)tableView DocNum:(NSInteger)i_doc_num FlowNum:(NSInteger)i_flow_num MsgNum:(NSInteger)i_msg_num {
     static NSString *cellID=@"cellID";
     RemindCell *cell=[tableView dequeueReusableCellWithIdentifier:cellID];
-    if (!cell) {
+    //if (!cell) {
         cell=[[RemindCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID DocNum:i_doc_num FlowNum:i_flow_num MsgNum:i_msg_num];
-    }
+    //}
     return cell;
 }
 

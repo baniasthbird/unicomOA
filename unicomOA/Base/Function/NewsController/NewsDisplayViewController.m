@@ -60,6 +60,7 @@ int i_comment_num;
     _session=[AFHTTPSessionManager manager];
     _session.responseSerializer= [AFHTTPResponseSerializer serializer];
     [_session.requestSerializer setHTTPShouldHandleCookies:YES];
+    [_session.requestSerializer setTimeoutInterval:10.0f];
     
     _param=[NSMutableDictionary dictionary];
     _param[@"id"]=[NSString stringWithFormat:@"%ld",(long)_news_index];
@@ -265,11 +266,17 @@ int i_comment_num;
                 [self.view setNeedsDisplay];
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            NSLog(@"返回新闻内容失败");
+            [indicator stopAnimating];
+            LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"提示" message:@"无法连接到服务器" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+                
+            }];
+            [alert showLXAlertView];
+
         }];
 
     }
     else {
+        [indicator stopAnimating];
         LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"警告" message:@"无网络连接" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
             
         }];

@@ -306,11 +306,11 @@
         if (indexPath.row==0) {
             if (_service.shenpi_1!=nil) {
                 ShenPiStatus *tmp_status=_service.shenpi_1;
-                ShenPiResultCell *cell=[ShenPiResultCell cellWithTable:tableView withImage:tmp_status.str_Logo withName:tmp_status.str_name withStatus:tmp_status.str_status withTime:tmp_status.str_time atIndex:indexPath];
+                ShenPiResultCell *cell=[ShenPiResultCell cellWithTable:tableView withImage:tmp_status.str_Logo withName:tmp_status.str_name withStatus:tmp_status.str_status withTime:tmp_status.str_time ActivityName:@""  atIndex:indexPath];
                 return cell;
             }
             else {
-                ShenPiResultCell *cell=[ShenPiResultCell cellWithTable:tableView withImage:@"headLogo.png" withName:@"李四" withStatus:@"审批中" withTime:@"04-04 16:16" atIndex:indexPath];
+                ShenPiResultCell *cell=[ShenPiResultCell cellWithTable:tableView withImage:@"headLogo.png" withName:@"李四" withStatus:@"审批中" withTime:@"04-04 16:16" ActivityName:@"" atIndex:indexPath];
                 return cell;
                 
             }
@@ -319,17 +319,17 @@
         else if (indexPath.row==1) {
             if (_service.shenpi_2!=nil) {
                 ShenPiStatus *tmp_status=_service.shenpi_2;
-                ShenPiResultCell *cell=[ShenPiResultCell cellWithTable:tableView withImage:tmp_status.str_Logo withName:tmp_status.str_name withStatus:tmp_status.str_status withTime:tmp_status.str_time atIndex:indexPath];
+                ShenPiResultCell *cell=[ShenPiResultCell cellWithTable:tableView withImage:tmp_status.str_Logo withName:tmp_status.str_name withStatus:tmp_status.str_status withTime:tmp_status.str_time ActivityName:@""  atIndex:indexPath];
                 return cell;
             }
             else {
-                ShenPiResultCell *cell=[ShenPiResultCell cellWithTable:tableView withImage:@"headLogo.png" withName:@"李四" withStatus:@"审批中" withTime:@"04-04 16:16" atIndex:indexPath];
+                ShenPiResultCell *cell=[ShenPiResultCell cellWithTable:tableView withImage:@"headLogo.png" withName:@"李四" withStatus:@"审批中" withTime:@"04-04 16:16" ActivityName:@"" atIndex:indexPath];
                 return cell;
             }
             
         }
         else {
-            ShenPiResultCell *cell=[ShenPiResultCell cellWithTable:tableView withImage:@"headLogo.png" withName:@"李四" withStatus:@"审批中" withTime:@"04-04 16:16" atIndex:indexPath];
+            ShenPiResultCell *cell=[ShenPiResultCell cellWithTable:tableView withImage:@"headLogo.png" withName:@"李四" withStatus:@"审批中" withTime:@"04-04 16:16" ActivityName:@"" atIndex:indexPath];
             return cell;
         }
     }

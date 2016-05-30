@@ -20,6 +20,8 @@
 
 @property (nonatomic,strong) NSArray *arr_ShenPiQueryList;
 
+@property (nonatomic,strong) UIRefreshControl *refreshControl;
+
 @end
 
 @implementation ShenPiQueryLogVC {
@@ -67,6 +69,14 @@
     _tableView.dataSource=self;
     _tableView.backgroundColor=[UIColor clearColor];
     _tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
+    
+    _refreshControl=[[UIRefreshControl alloc]init];
+    _refreshControl.attributedTitle=[[NSAttributedString alloc]initWithString:@"加载中..." attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14], NSForegroundColorAttributeName:[UIColor blackColor]}];
+    [self.refreshControl addTarget:self action:@selector(handleRefresh:) forControlEvents:UIControlEventValueChanged];
+    
+    [_tableView addSubview:_refreshControl];
+
+    
 
     [self.view addSubview:_tableView];
     
@@ -123,11 +133,18 @@
             }
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            
+            [indicator stopAnimating];
+            [_refreshControl endRefreshing];
+            LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"提示" message:@"无法连接到服务器" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+                
+            }];
+            [alert showLXAlertView];
         }];
   
     }
     else {
+        [indicator stopAnimating];
+        [_refreshControl endRefreshing];
         LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"警告" message:@"无网络连接" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
             
         }];
@@ -176,16 +193,12 @@
         }
         NSString *str_decision=[dic_tmp objectForKey:@"decision"];
         NSString *str_date=[dic_tmp objectForKey:@"endTime"];
-        NSArray *arr_date=[str_date componentsSeparatedByString:@" "];
+        NSArray *arr_date=[str_date componentsSeparatedByString:@"."];
         str_date=[arr_date objectAtIndex:0];
+        NSString *str_activename=[dic_tmp objectForKey:@"activityName"];
         NSString *str_status=@"";
-        if ([str_decision isEqualToString:@"1"]) {
-            str_status=@"同意";
-        }
-        else if ([str_decision isEqualToString:@"0"]) {
-            str_status=@"不同意";
-        }
-        ShenPiResultCell *cell=[ShenPiResultCell cellWithTable:tableView withImage:@"headLogo.png" withName:str_name withStatus:str_status withTime:str_date atIndex:indexPath];
+        str_status=str_decision;
+        ShenPiResultCell *cell=[ShenPiResultCell cellWithTable:tableView withImage:@"headLogo.png" withName:str_name withStatus:str_status withTime:str_date ActivityName:str_activename atIndex:indexPath];
         return cell;
     }
     else {
@@ -227,6 +240,24 @@
     //设置显示位置
     [l_indicator setCenter:CGPointMake(self.view.frame.size.width / 2.0, self.view.frame.size.height / 2.0)];
     return l_indicator;
+}
+
+
+-(void)handleRefresh:(id)paramSender {
+    // 模拟2秒后刷新数据
+    int64_t delayInSeconds = 2.0f;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        NSMutableDictionary *dic_param=[NSMutableDictionary dictionary];
+        dic_param[@"processInstID"]=_str_processInstID;
+        [self PrePareData:dic_param];
+        //tableview中插入一条数据
+        //[self NewsList:_news_param];
+        
+    });
+    
+    
 }
 
 /*

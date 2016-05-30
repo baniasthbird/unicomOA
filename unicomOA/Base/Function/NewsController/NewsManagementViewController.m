@@ -48,6 +48,8 @@
 
 @property (nonatomic,strong) NSMutableDictionary *news_param;
 
+@property (nonatomic,strong) UIRefreshControl *refreshControl;
+
 @end
 
 @implementation NewsManagementViewController {
@@ -103,6 +105,7 @@
     _session=[AFHTTPSessionManager manager];
     _session.responseSerializer= [AFHTTPResponseSerializer serializer];
     [_session.requestSerializer setHTTPShouldHandleCookies:YES];
+    [_session.requestSerializer setTimeoutInterval:10.0f];
     
     [self buildView];
     
@@ -201,11 +204,16 @@
             
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            NSLog(@"获取新闻列表失败");
+            [indicator stopAnimating];
+            LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"提示" message:@"连接服务器失败" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+                
+            }];
+            [alert showLXAlertView];
         }];
 
     }
     else {
+        [indicator stopAnimating];
         LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"警告" message:@"无网络连接" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
             
         }];
@@ -238,11 +246,19 @@
     
     _tableView.separatorStyle=UITableViewCellSeparatorStyleSingleLine;
     
-    _tableView.backgroundColor=[UIColor whiteColor];
+    _tableView.backgroundColor=[UIColor clearColor];
     
     _tableView.dataSource=self;
     
     _tableView.delegate=self;
+    
+    //设置refreshControl的属性
+    _refreshControl=[[UIRefreshControl alloc] init];
+    _refreshControl.attributedTitle=[[NSAttributedString alloc]initWithString:@"加载中..." attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14], NSForegroundColorAttributeName:[UIColor blackColor]}];
+    [self.refreshControl addTarget:self action:@selector(handleRefresh:) forControlEvents:UIControlEventValueChanged];
+    
+    [self.tableView addSubview:_refreshControl];
+
     
     if (iPhone4_4s || iPhone5_5s) {
         _btn_Select=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height*0.023, self.view.frame.size.width/4, self.view.frame.size.height/16)];
@@ -687,6 +703,24 @@
     [l_indicator setCenter:CGPointMake(self.view.frame.size.width / 2.0, self.view.frame.size.height / 2.0)];
     return l_indicator;
 }
+
+
+
+-(void)handleRefresh:(id)paramSender {
+    // 模拟2秒后刷新数据
+    int64_t delayInSeconds = 2.0f;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        //停止刷新
+        [self.refreshControl endRefreshing];
+        //tableview中插入一条数据
+        [self NewsList:_news_param];
+    });
+    
+    
+}
+
 
 
 @end

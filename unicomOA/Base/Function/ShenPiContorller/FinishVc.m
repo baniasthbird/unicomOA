@@ -19,6 +19,8 @@
 
 @property (nonatomic,strong) AFHTTPSessionManager *session;
 
+@property (nonatomic,strong) UIRefreshControl *refreshControl;
+
 @end
 
 @implementation FinishVc {
@@ -78,6 +80,12 @@
     tableView.backgroundColor=[UIColor clearColor];
     tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     
+    _refreshControl=[[UIRefreshControl alloc]init];
+    _refreshControl.attributedTitle=[[NSAttributedString alloc]initWithString:@"加载中..." attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14], NSForegroundColorAttributeName:[UIColor blackColor]}];
+    [self.refreshControl addTarget:self action:@selector(handleRefresh:) forControlEvents:UIControlEventValueChanged];
+    
+    [tableView addSubview:_refreshControl];
+    
     [self.view addSubview:tableView];
     
     [indicator startAnimating];
@@ -114,6 +122,7 @@
         [_session POST:str_url parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
             
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            [_refreshControl endRefreshing];
             NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             NSDictionary *dic_exp=[JSON objectForKey:@"exception"];
             if (dic_exp!=nil) {
@@ -157,10 +166,17 @@
                 }
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            NSLog(@"获取界面失败");
+            [_refreshControl endRefreshing];
+            [indicator stopAnimating];
+            LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"提示" message:@"无法连接到服务器" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+                
+            }];
+            [alert showLXAlertView];
         }];
     }
     else {
+        [_refreshControl endRefreshing];
+        [indicator stopAnimating];
         LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"警告" message:@"无网络连接" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
             
         }];
@@ -480,6 +496,25 @@
     [l_indicator setCenter:CGPointMake(self.view.frame.size.width / 2.0, self.view.frame.size.height / 2.0)];
     return l_indicator;
 }
+
+
+-(void)handleRefresh:(id)paramSender {
+    // 模拟2秒后刷新数据
+    int64_t delayInSeconds = 2.0f;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        NSMutableDictionary *dic_param=[NSMutableDictionary dictionary];
+        dic_param[@"processInstID"]=_str_processInstID;
+        [self PrePareData:dic_param];
+        //tableview中插入一条数据
+        //[self NewsList:_news_param];
+        
+    });
+    
+    
+}
+
 
 /*
 #pragma mark - Navigation
