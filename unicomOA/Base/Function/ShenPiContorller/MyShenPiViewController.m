@@ -76,9 +76,9 @@
     //已办请求参数字典
     NSMutableDictionary *dic_param2;
     //展现待办流程数据的url
-    NSDictionary *dic_url1;
+    NSMutableDictionary *dic_url1;
     //展现已办流程数据的url
-    NSDictionary *dic_url2;
+    NSMutableDictionary *dic_url2;
     
    UIActivityIndicatorView *indicator;
 }
@@ -140,13 +140,15 @@
     
     [self.view addSubview:_tableView];
     
+    dic_url1=[NSMutableDictionary dictionary];
+    dic_url2=[NSMutableDictionary dictionary];
    
     _i_pageIndex1=1;
     _i_pageIndex2=1;
     dic_param1[@"pageIndex"]=@"1";
-    dic_param2[@"pageIndex"]=@"1";
+    //dic_param2[@"pageIndex"]=@"1";
     [self PrePareData:dic_param1 interface:@"UnFinishTaskShenPiList"];
-    [self PrePareData:dic_param2 interface:@"FinishTaskShenPiList"];
+    //[self PrePareData:dic_param2 interface:@"FinishTaskShenPiList"];
     
     self.leftArray=@[@"全部",@"已办",@"待办"];
     self.rightArray=@[@"全部",@"复印",@"预约用车",@"信息发布"];
@@ -647,11 +649,31 @@
                 NSString *str_listname=@"";
                 if ([str_interface isEqualToString:@"UnFinishTaskShenPiList"]) {
                     str_listname=@"taskList";
-                    dic_url1=[JSON objectForKey:@"urlMap"];
+                    NSMutableDictionary *dic_tmpMap =[JSON objectForKey:@"urlMap"];
+                    NSArray *arr_tmpMapKey=dic_tmpMap.allKeys;
+                    NSArray *arr_tmpMapValue=dic_tmpMap.allValues;
+                    for (int i=0;i<[dic_tmpMap count];i++) {
+                        NSString *str_Mapkey=[arr_tmpMapKey objectAtIndex:i];
+                        NSString *str_Mapvalue=[arr_tmpMapValue objectAtIndex:i];
+                        NSString *str_tmp=[dic_url1 objectForKey:str_Mapkey];
+                        if (str_tmp==nil) {
+                            [dic_url1 setObject:str_Mapvalue forKey:str_Mapkey];
+                        }
+                    }
                 }
                 else if ([str_interface isEqualToString:@"FinishTaskShenPiList"]) {
                     str_listname=@"list";
-                    dic_url2=[JSON objectForKey:@"urlMap"];
+                    NSMutableDictionary *dic_tmpMap =[JSON objectForKey:@"urlMap"];
+                    NSArray *arr_tmpMapKey=dic_tmpMap.allKeys;
+                    NSArray *arr_tmpMapValue=dic_tmpMap.allValues;
+                    for (int i=0;i<[dic_tmpMap count];i++) {
+                        NSString *str_Mapkey=[arr_tmpMapKey objectAtIndex:i];
+                        NSString *str_Mapvalue=[arr_tmpMapValue objectAtIndex:i];
+                        NSString *str_tmp=[dic_url2 objectForKey:str_Mapkey];
+                        if (str_tmp==nil) {
+                            [dic_url2 setObject:str_Mapvalue forKey:str_Mapkey];
+                        }
+                    }
                 }
                 NSArray *arr_list=[JSON objectForKey:str_listname];
                 for (int i=0;i<[arr_list count];i++) {

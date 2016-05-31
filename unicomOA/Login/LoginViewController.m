@@ -301,7 +301,7 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     //创建数据库
     [db_local initTables];
     //添加IP数据
-    [db_local InsertIPTable:@"192.168.12.151" port:@"8080" IP_Mark:@"TestServer"];
+    [db_local InsertIPTable:@"192.168.12.25" port:@"8080" IP_Mark:@"TestServer"];
     //添加接口数据
     [db_local InsertInterFaceTable];
     
@@ -509,6 +509,7 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             if (JSON.count==1) {
+                [indicator stopAnimating];
                 NSDictionary *dic_exp=[JSON objectForKey:@"exception"];
                 NSString *str_message=[dic_exp objectForKey:@"message"];
                 str_message=[NSString stringWithFormat:@"%@%@",@"未能登录成功，",str_message];
@@ -538,7 +539,7 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             [indicator stopAnimating];
-            LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"警告" message:@"网络连接失败" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+            LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"警告" message:@"无法连接到服务器" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
                 
             }];
             [alert showLXAlertView];

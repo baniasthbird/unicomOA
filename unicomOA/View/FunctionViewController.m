@@ -17,6 +17,9 @@
 #import "MyShenPiViewController.h"
 #import "DataBase.h"
 #import "AFNetworking.h"
+#import "LXAlertView.h"
+#import "UITabBar+badge.h"
+
 
 #define kImageWidth 100      //UITAbleViewCell里面图片的宽度
 #define kImageHeight 100     //UITableViewCell里面图片的高度
@@ -32,6 +35,9 @@
 
 @implementation FunctionViewController {
     DataBase *db;
+    UIActivityIndicatorView *indicator;
+    NSInteger i_total;
+    
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -67,6 +73,11 @@
     CGFloat screenWidth=mSize.width;
     CGFloat screenHeiht=mSize.height;
     
+    [self.tabBarController.tabBar hideBadgeOnItemIndex:2];
+    
+    indicator=[self AddLoop];
+
+    i_total=0;
     CGFloat i_Height=-1;
     if (iPhone4_4s || iPhone5_5s) {
         i_Height=68;
@@ -94,6 +105,10 @@
     _session=[AFHTTPSessionManager manager];
     _session.responseSerializer= [AFHTTPResponseSerializer serializer];
     [_session.requestSerializer setHTTPShouldHandleCookies:YES];
+    
+    NSMutableDictionary *dic_param1=[NSMutableDictionary dictionary];
+    dic_param1[@"pageIndex"]=_str_page;
+    [self PrePareData:dic_param1 interface:@"UnFinishTaskShenPiList"];
 
 }
 
@@ -142,7 +157,7 @@
     static NSString *identifier=@"Cell";
     //自定义UITableGridViewCell
     UITableGridViewCell *cell=[tableView dequeueReusableCellWithIdentifier:identifier];
-    if (cell==nil) {
+    //if (cell==nil) {
         cell=[[UITableGridViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         cell.selectedBackgroundView=[[UIView alloc]init];
         NSMutableArray *array=[NSMutableArray array];
@@ -187,10 +202,12 @@
        // btn_News.badgeCenterOffset=CGPointMake(0, btn_News.size.height*0.08);
         //[btn_News showBadgeWithStyle:WBadgeStyleRedDot value:1 animationType:WBadgeAnimTypeNone];
         
-        
-        //btn_ShenPi.badgeBgColor=[UIColor redColor];
-        //btn_ShenPi.badgeCenterOffset=CGPointMake(0, btn_ShenPi.size.height*0.08);
-        //[btn_ShenPi showBadgeWithStyle:WBadgeStyleNumber value:1 animationType:WBadgeAnimTypeNone];
+        if (i_total!=0) {
+            btn_ShenPi.badgeBgColor=[UIColor redColor];
+            btn_ShenPi.badgeCenterOffset=CGPointMake(0, btn_ShenPi.size.height*0.08);
+            [btn_ShenPi showBadgeWithStyle:WBadgeStyleNumber value:i_total animationType:WBadgeAnimTypeNone];
+        }
+       
         
         if (indexPath.row==0) {
             [cell addSubview:btn_News];
@@ -207,7 +224,7 @@
 
         
         [cell setValue:array forKey:@"buttons"];
-    }
+  //  }
         NSArray *imageButtons=cell.buttons;
         
         [imageButtons setValue:[NSNumber numberWithInt:(int)indexPath.row] forKey:@"row"];
@@ -284,6 +301,97 @@
     [self.tableView reloadData];
     
 }
+
+
+//整理数据
+-(void)PrePareData:(NSMutableDictionary*)param interface:(NSString*)str_interface{
+    NSString *str_connection=[self GetConnectionStatus];
+    if ([str_connection isEqualToString:@"wifi"] || [str_connection isEqualToString:@"GPRS"]) {
+        NSString *str_ip=@"";
+        NSString *str_port=@"";
+        NSMutableArray *t_array=[db fetchIPAddress];
+        if (t_array.count==1) {
+            NSArray *arr_ip=[t_array objectAtIndex:0];
+            str_ip=[arr_ip objectAtIndex:0];
+            str_port=[arr_ip objectAtIndex:1];
+        }
+        NSString *str_urldata=[db fetchInterface:str_interface];
+        NSCharacterSet *whitespace = [NSCharacterSet  whitespaceAndNewlineCharacterSet];
+        str_urldata= [str_urldata stringByTrimmingCharactersInSet:whitespace];
+        NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_urldata];
+        [_session POST:str_url parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
+            
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            
+            NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            NSString *str_success= [JSON objectForKey:@"success"];
+            BOOL b_success=[str_success boolValue];
+            if (b_success==YES) {
+                [indicator stopAnimating];
+                NSLog(@"获取审批列表成功");
+                NSArray *arr_TaskList=[JSON objectForKey:@"taskList"];
+                NSInteger i_integer=[_str_page integerValue];
+                i_total=[arr_TaskList count]+(i_integer-1)*10;
+                
+                
+                
+                
+                 [self.tableView reloadData];
+            }
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            [indicator stopAnimating];
+            //停止刷新
+            LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"提示" message:@"无法连接到服务器" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+                
+            }];
+            [alert showLXAlertView];
+        }];
+        
+    }
+    else {
+        [indicator stopAnimating];
+        LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"警告" message:@"无网络连接" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+            
+        }];
+        [alert showLXAlertView];
+        
+    }
+    
+    
+}
+
+
+-(NSString*)GetConnectionStatus {
+    NSString *currentNetWorkState=[[NSUserDefaults standardUserDefaults] objectForKey:@"connection"];
+    return currentNetWorkState;
+}
+
+
+//添加菊花等待图标
+-(UIActivityIndicatorView*)AddLoop {
+    //初始化:
+    UIActivityIndicatorView *l_indicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 80, 80)];
+    
+    l_indicator.tag = 103;
+    
+    //设置显示样式,见UIActivityIndicatorViewStyle的定义
+    l_indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
+    
+    
+    //设置背景色
+    l_indicator.backgroundColor = [UIColor blackColor];
+    
+    //设置背景透明
+    l_indicator.alpha = 0.5;
+    
+    //设置背景为圆角矩形
+    l_indicator.layer.cornerRadius = 6;
+    l_indicator.layer.masksToBounds = YES;
+    //设置显示位置
+    [l_indicator setCenter:CGPointMake(self.view.frame.size.width / 2.0, self.view.frame.size.height / 2.0)];
+    return l_indicator;
+}
+
 /*
 #pragma mark - Navigation
 

@@ -134,6 +134,8 @@
     else {
         _lbl_tip.text=@"";
         [_lbl_tip setHidden:YES];
+       // [_delegate sendCellValue:textView.text indexPath:];
+        [_delegate sendCellValue:textView.text indexPath:_i_indexPath];
     }
 }
 
