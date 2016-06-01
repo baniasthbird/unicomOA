@@ -273,6 +273,9 @@
     [_btn_Select setTitle:@"类别" forState:UIControlStateNormal];
     [_btn_Select setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_btn_Select setBackgroundColor:[UIColor colorWithRed:80.0/255.0f green:124.0f/255.0f blue:236.0f/255.0f alpha:1]];
+    UIImageView *img_view=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"down_arrow"]];
+    [img_view setFrame:CGRectMake(_btn_Select.frame.size.width*0.75, _btn_Select.frame.size.height*0.5-img_view.size.height/2, img_view.size.width, img_view.size.height)];
+    [_btn_Select addSubview:img_view];
     if (iPhone5_5s || iPhone4_4s) {
         _btn_Select.titleLabel.font=[UIFont systemFontOfSize:15];
     }

@@ -13,4 +13,6 @@
 
 @property (nonatomic,strong) UserInfo *userInfo;
 
+@property (nonatomic,strong) NSString *str_page;
+
 @end

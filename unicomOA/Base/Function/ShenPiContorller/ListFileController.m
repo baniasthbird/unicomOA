@@ -110,7 +110,7 @@
     NSDictionary *dic_value=[_arr_value objectAtIndex:indexPath.row];
     cell.textLabel.text=[dic_value objectForKey:@"label"];
     NSString *str_value=[dic_value objectForKey:@"value"];
-    cell.tag=[str_value integerValue];
+    cell.accessibilityHint=str_value;
     cell.textLabel.textColor=[UIColor blueColor];
     
     return cell;
@@ -118,12 +118,11 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell=[tableView cellForRowAtIndexPath:indexPath];
-        cell.accessoryType=UITableViewCellAccessoryCheckmark;
+    cell.accessoryType=UITableViewCellAccessoryCheckmark;
     NSString *str_text=cell.textLabel.text;
-    NSInteger i_value=cell.tag;
+    NSString *str_value=cell.accessibilityHint;
     _dic_backvalue[@"text"]=str_text;
-    _dic_backvalue[@"value"]=[NSString stringWithFormat:@"%ld",(long)i_value];
-   
+    _dic_backvalue[@"value"]=str_value;
     if (_mutliselect==NO) {
         _i_selectedindexpath=indexPath;
         [self.tableview reloadData];

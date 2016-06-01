@@ -19,7 +19,7 @@
 #import "NewsDetailVc.h"
 #import "UILabel+LabelHeightAndWidth.h"
 
-@interface UnFinishVc ()<UITableViewDataSource,UITableViewDelegate,ListFileControllerDelegate>
+@interface UnFinishVc ()<UITableViewDataSource,UITableViewDelegate,ListFileControllerDelegate,PrintApplicationDetailCellDelegate>
 
 @property (nonatomic,strong) AFHTTPSessionManager *session;
 
@@ -178,6 +178,9 @@
                         [indicator stopAnimating];
                         [_refreshControl endRefreshing];
                         NSString *str_msg= [JSON objectForKey:@"msg"];
+                        if (str_msg==nil) {
+                            str_msg=@"";
+                        }
                         LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"提示" message:str_msg cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
                             
                         }];
@@ -193,6 +196,8 @@
                 
             }];
             [alert showLXAlertView];
+            NSString *str_error=[NSString stringWithFormat:@"%@",error];
+            NSLog(@"%@%@",@"问题是",str_error);
         }];
     }
     else {
@@ -227,6 +232,12 @@
     return dic_tmp;
 }
 
+//根据js ajax规范，修改key值，调整.为/
+-(NSString*)modifykey:(NSString*)str_key {
+    NSString *str_return=[str_key stringByReplacingOccurrencesOfString:@"." withString:@"/"];
+    return str_return;
+}
+
 -(void)Submit:(UIButton*)sender {
     //提交申请
     // NSMutableDictionary *dic_submit=[[NSMutableDictionary alloc]init];
@@ -235,8 +246,49 @@
         NSCharacterSet *whitespace = [NSCharacterSet  whitespaceAndNewlineCharacterSet];
         str_urldata= [str_urldata stringByTrimmingCharactersInSet:whitespace];
         NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_urldata];
-        int i=0;
-        i=i+1;
+        NSMutableDictionary *param=[NSMutableDictionary dictionary];
+        for (int i=0;i<[arr_ctlList count];i++) {
+            NSDictionary *dic=[arr_ctlList objectAtIndex:i];
+            NSString *str_key=[dic objectForKey:@"key"];
+            str_key=[self modifykey:str_key];
+            NSObject *obj_value=[dic objectForKey:@"value"];
+            NSString *str_value=@"";
+            if (obj_value!=[NSNull null]) {
+                str_value=(NSString*)obj_value;
+            }
+            param[str_key]=str_value;
+        }
+        [_session POST:str_url parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
+            
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            NSString *str_success=[JSON objectForKey:@"success"];
+            BOOL b_success=[str_success boolValue];
+            if (b_success==YES) {
+                LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"提示" message:@"提交成功！" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+                    
+                }];
+                [alert showLXAlertView];
+                [self.navigationController popViewControllerAnimated:YES];
+
+            }
+            else {
+                NSString *str_msg=[JSON objectForKey:@"message"];
+                if (str_msg==nil) {
+                    str_msg=@"";
+                }
+                LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"提示" message:str_msg cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+                    
+                }];
+                [alert showLXAlertView];
+            }
+        
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSString *str_error=[NSString stringWithFormat:@"%@",error];
+            NSLog(@"%@%@",@"问题是",str_error);
+        }];
+       
     }
    
     
@@ -348,7 +400,16 @@
                 if (obj_value!=[NSNull null]) {
                     str_value=(NSString*)obj_value;
                 }
-                PrintApplicationDetailCell *cell=[PrintApplicationDetailCell cellWithTable:tableView withName:str_label withPlaceHolder:@"" withText:str_value atIndexPath:indexPath atHeight:180];
+                NSString *str_placeholder=@"";
+                if ([str_value isEqualToString:@""]) {
+                   str_placeholder= [NSString stringWithFormat:@"%@%@",@"请输入",str_label];
+                }
+                else {
+                    str_placeholder=@"";
+                }
+                PrintApplicationDetailCell *cell=[PrintApplicationDetailCell cellWithTable:tableView withName:str_label withPlaceHolder:str_placeholder withText:str_value atIndexPath:indexPath atHeight:180];
+                cell.i_indexPath=indexPath;
+                cell.delegate=self;
                 cell.accessibilityHint=@"textArea";
                 return cell;
             }
@@ -373,15 +434,12 @@
                 str_value=(NSString*)obj_value;
             }
             NSArray *arr_listData=[dic_tmp objectForKey:@"listData"];
-            NSInteger i_value=[str_value integerValue];
             NSString *str_detail_value=@"";
-            NSString *str_value2=[NSString stringWithFormat:@"%ld",(long)i_value];
             for (int l=0;l<[arr_listData count];l++) {
                 NSDictionary *dic= [arr_listData objectAtIndex:l];
-                NSString *str_tmp=[dic objectForKey:@"value"];
-                if ([str_tmp isEqualToString:str_value2]) {
-                    str_detail_value=[dic objectForKey:@"label"];
-                }
+             //   NSString *str_tmp=[dic objectForKey:@"value"];
+               
+                str_detail_value=[dic objectForKey:@"label"];
                 
             }
             cell.textLabel.text=str_label;
@@ -401,14 +459,14 @@
                 if ([dic_bkvalue count]!=0) {
                     NSString *str_text=[dic_bkvalue objectForKey:@"text"];
                     NSString *str_value=[dic_bkvalue objectForKey:@"value"];
-                    NSInteger i_value=[str_value integerValue];
                     cell.detailTextLabel.text=str_text;
-                    cell.detailTextLabel.textColor=[UIColor blueColor];
-                    cell.tag=i_value;
+                    [dic_tmp setValue:str_value forKey:@"value"];
                 }
                 else {
                     cell.detailTextLabel.text=@"请点击选择";
                 }
+                cell.detailTextLabel.textColor=[UIColor blueColor];
+
             }
             else {
                 cell.detailTextLabel.text=str_detail_value;
@@ -643,6 +701,13 @@
     
 }
 
+
+-(void)sendCellValue:(NSString *)str_text indexPath:(NSIndexPath *)i_indexPath {
+    NSString *str_index=[NSString stringWithFormat:@"%ld",(long)i_indexPath.section];
+    NSArray *arr_tmp=  [dic_m_ctl objectForKey:str_index];
+    NSDictionary  *dic_tmp=[arr_tmp objectAtIndex:i_indexPath.row];
+    [dic_tmp setValue:str_text forKey:@"value"];
+}
 /*
 #pragma mark - Navigation
 

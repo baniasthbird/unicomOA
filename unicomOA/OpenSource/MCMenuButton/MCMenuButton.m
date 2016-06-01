@@ -27,7 +27,8 @@
         _font = 16.0;
         
         [self setupContentLabel];
-      //  [self setupArrowView];
+        [self setupArrowView];
+        [self adjustLayout];
     }
     
     return self;
@@ -100,7 +101,7 @@
     CGFloat leftMagrin = (self.bounds.size.width - totalW) * 0.5;
     
     self.contenetLabel.frame = CGRectMake(leftMagrin, 0, rect.size.width, self.bounds.size.height);
-    self.arrowView.frame = CGRectMake(CGRectGetMaxX(self.contenetLabel.frame)+ magrin, (self.bounds.size.height - arrowH) / 2, arrowW, arrowH);
+    self.arrowView.frame = CGRectMake(CGRectGetMaxX(self.contenetLabel.frame)+ magrin*5, (self.bounds.size.height - arrowH) / 2, arrowW, arrowH);
 
     
     self.contenetLabel.text = _title;
@@ -113,7 +114,7 @@
 }
 - (void)setArrowDirectionUp
 {
-    self.arrowView.transform = CGAffineTransformMakeRotation(M_PI_2);
+    self.arrowView.transform = CGAffineTransformMakeRotation(M_PI);
 }
 
 - (void)setArrowDirectionDown

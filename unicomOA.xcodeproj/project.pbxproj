@@ -139,6 +139,7 @@
 		684A71591CD9DC4100A892B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 684A71581CD9DC4100A892B1 /* Foundation.framework */; };
 		684A715B1CD9DC4800A892B1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 684A715A1CD9DC4800A892B1 /* QuartzCore.framework */; };
 		684A715D1CD9DC5F00A892B1 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 684A715C1CD9DC5F00A892B1 /* MobileCoreServices.framework */; };
+		684E93D31CFD537600545D55 /* UITabBar+badge.m in Sources */ = {isa = PBXBuildFile; fileRef = 684E93D21CFD537600545D55 /* UITabBar+badge.m */; };
 		685233931CD9F9DE0093E368 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 685233921CD9F9DE0093E368 /* MapKit.framework */; };
 		68579FA31CC0BBCE00597FBD /* ShenPiAgreeWithCarDeploy.m in Sources */ = {isa = PBXBuildFile; fileRef = 68579FA21CC0BBCE00597FBD /* ShenPiAgreeWithCarDeploy.m */; };
 		68579FA61CC0C21100597FBD /* CarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68579FA51CC0C21100597FBD /* CarModel.m */; };
@@ -514,6 +515,8 @@
 		684A71581CD9DC4100A892B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		684A715A1CD9DC4800A892B1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		684A715C1CD9DC5F00A892B1 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		684E93D11CFD537600545D55 /* UITabBar+badge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITabBar+badge.h"; path = "View/UITabBar+badge.h"; sourceTree = "<group>"; };
+		684E93D21CFD537600545D55 /* UITabBar+badge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITabBar+badge.m"; path = "View/UITabBar+badge.m"; sourceTree = "<group>"; };
 		685233921CD9F9DE0093E368 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		68579FA11CC0BBCE00597FBD /* ShenPiAgreeWithCarDeploy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShenPiAgreeWithCarDeploy.h; path = Base/Function/ShenPiContorller/ShenPiAgreeWithCarDeploy.h; sourceTree = "<group>"; };
 		68579FA21CC0BBCE00597FBD /* ShenPiAgreeWithCarDeploy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShenPiAgreeWithCarDeploy.m; path = Base/Function/ShenPiContorller/ShenPiAgreeWithCarDeploy.m; sourceTree = "<group>"; };
@@ -919,6 +922,8 @@
 				2CFEAD351C7188500054730E /* OAViewController.m */,
 				68E779F21CB34D78006DA5B9 /* ContactViewControllerNew.h */,
 				68E779F31CB34D78006DA5B9 /* ContactViewControllerNew.m */,
+				684E93D11CFD537600545D55 /* UITabBar+badge.h */,
+				684E93D21CFD537600545D55 /* UITabBar+badge.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1956,6 +1961,7 @@
 				68ED4E2B1CB49432000E8A7B /* ShenPiManagementController.m in Sources */,
 				68E779DD1CB34A8E006DA5B9 /* CLTreeView_LEVEL0_Model.m in Sources */,
 				2CFEADCC1C76E56D0054730E /* SearchResultViewController.m in Sources */,
+				684E93D31CFD537600545D55 /* UITabBar+badge.m in Sources */,
 				2CFEADE71C7C05830054730E /* MenuTableViewCell.m in Sources */,
 				68DEEBDA1CBE1D0D003DB7AA /* ShenPiAgree.m in Sources */,
 				68E779E31CB34A8E006DA5B9 /* CLTreeViewNode.m in Sources */,
