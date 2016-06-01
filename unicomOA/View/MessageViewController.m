@@ -171,7 +171,7 @@
     else {
         
         LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"警告" message:@"无网络连接" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
-            
+            NSLog(@"网络连接断了");
         }];
         [alert showLXAlertView];
     }
