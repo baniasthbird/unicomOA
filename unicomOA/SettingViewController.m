@@ -433,6 +433,7 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
             }
             [defaults synchronize];
             LoginViewController *login=[[LoginViewController alloc]init];
+            login.b_update=YES;
             UINavigationController *nav=[[UINavigationController alloc]initWithRootViewController:login];
             [[UIApplication sharedApplication] keyWindow].rootViewController=nav;
             
@@ -461,14 +462,7 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
 }
 
 
-//判断是在线还是离线
--(BOOL)isLocal {
-    NSString *File=[[NSBundle mainBundle] pathForResource:@"Info" ofType:@"plist"];
-    NSMutableDictionary *dict=[[NSMutableDictionary alloc] initWithContentsOfFile:File];
-    BOOL isLocal=  [dict objectForKey:@"blocal"];
-    return isLocal;
-    
-}
+
 
 -(NSString*)GetConnectionStatus {
     NSString *currentNetWorkState=[[NSUserDefaults standardUserDefaults] objectForKey:@"connection"];

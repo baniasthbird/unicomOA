@@ -279,13 +279,14 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
 }
 
 //判断是在线还是离线
+/*
 -(BOOL)isLocal {
     NSString *File=[[NSBundle mainBundle] pathForResource:@"Info" ofType:@"plist"];
     NSMutableDictionary *dict=[[NSMutableDictionary alloc] initWithContentsOfFile:File];
     BOOL isLocal=  [dict objectForKey:@"blocal"];
     return isLocal;
-    
 }
+ */
 
 //离线测试用
 -(void)LocalEnter {
@@ -377,7 +378,7 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     user.textColor=[UIColor whiteColor];
     user.clearButtonMode = UITextFieldViewModeWhileEditing;
     user.delegate=self;
-    user.text=@"sysadmin";
+    //user.text=@"sysadmin";
     
     pwd=[self createTextFielfFrame:CGRectMake(60, self.view.frame.size.height/2, self.view.frame.size.width-120, 30) font:[UIFont systemFontOfSize:20]  placeholder:@"密码" ];
     pwd.clearButtonMode = UITextFieldViewModeWhileEditing;
@@ -387,7 +388,7 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     pwd.textColor=[UIColor whiteColor];
     pwd.attributedPlaceholder=[[NSAttributedString alloc] initWithString:@"密码" attributes:@{NSForegroundColorAttributeName:placeholderColor}];
     pwd.delegate=self;
-    pwd.text=@"000000";
+  //  pwd.text=@"000000";
     //pwd.keyboardType=UIKeyboardTypeNumberPad;
     
     
