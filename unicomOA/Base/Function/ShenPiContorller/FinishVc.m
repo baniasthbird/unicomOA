@@ -271,7 +271,16 @@
     cell.textLabel.textAlignment=NSTextAlignmentLeft;
     cell.detailTextLabel.textColor=[UIColor colorWithRed:112/255.0f green:112/255.0f blue:112/255.0f alpha:1];
     cell.detailTextLabel.font=[UIFont systemFontOfSize:16];
+    if (indexPath.row%2==0) {
+        cell.textLabel.backgroundColor=[UIColor colorWithRed:245/255.0f green:245/255.0f blue:245/255.0f alpha:1];
+        cell.detailTextLabel.backgroundColor=[UIColor whiteColor];
+    }
+    else {
+        cell.textLabel.backgroundColor=[UIColor colorWithRed:235/255.0f green:235/255.0f blue:235/255.0f alpha:1];
+        cell.detailTextLabel.backgroundColor=[UIColor colorWithRed:245/255.0f green:245/255.0f blue:245/255.0f alpha:1];
+    }
     
+    /*
     UIView *leftView=[[UIView alloc]init];
     UIView *rightView=[[UIView alloc]init];
     if (iPhone5_5s || iPhone4_4s) {
@@ -291,12 +300,17 @@
             leftView.backgroundColor=[UIColor colorWithRed:245/255.0f green:245/255.0f blue:245/255.0f alpha:1];
             rightView.backgroundColor=[UIColor whiteColor];
         }
-    }
-    else {
-        leftView.backgroundColor=[UIColor colorWithRed:235/255.0f green:235/255.0f blue:235/255.0f alpha:1];
-        rightView.backgroundColor=[UIColor colorWithRed:245/255.0f green:245/255.0f blue:245/255.0f alpha:1];
-    }
+        else {
+            leftView.backgroundColor=[UIColor colorWithRed:235/255.0f green:235/255.0f blue:235/255.0f alpha:1];
+            rightView.backgroundColor=[UIColor colorWithRed:245/255.0f green:245/255.0f blue:245/255.0f alpha:1];
+        }
+        [cell.contentView addSubview:leftView];
+        [cell.contentView addSubview:rightView];
+        [cell.contentView sendSubviewToBack:leftView];
+        [cell.contentView sendSubviewToBack:rightView];
 
+    }
+   */
     
     
     if ([dic_ctl count]==0) {
@@ -308,7 +322,7 @@
         NSArray *arr_tmp=  [dic_m_ctl objectForKey:str_index];
         NSDictionary  *dic_tmp=[arr_tmp objectAtIndex:indexPath.row];
         NSString *str_type=[dic_tmp objectForKey:@"type"];
-        if ([str_type isEqualToString:@"text"] || [str_type isEqualToString:@"int"] || [str_type isEqualToString:@"date"] || [str_type isEqualToString:@"textarea"]) {
+        if ([str_type isEqualToString:@"text"] || [str_type isEqualToString:@"int"] || [str_type isEqualToString:@"date"] || [str_type isEqualToString:@"textarea"]|| [str_type isEqualToString:@"datetime"] || [str_type isEqualToString:@"FLOAT"]) {
             NSString *str_label=[dic_tmp objectForKey:@"label"];
             NSObject *obj_value=[dic_tmp objectForKey:@"value"];
             NSString *str_value=@"";
@@ -316,6 +330,7 @@
                 str_value=(NSString*)obj_value;
             }
             cell.textLabel.text=str_label;
+            cell.textLabel.numberOfLines=0;
             cell.detailTextLabel.text=str_value;
             cell.detailTextLabel.numberOfLines=0;
             cell.textLabel.backgroundColor=[UIColor clearColor];
@@ -328,9 +343,11 @@
             NSArray *arr_data=[dic_tmp objectForKey:@"tableDataContent"];
             NSString *str_titlename=[arr_title objectAtIndex:0];
             NSString *str_title=[arr_data objectAtIndex:0];
-            PrintFileNavCell *cell=[PrintFileNavCell cellWithTable:tb withTitle:str_title withTileName:str_titlename atIndexPath:indexPath];
+            NSString *str_label=[dic_tmp objectForKey:@"label"];
+            PrintFileNavCell *cell=[PrintFileNavCell cellWithTable:tb withTitle:str_title withTileName:str_titlename withLabel:str_label atIndexPath:indexPath];
             cell.file_data=arr_data;
             cell.file_title=arr_title;
+            cell.str_label=str_label;
             return cell;   
         }
         else if ([str_type isEqualToString:@"list"]) {
@@ -374,10 +391,7 @@
        
         
     }
-    [cell.contentView addSubview:leftView];
-    [cell.contentView addSubview:rightView];
-    [cell.contentView sendSubviewToBack:leftView];
-    [cell.contentView sendSubviewToBack:rightView];
+    
     return  cell;
 }
 
@@ -428,9 +442,11 @@
         PrintFileNavCell *cell_nav=(PrintFileNavCell*)cell;
         NSArray *tmp_Files=cell_nav.file_data;
         NSArray *tmp_Title=cell_nav.file_title;
+        NSString *str_title=cell_nav.str_label;
         PrintFileDetail *viewController=[[PrintFileDetail alloc]init];
         viewController.arr_data=tmp_Files;
         viewController.arr_title=tmp_Title;
+        viewController.str_title=str_title;
         [self.navigationController pushViewController:viewController animated:YES];
     }
     else if ([cell.accessibilityHint isEqualToString:@"html"]) {
@@ -456,14 +472,11 @@
             }
             else if ([str_sub_type isEqualToString:@"tableView"]) {
                 NSArray *arr_tabledata=[dic_sub_ctl objectForKey:@"tableData"];
+                [arr_my_ctl removeObjectAtIndex:j];
                 NSUInteger i_count=[arr_tabledata count];
-                [arr_my_ctl removeAllObjects];
                 for (int l=0;l<i_count;l++) {
-                    [arr_my_ctl addObject:dic_sub_ctl];
-                }
-                for (int l=0;l<i_count;l++) {
-                    NSDictionary *dic_tmp_ctl=[arr_my_ctl objectAtIndex:l];
-                    [dic_tmp_ctl setValue:[arr_tabledata objectAtIndex:l] forKey:@"tableDataCotent"];
+                    [dic_sub_ctl setValue:[arr_tabledata objectAtIndex:l] forKey:@"tableDataContent"];
+                    [arr_my_ctl insertObject:dic_sub_ctl atIndex:j+l];
                 }
             }
         }

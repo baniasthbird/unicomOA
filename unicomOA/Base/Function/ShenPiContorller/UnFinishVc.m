@@ -133,6 +133,7 @@
         [_session POST:str_url parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
             
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            NSLog(@"返回成功%@",responseObject);
             NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             NSDictionary *dic_exp=[JSON objectForKey:@"exception"];
             if (dic_exp!=nil) {
@@ -177,9 +178,10 @@
                     else {
                         [indicator stopAnimating];
                         [_refreshControl endRefreshing];
-                        NSString *str_msg= [JSON objectForKey:@"msg"];
-                        if (str_msg==nil) {
-                            str_msg=@"";
+                        NSObject *obj_msg= [JSON objectForKey:@"msg"];
+                        NSString *str_msg=@"";
+                        if (obj_msg!=[NSNull null]) {
+                            str_msg=(NSString*)obj_msg;
                         }
                         LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"提示" message:str_msg cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
                             
@@ -355,7 +357,7 @@
         NSDictionary  *dic_tmp=[arr_tmp objectAtIndex:indexPath.row];
         
         NSString *str_type=[dic_tmp objectForKey:@"type"];
-        if ([str_type isEqualToString:@"text"] || [str_type isEqualToString:@"int"] || [str_type isEqualToString:@"date"]) {
+        if ([str_type isEqualToString:@"text"] || [str_type isEqualToString:@"int"] || [str_type isEqualToString:@"date"] || [str_type isEqualToString:@"datetime"] || [str_type isEqualToString:@"FLOAT"]) {
         //    NSString *str_readonly= [dic_tmp objectForKey:@"readonly"];
          //   BOOL b_readonly=[str_readonly boolValue];
             //if (b_readonly==YES) {
@@ -366,6 +368,7 @@
                     str_value=(NSString*)obj_value;
                 }
                 cell.textLabel.text=str_label;
+            cell.textLabel.numberOfLines=0;
                 cell.detailTextLabel.text=str_value;
             cell.detailTextLabel.numberOfLines=0;
             CGFloat w_value=[UILabel_LabelHeightAndWidth getWidthWithTitle:str_value font:cell.detailTextLabel.font];
@@ -390,7 +393,9 @@
                     str_value=(NSString*)obj_value;
                 }
                 cell.textLabel.text=str_label;
+                cell.textLabel.numberOfLines=0;
                 cell.detailTextLabel.text=str_value;
+                cell.detailTextLabel.numberOfLines=0;
                 return cell;
             }
             else {
@@ -420,7 +425,7 @@
             NSString *str_titlename=[arr_title objectAtIndex:0];
             NSString *str_title=[arr_data objectAtIndex:0];
             NSString *str_label=[dic_tmp objectForKey:@"label"];
-            PrintFileNavCell *cell=[PrintFileNavCell cellWithTable:tb withTitle:str_title withTileName:str_titlename atIndexPath:indexPath];
+            PrintFileNavCell *cell=[PrintFileNavCell cellWithTable:tb withTitle:str_title withTileName:str_titlename withLabel:str_label atIndexPath:indexPath];
             cell.file_data=arr_data;
             cell.file_title=arr_title;
             cell.str_label=str_label;
@@ -619,15 +624,13 @@
             }
             else if ([str_sub_type isEqualToString:@"tableView"]) {
                 NSArray *arr_tabledata=[dic_sub_ctl objectForKey:@"tableData"];
+                [arr_my_ctl removeObjectAtIndex:j];
                 NSUInteger i_count=[arr_tabledata count];
-                [arr_my_ctl removeAllObjects];
                 for (int l=0;l<i_count;l++) {
-                    [arr_my_ctl addObject:dic_sub_ctl];
+                    [dic_sub_ctl setValue:[arr_tabledata objectAtIndex:l] forKey:@"tableDataCotent"];
+                    [arr_my_ctl insertObject:dic_sub_ctl atIndex:j+l];
                 }
-                for (int l=0;l<i_count;l++) {
-                    NSDictionary *dic_tmp_ctl=[arr_my_ctl objectAtIndex:l];
-                    [dic_tmp_ctl setValue:[arr_tabledata objectAtIndex:l] forKey:@"tableDataCotent"];
-                }
+               
             }
         }
     }

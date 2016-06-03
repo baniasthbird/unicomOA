@@ -343,12 +343,20 @@
 -(void)labelTouchUpInside:(UITapGestureRecognizer *)recognizer {
     if (_str_cellphone!=nil) {
         //判断是否是正常的手机号码 zr 0516 继续完善
-        
-        NSMutableString *str=[[NSMutableString alloc]initWithFormat:@"tel:%@",_str_cellphone];
-        UIWebView *callWebView=[[UIWebView alloc]init];
-        [callWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
-        [self.view addSubview:callWebView];
+        if (_str_cellphone.length==11 && [self isPureInt:_str_cellphone]==YES) {
+            NSMutableString *str=[[NSMutableString alloc]initWithFormat:@"tel:%@",_str_cellphone];
+            UIWebView *callWebView=[[UIWebView alloc]init];
+            [callWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
+            [self.view addSubview:callWebView];
+
+        }
     }
+}
+
+- (BOOL)isPureInt:(NSString*)string{
+    NSScanner* scan = [NSScanner scannerWithString:string];
+    int val;
+    return [scan scanInt:&val] && [scan isAtEnd];
 }
 
 -(void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result {

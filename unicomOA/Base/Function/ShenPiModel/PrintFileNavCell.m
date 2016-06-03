@@ -14,16 +14,16 @@
     [super awakeFromNib];
 }
 
-+(instancetype)cellWithTable:(UITableView *)tableView withTitle:(NSString *)str_Title withTileName:(NSString *)str_TitleName atIndexPath:(NSIndexPath *)indexPath {
++(instancetype)cellWithTable:(UITableView *)tableView withTitle:(NSString *)str_Title withTileName:(NSString *)str_TitleName withLabel:(NSString*)str_Label atIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellID=@"cellID";
     PrintFileNavCell *cell=[tableView cellForRowAtIndexPath:indexPath];
     if (!cell) {
-        cell=[[PrintFileNavCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID withTtile:str_Title withTitleName:str_TitleName];
+        cell=[[PrintFileNavCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID withTtile:str_Title withTitleName:str_TitleName withLabel:str_Label];
     }
     return cell;
 }
 
--(id) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withTtile:(NSString*)str_Title withTitleName:str_TitleName {
+-(id) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withTtile:(NSString*)str_Title withTitleName:(NSString*)str_TitleName withLabel:(NSString*)str_label {
     self=[super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.backgroundColor=[UIColor clearColor];
@@ -44,7 +44,7 @@
         lbl_filename.font=[UIFont systemFontOfSize:13];
     
         
-        lbl_filename.text=[NSString stringWithFormat:@"%@:%@",str_TitleName,str_Title];
+        lbl_filename.text=[NSString stringWithFormat:@"%@:%@%@",str_label,str_TitleName,str_Title];
         lbl_filename.textAlignment=NSTextAlignmentCenter;
        
         

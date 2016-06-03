@@ -75,9 +75,22 @@
     cell.textLabel.font=[UIFont systemFontOfSize:16];
     cell.detailTextLabel.font=[UIFont systemFontOfSize:16];
     
-    cell.textLabel.text=[_arr_title objectAtIndex:indexPath.row];
-    NSString *str_tmp=[_arr_data objectAtIndex:indexPath.row];
-    cell.detailTextLabel.text=str_tmp;
+    NSObject *obj_title= [_arr_title objectAtIndex:indexPath.row];
+    NSString *str_title=@"";
+    if (obj_title!=[NSNull null]) {
+        str_title=(NSString*)obj_title;
+    }
+    
+    cell.textLabel.text=str_title;
+    cell.textLabel.numberOfLines=0;
+    
+    NSObject *obj_data= [_arr_data objectAtIndex:indexPath.row];
+    NSString *str_data=@"";
+    if (obj_data!=[NSNull null]) {
+        str_data=(NSString*)obj_data;
+    }
+    cell.detailTextLabel.text=str_data;
+    cell.detailTextLabel.numberOfLines=0;
     
     return cell;
     /*
