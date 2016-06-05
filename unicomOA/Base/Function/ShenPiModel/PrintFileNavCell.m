@@ -44,7 +44,7 @@
         lbl_filename.font=[UIFont systemFontOfSize:13];
     
         
-        lbl_filename.text=[NSString stringWithFormat:@"%@:%@%@",str_label,str_TitleName,str_Title];
+        lbl_filename.text=[NSString stringWithFormat:@"%@:%@     %@",str_label,str_TitleName,str_Title];
         lbl_filename.textAlignment=NSTextAlignmentCenter;
        
         

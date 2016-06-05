@@ -50,6 +50,8 @@
     NSString *str_port;
     
     UIActivityIndicatorView *indicator;
+    
+    BOOL b_Table;
 }
 
 - (void)viewDidLoad {
@@ -72,6 +74,8 @@
     self.navigationItem.rightBarButtonItem=barButtonItem2;
     
     self.view.backgroundColor=[UIColor colorWithRed:246/255.0f green:249/255.0f blue:254/255.0f alpha:1];
+    
+    b_Table=NO;
     
     indicator=[self AddLoop];
     // Do any additional setup after loading the view.
@@ -258,6 +262,20 @@
             if (obj_value!=[NSNull null]) {
                 str_value=(NSString*)obj_value;
             }
+            NSString *str_groupKey=[dic objectForKey:@"groupKey"];
+            if ([str_groupKey isEqualToString:@"audit"]) {
+                NSString *str_type=[dic objectForKey:@"type"];
+                if ([str_type isEqualToString:@"list"]) {
+                    if ([str_value isEqualToString:@""] || [str_value isEqualToString:@"0"])
+                    {
+                        LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"提示" message:@"请先完成审批" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+                            
+                        }];
+                        [alert showLXAlertView];
+                        return;
+                    }
+                }
+            }
             param[str_key]=str_value;
         }
         [_session POST:str_url parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
@@ -271,7 +289,9 @@
                     
                 }];
                 [alert showLXAlertView];
+                 [_delegate RefreshUnFinishView];
                 [self.navigationController popViewControllerAnimated:YES];
+               
 
             }
             else {
@@ -314,21 +334,20 @@
     }
     else {
         NSString *str_index=[NSString stringWithFormat:@"%ld",(long)section];
-        NSArray *arr_ctl= [dic_ctl objectForKey:str_index];
+        NSArray *arr_ctl= [dic_m_ctl objectForKey:str_index];
         NSInteger i_count=0;
         for (int i=0;i<[arr_ctl count];i++) {
             NSDictionary *dic_tmp=[arr_ctl objectAtIndex:i];
             NSString *str_type= [dic_tmp objectForKey:@"type"];
-            if ([str_type isEqualToString:@"hidden"]) {
-                //i_count=i_count+1;
+            if (![str_type isEqualToString:@"hidden"]) {
+                i_count=i_count+1;
             }
+            /*
             else if ([str_type isEqualToString:@"tableView"]) {
                 NSArray *arr_list=[dic_tmp objectForKey:@"tableData"];
                 i_count=i_count+[arr_list count];
             }
-            else {
-                i_count=i_count+1;
-            }
+            */
         }
         return i_count;
 
@@ -367,6 +386,9 @@
                 if (obj_value!=[NSNull null]) {
                     str_value=(NSString*)obj_value;
                 }
+            if ([str_value isEqualToString:@"null"]) {
+                str_value=@"";
+            }
                 cell.textLabel.text=str_label;
             cell.textLabel.numberOfLines=0;
                 cell.detailTextLabel.text=str_value;
@@ -420,16 +442,40 @@
             }
         }
         else if ([str_type isEqualToString:@"tableView"]) {
+          
+            
             NSArray *arr_title=[dic_tmp objectForKey:@"tableTitle"];
-            NSArray *arr_data=[dic_tmp objectForKey:@"tableDataCotent"];
-            NSString *str_titlename=[arr_title objectAtIndex:0];
-            NSString *str_title=[arr_data objectAtIndex:0];
-            NSString *str_label=[dic_tmp objectForKey:@"label"];
-            PrintFileNavCell *cell=[PrintFileNavCell cellWithTable:tb withTitle:str_title withTileName:str_titlename withLabel:str_label atIndexPath:indexPath];
-            cell.file_data=arr_data;
-            cell.file_title=arr_title;
-            cell.str_label=str_label;
-            return cell;
+            NSArray *arr_data=[dic_tmp objectForKey:@"tableData"];
+            if ([arr_data count]>0) {
+                NSString *str_index=[dic_tmp objectForKey:@"tableIndex"];
+                NSObject *obj_tableData=[arr_data objectAtIndex:[str_index integerValue]];
+                if (obj_tableData!=[NSNull null]) {
+                    NSArray *arr_tableData=(NSArray*)obj_tableData;
+                    if ([arr_tableData count]>0) {
+                        NSObject *obj_titlename=[arr_tableData objectAtIndex:0];
+                        NSString *str_titlename=@"";
+                        if (obj_titlename!=[NSNull null]) {
+                            str_titlename=(NSString*)obj_titlename;
+                        }
+                        NSObject *obj_title=[arr_tableData objectAtIndex:1];
+                        NSString *str_title=@"";
+                        if (obj_title!=[NSNull null]) {
+                            str_title=(NSString*)obj_title;
+                        }
+                        NSObject *obj_label=[dic_tmp objectForKey:@"label"];
+                        NSString *str_label=@"";
+                        if (obj_label!=[NSNull null]) {
+                            str_label=(NSString*)obj_label;
+                        }
+                        PrintFileNavCell *cell=[PrintFileNavCell cellWithTable:tb withTitle:str_title withTileName:str_titlename withLabel:str_label atIndexPath:indexPath];
+                        cell.file_data=arr_tableData;
+                        cell.file_title=arr_title;
+                        cell.str_label=str_label;
+                        return cell;
+                        
+                    }
+                }
+            }
         }
         else if ([str_type isEqualToString:@"list"]) {
             NSString *str_label=[dic_tmp objectForKey:@"label"];
@@ -553,13 +599,88 @@
      */
     NSString *str_index=[NSString stringWithFormat:@"%ld",(long)indexPath.section];
     NSArray *arr_tmp=  [dic_m_ctl objectForKey:str_index];
-    NSDictionary  *dic_tmp=[arr_tmp objectAtIndex:indexPath.row];
-    NSString *str_type=[dic_tmp objectForKey:@"type"];
-    if ([str_type isEqualToString:@"textarea"]) {
-        return 180;
+    if (indexPath.row<[arr_tmp count]) {
+        NSDictionary  *dic_tmp=[arr_tmp objectAtIndex:indexPath.row];
+        NSString *str_type=[dic_tmp objectForKey:@"type"];
+        NSString *str_readonly=[dic_tmp objectForKey:@"readonly"];
+        BOOL b_readonly=[str_readonly boolValue];
+        if ([str_type isEqualToString:@"textarea"]) {
+            if (b_readonly==YES) {
+                NSObject *obj_label=[dic_tmp objectForKey:@"label"];
+                NSString *str_label=@"";
+                if (obj_label!=[NSNull null]) {
+                    str_label=(NSString*)obj_label;
+                }
+                NSObject *obj_value=[dic_tmp objectForKey:@"value"];
+                NSString *str_value=@"";
+                if (obj_value!=[NSNull null]) {
+                    str_value=(NSString*)obj_value;
+                }
+                if (![str_value isEqualToString:@""] || ![str_label isEqualToString:@""]) {
+                    CGFloat rowHeightValue=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width*0.4 title:str_value font:[UIFont systemFontOfSize:14]];
+                    CGFloat rowHeightLabel=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width*0.1 title:str_label font:[UIFont systemFontOfSize:14]];
+                    if (rowHeightLabel>rowHeightValue)
+                    {
+                        return  rowHeightLabel+10;
+                    }
+                    else {
+                        return  rowHeightValue+10;
+                    }
+                }
+                else {
+                    return 180;
+                }
+
+            }
+            else {
+                return  180;
+                
+            }
+        }
+        else if (![str_type isEqualToString:@"html"]) {
+            //下午完善
+            NSObject *obj_label=[dic_tmp objectForKey:@"label"];
+            NSString *str_label=@"";
+            if (obj_label!=[NSNull null]) {
+                str_label=(NSString*)obj_label;
+            }
+            NSObject *obj_value=[dic_tmp objectForKey:@"value"];
+            NSString *str_value=@"";
+            if (obj_value!=[NSNull null]) {
+                str_value=(NSString*)obj_value;
+            }
+            if (![str_value isEqualToString:@""] || ![str_label isEqualToString:@""]) {
+                CGFloat rowHeightValue=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width*0.4 title:str_value font:[UIFont systemFontOfSize:14]];
+                CGFloat rowHeightLabel=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width*0.2 title:str_label font:[UIFont systemFontOfSize:14]];
+                if (rowHeightLabel>rowHeightValue) {
+                    if (rowHeightLabel<34) {
+                        return 44;
+                    }
+                    else {
+                        return rowHeightLabel+10;
+                    }
+                }
+                else {
+                    if (rowHeightValue<34) {
+                        return 44;
+                    }
+                    else {
+                        return rowHeightValue+10;
+                    }
+                }
+            }
+            else {
+                return 44;
+            }
+            
+        }
+        else {
+            return 44;
+        }
+
     }
     else {
-        return 44;
+        return  44;
     }
     
     
@@ -617,7 +738,7 @@
         NSString *str_index=[NSString stringWithFormat:@"%d",i];
         NSMutableArray *arr_my_ctl=[dic_my_ctl objectForKey:str_index];
         for (int j=0;j<[arr_my_ctl count];j++) {
-            NSDictionary *dic_sub_ctl=[arr_my_ctl objectAtIndex:j];
+            NSMutableDictionary *dic_sub_ctl=[arr_my_ctl objectAtIndex:j];
             NSString *str_sub_type=[dic_sub_ctl objectForKey:@"type"];
             if ([str_sub_type isEqualToString:@"hidden"]) {
                 [arr_my_ctl removeObject:dic_sub_ctl];
@@ -626,11 +747,19 @@
                 NSArray *arr_tabledata=[dic_sub_ctl objectForKey:@"tableData"];
                 [arr_my_ctl removeObjectAtIndex:j];
                 NSUInteger i_count=[arr_tabledata count];
-                for (int l=0;l<i_count;l++) {
-                    [dic_sub_ctl setValue:[arr_tabledata objectAtIndex:l] forKey:@"tableDataCotent"];
-                    [arr_my_ctl insertObject:dic_sub_ctl atIndex:j+l];
+                if (i_count>0) {
+                    for (int l=0;l<i_count;l++) {
+                        /*
+                         NSMutableArray *arr_data=[[arr_tabledata objectAtIndex:l] mutableCopy];
+                         [dic_sub_ctl setValue:arr_data forKey:@"tableDataContent"];
+                         */
+                        NSString *str_index=[NSString stringWithFormat:@"%d",l];
+                        NSDictionary *dic_tmp=[dic_sub_ctl mutableCopy];
+                        [dic_tmp setValue:str_index forKey:@"tableIndex"];
+                        [arr_my_ctl insertObject:dic_tmp atIndex:j+l];
+                    }
+                    j=j+(int)i_count;
                 }
-               
             }
         }
     }

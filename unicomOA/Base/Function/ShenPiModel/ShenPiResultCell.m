@@ -48,15 +48,21 @@
         lbl_bg.font=[UIFont systemFontOfSize:16];
         lbl_bg.textColor=[UIColor whiteColor];
         lbl_bg.text=@"审核结果";
-        
+        //同意
         if ([str_status isEqualToString:@"1"]) {
             lbl_bg.backgroundColor=[UIColor colorWithRed:61/255.0f green:189/255.0f blue:143/255.0f alpha:1];
         }
+        //退回
         else if ([str_status isEqualToString:@"2"]) {
-            lbl_bg.backgroundColor=[UIColor colorWithRed:173/255.0f green:173/255.0f blue:173/255.0f alpha:1];
+            lbl_bg.backgroundColor=[UIColor colorWithRed:247/255.0f green:35/255.0f blue:0/255.0f alpha:1];
         }
-        else {
+        //暂存
+        else if ([str_status isEqualToString:@"0"]) {
             lbl_bg.backgroundColor=[UIColor colorWithRed:246/255.0f green:187/255.0f blue:67/255.0f alpha:1];
+        }
+        //废弃
+        else if ([str_status isEqualToString:@"3"]) {
+            lbl_bg.backgroundColor=[UIColor colorWithRed:173/255.0f green:173/255.0f blue:173/255.0f alpha:1];
         }
         
         
@@ -82,8 +88,9 @@
         
         lbl_active.textColor=[UIColor blackColor];
         lbl_active.textAlignment=NSTextAlignmentCenter;
-        lbl_active.font=[UIFont systemFontOfSize:16];
+        lbl_active.font=[UIFont systemFontOfSize:12];
         lbl_active.text=str_activename;
+        lbl_active.numberOfLines=0;
         
         _lbl_time=[[UILabel alloc]init];
         if (iPhone5_5s || iPhone4_4s) {
@@ -118,7 +125,13 @@
             _lbl_status.text=@"同意";
         }
         else if ([str_status isEqualToString:@"2"]) {
-            _lbl_status.text=@"不同意";
+            _lbl_status.text=@"退回";
+        }
+        else if ([str_status isEqualToString:@"3"]) {
+            _lbl_status.text=@"废弃";
+        }
+        else if ([str_status isEqualToString:@"0"]) {
+            _lbl_status.text=@"暂存";
         }
         _lbl_status.textAlignment=NSTextAlignmentCenter;
         _lbl_status.font=[UIFont systemFontOfSize:16];

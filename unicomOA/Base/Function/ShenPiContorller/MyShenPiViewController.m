@@ -22,7 +22,7 @@
 #import "FinishVc.h"
 
 
-@interface MyShenPiViewController()<UITableViewDelegate,UITableViewDataSource,CarShenPiDetailDelegate,PrintShenPiDetailDelegate>
+@interface MyShenPiViewController()<UITableViewDelegate,UITableViewDataSource,UnFinishVcDelegate>
 
 /**
  *  头部筛选模块
@@ -161,7 +161,7 @@
     self.rightArrayColor=@[[UIColor blackColor],[UIColor colorWithRed:246/255.0f green:88/255.0f blue:87/255.0f alpha:1],[UIColor colorWithRed:80/255.0f green:125/255.0f blue:236/255.0f alpha:1],[UIColor colorWithRed:80/255.0f green:125/255.0f blue:236/255.0f alpha:1]];
 
     
-    _str_searchKeyword1=@"全部";
+    _str_searchKeyword1=@"待办";
     _str_searchKeyword2=@"全部";
     
     [self setupTopView];
@@ -173,6 +173,7 @@
 }
 
 -(void)MovePreviousVc:(UIButton*)sender {
+    [_delegate RefreshBadgeNumber];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -372,6 +373,7 @@
         vc.str_processInstID=str_processInstID;
         vc.str_activityDefID=str_activityDefID;
         vc.str_workItemID=str_workItemID;
+        vc.delegate=self;
         [self.navigationController pushViewController:vc animated:YES];
     }
     else if ([cell.lbl_status.text isEqualToString:@"已办"]) {
@@ -443,7 +445,7 @@
 //根据条件筛选
 -(NSMutableArray*)CreateSearchResult:(NSString*)str_condition1 con2:(NSString*)str_condition2 {
     NSMutableArray *arr_result=[[NSMutableArray alloc]init];
-    if (_arr_MyShenPi.count>0) {
+    if (_arr_MyShenPi.count>0 || _arr_SearchResult.count>0) {
         if ([str_condition1 isEqualToString:@"全部"] && [str_condition2 isEqualToString:@"全部"]) {
             //根据类型筛选
             [arr_MyReview removeAllObjects];
@@ -647,7 +649,8 @@
         [_session POST:str_url parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
             
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            
+             [self.refreshControl endRefreshing];
+            [indicator stopAnimating];
             NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             NSString *str_success= [JSON objectForKey:@"success"];
             BOOL b_success=[str_success boolValue];
@@ -834,16 +837,34 @@
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        
+        [arr_MyReview removeAllObjects];
+        if ([_str_searchKeyword1 isEqualToString:@"全部"]) {
+            dic_param1[@"pageIndex"]=@"1";
+            dic_param2[@"pageIndex"]=@"1";
+            [self PrePareData:dic_param1 interface:@"UnFinishTaskShenPiList"];
+            [self PrePareData:dic_param2 interface:@"FinishTaskShenPiList"];
+        }
+        else if ([_str_searchKeyword1 isEqualToString:@"待办"]) {
+            dic_param1[@"pageIndex"]=@"1";
+            [self PrePareData:dic_param1 interface:@"UnFinishTaskShenPiList"];
+            
+        }
+        else if ([_str_searchKeyword1 isEqualToString:@"已办"]) {
+            dic_param2[@"pageIndex"]=@"1";
+            [self PrePareData:dic_param2 interface:@"FinishTaskShenPiList"];
+        }
+        [indicator stopAnimating];
         //tableview中插入一条数据
         //[self NewsList:_news_param];
-        dic_param1[@"pageIndex"]=@"1";
-        dic_param2[@"pageIndex"]=@"1";
-        [self PrePareData:dic_param1 interface:@"UnFinishTaskShenPiList"];
-        [self PrePareData:dic_param2 interface:@"FinishTaskShenPiList"];
+       
     });
-    
-    
+}
+
+
+-(void)RefreshUnFinishView {
+    [arr_MyReview removeAllObjects];
+    dic_param1[@"pageIndex"]=@"1";
+    [self PrePareData:dic_param1 interface:@"UnFinishTaskShenPiList"];
 }
 
 

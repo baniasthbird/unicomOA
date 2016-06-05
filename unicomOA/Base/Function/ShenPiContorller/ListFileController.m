@@ -44,7 +44,17 @@
     
     _dic_backvalue=[NSMutableDictionary dictionary];
     
-    _tableview=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped];
+    CGFloat i_Height=-10;
+    if (iPhone5_5s) {
+        i_Height=-10;
+    }
+    else if (iPhone6) {
+        i_Height=-20;
+    }
+    else if (iPhone6_plus) {
+        i_Height=-30;
+    }
+    _tableview=[[UITableView alloc]initWithFrame:CGRectMake(0, i_Height, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped];
     _tableview.delegate=self;
     _tableview.dataSource=self;
     _tableview.backgroundColor=[UIColor clearColor];

@@ -89,21 +89,15 @@
         lbl_name.text=[NSString stringWithFormat:@"%@:%@",@"标题",str_Name];
         lbl_name.numberOfLines=0;
         
-        CGFloat h_name=[UILabel_LabelHeightAndWidth getHeightByWidth:100 title:lbl_name.text font:[UIFont systemFontOfSize:14]];
-        if (iPhone4_4s || iPhone5_5s) {
-            lbl_name.frame=CGRectMake(75, 20, [UIScreen mainScreen].bounds.size.width-170, h_name);
-        }
-        else if (iPhone6) {
-            lbl_name.frame=CGRectMake(75, 20, [UIScreen mainScreen].bounds.size.width-170, h_name);
-        }
-        else if (iPhone6_plus) {
-            lbl_name.frame=CGRectMake(75, 20, [UIScreen mainScreen].bounds.size.width-170, h_name);
-        }
-        [lbl_name sizeToFit];
         
         lbl_category.text=str_Categroy;
+        CGFloat h_cate=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width-100 title:str_Categroy font:[UIFont systemFontOfSize:16]];
+        [lbl_category setFrame:CGRectMake(75, 5, [UIScreen mainScreen].bounds.size.width-100, h_cate)];
         _lbl_status.text=str_status;
         lbl_Title.text=str_Title;
+        [lbl_name setFrame:CGRectMake(75, h_cate+5, [UIScreen mainScreen].bounds.size.width-180, 70)];
+        [lbl_name sizeToFit];
+
         lbl_time.text=str_time;
         _lbl_status.textColor=[UIColor whiteColor];
         _lbl_status.textAlignment=NSTextAlignmentCenter;

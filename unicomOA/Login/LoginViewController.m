@@ -378,7 +378,7 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     user.textColor=[UIColor whiteColor];
     user.clearButtonMode = UITextFieldViewModeWhileEditing;
     user.delegate=self;
-    user.text=@"sysadmin";
+    user.text=@"张克进";
     
     pwd=[self createTextFielfFrame:CGRectMake(60, self.view.frame.size.height/2, self.view.frame.size.width-120, 30) font:[UIFont systemFontOfSize:20]  placeholder:@"密码" ];
     pwd.clearButtonMode = UITextFieldViewModeWhileEditing;

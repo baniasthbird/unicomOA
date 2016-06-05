@@ -36,7 +36,7 @@
     [barButtonItem setImage:[UIImage imageNamed:@"returnlogo.png"]];
     self.navigationItem.leftBarButtonItem=barButtonItem;
     
-    _tableview=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped];
+    _tableview=[[UITableView alloc]initWithFrame:CGRectMake(0, -35, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped];
     _tableview.delegate=self;
     _tableview.dataSource=self;
     _tableview.backgroundColor=[UIColor clearColor];

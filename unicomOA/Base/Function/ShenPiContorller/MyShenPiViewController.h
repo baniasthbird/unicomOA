@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "UserInfo.h"
+@class MyShenPiViewController;
+@protocol MyShenPiViewControllerDelegate <NSObject>
+
+-(void)RefreshBadgeNumber;
+
+@end
+
 //我的审批页面
 
 @interface MyShenPiViewController : UIViewController
@@ -18,5 +25,7 @@
 @property (nonatomic,strong) UserInfo *userInfo;
 
 @property (nonatomic,strong) NSMutableArray *arr_SearchResult;
+
+@property (nonatomic,strong) id<MyShenPiViewControllerDelegate> delegate;
 
 @end

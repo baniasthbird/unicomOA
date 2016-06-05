@@ -24,7 +24,7 @@
 #define kImageWidth 100      //UITAbleViewCell里面图片的宽度
 #define kImageHeight 100     //UITableViewCell里面图片的高度
 
-@interface FunctionViewController ()<ClearRedDotDelegate>
+@interface FunctionViewController ()<ClearRedDotDelegate,MyShenPiViewControllerDelegate>
 
 @property(nonatomic,strong) UITableView *tableView;
 @property(nonatomic,strong) UIImage *image;
@@ -268,6 +268,7 @@
     */
     MyShenPiViewController *viewController=[[MyShenPiViewController alloc] init];
     viewController.userInfo=_userInfo;
+    viewController.delegate=self;
     [self.navigationController pushViewController:viewController animated:YES];
 
 }
@@ -302,6 +303,58 @@
     
 }
 
+//点击审批后返回时刷新badgeValue
+-(void)RefreshBadge:(NSMutableDictionary*)param {
+    NSString *str_connection=[self GetConnectionStatus];
+    if ([str_connection isEqualToString:@"wifi"] || [str_connection isEqualToString:@"GPRS"]) {
+         NSString *str_ip=@"";
+        NSString *str_port=@"";
+        NSMutableArray *t_array=[db fetchIPAddress];
+        if (t_array.count==1) {
+            NSArray *arr_ip=[t_array objectAtIndex:0];
+            str_ip=[arr_ip objectAtIndex:0];
+            str_port=[arr_ip objectAtIndex:1];
+        }
+        NSString *str_urldata=[db fetchInterface:@"UnFinishTaskShenPiList"];
+        NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_urldata];
+        [_session POST:str_url parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
+            
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            NSString *str_success= [JSON objectForKey:@"success"];
+            BOOL b_success=[str_success boolValue];
+            if (b_success==YES) {
+               NSString *str_totalPage=[JSON objectForKey:@"totalPage"];
+                NSMutableDictionary *dic_param1=[NSMutableDictionary dictionary];
+                dic_param1[@"pageIndex"]=str_totalPage;
+                NSString *str_ip_1=@"";
+                NSString *str_port_1=@"";
+                NSMutableArray *t_array=[db fetchIPAddress];
+                if (t_array.count==1) {
+                    NSArray *arr_ip=[t_array objectAtIndex:0];
+                    str_ip_1=[arr_ip objectAtIndex:0];
+                    str_port_1=[arr_ip objectAtIndex:1];
+                }
+                NSString *str_urldata_1=[db fetchInterface:@"UnFinishTaskShenPiList"];
+                NSString *str_url2=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip_1,str_port_1,str_urldata_1];
+                [_session POST:str_url2 parameters:dic_param1 progress:^(NSProgress * _Nonnull uploadProgress) {
+                    
+                } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                     NSDictionary *JSON1=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+                    NSArray *arr_TaskList=[JSON1 objectForKey:@"taskList"];
+                    NSInteger i_integer=[str_totalPage integerValue];
+                    i_total=[arr_TaskList count]+(i_integer-1)*10;
+                    [self.tableView reloadData];
+                } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                    
+                }];
+            }
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            
+        }];
+        
+    }
+}
 
 //整理数据
 -(void)PrePareData:(NSMutableDictionary*)param interface:(NSString*)str_interface{
@@ -392,6 +445,13 @@
     return l_indicator;
 }
 
+
+-(void)RefreshBadgeNumber {
+    NSMutableDictionary *dic_param1=[NSMutableDictionary dictionary];
+    dic_param1[@"pageIndex"]=@"1";
+    [self RefreshBadge:dic_param1];
+
+}
 /*
 #pragma mark - Navigation
 
