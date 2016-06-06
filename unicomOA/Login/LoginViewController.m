@@ -72,7 +72,10 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     [super viewDidLoad];
     
     if (_b_update==YES) {
-        LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"提示" message:@"有新版本，是否下载" cancelBtnTitle:@"稍后下载" otherBtnTitle:@"立即下载" clickIndexBlock:^(NSInteger clickIndex) {
+        NSString *str_msg1=@"有新版本，是否下载？\n";
+        NSString *str_msg2=@"本次版本更新:审批可在已有复印、用车与信息发布的基础上新增图书、差旅费、会议费、预算外事项以及业务招待费报销流程，并优化审批效果";
+        NSString *str_msg=[NSString stringWithFormat:@"%@%@",str_msg1,str_msg2];
+        LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"提示" message:str_msg cancelBtnTitle:@"稍后下载" otherBtnTitle:@"立即下载" clickIndexBlock:^(NSInteger clickIndex) {
             if (clickIndex==0) {
                 //稍后下载
                 
