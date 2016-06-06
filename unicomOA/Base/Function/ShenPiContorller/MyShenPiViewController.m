@@ -863,8 +863,11 @@
 
 -(void)RefreshUnFinishView {
     [arr_MyReview removeAllObjects];
+    _i_pageIndex1=1;
     dic_param1[@"pageIndex"]=@"1";
+    [self.tableView setContentOffset:CGPointMake(0, 0) animated:NO];
     [self PrePareData:dic_param1 interface:@"UnFinishTaskShenPiList"];
+   
 }
 
 

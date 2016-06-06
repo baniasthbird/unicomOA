@@ -138,11 +138,14 @@
         if ([_lbl_status.text isEqualToString:@"同意"]) {
             _lbl_status.textColor=[UIColor colorWithRed:61/255.0f green:189/255.0f blue:143/255.0f alpha:1];
         }
-        else if ([_lbl_status.text isEqualToString:@"审批中"]) {
-            _lbl_status.textColor=[UIColor colorWithRed:246/255.0f green:187/255.0f blue:67/255.0f alpha:1];
+        else if ([_lbl_status.text isEqualToString:@"退回"]) {
+            _lbl_status.textColor=[UIColor colorWithRed:247/255.0f green:35/255.0f blue:0/255.0f alpha:1];
         }
-        else if ([_lbl_status.text isEqualToString:@"不同意"]) {
+        else if ([_lbl_status.text isEqualToString:@"废弃"]) {
             _lbl_status.textColor=[UIColor colorWithRed:173/255.0f green:173/255.0f blue:173/255.0f alpha:1];
+        }
+        else if ([_lbl_status.text isEqualToString:@"暂存"]) {
+            _lbl_status.textColor=[UIColor colorWithRed:246/255.0f green:187/255.0f blue:67/255.0f alpha:1];
         }
         
         self.contentView.backgroundColor=[UIColor colorWithRed:246/255.0f green:249/255.0f blue:254/255.0f alpha:1];

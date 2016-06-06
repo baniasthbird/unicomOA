@@ -516,10 +516,10 @@
                 }
                 
                 if ([dic_bkvalue count]!=0) {
-                    NSDictionary *dic_tmp=[dic_bkvalue objectForKey:str_label];
+                    NSDictionary *dic_bkvalue_tmp=[dic_bkvalue objectForKey:str_label];
                     if (dic_tmp!=nil) {
-                        NSString *str_text=[dic_tmp objectForKey:@"text"];
-                        NSString *str_value=[dic_tmp objectForKey:@"value"];
+                        NSString *str_text=[dic_bkvalue_tmp objectForKey:@"text"];
+                        NSString *str_value=[dic_bkvalue_tmp objectForKey:@"value"];
                         cell.detailTextLabel.text=str_text;
                         [dic_tmp setValue:str_value forKey:@"value"];
                     }
