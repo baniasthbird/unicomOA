@@ -131,6 +131,7 @@
     cell.accessoryType=UITableViewCellAccessoryCheckmark;
     NSString *str_text=cell.textLabel.text;
     NSString *str_value=cell.accessibilityHint;
+    _dic_backvalue[@"title"]=_str_title;
     _dic_backvalue[@"text"]=str_text;
     _dic_backvalue[@"value"]=str_value;
     if (_mutliselect==NO) {

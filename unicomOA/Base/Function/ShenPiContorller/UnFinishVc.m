@@ -266,14 +266,19 @@
             if ([str_groupKey isEqualToString:@"audit"]) {
                 NSString *str_type=[dic objectForKey:@"type"];
                 if ([str_type isEqualToString:@"list"]) {
-                    if ([str_value isEqualToString:@""] || [str_value isEqualToString:@"0"])
-                    {
-                        LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"提示" message:@"请先完成审批" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
-                            
-                        }];
-                        [alert showLXAlertView];
-                        return;
+                    NSString *str_key=[dic objectForKey:@"key"];
+                    NSRange range=[str_key rangeOfString:@"decision"];
+                    if (range.length>0) {
+                        if ([str_value isEqualToString:@""] || [str_value isEqualToString:@"0"])
+                        {
+                            LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"提示" message:@"请先完成审批" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+                                
+                            }];
+                            [alert showLXAlertView];
+                            return;
+                        }
                     }
+                    
                 }
             }
             param[str_key]=str_value;
@@ -357,6 +362,7 @@
 -(UITableViewCell*)tableView:(UITableView *)tb cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *cellID=[NSString stringWithFormat:@"%@%ld%ld",@"cellID",(long)indexPath.row,(long)indexPath.section];
     UITableViewCell *cell=[tb cellForRowAtIndexPath:indexPath];
+   // UITableViewCell *cell=[tb dequeueReusableCellWithIdentifier:cellID];
     if (cell==nil) {
         cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:cellID];
     }
@@ -374,6 +380,7 @@
         NSString *str_index=[NSString stringWithFormat:@"%ld",(long)indexPath.section];
         NSArray *arr_tmp=  [dic_m_ctl objectForKey:str_index];
         NSDictionary  *dic_tmp=[arr_tmp objectAtIndex:indexPath.row];
+        
         
         NSString *str_type=[dic_tmp objectForKey:@"type"];
         if ([str_type isEqualToString:@"text"] || [str_type isEqualToString:@"int"] || [str_type isEqualToString:@"date"] || [str_type isEqualToString:@"datetime"] || [str_type isEqualToString:@"FLOAT"]) {
@@ -478,6 +485,7 @@
             }
         }
         else if ([str_type isEqualToString:@"list"]) {
+           
             NSString *str_label=[dic_tmp objectForKey:@"label"];
             NSObject *obj_value=[dic_tmp objectForKey:@"value"];
             NSString *str_value=@"";
@@ -508,10 +516,16 @@
                 }
                 
                 if ([dic_bkvalue count]!=0) {
-                    NSString *str_text=[dic_bkvalue objectForKey:@"text"];
-                    NSString *str_value=[dic_bkvalue objectForKey:@"value"];
-                    cell.detailTextLabel.text=str_text;
-                    [dic_tmp setValue:str_value forKey:@"value"];
+                    NSDictionary *dic_tmp=[dic_bkvalue objectForKey:str_label];
+                    if (dic_tmp!=nil) {
+                        NSString *str_text=[dic_tmp objectForKey:@"text"];
+                        NSString *str_value=[dic_tmp objectForKey:@"value"];
+                        cell.detailTextLabel.text=str_text;
+                        [dic_tmp setValue:str_value forKey:@"value"];
+                    }
+                    else {
+                        cell.detailTextLabel.text=@"请点击选择";
+                    }
                 }
                 else {
                     cell.detailTextLabel.text=@"请点击选择";
@@ -772,7 +786,9 @@
     UITableViewCell *cell=[tableView cellForRowAtIndexPath:i_indexPath];
     if (cell!=nil) {
         if ([dic_backvalue count]!=0) {
-            dic_bkvalue=dic_backvalue;
+            NSString *str_title=[dic_backvalue objectForKey:@"title"];
+            [dic_bkvalue setObject:dic_backvalue forKey:str_title];
+          //  [dic_bkvalue addEntriesFromDictionary:dic_backvalue];
             /*
             NSString *str_text=[dic_backvalue objectForKey:@"label"];
             NSString *str_value=[dic_backvalue objectForKey:@"value"];

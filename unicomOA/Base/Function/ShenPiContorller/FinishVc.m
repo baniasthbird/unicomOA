@@ -164,6 +164,21 @@
                         str_url_postdata=[JSON objectForKey:@"url"];
                         [tableView reloadData];
                     }
+                    else {
+                        [indicator stopAnimating];
+                        [_refreshControl endRefreshing];
+                        NSObject *obj_msg= [JSON objectForKey:@"msg"];
+                        NSString *str_msg=@"";
+                        if (obj_msg!=[NSNull null]) {
+                            str_msg=(NSString*)obj_msg;
+                        }
+                        LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"提示" message:str_msg cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+                            
+                        }];
+                        [alert showLXAlertView];
+                        [self.navigationController popViewControllerAnimated:YES];
+                        
+                    }
                 }
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
