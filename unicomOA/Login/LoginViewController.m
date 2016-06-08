@@ -21,7 +21,7 @@
 
 
 
-@interface LoginViewController()<UITextFieldDelegate,YBMonitorNetWorkStateDelegate>
+@interface LoginViewController()<UITextFieldDelegate,YBMonitorNetWorkStateDelegate,ServerIPViewControllerDelegate>
 {
     UIImageView *View;
     UIView *bgView;
@@ -55,6 +55,8 @@
     NSString *str_reachable;
     
     UIActivityIndicatorView *indicator;
+    
+    UILabel *lbl_ip;
 }
 
 static NSString *kServerSessionCookie=@"JSESSIONID";
@@ -128,12 +130,35 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
 
     db=[DataBase sharedinstanceDB];
     
+    NSMutableArray *arr_ip= [db fetchIPAddress];
+    NSString *str_ip_label=@"";
+    if (arr_ip!=nil && [arr_ip count]>0) {
+        NSArray *arr_sub_ip=[arr_ip objectAtIndex:0];
+        NSString *str_ip=[arr_sub_ip objectAtIndex:0];
+        NSString *str_port=[arr_sub_ip objectAtIndex:1];
+        str_ip_label=[NSString stringWithFormat:@"%@  %@:%@",@"当前服务器端口为",str_ip,str_port];
+    }
+    
+    lbl_ip=[self CreateLabel:CGRectMake(10, self.view.frame.size.height-80, self.view.frame.size.width-20, 30) title:str_ip_label titleColor:[UIColor whiteColor] font:[UIFont fontWithName:@"STHeitiSC-Medium" size:14]];
+    lbl_ip.textAlignment=NSTextAlignmentCenter;
+    [self.view addSubview:lbl_ip];
+    
     // 设置代理
     [YBMonitorNetWorkState shareMonitorNetWorkState].delegate = self;
     // 添加网络监听
     [[YBMonitorNetWorkState shareMonitorNetWorkState] addMonitorNetWorkState];
     
     [self netWorkStateChanged];
+    
+    
+}
+
+//新增添加显示IP地址的界面
+-(void)createIPLabel {
+    
+    
+    
+    
 }
 
 -(void)createLabels {
@@ -141,6 +166,7 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     UILabel *lbl_title1;
     UILabel *lbl_title2;
     UILabel *lbl_title3;
+    
     if (iPhone6 || iPhone6_plus) {
         lbl_title1=[self CreateLabel:CGRectMake(10, self.view.frame.size.height/2-170, self.view.frame.size.width-20, 50) title:@"HNTI综合信息管理系统" titleColor:[UIColor whiteColor] font:[UIFont fontWithName:@"STHeitiSC-Medium" size:25]];
         lbl_title2=[self CreateLabel:CGRectMake(10, self.view.frame.size.height/2-130, self.view.frame.size.width-20, 50) title:@"设计研究有限公司" titleColor:[UIColor whiteColor] font:[UIFont fontWithName:@"STHeitiSC-Medium" size:20]];
@@ -336,6 +362,7 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
 
 -(void)serverip:(UIButton*)button {
     ServerIPViewController *vc=[[ServerIPViewController alloc]init];
+    vc.delegate=self;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -382,7 +409,7 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     user.clearButtonMode = UITextFieldViewModeWhileEditing;
     user.delegate=self;
    // user.text=@"sysadmin";
-    //user.text=@"张克进";
+   // user.text=@"张克进";
     
     pwd=[self createTextFielfFrame:CGRectMake(60, self.view.frame.size.height/2, self.view.frame.size.width-120, 30) font:[UIFont systemFontOfSize:20]  placeholder:@"密码" ];
     pwd.clearButtonMode = UITextFieldViewModeWhileEditing;
@@ -392,7 +419,7 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     pwd.textColor=[UIColor whiteColor];
     pwd.attributedPlaceholder=[[NSAttributedString alloc] initWithString:@"密码" attributes:@{NSForegroundColorAttributeName:placeholderColor}];
     pwd.delegate=self;
-    //pwd.text=@"000000";
+  //  pwd.text=@"000000";
     //pwd.keyboardType=UIKeyboardTypeNumberPad;
     
     
@@ -697,6 +724,17 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
 }
 
 
+-(void)RefreshIP {
+    NSMutableArray *arr_ip= [db fetchIPAddress];
+    if (arr_ip!=nil && [arr_ip count]>0) {
+        NSArray *arr_sub_ip=[arr_ip objectAtIndex:0];
+        NSString *str_ip=[arr_sub_ip objectAtIndex:0];
+        NSString *str_port=[arr_sub_ip objectAtIndex:1];
+        lbl_ip.text=[NSString stringWithFormat:@"%@   %@:%@",@"当前服务器地址为",str_ip,str_port];
+        lbl_ip.textAlignment=NSTextAlignmentCenter;
+    }
+}
+
 #pragma mark 网络监听代理方法，当网络状态发生改变的时候出发
 -(void)netWorkStateChanged {
     // 获取当前网络类型
@@ -708,5 +746,9 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     str_reachable=currentNetWorkState;
 
 }
+
+
+
+
 
 @end

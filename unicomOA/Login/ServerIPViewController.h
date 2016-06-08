@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@class ServerIPViewController;
+@protocol ServerIPViewControllerDelegate <NSObject>
+
+-(void)RefreshIP;
+
+@end
+
 @interface ServerIPViewController : UIViewController
+
+@property (nonatomic,strong) id<ServerIPViewControllerDelegate> delegate;
 
 @end

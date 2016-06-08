@@ -176,7 +176,7 @@
         }
         
     }
-    
+    [_delegate RefreshIP];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 

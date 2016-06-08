@@ -543,10 +543,8 @@
     if (indexPath.row<[arr_tmp count]) {
         NSDictionary  *dic_tmp=[arr_tmp objectAtIndex:indexPath.row];
         NSString *str_type=[dic_tmp objectForKey:@"type"];
-        NSString *str_readonly=[dic_tmp objectForKey:@"readonly"];
-        BOOL b_readonly=[str_readonly boolValue];
         if ([str_type isEqualToString:@"textarea"]) {
-            if (b_readonly==YES) {
+            //if (b_readonly==YES) {
                 NSObject *obj_label=[dic_tmp objectForKey:@"label"];
                 NSString *str_label=@"";
                 if (obj_label!=[NSNull null]) {
@@ -562,19 +560,27 @@
                     CGFloat rowHeightLabel=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width*0.1 title:str_label font:[UIFont systemFontOfSize:14]];
                     if (rowHeightLabel>rowHeightValue)
                     {
-                        return  rowHeightLabel+10;
+                        if (rowHeightLabel>34) {
+                            return  rowHeightLabel+10;
+                        }
+                        else {
+                            return 44;
+                        }
                     }
                     else {
-                        return  rowHeightValue+10;
+                        if (rowHeightValue>34) {
+                            return rowHeightValue+10;
+                        }
+                        else {
+                            return  44;
+                        }
+                        
                     }
-                }
-                else {
-                    return 180;
-                }
+               
                 
             }
             else {
-                return  180;
+                return  44;
                 
             }
         }
