@@ -159,12 +159,12 @@
     NSObject *tmp=tmpTree.nodeData;
     if ([tmp isMemberOfClass:[CLTreeView_LEVEL0_Model class]]) {
         CLTreeView_LEVEL0_Model *tmp0=(CLTreeView_LEVEL0_Model*)tmp;
-        NSString *str_num=[NSString stringWithFormat:@"%ld",i_num];
+        NSString *str_num=[NSString stringWithFormat:@"%ld",(long)i_num];
         tmp0.num=str_num;
     }
     else if ([tmp isMemberOfClass:[CLTreeView_LEVEL1_Model class]]) {
         CLTreeView_LEVEL1_Model *tmp0=(CLTreeView_LEVEL1_Model*)tmp;
-        NSString *str_num=[NSString stringWithFormat:@"%ld",i_num];
+        NSString *str_num=[NSString stringWithFormat:@"%ld",(long)i_num];
         tmp0.sonCnt=str_num;
     }
 }

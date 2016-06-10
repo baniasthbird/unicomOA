@@ -107,7 +107,7 @@
 -(void)Actiondo:(UIButton*)sender {
     if ([self.delegate respondsToSelector:@selector(tapCell:atIndex:)]) {
         [self.delegate tapCell:self atIndex:self.myTag];
-        NSLog(@"%ld,%@",self.myTag,@"进入下一版面");
+        NSLog(@"%ld,%@",(long)self.myTag,@"进入下一版面");
     }
 }
 
@@ -133,7 +133,7 @@
     }];
     if ([self.delegate respondsToSelector:@selector(sideslipCellRemoveCell:atIndex:)]) {
         [self.delegate sideslipCellRemoveCell:self atIndex:self.myTag];
-        NSLog(@"%ld,%@",self.myTag,@"移除");
+        NSLog(@"%ld,%@",(long)self.myTag,@"移除");
     }
 }
 

@@ -167,7 +167,7 @@
             }
         } @catch (NSException *exception) {
             LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"警告" message:@"请输入正确的IP地址或端口号" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
-                NSLog(@"点击index====%ld",clickIndex);
+                NSLog(@"点击index====%ld",(long)clickIndex);
             }];
             [alert showLXAlertView];
             return;

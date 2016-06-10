@@ -121,12 +121,12 @@
                 }
                 else
                 {
-                    NSLog(@"county index at component %ld row %ld is unvalid",component,row);
+                    NSLog(@"county index at component %ld row %ld is unvalid",(long)component,row);
                 }
             }
             else
             {
-                NSLog(@"city index at component %ld row %ld is unvalid",component,row);
+                NSLog(@"city index at component %ld row %ld is unvalid",(long)component,row);
             }
             
         }
@@ -142,7 +142,7 @@
             }
             else
             {
-                NSLog(@"county index at component %ld row %ld is unvalid",component,row);
+                NSLog(@"county index at component %ld row %ld is unvalid",(long)component,row);
             }
         }
             break;

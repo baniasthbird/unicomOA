@@ -156,7 +156,7 @@
 {
     if ([self.delegate respondsToSelector:@selector(tapCell:atIndex:)]) {
         [self.delegate tapCell:self atIndex:self.myTag];
-        NSLog(@"%ld,%@",self.myTag,@"进入");
+        NSLog(@"%ld,%@",(long)self.myTag,@"进入");
     }
 }
 
@@ -169,7 +169,7 @@
     }];
     if ([self.delegate respondsToSelector:@selector(sideslipCellRemoveCell:atIndex:)]) {
         [self.delegate sideslipCellRemoveCell:self atIndex:self.myTag];
-        NSLog(@"%ld,%@",self.myTag,@"移除");
+        NSLog(@"%ld,%@",(long)self.myTag,@"移除");
     }
     
 }

@@ -34,14 +34,14 @@
         self.detailTextLabel.font=[UIFont systemFontOfSize:13];
         //self.textLabel.text=@"工作提醒:待办流程";
         //[self.textLabel sizeToFit];
-        NSString *str_doc_num=[NSString stringWithFormat:@"%lu",i_doc_num];
+        NSString *str_doc_num=[NSString stringWithFormat:@"%lu",(long)i_doc_num];
         int i_doc_length=(int)str_doc_num.length;
-        NSString *str_flow_num=[NSString stringWithFormat:@"%lu",i_flow_num];
+        NSString *str_flow_num=[NSString stringWithFormat:@"%lu",(long)i_flow_num];
         int i_flow_length=(int)str_flow_num.length;
-        NSString *str_msg_num=[NSString stringWithFormat:@"%lu",i_msg_num];
+        NSString *str_msg_num=[NSString stringWithFormat:@"%lu",(long)i_msg_num];
         int i_msg_length=(int)str_msg_num.length;
         
-        NSString *str_content=[NSString stringWithFormat:@"%@%lu%@%lu%@%lu%@",@"工作提醒:待办流程",i_flow_num,@"个，公文传阅",i_doc_num,@"个,系统消息",i_msg_num,@"个"];
+        NSString *str_content=[NSString stringWithFormat:@"%@%lu%@%lu%@%lu%@",@"工作提醒:待办流程",(long)i_flow_num,@"个，公文传阅",i_doc_num,@"个,系统消息",i_msg_num,@"个"];
         NSMutableAttributedString *str_lbl=[[NSMutableAttributedString alloc]initWithString:str_content];
         [str_lbl addAttribute:NSForegroundColorAttributeName  value:[UIColor blackColor] range:NSMakeRange(0, 8)];
         [str_lbl addAttribute:NSForegroundColorAttributeName  value:[UIColor redColor] range:NSMakeRange(9, i_flow_length)];
@@ -58,7 +58,7 @@
         self.imageView.image=[UIImage imageNamed:@"remind.png"];
         _lbl_count=[[UILabel alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width-80, 10, 30, 30)];
         _lbl_count.backgroundColor=[UIColor redColor];
-        _lbl_count.text=[NSString stringWithFormat:@"%lu",i_flow_num];
+        _lbl_count.text=[NSString stringWithFormat:@"%lu",(long)i_flow_num];
         _lbl_count.textAlignment=NSTextAlignmentCenter;
         _lbl_count.textColor=[UIColor whiteColor];
         _lbl_count.font=[UIFont systemFontOfSize:13];

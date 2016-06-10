@@ -294,7 +294,7 @@
     }
     else {
         NSIndexPath *index_selected=self.selectedRowIndexPath;
-        NSString *str_index=[NSString stringWithFormat:@"%ld",indexPath.section];
+        NSString *str_index=[NSString stringWithFormat:@"%ld",(long)indexPath.section];
         NSArray *arr_ctl= [_dic_clt objectForKey:str_index];
         NSDictionary *dic_tmp;
         if (index_selected!=nil) {
@@ -349,7 +349,7 @@
         return cell;
     }
     else {
-        NSString *str_index=[NSString stringWithFormat:@"%ld",indexPath.section];
+        NSString *str_index=[NSString stringWithFormat:@"%ld",(long)indexPath.section];
         NSArray *arr_ctl= [_dic_clt objectForKey:str_index];
         NSMutableArray *arr_m_ctl=[self DispalyUIWithoutHidden:arr_ctl];
         //if (indexPath.row<[arr_m_ctl count]) {

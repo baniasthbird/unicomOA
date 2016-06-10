@@ -348,7 +348,7 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
         */
         
         LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"警告" message:@"是否清空所有缓存数据" cancelBtnTitle:@"取消" otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
-             NSLog(@"点击index====%ld",clickIndex);
+             NSLog(@"点击index====%ld",(long)clickIndex);
         }];
         [alert showLXAlertView];
         
@@ -366,7 +366,7 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
     }
     */
     else {
-        NSLog(@"点击了第%ld组，第%ld行",indexPath.section,indexPath.row);
+        NSLog(@"点击了第%ld组，第%ld行",(long)indexPath.section,indexPath.row);
     }
 }
 

@@ -217,7 +217,7 @@
         yzButton.userInteractionEnabled = YES;
         [self.timer invalidate];
     } else {
-        NSString *str = [NSString stringWithFormat:@"%lu秒后重新获取", self.timeCount];
+        NSString *str = [NSString stringWithFormat:@"%lu秒后重新获取", (long)self.timeCount];
         [yzButton setTitle:str forState:UIControlStateNormal];
         yzButton.userInteractionEnabled = NO;
         

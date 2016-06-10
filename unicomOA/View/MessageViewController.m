@@ -422,13 +422,7 @@
 
 
 
-//判断是在线还是离线
--(BOOL)isLocal {
-    NSString *File=[[NSBundle mainBundle] pathForResource:@"Info" ofType:@"plist"];
-    NSMutableDictionary *dict=[[NSMutableDictionary alloc] initWithContentsOfFile:File];
-    BOOL isLocal=  [dict objectForKey:@"blocal"];
-    return isLocal;
-}
+
 
 //点击新闻事件
 -(void)tapCell:(NewsManagementTableViewCell *)cell atIndex:(NSInteger)index {

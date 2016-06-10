@@ -72,7 +72,7 @@
     _friendGroup = friendGroup;
     
     [_bgButton setTitle:friendGroup.name forState:UIControlStateNormal];
-    _numLabel.text = [NSString stringWithFormat:@"%d/%d", friendGroup.online, friendGroup.friends.count];
+    _numLabel.text = [NSString stringWithFormat:@"%ld/%lu", (long)friendGroup.online, (unsigned long)friendGroup.friends.count];
 }
 
 - (void)didMoveToSuperview
