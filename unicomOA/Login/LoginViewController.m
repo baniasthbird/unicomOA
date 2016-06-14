@@ -27,6 +27,7 @@
     UIView *bgView;
     UITextField *pwd;
     UITextField *user;
+    UIButton *checkbox;
 }
 
 
@@ -57,6 +58,8 @@
     UIActivityIndicatorView *indicator;
     
     UILabel *lbl_ip;
+    
+    BOOL b_rememberPwd;
 }
 
 static NSString *kServerSessionCookie=@"JSESSIONID";
@@ -67,6 +70,19 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
 -(void)viewWillAppear:(BOOL)animated
 {
     self.navigationController.navigationBarHidden=YES;
+    NSUserDefaults *account = [NSUserDefaults standardUserDefaults];
+    NSString *str_usrname= [account objectForKey:@"name"];
+    NSString *str_password= [account objectForKey:@"password"];
+    if (str_usrname==nil && str_password==nil) {
+        user.text=@"";
+        pwd.text=@"";
+        checkbox.selected=NO;
+    }
+    else if (![str_usrname isEqualToString:@""] && ![str_password isEqualToString:@""]) {
+        pwd.text=str_password;
+        user.text=str_usrname;
+        checkbox.selected=YES;
+    }
 }
  
 -(void)viewDidLoad
@@ -120,7 +136,7 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     [self createLabels];
     [self createButtons];
     [self createTextFields];
-    
+    [self CreateCheckBox];
     [self InitDataBase];
     
     self.view.userInteractionEnabled = YES;
@@ -142,7 +158,7 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     
     lbl_ip=[self CreateLabel:CGRectMake(10, self.view.frame.size.height-80, self.view.frame.size.width-20, 30) title:str_ip_label titleColor:[UIColor whiteColor] font:[UIFont fontWithName:@"STHeitiSC-Medium" size:14]];
     lbl_ip.textAlignment=NSTextAlignmentCenter;
-    [self.view addSubview:lbl_ip];
+  //  [self.view addSubview:lbl_ip];
     
     // 设置代理
     [YBMonitorNetWorkState shareMonitorNetWorkState].delegate = self;
@@ -150,15 +166,21 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     [[YBMonitorNetWorkState shareMonitorNetWorkState] addMonitorNetWorkState];
     
     [self netWorkStateChanged];
-    
-    
 }
 
 //新增添加显示IP地址的界面
--(void)createIPLabel {
+-(void)CreateCheckBox {
+    checkbox=[[UIButton alloc]initWithFrame:CGRectZero];
+    checkbox.frame=CGRectMake(self.view.frame.size.width*0.08, self.view.frame.size.height/2+45,20,20);
+    [checkbox setImage:[UIImage imageNamed:@"check_off.png"]forState:UIControlStateNormal];
+    [checkbox setImage:[UIImage imageNamed:@"check_on.png"]forState:UIControlStateSelected];
+    [checkbox addTarget:self action:@selector(checkboxClick:) forControlEvents:UIControlEventTouchUpInside];
+    UILabel *lbl_checkname=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.08+30, self.view.frame.size.height/2+30, self.view.frame.size.width*0.3, 50)];
+    lbl_checkname.textColor=[UIColor whiteColor];
+    lbl_checkname.text=@"记住密码";
     
-    
-    
+    [self.view addSubview:checkbox];
+    [self.view addSubview:lbl_checkname];
     
 }
 
@@ -169,12 +191,12 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     UILabel *lbl_title3;
     
     if (iPhone6 || iPhone6_plus) {
-        lbl_title1=[self CreateLabel:CGRectMake(10, self.view.frame.size.height/2-170, self.view.frame.size.width-20, 50) title:@"HNTI综合信息管理系统" titleColor:[UIColor whiteColor] font:[UIFont fontWithName:@"STHeitiSC-Medium" size:25]];
+        lbl_title1=[self CreateLabel:CGRectMake(10, self.view.frame.size.height/2-170, self.view.frame.size.width-20, 50) title:@"YICR综合信息管理系统" titleColor:[UIColor whiteColor] font:[UIFont fontWithName:@"STHeitiSC-Medium" size:25]];
         lbl_title2=[self CreateLabel:CGRectMake(10, self.view.frame.size.height/2-130, self.view.frame.size.width-20, 50) title:@"设计研究有限公司" titleColor:[UIColor whiteColor] font:[UIFont fontWithName:@"STHeitiSC-Medium" size:20]];
         lbl_title3=[self CreateLabel:CGRectMake(10, self.view.frame.size.height-50, self.view.frame.size.width-20,30 ) title:@"河南省信息咨询设计研究有限公司" titleColor:[UIColor whiteColor] font:[UIFont systemFontOfSize:15]];
     }
     else if (iPhone5_5s) {
-        lbl_title1=[self CreateLabel:CGRectMake(10, self.view.frame.size.height/2-140, self.view.frame.size.width-20, 50) title:@"HNTI综合信息管理系统" titleColor:[UIColor whiteColor] font:[UIFont fontWithName:@"STHeitiSC-Medium" size:25]];
+        lbl_title1=[self CreateLabel:CGRectMake(10, self.view.frame.size.height/2-140, self.view.frame.size.width-20, 50) title:@"YICR综合信息管理系统" titleColor:[UIColor whiteColor] font:[UIFont fontWithName:@"STHeitiSC-Medium" size:25]];
         lbl_title2=[self CreateLabel:CGRectMake(10, self.view.frame.size.height/2-100, self.view.frame.size.width-20, 50) title:@"设计研究有限公司" titleColor:[UIColor whiteColor] font:[UIFont fontWithName:@"STHeitiSC-Medium" size:20]];
         lbl_title3=[self CreateLabel:CGRectMake(10, self.view.frame.size.height-50, self.view.frame.size.width-20,30 ) title:@"河南省信息咨询设计研究有限公司" titleColor:[UIColor whiteColor] font:[UIFont systemFontOfSize:15]];
         
@@ -189,7 +211,7 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
 
 -(void)createButtons
 {
-    UIButton *btn_login=[self createButtonFrame:CGRectMake(self.view.frame.size.width*0.18, self.view.frame.size.height/2+80, self.view.frame.size.width*0.64, 50) backImageName:nil title:@"登  录" titleColor:[UIColor whiteColor]  font:[UIFont systemFontOfSize:25] target:self action:@selector(landClick)];
+    UIButton *btn_login=[self createButtonFrame:CGRectMake(self.view.frame.size.width*0.18, self.view.frame.size.height/2+110, self.view.frame.size.width*0.64, 50) backImageName:nil title:@"登  录" titleColor:[UIColor whiteColor]  font:[UIFont systemFontOfSize:25] target:self action:@selector(landClick)];
     btn_login.backgroundColor=[UIColor clearColor];
     btn_login.layer.cornerRadius=25.0f;
     btn_login.layer.borderWidth=1.0f;
@@ -211,7 +233,7 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     //newUserBtn.backgroundColor=[UIColor lightGrayColor];
     
     
-    UIButton *btn_forgetpassword=[self createButtonFrame:CGRectMake(self.view.frame.size.width*0.35, self.view.frame.size.height/2+150, self.view.frame.size.width*0.3, 30) backImageName:nil title:@"忘记密码?" titleColor:[UIColor colorWithRed:232/255.0f green:242/255.0f blue:255/255.0f alpha:0.3] font:[UIFont systemFontOfSize:15] target:self action:@selector(fogetPwd:)];
+    UIButton *btn_forgetpassword=[self createButtonFrame:CGRectMake(self.view.frame.size.width*0.35, self.view.frame.size.height/2+180, self.view.frame.size.width*0.3, 30) backImageName:nil title:@"忘记密码?" titleColor:[UIColor colorWithRed:232/255.0f green:242/255.0f blue:255/255.0f alpha:0.3] font:[UIFont systemFontOfSize:15] target:self action:@selector(fogetPwd:)];
     //fogotPwdBtn.backgroundColor=[UIColor lightGrayColor];
     
     
@@ -410,7 +432,7 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     user.clearButtonMode = UITextFieldViewModeWhileEditing;
     user.delegate=self;
    // user.text=@"sysadmin";
-   // user.text=@"张克进";
+  //  user.text=@"张克进";
     
     pwd=[self createTextFielfFrame:CGRectMake(60, self.view.frame.size.height/2, self.view.frame.size.width-120, 30) font:[UIFont systemFontOfSize:20]  placeholder:@"密码" ];
     pwd.clearButtonMode = UITextFieldViewModeWhileEditing;
@@ -440,6 +462,8 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     [self.view addSubview:pwdImageView];
    // [bgView addSubview:line1];
 }
+
+
 
 
 -(UITextField *)createTextFielfFrame:(CGRect)frame font:(UIFont *)font placeholder:(NSString *)placeholder
@@ -557,6 +581,10 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
                 NSString *str_success=[JSON objectForKey:@"success"];
                 BOOL b_success=[str_success boolValue];
                 if (b_success==YES) {
+                    if (b_rememberPwd==YES) {
+                        [self saveUserInfo];
+                    }
+                    //保存session
                     [self saveLoginSession:str_url];
                     NSDictionary *dic_usr=[JSON objectForKey:@"userInfo"];
                     // [self postLogin2];
@@ -610,6 +638,21 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
         return;
         
     } ];
+}
+
+
+-(void)saveUserInfo {
+    //获取userDefault单例
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    //登陆成功后把用户名和密码存储到UserDefault
+    NSString *str_username=user.text;
+    str_username= [str_username stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    NSString *str_password=pwd.text;
+    str_password=[str_password stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    [userDefaults setObject:str_username forKey:@"name"];
+    [userDefaults setObject:str_password forKey:@"password"];
+    [userDefaults synchronize];
+
 }
 
 
@@ -747,6 +790,22 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     str_reachable=currentNetWorkState;
 
 }
+
+-(void)checkboxClick:(UIButton*)btn {
+    btn.selected=!btn.selected;
+    if (btn.selected) {
+        b_rememberPwd=YES;
+    }
+    else {
+        b_rememberPwd=NO;
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        [userDefaults setObject:nil forKey:@"name"];
+        [userDefaults setObject:nil forKey:@"password"];
+        [userDefaults synchronize];
+        
+    }
+}
+
 
 
 

@@ -16,6 +16,13 @@
 #define IP_PORT @"IP_PORT"
 #define IP_MARK @"IP_SERVERNAME"
 
+//用户表
+#define USER_TABLENAME @"USR_TABLE"
+#define USER_ID @"USR_ID"
+#define USER_NAME @"USR_NAME"
+#define USER_PASSWORD @"USR_PWD"
+#define USER_MARK @"USR_MARK"
+
 //接口表
 #define INTERFACE_TABLENAME @"INTERFACE_TABLE"
 #define INTERFACE_ID        @"INTERFACE_ID"

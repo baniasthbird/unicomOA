@@ -253,7 +253,14 @@
         return 50;
     }
     else {
-        return 110;
+        if ([_arr_NewsList count]==0) {
+            return 110;
+        }
+        else {
+            CGFloat h_height=[self cellHeightForNews:indexPath.row];
+            return h_height;
+        }
+        
     }
 }
 
@@ -277,6 +284,21 @@
     }
 }
 
+
+-(CGFloat)cellHeightForNews:(NSInteger)i_index {
+    NSDictionary *dic_content=[_arr_NewsList objectAtIndex:i_index];
+    NSString *str_category=[dic_content objectForKey:@"classname"];
+    CGFloat h_category=[UILabel_LabelHeightAndWidth getHeightByWidth:15*self.view.frame.size.width/16 title:str_category font:[UIFont systemFontOfSize:14]];
+   
+    CGFloat h_Title=[UILabel_LabelHeightAndWidth getHeightByWidth:15*self.view.frame.size.width/16 title:[dic_content objectForKey:@"title"] font:[UIFont systemFontOfSize:24]];
+    
+    NSString *str_department = [dic_content objectForKey:@"operatorName"];
+    CGFloat w_depart=[UILabel_LabelHeightAndWidth getWidthWithTitle:[dic_content objectForKey:@"operatorName"] font:[UIFont systemFontOfSize:14]];
+    CGFloat h_depart=[UILabel_LabelHeightAndWidth getHeightByWidth:w_depart title:str_department font:[UIFont systemFontOfSize:14]];
+    CGFloat h_height=h_category+h_Title+h_depart;
+    return  h_height+15;
+}
+
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
    
         if (indexPath.section==0) {
@@ -295,6 +317,8 @@
             }
             else {
                 NewsManagementTableViewCell *cell;
+                
+                /*
                 if (iPhone6 || iPhone6_plus)
                 {
                     cell=[NewsManagementTableViewCell cellWithTable:tableView withCellHeight:110 titleX:self.view.frame.size.width/32 titleY:0.0f titleW:15*self.view.frame.size.width/16 titleH:50.0f DepartX:self.view.frame.size.width/32 DepartY:60.0f DepartW:3*self.view.frame.size.width/8 DepartH:40.0f TimeX:self.view.frame.size.width/2 TimeY:60.0f TimeW:self.view.frame.size.width/3 TimeH:40.0f canScroll:NO];
@@ -302,36 +326,25 @@
                 else if (iPhone5_5s || iPhone4_4s) {
                     cell=[NewsManagementTableViewCell cellWithTable:tableView withCellHeight:110 titleX:self.view.frame.size.width/32 titleY:0.0f titleW:15*self.view.frame.size.width/16 titleH:50.0f DepartX:self.view.frame.size.width/32 DepartY:60.0f DepartW:3*self.view.frame.size.width/8 DepartH:40.0f TimeX:self.view.frame.size.width*0.4 TimeY:60.0f TimeW:self.view.frame.size.width*0.5 TimeH:40.0f canScroll:NO];
                 }
+                */
                 NSDictionary *dic_content=[_arr_NewsList objectAtIndex:indexPath.row];
                 cell.delegate=self;
                 cell.myTag=indexPath.row;
-                cell.lbl_Title.text=[dic_content objectForKey:@"title"];
+                NSString *str_category=[dic_content objectForKey:@"classname"];
+                CGFloat h_category=[UILabel_LabelHeightAndWidth getHeightByWidth:15*self.view.frame.size.width/16 title:str_category font:[UIFont systemFontOfSize:14]];
+                NSString *str_title=[dic_content objectForKey:@"title"];
                 CGFloat h_Title=[UILabel_LabelHeightAndWidth getHeightByWidth:15*self.view.frame.size.width/16 title:[dic_content objectForKey:@"title"] font:[UIFont systemFontOfSize:24]];
-                cell.lbl_Title.frame=CGRectMake(self.view.frame.size.width/32, 5, 15*self.view.frame.size.width/16, h_Title);
-                [cell.lbl_Title sizeToFit];
-                cell.lbl_department.text=[dic_content objectForKey:@"operatorName"];
+                
+                NSString *str_department = [dic_content objectForKey:@"operatorName"];
                 CGFloat w_depart=[UILabel_LabelHeightAndWidth getWidthWithTitle:[dic_content objectForKey:@"operatorName"] font:[UIFont systemFontOfSize:14]];
-                if (h_Title<90) {
-                    cell.lbl_department.frame=CGRectMake(self.view.frame.size.width/32, 90, w_depart, 20);
-                }
-                else {
-                    cell.lbl_department.frame=CGRectMake(self.view.frame.size.width/32, h_Title+10, w_depart, 40);
-                }
-                
-                [cell.lbl_department sizeToFit];
-                
-               
-                cell.lbl_time.text=[dic_content objectForKey:@"startDate"];
-                CGFloat w_time=[UILabel_LabelHeightAndWidth getWidthWithTitle:[dic_content objectForKey:@"operatorName"] font:[UIFont systemFontOfSize:14]];
-                if (h_Title<90) {
-                    cell.lbl_time.frame=CGRectMake(self.view.frame.size.width/32+w_depart+10, 90, w_time, 20);
-                }
-                else {
-                    cell.lbl_time.frame=CGRectMake(self.view.frame.size.width/32+w_depart+10, 90, h_Title+10, 20);
+                CGFloat h_depart=[UILabel_LabelHeightAndWidth getHeightByWidth:w_depart title:str_department font:[UIFont systemFontOfSize:14]];
+                NSString *str_time =[dic_content objectForKey:@"startDate"];
+                CGFloat h_height=h_category+h_Title+h_depart+15;
+                cell=[NewsManagementTableViewCell cellWithTable:tableView withCellHeight:h_height withCategoryHeight:h_category withTitleHeight:h_Title withButtonHeight:h_depart withTitle:str_title withCategory:str_category withDepart:str_department withTime:str_time canScroll:NO];
+                cell.delegate=self;
+                cell.str_title=str_title;
+                cell.str_department=str_department;
 
-                }
-                
-                [cell.lbl_time sizeToFit];
                 NSObject *obj=[dic_content objectForKey:@"id"];
                 if (obj!=nil) {
                     NSNumber *num_index=(NSNumber*)obj;
@@ -428,8 +441,8 @@
 -(void)tapCell:(NewsManagementTableViewCell *)cell atIndex:(NSInteger)index {
     NewsDisplayViewController *news_controller=[[NewsDisplayViewController alloc]init];
     news_controller.news_index=cell.tag;
-    news_controller.str_label=cell.lbl_Title.text;
-    news_controller.str_depart=cell.lbl_department.text;
+    news_controller.str_label=cell.str_title;
+    news_controller.str_depart=cell.str_department;
     news_controller.userInfo=_userInfo;
     [self.navigationController pushViewController:news_controller animated:YES];
 }

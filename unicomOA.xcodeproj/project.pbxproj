@@ -41,7 +41,6 @@
 		2CBA8E221CD3B33400BDF625 /* mission_unfinished.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CBA8E1E1CD3B33400BDF625 /* mission_unfinished.png */; };
 		2CBA8E231CD3B33400BDF625 /* printmission.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CBA8E1F1CD3B33400BDF625 /* printmission.png */; };
 		2CDC2BDD1C8FBFC90067693B /* NewsManagementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDC2BDC1C8FBFC90067693B /* NewsManagementViewController.m */; };
-		2CDC2BE01C8FD1300067693B /* NewsFocusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDC2BDF1C8FD1300067693B /* NewsFocusViewController.m */; };
 		2CDC2BE41C8FFD6C0067693B /* NIDropDown.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDC2BE31C8FFD6C0067693B /* NIDropDown.m */; };
 		2CDC2BF21C9117FE0067693B /* NewsManagementTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDC2BF11C9117FE0067693B /* NewsManagementTableViewCell.m */; };
 		2CDC2BF51C924DAC0067693B /* NewsDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDC2BF41C924DAC0067693B /* NewsDisplayViewController.m */; };
@@ -146,6 +145,8 @@
 		68579FA91CC0C88600597FBD /* CarDeployCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68579FA81CC0C88600597FBD /* CarDeployCell.m */; };
 		68723EB61CF839DA0019ACD8 /* UnFinishVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 68723EB51CF839DA0019ACD8 /* UnFinishVc.m */; };
 		68723EB91CF839F50019ACD8 /* FinishVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 68723EB81CF839F50019ACD8 /* FinishVc.m */; };
+		687D168A1D0FAA1A0040921D /* check_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 687D16881D0FAA1A0040921D /* check_off.png */; };
+		687D168B1D0FAA1A0040921D /* check_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 687D16891D0FAA1A0040921D /* check_on.png */; };
 		68815DC71CCDC45400277807 /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68815DC61CCDC45400277807 /* CommentCell.m */; };
 		6882288D1CE013A1007F5861 /* libFMDB.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6882288C1CE013A1007F5861 /* libFMDB.a */; };
 		6882288F1CE01D96007F5861 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6882288E1CE01D96007F5861 /* libsqlite3.0.tbd */; };
@@ -319,8 +320,6 @@
 		2CBA8E1F1CD3B33400BDF625 /* printmission.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = printmission.png; sourceTree = "<group>"; };
 		2CDC2BDB1C8FBFC90067693B /* NewsManagementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsManagementViewController.h; path = Base/Function/NewsController/NewsManagementViewController.h; sourceTree = "<group>"; };
 		2CDC2BDC1C8FBFC90067693B /* NewsManagementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsManagementViewController.m; path = Base/Function/NewsController/NewsManagementViewController.m; sourceTree = "<group>"; };
-		2CDC2BDE1C8FD1300067693B /* NewsFocusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsFocusViewController.h; path = Base/Function/NewsController/NewsFocusViewController.h; sourceTree = "<group>"; };
-		2CDC2BDF1C8FD1300067693B /* NewsFocusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsFocusViewController.m; path = Base/Function/NewsController/NewsFocusViewController.m; sourceTree = "<group>"; };
 		2CDC2BE21C8FFD6C0067693B /* NIDropDown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NIDropDown.h; path = Base/Function/NewsModel/Classes/NIDropDown.h; sourceTree = "<group>"; };
 		2CDC2BE31C8FFD6C0067693B /* NIDropDown.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NIDropDown.m; path = Base/Function/NewsModel/Classes/NIDropDown.m; sourceTree = "<group>"; };
 		2CDC2BF01C9117FE0067693B /* NewsManagementTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsManagementTableViewCell.h; path = Base/Function/NewsModel/NewsManagementTableViewCell.h; sourceTree = "<group>"; };
@@ -528,6 +527,8 @@
 		68723EB51CF839DA0019ACD8 /* UnFinishVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UnFinishVc.m; path = Base/Function/ShenPiContorller/UnFinishVc.m; sourceTree = "<group>"; };
 		68723EB71CF839F50019ACD8 /* FinishVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FinishVc.h; path = Base/Function/ShenPiContorller/FinishVc.h; sourceTree = "<group>"; };
 		68723EB81CF839F50019ACD8 /* FinishVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FinishVc.m; path = Base/Function/ShenPiContorller/FinishVc.m; sourceTree = "<group>"; };
+		687D16881D0FAA1A0040921D /* check_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check_off.png; sourceTree = "<group>"; };
+		687D16891D0FAA1A0040921D /* check_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check_on.png; sourceTree = "<group>"; };
 		68815DC51CCDC45400277807 /* CommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommentCell.h; path = Base/Function/NewsModel/CommentCell.h; sourceTree = "<group>"; };
 		68815DC61CCDC45400277807 /* CommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommentCell.m; path = Base/Function/NewsModel/CommentCell.m; sourceTree = "<group>"; };
 		6882288C1CE013A1007F5861 /* libFMDB.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFMDB.a; path = "../../../Library/Developer/Xcode/DerivedData/unicomOA-casyuftkadckdjdwnuvyvlrozdco/Build/Products/Debug-iphonesimulator/libFMDB.a"; sourceTree = "<group>"; };
@@ -882,8 +883,6 @@
 			children = (
 				2CDC2BDB1C8FBFC90067693B /* NewsManagementViewController.h */,
 				2CDC2BDC1C8FBFC90067693B /* NewsManagementViewController.m */,
-				2CDC2BDE1C8FD1300067693B /* NewsFocusViewController.h */,
-				2CDC2BDF1C8FD1300067693B /* NewsFocusViewController.m */,
 				2CDC2BF31C924DAC0067693B /* NewsDisplayViewController.h */,
 				2CDC2BF41C924DAC0067693B /* NewsDisplayViewController.m */,
 				6882C31F1CA92C4B00CDEB1A /* CommentViewController.h */,
@@ -1618,6 +1617,8 @@
 				683EFF5E1CDC7B9C0049326B /* locate.png */,
 				68A349B11CD8A90500E2851B /* remind.png */,
 				2CBA8E1C1CD3B33400BDF625 /* carmission.png */,
+				687D16881D0FAA1A0040921D /* check_off.png */,
+				687D16891D0FAA1A0040921D /* check_on.png */,
 				2CBA8E1D1CD3B33400BDF625 /* mission_done.png */,
 				2CBA8E1E1CD3B33400BDF625 /* mission_unfinished.png */,
 				2CBA8E1F1CD3B33400BDF625 /* printmission.png */,
@@ -1771,6 +1772,7 @@
 				68F8E1851CD042AA005D2727 /* print.png in Resources */,
 				68F8E1831CD042AA005D2727 /* PHONEOA.png in Resources */,
 				68E779E71CB34A8E006DA5B9 /* head2.jpg in Resources */,
+				687D168B1D0FAA1A0040921D /* check_on.png in Resources */,
 				2CBA8E231CD3B33400BDF625 /* printmission.png in Resources */,
 				68F8E17A1CD042AA005D2727 /* checkbox_checked.png in Resources */,
 				68DA1EC61CE4640B0065517B /* newsbodcast.png in Resources */,
@@ -1785,6 +1787,7 @@
 				68F8E17B1CD042AA005D2727 /* checkbox_unchecked.png in Resources */,
 				2C35B0571C7062160003BF6C /* Assets.xcassets in Resources */,
 				2CBA8E211CD3B33400BDF625 /* mission_done.png in Resources */,
+				687D168A1D0FAA1A0040921D /* check_off.png in Resources */,
 				68E779E41CB34A8E006DA5B9 /* contacts_collect@2x.png in Resources */,
 				68F8E1801CD042AA005D2727 /* myApplication.png in Resources */,
 				6846EC5A1CF99C7C00A400C5 /* IQKeyboardManager.bundle in Resources */,
@@ -1882,7 +1885,6 @@
 			files = (
 				683815361CBC941300E6AFD3 /* CarApplicationDetail.m in Sources */,
 				6846EC501CF99C7C00A400C5 /* IQUIViewController+Additions.m in Sources */,
-				2CDC2BE01C8FD1300067693B /* NewsFocusViewController.m in Sources */,
 				68EEDE721CBB911A003295EB /* MCMenuButton.m in Sources */,
 				2CFEAD1A1C7168980054730E /* SignInViewController.m in Sources */,
 				6838153F1CBCCB2A00E6AFD3 /* PrintApplicationDetail.m in Sources */,

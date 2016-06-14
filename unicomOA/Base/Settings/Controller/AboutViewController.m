@@ -37,7 +37,7 @@
     
 #pragma mark 公司名
     UILabel *lbl_company=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2-image.size.width*2, self.view.frame.size.height/8+image.size.height/3, image.size.width*4, 80)];
-    lbl_company.text=@"HNTI综合信息管理系统";
+    lbl_company.text=@"YICR综合信息管理系统";
     lbl_company.textColor=[UIColor whiteColor];
     lbl_company.font=[UIFont boldSystemFontOfSize:24];
     lbl_company.textAlignment=NSTextAlignmentCenter;

@@ -117,6 +117,14 @@
     
     [self.view addSubview:btn_OK];
     
+    NSMutableArray *arr_tmp=[db fetchIPAddress];
+    NSArray *arr_ip= [arr_tmp objectAtIndex:0];
+    NSString *str_ip=[arr_ip objectAtIndex:0];
+    NSString *str_port=[arr_ip objectAtIndex:1];
+    
+    _txt_IP.text=str_ip;
+    _txt_Port.text=str_port;
+    
     
     UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"  " style:UIBarButtonItemStyleDone target:self action:@selector(MovePreviousVc:)];
     barButtonItem.tintColor=[UIColor whiteColor];

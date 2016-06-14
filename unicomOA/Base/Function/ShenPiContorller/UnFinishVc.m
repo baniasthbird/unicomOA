@@ -18,6 +18,7 @@
 #import "ListFileController.h"
 #import "NewsDetailVc.h"
 #import "UILabel+LabelHeightAndWidth.h"
+#import "ShenPiQueryLogVC.h"
 
 @interface UnFinishVc ()<UITableViewDataSource,UITableViewDelegate,ListFileControllerDelegate,PrintApplicationDetailCellDelegate>
 
@@ -68,10 +69,11 @@
     [barButtonItem setTitleTextAttributes:dict forState:UIControlStateNormal];
     self.navigationItem.leftBarButtonItem = barButtonItem;
     
-    
-    UIBarButtonItem *barButtonItem2 = [[UIBarButtonItem alloc] initWithTitle:@"提交" style:UIBarButtonItemStyleDone target:self action:@selector(Submit:)];
+    UIBarButtonItem *barButtonItem2 = [[UIBarButtonItem alloc] initWithTitle:@"记录" style:UIBarButtonItemStyleDone target:self action:@selector(QueryLog:)];
     [barButtonItem2 setTitleTextAttributes:dict forState:UIControlStateNormal];
-    self.navigationItem.rightBarButtonItem=barButtonItem2;
+    UIBarButtonItem *barButtonItem3 = [[UIBarButtonItem alloc] initWithTitle:@"提交" style:UIBarButtonItemStyleDone target:self action:@selector(Submit:)];
+    [barButtonItem3 setTitleTextAttributes:dict forState:UIControlStateNormal];
+    self.navigationItem.rightBarButtonItems=[NSArray arrayWithObjects:barButtonItem3,barButtonItem2, nil];
     
     self.view.backgroundColor=[UIColor colorWithRed:246/255.0f green:249/255.0f blue:254/255.0f alpha:1];
     
@@ -243,6 +245,13 @@
     NSString *str_return=[str_key stringByReplacingOccurrencesOfString:@"." withString:@"/"];
     return str_return;
 }
+
+-(void)QueryLog:(UIButton*)sender {
+    ShenPiQueryLogVC *vc=[[ShenPiQueryLogVC alloc]init];
+    vc.str_processInstID=_str_processInstID;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 
 -(void)Submit:(UIButton*)sender {
     //提交申请

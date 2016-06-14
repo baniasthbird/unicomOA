@@ -76,6 +76,15 @@
     } else {
         NSLog(@"success to creating IP table");
     }
+    //生成用户表
+    NSString *sqlCreateTableUser=[NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS '%@' ('%@' INTEGER PRIMARY KEY AUTOINCREMENT, '%@' TEXT, '%@' TEXT, '%@' TEXT)",USER_TABLENAME,USER_ID,USER_NAME,USER_PASSWORD,USER_MARK];
+    BOOL resUser=[_database executeUpdate:sqlCreateTableUser];
+    if (!resUser) {
+        NSLog(@"error when creating User table");
+    } else {
+        NSLog(@"success to creating User table");
+    }
+
 
     //生成接口表
     NSString *sqlCreateTableInterface=[NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS '%@' ('%@' INTEGER PRIMARY KEY AUTOINCREMENT, '%@' TEXT, '%@' TEXT)",INTERFACE_TABLENAME,INTERFACE_ID,INTERFACE_NAME,INTERFACE_VALUE];
@@ -160,10 +169,58 @@
     }
 }
 
+/*
+//初始化用户表
+-(void)InsertUserTable:(NSString *)str_username password:(NSString *)str_pwd Mark:(NSString *)str_mark {
+    NSMutableArray *t_array=[self fetchIPAddress];
+    if (t_array.count==0) {
+        if ([_database open]) {
+            NSString *insertSql1=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@' , '%@' , '%@') VALUES ('%@', '%@', '%@')",USER_TABLENAME,USER_NAME,USER_PASSWORD,USER_MARK,str_username,str_pwd,str_mark];
+            BOOL res=[_database executeUpdate:insertSql1];
+            if (res) {
+                NSLog(@"成功添加至用户表!");
+            } else {
+                NSLog(@"添加数据至用户表出错！");
+            }
+        }
+    }
 
-                   
+}
 
+//获取IP表数据
+-(NSMutableArray*) fetchUserInfo {
+    [_database open];
+    NSString *sql=[NSString stringWithFormat:@"SELECT * FROM %@", USER_TABLENAME];
+    
+    NSMutableArray *array=[@[] mutableCopy];
+    
+    FMResultSet *rs=[_database executeQuery:sql];
+    while ([rs next]) {
+        NSString *str_ipaddress=[rs stringForColumn:USER_NAME];
+        NSString *str_port=[rs stringForColumn:USER_PASSWORD];
+        NSArray *arr_ip=@[str_ipaddress,str_port];
+        [array addObject:arr_ip];
+    }
+    
+    [_database close];
+    
+    return array;
+}
 
+//更新用户信息
+-(void)UpdateUserTable:(NSString *)str_username password:(NSString *)str_pwd Mark:(NSString *)str_mark {
+    if ([_database open]) {
+        NSString *updateSql1=@"";
+        updateSql1=[NSString stringWithFormat:@"UPDATE '%@' SET '%@' = '%@', '%@' = '%@', '%@' = '%@' ",USER_TABLENAME,USER_NAME,str_username,USER_PASSWORD,str_pwd,USER_MARK,str_mark];
+        BOOL res=[_database executeUpdate:updateSql1];
+        if (res) {
+            NSLog(@"成功更新至用户表!");
+        } else {
+            NSLog(@"更新数据至用户表出错！");
+        }
+    }
+}
+*/
 
 //初始化接口数据表
 -(void)InsertInterFaceTable {

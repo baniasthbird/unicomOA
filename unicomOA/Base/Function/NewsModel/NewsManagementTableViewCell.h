@@ -23,47 +23,19 @@
 @end
 
 @interface NewsManagementTableViewCell : UITableViewCell
-/** cell的高度*/
-{
-    CGFloat _cellHeight;
-    
-    CGFloat i_TitleX;
-    
-    CGFloat i_TitleY;
-    
-    CGFloat i_TitleW;
-    
-    CGFloat i_TitleH;
-    
-    CGFloat i_DepartX;
-    
-    CGFloat i_DepartY;
-    
-    CGFloat i_DepartW;
-    
-    CGFloat i_DepartH;
-    
-    CGFloat i_TimeX;
-    
-    CGFloat i_TimeY;
-    
-    CGFloat i_TimeW;
-    
-    CGFloat i_TimeH;
-    
-}
 
-@property (nonatomic,retain) UILabel *lbl_Title;
 
-@property (nonatomic,retain) UILabel *lbl_department;
+@property (nonatomic,strong) NSString *str_title;
 
-@property (nonatomic,retain) UILabel *lbl_time;
+@property (nonatomic,strong) NSString *str_department;
 
 @property (nonatomic,unsafe_unretained) id<NewsTapDelegate> delegate;
 
 @property (nonatomic,assign) NSInteger myTag;
 
+
+
 /**快速创建cell的方法*/
-+ (instancetype)cellWithTable:(UITableView*)tableView withCellHeight:(CGFloat)cellHeight titleX:(CGFloat)i_TitleX titleY:(CGFloat)i_TitleY titleW:(CGFloat)i_TitleW titleH:(CGFloat)i_TitleH DepartX:(CGFloat)i_DepartX DepartY:(CGFloat)i_DepartY DepartW:(CGFloat)i_DepartW DepartH:(CGFloat)i_DepartH TimeX:(CGFloat)i_TimeX TimeY:(CGFloat)i_TimeY TimeW:(CGFloat)i_TimeW TimeH:(CGFloat)i_TimeH canScroll:(BOOL)b_scroll;
++ (instancetype)cellWithTable:(UITableView*)tableView withCellHeight:(CGFloat)cellHeight withCategoryHeight:(CGFloat)h_category withTitleHeight:(CGFloat)h_title withButtonHeight:(CGFloat)h_depart withTitle:(NSString*)str_title withCategory:(NSString*)str_category withDepart:(NSString*)str_depart withTime:(NSString*)str_time canScroll:(BOOL)b_scroll;
 
 @end
