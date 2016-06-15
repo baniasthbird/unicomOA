@@ -77,11 +77,13 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
         user.text=@"";
         pwd.text=@"";
         checkbox.selected=NO;
+        b_rememberPwd=NO;
     }
     else if (![str_usrname isEqualToString:@""] && ![str_password isEqualToString:@""]) {
         pwd.text=str_password;
         user.text=str_usrname;
         checkbox.selected=YES;
+        b_rememberPwd=YES;
     }
 }
  
@@ -91,10 +93,7 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     
     if (_b_update==YES) {
         NSString *str_msg1=@"有新版本，是否下载？\n";
-        //写下次版本更新的内容
-        NSString *str_msg2=@"本次版本更新:完成所有审批流程，并优化审批效果。";
-        NSString *str_msg=[NSString stringWithFormat:@"%@%@",str_msg1,str_msg2];
-        LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"提示" message:str_msg cancelBtnTitle:@"稍后下载" otherBtnTitle:@"立即下载" clickIndexBlock:^(NSInteger clickIndex) {
+        LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"提示" message:str_msg1 cancelBtnTitle:@"稍后下载" otherBtnTitle:@"立即下载" clickIndexBlock:^(NSInteger clickIndex) {
             if (clickIndex==0) {
                 //稍后下载
                 

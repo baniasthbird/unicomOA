@@ -298,7 +298,7 @@
     return arr_tmp;
 }
 
-
+/*
 -(MyShenPiCell*)CreateCarCell:(CarService*)service tableView:(UITableView*)tableView atIndexPath:(NSIndexPath*)indexPath {
     MyShenPiCell *cell;
     if (service.shenpi_1==nil && service.shenpi_2==nil) {
@@ -349,8 +349,8 @@
     cell.print_service=service;
     cell.str_category=@"复印";
     return cell;
-    
 }
+*/
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     if ([_str_searchKeyword2 isEqualToString:@"全部"] && [_str_searchKeyword1 isEqualToString:@"全部"]) {
@@ -391,6 +391,8 @@
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     // NSString *ID=@"cell";
     NSString *ID=[NSString stringWithFormat:@"Cell%ld%ld",(long)[indexPath section],(long)[indexPath row]];
+    UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:ID];
+    /*
     MyShenPiCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
     
     if (cell==nil) {
@@ -420,6 +422,7 @@
             }
         }
     }
+     */
     return cell;
 }
 

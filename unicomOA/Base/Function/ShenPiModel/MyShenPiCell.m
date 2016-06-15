@@ -15,16 +15,16 @@
     [super awakeFromNib];
 }
 
-+(instancetype)cellWithTable:(UITableView *)tableView withImage:(NSString *)str_Image withName:(NSString *)str_Name withCategroy:(NSString *)str_Categroy withStatus:(NSString *)str_status withTitle:(NSString *)str_Title withTime:(NSString *)str_time atIndex:(NSIndexPath *)indexPath {
++(instancetype)cellWithTable:(UITableView *)tableView withImage:(NSString *)str_Image withCellHeight:(CGFloat)cellHeight withName:(NSString *)str_Name withCategroy:(NSString *)str_Categroy withStatus:(NSString *)str_status withTitle:(NSString *)str_Title withTime:(NSString *)str_time atIndex:(NSIndexPath *)indexPath {
     static NSString *cellID=@"cellID";
     MyShenPiCell *cell=[tableView cellForRowAtIndexPath:indexPath];
-    if (!cell) {
-        cell=[[MyShenPiCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID withImage:str_Image withName:str_Name withCategrory:str_Categroy withStatus:str_status withTitle:str_Title withTime:str_time];
-    }
+    //if (!cell) {
+    cell=[[MyShenPiCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID withCellHeight:cellHeight withImage:str_Image withName:str_Name withCategrory:str_Categroy withStatus:str_status withTitle:str_Title withTime:str_time];
+    //}
     return cell;
 }
 
--(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withImage:(NSString*)str_Image withName:(NSString *)str_Name withCategrory:(NSString *)str_Categroy withStatus:(NSString *)str_status withTitle:(NSString*)str_Title withTime:(NSString*)str_time {
+-(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withCellHeight:(CGFloat)cellHeight withImage:(NSString*)str_Image withName:(NSString *)str_Name withCategrory:(NSString *)str_Categroy withStatus:(NSString *)str_status withTitle:(NSString*)str_Title withTime:(NSString*)str_time {
     self=[super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         UIImageView *img_Logo=[[UIImageView alloc]init];
@@ -38,27 +38,25 @@
         img_Logo.layer.cornerRadius=30.0f;
         [img_Logo.layer setMasksToBounds:YES];
        // [lbl_Title setFrame:CGRectMake(10, 75, 200, 20)];
-        [lbl_time setFrame:CGRectMake(10, 95, [UIScreen mainScreen].bounds.size.width-20, 15)];
+        [lbl_time setFrame:CGRectMake(10, cellHeight-15, [UIScreen mainScreen].bounds.size.width-20, 15)];
+        [img_Logo setFrame:CGRectMake(10, 15, 60, 60)];
         if (iPhone4_4s || iPhone5_5s) {
-            [img_Logo setFrame:CGRectMake(10, 15, 60, 60)];
-            [_lbl_status setFrame:CGRectMake(250, 0, 70, 110)];
-            [view_line setFrame:CGRectMake(0, 90, 250, 1)];
-            [lbl_name setFrame:CGRectMake(100, 20, [UIScreen mainScreen].bounds.size.width-180, 70)];
+            [_lbl_status setFrame:CGRectMake(250, 0, 70, cellHeight)];
+            [view_line setFrame:CGRectMake(0, cellHeight-20, 250, 1)];
+            [lbl_name setFrame:CGRectMake(100, 20, [UIScreen mainScreen].bounds.size.width-160, 70)];
             [lbl_category setFrame:CGRectMake(75, 5, 120, 10)];
             
         }
         else if (iPhone6) {
-            [img_Logo setFrame:CGRectMake(10, 15, 60, 60)];
-            [_lbl_status setFrame:CGRectMake(300, 0, 75, 110)];
-            [view_line setFrame:CGRectMake(0, 90, 300, 1)];
-            [lbl_name setFrame:CGRectMake(130, 20, [UIScreen mainScreen].bounds.size.width-180, 70)];
+            [_lbl_status setFrame:CGRectMake(300, 0, 75, cellHeight)];
+            [view_line setFrame:CGRectMake(0, cellHeight-20, 300, 1)];
+            [lbl_name setFrame:CGRectMake(130, 20, [UIScreen mainScreen].bounds.size.width-160, 70)];
             [lbl_category setFrame:CGRectMake(75, 5, 120, 10)];
             }
         else {
-            [img_Logo setFrame:CGRectMake(10, 15, 60, 60)];
-            [_lbl_status setFrame:CGRectMake(350, 0, 64, 110)];
-            [view_line setFrame:CGRectMake(0, 90, 350, 1)];
-            [lbl_name setFrame:CGRectMake(150, 20, [UIScreen mainScreen].bounds.size.width-180, 70)];
+            [_lbl_status setFrame:CGRectMake(350, 0, 64, cellHeight)];
+            [view_line setFrame:CGRectMake(0, cellHeight-20, 350, 1)];
+            [lbl_name setFrame:CGRectMake(150, 20, [UIScreen mainScreen].bounds.size.width-160, 70)];
             [lbl_category setFrame:CGRectMake(75, 5, 120, 10)];
         }
         img_Logo.image=[UIImage imageNamed:str_Image];
@@ -86,7 +84,12 @@
         lbl_Title.font=[UIFont systemFontOfSize:13];
         lbl_time.font=[UIFont systemFontOfSize:13];
         
-        lbl_name.text=[NSString stringWithFormat:@"%@:%@",@"标题",str_Name];
+        NSString *str_name=[NSString stringWithFormat:@"%@:%@",@"标题",str_Name];
+        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str_name];
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+        [paragraphStyle setLineSpacing:5];
+        [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [str_name length])];
+        lbl_name.attributedText=attributedString;
         lbl_name.numberOfLines=0;
         
         
@@ -95,7 +98,7 @@
         [lbl_category setFrame:CGRectMake(75, 5, [UIScreen mainScreen].bounds.size.width-100, h_cate)];
         _lbl_status.text=str_status;
         lbl_Title.text=str_Title;
-        [lbl_name setFrame:CGRectMake(75, h_cate+5, [UIScreen mainScreen].bounds.size.width-180, 70)];
+        [lbl_name setFrame:CGRectMake(75, h_cate+10, [UIScreen mainScreen].bounds.size.width-145, 70)];
         [lbl_name sizeToFit];
 
         lbl_time.text=str_time;

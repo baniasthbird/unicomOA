@@ -22,6 +22,10 @@
 
 @property (strong,nonatomic) NSString *str_depart;
 
+@property (strong,nonatomic) NSString *str_operator;
+
+@property (strong,nonatomic) NSString *str_time;
+
 @property (strong,nonatomic) UILabel *lbl_label;
 
 @property (strong,nonatomic) WKWebView *wb_content;

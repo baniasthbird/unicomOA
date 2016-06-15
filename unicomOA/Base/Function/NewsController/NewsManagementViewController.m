@@ -372,16 +372,14 @@
 
 -(CGFloat)cellHeightForNews:(NSInteger)i_index titleFont:(CGFloat)i_titleFont otherFont:(CGFloat)i_otherFont {
     NSDictionary *dic_content=[_arr_NewsList objectAtIndex:i_index];
-    NSString *str_category=[dic_content objectForKey:@"classname"];
-    CGFloat h_category=[UILabel_LabelHeightAndWidth getHeightByWidth:15*self.view.frame.size.width/16 title:str_category font:[UIFont systemFontOfSize:i_otherFont]];
     
     CGFloat h_Title=[UILabel_LabelHeightAndWidth getHeightByWidth:15*self.view.frame.size.width/16 title:[dic_content objectForKey:@"title"] font:[UIFont systemFontOfSize:i_titleFont]];
     
     NSString *str_department = [dic_content objectForKey:@"operatorName"];
     CGFloat w_depart=[UILabel_LabelHeightAndWidth getWidthWithTitle:[dic_content objectForKey:@"operatorName"] font:[UIFont systemFontOfSize:i_otherFont]];
     CGFloat h_depart=[UILabel_LabelHeightAndWidth getHeightByWidth:w_depart title:str_department font:[UIFont systemFontOfSize:i_otherFont]];
-    CGFloat h_height=h_category+h_Title+h_depart;
-    return  h_height+15;
+    CGFloat h_height=h_Title+h_depart;
+    return  h_height+20;
 }
 
 
@@ -417,28 +415,41 @@
     cell.myTag=indexPath.row;
     if ([_arr_NewsList count]!=0) {
         NSDictionary *dic_content=[_arr_NewsList objectAtIndex:indexPath.row];
+        cell.delegate=self;
+        cell.myTag=indexPath.row;
         NSString *str_category=[dic_content objectForKey:@"classname"];
-        CGFloat h_category=[UILabel_LabelHeightAndWidth getHeightByWidth:15*self.view.frame.size.width/16 title:str_category font:[UIFont systemFontOfSize:14]];
+        CGFloat i_titleFont=0;
+        CGFloat i_otherFont=0;
+        if (iPhone6_plus) {
+            i_titleFont=17;
+            i_otherFont=14;
+        }
+        else {
+            i_titleFont=16;
+            i_otherFont=11;
+        }
+        //  CGFloat h_category=[UILabel_LabelHeightAndWidth getHeightByWidth:15*self.view.frame.size.width/16 title:str_category font:[UIFont systemFontOfSize:i_otherFont]];
         NSString *str_title=[dic_content objectForKey:@"title"];
         NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str_title];
         NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
         [paragraphStyle setLineSpacing:5];
         [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [str_title length])];
-        CGFloat h_Title=[UILabel_LabelHeightAndWidth getHeightByWidth:15*self.view.frame.size.width/16 title:str_title font:[UIFont systemFontOfSize:17]];
-     //   cell.lbl_Title.frame=CGRectMake(self.view.frame.size.width/32, 5, 15*self.view.frame.size.width/16, h_Title);
-     //   [cell.lbl_Title sizeToFit];
-        NSString *str_department=[dic_content objectForKey:@"operatorName"];
-        CGFloat w_depart=[UILabel_LabelHeightAndWidth getWidthWithTitle:[dic_content objectForKey:@"operatorName"] font:[UIFont systemFontOfSize:14]];
-        CGFloat h_depart=[UILabel_LabelHeightAndWidth getHeightByWidth:w_depart title:str_department font:[UIFont systemFontOfSize:14]];
-        NSString *str_time=[dic_content objectForKey:@"startDate"];
+        
+        CGFloat h_Title=[UILabel_LabelHeightAndWidth getHeightByWidth:15*self.view.frame.size.width/16 title:[dic_content objectForKey:@"title"] font:[UIFont systemFontOfSize:i_titleFont]];
+        NSString *str_department = [dic_content objectForKey:@"operationDeptName"];
+        CGFloat w_depart=[UILabel_LabelHeightAndWidth getWidthWithTitle:[dic_content objectForKey:@"operationDeptName"] font:[UIFont systemFontOfSize:i_otherFont]];
+        CGFloat h_depart=[UILabel_LabelHeightAndWidth getHeightByWidth:w_depart title:str_department font:[UIFont systemFontOfSize:i_otherFont]];
+        NSString *str_time =[dic_content objectForKey:@"startDate"];
         NSArray *arr_time=[str_time componentsSeparatedByString:@" "];
         NSString *str_time2=[arr_time objectAtIndex:0];
         NSString *str_depart=[NSString stringWithFormat:@"%@ %@",str_department,str_time2];
-        CGFloat h_cellHeight=h_category+h_Title+h_depart+20;
-        cell=[NewsManagementTableViewCell cellWithTable:tableView withCellHeight:h_cellHeight  withTitleHeight:h_Title withButtonHeight:h_depart withTitle:attributedString withCategory:str_category withDepart:str_depart  titleFont:17 otherFont:14 canScroll:NO];
+        CGFloat h_height=h_Title+h_depart+20;
+        cell=[NewsManagementTableViewCell cellWithTable:tableView withCellHeight:h_height withTitleHeight:h_Title withButtonHeight:h_depart withTitle:attributedString withCategory:str_category withDepart:str_depart titleFont:i_titleFont otherFont:i_otherFont canScroll:NO];
         cell.delegate=self;
         cell.str_title=str_title;
         cell.str_department=str_department;
+        cell.str_time=str_time2;
+        cell.str_operator=[dic_content objectForKey:@"operatorName"];
         NSObject *obj=[dic_content objectForKey:@"id"];
         if (obj!=nil) {
             NSNumber *num_index=(NSNumber*)obj;
@@ -558,6 +569,8 @@
     news_controller.news_index=cell.tag;
     news_controller.str_label=cell.str_title;
     news_controller.str_depart=cell.str_department;
+    news_controller.str_time=cell.str_time;
+    news_controller.str_operator=cell.str_operator;
     news_controller.delegate=self;
     news_controller.userInfo=_userInfo;
     [self.navigationController pushViewController:news_controller animated:YES];

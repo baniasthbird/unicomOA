@@ -76,7 +76,7 @@
     }
     cell.textLabel.textColor=[UIColor blackColor];
     cell.textLabel.textAlignment=NSTextAlignmentLeft;
-    cell.detailTextLabel.textColor=[UIColor colorWithRed:236.0/255.0f green:236.0/255.0f  blue:236.0/255.0f  alpha:1];
+    cell.detailTextLabel.textColor=[UIColor colorWithRed:181.0/255.0f green:181.0/255.0f  blue:181.0/255.0f  alpha:1];
     
     
     if (indexPath.section==0 && indexPath.row==0) {

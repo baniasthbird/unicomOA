@@ -29,6 +29,10 @@
 
 @property (nonatomic,strong) NSString *str_department;
 
+@property (nonatomic,strong) NSString *str_time;
+
+@property (nonatomic,strong) NSString *str_operator;
+
 @property (nonatomic,unsafe_unretained) id<NewsTapDelegate> delegate;
 
 @property (nonatomic,assign) NSInteger myTag;

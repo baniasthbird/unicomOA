@@ -519,7 +519,7 @@
                         if (obj_label!=[NSNull null]) {
                             str_label=(NSString*)obj_label;
                         }
-                        PrintFileNavCell *cell=[PrintFileNavCell cellWithTable:tb withTitle:str_title withTileName:str_titlename withLabel:str_label atIndexPath:indexPath];
+                        PrintFileNavCell *cell=[PrintFileNavCell cellWithTable:tb withTitle:str_title withTileName:str_index withLabel:str_label atIndexPath:indexPath];
                         cell.file_data=arr_tableData;
                         cell.file_title=arr_title;
                         cell.str_label=str_label;
@@ -615,7 +615,8 @@
     CGRect view_title;
     view_title=CGRectMake(0, 0, self.view.frame.size.width, 30);
     UILabel *lbl_sectionTitle=[[UILabel alloc]initWithFrame:view_title];
-    lbl_sectionTitle.textAlignment=NSTextAlignmentLeft;
+    lbl_sectionTitle.textAlignment=NSTextAlignmentCenter;
+    lbl_sectionTitle.font=[UIFont boldSystemFontOfSize:17];
     lbl_sectionTitle.backgroundColor=[UIColor whiteColor];
     NSDictionary *dic_group=[arr_groupList objectAtIndex:section];
     NSString *str_label=[dic_group objectForKey:@"label"];
@@ -690,7 +691,7 @@
                     if (rowHeightLabel>rowHeightValue)
                     {
                         if (rowHeightLabel>34) {
-                            return  rowHeightLabel+10;
+                            return  rowHeightLabel+20;
                         }
                         else {
                             return 44;
@@ -736,7 +737,7 @@
                         return 44;
                     }
                     else {
-                        return rowHeightLabel+10;
+                        return rowHeightLabel+20;
                     }
                 }
                 else {
@@ -744,7 +745,7 @@
                         return 44;
                     }
                     else {
-                        return rowHeightValue+10;
+                        return rowHeightValue+20;
                     }
                 }
             }

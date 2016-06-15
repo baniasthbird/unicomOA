@@ -41,11 +41,14 @@
         
         lbl_filename.textColor=[UIColor blackColor];
         
-        lbl_filename.font=[UIFont systemFontOfSize:13];
+        lbl_filename.font=[UIFont systemFontOfSize:16];
     
+        NSInteger i_titlename=[str_TitleName integerValue];
+        i_titlename=i_titlename+1;
+        str_TitleName=[NSString stringWithFormat:@"%ld",(long)i_titlename];
         
-        lbl_filename.text=[NSString stringWithFormat:@"    %@:%@     %@",str_label,str_TitleName,str_Title];
-        lbl_filename.textAlignment=NSTextAlignmentLeft;
+        lbl_filename.text=[NSString stringWithFormat:@"%@%@%@%@",str_label,@"表第",str_TitleName,@"行"];
+        lbl_filename.textAlignment=NSTextAlignmentCenter;
        
         
         [self.contentView addSubview:lbl_filename];

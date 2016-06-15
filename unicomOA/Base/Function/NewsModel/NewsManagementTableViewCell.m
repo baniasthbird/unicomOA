@@ -101,11 +101,12 @@
         [lbl_Category sizeToFit];
 
         
-        lbl_department=[[UILabel alloc]initWithFrame:CGRectMake(WHScreenW*0.4, lbl_Title.frame.origin.y+lbl_Title.frame.size.height+5, WHScreenW*0.6-17, h_depart)];
+        lbl_department=[[UILabel alloc]initWithFrame:CGRectMake(WHScreenW*0.5, lbl_Title.frame.origin.y+lbl_Title.frame.size.height+5, WHScreenW*0.5, h_depart)];
         
         lbl_department.font=[UIFont systemFontOfSize:i_otherFont];
         lbl_department.textColor=[UIColor lightGrayColor];
         lbl_department.text=str_department;
+        [lbl_department sizeToFit];
         /*
         lbl_time.textColor=[UIColor lightGrayColor];
         lbl_time.font=[UIFont systemFontOfSize:i_otherFont];
@@ -114,7 +115,7 @@
         */
         lbl_department.textAlignment=NSTextAlignmentRight;
         
-        [lbl_department sizeToFit];
+        
         
         [baseView addSubview:lbl_Category];
         [baseView addSubview:lbl_Title];

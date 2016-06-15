@@ -36,7 +36,7 @@
     CGRect imgFrame = _headImg.frame;
     imgFrame.origin.x = 14 + addX;
     _headImg.frame = imgFrame;
-    _headImg.layer.cornerRadius=20.0f;
+    _headImg.layer.cornerRadius=15.0f;
     
     CGRect nameFrame = _name.frame;
     nameFrame.origin.x = 62 + addX;

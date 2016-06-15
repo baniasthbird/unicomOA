@@ -87,15 +87,9 @@ int i_comment_num;
     [_lbl_depart setLineBreakMode:NSLineBreakByWordWrapping];
     _lbl_depart.textColor=[UIColor lightGrayColor];
     _lbl_depart.font=[UIFont systemFontOfSize:14];
-    _lbl_depart.textAlignment=NSTextAlignmentLeft;
+    _lbl_depart.textAlignment=NSTextAlignmentCenter;
+    _lbl_depart.text=[NSString stringWithFormat:@"     %@       %@  %@",_str_depart,_str_operator,_str_time];
     
-    
-    if (iPhone6 || iPhone6_plus) {
-        _lbl_depart.text=@"           综合管理部                        张三   2016-01-26 ";
-    }
-    else if (iPhone5_5s || iPhone4_4s) {
-        _lbl_depart.text=@"     综合管理部          张三   2016-01-26 ";
-    }
     
     WKWebViewConfiguration *config=[[WKWebViewConfiguration alloc]init];
     //设置偏好设置
@@ -252,11 +246,11 @@ int i_comment_num;
                 NSString *str_date=[dic_news objectForKey:@"addTime"];
                 NSArray *arr_date=[str_date componentsSeparatedByString:@" "];
                 NSString *str_day=[arr_date objectAtIndex:0];
-                NSString *str_departlabel=[NSString stringWithFormat:@"%@    %@    %@",str_depart,str_operator,str_day];
+                NSString *str_departlabel=[NSString stringWithFormat:@"      %@    %@ %@",str_depart,str_operator,str_day];
                 _lbl_depart.text=str_departlabel;
-                _h_depart=[UILabel_LabelHeightAndWidth getHeightByWidth:_lbl_depart.frame.size.width title:str_departlabel font:[UIFont systemFontOfSize:14]];
-                _lbl_depart.frame=CGRectMake(self.view.frame.size.width/32, _h_title+5, 15*self.view.frame.size.width/16, _h_depart);
-                [_lbl_depart sizeToFit];
+               // _h_depart=[UILabel_LabelHeightAndWidth getHeightByWidth:_lbl_depart.frame.size.width title:str_departlabel font:[UIFont systemFontOfSize:14]];
+               // _lbl_depart.frame=CGRectMake(0, _h_title+5, [UIScreen mainScreen].bounds.size.width, _h_depart);
+               //  [_lbl_depart sizeToFit];
                 NSString *str_content=[dic_news objectForKey:@"content"];
                 str_content=[NSString stringWithFormat:@"%@%@",_str_headscale,str_content];
                 [_wb_content loadHTMLString:str_content baseURL:nil];

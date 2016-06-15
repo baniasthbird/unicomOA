@@ -39,6 +39,7 @@
 @implementation MessageViewController {
     DataBase *db;
     UIActivityIndicatorView *indicator;
+    CGFloat i_totalHeight;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -76,7 +77,7 @@
     _tableView.dataSource=self;
     _tableView.backgroundColor=[UIColor clearColor];
     
-    
+    i_totalHeight=0;
     _refreshControl=[[UIRefreshControl alloc] init];
     
     //设置refreshControl的属性
@@ -239,8 +240,20 @@
         return 1;
     }
     else {
-        return 10;
+        if (iPhone5_5s) {
+            return 5;
+        }
+        else if (iPhone6) {
+            return 7;
+        }
+        else if (iPhone6_plus) {
+            return 8;
+        }
+        else {
+            return 5;
+        }
     }
+    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -259,6 +272,7 @@
             else {
                  h_height=[self cellHeightForNews:indexPath.row titleFont:17 otherFont:11];
             }
+            
             return h_height;
         }
         
@@ -333,14 +347,14 @@
                 CGFloat i_titleFont=0;
                 CGFloat i_otherFont=0;
                 if (iPhone6_plus) {
-                    i_titleFont=17;
-                    i_otherFont=14;
+                    i_titleFont=16;
+                    i_otherFont=11;
                 }
                 else {
                     i_titleFont=16;
                     i_otherFont=11;
                 }
-              //  CGFloat h_category=[UILabel_LabelHeightAndWidth getHeightByWidth:15*self.view.frame.size.width/16 title:str_category font:[UIFont systemFontOfSize:i_otherFont]];
+              //  CGFloat h_category=[UILabel_LabelHeighndWidth getHeightByWidth:15*self.view.frame.size.width/16 title:str_category font:[UIFont systemFontOfSize:i_otherFont]];
                 NSString *str_title=[dic_content objectForKey:@"title"];
                 NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str_title];
                 NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];

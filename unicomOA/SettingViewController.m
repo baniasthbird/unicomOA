@@ -149,6 +149,7 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
     
     self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     self.tableView.scrollEnabled=NO;
+    
      
 }
 
@@ -185,6 +186,7 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
     UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:ID];
     if (cell==nil) {
         cell =[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
+        cell.selectionStyle=UITableViewCellSelectionStyleNone;
     }
     
     LGSettingSection *section=self.groups[indexPath.section];
@@ -282,7 +284,18 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (section==3) {
-        return 60;
+        if (iPhone5_5s) {
+            return 130;
+        }
+        else if (iPhone6) {
+            return 190;
+        }
+        else if (iPhone6_plus) {
+            return 240;
+        }
+        else {
+            return 60;
+        }
     }
     else if (section==0) {
         return 0.1;
@@ -433,7 +446,7 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
             }
             [defaults synchronize];
             LoginViewController *login=[[LoginViewController alloc]init];
-            login.b_update=YES;
+            login.b_update=NO;
             UINavigationController *nav=[[UINavigationController alloc]initWithRootViewController:login];
             [[UIApplication sharedApplication] keyWindow].rootViewController=nav;
             

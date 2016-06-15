@@ -20,6 +20,7 @@
 #import "LXAlertView.h"
 #import "UnFinishVc.h"
 #import "FinishVc.h"
+#import "UILabel+LabelHeightAndWidth.h"
 
 
 @interface MyShenPiViewController()<UITableViewDelegate,UITableViewDataSource,UnFinishVcDelegate>
@@ -344,7 +345,40 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 110;
+    return [self cellHeightForShenPi:indexPath.section  otherFont:14 ];
+}
+
+
+-(CGFloat)cellHeightForShenPi:(NSInteger)i_index otherFont:(CGFloat)i_otherFont {
+    NSMutableDictionary *dic_tmp=[NSMutableDictionary dictionary];
+    if ([_str_searchKeyword2 isEqualToString:@"全部"] && [_str_searchKeyword1 isEqualToString:@"全部"]) {
+        dic_tmp=[_arr_MyShenPi objectAtIndex:i_index];
+    }
+    else if ([_str_searchKeyword2 isEqualToString:@"全部"]) {
+        dic_tmp=[_arr_SearchResult objectAtIndex:i_index];
+    }
+    
+    //流程标题
+    NSString *str_title=[dic_tmp objectForKey:@"processInstName"];
+    
+    str_title=[NSString stringWithFormat:@"%@%@",@"标题:",str_title];
+    CGFloat i_width= [UILabel_LabelHeightAndWidth getWidthWithTitle:str_title font:[UIFont systemFontOfSize:i_otherFont]];
+    CGFloat f_linenum=i_width/([UIScreen mainScreen].bounds.size.width-180);
+    NSInteger i_linenum=0;
+    if (f_linenum<1) {
+        i_linenum=1;
+    }
+    else {
+        i_linenum=(NSInteger)f_linenum+1;
+    }
+   
+
+    if  (i_linenum<=3) {
+        return 120;
+    }
+    else {
+        return  120+17*(i_linenum-3);
+    }
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -354,6 +388,7 @@
     
     if (cell==nil) {
            cell=[self CreateCell:tableView indexPath:indexPath];
+        cell.selectionStyle=UITableViewCellSelectionStyleNone;
     }
     return cell;
 }
@@ -581,7 +616,7 @@
     return arr_tmp;
 }
 
-
+/*
 -(MyShenPiCell*)CreateCarCell:(CarService*)service tableView:(UITableView*)tableView atIndexPath:(NSIndexPath*)indexPath {
     MyShenPiCell *cell;
     //zr 0503 因为角色不同，所以cell中显示的待办与已办不同，没处理时为待办，处理一个层级后，对于第一层级领导来说是已办，对于第二层级领导来说是待办，目前由于流程角色未分配，按照第二级审批完成变成已办处理
@@ -603,7 +638,9 @@
         cell.str_category=@"预约用车";
         return cell;
 }
+*/
 
+/*
 -(MyShenPiCell*)CreatePrintCell:(PrintService*)service tableView:(UITableView*)tableView atIndexPath:(NSIndexPath*)indexPath {
     MyShenPiCell *cell;
     if (service.shenpi_1==nil && service.shenpi_2==nil) {
@@ -625,6 +662,7 @@
     return cell;
     
 }
+*/
 -(NSString*)GetConnectionStatus {
     NSString *currentNetWorkState=[[NSUserDefaults standardUserDefaults] objectForKey:@"connection"];
     return currentNetWorkState;
@@ -798,9 +836,11 @@
     //时间
     NSString *str_startTime=[dic_task objectForKey:@"startTime"];
     
+    CGFloat h_height=[self cellHeightForShenPi:indexPath.section otherFont:14];
+    
     //MyShenPiCell *cell=[MyShenPiCell cellWithTable:tableView withTitle:str_title withStatus:@"待办" category:str_categroy withTime:str_startTime];
    // cell.dic_task=dic_task;
-    MyShenPiCell *cell=[MyShenPiCell cellWithTable:tableView withImage:_userInfo.str_Logo withName:str_title withCategroy:str_categroy withStatus:str_status withTitle:str_title withTime:str_startTime atIndex:indexPath];
+    MyShenPiCell *cell=[MyShenPiCell cellWithTable:tableView withImage:_userInfo.str_Logo withCellHeight:h_height withName:str_title withCategroy:str_categroy withStatus:str_status withTitle:str_title withTime:str_startTime atIndex:indexPath];
     cell.dic_task=dic_task;
     return cell;
 }
