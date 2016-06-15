@@ -36,6 +36,6 @@
 
 
 /**快速创建cell的方法*/
-+ (instancetype)cellWithTable:(UITableView*)tableView withCellHeight:(CGFloat)cellHeight withCategoryHeight:(CGFloat)h_category withTitleHeight:(CGFloat)h_title withButtonHeight:(CGFloat)h_depart withTitle:(NSString*)str_title withCategory:(NSString*)str_category withDepart:(NSString*)str_depart withTime:(NSString*)str_time canScroll:(BOOL)b_scroll;
++ (instancetype)cellWithTable:(UITableView*)tableView withCellHeight:(CGFloat)cellHeight withTitleHeight:(CGFloat)h_title withButtonHeight:(CGFloat)h_depart withTitle:(NSMutableAttributedString*)str_title withCategory:(NSString*)str_category withDepart:(NSString*)str_depart titleFont:(CGFloat)i_titleFont otherFont:(CGFloat)i_otherFont canScroll:(BOOL)b_scroll;
 
 @end

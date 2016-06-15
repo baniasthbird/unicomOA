@@ -23,21 +23,20 @@
 
 @property (nonatomic,retain) UILabel *lbl_department;
 
-@property (nonatomic,retain) UILabel *lbl_time;
 
 @end
 
 @implementation NewsManagementTableViewCell
 
-@synthesize lbl_Title,lbl_department,lbl_time,lbl_Category;
+@synthesize lbl_Title,lbl_department,lbl_Category;
 
 #pragma mark 创建cell
 
-+(instancetype)cellWithTable:(UITableView *)tableView withCellHeight:(CGFloat)cellHeight withCategoryHeight:(CGFloat)h_category withTitleHeight:(CGFloat)h_title withButtonHeight:(CGFloat)h_depart withTitle:(NSString *)str_title withCategory:(NSString *)str_category withDepart:(NSString *)str_depart withTime:(NSString *)str_time canScroll:(BOOL)b_scroll {
++(instancetype)cellWithTable:(UITableView *)tableView withCellHeight:(CGFloat)cellHeight  withTitleHeight:(CGFloat)h_title withButtonHeight:(CGFloat)h_depart withTitle:(NSMutableAttributedString *)str_title withCategory:(NSString *)str_category withDepart:(NSString *)str_depart titleFont:(CGFloat)i_titleFont otherFont:(CGFloat)i_otherFont  canScroll:(BOOL)b_scroll {
     static NSString *cellID=@"sideslipCell";
     NewsManagementTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:cellID];
     //if (!cell) {
-        cell=[[NewsManagementTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID withCellHeight:cellHeight withCategoryHeight:h_category withTitleHeight:h_title withButtonHeight:h_depart withCateGroy:str_category withTitle:str_title withDepartment:str_depart withTime:str_time canScroll:b_scroll];
+        cell=[[NewsManagementTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID withCellHeight:cellHeight  withTitleHeight:h_title withButtonHeight:h_depart withCateGroy:str_category withTitle:str_title withDepartment:str_depart  titleFont:i_titleFont otherFont:i_otherFont canScroll:b_scroll];
     //}
     return cell;
 
@@ -45,7 +44,7 @@
 
 
 
--(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withCellHeight:(CGFloat)cellHeight withCategoryHeight:(CGFloat)h_category withTitleHeight:(CGFloat)h_title withButtonHeight:(CGFloat)h_depart withCateGroy:(NSString*)str_categroy withTitle:(NSString*)str_title withDepartment:(NSString*)str_department withTime:(NSString*)str_time canScroll:(BOOL)b_scroll
+-(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withCellHeight:(CGFloat)cellHeight  withTitleHeight:(CGFloat)h_title withButtonHeight:(CGFloat)h_depart withCateGroy:(NSString*)str_categroy withTitle:(NSMutableAttributedString*)str_title withDepartment:(NSString*)str_department titleFont:(CGFloat)i_titleFont otherFont:(CGFloat)i_otherFont  canScroll:(BOOL)b_scroll
 {
     if (self=[super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
 #pragma 创建滚动条，增加删除按钮
@@ -85,33 +84,42 @@
         //创建显示内容
         UIView *baseView=[[UIView alloc]initWithFrame:scrollView.bounds];
         
-        lbl_Category=[[UILabel alloc] initWithFrame:CGRectMake(0, 0, WHScreenW, h_category)];
-        lbl_Title=[[UILabel alloc]initWithFrame:CGRectMake(0, h_category+5, WHScreenW, h_title)];
-        lbl_department=[[UILabel alloc]initWithFrame:CGRectMake(0, h_category+h_title+10,WHScreenW*0.6 , h_depart)];
-        lbl_time=[[UILabel alloc]initWithFrame:CGRectMake(WHScreenW*0.6+5, h_category+h_title+10, WHScreenW*0.4-5, h_depart)];
+        lbl_Title=[[UILabel alloc]initWithFrame:CGRectMake(17, 5, WHScreenW-34, h_title)];
         
-        lbl_Category.font=[UIFont systemFontOfSize:14];
-        lbl_Category.textColor=[UIColor lightGrayColor];
-        lbl_Category.numberOfLines=1;
-        lbl_Category.text=str_categroy;
-        
-        lbl_Title.font=[UIFont systemFontOfSize:24];
+        lbl_Title.font=[UIFont systemFontOfSize:i_titleFont];
         lbl_Title.textColor=[UIColor blackColor];
         lbl_Title.numberOfLines=0;
-        lbl_Title.text=str_title;
+        lbl_Title.attributedText = str_title;
+        [lbl_Title sizeToFit];
         
-        lbl_department.font=[UIFont systemFontOfSize:14];
+        lbl_Category=[[UILabel alloc] initWithFrame:CGRectMake(17, lbl_Title.frame.origin.y+lbl_Title.frame.size.height+5, WHScreenW*0.35, h_depart)];
+        lbl_Category.font=[UIFont systemFontOfSize:i_otherFont];
+        lbl_Category.textColor=[UIColor lightGrayColor];
+       // lbl_Category.numberOfLines=1;
+        lbl_Category.text=str_categroy;
+        lbl_Category.textAlignment=NSTextAlignmentLeft;
+        [lbl_Category sizeToFit];
+
+        
+        lbl_department=[[UILabel alloc]initWithFrame:CGRectMake(WHScreenW*0.4, lbl_Title.frame.origin.y+lbl_Title.frame.size.height+5, WHScreenW*0.6-17, h_depart)];
+        
+        lbl_department.font=[UIFont systemFontOfSize:i_otherFont];
         lbl_department.textColor=[UIColor lightGrayColor];
         lbl_department.text=str_department;
-        
+        /*
         lbl_time.textColor=[UIColor lightGrayColor];
-        lbl_time.font=[UIFont systemFontOfSize:14];
-        lbl_time.text=str_time;
+        lbl_time.font=[UIFont systemFontOfSize:i_otherFont];
+        NSArray *arr_time=[str_time componentsSeparatedByString:@" "];
+        lbl_time.text=[arr_time objectAtIndex:0];
+        */
+        lbl_department.textAlignment=NSTextAlignmentRight;
+        
+        [lbl_department sizeToFit];
         
         [baseView addSubview:lbl_Category];
         [baseView addSubview:lbl_Title];
         [baseView addSubview:lbl_department];
-        [baseView addSubview:lbl_time];
+      //  [baseView addSubview:lbl_time];
         _baseView=baseView;
         baseView.backgroundColor=[UIColor clearColor];
         [baseView addGestureRecognizer:tapGesture];

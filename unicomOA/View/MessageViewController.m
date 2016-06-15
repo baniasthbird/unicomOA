@@ -76,6 +76,7 @@
     _tableView.dataSource=self;
     _tableView.backgroundColor=[UIColor clearColor];
     
+    
     _refreshControl=[[UIRefreshControl alloc] init];
     
     //设置refreshControl的属性
@@ -238,13 +239,7 @@
         return 1;
     }
     else {
-        if (iPhone6 || iPhone6_plus) {
-            return 5;
-        }
-        else {
-            return 3;
-        }
-        
+        return 10;
     }
 }
 
@@ -257,7 +252,13 @@
             return 110;
         }
         else {
-            CGFloat h_height=[self cellHeightForNews:indexPath.row];
+            CGFloat h_height=0;
+            if (iPhone6_plus) {
+                h_height=[self cellHeightForNews:indexPath.row titleFont:17 otherFont:14];
+            }
+            else {
+                 h_height=[self cellHeightForNews:indexPath.row titleFont:17 otherFont:11];
+            }
             return h_height;
         }
         
@@ -285,18 +286,16 @@
 }
 
 
--(CGFloat)cellHeightForNews:(NSInteger)i_index {
+-(CGFloat)cellHeightForNews:(NSInteger)i_index titleFont:(CGFloat)i_titleFont otherFont:(CGFloat)i_otherFont {
     NSDictionary *dic_content=[_arr_NewsList objectAtIndex:i_index];
-    NSString *str_category=[dic_content objectForKey:@"classname"];
-    CGFloat h_category=[UILabel_LabelHeightAndWidth getHeightByWidth:15*self.view.frame.size.width/16 title:str_category font:[UIFont systemFontOfSize:14]];
-   
-    CGFloat h_Title=[UILabel_LabelHeightAndWidth getHeightByWidth:15*self.view.frame.size.width/16 title:[dic_content objectForKey:@"title"] font:[UIFont systemFontOfSize:24]];
+
+    CGFloat h_Title=[UILabel_LabelHeightAndWidth getHeightByWidth:15*self.view.frame.size.width/16 title:[dic_content objectForKey:@"title"] font:[UIFont systemFontOfSize:i_titleFont]];
     
     NSString *str_department = [dic_content objectForKey:@"operatorName"];
-    CGFloat w_depart=[UILabel_LabelHeightAndWidth getWidthWithTitle:[dic_content objectForKey:@"operatorName"] font:[UIFont systemFontOfSize:14]];
-    CGFloat h_depart=[UILabel_LabelHeightAndWidth getHeightByWidth:w_depart title:str_department font:[UIFont systemFontOfSize:14]];
-    CGFloat h_height=h_category+h_Title+h_depart;
-    return  h_height+15;
+    CGFloat w_depart=[UILabel_LabelHeightAndWidth getWidthWithTitle:[dic_content objectForKey:@"operatorName"] font:[UIFont systemFontOfSize:i_otherFont]];
+    CGFloat h_depart=[UILabel_LabelHeightAndWidth getHeightByWidth:w_depart title:str_department font:[UIFont systemFontOfSize:i_otherFont]];
+    CGFloat h_height=h_Title+h_depart;
+    return  h_height+20;
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -331,16 +330,33 @@
                 cell.delegate=self;
                 cell.myTag=indexPath.row;
                 NSString *str_category=[dic_content objectForKey:@"classname"];
-                CGFloat h_category=[UILabel_LabelHeightAndWidth getHeightByWidth:15*self.view.frame.size.width/16 title:str_category font:[UIFont systemFontOfSize:14]];
+                CGFloat i_titleFont=0;
+                CGFloat i_otherFont=0;
+                if (iPhone6_plus) {
+                    i_titleFont=17;
+                    i_otherFont=14;
+                }
+                else {
+                    i_titleFont=16;
+                    i_otherFont=11;
+                }
+              //  CGFloat h_category=[UILabel_LabelHeightAndWidth getHeightByWidth:15*self.view.frame.size.width/16 title:str_category font:[UIFont systemFontOfSize:i_otherFont]];
                 NSString *str_title=[dic_content objectForKey:@"title"];
-                CGFloat h_Title=[UILabel_LabelHeightAndWidth getHeightByWidth:15*self.view.frame.size.width/16 title:[dic_content objectForKey:@"title"] font:[UIFont systemFontOfSize:24]];
-                
-                NSString *str_department = [dic_content objectForKey:@"operatorName"];
-                CGFloat w_depart=[UILabel_LabelHeightAndWidth getWidthWithTitle:[dic_content objectForKey:@"operatorName"] font:[UIFont systemFontOfSize:14]];
-                CGFloat h_depart=[UILabel_LabelHeightAndWidth getHeightByWidth:w_depart title:str_department font:[UIFont systemFontOfSize:14]];
+                NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str_title];
+                NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+                [paragraphStyle setLineSpacing:5];
+                [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [str_title length])];
+
+                CGFloat h_Title=[UILabel_LabelHeightAndWidth getHeightByWidth:15*self.view.frame.size.width/16 title:[dic_content objectForKey:@"title"] font:[UIFont systemFontOfSize:i_titleFont]];
+                NSString *str_department = [dic_content objectForKey:@"operationDeptName"];
+                CGFloat w_depart=[UILabel_LabelHeightAndWidth getWidthWithTitle:[dic_content objectForKey:@"operatorName"] font:[UIFont systemFontOfSize:i_otherFont]];
+                CGFloat h_depart=[UILabel_LabelHeightAndWidth getHeightByWidth:w_depart title:str_department font:[UIFont systemFontOfSize:i_otherFont]];
                 NSString *str_time =[dic_content objectForKey:@"startDate"];
-                CGFloat h_height=h_category+h_Title+h_depart+15;
-                cell=[NewsManagementTableViewCell cellWithTable:tableView withCellHeight:h_height withCategoryHeight:h_category withTitleHeight:h_Title withButtonHeight:h_depart withTitle:str_title withCategory:str_category withDepart:str_department withTime:str_time canScroll:NO];
+                NSArray *arr_time=[str_time componentsSeparatedByString:@" "];
+                NSString *str_time2=[arr_time objectAtIndex:0];
+                NSString *str_depart=[NSString stringWithFormat:@"%@ %@",str_department,str_time2];
+                CGFloat h_height=h_Title+h_depart+20;
+                cell=[NewsManagementTableViewCell cellWithTable:tableView withCellHeight:h_height withTitleHeight:h_Title withButtonHeight:h_depart withTitle:attributedString withCategory:str_category withDepart:str_depart titleFont:i_titleFont otherFont:i_otherFont canScroll:NO];
                 cell.delegate=self;
                 cell.str_title=str_title;
                 cell.str_department=str_department;
