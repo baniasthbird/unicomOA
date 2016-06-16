@@ -21,6 +21,7 @@
 #import "DataBase.h"
 #import "PositionCell.h"
 #import "Soundselectvc.h"
+#import "AlarmCell.h"
 
 
 
@@ -96,6 +97,8 @@ typedef enum
 @implementation NewNotesViewController {
    // IQKeyboardReturnKeyHandler *returnKeyHandler;
     DataBase *db;
+    
+    BOOL b_Remind;
 }
 
 @synthesize delegate;
@@ -117,6 +120,7 @@ typedef enum
     //[barButtonItem setTitleTextAttributes:dict forState:UIControlStateNormal];
     self.navigationItem.leftBarButtonItem = barButtonItem;
     [self GetValue];
+    b_Remind=NO;
     
     [self buildDataSource];
     [self buildView];
@@ -247,7 +251,7 @@ typedef enum
 //搭建界面
 -(void)buildView {
     //列表
-    self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, -110, self.view.frame.size.width, self.view.frame.size.height+110) style:UITableViewStylePlain];
+    self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, -110, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
    // [self.tableView setSeparatorColor:[UIColor blueColor]];
     self.tableView.separatorStyle=UITableViewCellSeparatorStyleSingleLine;
     self.tableView.backgroundColor=[UIColor whiteColor];
@@ -381,37 +385,12 @@ typedef enum
     else if (indexPath.row==3) {
         PositionCell *cell=[PositionCell cellWithTable:tableView location:_str_location_content cellHeight:_i_cellHeight_pos indexPath:indexPath];
         return cell;
-        /*
-        static NSString *cellIdentifier = @"cell";
-        
-        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-        }
-        
-        UIImageView *img_positon=[[UIImageView alloc]initWithFrame:CGRectMake(cell.contentView.frame.origin.x+10, cell.contentView.frame.origin.y+_i_cellHeight_pos/2-22, 44, 44)];
-        img_positon.image=[UIImage imageNamed:@"position.png"];
-        UILabel *lbl_text=[[UILabel alloc]initWithFrame:CGRectMake(cell.contentView.frame.origin.x+80,cell.contentView.frame.origin.y , self.view.frame.size.width-80, _i_cellHeight_pos)];
-        if (_str_location_content!=nil) {
-            lbl_text.numberOfLines=0;
-            lbl_text.text=[NSString stringWithFormat:@"%@%@",@"位置信息:",_str_location_content];
-            lbl_text.font=[UIFont systemFontOfSize:18];
-        }
-        else {
-            lbl_text.text=@"位置信息:";
-            lbl_text.font=[UIFont systemFontOfSize:18];
-        }
-        
-        
-        [[cell contentView] addSubview:img_positon];
-        [[cell contentView] addSubview:lbl_text];
-         return cell;
-         */
-
+      
     }
     else if (indexPath.row==4) {
+        AlarmCell *cell=[AlarmCell cellWithTable:tableView cellHeight:110 switch:b_Remind indexPath:indexPath];
+        return cell;
+        /*
         static NSString *cellIdentifier = @"cell";
         
         UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
@@ -437,6 +416,7 @@ typedef enum
         [[cell contentView] addSubview:lbl_text];
         
          return cell;
+         */
        
     }
     else if (indexPath.row==5) {
@@ -451,7 +431,7 @@ typedef enum
             cell.textLabel.text=@"重复";
             cell.detailTextLabel.textColor=[UIColor colorWithRed:173/255.0f green:173/255.0f blue:173/255.0f alpha:1];
             cell.detailTextLabel.text=@"只响一次";
-            cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+            //cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
         }
         
         return cell;
@@ -484,12 +464,12 @@ typedef enum
             cell.textLabel.text=@"振动";
             cell.detailTextLabel.textColor=[UIColor colorWithRed:173/255.0f green:173/255.0f blue:173/255.0f alpha:1];
             cell.detailTextLabel.text=@"响铃时振动";
-            UISwitch *sw_alarm=[[UISwitch alloc]initWithFrame:CGRectMake(120, 15, 50, 50)];
+          //  UISwitch *sw_alarm=[[UISwitch alloc]initWithFrame:CGRectMake(120, 15, 50, 50)];
             
             
-            [sw_alarm setOn:NO animated:YES];
-            [sw_alarm addTarget:self action:@selector(vibration) forControlEvents:UIControlEventValueChanged];
-            cell.accessoryView=sw_alarm;
+          //  [sw_alarm setOn:NO animated:YES];
+          //  [sw_alarm addTarget:self action:@selector(vibration) forControlEvents:UIControlEventValueChanged];
+          //  cell.accessoryView=sw_alarm;
         
 
         }
@@ -625,6 +605,7 @@ typedef enum
     
     if (indexPath.row==4 && indexPath.section==0) {
         [self extendCellAtIndexPath:indexPath];
+        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
     }
     
     if (_b_isOpenMenu==YES) {
@@ -762,6 +743,7 @@ typedef enum
                 self.selectedRowIndexPath=nil;
                 
                 [self removeCellBelowIndexPath:tempIndexPath];
+                b_Remind=NO;
             }
             else if ([self isExtendedCellIndexPath:indexPath]);
             else {
@@ -779,6 +761,7 @@ typedef enum
         else {
             self.selectedRowIndexPath=indexPath;
             [self insertCellBelowIndexPath:indexPath];
+            b_Remind=YES;
         }
         
         [self.tableView endUpdates];

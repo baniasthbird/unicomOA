@@ -55,6 +55,7 @@
         
         scrollView.scrollEnabled=b_scroll;
         
+       
         //按钮个数
         NSInteger btnCount=1;
         CGFloat btnW=80;
@@ -130,6 +131,7 @@
         scrollView.contentSize=CGSizeMake(WHScreenW+btnViewW, 0);
         _scrollView=scrollView;
         [self.contentView addSubview:scrollView];
+        
         
     }
     return self;

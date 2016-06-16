@@ -44,7 +44,7 @@
     
 #pragma mark 系统版本
     UILabel *lbl_version=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2-image.size.width*2, self.view.frame.size.height/8+img_logo.frame.size.height*1.5, image.size.width*4, 80)];
-    lbl_version.text=@"for IPhone V1.0";
+    lbl_version.text=@"for IPhone V0.5 beta";
     lbl_version.textColor=[UIColor whiteColor];
     lbl_version.font=[UIFont systemFontOfSize:14];
     lbl_version.textAlignment=NSTextAlignmentCenter;

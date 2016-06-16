@@ -59,6 +59,12 @@
     NSMutableArray *arr_tmpList;
     
     UIActivityIndicatorView *indicator;
+    
+    NSInteger selectedIndex;
+    
+    NSString *selected_title;
+    
+    BOOL b_ReplaceDataSource;
 }
 
 
@@ -72,7 +78,8 @@
     [btn_focus addTarget:self action:@selector(FocusNews:) forControlEvents:UIControlEventTouchUpInside];
   //  self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithCustomView:btn_focus];
     
-    
+    selectedIndex=-1;
+    b_ReplaceDataSource=NO;
     
     UIButton *btn_back=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40, 40)];
     [btn_back setTitle:@"  " forState:UIControlStateNormal];
@@ -240,8 +247,17 @@
 
 -(void)buildView {
     
-    
-    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.005, self.view.frame.size.height*0.13, self.view.frame.size.width*0.99, self.view.frame.size.height*0.7) style:UITableViewStylePlain];
+    CGFloat t_height=0;
+    if (iPhone5_5s) {
+        t_height=self.view.frame.size.height*0.1;
+    }
+    else if (iPhone6) {
+        t_height=self.view.frame.size.height*0.095;
+    }
+    else if (iPhone6_plus) {
+        t_height=self.view.frame.size.height*0.09;
+    }
+    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.005, t_height, self.view.frame.size.width*0.99, self.view.frame.size.height*0.755) style:UITableViewStylePlain];
     
     _tableView.separatorStyle=UITableViewCellSeparatorStyleSingleLine;
     
@@ -260,20 +276,24 @@
 
     
     if (iPhone4_4s || iPhone5_5s) {
-        _btn_Select=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height*0.023, self.view.frame.size.width/4, self.view.frame.size.height/16)];
+        _btn_Select=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height*0.027, self.view.frame.size.width*0.25, self.view.frame.size.height*0.05)];
+        _btn_Select.layer.cornerRadius=self.view.frame.size.height*0.025;
     }
     else if (iPhone6) {
-        _btn_Select=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height*0.015, self.view.frame.size.width/4, self.view.frame.size.height/16)];
+        _btn_Select=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.033, self.view.frame.size.height*0.0208, self.view.frame.size.width*0.21, self.view.frame.size.height*0.0475)];
+        _btn_Select.layer.cornerRadius=self.view.frame.size.height*0.02375;
     }
     else if (iPhone6_plus) {
-        _btn_Select=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height*0.013, self.view.frame.size.width/4, self.view.frame.size.height/16)];
+        _btn_Select=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height*0.026, self.view.frame.size.width*0.2, self.view.frame.size.height*0.038)];
+        _btn_Select.layer.cornerRadius=self.view.frame.size.height*0.019;
     }
     
     [_btn_Select setTitle:@"类别" forState:UIControlStateNormal];
+    _btn_Select.titleLabel.font=[UIFont systemFontOfSize:12.5];
     [_btn_Select setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_btn_Select setBackgroundColor:[UIColor colorWithRed:80.0/255.0f green:124.0f/255.0f blue:236.0f/255.0f alpha:1]];
     UIImageView *img_view=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"down_arrow"]];
-    [img_view setFrame:CGRectMake(_btn_Select.frame.size.width*0.75, _btn_Select.frame.size.height*0.5-img_view.size.height/2, img_view.size.width, img_view.size.height)];
+    [img_view setFrame:CGRectMake(_btn_Select.frame.size.width*0.87, _btn_Select.frame.size.height*0.5-img_view.size.height/2, img_view.size.width, img_view.size.height)];
     [_btn_Select addSubview:img_view];
     if (iPhone5_5s || iPhone4_4s) {
         _btn_Select.titleLabel.font=[UIFont systemFontOfSize:15];
@@ -307,7 +327,7 @@
     _btn_Select.layer.borderWidth=1;
     _btn_Select.layer.borderColor=[[UIColor lightGrayColor] CGColor];
     */
-    _btn_Select.layer.cornerRadius=18.0f;
+ //   _btn_Select.layer.cornerRadius=18.0f;
     [_btn_Select addTarget:self action:@selector(selectClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     if (iPhone4_4s || iPhone5_5s) {
@@ -411,18 +431,14 @@
     }
     */
    
-    cell.delegate=self;
-    cell.myTag=indexPath.row;
     if ([_arr_NewsList count]!=0) {
         NSDictionary *dic_content=[_arr_NewsList objectAtIndex:indexPath.row];
-        cell.delegate=self;
-        cell.myTag=indexPath.row;
         NSString *str_category=[dic_content objectForKey:@"classname"];
         CGFloat i_titleFont=0;
         CGFloat i_otherFont=0;
         if (iPhone6_plus) {
-            i_titleFont=17;
-            i_otherFont=14;
+            i_titleFont=16;
+            i_otherFont=11;
         }
         else {
             i_titleFont=16;
@@ -437,7 +453,7 @@
         
         CGFloat h_Title=[UILabel_LabelHeightAndWidth getHeightByWidth:15*self.view.frame.size.width/16 title:[dic_content objectForKey:@"title"] font:[UIFont systemFontOfSize:i_titleFont]];
         NSString *str_department = [dic_content objectForKey:@"operationDeptName"];
-        CGFloat w_depart=[UILabel_LabelHeightAndWidth getWidthWithTitle:[dic_content objectForKey:@"operationDeptName"] font:[UIFont systemFontOfSize:i_otherFont]];
+        CGFloat w_depart=[UILabel_LabelHeightAndWidth getWidthWithTitle:[dic_content objectForKey:@"operatorName"] font:[UIFont systemFontOfSize:i_otherFont]];
         CGFloat h_depart=[UILabel_LabelHeightAndWidth getHeightByWidth:w_depart title:str_department font:[UIFont systemFontOfSize:i_otherFont]];
         NSString *str_time =[dic_content objectForKey:@"startDate"];
         NSArray *arr_time=[str_time componentsSeparatedByString:@" "];
@@ -448,8 +464,17 @@
         cell.delegate=self;
         cell.str_title=str_title;
         cell.str_department=str_department;
-        cell.str_time=str_time2;
+        cell.myTag=indexPath.row;
         cell.str_operator=[dic_content objectForKey:@"operatorName"];
+        //如果在一个页面，就不触发这个
+        
+        if ([str_title isEqualToString:selected_title]) {
+          //  cell.backgroundColor=[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1];
+            if (b_ReplaceDataSource==YES) {
+                cell.backgroundColor=[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1];
+            }
+            
+        }
         NSObject *obj=[dic_content objectForKey:@"id"];
         if (obj!=nil) {
             NSNumber *num_index=(NSNumber*)obj;
@@ -464,7 +489,7 @@
         UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:identifier];
         if (cell==nil) {
             cell =[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-            cell.textLabel.text=@"aaa";
+            cell.textLabel.text=@"";
         }
         return cell;
         
@@ -502,8 +527,15 @@
         return 110;
     }
     else {
-        CGFloat h_height=[self cellHeightForNews:indexPath.row titleFont:17 otherFont:14];
-        return  h_height;
+        CGFloat h_height=0;
+        if (iPhone6_plus) {
+            h_height=[self cellHeightForNews:indexPath.row titleFont:17 otherFont:14];
+        }
+        else {
+            h_height=[self cellHeightForNews:indexPath.row titleFont:17 otherFont:11];
+        }
+        
+        return h_height;
     }
     
 }
@@ -564,7 +596,11 @@
      */
    // }
     
-    
+    if (selectedIndex!=-1 && index!=selectedIndex) {
+        NSIndexPath *selectIndexPath=[NSIndexPath indexPathForRow:selectedIndex inSection:0];
+        b_ReplaceDataSource=NO;
+        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:selectIndexPath,nil]  withRowAnimation:UITableViewRowAnimationNone];
+    }
     NewsDisplayViewController *news_controller=[[NewsDisplayViewController alloc]init];
     news_controller.news_index=cell.tag;
     news_controller.str_label=cell.str_title;
@@ -573,6 +609,9 @@
     news_controller.str_operator=cell.str_operator;
     news_controller.delegate=self;
     news_controller.userInfo=_userInfo;
+    cell.backgroundColor=[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1];
+    selectedIndex=index;
+    selected_title=cell.str_title;
     [self.navigationController pushViewController:news_controller animated:YES];
     
 }
@@ -633,6 +672,7 @@
 
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    b_ReplaceDataSource=YES;
     CGFloat height=scrollView.frame.size.height;
     CGFloat contentYoffset=scrollView.contentOffset.y;
     CGFloat distanceFromBottom=scrollView.contentSize.height-contentYoffset;

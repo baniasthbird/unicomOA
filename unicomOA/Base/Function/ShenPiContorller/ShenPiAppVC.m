@@ -345,7 +345,7 @@
     cell.detailTextLabel.textColor=[UIColor colorWithRed:112/255.0f green:112/255.0f blue:112/255.0f alpha:1];
     cell.detailTextLabel.font=[UIFont systemFontOfSize:16];
     if ([_dic_clt count]==0) {
-        cell.textLabel.text=@"aaa";
+        cell.textLabel.text=@"";
         return cell;
     }
     else {

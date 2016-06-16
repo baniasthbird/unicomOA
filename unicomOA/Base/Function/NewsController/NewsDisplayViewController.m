@@ -72,17 +72,17 @@ int i_comment_num;
     _lbl_label=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, 5, 15*self.view.frame.size.width/16, self.view.frame.size.height*0.2)];
     
     _lbl_label.numberOfLines=0;
-    _lbl_label.textAlignment=NSTextAlignmentLeft;
+    _lbl_label.textAlignment=NSTextAlignmentCenter;
     [_lbl_label setLineBreakMode:NSLineBreakByWordWrapping];
     _lbl_label.font=[UIFont systemFontOfSize:24];
     _lbl_label.textColor=[UIColor blackColor];
     _lbl_label.text=_str_label;
     _h_title=[UILabel_LabelHeightAndWidth getHeightByWidth:_lbl_label.frame.size.width title:_str_label font:[UIFont systemFontOfSize:24]];
-    _lbl_label.frame=CGRectMake(self.view.frame.size.width/32, 5, 15*self.view.frame.size.width/16, _h_title);
+    _lbl_label.frame=CGRectMake(self.view.frame.size.width/32, 10, 15*self.view.frame.size.width/16, _h_title);
     [_lbl_label sizeToFit];
     
     
-    _lbl_depart=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, _h_title+5, 15*self.view.frame.size.width/16, self.view.frame.size.height*0.02)];
+    _lbl_depart=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, _h_title+15, 15*self.view.frame.size.width/16, self.view.frame.size.height*0.02)];
     _lbl_depart.numberOfLines=1;
     [_lbl_depart setLineBreakMode:NSLineBreakByWordWrapping];
     _lbl_depart.textColor=[UIColor lightGrayColor];
@@ -101,7 +101,7 @@ int i_comment_num;
     
     
    
-    _wb_content=[[WKWebView alloc]initWithFrame:CGRectMake(0, _h_title+27, self.view.frame.size.width, self.view.frame.size.height-120-_h_title) configuration:config];
+    _wb_content=[[WKWebView alloc]initWithFrame:CGRectMake(0, _h_title+25+self.view.frame.size.height*0.02, self.view.frame.size.width, self.view.frame.size.height-120-_h_title) configuration:config];
          //_txt_content=[[UITextView alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height*0.20, 15*self.view.frame.size.width/16, self.view.frame.size.height*0.51)];
     
     
@@ -183,7 +183,7 @@ int i_comment_num;
 -(void)FocusEvent:(UIButton*)btn {
     if ([btn.titleLabel.text isEqualToString:@"关注"]) {
         [btn setTitle:@"已关注" forState:UIControlStateNormal];
-        [self.delegate passFocusValue:@"AAA"];
+        [self.delegate passFocusValue:@""];
     }
     else if ([btn.titleLabel.text isEqualToString:@"已关注"]) {
         [btn setTitle:@"关注" forState:UIControlStateNormal];

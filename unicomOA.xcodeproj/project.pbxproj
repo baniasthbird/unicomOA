@@ -191,6 +191,7 @@
 		68E779F41CB34D78006DA5B9 /* ContactViewControllerNew.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E779F31CB34D78006DA5B9 /* ContactViewControllerNew.m */; };
 		68E779F91CB37D6A006DA5B9 /* Friend.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E779F61CB37D6A006DA5B9 /* Friend.m */; };
 		68E779FA1CB37D6A006DA5B9 /* FriendGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E779F81CB37D6A006DA5B9 /* FriendGroup.m */; };
+		68E8F3791D1249270062E864 /* AlarmCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E8F3781D1249270062E864 /* AlarmCell.m */; };
 		68ED4E2B1CB49432000E8A7B /* ShenPiManagementController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68ED4E2A1CB49432000E8A7B /* ShenPiManagementController.m */; };
 		68ED4E3E1CB4CDC4000E8A7B /* headLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 68ED4E3D1CB4CDC4000E8A7B /* headLogo.png */; };
 		68ED4E421CB4DC58000E8A7B /* the_arrow_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 68ED4E411CB4DC58000E8A7B /* the_arrow_0.png */; };
@@ -606,6 +607,8 @@
 		68E779F61CB37D6A006DA5B9 /* Friend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Friend.m; path = Base/Contact/Model/Friend.m; sourceTree = "<group>"; };
 		68E779F71CB37D6A006DA5B9 /* FriendGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FriendGroup.h; path = Base/Contact/Model/FriendGroup.h; sourceTree = "<group>"; };
 		68E779F81CB37D6A006DA5B9 /* FriendGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FriendGroup.m; path = Base/Contact/Model/FriendGroup.m; sourceTree = "<group>"; };
+		68E8F3771D1249270062E864 /* AlarmCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlarmCell.h; path = Base/Function/NotesViews/AlarmCell.h; sourceTree = "<group>"; };
+		68E8F3781D1249270062E864 /* AlarmCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AlarmCell.m; path = Base/Function/NotesViews/AlarmCell.m; sourceTree = "<group>"; };
 		68ED4E291CB49432000E8A7B /* ShenPiManagementController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShenPiManagementController.h; path = Base/Function/ShenPiContorller/ShenPiManagementController.h; sourceTree = "<group>"; };
 		68ED4E2A1CB49432000E8A7B /* ShenPiManagementController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShenPiManagementController.m; path = Base/Function/ShenPiContorller/ShenPiManagementController.m; sourceTree = "<group>"; };
 		68ED4E3D1CB4CDC4000E8A7B /* headLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = headLogo.png; sourceTree = "<group>"; };
@@ -1057,6 +1060,8 @@
 				2C3F219B1C85837F00EBD122 /* NotesTableVIewCell.m */,
 				680861D41CEAD33300257AAA /* PositionCell.h */,
 				680861D51CEAD33300257AAA /* PositionCell.m */,
+				68E8F3771D1249270062E864 /* AlarmCell.h */,
+				68E8F3781D1249270062E864 /* AlarmCell.m */,
 			);
 			name = NotesViews;
 			sourceTree = "<group>";
@@ -1992,6 +1997,7 @@
 				2CFEAD451C72B8B90054730E /* LGSettingSection.m in Sources */,
 				68EEDE761CBB911A003295EB /* MCPopMenuPresentAnimator.m in Sources */,
 				68052C2C1CAD167400A93BDA /* UIBarButtonItem+WZLBadge.m in Sources */,
+				68E8F3791D1249270062E864 /* AlarmCell.m in Sources */,
 				6846D3621CABC496004BD285 /* RadioBox.m in Sources */,
 				680861D61CEAD33300257AAA /* PositionCell.m in Sources */,
 				2C9DDECD1CD8E688009462E6 /* LYThreeViewController.m in Sources */,

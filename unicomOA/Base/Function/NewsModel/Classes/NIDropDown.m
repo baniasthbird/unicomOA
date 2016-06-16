@@ -105,14 +105,14 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         cell.backgroundColor=[UIColor colorWithRed:80/255.0f green:124/255.0f blue:236/255.0f alpha:1];
-        
-        if (iPhone6 || iPhone6_plus) {
-            cell.textLabel.font = [UIFont systemFontOfSize:15];
+        if (iPhone6_plus || iPhone5_5s) {
+            cell.textLabel.font = [UIFont systemFontOfSize:12.5];
         }
-        else if (iPhone4_4s || iPhone5_5s) {
-            cell.textLabel.font=[UIFont systemFontOfSize:12.5];
+        else if (iPhone6) {
+             cell.textLabel.font = [UIFont systemFontOfSize:12];
         }
         
+                
         cell.textLabel.textAlignment =NSTextAlignmentCenter;
     }
     if ([self.imageList count] == [self.list count]) {
@@ -145,6 +145,7 @@
     UITableViewCell *c = [tableView cellForRowAtIndexPath:indexPath];
     [btnSender setTitle:c.textLabel.text forState:UIControlStateNormal];
     
+    
     for (UIView *subview in btnSender.subviews) {
         if ([subview isKindOfClass:[UIImageView class]]) {
             [subview removeFromSuperview];
@@ -154,6 +155,9 @@
     imgView = [[UIImageView alloc] initWithImage:c.imageView.image];
     imgView.frame = CGRectMake(5, 5, 25, 25);
     [btnSender addSubview:imgView];
+    UIImageView *img_view=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"down_arrow"]];
+    [img_view setFrame:CGRectMake(btnSender.frame.size.width*0.87, btnSender.frame.size.height*0.5-img_view.frame.size.height/2, img_view.frame.size.width, img_view.frame.size.height)];
+    [btnSender addSubview:img_view];
     [self myDelegate:indexPath.row];
 }
 

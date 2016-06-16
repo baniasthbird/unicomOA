@@ -40,6 +40,11 @@
     DataBase *db;
     UIActivityIndicatorView *indicator;
     CGFloat i_totalHeight;
+    NSInteger selectedIndex;
+    
+    NSString *selected_title;
+    
+    BOOL b_ReplaceDataSource;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -70,9 +75,10 @@
     
     self.navigationController.navigationBar.titleTextAttributes=dict;
 
+    selectedIndex=-1;
+    b_ReplaceDataSource=NO;
     
-    
-    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
+    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-50) style:UITableViewStylePlain];
     _tableView.delegate=self;
     _tableView.dataSource=self;
     _tableView.backgroundColor=[UIColor clearColor];
@@ -240,18 +246,7 @@
         return 1;
     }
     else {
-        if (iPhone5_5s) {
-            return 5;
-        }
-        else if (iPhone6) {
-            return 7;
-        }
-        else if (iPhone6_plus) {
-            return 8;
-        }
-        else {
-            return 5;
-        }
+        return 10;
     }
     
 }
@@ -291,12 +286,7 @@
 
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    if (section==0) {
-        return 30;
-    }
-    else {
-        return 0;
-    }
+    return 0;
 }
 
 
@@ -324,7 +314,7 @@
                 UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:identifier];
                 if (cell==nil) {
                     cell =[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-                    cell.textLabel.text=@"aaa";
+                    cell.textLabel.text=@"";
                 }
                 return cell;
             }
@@ -341,8 +331,6 @@
                 }
                 */
                 NSDictionary *dic_content=[_arr_NewsList objectAtIndex:indexPath.row];
-                cell.delegate=self;
-                cell.myTag=indexPath.row;
                 NSString *str_category=[dic_content objectForKey:@"classname"];
                 CGFloat i_titleFont=0;
                 CGFloat i_otherFont=0;
@@ -374,6 +362,16 @@
                 cell.delegate=self;
                 cell.str_title=str_title;
                 cell.str_department=str_department;
+                cell.myTag=indexPath.row;
+                
+                if ([str_title isEqualToString:selected_title]) {
+                    if (b_ReplaceDataSource==YES) {
+                        cell.backgroundColor=[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1];
+                    }
+                    
+                }
+                
+                cell.selectionStyle=UITableViewCellSelectionStyleGray;
 
                 NSObject *obj=[dic_content objectForKey:@"id"];
                 if (obj!=nil) {
@@ -399,11 +397,11 @@
     
     UIImageView *img=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"newsbodcast.png"]];
     
-    [img setFrame:CGRectMake(20, 7, 20, 20)];
+    [img setFrame:CGRectMake(20, 5, 20, 20)];
     
     [view addSubview:img];
     
-    UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(80, 0, self.view.frame.size.width-80, 37)];
+    UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(80, 0, self.view.frame.size.width-80, 30)];
     
     label.textAlignment=NSTextAlignmentLeft;
     
@@ -427,21 +425,13 @@
     }
     
     [view addSubview:label];
+    view.backgroundColor=[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1];
    
     return view;
 }
 
 
--(UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    UIView *view_end=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 30)];
-    view_end.backgroundColor=[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1];
-    if (section==0) {
-        return view_end;
-    }
-    else {
-        return nil;
-    }
-}
+
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==0) {
@@ -469,11 +459,19 @@
 
 //点击新闻事件
 -(void)tapCell:(NewsManagementTableViewCell *)cell atIndex:(NSInteger)index {
+    if (selectedIndex!=-1 && selectedIndex!=index) {
+        NSIndexPath *selectIndexPath=[NSIndexPath indexPathForRow:selectedIndex inSection:1];
+        b_ReplaceDataSource=NO;
+        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:selectIndexPath,nil]  withRowAnimation:UITableViewRowAnimationNone];
+    }
+    cell.backgroundColor=[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1];
+    selectedIndex=index;
     NewsDisplayViewController *news_controller=[[NewsDisplayViewController alloc]init];
     news_controller.news_index=cell.tag;
     news_controller.str_label=cell.str_title;
     news_controller.str_depart=cell.str_department;
     news_controller.userInfo=_userInfo;
+    selected_title=cell.str_title;
     [self.navigationController pushViewController:news_controller animated:YES];
 }
 
@@ -524,8 +522,11 @@
 
         
     });
-    
-    
+}
+
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    b_ReplaceDataSource=YES;
 }
 
 /*

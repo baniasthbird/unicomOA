@@ -28,6 +28,8 @@
 
 @property (nonatomic,strong) AFHTTPSessionManager *session;
 
+@property (nonatomic,strong) UIRefreshControl *refreshControl;
+
 @end
 
 @implementation ContactViewControllerNew {
@@ -99,6 +101,16 @@ CGFloat i_Height=-1;
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
     self.tableView.backgroundColor=[UIColor clearColor];
+    
+    _refreshControl=[[UIRefreshControl alloc] init];
+    
+    //设置refreshControl的属性
+    _refreshControl.attributedTitle=[[NSAttributedString alloc]initWithString:@"加载中..." attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14], NSForegroundColorAttributeName:[UIColor blackColor]}];
+    [self.refreshControl addTarget:self action:@selector(handleRefresh:) forControlEvents:UIControlEventValueChanged];
+    
+    [self.tableView addSubview:_refreshControl];
+
+    
     [self.view addSubview:self.tableView];
     
     
@@ -179,12 +191,14 @@ CGFloat i_Height=-1;
         [_session POST:str_url parameters:nil progress:^(NSProgress * _Nonnull uploadProgress) {
             
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            [indicator stopAnimating];
-            NSLog(@"获取通讯录列表成功:%@",responseObject);
+           
             NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             NSString *str_success= [JSON objectForKey:@"success"];
             int i_success=[str_success intValue];
             if (i_success==1) {
+                 NSLog(@"获取通讯录列表成功:%@",responseObject);
+                 [indicator stopAnimating];
+                [_refreshControl endRefreshing];
                 NSMutableArray *staffArray=[JSON objectForKey:@"empList"];
                 NSMutableArray *departArray=[JSON objectForKey:@"orgList"];
                 DataSource *dt_tmp=[[DataSource alloc]init];
@@ -204,6 +218,7 @@ CGFloat i_Height=-1;
     }
     else {
         [indicator stopAnimating];
+        [_refreshControl endRefreshing];
         LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"警告" message:@"无网络连接" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
             
         }];
@@ -288,6 +303,7 @@ CGFloat i_Height=-1;
     lbl_title.textColor=[UIColor blackColor];
     lbl_title.textAlignment=NSTextAlignmentLeft;
     lbl_title.font=[UIFont systemFontOfSize:15];
+    lbl_title.backgroundColor=[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1];
     return lbl_title;
 }
 
@@ -586,6 +602,23 @@ CGFloat i_Height=-1;
     //设置显示位置
     [l_indicator setCenter:CGPointMake(self.view.frame.size.width / 2.0, self.view.frame.size.height / 2.0)];
     return l_indicator;
+}
+
+
+-(void)handleRefresh:(id)paramSender {
+    // 模拟2秒后刷新数据
+    int64_t delayInSeconds = 2.0f;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        //停止刷新
+        
+        //tableview中插入一条数据
+        [self AddressList];
+        
+    });
+    
+    
 }
 
 

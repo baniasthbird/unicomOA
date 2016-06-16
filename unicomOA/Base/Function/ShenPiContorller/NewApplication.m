@@ -124,7 +124,7 @@
     cell.textLabel.font=[UIFont systemFontOfSize:16];
     cell.textLabel.textAlignment=NSTextAlignmentLeft;
     if (_dic_data==nil) {
-        cell.textLabel.text=@"aaa";
+        cell.textLabel.text=@"";
     }
     else {
         NSString *str_section=[NSString stringWithFormat:@"%ld",(long)indexPath.section];
