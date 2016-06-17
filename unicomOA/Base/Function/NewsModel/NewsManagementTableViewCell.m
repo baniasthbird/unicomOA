@@ -32,11 +32,11 @@
 
 #pragma mark 创建cell
 
-+(instancetype)cellWithTable:(UITableView *)tableView withCellHeight:(CGFloat)cellHeight  withTitleHeight:(CGFloat)h_title withButtonHeight:(CGFloat)h_depart withTitle:(NSMutableAttributedString *)str_title withCategory:(NSString *)str_category withDepart:(NSString *)str_depart titleFont:(CGFloat)i_titleFont otherFont:(CGFloat)i_otherFont  canScroll:(BOOL)b_scroll {
++(instancetype)cellWithTable:(UITableView *)tableView withCellHeight:(CGFloat)cellHeight  withTitleHeight:(CGFloat)h_title withButtonHeight:(CGFloat)h_depart withTitle:(NSMutableAttributedString *)str_title withCategory:(NSString *)str_category withDepart:(NSString *)str_depart titleFont:(CGFloat)i_titleFont otherFont:(CGFloat)i_otherFont  canScroll:(BOOL)b_scroll withImage:(NSString *)str_Image {
     static NSString *cellID=@"sideslipCell";
     NewsManagementTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:cellID];
     //if (!cell) {
-        cell=[[NewsManagementTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID withCellHeight:cellHeight  withTitleHeight:h_title withButtonHeight:h_depart withCateGroy:str_category withTitle:str_title withDepartment:str_depart  titleFont:i_titleFont otherFont:i_otherFont canScroll:b_scroll];
+        cell=[[NewsManagementTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID withCellHeight:cellHeight  withTitleHeight:h_title withButtonHeight:h_depart withCateGroy:str_category withTitle:str_title withDepartment:str_depart  titleFont:i_titleFont otherFont:i_otherFont canScroll:b_scroll withImage:str_Image];
     //}
     return cell;
 
@@ -44,7 +44,7 @@
 
 
 
--(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withCellHeight:(CGFloat)cellHeight  withTitleHeight:(CGFloat)h_title withButtonHeight:(CGFloat)h_depart withCateGroy:(NSString*)str_categroy withTitle:(NSMutableAttributedString*)str_title withDepartment:(NSString*)str_department titleFont:(CGFloat)i_titleFont otherFont:(CGFloat)i_otherFont  canScroll:(BOOL)b_scroll
+-(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withCellHeight:(CGFloat)cellHeight  withTitleHeight:(CGFloat)h_title withButtonHeight:(CGFloat)h_depart withCateGroy:(NSString*)str_categroy withTitle:(NSMutableAttributedString*)str_title withDepartment:(NSString*)str_department titleFont:(CGFloat)i_titleFont otherFont:(CGFloat)i_otherFont  canScroll:(BOOL)b_scroll withImage:(NSString*)str_Image;
 {
     if (self=[super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
 #pragma 创建滚动条，增加删除按钮
@@ -55,7 +55,7 @@
         
         scrollView.scrollEnabled=b_scroll;
         
-       
+        
         //按钮个数
         NSInteger btnCount=1;
         CGFloat btnW=80;
@@ -82,10 +82,18 @@
         
         [scrollView addSubview:btnView];
         
+        
         //创建显示内容
         UIView *baseView=[[UIView alloc]initWithFrame:scrollView.bounds];
         
-        lbl_Title=[[UILabel alloc]initWithFrame:CGRectMake(17, 5, WHScreenW-34, h_title)];
+        UIImageView *logoImage=[[UIImageView alloc]initWithFrame:CGRectMake(11, 7.5, 16, 16)];
+        CGFloat i_left=17;
+        if (str_Image!=nil) {
+            i_left=32;
+            logoImage.image=[UIImage imageNamed:str_Image];
+        }
+        
+        lbl_Title=[[UILabel alloc]initWithFrame:CGRectMake(i_left, 5, WHScreenW-34, h_title)];
         
         lbl_Title.font=[UIFont systemFontOfSize:i_titleFont];
         lbl_Title.textColor=[UIColor blackColor];
@@ -93,7 +101,7 @@
         lbl_Title.attributedText = str_title;
         [lbl_Title sizeToFit];
         
-        lbl_Category=[[UILabel alloc] initWithFrame:CGRectMake(17, lbl_Title.frame.origin.y+lbl_Title.frame.size.height+5, WHScreenW*0.35, h_depart)];
+        lbl_Category=[[UILabel alloc] initWithFrame:CGRectMake(i_left, lbl_Title.frame.origin.y+lbl_Title.frame.size.height+5, WHScreenW*0.35, h_depart)];
         lbl_Category.font=[UIFont systemFontOfSize:i_otherFont];
         lbl_Category.textColor=[UIColor lightGrayColor];
        // lbl_Category.numberOfLines=1;
@@ -116,11 +124,13 @@
         */
         lbl_department.textAlignment=NSTextAlignmentRight;
         
+      
         
         
         [baseView addSubview:lbl_Category];
         [baseView addSubview:lbl_Title];
         [baseView addSubview:lbl_department];
+        [baseView addSubview:logoImage];
       //  [baseView addSubview:lbl_time];
         _baseView=baseView;
         baseView.backgroundColor=[UIColor clearColor];

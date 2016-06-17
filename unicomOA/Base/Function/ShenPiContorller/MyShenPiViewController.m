@@ -403,21 +403,25 @@
         NSString *str_processInstID=[dic_tmp objectForKey:@"processInstID"];
         NSString *str_activityDefID=[dic_tmp objectForKey:@"activityDefID"];
         NSString *str_workItemID=[dic_tmp objectForKey:@"workItemID"];
+        NSString *str_processTitle=[dic_tmp objectForKey:@"processInstName"];
         UnFinishVc *vc=[[UnFinishVc alloc]init];
         vc.str_url=str_url;
         vc.str_processInstID=str_processInstID;
         vc.str_activityDefID=str_activityDefID;
         vc.str_workItemID=str_workItemID;
+        vc.str_title=str_processTitle;
         vc.delegate=self;
         [self.navigationController pushViewController:vc animated:YES];
     }
     else if ([cell.lbl_status.text isEqualToString:@"已办"]) {
         NSString *str_key=[dic_tmp objectForKey:@"processDefName"];
+        NSString *str_processTitle=[dic_tmp objectForKey:@"processInstName"];
         str_url=[dic_url2 objectForKey:str_key];
         NSString *str_processInstID=[dic_tmp objectForKey:@"processInstId"];
         FinishVc *vc=[[FinishVc alloc]init];
         vc.str_url=str_url;
         vc.str_processInstID=str_processInstID;
+        vc.str_title=str_processTitle;
         [self.navigationController pushViewController:vc animated:YES];
 
     }

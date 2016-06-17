@@ -13,7 +13,7 @@
 @interface ShenPiResultCell : UITableViewCell
 
 /** 快速创建cell的方法 在编辑数据时使用**/
-+ (instancetype)cellWithTable:(UITableView *)tableView withImage:(NSString*)str_Image withName:(NSString*)str_Name withStatus:(NSString*)str_status withTime:(NSString*)str_time ActivityName:(NSString*)str_activename atIndex:(NSIndexPath*)indexPath;
++ (instancetype)cellWithTable:(UITableView *)tableView withTitle:(NSString*)str_title withName:(NSString*)str_Name withStatus:(NSString*)str_status withTime:(NSString*)str_time ActivityName:(NSString*)str_activename atIndex:(NSIndexPath*)indexPath;
 
 @property (nonatomic,strong) UILabel *lbl_status;
 

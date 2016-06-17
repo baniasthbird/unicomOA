@@ -26,6 +26,8 @@
 
 @property (nonatomic,strong) NSString *str_url;
 
+@property (nonatomic,strong) NSString *str_title;
+
 @property (nonatomic,strong) id<UnFinishVcDelegate> delegate;
 
 @end

@@ -460,7 +460,7 @@
         NSString *str_time2=[arr_time objectAtIndex:0];
         NSString *str_depart=[NSString stringWithFormat:@"%@ %@",str_department,str_time2];
         CGFloat h_height=h_Title+h_depart+20;
-        cell=[NewsManagementTableViewCell cellWithTable:tableView withCellHeight:h_height withTitleHeight:h_Title withButtonHeight:h_depart withTitle:attributedString withCategory:str_category withDepart:str_depart titleFont:i_titleFont otherFont:i_otherFont canScroll:NO];
+        cell=[NewsManagementTableViewCell cellWithTable:tableView withCellHeight:h_height withTitleHeight:h_Title withButtonHeight:h_depart withTitle:attributedString withCategory:str_category withDepart:str_depart titleFont:i_titleFont otherFont:i_otherFont canScroll:NO withImage:nil];
         cell.delegate=self;
         cell.str_title=str_title;
         cell.str_department=str_department;

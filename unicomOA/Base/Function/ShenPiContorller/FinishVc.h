@@ -14,4 +14,6 @@
 
 @property (nonatomic,strong) NSString *str_url;
 
+@property (nonatomic,strong) NSString *str_title;
+
 @end

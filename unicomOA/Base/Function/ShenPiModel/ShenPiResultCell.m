@@ -18,32 +18,73 @@
     [super awakeFromNib];
 }
 
-+(instancetype)cellWithTable:(UITableView *)tableView withImage:(NSString *)str_Image withName:(NSString *)str_Name withStatus:(NSString *)str_status withTime:(NSString *)str_time ActivityName:(NSString *)str_activename  atIndex:(NSIndexPath*)indexPath{
++(instancetype)cellWithTable:(UITableView *)tableView withTitle:(NSString *)str_title withName:(NSString *)str_Name withStatus:(NSString *)str_status withTime:(NSString *)str_time ActivityName:(NSString *)str_activename atIndex:(NSIndexPath *)indexPath {
     static NSString *cellID=@"cellID";
     ShenPiResultCell *cell=[tableView cellForRowAtIndexPath:indexPath];
     if (!cell) {
-       // cell=[ShenPiResultCell cellWithTable:tableView withImage:str_Image withName:str_Name withStatus:str_status withTime:str_time];
-        cell=[[ShenPiResultCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID withName:str_Name withStatus:str_status      ActivityName:(NSString*)str_activename withTime:str_time];
+        // cell=[ShenPiResultCell cellWithTable:tableView withImage:str_Image withName:str_Name withStatus:str_status withTime:str_time];
+        cell=[[ShenPiResultCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID withTitle:str_title withName:str_Name withStatus:str_status  ActivityName:(NSString*)str_activename withTime:str_time];
     }
     return cell;
 }
 
--(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier  withName:(NSString*)str_Name withStatus:(NSString*)str_status ActivityName:(NSString*)str_activename withTime:(NSString*)str_time {
+
+
+
+-(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withTitle:(NSString*)str_title withName:(NSString*)str_Name withStatus:(NSString*)str_status ActivityName:(NSString*)str_activename withTime:(NSString*)str_time {
     self=[super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        UILabel *lbl_bg=[[UILabel alloc]init];
-        [lbl_bg setFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 30)];
-        /*
-        if (iPhone5_5s || iPhone4_4s) {
-            [lbl_bg setFrame:CGRectMake(0, 0, 320, 30)];
+        
+        UILabel *lbl_title=[[UILabel alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width*0.05, 5, [UIScreen mainScreen].bounds.size.width*0.9, 30)];
+        lbl_title.textColor=[UIColor blackColor];
+        lbl_title.font=[UIFont systemFontOfSize:16];
+        lbl_title.numberOfLines=0;
+        lbl_title.text=str_title;
+        [lbl_title sizeToFit];
+        
+        UILabel *lbl_info=[[UILabel alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width*0.05, lbl_title.frame.size.height+5, [UIScreen mainScreen].bounds.size.width*0.8, 30)];
+        lbl_info.textColor=[UIColor colorWithRed:181/255.0f green:181/255.0f blue:181/255.0f alpha:1];
+        lbl_info.font=[UIFont systemFontOfSize:12];
+        lbl_info.numberOfLines=1;
+        NSString *str_info=[NSString stringWithFormat:@"%@  %@   %@",str_Name,str_activename,str_time];
+        lbl_info.text=str_info;
+        [lbl_title sizeToFit];
+        
+        UILabel *lbl_decision=[[UILabel alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width-80, lbl_title.frame.size.height+10, 40, 20)];
+        lbl_decision.textColor=[UIColor whiteColor];
+        lbl_decision.textAlignment=NSTextAlignmentCenter;
+        lbl_decision.font=[UIFont systemFontOfSize:12];
+        if ([str_status isEqualToString:@"1"]) {
+            lbl_decision.backgroundColor=[UIColor colorWithRed:61/255.0f green:189/255.0f blue:143/255.0f alpha:1];
+            lbl_decision.text=@"同意";
         }
-        else if (iPhone6) {
-            [lbl_bg setFrame:CGRectMake(0, 0, 375, 30)];
+        else if ([str_status isEqualToString:@"2"]) {
+            lbl_decision.backgroundColor=[UIColor colorWithRed:247/255.0f green:35/255.0f blue:0/255.0f alpha:1];
+            lbl_decision.text=@"退回";
+        }
+        else if ([str_status isEqualToString:@"3"]) {
+            lbl_decision.backgroundColor=[UIColor colorWithRed:173/255.0f green:173/255.0f blue:173/255.0f alpha:1];
+            lbl_decision.text=@"废弃";
+        }
+        else if ([str_status isEqualToString:@"0"]) {
+            lbl_decision.backgroundColor=[UIColor colorWithRed:246/255.0f green:187/255.0f blue:67/255.0f alpha:1];
+            lbl_decision.text=@"暂存";
         }
         else {
-            [lbl_bg setFrame:CGRectMake(0, 0, 414, 30)];
+            lbl_decision.backgroundColor=[UIColor blueColor];
         }
-        */
+        lbl_decision.layer.cornerRadius=5;
+        lbl_decision.layer.masksToBounds=YES;
+        
+        
+        
+        [self addSubview:lbl_title];
+        [self addSubview:lbl_info];
+        [self addSubview:lbl_decision];
+        
+        /*
+        UILabel *lbl_bg=[[UILabel alloc]init];
+        [lbl_bg setFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 30)];
         lbl_bg.textAlignment=NSTextAlignmentCenter;
         lbl_bg.font=[UIFont systemFontOfSize:16];
         lbl_bg.textColor=[UIColor whiteColor];
@@ -156,6 +197,7 @@
         [self.contentView addSubview:lbl_active];
         [self.contentView addSubview:_lbl_status];
         [self.contentView addSubview:_lbl_time];
+         */
     }
     return self;
 }

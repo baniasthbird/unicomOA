@@ -29,6 +29,86 @@
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier DocNum:(NSInteger)i_doc_num FlowNum:(NSInteger)i_flow_num MsgNum:(NSInteger)i_msg_num {
     self=[super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        //添加两条竖线
+        UIView *seperatorline1=[[UIView alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/3, 0, 1, 70)];
+        seperatorline1.backgroundColor=[UIColor colorWithRed:191/255.0f green:191/255.0f blue:191/255.0f alpha:1];
+        UIView *seperatorline2=[[UIView alloc]initWithFrame:CGRectMake(2*[UIScreen mainScreen].bounds.size.width/3, 0, 1, 70)];
+        seperatorline2.backgroundColor=[UIColor colorWithRed:191/255.0f green:191/255.0f blue:191/255.0f alpha:1];
+        
+        UILabel *lbl_title1=[[UILabel alloc]initWithFrame:CGRectMake(0, 8, [UIScreen mainScreen].bounds.size.width/3, 30)];
+        lbl_title1.font=[UIFont systemFontOfSize:16];
+        lbl_title1.textColor=[UIColor blackColor];
+        lbl_title1.text=@"待办流程";
+        lbl_title1.textAlignment=NSTextAlignmentCenter;
+        
+        UILabel *lbl_title2=[[UILabel alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/3, 8, [UIScreen mainScreen].bounds.size.width/3, 30)];
+        lbl_title2.font=[UIFont systemFontOfSize:16];
+        lbl_title2.textColor=[UIColor blackColor];
+        lbl_title2.text=@"公文传阅";
+        lbl_title2.textAlignment=NSTextAlignmentCenter;
+        
+        UILabel *lbl_title3=[[UILabel alloc]initWithFrame:CGRectMake(2*[UIScreen mainScreen].bounds.size.width/3, 8, [UIScreen mainScreen].bounds.size.width/3, 30)];
+        lbl_title3.font=[UIFont systemFontOfSize:16];
+        lbl_title3.textColor=[UIColor blackColor];
+        lbl_title3.text=@"系统消息";
+        lbl_title3.textAlignment=NSTextAlignmentCenter;
+        
+        
+        UILabel *lbl_num1=[[UILabel alloc]initWithFrame:CGRectMake(0, 40, [UIScreen mainScreen].bounds.size.width/3, 30)];
+        lbl_num1.font=[UIFont systemFontOfSize:16];
+        lbl_num1.backgroundColor=[UIColor colorWithRed:254/255.0f green:83/255.0f blue:81/255.0f alpha:1];
+        lbl_num1.textColor=[UIColor whiteColor];
+        lbl_num1.text=[NSString stringWithFormat:@"%ld",(long)i_flow_num];
+        lbl_num1.textAlignment=NSTextAlignmentCenter;
+        CGFloat width_1=[UILabel_LabelHeightAndWidth getWidthWithTitle:lbl_num1.text font:[UIFont systemFontOfSize:16]];
+        width_1=width_1+20;
+        CGFloat height_1=[UILabel_LabelHeightAndWidth getHeightByWidth:width_1 title:lbl_num1.text font:[UIFont systemFontOfSize:16]];
+        [lbl_num1 setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/6-width_1/2, 40, width_1, height_1)];
+       // [lbl_num1 sizeToFit];
+        lbl_num1.layer.cornerRadius=10;
+        lbl_num1.layer.masksToBounds=YES;
+        
+        UILabel *lbl_num2=[[UILabel alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/3, 40, [UIScreen mainScreen].bounds.size.width/3, 30)];
+        lbl_num2.font=[UIFont systemFontOfSize:16];
+        lbl_num2.backgroundColor=[UIColor colorWithRed:254/255.0f green:83/255.0f blue:81/255.0f alpha:1];
+        lbl_num2.textColor=[UIColor whiteColor];
+        lbl_num2.text=[NSString stringWithFormat:@"%ld",(long)i_doc_num];
+        lbl_num2.textAlignment=NSTextAlignmentCenter;
+        CGFloat width_2=[UILabel_LabelHeightAndWidth getWidthWithTitle:lbl_num2.text font:[UIFont systemFontOfSize:16]];
+        width_2=width_2+20;
+        CGFloat height_2=[UILabel_LabelHeightAndWidth getHeightByWidth:width_2 title:lbl_num2.text font:[UIFont systemFontOfSize:16]];
+        [lbl_num2 setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2-width_2/2, 40, width_2, height_2)];
+      //  [lbl_num2 sizeToFit];
+
+        lbl_num2.layer.cornerRadius=10;
+        lbl_num2.layer.masksToBounds=YES;
+        
+        
+        UILabel *lbl_num3=[[UILabel alloc]initWithFrame:CGRectMake(2*[UIScreen mainScreen].bounds.size.width/3, 40, [UIScreen mainScreen].bounds.size.width/3, 30)];
+        lbl_num3.font=[UIFont systemFontOfSize:16];
+        lbl_num3.backgroundColor=[UIColor colorWithRed:254/255.0f green:83/255.0f blue:81/255.0f alpha:1];
+        lbl_num3.textColor=[UIColor whiteColor];
+        lbl_num3.text=[NSString stringWithFormat:@"%ld",(long)i_msg_num];
+        lbl_num3.textAlignment=NSTextAlignmentCenter;
+        CGFloat width_3=[UILabel_LabelHeightAndWidth getWidthWithTitle:lbl_num3.text font:[UIFont systemFontOfSize:16]];
+        width_3=width_3+20;
+        CGFloat height_3=[UILabel_LabelHeightAndWidth getHeightByWidth:width_3 title:lbl_num3.text font:[UIFont systemFontOfSize:16]];
+        [lbl_num3 setFrame:CGRectMake(5*[UIScreen mainScreen].bounds.size.width/6-width_3/2, 40, width_3, height_3)];
+       // [lbl_num3 sizeToFit];
+        lbl_num3.layer.cornerRadius=10;
+        lbl_num3.layer.masksToBounds=YES;
+        
+
+        [self.contentView addSubview:seperatorline1];
+        [self.contentView addSubview:seperatorline2];
+        [self.contentView addSubview:lbl_title1];
+        [self.contentView addSubview:lbl_title2];
+        [self.contentView addSubview:lbl_title3];
+        [self.contentView addSubview:lbl_num1];
+        [self.contentView addSubview:lbl_num2];
+        [self.contentView addSubview:lbl_num3];
+        
+        /*
         //self.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
         self.textLabel.font=[UIFont systemFontOfSize:13];
         self.detailTextLabel.font=[UIFont systemFontOfSize:13];
@@ -70,7 +150,7 @@
         
         _lbl_count.layer.cornerRadius=width1/2;
         [_lbl_count.layer setMasksToBounds:YES];
-        
+        */
        // [self.contentView addSubview:_lbl_count];
     }
     return self;

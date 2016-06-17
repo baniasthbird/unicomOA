@@ -230,6 +230,7 @@
     // NSMutableDictionary *dic_submit=[[NSMutableDictionary alloc]init];
     ShenPiQueryLogVC *vc=[[ShenPiQueryLogVC alloc]init];
     vc.str_processInstID=_str_processInstID;
+    vc.str_titleName=_str_title;
     [self.navigationController pushViewController:vc animated:YES];
     
 }

@@ -12,6 +12,8 @@
 
 @property (nonatomic,strong) NSString *str_processInstID;
 
+@property (nonatomic,strong) NSString *str_titleName;
+
 
 
 @end

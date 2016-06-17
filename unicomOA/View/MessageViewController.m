@@ -82,6 +82,8 @@
     _tableView.delegate=self;
     _tableView.dataSource=self;
     _tableView.backgroundColor=[UIColor clearColor];
+   
+
     
     i_totalHeight=0;
     _refreshControl=[[UIRefreshControl alloc] init];
@@ -215,8 +217,8 @@
             if (i_success==1) {
                 _arr_NewsList=[JSON objectForKey:@"list"];
                 if ([_arr_NewsList count]>0) {
-                    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
-                    // [self.tableView reloadData];
+                  //  [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
+                     [self.tableView reloadData];
                 }
                 
             }
@@ -238,55 +240,50 @@
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 11;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section==0) {
-        return 1;
-    }
-    else {
-        return 10;
-    }
+    return 1;
     
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==0) {
-        return 50;
+        return 70;
     }
     else {
         if ([_arr_NewsList count]==0) {
             return 110;
         }
         else {
+            
+            
             CGFloat h_height=0;
             if (iPhone6_plus) {
-                h_height=[self cellHeightForNews:indexPath.row titleFont:17 otherFont:14];
+                h_height=[self cellHeightForNews:indexPath.section-1 titleFont:17 otherFont:14];
             }
             else {
-                 h_height=[self cellHeightForNews:indexPath.row titleFont:17 otherFont:11];
+                 h_height=[self cellHeightForNews:indexPath.section-1 titleFont:17 otherFont:11];
             }
             
             return h_height;
+            
         }
         
     }
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (section==1) {
-        return 30;
-    }
-    else {
-        return 0;
-    }
-    
-}
+
 
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 0;
+    if (section==0) {
+        return 30;
+    }
+    else {
+        return 6;
+    }
 }
 
 
@@ -330,12 +327,13 @@
                     cell=[NewsManagementTableViewCell cellWithTable:tableView withCellHeight:110 titleX:self.view.frame.size.width/32 titleY:0.0f titleW:15*self.view.frame.size.width/16 titleH:50.0f DepartX:self.view.frame.size.width/32 DepartY:60.0f DepartW:3*self.view.frame.size.width/8 DepartH:40.0f TimeX:self.view.frame.size.width*0.4 TimeY:60.0f TimeW:self.view.frame.size.width*0.5 TimeH:40.0f canScroll:NO];
                 }
                 */
-                NSDictionary *dic_content=[_arr_NewsList objectAtIndex:indexPath.row];
+                NSDictionary *dic_content=[_arr_NewsList objectAtIndex:indexPath.section-1];
                 NSString *str_category=[dic_content objectForKey:@"classname"];
                 CGFloat i_titleFont=0;
                 CGFloat i_otherFont=0;
                 if (iPhone6_plus) {
                     i_titleFont=16;
+                 
                     i_otherFont=11;
                 }
                 else {
@@ -358,16 +356,17 @@
                 NSString *str_time2=[arr_time objectAtIndex:0];
                 NSString *str_depart=[NSString stringWithFormat:@"%@ %@",str_department,str_time2];
                 CGFloat h_height=h_Title+h_depart+20;
-                cell=[NewsManagementTableViewCell cellWithTable:tableView withCellHeight:h_height withTitleHeight:h_Title withButtonHeight:h_depart withTitle:attributedString withCategory:str_category withDepart:str_depart titleFont:i_titleFont otherFont:i_otherFont canScroll:NO];
+                cell=[NewsManagementTableViewCell cellWithTable:tableView withCellHeight:h_height withTitleHeight:h_Title withButtonHeight:h_depart withTitle:attributedString withCategory:str_category withDepart:str_depart titleFont:i_titleFont otherFont:i_otherFont canScroll:NO withImage:@"hot.png"];
                 cell.delegate=self;
                 cell.str_title=str_title;
                 cell.str_department=str_department;
-                cell.myTag=indexPath.row;
+                cell.myTag=indexPath.section-1;
+                
                 
                 if ([str_title isEqualToString:selected_title]) {
-                    if (b_ReplaceDataSource==YES) {
+                    //if (b_ReplaceDataSource==YES) {
                         cell.backgroundColor=[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1];
-                    }
+                   // }
                     
                 }
                 
@@ -390,44 +389,49 @@
 
 }
 
--(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    CGRect frameRect = CGRectMake(0, 0, self.view.frame.size.width, 40);
-    
-    UIView *view = [[UIView alloc] initWithFrame:frameRect];
-    
-    UIImageView *img=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"newsbodcast.png"]];
-    
-    [img setFrame:CGRectMake(20, 5, 20, 20)];
-    
-    [view addSubview:img];
-    
-    UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(80, 0, self.view.frame.size.width-80, 30)];
-    
-    label.textAlignment=NSTextAlignmentLeft;
-    
-   
-    
-    CGFloat i_Float=0;
-    if (iPhone4_4s || iPhone5_5s) {
-        i_Float=16;
+-(UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    if (section==0) {
+        CGRect frameRect = CGRectMake(0, 0, self.view.frame.size.width, 40);
+        
+        UIView *view = [[UIView alloc] initWithFrame:frameRect];
+        
+        UIImageView *img=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"newsbodcast.png"]];
+        
+        [img setFrame:CGRectMake(20, 5, 20, 20)];
+        
+       // [view addSubview:img];
+        
+        UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(25, 0, self.view.frame.size.width-80, 30)];
+        
+        label.textAlignment=NSTextAlignmentLeft;
+        
+        
+        
+        CGFloat i_Float=0;
+        if (iPhone4_4s || iPhone5_5s) {
+            i_Float=16;
+        }
+        else {
+            i_Float=16;
+        }
+        
+        label.font=[UIFont systemFontOfSize:i_Float];
+        
+        // label.backgroundColor=[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1];
+        
+        
+        label.text=@"新闻公告";
+        label.textColor=[UIColor blackColor];
+        
+        
+        [view addSubview:label];
+        view.backgroundColor=[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1];
+        
+        return view;
     }
     else {
-        i_Float=20;
+        return nil;
     }
-    
-    label.font=[UIFont systemFontOfSize:i_Float];
-    
-   // label.backgroundColor=[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1];
-    
-    if (section==1) {
-        label.text=@"新闻公告";
-        label.textColor=[UIColor colorWithRed:80/255.0f green:125/255.0f blue:236/255.0f alpha:1];
-    }
-    
-    [view addSubview:label];
-    view.backgroundColor=[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1];
-   
-    return view;
 }
 
 
@@ -460,9 +464,10 @@
 //点击新闻事件
 -(void)tapCell:(NewsManagementTableViewCell *)cell atIndex:(NSInteger)index {
     if (selectedIndex!=-1 && selectedIndex!=index) {
-        NSIndexPath *selectIndexPath=[NSIndexPath indexPathForRow:selectedIndex inSection:1];
+      //  NSIndexPath *selectIndexPath=[NSIndexPath indexPathForRow:selectedIndex inSection:1];
         b_ReplaceDataSource=NO;
-        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:selectIndexPath,nil]  withRowAnimation:UITableViewRowAnimationNone];
+      //  [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:selectIndexPath,nil]  withRowAnimation:UITableViewRowAnimationNone];
+        [self.tableView reloadData];
     }
     cell.backgroundColor=[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1];
     selectedIndex=index;

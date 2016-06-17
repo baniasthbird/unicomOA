@@ -64,7 +64,7 @@
     dic_param[@"processInstID"]=_str_processInstID;
     [self PrePareData:dic_param];
     
-    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, -30, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped];
+    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 5, self.view.frame.size.width, self.view.frame.size.height-80) style:UITableViewStylePlain];
     _tableView.delegate=self;
     _tableView.dataSource=self;
     _tableView.backgroundColor=[UIColor clearColor];
@@ -153,16 +153,20 @@
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (_arr_ShenPiQueryList!=nil) {
         return [_arr_ShenPiQueryList count];
     }
     else {
         return 1;
     }
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 1;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 10;
 }
 
 
@@ -179,7 +183,7 @@
     cell.detailTextLabel.textColor=[UIColor colorWithRed:112/255.0f green:112/255.0f blue:112/255.0f alpha:1];
     cell.detailTextLabel.font=[UIFont systemFontOfSize:16];
 
-    NSDictionary *dic_tmp=[_arr_ShenPiQueryList objectAtIndex:indexPath.row];
+    NSDictionary *dic_tmp=[_arr_ShenPiQueryList objectAtIndex:indexPath.section];
     
    
 
@@ -198,7 +202,8 @@
         NSString *str_activename=[dic_tmp objectForKey:@"activityName"];
         NSString *str_status=@"";
         str_status=str_decision;
-        ShenPiResultCell *cell=[ShenPiResultCell cellWithTable:tableView withImage:@"headLogo.png" withName:str_name withStatus:str_status withTime:str_date ActivityName:str_activename atIndex:indexPath];
+        //ShenPiResultCell *cell=[ShenPiResultCell cellWithTable:tableView withImage:@"headLogo.png" withName:str_name withStatus:str_status withTime:str_date ActivityName:str_activename atIndex:indexPath];
+        ShenPiResultCell *cell=[ShenPiResultCell cellWithTable:tableView withTitle:_str_titleName withName:str_name withStatus:str_status withTime:str_date ActivityName:str_activename atIndex:indexPath];
         return cell;
     }
     else {
@@ -210,11 +215,14 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 100;
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 0;
+    UILabel *lbl_title=[[UILabel alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width*0.05, 5, [UIScreen mainScreen].bounds.size.width*0.9, 30)];
+    lbl_title.textColor=[UIColor blackColor];
+    lbl_title.font=[UIFont systemFontOfSize:16];
+    lbl_title.numberOfLines=0;
+    lbl_title.text=_str_titleName;
+    [lbl_title sizeToFit];
+    CGFloat h_height=lbl_title.frame.size.height+40;
+    return h_height;
 }
 
 //添加菊花等待图标
