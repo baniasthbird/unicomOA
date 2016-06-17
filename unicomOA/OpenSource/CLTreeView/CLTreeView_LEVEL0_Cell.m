@@ -37,6 +37,10 @@
     CGRect nameFrame = _name.frame;
     nameFrame.origin.x = 62 + addX;
     _name.frame = nameFrame;
+    if (iPad) {
+        _name.font=[UIFont systemFontOfSize:20];
+        _staffnum.font=[UIFont systemFontOfSize:20];
+    }
 }
 
 

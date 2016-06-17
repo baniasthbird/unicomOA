@@ -46,6 +46,10 @@
     signtureFrame.origin.x = 62 + addX;
     _signture.frame = signtureFrame;
     */
+    if (iPad) {
+        _name.font=[UIFont systemFontOfSize:17];
+        _signture.font=[UIFont systemFontOfSize:17];
+    }
 }
 
 @end
