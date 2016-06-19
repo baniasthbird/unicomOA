@@ -116,7 +116,7 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     View=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     View.image=[UIImage imageNamed:@"LoginView.png"];
     if (iPad) {
-        View.contentMode=UIViewContentModeScaleAspectFit;
+      //  View.contentMode=UIViewContentModeScaleAspectFit;
     }
     View.backgroundColor=[UIColor whiteColor];
     [self.view addSubview:View];
@@ -173,13 +173,23 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
 //新增添加显示IP地址的界面
 -(void)CreateCheckBox {
     checkbox=[[UIButton alloc]initWithFrame:CGRectZero];
-    checkbox.frame=CGRectMake(self.view.frame.size.width*0.08, self.view.frame.size.height/2+45,20,20);
+    UILabel *lbl_checkname;
+    if (!iPad) {
+        checkbox.frame=CGRectMake(self.view.frame.size.width*0.08, self.view.frame.size.height/2+45,20,20);
+        lbl_checkname=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.08+30, self.view.frame.size.height/2+30, self.view.frame.size.width*0.3, 50)];
+    }
+    else {
+        checkbox.frame=CGRectMake(105, 620,25,25);
+        lbl_checkname=[[UILabel alloc]initWithFrame:CGRectMake(160, 608, self.view.frame.size.width*0.3, 50)];
+        lbl_checkname.font=[UIFont systemFontOfSize:20];
+    }
+    lbl_checkname.textColor=[UIColor whiteColor];
+    lbl_checkname.text=@"记住密码";
+
     [checkbox setImage:[UIImage imageNamed:@"check_off.png"]forState:UIControlStateNormal];
     [checkbox setImage:[UIImage imageNamed:@"check_on.png"]forState:UIControlStateSelected];
     [checkbox addTarget:self action:@selector(checkboxClick:) forControlEvents:UIControlEventTouchUpInside];
-    UILabel *lbl_checkname=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.08+30, self.view.frame.size.height/2+30, self.view.frame.size.width*0.3, 50)];
-    lbl_checkname.textColor=[UIColor whiteColor];
-    lbl_checkname.text=@"记住密码";
+    
     
     [self.view addSubview:checkbox];
     [self.view addSubview:lbl_checkname];
@@ -203,9 +213,9 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
         lbl_title3=[self CreateLabel:CGRectMake(10, self.view.frame.size.height-50, self.view.frame.size.width-20,30 ) title:@"河南省信息咨询设计研究有限公司" titleColor:[UIColor whiteColor] font:[UIFont systemFontOfSize:15]];
     }
     else if (iPad) {
-        lbl_title1=[self CreateLabel:CGRectMake(10, self.view.frame.size.height/2-140, self.view.frame.size.width-20, 50) title:@"YICR综合信息管理系统" titleColor:[UIColor whiteColor] font:[UIFont fontWithName:@"STHeitiSC-Medium" size:25]];
+        lbl_title1=[self CreateLabel:CGRectMake(10, self.view.frame.size.height/2-240, self.view.frame.size.width-20, 50) title:@"YICR综合信息管理系统" titleColor:[UIColor whiteColor] font:[UIFont fontWithName:@"STHeitiSC-Medium" size:35]];
         lbl_title2=[self CreateLabel:CGRectMake(10, self.view.frame.size.height/2-100, self.view.frame.size.width-20, 50) title:@"设计研究有限公司" titleColor:[UIColor whiteColor] font:[UIFont fontWithName:@"STHeitiSC-Medium" size:20]];
-        lbl_title3=[self CreateLabel:CGRectMake(10, self.view.frame.size.height-50, self.view.frame.size.width-20,30 ) title:@"河南省信息咨询设计研究有限公司" titleColor:[UIColor whiteColor] font:[UIFont systemFontOfSize:15]];
+        lbl_title3=[self CreateLabel:CGRectMake(10, 900, self.view.frame.size.width-20,30 ) title:@"河南省信息咨询设计研究有限公司" titleColor:[UIColor whiteColor] font:[UIFont systemFontOfSize:25]];
     }
     
     
@@ -217,39 +227,54 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
 
 -(void)createButtons
 {
-    UIButton *btn_login=[self createButtonFrame:CGRectMake(self.view.frame.size.width*0.18, self.view.frame.size.height/2+110, self.view.frame.size.width*0.64, 50) backImageName:nil title:@"登  录" titleColor:[UIColor whiteColor]  font:[UIFont systemFontOfSize:25] target:self action:@selector(landClick)];
+    //登陆
+    UIButton *btn_login;
+    if (!iPad) {
+        btn_login=[self createButtonFrame:CGRectMake(self.view.frame.size.width*0.18, self.view.frame.size.height/2+110, self.view.frame.size.width*0.64, 50) backImageName:nil title:@"登  录" titleColor:[UIColor whiteColor]  font:[UIFont systemFontOfSize:25] target:self action:@selector(landClick)];
+        btn_login.layer.cornerRadius=25.0f;
+    }
+    else {
+        btn_login=[self createButtonFrame:CGRectMake(120, 700, 528, 60) backImageName:nil title:@"登  录" titleColor:[UIColor whiteColor]  font:[UIFont systemFontOfSize:30] target:self action:@selector(landClick)];
+        btn_login.layer.cornerRadius=30.0f;
+    }
     btn_login.backgroundColor=[UIColor clearColor];
-    btn_login.layer.cornerRadius=25.0f;
+    
     btn_login.layer.borderWidth=1.0f;
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     CGColorRef colorref = CGColorCreate(colorSpace,(CGFloat[]){ 234/255.0f, 246/255.0f, 254/255.0f, 0.3 });
     btn_login.layer.borderColor=colorref;
 
+    //服务器设置
     CGFloat i_Width=35.0f;
     CGFloat i_Right=75.0f;
     if (iPhone6 || iPhone6_plus) {
         i_Width=35.0f;
         i_Right=75.0f;
     }
-    else {
+    else if (iPhone5_5s || iPhone4_4s) {
         i_Width=25.0f;
         i_Right=55.0f;
     }
-    UIButton *btn_Server=[self createButtonFrame:CGRectMake(self.view.frame.size.width-i_Right, self.view.frame.size.height-50, i_Width, i_Width) backImageName:@"server.png" title:@"" titleColor:[UIColor grayColor] font:[UIFont systemFontOfSize:13] target:self action:@selector(serverip:)];
-    //newUserBtn.backgroundColor=[UIColor lightGrayColor];
+    UIButton *btn_Server;
+    if (!iPad) {
+        btn_Server=[self createButtonFrame:CGRectMake(self.view.frame.size.width-i_Right, self.view.frame.size.height-50, i_Width, i_Width) backImageName:@"server.png" title:@"" titleColor:[UIColor grayColor] font:[UIFont systemFontOfSize:13] target:self action:@selector(serverip:)];
+    }
+    else {
+        btn_Server=[self createButtonFrame:CGRectMake(600, 898, 30, 30) backImageName:@"server.png" title:@"" titleColor:[UIColor grayColor] font:[UIFont systemFontOfSize:17] target:self action:@selector(serverip:)];
+    }
+        //newUserBtn.backgroundColor=[UIColor lightGrayColor];
     
-    
-    UIButton *btn_forgetpassword=[self createButtonFrame:CGRectMake(self.view.frame.size.width*0.35, self.view.frame.size.height/2+180, self.view.frame.size.width*0.3, 30) backImageName:nil title:@"忘记密码?" titleColor:[UIColor colorWithRed:232/255.0f green:242/255.0f blue:255/255.0f alpha:0.3] font:[UIFont systemFontOfSize:15] target:self action:@selector(fogetPwd:)];
+    //忘记密码
+    UIButton *btn_forgetpassword;
+    if (!iPad) {
+        btn_forgetpassword=[self createButtonFrame:CGRectMake(self.view.frame.size.width*0.35, self.view.frame.size.height/2+180, self.view.frame.size.width*0.3, 30) backImageName:nil title:@"忘记密码?" titleColor:[UIColor colorWithRed:232/255.0f green:242/255.0f blue:255/255.0f alpha:0.3] font:[UIFont systemFontOfSize:15] target:self action:@selector(fogetPwd:)];
+    }
+    else {
+        btn_forgetpassword=[self createButtonFrame:CGRectMake(self.view.frame.size.width*0.35, self.view.frame.size.height/2+280, self.view.frame.size.width*0.3, 50) backImageName:nil title:@"忘记密码?" titleColor:[UIColor colorWithRed:232/255.0f green:242/255.0f blue:255/255.0f alpha:0.3] font:[UIFont systemFontOfSize:18] target:self action:@selector(fogetPwd:)];
+    }
+  
     //fogotPwdBtn.backgroundColor=[UIColor lightGrayColor];
     
-    
-    
-    #define Start_X 60.0f           // 第一个按钮的X坐标
-    #define Start_Y 440.0f           // 第一个按钮的Y坐标
-    #define Width_Space 50.0f        // 2个按钮之间的横间距
-    #define Height_Space 20.0f      // 竖间距
-    #define Button_Height 50.0f    // 高
-    #define Button_Width 50.0f      // 宽
     
     [self.view addSubview:btn_login];
    // [self.view addSubview:btn_newuser];
@@ -430,7 +455,13 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     //[self.view addSubview:bgView];
     
     UIColor *placeholderColor= [UIColor colorWithRed:166/255.0f green:191/255.0f blue:250/255.0f alpha:1];
-    user=[self createTextFielfFrame:CGRectMake(60, self.view.frame.size.height/2-50, self.view.frame.size.width-120, 30) font:[UIFont systemFontOfSize:20] placeholder:@"用户名"];
+    if (!iPad) {
+        user=[self createTextFielfFrame:CGRectMake(60, self.view.frame.size.height/2-50, self.view.frame.size.width-120, 30) font:[UIFont systemFontOfSize:20] placeholder:@"用户名"];
+    }
+    else {
+        user=[self createTextFielfFrame:CGRectMake(160, 450, self.view.frame.size.width-320, 50) font:[UIFont systemFontOfSize:25] placeholder:@"用户名"];
+    }
+   
     user.attributedPlaceholder=[[NSAttributedString alloc] initWithString:@"用户名" attributes:@{NSForegroundColorAttributeName:placeholderColor}];
     //user.text=@"13419693608";
     user.keyboardType=UIKeyboardTypeDefault;
@@ -440,7 +471,13 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
    // user.text=@"sysadmin";
   //  user.text=@"张克进";
     
-    pwd=[self createTextFielfFrame:CGRectMake(60, self.view.frame.size.height/2, self.view.frame.size.width-120, 30) font:[UIFont systemFontOfSize:20]  placeholder:@"密码" ];
+    if (!iPad) {
+        pwd=[self createTextFielfFrame:CGRectMake(60, self.view.frame.size.height/2, self.view.frame.size.width-120, 30) font:[UIFont systemFontOfSize:20]  placeholder:@"密码" ];
+    }
+    else {
+        pwd=[self createTextFielfFrame:CGRectMake(160, 550, self.view.frame.size.width-320, 50) font:[UIFont systemFontOfSize:25]  placeholder:@"密码" ];
+    }
+   
     pwd.clearButtonMode = UITextFieldViewModeWhileEditing;
     //pwd.text=@"123456";
     //密文样式
@@ -451,14 +488,33 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
    // pwd.text=@"000000";
     //pwd.keyboardType=UIKeyboardTypeNumberPad;
     
+    UIImageView *userImageView;
+    UIImageView *pwdImageView;
+    if (!iPad) {
+      userImageView=[self createImageViewFrame:CGRectMake(self.view.frame.size.width*0.07, self.view.frame.size.height/2-50, 25, 25) imageName:@"ic_landing_nickname" color:nil];
+      pwdImageView=[self createImageViewFrame:CGRectMake(self.view.frame.size.width*0.07, self.view.frame.size.height/2, 25, 25) imageName:@"mm_normal" color:nil];
+    }
+    else {
+        userImageView=[self createImageViewFrame:CGRectMake(100, 460, 30, 30) imageName:@"ic_landing_nickname" color:nil];
+        pwdImageView=[self createImageViewFrame:CGRectMake(100, 560, 30, 30) imageName:@"mm_normal" color:nil];
+    }
     
-    UIImageView *userImageView=[self createImageViewFrame:CGRectMake(self.view.frame.size.width*0.07, self.view.frame.size.height/2-50, 25, 25) imageName:@"ic_landing_nickname" color:nil];
-    UIImageView *pwdImageView=[self createImageViewFrame:CGRectMake(self.view.frame.size.width*0.07, self.view.frame.size.height/2, 25, 25) imageName:@"mm_normal" color:nil];
    
-    UIView *underline1=[[UIView alloc]initWithFrame:CGRectMake(20, self.view.frame.size.height/2-20, self.view.frame.size.width-40, 1)];
-    underline1.backgroundColor=[UIColor whiteColor];
-    UIView *underline2=[[UIView alloc]initWithFrame:CGRectMake(20, self.view.frame.size.height/2+30, self.view.frame.size.width-40, 1)];
-    underline2.backgroundColor=[UIColor whiteColor];
+    UIView *underline1;
+    UIView *underline2;
+    if (!iPad) {
+        underline1=[[UIView alloc]initWithFrame:CGRectMake(20, self.view.frame.size.height/2-20, self.view.frame.size.width-40, 1)];
+        underline1.backgroundColor=[UIColor whiteColor];
+        underline2=[[UIView alloc]initWithFrame:CGRectMake(20, self.view.frame.size.height/2+30, self.view.frame.size.width-40, 1)];
+        underline2.backgroundColor=[UIColor whiteColor];
+    }
+    else {
+        underline1=[[UIView alloc]initWithFrame:CGRectMake(100, self.view.frame.size.height/2-20, self.view.frame.size.width-200, 1)];
+        underline1.backgroundColor=[UIColor whiteColor];
+        underline2=[[UIView alloc]initWithFrame:CGRectMake(100, self.view.frame.size.height/2+80, self.view.frame.size.width-200, 1)];
+        underline2.backgroundColor=[UIColor whiteColor];
+    }
+   
     [self.view addSubview:underline1];
     [self.view addSubview:underline2];
     [self.view addSubview:user];
