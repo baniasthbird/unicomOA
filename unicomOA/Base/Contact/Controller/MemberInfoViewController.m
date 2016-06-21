@@ -90,8 +90,11 @@
     else if (iPhone6) {
         lbl_title =[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.22, 0, self.view.frame.size.width*0.2, cell.frame.size.height)];
     }
-    else {
+    else if (iPhone6_plus) {
         lbl_title =[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.22, 0, self.view.frame.size.width*0.2, cell.frame.size.height)];
+    }
+    else if (iPad) {
+        lbl_title =[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.22, 0, self.view.frame.size.width*0.2, 60)];
     }
     lbl_title.font=[UIFont systemFontOfSize:16];
     lbl_title.textColor=[UIColor colorWithRed:165/255.0f green:165/255.0f blue:165/255.0f alpha:1];
@@ -101,8 +104,11 @@
     if (iPhone5_5s || iPhone4_4s) {
         lbl_name=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.46, -5, self.view.frame.size.width*0.8, cell.frame.size.height)];
     }
-    else {
+    else if (iPhone6_plus || iPhone6) {
         lbl_name=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.46, 0, self.view.frame.size.width*0.8, cell.frame.size.height)];
+    }
+    else if (iPad) {
+        lbl_name=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.46, 0, self.view.frame.size.width*0.8, 60)];
     }
     lbl_name.textColor=[UIColor colorWithRed:165/255.0f green:165/255.0f blue:165/255.0f alpha:1];
     lbl_name.font=[UIFont systemFontOfSize:16];
@@ -118,6 +124,7 @@
     if (indexPath.section==0) {
         if (indexPath.row==0) {
             LogoView *cell=[LogoView cellWithTable:tableView withName:nil withImage:_str_img];
+            cell.selectionStyle=UITableViewCellSelectionStyleNone;
             return cell;
         }
         else if (indexPath.row==1) {
@@ -166,8 +173,11 @@
             if (iPhone4_4s || iPhone5_5s) {
                 lbl_num=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.17, -5, self.view.frame.size.width*0.2, cell.frame.size.height)];
             }
-            else {
+            else if (iPhone6_plus || iPhone6){
                lbl_num=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.17, 0, self.view.frame.size.width*0.2, cell.frame.size.height)];
+            }
+            else if (iPad) {
+                lbl_num=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.17, 0, self.view.frame.size.width*0.2, 60)];
             }
             lbl_num.text=@"固定电话";
             lbl_num.font=[UIFont systemFontOfSize:16];
@@ -197,9 +207,13 @@
                 lbl_email=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.46, -5, self.view.frame.size.width*0.7, cell.frame.size.height)];
                 lbl_email.font=[UIFont systemFontOfSize:14];
             }
-            else {
+            else if (iPhone6 || iPhone6_plus){
                 lbl_email=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.46, 0, self.view.frame.size.width*0.7, cell.frame.size.height)];
                 lbl_email.font=[UIFont systemFontOfSize:16];
+            }
+            else if (iPad) {
+                lbl_email=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.46, 0, self.view.frame.size.width*0.7, 60)];
+                lbl_email.font=[UIFont systemFontOfSize:18];
             }
             lbl_email.text=_str_email;
             lbl_email.textColor=[UIColor colorWithRed:165/255.0f green:165/255.0f blue:165/255.0f alpha:1];
@@ -213,7 +227,18 @@
              cell.textLabel.textColor=[UIColor colorWithRed:22/255.0f green:155/255.0f blue:213/255.0f alpha:1];
              cell.textLabel.text=@"发送信息";
              */
-            UIButton *btn=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, 0, self.view.frame.size.width*0.9, cell.frame.size.height)];
+            CGFloat i_left=self.view.frame.size.width*0.05;
+            CGFloat i_width=self.view.frame.size.width*0.9;
+            if (!iPad) {
+               i_left=self.view.frame.size.width*0.05;
+               i_width=self.view.frame.size.width*0.9;
+            }
+            else {
+                i_left=100;
+                i_width=568;
+            }
+            UIButton  *btn=[[UIButton alloc]initWithFrame:CGRectMake(i_left, 0, i_width, cell.frame.size.height)];
+            
             btn.backgroundColor=[UIColor colorWithRed:85/255.0f green:129/255.0f blue:239/255.0f alpha:1];
             btn.layer.cornerRadius=20.0f;
             [btn setTitle:@"发送信息" forState:UIControlStateNormal];
@@ -223,7 +248,7 @@
 
     }
            // Configure the cell...
-    
+    cell.selectionStyle=UITableViewCellSelectionStyleNone;
     return cell;
 }
 
@@ -252,9 +277,13 @@
         else if (iPhone6) {
             return 133;
         }
-        else {
+        else if (iPhone6_plus){
             return 147;
         }
+        else  {
+            return 196;
+        }
+        
     }
     else if (indexPath.row==1) {
         return 60;
@@ -266,8 +295,11 @@
         else if (iPhone6) {
             return 41;
         }
-        else {
+        else if (iPhone6_plus) {
             return 45;
+        }
+        else {
+            return 60;
         }
     }
 }

@@ -86,7 +86,7 @@
 
         _txt_Pwd2=[self CreateTextFiled:CGRectMake(self.view.frame.size.width*0.1, self.view.frame.size.height*0.34, self.view.frame.size.width*0.8, 50) placeholder:@"再次输入密码" security:NO fontsize:i_Float];
     }
-    else {
+    else if (iPhone5_5s || iPhone4_4s) {
         view_OldPwd=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.03, self.view.frame.size.width*0.9, 50)];
         
         view_Pwd=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.17, self.view.frame.size.width*0.9, 50)];
@@ -99,6 +99,15 @@
         
         
         _txt_Pwd2=[self CreateTextFiled:CGRectMake(self.view.frame.size.width*0.1, self.view.frame.size.height*0.37, self.view.frame.size.width*0.8, 50) placeholder:@"再次输入密码" security:NO fontsize:i_Float];
+        
+    }
+    else if (iPad) {
+        view_OldPwd=[[UIView alloc]initWithFrame:CGRectMake(100, 70, 568, 50)];
+        view_Pwd=[[UIView alloc]initWithFrame:CGRectMake(100, 170, 568, 50)];
+        view_Pwd2=[[UIView alloc]initWithFrame:CGRectMake(100, 300, 568, 50)];
+        _txt_OldPwd=[self CreateTextFiled:CGRectMake(153, 70, 500, 50) placeholder:@"请输入原始密码" security:YES fontsize:i_Float];
+        _txt_Pwd=[self CreateTextFiled:CGRectMake(153, 170, 500, 50) placeholder:@"请输入新密码" security:NO fontsize:i_Float];
+        _txt_Pwd2=[self CreateTextFiled:CGRectMake(153,300,500,50) placeholder:@"再次输入密码" security:NO fontsize:i_Float];
         
     }
     
@@ -133,8 +142,11 @@
     else if (iPhone6) {
         checkbox.frame=CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.285, 30, 30);
     }
-    else {
+    else if (iPhone5_5s || iPhone4_4s) {
         checkbox.frame=CGRectMake(self.view.frame.size.width*0.05, self.view.frame.size.height*0.285, 30, 30);
+    }
+    else if (iPad) {
+        checkbox.frame=CGRectMake(110, 250, 30, 30);
     }
     
     
@@ -154,8 +166,11 @@
     else if (iPhone6_plus) {
          lbl_Pwd =[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.18, self.view.frame.size.height*0.26, self.view.frame.size.width*0.5, self.view.frame.size.height*0.08)];
     }
-    else {
+    else if (iPhone5_5s || iPhone4_4s) {
         lbl_Pwd =[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.18, self.view.frame.size.height*0.27, self.view.frame.size.width*0.5, self.view.frame.size.height*0.08)];
+    }
+    else if (iPad) {
+         lbl_Pwd =[[UILabel alloc]initWithFrame:CGRectMake(160, 250, 200, 30)];
     }
     
     

@@ -356,7 +356,7 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     [self postLogin];
    // }
     
-   //[self LocalEnter];
+   // [self LocalEnter];
 
  
 }
@@ -385,7 +385,7 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     //创建数据库
     [db_local initTables];
     //添加IP数据
-    [db_local InsertIPTable:@"192.168.12.25" port:@"8080" IP_Mark:@"TestServer"];
+    [db_local InsertIPTable:@"192.168.1.62" port:@"8080" IP_Mark:@"TestServer"];
     //添加接口数据
     [db_local InsertInterFaceTable];
     

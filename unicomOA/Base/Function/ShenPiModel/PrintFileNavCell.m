@@ -26,7 +26,16 @@
 -(id) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withTtile:(NSString*)str_Title withTitleName:(NSString*)str_TitleName withLabel:(NSString*)str_label {
     self=[super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        self.backgroundColor=[UIColor clearColor];
+        self.backgroundColor=[UIColor whiteColor];
+        self.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+        self.textLabel.textColor=[UIColor colorWithRed:53/255.0f green:98/255.0f blue:222/255.0f alpha:1];
+        self.textLabel.font=[UIFont systemFontOfSize:16];
+        NSInteger i_TitleName=[str_TitleName integerValue];
+        i_TitleName=i_TitleName+1;
+        str_TitleName=[NSString stringWithFormat:@"%ld",(long)i_TitleName];
+        self.textLabel.text=[NSString stringWithFormat:@"%@%@%@%@",str_label,@"表(第",str_TitleName,@"行)"];
+        self.imageView.image=[UIImage imageNamed:@"tablerow.png"];
+        
         UILabel *lbl_filename=[[UILabel alloc]init];
         
         if (iPhone4_4s || iPhone5_5s) {
@@ -51,7 +60,7 @@
         lbl_filename.textAlignment=NSTextAlignmentCenter;
        
         
-        [self.contentView addSubview:lbl_filename];
+       // [self.contentView addSubview:lbl_filename];
     }
     return self;
 }

@@ -37,21 +37,20 @@
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withName:(NSString*)str_name withPlaceholder:(NSString*)str_placeholder withText:(NSString*)str_text atHeight:(CGFloat)i_Height{
     self=[super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        /*
         self.textLabel.textColor=[UIColor blackColor];
         self.textLabel.font=[UIFont systemFontOfSize:16];
         self.textLabel.textAlignment=NSTextAlignmentLeft;
         self.textLabel.text=str_name;
+        */
+        UILabel *lbl_title=[[UILabel alloc]initWithFrame:CGRectMake(15, 10, [UIScreen mainScreen].bounds.size.width-20, 15)];
+        lbl_title.textColor=[UIColor blackColor];
+        lbl_title.font=[UIFont systemFontOfSize:16];
+        lbl_title.textAlignment=NSTextAlignmentLeft;
+        lbl_title.text=str_name;
         
         
-        if (iPhone4_4s || iPhone5_5s) {
-            _txt_detail=[[UITextView alloc]initWithFrame:CGRectMake(106, 5, 210, 100)];
-        }
-        else if (iPhone6) {
-            _txt_detail=[[UITextView alloc]initWithFrame:CGRectMake(106, 6, 265, 100)];
-        }
-        else {
-            _txt_detail=[[UITextView alloc]initWithFrame:CGRectMake(111, 6, 300, 100)];
-        }
+        _txt_detail=[[UITextView alloc]initWithFrame:CGRectMake(15, 35, [UIScreen mainScreen].bounds.size.width-30, i_Height-50)];
         
         _txt_detail.textColor=[UIColor colorWithRed:186/255.0f green:186/255.0f blue:186/255.0f alpha:1];
         _txt_detail.textAlignment=NSTextAlignmentLeft;
@@ -63,22 +62,16 @@
         _txt_detail.returnKeyType=UIReturnKeyDone;
         _txt_detail.scrollEnabled=YES;
         _txt_detail.delegate=self;
+        _txt_detail.layer.borderWidth=1;
+        _txt_detail.layer.borderColor=[[UIColor colorWithRed:231/255.0f green:231/255.0f blue:231/255.0f alpha:1] CGColor];
         if (str_text!=nil) {
             _txt_detail.text=str_text;
         }
         
        
         //自定义文本框placeholder
-        if (iPhone5_5s || iPhone4_4s) {
-            _lbl_tip=[[UILabel alloc]initWithFrame:CGRectMake(111, 0,200 , 40)];
-        }
-        else if (iPhone6)
-        {
-            _lbl_tip=[[UILabel alloc]initWithFrame:CGRectMake(111, 0,264 , self.frame.size.height)];
-        }
-        else {
-            _lbl_tip=[[UILabel alloc]initWithFrame:CGRectMake(116, 0,290 , self.frame.size.height)];
-        }
+       
+        _lbl_tip=[[UILabel alloc]initWithFrame:CGRectMake(17,35,200,40)];
         _lbl_tip.text=str_placeholder;
         _lbl_tip.textColor=[UIColor colorWithRed:186/255.0f green:186/255.0f blue:186/255.0f alpha:1];
         _lbl_tip.textAlignment=NSTextAlignmentLeft;
@@ -90,16 +83,8 @@
         
         
         //自定义文本框字数统计
-        if (iPhone4_4s || iPhone5_5s) {
-            _lbl_count=[[UILabel alloc]initWithFrame:CGRectMake(280, 80,32 , 20)];
-        }
-        else if (iPhone6) {
-            _lbl_count=[[UILabel alloc]initWithFrame:CGRectMake(335, 80,32 , 20)];
-        }
-        else {
-            _lbl_count=[[UILabel alloc]initWithFrame:CGRectMake(350, 80,32 , 20)];
-        }
         
+        _lbl_count=[[UILabel alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width-50, i_Height-45,32 ,20)];
         _lbl_count.text=@"500";
         _lbl_count.textAlignment=NSTextAlignmentRight;
         _lbl_count.font=[UIFont systemFontOfSize:13];
@@ -107,6 +92,7 @@
         _lbl_count.backgroundColor=[UIColor clearColor];
         _lbl_count.enabled=NO;
         
+        [self.contentView addSubview:lbl_title];
         [self.contentView addSubview:_txt_detail];
         [self.contentView addSubview:_lbl_tip];
         [self.contentView addSubview:_lbl_count];

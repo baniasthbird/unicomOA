@@ -33,37 +33,46 @@
         _lbl_status=[[UILabel alloc]init];
         UIView  *view_line=[[UIView alloc]init];
         UILabel *lbl_Title=[[UILabel alloc]init];
-        UILabel *lbl_time=[[UILabel alloc]init];
+        UILabel *lbl_under_left=[[UILabel alloc]init];
+        UILabel *lbl_under_right=[[UILabel alloc]init];
         
         img_Logo.layer.cornerRadius=30.0f;
         [img_Logo.layer setMasksToBounds:YES];
        // [lbl_Title setFrame:CGRectMake(10, 75, 200, 20)];
-        [lbl_time setFrame:CGRectMake(10, cellHeight-15, [UIScreen mainScreen].bounds.size.width-20, 15)];
+        [lbl_under_left setFrame:CGRectMake(10, cellHeight-25, [UIScreen mainScreen].bounds.size.width/2, 15)];
+        [lbl_under_right setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2, cellHeight-25, [UIScreen mainScreen].bounds.size.width/2-10, 15)];
         [img_Logo setFrame:CGRectMake(10, 15, 60, 60)];
+        [lbl_category setFrame:CGRectMake(75, 5, 120, 10)];
+        [_lbl_status setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width-66, 10, 46, 20)];
+        _lbl_status.layer.cornerRadius=2;
+        _lbl_status.layer.masksToBounds=YES;
         if (iPhone4_4s || iPhone5_5s) {
-            [_lbl_status setFrame:CGRectMake(250, 0, 70, cellHeight)];
+           // [_lbl_status setFrame:CGRectMake(250, 0, 70, cellHeight)];
             [view_line setFrame:CGRectMake(0, cellHeight-20, 250, 1)];
             [lbl_name setFrame:CGRectMake(100, 20, [UIScreen mainScreen].bounds.size.width-160, 70)];
-            [lbl_category setFrame:CGRectMake(75, 5, 120, 10)];
             
         }
         else if (iPhone6) {
-            [_lbl_status setFrame:CGRectMake(300, 0, 75, cellHeight)];
+           // [_lbl_status setFrame:CGRectMake(300, 0, 75, cellHeight)];
             [view_line setFrame:CGRectMake(0, cellHeight-20, 300, 1)];
             [lbl_name setFrame:CGRectMake(130, 20, [UIScreen mainScreen].bounds.size.width-160, 70)];
             [lbl_category setFrame:CGRectMake(75, 5, 120, 10)];
             }
-        else {
-            [_lbl_status setFrame:CGRectMake(350, 0, 64, cellHeight)];
+        else if (iPhone6_plus) {
+           // [_lbl_status setFrame:CGRectMake(350, 0, 64, cellHeight)];
             [view_line setFrame:CGRectMake(0, cellHeight-20, 350, 1)];
             [lbl_name setFrame:CGRectMake(150, 20, [UIScreen mainScreen].bounds.size.width-160, 70)];
             [lbl_category setFrame:CGRectMake(75, 5, 120, 10)];
+        }
+        else if (iPad) {
+            
         }
         img_Logo.image=[UIImage imageNamed:str_Image];
         lbl_name.textColor=[UIColor blackColor];
         lbl_category.textColor=[UIColor colorWithRed:165/255.0f green:165/255.0f blue:165/255.0f alpha:1];
         lbl_Title.textColor=[UIColor colorWithRed:165/255.0f green:165/255.0f blue:165/255.0f alpha:1];
-        lbl_time.textColor=[UIColor colorWithRed:153/255.0f green:153/255.0f blue:153/255.0f alpha:1];
+        lbl_under_left.textColor=[UIColor colorWithRed:153/255.0f green:153/255.0f blue:153/255.0f alpha:1];
+        lbl_under_right.textColor=[UIColor colorWithRed:153/255.0f green:153/255.0f blue:153/255.0f alpha:1];
         view_line.backgroundColor=[UIColor colorWithRed:204/255.0f green:204/255.0f blue:204/255.0f alpha:1];
         
         if ([str_status isEqualToString:@"已办"]) {
@@ -82,7 +91,8 @@
         lbl_category.font=[UIFont systemFontOfSize:16];
         _lbl_status.font=[UIFont systemFontOfSize:16];
         lbl_Title.font=[UIFont systemFontOfSize:13];
-        lbl_time.font=[UIFont systemFontOfSize:13];
+        lbl_under_left.font=[UIFont systemFontOfSize:14];
+        lbl_under_right.font=[UIFont systemFontOfSize:14];
         
         NSString *str_name=[NSString stringWithFormat:@"%@:%@",@"标题",str_Name];
         NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str_name];
@@ -98,21 +108,23 @@
         [lbl_category setFrame:CGRectMake(75, 5, [UIScreen mainScreen].bounds.size.width-100, h_cate)];
         _lbl_status.text=str_status;
         lbl_Title.text=str_Title;
-        [lbl_name setFrame:CGRectMake(75, h_cate+10, [UIScreen mainScreen].bounds.size.width-145, 70)];
+        [lbl_name setFrame:CGRectMake(10, 10, [UIScreen mainScreen].bounds.size.width-85, 70)];
         [lbl_name sizeToFit];
 
-        lbl_time.text=str_time;
+        lbl_under_left.text=str_Categroy;
+        lbl_under_right.text=str_time;
         _lbl_status.textColor=[UIColor whiteColor];
         _lbl_status.textAlignment=NSTextAlignmentCenter;
        
         
-        [self.contentView addSubview:img_Logo];
+       // [self.contentView addSubview:img_Logo];
         [self.contentView addSubview:lbl_name];
-        [self.contentView addSubview:lbl_category];
+       // [self.contentView addSubview:lbl_category];
         [self.contentView addSubview:_lbl_status];
-        [self.contentView addSubview:view_line];
+       // [self.contentView addSubview:view_line];
         [self.contentView addSubview:lbl_Title];
-        [self.contentView addSubview:lbl_time];
+        [self.contentView addSubview:lbl_under_left];
+        [self.contentView addSubview:lbl_under_right];
     }
     return self;
 }

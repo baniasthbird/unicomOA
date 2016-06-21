@@ -16,6 +16,8 @@
 
 @property (nonatomic,strong) NSIndexPath* i_selectedindexpath;
 
+
+
 @end
 
 @implementation ListFileController
@@ -112,16 +114,43 @@
     cell.detailTextLabel.font=[UIFont systemFontOfSize:16];
     cell.accessoryType=UITableViewCellAccessoryNone;
     
+    UILabel *lbl_title=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 44)];
+    lbl_title.textAlignment=NSTextAlignmentCenter;
+    lbl_title.font=[UIFont systemFontOfSize:16];
+    
+    UIImageView *img_logo=[[UIImageView alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2-60, 10, 24, 24)];
+    
+    
+    
     if (_mutliselect==NO) {
         if (indexPath==_i_selectedindexpath) {
             cell.accessoryType=UITableViewCellAccessoryCheckmark;
         }
     }
     NSDictionary *dic_value=[_arr_value objectAtIndex:indexPath.row];
-    cell.textLabel.text=[dic_value objectForKey:@"label"];
+    NSString *str_text=[dic_value objectForKey:@"label"];
+    lbl_title.text=str_text;
+    if ([_str_title isEqualToString:@"处理决策"]) {
+        if ([str_text isEqualToString:@"同意"]) {
+            lbl_title.textColor=[UIColor colorWithRed:26/255.0f green:189/255.0f blue:145/255.0f alpha:1];
+            img_logo.image=[UIImage imageNamed:@"agree.png"];
+        }
+        else if ([str_text isEqualToString:@"不同意"]) {
+            lbl_title.textColor=[UIColor colorWithRed:247/255.0f green:89/255.0f blue:89/255.0f alpha:1];
+            img_logo.image=[UIImage imageNamed:@"disagree.png"];
+        }
+    }
+    else {
+        lbl_title.textColor=[UIColor colorWithRed:90/255.0f green:134/255.0f blue:243/255.0f alpha:1];
+    }
+   // cell.textLabel.text=[dic_value objectForKey:@"label"];
     NSString *str_value=[dic_value objectForKey:@"value"];
+    cell.accessibilityIdentifier=str_text;
     cell.accessibilityHint=str_value;
     cell.textLabel.textColor=[UIColor blueColor];
+    
+    [cell.contentView addSubview:lbl_title];
+    [cell.contentView addSubview:img_logo];
     
     return cell;
 }
@@ -129,10 +158,10 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell=[tableView cellForRowAtIndexPath:indexPath];
     cell.accessoryType=UITableViewCellAccessoryCheckmark;
-    NSString *str_text=cell.textLabel.text;
+    //NSString *str_text=cell.textLabel.text;
     NSString *str_value=cell.accessibilityHint;
     _dic_backvalue[@"title"]=_str_title;
-    _dic_backvalue[@"text"]=str_text;
+    _dic_backvalue[@"text"]=cell.accessibilityIdentifier;
     _dic_backvalue[@"value"]=str_value;
     if (_mutliselect==NO) {
         _i_selectedindexpath=indexPath;

@@ -86,10 +86,18 @@
         //创建显示内容
         UIView *baseView=[[UIView alloc]initWithFrame:scrollView.bounds];
         
+        
+        
         UIImageView *logoImage=[[UIImageView alloc]initWithFrame:CGRectMake(11, 7.5, 16, 16)];
         CGFloat i_left=17;
         if (str_Image!=nil) {
-            i_left=32;
+            if (!iPad) {
+                i_left=32;
+            }
+            else {
+                logoImage=[[UIImageView alloc]initWithFrame:CGRectMake(30, 7.5, 23, 23)];
+                i_left=80;
+            }
             logoImage.image=[UIImage imageNamed:str_Image];
         }
         

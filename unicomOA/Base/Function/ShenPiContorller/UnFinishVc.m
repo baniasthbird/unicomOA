@@ -19,6 +19,7 @@
 #import "NewsDetailVc.h"
 #import "UILabel+LabelHeightAndWidth.h"
 #import "ShenPiQueryLogVC.h"
+#import "ListCell.h"
 
 @interface UnFinishVc ()<UITableViewDataSource,UITableViewDelegate,ListFileControllerDelegate,PrintApplicationDetailCellDelegate>
 
@@ -94,7 +95,7 @@
     
     dic_bkvalue=[NSMutableDictionary dictionary];
     
-    tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped];
+    tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-20) style:UITableViewStyleGrouped];
     tableView.delegate=self;
     tableView.dataSource=self;
     tableView.backgroundColor=[UIColor clearColor];
@@ -391,7 +392,7 @@
     UITableViewCell *cell=[tb cellForRowAtIndexPath:indexPath];
    // UITableViewCell *cell=[tb dequeueReusableCellWithIdentifier:cellID];
     if (cell==nil) {
-        cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:cellID];
+        cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellID];
     }
     cell.backgroundColor=[UIColor whiteColor];
     cell.textLabel.textColor=[UIColor blackColor];
@@ -399,6 +400,7 @@
     cell.textLabel.textAlignment=NSTextAlignmentLeft;
     cell.detailTextLabel.textColor=[UIColor colorWithRed:112/255.0f green:112/255.0f blue:112/255.0f alpha:1];
     cell.detailTextLabel.font=[UIFont systemFontOfSize:16];
+    cell.detailTextLabel.textAlignment=NSTextAlignmentRight;
     if ([dic_ctl count]==0) {
         cell.textLabel.text=@"";
         return cell;
@@ -547,6 +549,47 @@
                 str_detail_value=[dic objectForKey:@"label"];
                 
             }
+            BOOL b_multi=NO;
+            NSString *str_groupKey=[dic_tmp objectForKey:@"groupKey"];
+            if ([str_groupKey isEqualToString:@"audit"]) {
+                if (cell.accessibilityElements.count>0) {
+                    cell.accessibilityHint=@"canPopList";
+                    NSString *str_multiselect=[dic_tmp objectForKey:@"multiSelect"];
+                    b_multi=[str_multiselect boolValue];
+                }
+                if ([dic_bkvalue count]!=0) {
+                    NSDictionary *dic_bkvalue_tmp=[dic_bkvalue objectForKey:str_label];
+                    if (dic_tmp!=nil) {
+                        NSString *str_text=[dic_bkvalue_tmp objectForKey:@"text"];
+                        NSString *str_value=[dic_bkvalue_tmp objectForKey:@"value"];
+                        str_detail_value=str_text;
+                        [dic_tmp setValue:str_value forKey:@"value"];
+                        
+                    }
+                    else {
+                        str_detail_value=@"请点击选择";
+                    }
+                    
+                }
+                else {
+                    str_detail_value=@"请点击选择";
+                }
+                
+                ListCell *cell=[ListCell cellWithTable:tb withLabel:str_label withDetailLabel:str_detail_value index:indexPath listData:arr_listData mutiSelect:b_multi];
+                
+                return cell;
+
+            }
+            else {
+                cell.textLabel.text=str_label;
+                cell.detailTextLabel.text=str_detail_value;
+                [dic_tmp setValue:str_detail_value forKey:@"value"];
+                
+                
+            }
+            
+            
+            /*
             cell.textLabel.text=str_label;
             cell.accessibilityElements=[dic_tmp objectForKey:@"listData"];
             NSString *str_groupKey=[dic_tmp objectForKey:@"groupKey"];
@@ -564,6 +607,7 @@
                     
                     if ([dic_bkvalue count]!=0) {
                         NSDictionary *dic_bkvalue_tmp=[dic_bkvalue objectForKey:str_label];
+                        
                         if (dic_tmp!=nil) {
                             NSString *str_text=[dic_bkvalue_tmp objectForKey:@"text"];
                             NSString *str_value=[dic_bkvalue_tmp objectForKey:@"value"];
@@ -577,7 +621,8 @@
                     else {
                         cell.detailTextLabel.text=@"请点击选择";
                     }
-                    cell.detailTextLabel.textColor=[UIColor blueColor];
+                    cell.detailTextLabel.backgroundColor=[UIColor colorWithRed:69/255.0f green:115/255.0f blue:230/255.0f alpha:1];
+                    cell.detailTextLabel.textColor=[UIColor whiteColor];
                     
                 }
                 else {
@@ -591,6 +636,7 @@
                     
                 }
                 return cell;
+             */
         }
         else if ([str_type isEqualToString:@"html"]) {
             NSString *str_label=[dic_tmp objectForKey:@"label"];

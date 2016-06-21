@@ -81,7 +81,7 @@
     //展现已办流程数据的url
     NSMutableDictionary *dic_url2;
     
-   UIActivityIndicatorView *indicator;
+    UIActivityIndicatorView *indicator;
 }
 
 -(void)viewDidLoad {
@@ -184,7 +184,7 @@
 - (void)setupTopView
 {
     self.topView = [[UIView alloc] init];
-    self.topView.backgroundColor = [UIColor clearColor];
+    self.topView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.topView];
     self.topView.sd_layout
     .leftSpaceToView(self.view,0)
@@ -193,22 +193,23 @@
     .topSpaceToView(self.view,0);
     
     CGFloat w_left= [UIScreen mainScreen].bounds.size.width;
-    int i_left=(int)w_left/4;
-    self.levelButton = [[MCMenuButton alloc] initWithTitle:@"状态"];
+    int i_left=(int)w_left*0.208;
+  //  self.levelButton = [[MCMenuButton alloc] initWithTitle:@"  状态"];
+    self.levelButton=[[MCMenuButton alloc] initWithTitle:@"  状态" imgName:@"down_arrow_blue"];
     [self.levelButton setArrowDirectionDown];
     [self.topView addSubview:self.levelButton];
     self.levelButton.sd_layout
     .leftSpaceToView(self.topView,i_left)
     .topSpaceToView(self.topView,5)
     .bottomSpaceToView(self.topView,5)
-    .widthRatioToView(self.topView,0.5);
+    .widthRatioToView(self.topView,0.584);
     self.levelButton.layer.cornerRadius=17.0f;
     self.levelButton.layer.borderWidth=1;
     [self.levelButton.layer setMasksToBounds:YES];
-    self.levelButton.layer.borderColor=[[UIColor colorWithRed:215/255.0f green:215/255.0f blue:215/255.0f alpha:1] CGColor];
-   
+    self.levelButton.layer.borderColor=[[UIColor colorWithRed:80/255.0f green:125/255.0f blue:236/255.0f alpha:1] CGColor];
     
-    self.groupButton = [[MCMenuButton alloc] initWithTitle:@"类型"];
+    
+    self.groupButton = [[MCMenuButton alloc] initWithTitle:@"  类型" imgName:@"down_arrow_blue"];
    // [self.topView addSubview:self.groupButton];
     self.groupButton.sd_layout
     .leftSpaceToView(self.levelButton,-30)
@@ -220,11 +221,15 @@
     [self.groupButton.layer setMasksToBounds:YES];
     self.groupButton.layer.borderColor=[[UIColor colorWithRed:215/255.0f green:215/255.0f blue:215/255.0f alpha:1] CGColor];
     
-    self.levelButton.backgroundColor=[UIColor colorWithRed:80/255.0f green:125/255.0f blue:236/255.0f alpha:1];
-    [self.levelButton setTitleColor:[UIColor whiteColor]];
+   // self.levelButton.backgroundColor=[UIColor colorWithRed:80/255.0f green:125/255.0f blue:236/255.0f alpha:1];
+    self.levelButton.backgroundColor=[UIColor whiteColor];
+
+    [self.levelButton setTitleColor:[UIColor colorWithRed:80/255.0f green:125/255.0f blue:236/255.0f alpha:1]];
+    
     
     self.groupButton.backgroundColor=[UIColor whiteColor];
     [self.groupButton setTitleColor:[UIColor colorWithRed:173/255.0f green:173/255.0f blue:173/255.0f alpha:1]];
+    
     
     UIView *lineView = [[UIView alloc] init];
     lineView.backgroundColor = [UIColor colorWithWhite:0.8 alpha:1.0];
@@ -242,8 +247,8 @@
         //[weakSelf.levelButton setArrowDirectionUp];
 
         
-        weakSelf.levelButton.backgroundColor=[UIColor colorWithRed:80/255.0f green:125/255.0f blue:236/255.0f alpha:1];
-        [weakSelf.levelButton setTitleColor:[UIColor whiteColor]];
+        weakSelf.levelButton.backgroundColor=[UIColor whiteColor];
+        [weakSelf.levelButton setTitleColor:[UIColor colorWithRed:80/255.0f green:125/255.0f blue:236/255.0f alpha:1]];
         
         weakSelf.groupButton.backgroundColor=[UIColor whiteColor];
         [weakSelf.groupButton setTitleColor:[UIColor colorWithRed:173/255.0f green:173/255.0f blue:173/255.0f alpha:1]];
@@ -363,7 +368,7 @@
     
     str_title=[NSString stringWithFormat:@"%@%@",@"标题:",str_title];
     CGFloat i_width= [UILabel_LabelHeightAndWidth getWidthWithTitle:str_title font:[UIFont systemFontOfSize:i_otherFont]];
-    CGFloat f_linenum=i_width/([UIScreen mainScreen].bounds.size.width-180);
+    CGFloat f_linenum=i_width/([UIScreen mainScreen].bounds.size.width-80);
     NSInteger i_linenum=0;
     if (f_linenum<1) {
         i_linenum=1;
@@ -373,11 +378,11 @@
     }
    
 
-    if  (i_linenum<=3) {
-        return 120;
+    if  (i_linenum==1) {
+        return 70;
     }
     else {
-        return  120+17*(i_linenum-3);
+        return  70+23*(i_linenum-1);
     }
 }
 
@@ -839,12 +844,14 @@
     //NSString *str_node=[dic_task objectForKey:@"workItemName"];
     //时间
     NSString *str_startTime=[dic_task objectForKey:@"startTime"];
+    NSArray *arr_time=[str_startTime componentsSeparatedByString:@"."];
+    NSString *str_time=[arr_time objectAtIndex:0];
     
     CGFloat h_height=[self cellHeightForShenPi:indexPath.section otherFont:14];
     
     //MyShenPiCell *cell=[MyShenPiCell cellWithTable:tableView withTitle:str_title withStatus:@"待办" category:str_categroy withTime:str_startTime];
    // cell.dic_task=dic_task;
-    MyShenPiCell *cell=[MyShenPiCell cellWithTable:tableView withImage:_userInfo.str_Logo withCellHeight:h_height withName:str_title withCategroy:str_categroy withStatus:str_status withTitle:str_title withTime:str_startTime atIndex:indexPath];
+    MyShenPiCell *cell=[MyShenPiCell cellWithTable:tableView withImage:_userInfo.str_Logo withCellHeight:h_height withName:str_title withCategroy:str_categroy withStatus:str_status withTitle:str_title withTime:str_time atIndex:indexPath];
     cell.dic_task=dic_task;
     return cell;
 }

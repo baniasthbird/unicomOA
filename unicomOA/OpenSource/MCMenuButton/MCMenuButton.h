@@ -41,7 +41,7 @@
  *
  *  @return 实例
  */
-- (instancetype _Nonnull)initWithTitle:(NSString * _Nullable)title ;
+- (instancetype _Nonnull)initWithTitle:(NSString * _Nullable)title imgName:(NSString* _Nullable)str_img;
 
 /**
  *  根据标题刷新数据

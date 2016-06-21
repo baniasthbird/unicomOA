@@ -156,7 +156,7 @@
     .heightIs(44)
     .topSpaceToView(self.view,0);
     
-    self.levelButton = [[MCMenuButton alloc] initWithTitle:@"状态"];
+    self.levelButton = [[MCMenuButton alloc] initWithTitle:@"状态" imgName:@"down_arrow_blue"];
     [self.topView addSubview:self.levelButton];
     self.levelButton.sd_layout
     .leftSpaceToView(self.topView,60)
@@ -168,7 +168,7 @@
     [self.levelButton.layer setMasksToBounds:YES];
     self.levelButton.layer.borderColor=[[UIColor colorWithRed:215/255.0f green:215/255.0f blue:215/255.0f alpha:1] CGColor];
     
-    self.groupButton = [[MCMenuButton alloc] initWithTitle:@"类型"];
+    self.groupButton = [[MCMenuButton alloc] initWithTitle:@"类型" imgName:@"down_arrow_blue"];
     [self.topView addSubview:self.groupButton];
     self.groupButton.sd_layout
     .leftSpaceToView(self.levelButton,-30)

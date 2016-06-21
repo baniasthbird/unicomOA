@@ -84,8 +84,12 @@
        // HeadViewCell *cell=[[HeadViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
        // return cell;
         //UITableViewCell *cell_photo=[tableView cellForRowAtIndexPath:indexPath];
+        CGFloat i_left=20;
+        if (iPad) {
+            i_left=45;
+        }
         
-        UILabel *lbl_title=[[UILabel alloc]initWithFrame:CGRectMake(0, 20, [UIScreen mainScreen].bounds.size.width/3, 60)];
+        UILabel *lbl_title=[[UILabel alloc]initWithFrame:CGRectMake(i_left, 20, [UIScreen mainScreen].bounds.size.width/3, 60)];
         lbl_title.text=@" 头像";
         lbl_title.textAlignment=NSTextAlignmentLeft;
         lbl_title.font=[UIFont systemFontOfSize:24];
@@ -95,7 +99,13 @@
         _img_Head=[[UIImageView alloc]initWithImage:imageHead];
         [_img_Head.layer setMasksToBounds:YES];
         _img_Head.layer.cornerRadius=37.0f;
-        [_img_Head setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width*0.68, 13, 74, 74)];
+        if (iPad) {
+            [_img_Head setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width*0.88, 13, 74, 74)];
+        }
+        else {
+            [_img_Head setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width*0.68, 13, 74, 74)];
+        }
+        
         _img_Head.userInteractionEnabled=YES;
         
         UITapGestureRecognizer *singleTap1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(buttonPressed:)];

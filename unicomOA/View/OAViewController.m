@@ -128,12 +128,54 @@
     
     self.viewControllers=[NSArray arrayWithObjects:navi1,navi2,navi3,navi4, nil];
     
-    [self creatButtonWithNormalName:@"message.png" andSelectName:@"message_selected.png" andTitle:@"" andIndex:0];
-    [self creatButtonWithNormalName:@"contact.png" andSelectName:@"contact_selected" andTitle:@"" andIndex:1];
-    [self creatButtonWithNormalName:@"appcenter.png" andSelectName:@"appcenter_selected.png" andTitle:@"" andIndex:2];
-    [self creatButtonWithNormalName:@"user.png" andSelectName:@"user_selected.png" andTitle:@"" andIndex:3];
+    if (!iPad) {
+        [self creatButtonWithNormalName:@"message.png" andSelectName:@"message_selected.png" andTitle:@"" andIndex:0];
+        [self creatButtonWithNormalName:@"contact.png" andSelectName:@"contact_selected.png" andTitle:@"" andIndex:1];
+        [self creatButtonWithNormalName:@"appcenter.png" andSelectName:@"appcenter_selected.png" andTitle:@"" andIndex:2];
+        [self creatButtonWithNormalName:@"user.png" andSelectName:@"user_selected.png" andTitle:@"" andIndex:3];
+
+    }
+    else {
+       
+        self.tabBar.itemPositioning=UITabBarItemPositioningFill;
+        
+        UITabBarItem *item1=[self.tabBar.items objectAtIndex:0];
+        item1.image=[UIImage imageNamed:@"message.png"];
+        item1.selectedImage=[UIImage imageNamed:@"message_selected.png"];
+        item1.title=@"消息";
+        
+        UITabBarItem *item2=[self.tabBar.items objectAtIndex:1];
+        item2.image=[UIImage imageNamed:@"contact.png"];
+        item2.selectedImage=[UIImage imageNamed:@"contact_selected.png"];
+        item2.title=@"通讯录";
+        
+        UITabBarItem *item3=[self.tabBar.items objectAtIndex:2];
+        item3.image=[UIImage imageNamed:@"appcenter.png"];
+        item3.selectedImage=[UIImage imageNamed:@"appcenter_selected.png"];
+        item3.title=@"应用";
+
+        UITabBarItem *item4=[self.tabBar.items objectAtIndex:3];
+        item4.image=[UIImage imageNamed:@"user.png"];
+        item4.selectedImage=[UIImage imageNamed:@"user_selected.png"];
+        item4.title=@"我";
+        
+      
+
+        
+        
+        
+
+    }
     
-   // NTButton *button=_tabBarView.subviews[0];
+    
+    /*
+    for (int i=0;i<4;i++) {
+        UITabBarItem *item=[self.tabBar.items objectAtIndex:i];
+        item.title=@"";
+    }
+    */
+    
+    // NTButton *button=_tabBarView.subviews[0];
     NTButton *button=self.tabBar.subviews[0];
     [self changeViewController:button];
     
@@ -178,6 +220,8 @@
     //这里应该设置选中状态的图片。wsq
     [customButton setImage:[UIImage imageNamed:selected] forState:UIControlStateSelected];
     [customButton setTitle:title forState:UIControlStateNormal];
+    [customButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+    [customButton setTitleColor:[UIColor blueColor] forState:UIControlStateSelected];
     
     [customButton addTarget:self action:@selector(changeViewController:) forControlEvents:UIControlEventTouchDown];
     

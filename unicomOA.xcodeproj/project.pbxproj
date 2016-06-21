@@ -160,6 +160,11 @@
 		689713731CE33B88008BB4AB /* NewsListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 689713721CE33B88008BB4AB /* NewsListCell.m */; };
 		68A349B21CD8A90500E2851B /* remind.png in Resources */ = {isa = PBXBuildFile; fileRef = 68A349B11CD8A90500E2851B /* remind.png */; };
 		68B2A3031D13E1D80032269B /* hot.png in Resources */ = {isa = PBXBuildFile; fileRef = 68B2A3021D13E1D70032269B /* hot.png */; };
+		68B38F071D18E03300F28034 /* down_arrow_blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68B38F061D18E03300F28034 /* down_arrow_blue@2x.png */; };
+		68B38F091D19248A00F28034 /* tablerow.png in Resources */ = {isa = PBXBuildFile; fileRef = 68B38F081D19248A00F28034 /* tablerow.png */; };
+		68B38F0C1D1927D500F28034 /* ListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B38F0B1D1927D500F28034 /* ListCell.m */; };
+		68B38F0E1D19441500F28034 /* disagree.png in Resources */ = {isa = PBXBuildFile; fileRef = 68B38F0D1D19441500F28034 /* disagree.png */; };
+		68B38F101D19441C00F28034 /* agree.png in Resources */ = {isa = PBXBuildFile; fileRef = 68B38F0F1D19441C00F28034 /* agree.png */; };
 		68C0A5BC1CBF6667008BEE27 /* ShenPiStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C0A5BB1CBF6667008BEE27 /* ShenPiStatus.m */; };
 		68D05CBA1C9791000039220F /* PasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D05CB91C9791000039220F /* PasswordViewController.m */; };
 		68D05CC01C97AC050039220F /* SendFeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D05CBF1C97AC050039220F /* SendFeedBackViewController.m */; };
@@ -553,6 +558,12 @@
 		689713721CE33B88008BB4AB /* NewsListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsListCell.m; path = Base/Message/View/NewsListCell.m; sourceTree = "<group>"; };
 		68A349B11CD8A90500E2851B /* remind.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = remind.png; sourceTree = "<group>"; };
 		68B2A3021D13E1D70032269B /* hot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hot.png; sourceTree = "<group>"; };
+		68B38F061D18E03300F28034 /* down_arrow_blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "down_arrow_blue@2x.png"; sourceTree = "<group>"; };
+		68B38F081D19248A00F28034 /* tablerow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tablerow.png; sourceTree = "<group>"; };
+		68B38F0A1D1927D500F28034 /* ListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ListCell.h; path = Base/Function/ShenPiModel/ListCell.h; sourceTree = "<group>"; };
+		68B38F0B1D1927D500F28034 /* ListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ListCell.m; path = Base/Function/ShenPiModel/ListCell.m; sourceTree = "<group>"; };
+		68B38F0D1D19441500F28034 /* disagree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = disagree.png; sourceTree = "<group>"; };
+		68B38F0F1D19441C00F28034 /* agree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = agree.png; sourceTree = "<group>"; };
 		68C0A5BA1CBF6667008BEE27 /* ShenPiStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShenPiStatus.h; path = Base/Function/ShenPiModel/ShenPiStatus.h; sourceTree = "<group>"; };
 		68C0A5BB1CBF6667008BEE27 /* ShenPiStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShenPiStatus.m; path = Base/Function/ShenPiModel/ShenPiStatus.m; sourceTree = "<group>"; };
 		68D05CB81C9791000039220F /* PasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PasswordViewController.h; path = Base/Settings/Controller/PasswordViewController.h; sourceTree = "<group>"; };
@@ -1483,6 +1494,8 @@
 				68DEEBC71CBDDA91003DB7AA /* MyShenPiCell.m */,
 				68579FA71CC0C88600597FBD /* CarDeployCell.h */,
 				68579FA81CC0C88600597FBD /* CarDeployCell.m */,
+				68B38F0A1D1927D500F28034 /* ListCell.h */,
+				68B38F0B1D1927D500F28034 /* ListCell.m */,
 			);
 			name = ShenPiViews;
 			sourceTree = "<group>";
@@ -1579,6 +1592,7 @@
 		68EEDE5D1CBB911A003295EB /* MCMenuButton */ = {
 			isa = PBXGroup;
 			children = (
+				68B38F061D18E03300F28034 /* down_arrow_blue@2x.png */,
 				68EEDE5E1CBB911A003295EB /* down_arrow@2x.png */,
 				68EEDE5F1CBB911A003295EB /* MCMenuButton.h */,
 				68EEDE601CBB911A003295EB /* MCMenuButton.m */,
@@ -1624,9 +1638,12 @@
 				68B2A3021D13E1D70032269B /* hot.png */,
 				683EFF5E1CDC7B9C0049326B /* locate.png */,
 				68A349B11CD8A90500E2851B /* remind.png */,
+				68B38F0F1D19441C00F28034 /* agree.png */,
 				2CBA8E1C1CD3B33400BDF625 /* carmission.png */,
+				68B38F081D19248A00F28034 /* tablerow.png */,
 				2CBA8E1D1CD3B33400BDF625 /* mission_done.png */,
 				2CBA8E1E1CD3B33400BDF625 /* mission_unfinished.png */,
+				68B38F0D1D19441500F28034 /* disagree.png */,
 				687E74B81D113B9500F67884 /* check_off.png */,
 				687E74B91D113B9500F67884 /* check_on.png */,
 				2CBA8E1F1CD3B33400BDF625 /* printmission.png */,
@@ -1772,6 +1789,7 @@
 			files = (
 				68F8E1791CD042AA005D2727 /* bg_Nav.png in Resources */,
 				68F8E1841CD042AA005D2727 /* position.png in Resources */,
+				68B38F071D18E03300F28034 /* down_arrow_blue@2x.png in Resources */,
 				68F8E1821CD042AA005D2727 /* newApplication.png in Resources */,
 				2CFEADE81C7C05830054730E /* MenuTableViewCell.xib in Resources */,
 				68F8E1881CD042AA005D2727 /* server.png in Resources */,
@@ -1789,6 +1807,7 @@
 				68E779F01CB34A8E006DA5B9 /* Level1_Cell.xib in Resources */,
 				68ED4E3E1CB4CDC4000E8A7B /* headLogo.png in Resources */,
 				2C5460BE1C854733005C5AB9 /* TableViewCell.xib in Resources */,
+				68B38F101D19441C00F28034 /* agree.png in Resources */,
 				68E779EF1CB34A8E006DA5B9 /* Level0_Cell.xib in Resources */,
 				68EEDE591CBB2E19003295EB /* SYS_AREA.xml in Resources */,
 				68F8E17F1CD042AA005D2727 /* membertablecell.png in Resources */,
@@ -1800,6 +1819,7 @@
 				68E779E41CB34A8E006DA5B9 /* contacts_collect@2x.png in Resources */,
 				68F8E1801CD042AA005D2727 /* myApplication.png in Resources */,
 				6846EC5A1CF99C7C00A400C5 /* IQKeyboardManager.bundle in Resources */,
+				68B38F091D19248A00F28034 /* tablerow.png in Resources */,
 				68F8E18C1CD04409005D2727 /* alarm.png in Resources */,
 				68E779E61CB34A8E006DA5B9 /* head1.jpg in Resources */,
 				2CBA8E201CD3B33400BDF625 /* carmission.png in Resources */,
@@ -1818,6 +1838,7 @@
 				68F36D6B1CD1F6C70027A97A /* logo.png in Resources */,
 				2CBA8E221CD3B33400BDF625 /* mission_unfinished.png in Resources */,
 				2C35B0551C7062160003BF6C /* Main.storyboard in Resources */,
+				68B38F0E1D19441500F28034 /* disagree.png in Resources */,
 				68ED4E421CB4DC58000E8A7B /* the_arrow_0.png in Resources */,
 				68F8E18A1CD042AA005D2727 /* vote_checked.png in Resources */,
 			);
@@ -2025,6 +2046,7 @@
 				2CE321101CC2810800B36793 /* DataSource.m in Sources */,
 				2CFEADC61C76A65E0054730E /* UIImage+ResizeImage.m in Sources */,
 				6846EC601CFA897A00A400C5 /* NewsDetailVc.m in Sources */,
+				68B38F0C1D1927D500F28034 /* ListCell.m in Sources */,
 				6846D35C1CABAF4D004BD285 /* IVotingResultViewController.m in Sources */,
 				689713671CE30420008BB4AB /* FlowListCell.m in Sources */,
 				68E779E01CB34A8E006DA5B9 /* CLTreeView_LEVEL2_Cell.m in Sources */,

@@ -111,8 +111,11 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
     else if (iPhone6) {
         item1.height=133;
     }
-    else {
+    else if (iPhone6_plus) {
         item1.height=147;
+    }
+    else if (iPad) {
+        item1.height=196;
     }
     item1.type=UITableViewCellAccessoryNone;
     [section1 addItem:item1];
@@ -201,7 +204,11 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
         
         img_View.layer.masksToBounds=YES;
         
-        UILabel *lbl_title=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05, item.height*0.77, 100, 20)];
+        CGFloat i_left=self.view.frame.size.width*0.05;
+        if (iPad) {
+            i_left=50;
+        }
+        UILabel *lbl_title=[[UILabel alloc]initWithFrame:CGRectMake(i_left, item.height*0.77, 100, 20)];
         
         if (self.userInfo!=nil) {
             img_View.image=item.image;
@@ -213,7 +220,13 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
 
         
         lbl_title.textColor=[UIColor colorWithRed:72/255.0f green:117/255.0f blue:230/255.0f alpha:1];
-        lbl_title.font=[UIFont systemFontOfSize:20];
+        if (!iPad) {
+             lbl_title.font=[UIFont systemFontOfSize:20];
+        }
+        else {
+            lbl_title.font=[UIFont systemFontOfSize:26];
+        }
+       
         [cell addSubview:lbl_title];
        // cell.textLabel.textColor=[UIColor colorWithRed:72/255.0f green:117/255.0f blue:230/255.0f alpha:1];
         [cell addSubview:img_View];
@@ -227,6 +240,9 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
         cell.textLabel.text=item.title;
 
         cell.textLabel.textColor=[UIColor colorWithRed:174/255.0f green:174/255.0f blue:174/255.0f alpha:1];
+        if (iPad) {
+            cell.textLabel.font=[UIFont systemFontOfSize:26];
+        }
     }
     //设置Cell左边的图标
    // cell.imageView.image=item.image;
@@ -240,6 +256,9 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
         [btn setFrame:CGRectMake(self.view.frame.size.width*0.15, cell.frame.origin.y, self.view.frame.size.width*0.7, cell.frame.size.height)];
         [btn setTitle:@"退出当前帐号" forState:UIControlStateNormal];
         [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        if (iPad) {
+            btn.titleLabel.font=[UIFont systemFontOfSize:26];
+        }
         btn.layer.cornerRadius=25.0f;
         [btn setBackgroundColor:[UIColor colorWithRed:246/255.0f green:88/255.0f blue:87/255.0f alpha:1]];
         [btn addTarget:self action:@selector(QuitUser:) forControlEvents:UIControlEventTouchUpInside];
@@ -270,14 +289,23 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
         else if (iPhone6) {
             return 143;
         }
-        else {
+        else if (iPhone6_plus) {
             return 157;
+        }
+        else {
+            return 210;
         }
     }
     else {
         LGSettingSection *section=self.groups[indexPath.section];
         LGSettingItem *item=section.items[indexPath.row];
-        return item.height;
+        if (!iPad) {
+            return item.height;
+        }
+        else {
+            return 80;
+        }
+        
     }
    
 }
@@ -292,6 +320,9 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
         }
         else if (iPhone6_plus) {
             return 240;
+        }
+        else if (iPad){
+            return 360;
         }
         else {
             return 60;

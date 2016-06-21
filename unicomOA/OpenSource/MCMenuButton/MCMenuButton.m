@@ -16,7 +16,7 @@
 @end
 @implementation MCMenuButton
 
-- (instancetype)initWithTitle:(NSString *)title
+- (instancetype)initWithTitle:(NSString *)title imgName:(NSString*)str_img
 {
     self = [super init];
     if (self) {
@@ -27,9 +27,13 @@
         _font = 16.0;
         
         [self setupContentLabel];
-        [self setupArrowView];
+        [self setupArrowView:str_img];
         [self adjustLayout];
+        
+       // self.layer.borderColor=[[UIColor colorWithRed:80/255.0f green:125/255.0f blue:236/255.0f alpha:1] CGColor];
     }
+    
+    
     
     return self;
 }
@@ -37,6 +41,7 @@
 - (void)setupContentLabel
 {
     self.contenetLabel = [[UILabel alloc] init];
+    self.contenetLabel.textAlignment=NSTextAlignmentCenter;
     self.contenetLabel.textColor = _titleColor;
    // self.backgroundColor=[UIColor colorWithRed:80/255.0f green:125/255.0f blue:236/255.0f alpha:1];
     self.contenetLabel.font = [UIFont systemFontOfSize:_font];
@@ -45,9 +50,9 @@
     [self addSubview:self.contenetLabel];
 }
 
-- (void)setupArrowView
+- (void)setupArrowView:(NSString*)str_img
 {
-    self.arrowView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"down_arrow"]];
+    self.arrowView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:str_img]];
     [self addSubview:self.arrowView];
 }
 

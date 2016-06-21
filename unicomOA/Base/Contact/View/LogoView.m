@@ -57,6 +57,10 @@
             i_Width=414;
             i_Height=147;
         }
+        else if (iPad) {
+            i_Width=768;
+            i_Height=256;
+        }
         UIImageView *img_bgView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, i_Width, i_Height)];
         img_bgView.image=[UIImage imageNamed:@"logoimage.png"];
         self.backgroundView=img_bgView;
@@ -68,15 +72,19 @@
         _img_Head.backgroundColor=[UIColor clearColor];
         if (iPhone4_4s || iPhone5_5s) {
             [_img_Head setFrame:CGRectMake(115, 20, 88, 88)];
-            _img_Head.layer.cornerRadius=45.0f;
+            _img_Head.layer.cornerRadius=44.0f;
         }
         else if (iPhone6) {
             [_img_Head setFrame:CGRectMake(134, 25, 105, 105)];
-            _img_Head.layer.cornerRadius=50.0f;
+            _img_Head.layer.cornerRadius=52.5f;
         }
         else if (iPhone6_plus) {
             [_img_Head setFrame:CGRectMake(146, 33, 120, 120)];
-            _img_Head.layer.cornerRadius=58.0f;
+            _img_Head.layer.cornerRadius=60.0f;
+        }
+        else if (iPad) {
+            [_img_Head setFrame:CGRectMake(309, 40, 135, 135)];
+            _img_Head.layer.cornerRadius=67.5f;
         }
         _lbl_name.text=str_name;
         _lbl_name.textAlignment=NSTextAlignmentCenter;

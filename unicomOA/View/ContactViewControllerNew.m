@@ -76,6 +76,9 @@ CGFloat i_Height=-1;
     else if (iPhone6_plus) {
         i_Height=87;
     }
+    else if (iPad) {
+        i_Height=116;
+    }
     UIView *bg_base=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, i_Height)];
     UIImageView *bg_View=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, i_Height)];
     bg_View.image=[UIImage imageNamed:@"bg_Nav.png"];
@@ -97,7 +100,7 @@ CGFloat i_Height=-1;
    
     [self AddressList];
     
-    self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 20, self.view.frame.size.width, self.view.frame.size.height-100)];
+    self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 20, self.view.frame.size.width, self.view.frame.size.height-120)];
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
     self.tableView.backgroundColor=[UIColor clearColor];

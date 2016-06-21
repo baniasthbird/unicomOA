@@ -263,6 +263,9 @@
             if (iPhone6_plus) {
                 h_height=[self cellHeightForNews:indexPath.section-1 titleFont:17 otherFont:14];
             }
+            else if (iPad) {
+                h_height=[self cellHeightForNews:indexPath.section-1 titleFont:24 otherFont:18];
+            }
             else {
                  h_height=[self cellHeightForNews:indexPath.section-1 titleFont:17 otherFont:11];
             }
@@ -282,7 +285,13 @@
         return 30;
     }
     else {
-        return 6;
+        if (!iPad) {
+            return 6;
+        }
+        else {
+            return 9;
+        }
+        
     }
 }
 
@@ -333,8 +342,11 @@
                 CGFloat i_otherFont=0;
                 if (iPhone6_plus) {
                     i_titleFont=16;
-                 
                     i_otherFont=11;
+                }
+                else if (iPad) {
+                    i_titleFont=24;
+                    i_otherFont=18;
                 }
                 else {
                     i_titleFont=16;
