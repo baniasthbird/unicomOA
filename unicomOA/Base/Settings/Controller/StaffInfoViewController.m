@@ -121,23 +121,61 @@
     }
     else if (indexPath.section==0 && indexPath.row==1) {
         cell.textLabel.text=@"姓名";
-        cell.detailTextLabel.text=_userInfo.str_name;
+        NSObject *obj=_userInfo.str_name;
+        if (obj==[NSNull null]) {
+            cell.detailTextLabel.text=@"";
+        }
+        else {
+            NSString *str_obj=(NSString*)obj;
+            cell.detailTextLabel.text=str_obj;
+        }
     }
     else if (indexPath.section==0 && indexPath.row==2) {
         cell.textLabel.text=@"帐号";
-        cell.detailTextLabel.text=_userInfo.str_username;
+        NSObject *obj=_userInfo.str_username;
+        if (obj==[NSNull null]) {
+            cell.detailTextLabel.text=@"";
+        }
+        else {
+            NSString *str_obj=(NSString*)obj;
+            cell.detailTextLabel.text=str_obj;
+        }
+
     }
     else if (indexPath.section==0 && indexPath.row==3) {
         cell.textLabel.text=@"性别";
-        cell.detailTextLabel.text=_userInfo.str_gender;
+        NSObject *obj=_userInfo.str_gender;
+        if (obj==[NSNull null]) {
+            cell.detailTextLabel.text=@"";
+        }
+        else {
+            NSString *str_obj=(NSString*)obj;
+            cell.detailTextLabel.text=str_obj;
+        }
+
     }
     else if (indexPath.section==1 && indexPath.row==0) {
         cell.textLabel.text=@"部门";
-        cell.detailTextLabel.text=_userInfo.str_department;
+        NSObject *obj=_userInfo.str_department;
+        if (obj==[NSNull null]) {
+            cell.detailTextLabel.text=@"";
+        }
+        else {
+            NSString *str_obj=(NSString*)obj;
+            cell.detailTextLabel.text=str_obj;
+        }
     }
     else if (indexPath.section==1 && indexPath.row==1) {
         cell.textLabel.text=@"职务";
-        cell.detailTextLabel.text=_userInfo.str_position;
+        NSObject *obj=_userInfo.str_position;
+        if (obj==[NSNull null]) {
+            cell.detailTextLabel.text=@"";
+        }
+        else {
+            NSString *str_obj=(NSString*)obj;
+            cell.detailTextLabel.text=str_obj;
+        }
+
     }
     else if (indexPath.section==1 && indexPath.row==2) {
         cell.textLabel.text=@"手机";
@@ -151,11 +189,26 @@
     }
     else if (indexPath.section==1 && indexPath.row==3) {
         cell.textLabel.text=@"Email";
-        cell.detailTextLabel.text=_userInfo.str_email;
+        NSObject *obj=_userInfo.str_email;
+        if (obj==[NSNull null]) {
+            cell.detailTextLabel.text=@"";
+        }
+        else {
+            NSString *str_obj=(NSString*)obj;
+            cell.detailTextLabel.text=str_obj;
+        }
     }
     else if (indexPath.section==1 && indexPath.row==4) {
         cell.textLabel.text=@"固定电话";
-        cell.detailTextLabel.text=_userInfo.str_phonenum;
+        NSObject *obj=_userInfo.str_phonenum;
+        if (obj==[NSNull null]) {
+            cell.detailTextLabel.text=@"";
+        }
+        else {
+            NSString *str_obj=(NSString*)obj;
+            cell.detailTextLabel.text=str_obj;
+        }
+        
     }
     
     return cell;
