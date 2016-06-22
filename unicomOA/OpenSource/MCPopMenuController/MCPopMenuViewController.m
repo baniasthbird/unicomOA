@@ -53,7 +53,7 @@
     self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     [self.view addSubview:self.tableView];
 }
 - (void)setupCoverView
@@ -86,8 +86,15 @@
     
     CGFloat y = rect.origin.y + rect.size.height;
     CGFloat x = 0.0;
-    CGFloat w = self.view.bounds.size.width;
+    CGFloat w = [UIScreen mainScreen].bounds.size.width;
     CGFloat h = [self getTableViewHeightWithTop:y];
+    if (iPad) {
+        h=200;
+    }
+    
+    if (iPad) {
+        w=w+100;
+    }
     
     self.tableView.frame = CGRectMake(x, y, w, h);
     self.coverView.frame = CGRectMake(0, y, self.tableView.frame.size.width, self.view.bounds.size.height - y);
@@ -166,7 +173,13 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return Kheight;
+    if (iPad) {
+        return 80;
+    }
+    else {
+        return Kheight;
+
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

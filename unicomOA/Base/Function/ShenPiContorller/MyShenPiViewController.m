@@ -124,7 +124,11 @@
     
     _i_sectionClicked=-1;
     
-    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 40, self.view.frame.size.width, self.view.frame.size.height-150) style:UITableViewStylePlain];
+    CGFloat i_Height=40;
+    if (iPad) {
+        i_Height=80;
+    }
+    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, i_Height, self.view.frame.size.width, self.view.frame.size.height-150) style:UITableViewStylePlain];
     _tableView.delegate=self;
     _tableView.dataSource=self;
     _tableView.scrollEnabled=YES;
@@ -186,24 +190,45 @@
     self.topView = [[UIView alloc] init];
     self.topView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.topView];
-    self.topView.sd_layout
-    .leftSpaceToView(self.view,0)
-    .rightSpaceToView(self.view,0)
-    .heightIs(44)
-    .topSpaceToView(self.view,0);
+    if (iPad) {
+        self.topView.sd_layout
+        .leftSpaceToView(self.view,0)
+        .rightSpaceToView(self.view,0)
+        .heightIs(80)
+        .topSpaceToView(self.view,0);
+    }
+    else {
+        self.topView.sd_layout
+        .leftSpaceToView(self.view,0)
+        .rightSpaceToView(self.view,0)
+        .heightIs(44)
+        .topSpaceToView(self.view,0);
+    }
+    
     
     CGFloat w_left= [UIScreen mainScreen].bounds.size.width;
     int i_left=(int)w_left*0.208;
   //  self.levelButton = [[MCMenuButton alloc] initWithTitle:@"  状态"];
-    self.levelButton=[[MCMenuButton alloc] initWithTitle:@"  状态" imgName:@"down_arrow_blue"];
+    self.levelButton=[[MCMenuButton alloc] initWithTitle:@"状   态" imgName:@"down_arrow_blue"];
     [self.levelButton setArrowDirectionDown];
     [self.topView addSubview:self.levelButton];
-    self.levelButton.sd_layout
-    .leftSpaceToView(self.topView,i_left)
-    .topSpaceToView(self.topView,5)
-    .bottomSpaceToView(self.topView,5)
-    .widthRatioToView(self.topView,0.584);
-    self.levelButton.layer.cornerRadius=17.0f;
+    if (iPad) {
+        self.levelButton.sd_layout
+        .leftSpaceToView(self.topView,i_left)
+        .topSpaceToView(self.topView,10)
+        .bottomSpaceToView(self.topView,10)
+        .widthRatioToView(self.topView,0.584);
+        self.levelButton.layer.cornerRadius=39.0f;
+    }
+    else {
+        self.levelButton.sd_layout
+        .leftSpaceToView(self.topView,i_left)
+        .topSpaceToView(self.topView,5)
+        .bottomSpaceToView(self.topView,5)
+        .widthRatioToView(self.topView,0.584);
+        self.levelButton.layer.cornerRadius=17.0f;
+    }
+    
     self.levelButton.layer.borderWidth=1;
     [self.levelButton.layer setMasksToBounds:YES];
     self.levelButton.layer.borderColor=[[UIColor colorWithRed:80/255.0f green:125/255.0f blue:236/255.0f alpha:1] CGColor];
@@ -222,6 +247,9 @@
     self.groupButton.layer.borderColor=[[UIColor colorWithRed:215/255.0f green:215/255.0f blue:215/255.0f alpha:1] CGColor];
     
    // self.levelButton.backgroundColor=[UIColor colorWithRed:80/255.0f green:125/255.0f blue:236/255.0f alpha:1];
+    if (iPad) {
+        self.levelButton.font=28;
+    }
     self.levelButton.backgroundColor=[UIColor whiteColor];
 
     [self.levelButton setTitleColor:[UIColor colorWithRed:80/255.0f green:125/255.0f blue:236/255.0f alpha:1]];
@@ -350,7 +378,14 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [self cellHeightForShenPi:indexPath.section  otherFont:14 ];
+    if (iPad) {
+        return [self cellHeightForShenPi:indexPath.section  otherFont:20 ];
+
+    }
+    else {
+        return [self cellHeightForShenPi:indexPath.section  otherFont:14 ];
+    }
+    
 }
 
 
@@ -377,12 +412,22 @@
         i_linenum=(NSInteger)f_linenum+1;
     }
    
-
-    if  (i_linenum==1) {
-        return 70;
+    if (iPad) {
+        if  (i_linenum==1) {
+            return 100;
+        }
+        else {
+            return  100+35*(i_linenum-1);
+        }
     }
     else {
-        return  70+23*(i_linenum-1);
+        if  (i_linenum==1) {
+            return 70;
+        }
+        else {
+            return  70+23*(i_linenum-1);
+        }
+
     }
 }
 

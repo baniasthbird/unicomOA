@@ -92,6 +92,9 @@
 		680861D61CEAD33300257AAA /* PositionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 680861D51CEAD33300257AAA /* PositionCell.m */; };
 		681FFC761CC7828F0086A934 /* LXAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 681FFC731CC7828F0086A934 /* LXAlertView.m */; };
 		681FFC771CC7828F0086A934 /* UILabel+LXAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 681FFC751CC7828F0086A934 /* UILabel+LXAdd.m */; };
+		682086CB1D1A319A0032A191 /* LoginView-IPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 682086CA1D1A319A0032A191 /* LoginView-IPad.png */; };
+		682086CD1D1A32E50032A191 /* bg_Nav-IPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 682086CC1D1A32E50032A191 /* bg_Nav-IPad.png */; };
+		682086CF1D1A34440032A191 /* logoimage-IPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 682086CE1D1A34440032A191 /* logoimage-IPad.png */; };
 		68212DF31CF3FAE40022955A /* Soundselectvc.m in Sources */ = {isa = PBXBuildFile; fileRef = 68212DF21CF3FAE40022955A /* Soundselectvc.m */; };
 		6822656F1C96B4C400AB29C0 /* NewsSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6822656E1C96B4C400AB29C0 /* NewsSettingViewController.m */; };
 		6825E1081CED507400EA4D87 /* ShenPiAppVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6825E1071CED507400EA4D87 /* ShenPiAppVC.m */; };
@@ -429,6 +432,9 @@
 		681FFC731CC7828F0086A934 /* LXAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXAlertView.m; sourceTree = "<group>"; };
 		681FFC741CC7828F0086A934 /* UILabel+LXAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+LXAdd.h"; sourceTree = "<group>"; };
 		681FFC751CC7828F0086A934 /* UILabel+LXAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+LXAdd.m"; sourceTree = "<group>"; };
+		682086CA1D1A319A0032A191 /* LoginView-IPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LoginView-IPad.png"; sourceTree = "<group>"; };
+		682086CC1D1A32E50032A191 /* bg_Nav-IPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_Nav-IPad.png"; sourceTree = "<group>"; };
+		682086CE1D1A34440032A191 /* logoimage-IPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logoimage-IPad.png"; sourceTree = "<group>"; };
 		68212DF01CF3EA6A0022955A /* Thunder Song.m4r */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Thunder Song.m4r"; sourceTree = "<group>"; };
 		68212DF11CF3FAE40022955A /* Soundselectvc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Soundselectvc.h; path = Base/Function/Controller/Soundselectvc.h; sourceTree = "<group>"; };
 		68212DF21CF3FAE40022955A /* Soundselectvc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Soundselectvc.m; path = Base/Function/Controller/Soundselectvc.m; sourceTree = "<group>"; };
@@ -1646,13 +1652,16 @@
 				68B38F0D1D19441500F28034 /* disagree.png */,
 				687E74B81D113B9500F67884 /* check_off.png */,
 				687E74B91D113B9500F67884 /* check_on.png */,
+				682086CE1D1A34440032A191 /* logoimage-IPad.png */,
 				2CBA8E1F1CD3B33400BDF625 /* printmission.png */,
 				68F36D681CD1F3320027A97A /* aboutbg.png */,
 				68F8E18B1CD04409005D2727 /* alarm.png */,
+				682086CC1D1A32E50032A191 /* bg_Nav-IPad.png */,
 				68F8E1671CD042AA005D2727 /* bg_Nav.png */,
 				68F8E1681CD042AA005D2727 /* checkbox_checked.png */,
 				68F8E1691CD042AA005D2727 /* checkbox_unchecked.png */,
 				68F36D6A1CD1F6C70027A97A /* logo.png */,
+				682086CA1D1A319A0032A191 /* LoginView-IPad.png */,
 				68F8E16A1CD042AA005D2727 /* LoginView.png */,
 				68F8E16C1CD042AA005D2727 /* logoimage.png */,
 				68F8E16D1CD042AA005D2727 /* membertablecell.png */,
@@ -1813,6 +1822,7 @@
 				68F8E17F1CD042AA005D2727 /* membertablecell.png in Resources */,
 				683EFF5F1CDC7B9C0049326B /* locate.png in Resources */,
 				68F8E17B1CD042AA005D2727 /* checkbox_unchecked.png in Resources */,
+				682086CF1D1A34440032A191 /* logoimage-IPad.png in Resources */,
 				2C35B0571C7062160003BF6C /* Assets.xcassets in Resources */,
 				2CBA8E211CD3B33400BDF625 /* mission_done.png in Resources */,
 				687E74BA1D113B9500F67884 /* check_off.png in Resources */,
@@ -1822,6 +1832,7 @@
 				68B38F091D19248A00F28034 /* tablerow.png in Resources */,
 				68F8E18C1CD04409005D2727 /* alarm.png in Resources */,
 				68E779E61CB34A8E006DA5B9 /* head1.jpg in Resources */,
+				682086CB1D1A319A0032A191 /* LoginView-IPad.png in Resources */,
 				2CBA8E201CD3B33400BDF625 /* carmission.png in Resources */,
 				68F36D691CD1F3320027A97A /* aboutbg.png in Resources */,
 				68A349B21CD8A90500E2851B /* remind.png in Resources */,
@@ -1836,6 +1847,7 @@
 				68E779F11CB34A8E006DA5B9 /* Level2_Cell.xib in Resources */,
 				2CFEADA61C769EBF0054730E /* friends.plist in Resources */,
 				68F36D6B1CD1F6C70027A97A /* logo.png in Resources */,
+				682086CD1D1A32E50032A191 /* bg_Nav-IPad.png in Resources */,
 				2CBA8E221CD3B33400BDF625 /* mission_unfinished.png in Resources */,
 				2C35B0551C7062160003BF6C /* Main.storyboard in Resources */,
 				68B38F0E1D19441500F28034 /* disagree.png in Resources */,

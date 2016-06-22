@@ -43,9 +43,17 @@
         [lbl_under_right setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2, cellHeight-25, [UIScreen mainScreen].bounds.size.width/2-10, 15)];
         [img_Logo setFrame:CGRectMake(10, 15, 60, 60)];
         [lbl_category setFrame:CGRectMake(75, 5, 120, 10)];
-        [_lbl_status setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width-66, 10, 46, 20)];
-        _lbl_status.layer.cornerRadius=2;
-        _lbl_status.layer.masksToBounds=YES;
+        if (iPad) {
+            [_lbl_status setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width-76, 10, 56, 30)];
+            _lbl_status.layer.cornerRadius=2;
+            _lbl_status.layer.masksToBounds=YES;
+        }
+        else {
+            [_lbl_status setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width-66, 10, 46, 20)];
+            _lbl_status.layer.cornerRadius=2;
+            _lbl_status.layer.masksToBounds=YES;
+        }
+       
         if (iPhone4_4s || iPhone5_5s) {
            // [_lbl_status setFrame:CGRectMake(250, 0, 70, cellHeight)];
             [view_line setFrame:CGRectMake(0, cellHeight-20, 250, 1)];
@@ -86,13 +94,24 @@
 
         }
         
-        
-        lbl_name.font=[UIFont systemFontOfSize:14];
-        lbl_category.font=[UIFont systemFontOfSize:16];
-        _lbl_status.font=[UIFont systemFontOfSize:16];
-        lbl_Title.font=[UIFont systemFontOfSize:13];
-        lbl_under_left.font=[UIFont systemFontOfSize:14];
-        lbl_under_right.font=[UIFont systemFontOfSize:14];
+        if (iPad) {
+            lbl_name.font=[UIFont systemFontOfSize:24];
+            lbl_category.font=[UIFont systemFontOfSize:20];
+            _lbl_status.font=[UIFont systemFontOfSize:18];
+            lbl_Title.font=[UIFont systemFontOfSize:16];
+            lbl_under_left.font=[UIFont systemFontOfSize:18];
+            lbl_under_right.font=[UIFont systemFontOfSize:18];
+        }
+        else {
+            lbl_name.font=[UIFont systemFontOfSize:14];
+            lbl_category.font=[UIFont systemFontOfSize:16];
+            _lbl_status.font=[UIFont systemFontOfSize:16];
+            lbl_Title.font=[UIFont systemFontOfSize:13];
+            lbl_under_left.font=[UIFont systemFontOfSize:14];
+            lbl_under_right.font=[UIFont systemFontOfSize:14];
+            
+        }
+       
         
         NSString *str_name=[NSString stringWithFormat:@"%@:%@",@"标题",str_Name];
         NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str_name];
@@ -104,7 +123,14 @@
         
         
         lbl_category.text=str_Categroy;
-        CGFloat h_cate=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width-100 title:str_Categroy font:[UIFont systemFontOfSize:16]];
+        CGFloat h_cate=0;
+        if (iPad) {
+             h_cate =[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width-100 title:str_Categroy font:[UIFont systemFontOfSize:20]];
+        }
+        else {
+            h_cate =[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width-100 title:str_Categroy font:[UIFont systemFontOfSize:16]];
+        }
+       
         [lbl_category setFrame:CGRectMake(75, 5, [UIScreen mainScreen].bounds.size.width-100, h_cate)];
         _lbl_status.text=str_status;
         lbl_Title.text=str_Title;

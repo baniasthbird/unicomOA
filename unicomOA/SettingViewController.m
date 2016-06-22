@@ -115,7 +115,7 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
         item1.height=147;
     }
     else if (iPad) {
-        item1.height=196;
+        item1.height=292;
     }
     item1.type=UITableViewCellAccessoryNone;
     [section1 addItem:item1];
@@ -199,8 +199,17 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
     
     if (indexPath.section==0 && indexPath.row==0) {
         
-        UIImageView *img_View=[[UIImageView alloc]initWithFrame:CGRectMake((self.view.frame.size.width-item.height*0.8)/2, item.height*0.2, item.height*0.8, item.height*0.8)];
-        img_View.layer.cornerRadius=item.height*0.4;
+        UIImageView *img_View;
+        if (iPad) {
+            img_View=[[UIImageView alloc]initWithFrame:CGRectMake(284, 75, 200, 200)];
+            img_View.layer.cornerRadius=100.0f;
+        }
+        else {
+            img_View=[[UIImageView alloc]initWithFrame:CGRectMake((self.view.frame.size.width-item.height*0.8)/2, item.height*0.2, item.height*0.8, item.height*0.8)];
+            img_View.layer.cornerRadius=item.height*0.4;
+
+        }
+        
         
         img_View.layer.masksToBounds=YES;
         
@@ -221,18 +230,23 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
         
         lbl_title.textColor=[UIColor colorWithRed:72/255.0f green:117/255.0f blue:230/255.0f alpha:1];
         if (!iPad) {
-             lbl_title.font=[UIFont systemFontOfSize:20];
+            lbl_title.font=[UIFont systemFontOfSize:20];
+            UIImageView *img_bgView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 100)];
+            img_bgView.image=[UIImage imageNamed:@"logoimage.png"];
+            cell.backgroundView=img_bgView;
         }
         else {
             lbl_title.font=[UIFont systemFontOfSize:26];
+            UIImageView *img_bgView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 292)];
+            img_bgView.image=[UIImage imageNamed:@"logoimage-IPad.png"];
+            cell.backgroundView=img_bgView;
         }
        
         [cell addSubview:lbl_title];
        // cell.textLabel.textColor=[UIColor colorWithRed:72/255.0f green:117/255.0f blue:230/255.0f alpha:1];
         [cell addSubview:img_View];
-        UIImageView *img_bgView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 100)];
-        img_bgView.image=[UIImage imageNamed:@"logoimage.png"];
-        cell.backgroundView=img_bgView;
+        
+        
         
     }
     else {
@@ -293,7 +307,7 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
             return 157;
         }
         else {
-            return 210;
+            return 292;
         }
     }
     else {
@@ -322,7 +336,7 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
             return 240;
         }
         else if (iPad){
-            return 360;
+            return 300;
         }
         else {
             return 60;

@@ -67,7 +67,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
     //UITableViewCell *cell=[tableView cellForRowAtIndexPath:indexPath];
     if (cell==nil) {
-        cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:ID];
+        cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:ID];
     }
     cell.textLabel.textAlignment=NSTextAlignmentLeft;
     cell.textLabel.textColor=[UIColor blackColor];

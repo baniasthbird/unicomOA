@@ -43,6 +43,10 @@
 //POST参数
 @property (nonatomic,strong) NSMutableDictionary *params;
 
+@property (nonatomic,strong) UIButton *btn_forgetpassword;
+
+@property (nonatomic,strong) UIButton *btn_Server;
+
 @property BOOL i_Success;
 
 
@@ -114,9 +118,13 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     [self.navigationItem setHidesBackButton:YES];
     //设置NavigationBar的背景色
     View=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    View.image=[UIImage imageNamed:@"LoginView.png"];
+    
     if (iPad) {
       //  View.contentMode=UIViewContentModeScaleAspectFit;
+        View.image=[UIImage imageNamed:@"LoginView-IPad.png"];
+    }
+    else {
+        View.image=[UIImage imageNamed:@"LoginView.png"];
     }
     View.backgroundColor=[UIColor whiteColor];
     [self.view addSubview:View];
@@ -255,22 +263,22 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
         i_Width=25.0f;
         i_Right=55.0f;
     }
-    UIButton *btn_Server;
+    
     if (!iPad) {
-        btn_Server=[self createButtonFrame:CGRectMake(self.view.frame.size.width-i_Right, self.view.frame.size.height-50, i_Width, i_Width) backImageName:@"server.png" title:@"" titleColor:[UIColor grayColor] font:[UIFont systemFontOfSize:13] target:self action:@selector(serverip:)];
+        _btn_Server=[self createButtonFrame:CGRectMake(self.view.frame.size.width-i_Right, self.view.frame.size.height-50, i_Width, i_Width) backImageName:@"server.png" title:@"" titleColor:[UIColor grayColor] font:[UIFont systemFontOfSize:13] target:self action:@selector(serverip:)];
     }
     else {
-        btn_Server=[self createButtonFrame:CGRectMake(600, 898, 30, 30) backImageName:@"server.png" title:@"" titleColor:[UIColor grayColor] font:[UIFont systemFontOfSize:17] target:self action:@selector(serverip:)];
+        _btn_Server=[self createButtonFrame:CGRectMake(600, 898, 30, 30) backImageName:@"server.png" title:@"" titleColor:[UIColor grayColor] font:[UIFont systemFontOfSize:17] target:self action:@selector(serverip:)];
     }
         //newUserBtn.backgroundColor=[UIColor lightGrayColor];
     
     //忘记密码
-    UIButton *btn_forgetpassword;
+    
     if (!iPad) {
-        btn_forgetpassword=[self createButtonFrame:CGRectMake(self.view.frame.size.width*0.35, self.view.frame.size.height/2+180, self.view.frame.size.width*0.3, 30) backImageName:nil title:@"忘记密码?" titleColor:[UIColor colorWithRed:232/255.0f green:242/255.0f blue:255/255.0f alpha:0.3] font:[UIFont systemFontOfSize:15] target:self action:@selector(fogetPwd:)];
+        _btn_forgetpassword=[self createButtonFrame:CGRectMake(self.view.frame.size.width*0.35, self.view.frame.size.height/2+180, self.view.frame.size.width*0.3, 30) backImageName:nil title:@"忘记密码?" titleColor:[UIColor colorWithRed:232/255.0f green:242/255.0f blue:255/255.0f alpha:0.3] font:[UIFont systemFontOfSize:15] target:self action:@selector(fogetPwd:)];
     }
     else {
-        btn_forgetpassword=[self createButtonFrame:CGRectMake(self.view.frame.size.width*0.35, self.view.frame.size.height/2+280, self.view.frame.size.width*0.3, 50) backImageName:nil title:@"忘记密码?" titleColor:[UIColor colorWithRed:232/255.0f green:242/255.0f blue:255/255.0f alpha:0.3] font:[UIFont systemFontOfSize:18] target:self action:@selector(fogetPwd:)];
+        _btn_forgetpassword=[self createButtonFrame:CGRectMake(self.view.frame.size.width*0.35, self.view.frame.size.height/2+280, self.view.frame.size.width*0.3, 50) backImageName:nil title:@"忘记密码?" titleColor:[UIColor colorWithRed:232/255.0f green:242/255.0f blue:255/255.0f alpha:0.3] font:[UIFont systemFontOfSize:18] target:self action:@selector(fogetPwd:)];
     }
   
     //fogotPwdBtn.backgroundColor=[UIColor lightGrayColor];
@@ -278,9 +286,9 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     
     [self.view addSubview:btn_login];
    // [self.view addSubview:btn_newuser];
-    [self.view addSubview:btn_forgetpassword];
+    [self.view addSubview:_btn_forgetpassword];
     
-    [self.view addSubview:btn_Server];
+    [self.view addSubview:_btn_Server];
 }
 
 -(UIButton *)createButtonFrame:(CGRect)frame backImageName:(NSString *)imageName title:(NSString *)title titleColor:(UIColor *)color font:(UIFont *)font target:(id)target action:(SEL)action
@@ -385,7 +393,7 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     //创建数据库
     [db_local initTables];
     //添加IP数据
-    [db_local InsertIPTable:@"192.168.1.62" port:@"8080" IP_Mark:@"TestServer"];
+    [db_local InsertIPTable:@"192.168.12.25" port:@"8080" IP_Mark:@"TestServer"];
     //添加接口数据
     [db_local InsertInterFaceTable];
     
@@ -624,6 +632,9 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     {
         [_session POST:str_url parameters:_params progress:^(NSProgress * _Nonnull uploadProgress) {
             NSLog(@"正在加载");
+            _btn_forgetpassword.enabled=NO;
+            _btn_Server.enabled=NO;
+            
            
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
@@ -635,10 +646,14 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
                 LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"警告" message:str_message cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
                     
                 }];
+                _btn_forgetpassword.enabled=YES;
+                _btn_Server.enabled=YES;
                 [alert showLXAlertView];
+               
             }
             else if (JSON.count==3) {
                 [indicator stopAnimating];
+            
                 NSLog(@"请求JSON成功");
                 NSString *str_success=[JSON objectForKey:@"success"];
                 BOOL b_success=[str_success boolValue];
@@ -658,6 +673,8 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
                         
                     }];
                     [alert showLXAlertView];
+                    _btn_forgetpassword.enabled=YES;
+                    _btn_Server.enabled=YES;
                 }
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -666,6 +683,8 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
                 
             }];
             [alert showLXAlertView];
+            _btn_forgetpassword.enabled=YES;
+            _btn_Server.enabled=YES;
             NSLog(@"请求失败:%@",error.description);
             _i_Success=NO;
            // [self LocalEnter];

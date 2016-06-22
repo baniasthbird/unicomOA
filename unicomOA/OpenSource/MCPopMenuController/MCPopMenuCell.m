@@ -45,6 +45,7 @@
         //下边的线
         UIView *line = [[UIView alloc] init];
         line.backgroundColor = [UIColor colorWithWhite:0.8 alpha:1.0];
+       
         [self.contentView addSubview:line];
         self.lineView = line;
         // 3.cell的设置。。。
@@ -60,11 +61,17 @@
     self.titleLabel.frame = CGRectMake(40, 0, self.bounds.size.width, self.bounds.size.height);
     self.titleLabel.text = item.itemtitle;
     self.titleLabel.textColor=item.itemtitleColor;
+    if (iPad) {
+        self.titleLabel.font=[UIFont systemFontOfSize:24];
+    }
+    else {
+        self.titleLabel.font=[UIFont systemFontOfSize:16];
+    }
     
     self.titleImage.frame=CGRectMake(10, 13, 20, 20);
     [self.titleImage setImage:[UIImage imageNamed:item.itmeImageName]];
     
-    self.lineView.frame = CGRectMake(0, self.titleLabel.bounds.size.height - 0.5, self.bounds.size.width, 0.5);
+    self.lineView.frame = CGRectMake(0, self.titleLabel.bounds.size.height - 0.5, [UIScreen mainScreen].bounds.size.width, 0.5);
     
 }
 

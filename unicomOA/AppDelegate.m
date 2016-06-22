@@ -23,7 +23,13 @@
     // Override point for customization after application launch.
     //在这里判断是否可以系统更新
         // [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:70/255.0f green:156/255.0f blue:241/255.0f alpha:1]];
-    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"bg_Nav.png"] forBarMetrics:UIBarMetricsDefault];
+    if (iPad) {
+         [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"bg_Nav-IPad.png"] forBarMetrics:UIBarMetricsDefault];
+    }
+    else {
+        [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"bg_Nav.png"] forBarMetrics:UIBarMetricsDefault];
+    }
+    
      NSString *str_url=@"https://app.hnsi.cn/hnti_soa/unicomOA.plist";
      BOOL b_update= [self checkUpdate:str_url];
      LoginViewController *login=[[LoginViewController alloc]init];
