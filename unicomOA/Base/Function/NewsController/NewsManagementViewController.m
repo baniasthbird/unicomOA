@@ -257,7 +257,14 @@
     else if (iPhone6_plus) {
         t_height=self.view.frame.size.height*0.09;
     }
-    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.005, t_height, self.view.frame.size.width*0.99, self.view.frame.size.height*0.755) style:UITableViewStylePlain];
+    
+    if (iPad) {
+          _tableView=[[UITableView alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.005, 95, self.view.frame.size.width*0.99, 880) style:UITableViewStylePlain];
+    }
+    else {
+         _tableView=[[UITableView alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.005, t_height, self.view.frame.size.width*0.99, self.view.frame.size.height*0.755) style:UITableViewStylePlain];
+    }
+   
     
     _tableView.separatorStyle=UITableViewCellSeparatorStyleSingleLine;
     
@@ -287,9 +294,19 @@
         _btn_Select=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height*0.026, self.view.frame.size.width*0.2, self.view.frame.size.height*0.038)];
         _btn_Select.layer.cornerRadius=self.view.frame.size.height*0.019;
     }
+    else if (iPad) {
+        _btn_Select=[[UIButton alloc]initWithFrame:CGRectMake(24, 40, 153.6, 40)];
+        _btn_Select.layer.cornerRadius=self.view.frame.size.height*0.019;
+    }
     
     [_btn_Select setTitle:@"类别" forState:UIControlStateNormal];
-    _btn_Select.titleLabel.font=[UIFont systemFontOfSize:12.5];
+    if (iPad) {
+        _btn_Select.titleLabel.font=[UIFont systemFontOfSize:25];
+    }
+    else {
+        _btn_Select.titleLabel.font=[UIFont systemFontOfSize:12.5];
+    }
+    
     [_btn_Select setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_btn_Select setBackgroundColor:[UIColor colorWithRed:80.0/255.0f green:124.0f/255.0f blue:236.0f/255.0f alpha:1]];
     UIImageView *img_view=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"down_arrow"]];
@@ -338,7 +355,9 @@
     }
     else if (iPhone6_plus) {
          _searchBar=[[UISearchBar alloc]initWithFrame:CGRectMake(5*self.view.frame.size.width/16.0, self.view.frame.size.height*0.013, 2*self.view.frame.size.width/3, self.view.frame.size.height/16)];
-        
+    }
+    else if (iPad) {
+          _searchBar=[[UISearchBar alloc]initWithFrame:CGRectMake(200, 6, 512, 100)];
     }
     
     /*
@@ -354,6 +373,9 @@
             UITextField *txt_Field=[view.subviews objectAtIndex:0];
             txt_Field.backgroundColor=[UIColor colorWithRed:240/255.0f green:240/255.0f blue:240/255.0f alpha:1];
             txt_Field.layer.cornerRadius=15.0f;
+            if (iPad) {
+                txt_Field.font=[UIFont systemFontOfSize:25];
+            }
             break;
         }
     }
@@ -439,6 +461,10 @@
         if (iPhone6_plus) {
             i_titleFont=16;
             i_otherFont=11;
+        }
+        else if (iPad) {
+            i_titleFont=24;
+            i_otherFont=18;
         }
         else {
             i_titleFont=16;
@@ -530,6 +556,9 @@
         CGFloat h_height=0;
         if (iPhone6_plus) {
             h_height=[self cellHeightForNews:indexPath.row titleFont:17 otherFont:14];
+        }
+        else if (iPad) {
+             h_height=[self cellHeightForNews:indexPath.row titleFont:27.4 otherFont:20];
         }
         else {
             h_height=[self cellHeightForNews:indexPath.row titleFont:17 otherFont:11];

@@ -114,17 +114,44 @@ NSInteger i_count=0;
     
 }
 
+
+
+
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NotesTableVIewCell *cell=[NotesTableVIewCell cellWithTable:tableView withCellHeight:180 atIndexPath:indexPath];
     cell.delegate=self;
     cell.myTag= indexPath.row;
     NSDictionary *dic_note = [_arr_Notes objectAtIndex:(_arr_Notes.count-1-indexPath.row)];
    // cell.textLabel.text=str_note;
-    cell.lbl_arrangement.text=[dic_note objectForKey:@"fenlei"];
-    cell.lbl_content.text=[dic_note objectForKey:@"content"];
-    cell.lbl_time2.text=[dic_note objectForKey:@"notes_date"];
-    cell.lbl_time.text=[dic_note objectForKey:@"meeting_date"];
+    NSString *str_fenlei=[dic_note objectForKey:@"fenlei"];
+    if ([str_fenlei isEqualToString:@"(null)"]) {
+        str_fenlei=@"";
+    }
+    cell.lbl_arrangement.text=str_fenlei;
+    
+    NSString *str_content=[dic_note objectForKey:@"content"];
+    if ([str_content isEqualToString:@"(null)"]) {
+        str_content=@"";
+    }
+    cell.lbl_content.text=str_content;
+    
+    
+    NSString *str_notes_date=[dic_note objectForKey:@"notes_date"];
+    if ([str_notes_date isEqualToString:@"(null)"]) {
+        str_notes_date=@"";
+    }
+    cell.lbl_time2.text=str_notes_date;
+    
+    NSString *str_meeting_date=[dic_note objectForKey:@"meeting_date"];
+    if ([str_meeting_date isEqualToString:@"(null)"]) {
+        str_meeting_date=@"";
+    }
+    cell.lbl_time.text=str_meeting_date;
+    
     NSString *str_index=[dic_note objectForKey:@"index"];
+    if ([str_index isEqualToString:@"(null)"]) {
+        str_index=@"";
+    }
     cell.tag=[str_index integerValue];
     cell.myNotes=dic_note;
    

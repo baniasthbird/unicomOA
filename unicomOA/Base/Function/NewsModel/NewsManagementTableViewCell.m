@@ -109,7 +109,9 @@
         lbl_Title.attributedText = str_title;
         [lbl_Title sizeToFit];
         
-        lbl_Category=[[UILabel alloc] initWithFrame:CGRectMake(i_left, lbl_Title.frame.origin.y+lbl_Title.frame.size.height+5, WHScreenW*0.35, h_depart)];
+      //  lbl_Category=[[UILabel alloc] initWithFrame:CGRectMake(i_left, lbl_Title.frame.origin.y+lbl_Title.frame.size.height+5, WHScreenW*0.35, h_depart)];
+        lbl_Category=[[UILabel alloc] initWithFrame:CGRectMake(i_left, cellHeight-h_depart-10, WHScreenW*0.35, h_depart)];
+
         lbl_Category.font=[UIFont systemFontOfSize:i_otherFont];
         lbl_Category.textColor=[UIColor lightGrayColor];
        // lbl_Category.numberOfLines=1;
@@ -118,7 +120,7 @@
         [lbl_Category sizeToFit];
 
         
-        lbl_department=[[UILabel alloc]initWithFrame:CGRectMake(WHScreenW*0.5, lbl_Title.frame.origin.y+lbl_Title.frame.size.height+5, WHScreenW*0.5, h_depart)];
+        lbl_department=[[UILabel alloc]initWithFrame:CGRectMake(WHScreenW*0.5, cellHeight-h_depart-10, WHScreenW*0.5, h_depart)];
         
         lbl_department.font=[UIFont systemFontOfSize:i_otherFont];
         lbl_department.textColor=[UIColor lightGrayColor];

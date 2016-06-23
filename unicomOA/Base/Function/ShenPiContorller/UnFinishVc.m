@@ -651,6 +651,7 @@
                 cell.detailTextLabel.backgroundColor=[UIColor clearColor];
                 cell.accessibilityHint=@"html";
                 cell.accessibilityValue=[dic_tmp objectForKey:@"value"];
+                cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
             }
             else {
                 cell.textLabel.text=@"";

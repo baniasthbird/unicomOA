@@ -59,10 +59,17 @@
         }
         else if (iPad) {
             i_Width=768;
-            i_Height=256;
+            i_Height=292;
         }
         UIImageView *img_bgView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, i_Width, i_Height)];
-        img_bgView.image=[UIImage imageNamed:@"logoimage.png"];
+        if (iPad) {
+            img_bgView.image=[UIImage imageNamed:@"logoimage-IPad.png"];
+
+        }
+        else {
+            img_bgView.image=[UIImage imageNamed:@"logoimage.png"];
+        }
+        
         self.backgroundView=img_bgView;
         _lbl_name=[[UILabel alloc]initWithFrame:CGRectMake(self.frame.size.width*0.65, self.frame.size.height*0.5, self.frame.size.width/3, self.frame.size.height)];
        
@@ -83,8 +90,8 @@
             _img_Head.layer.cornerRadius=60.0f;
         }
         else if (iPad) {
-            [_img_Head setFrame:CGRectMake(309, 40, 135, 135)];
-            _img_Head.layer.cornerRadius=67.5f;
+            [_img_Head setFrame:CGRectMake(284,75,200,200)];
+            _img_Head.layer.cornerRadius=100.0f;
         }
         _lbl_name.text=str_name;
         _lbl_name.textAlignment=NSTextAlignmentCenter;

@@ -59,9 +59,15 @@ CGFloat i_Height=-1;
 -(void)viewDidLoad {
     [super viewDidLoad];
     self.title=@"通讯录";
-    NSDictionary * dict=@{
-                          NSForegroundColorAttributeName:   [UIColor whiteColor]};
-    
+    NSDictionary * dict;
+    if (iPad) {
+        dict=@{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:[UIFont systemFontOfSize:25]};
+    }
+    else {
+        dict =@{
+                NSForegroundColorAttributeName:   [UIColor whiteColor]};
+        
+    }    
     self.navigationController.navigationBar.titleTextAttributes=dict;
     
     self.view.backgroundColor=[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1];

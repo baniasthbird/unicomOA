@@ -8,6 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
+@class Soundselectvc;
+
+@protocol SoundselectvcDelegate <NSObject>
+
+@required
+
+-(void)PassSoundValue:(NSString*)str_sound_url;
+
+@end
+
+
 @interface Soundselectvc : UIViewController
+
+@property (nonatomic,strong) NSString *str_sound;
+
+@property (nonatomic,unsafe_unretained) id<SoundselectvcDelegate> delegate;
 
 @end

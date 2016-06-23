@@ -31,7 +31,7 @@
                         <rect key="frame" x="0.0" y="113" width="320" height="1"/>
                     </imageView>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iLH-ic-ADn">
-                        <rect key="frame" x="0.0" y="64" width="320" height="49"/>
+                        <rect key="frame" x="0.0" y="64" width="768" height="49"/>
                         <color key="backgroundColor" red="0.96470588235294119" green="0.97647058823529409" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="whA-8x-IFJ">
@@ -41,7 +41,11 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LH7-Qh-e4N">
-                        <rect key="frame" x="285" y="25" width="7" height="18"/>
+                        <rect key="frame" x="252" y="16" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="6xJ-bh-ern"/>
+                            <constraint firstAttribute="width" constant="40" id="9o9-ua-PvK"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <state key="normal" image="cm2_list_btn_more">
                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -53,14 +57,14 @@
                 </subviews>
                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
-                    <constraint firstItem="LH7-Qh-e4N" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="17" id="NNY-aw-M88"/>
+                    <constraint firstItem="LH7-Qh-e4N" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="8" id="NNY-aw-M88"/>
                     <constraint firstAttribute="trailingMargin" secondItem="LH7-Qh-e4N" secondAttribute="trailing" constant="20" id="xKC-Xu-Bhh"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="headImageView" destination="5o8-SW-v0h" id="rzs-UH-vj3"/>
                 <outlet property="indexPathLabel" destination="whA-8x-IFJ" id="Znq-Xh-6gM"/>
-                <outlet property="menuView" destination="iLH-ic-ADn" id="Mwy-uA-pCF"/>
+                <outlet property="menuView" destination="iLH-ic-ADn" id="FxU-Vv-eAi"/>
                 <outlet property="moreBtn" destination="LH7-Qh-e4N" id="qEz-YN-wQB"/>
             </connections>
             <point key="canvasLocation" x="678" y="310"/>

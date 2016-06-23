@@ -28,6 +28,7 @@
     UITextField *pwd;
     UITextField *user;
     UIButton *checkbox;
+    UIButton *btn_login;
 }
 
 
@@ -236,7 +237,7 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
 -(void)createButtons
 {
     //登陆
-    UIButton *btn_login;
+    
     if (!iPad) {
         btn_login=[self createButtonFrame:CGRectMake(self.view.frame.size.width*0.18, self.view.frame.size.height/2+110, self.view.frame.size.width*0.64, 50) backImageName:nil title:@"登  录" titleColor:[UIColor whiteColor]  font:[UIFont systemFontOfSize:25] target:self action:@selector(landClick)];
         btn_login.layer.cornerRadius=25.0f;
@@ -634,7 +635,7 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
             NSLog(@"正在加载");
             _btn_forgetpassword.enabled=NO;
             _btn_Server.enabled=NO;
-            
+            btn_login.enabled=NO;
            
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
@@ -648,6 +649,7 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
                 }];
                 _btn_forgetpassword.enabled=YES;
                 _btn_Server.enabled=YES;
+                btn_login.enabled=YES;
                 [alert showLXAlertView];
                
             }
@@ -675,6 +677,7 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
                     [alert showLXAlertView];
                     _btn_forgetpassword.enabled=YES;
                     _btn_Server.enabled=YES;
+                    btn_login.enabled=YES;
                 }
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

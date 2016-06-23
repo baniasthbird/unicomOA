@@ -19,6 +19,7 @@
 
 @interface MenuTableViewCell()
 
+
 //下拉菜单数据源
 @property (nonatomic, strong) NSMutableArray *menuItemDataSourceArray;
 
@@ -34,6 +35,7 @@
     MenuTableViewCell *cell=[tableView cellForRowAtIndexPath:indexPath];
     if (!cell) {
         cell=[[MenuTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+        [cell.menuView setFrame:CGRectMake(0, 80, [UIScreen mainScreen].bounds.size.width, 80)];
     }
     return cell;
 }

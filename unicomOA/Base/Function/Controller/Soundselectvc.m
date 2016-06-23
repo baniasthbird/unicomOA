@@ -21,6 +21,9 @@
 
 @property (nonatomic,strong) NSIndexPath *indexPath_selected;
 
+//选择的铃声url
+@property (nonatomic,strong) NSString *str_sound_url;
+
 @end
 
 @implementation Soundselectvc
@@ -41,7 +44,7 @@
     [barButtonItem setImage:[UIImage imageNamed:@"returnlogo.png"]];
     self.navigationItem.leftBarButtonItem = barButtonItem;
     
-   
+   _str_sound_url=@"";
     _arr_sounds=[[NSMutableArray alloc]init];
     self.str_soundpath=[NSURL URLWithString:@"/System/Library/Audio/UISounds"];
     NSFileManager* fm=[NSFileManager defaultManager];
@@ -79,6 +82,9 @@
 }
 
 -(void)SoundSelect:(UIButton*)sender {
+    if (![_str_sound_url isEqualToString:@""]) {
+        [self.delegate PassSoundValue:_str_sound_url];
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -99,7 +105,7 @@
 
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 20;
+    return 44;
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -110,6 +116,13 @@
          cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         if (_arr_sounds!=nil) {
             cell.textLabel.text = [[_arr_sounds objectAtIndex:indexPath.row] lastPathComponent];
+            cell.textLabel.font=[UIFont systemFontOfSize:16];
+            if (_str_sound!=nil) {
+                if ([_str_sound isEqualToString:cell.textLabel.text]) {
+                    cell.accessoryType=UITableViewCellAccessoryCheckmark;
+                    cell.textLabel.textColor=[UIColor blueColor];
+                }
+            }
             NSURL *url=[_arr_sounds objectAtIndex:indexPath.row];
             NSString *str_url=[url absoluteString];
             cell.accessibilityHint=str_url;
@@ -131,6 +144,7 @@
     }
     UITableViewCell *cell=[tableView cellForRowAtIndexPath:indexPath];
     NSString *str_url=cell.accessibilityHint;
+    _str_sound_url=cell.textLabel.text;
     cell.textLabel.textColor=[UIColor blueColor];
     cell.accessoryType=UITableViewCellAccessoryCheckmark;
     NSURL *url=[NSURL URLWithString:str_url];

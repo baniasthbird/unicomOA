@@ -45,11 +45,15 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        NSDictionary * dict=@{
-                              NSForegroundColorAttributeName:   [UIColor whiteColor]};
-        
-        self.navigationController.navigationBar.titleTextAttributes=dict;
-        self.title = @"应用";
+        NSDictionary * dict;
+        if (iPad) {
+            dict=@{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:[UIFont systemFontOfSize:25]};
+        }
+        else {
+            dict =@{
+                    NSForegroundColorAttributeName:   [UIColor whiteColor]};
+        }
+        self.title=@"应用";
     }
     return self;
 }
@@ -63,8 +67,16 @@
     //self.view.backgroundColor=[UIColor yellowColor];
     self.title=@"应用";
     self.view.backgroundColor=[UIColor whiteColor];
-    NSDictionary * dict=@{
-                          NSForegroundColorAttributeName:   [UIColor whiteColor]};
+    NSDictionary * dict;
+    if (iPad) {
+        dict=@{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:[UIFont systemFontOfSize:25]};
+    }
+    else {
+        dict =@{
+                NSForegroundColorAttributeName:   [UIColor whiteColor]};
+        
+    }
+ 
     
     self.navigationController.navigationBar.titleTextAttributes=dict;
     
@@ -163,10 +175,10 @@
         [tmp_btn setTitleEdgeInsets:UIEdgeInsetsMake(50, 0, -150, 0)];
     }
     else if (iPhone5_5s) {
-        [tmp_btn setTitleEdgeInsets:UIEdgeInsetsMake(50, 0, -60, 0)];
+        [tmp_btn setTitleEdgeInsets:UIEdgeInsetsMake(50, 0, -63, 0)];
     }
     else if (iPhone6) {
-        [tmp_btn setTitleEdgeInsets:UIEdgeInsetsMake(50, 0, -63, 0)];
+        [tmp_btn setTitleEdgeInsets:UIEdgeInsetsMake(50, 0, -68, 0)];
     }
     else if (iPhone6_plus) {
         [tmp_btn setTitleEdgeInsets:UIEdgeInsetsMake(50, 0, -73, 0)];
@@ -264,7 +276,7 @@
             line1_2=[[UIView alloc]initWithFrame:CGRectMake(500, 0, 1, 765)];
             line2_2=[[UIView alloc] initWithFrame:CGRectMake(10, 500, [UIScreen mainScreen].bounds.size.width-20, 1)];
             btn_IVoting=[self createImageButton:634 CenterY:102 title:@"投票" image:@"IVoting.png"];
-            [btn_IVoting addTarget:self action:@selector(IVotingItemClick:) forControlEvents:UIControlEventTouchUpInside];
+           // [btn_IVoting addTarget:self action:@selector(IVotingItemClick:) forControlEvents:UIControlEventTouchUpInside];
             btn_Notes=[self createImageButton:122 CenterY:102 title:@"备忘录" image:@"Notes.png"];
             [btn_Notes addTarget:self action:@selector(NotesItemClick:) forControlEvents:UIControlEventTouchUpInside];
         }
@@ -329,6 +341,9 @@
     }
     else if (iPhone6_plus) {
         return 150;
+    }
+    else if (iPhone5_5s) {
+        return 140;
     }
     else {
         return kImageHeight+30;

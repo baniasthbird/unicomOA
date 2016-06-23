@@ -36,7 +36,7 @@ typedef enum
     DiningService
 }OperationType;
 
-@interface NewNotesViewController()<UITableViewDataSource,UITableViewDelegate,UITextViewDelegate,MenuTableViewCellDelegate,MenutableViewCellDataSource,LZActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,MapViewControllerDelegate>
+@interface NewNotesViewController()<UITableViewDataSource,UITableViewDelegate,UITextViewDelegate,MenuTableViewCellDelegate,MenutableViewCellDataSource,LZActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,MapViewControllerDelegate,AlarmCellDelegate,SoundselectvcDelegate>
     
 //列表
 @property (strong,nonatomic) UITableView *tableView;
@@ -76,6 +76,9 @@ typedef enum
 
 @property (nonatomic,strong) UIImageView *image;
 
+@property (nonatomic,strong) NSString *str_sound_url;
+
+@property (nonatomic,strong) NSString *str_meeeting_date;
 
 //是否支持震动
 @property BOOL b_viriable;
@@ -120,7 +123,13 @@ typedef enum
     //[barButtonItem setTitleTextAttributes:dict forState:UIControlStateNormal];
     self.navigationItem.leftBarButtonItem = barButtonItem;
     [self GetValue];
-    b_Remind=NO;
+    if (_str_meeeting_date==nil) {
+        b_Remind=NO;
+    }
+    else {
+        b_Remind=YES;
+        self.selectedRowIndexPath=[NSIndexPath indexPathForRow:4 inSection:0];
+    }
     
     [self buildDataSource];
     [self buildView];
@@ -142,13 +151,21 @@ typedef enum
 -(void)GetValue {
     if (_dic_notes!=nil) {
         _str_FenLei=[_dic_notes objectForKey:@"fenlei"];
+        if ([_str_FenLei isEqualToString:@"(null)"]) {
+            _str_FenLei=@"";
+        }
         _str_noteContent=[_dic_notes objectForKey:@"content"];
+        if ([_str_noteContent isEqualToString:@"(null)"]) {
+            _str_noteContent=@"";
+        }
         _str_pic_path=[_dic_notes objectForKey:@"pic_path"];
         NSString *str_lat=[_dic_notes objectForKey:@"coord_x"];
         NSString *str_lon=[_dic_notes objectForKey:@"coord_y"];
         _coord_placemark.latitude=[str_lat doubleValue];
         _coord_placemark.longitude=[str_lon doubleValue];
         _str_location_content=[_dic_notes objectForKey:@"address"];
+        _str_meeeting_date=[_dic_notes objectForKey:@"meeting_date"];
+        
     }
     
     
@@ -209,7 +226,7 @@ typedef enum
         [db UpdateNotesTable:dic];
     }
     
-    [self scheduleLocalNotificationWithDate:_date_select];
+    [self scheduleLocalNotificationWithDate:_date_select sound:_str_sound_url];
     
     //[delegate passValue:_str_notesFenLei Content:_str_noteContent Time:_str_date TimeNow:dateString];
     //[delegate passValue:_str_notesFenLei Content:_str_noteContent Time:_str_date TimeNow:dateString PicPath:_str_pic_path coordx:str_coordx coordy:str_coordy address:_str_location_content];
@@ -281,10 +298,13 @@ typedef enum
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (self.selectedRowIndexPath) {
+    if (b_Remind==YES) {
         return 10;
     }
-    return 5;
+    else {
+        return 5;
+    }
+    
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -326,7 +346,7 @@ typedef enum
             textView=[[UITextView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, cell.frame.size.height)];
             textView.delegate=self;
             [textView setTextColor:[UIColor blackColor]];
-            [textView setFont:[UIFont systemFontOfSize:12.0f]];
+            [textView setFont:[UIFont systemFontOfSize:15.0f]];
             [textView setBackgroundColor:[UIColor clearColor]];
             textView.autoresizingMask=UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
             textView.hidden=NO;
@@ -389,6 +409,7 @@ typedef enum
     }
     else if (indexPath.row==4) {
         AlarmCell *cell=[AlarmCell cellWithTable:tableView cellHeight:110 switch:b_Remind indexPath:indexPath];
+        cell.delegate=self;
         return cell;
         /*
         static NSString *cellIdentifier = @"cell";
@@ -426,7 +447,7 @@ typedef enum
         UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         
         if (cell==nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.textLabel.text=@"重复";
             cell.detailTextLabel.textColor=[UIColor colorWithRed:173/255.0f green:173/255.0f blue:173/255.0f alpha:1];
@@ -443,12 +464,12 @@ typedef enum
         UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         
         if (cell==nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.textLabel.text=@"铃声";
             cell.detailTextLabel.textColor=[UIColor colorWithRed:173/255.0f green:173/255.0f blue:173/255.0f alpha:1];
             cell.detailTextLabel.text=@"默认铃声";
-            cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+           // cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
         }
         
         return cell;
@@ -459,7 +480,7 @@ typedef enum
         UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         
         if (cell==nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.textLabel.text=@"振动";
             cell.detailTextLabel.textColor=[UIColor colorWithRed:173/255.0f green:173/255.0f blue:173/255.0f alpha:1];
@@ -517,7 +538,13 @@ typedef enum
          */
         NSString *identifier = [TableViewCell reusableIdentifier];
         TableViewCell *cell = [[[NSBundle mainBundle]loadNibNamed:identifier owner:self options:nil]objectAtIndex:0];
-        [cell addcontentView:[self viewForContainerAtIndexPath:indexPath]];
+        if (_str_meeeting_date!=nil) {
+            [cell addcontentView:[self viewForContainerAtIndexPath:indexPath time:_str_meeeting_date]];
+        }
+        else {
+            [cell addcontentView:[self viewForContainerAtIndexPath:indexPath time:nil]];
+        }
+        
         return cell;
     }
     else {
@@ -602,18 +629,13 @@ typedef enum
         }
         [self.navigationController pushViewController:viewController animated:YES];
     }
-    
-    if (indexPath.row==4 && indexPath.section==0) {
-        [self extendCellAtIndexPath:indexPath];
-        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
+    else if (indexPath.row==6 && indexPath.section==0) {
+        Soundselectvc *vc=[[Soundselectvc alloc]init];
+        vc.delegate=self;
+        vc.str_sound=_str_sound_url;
+       // [self.navigationController pushViewController:vc animated:YES];
     }
     
-    if (_b_isOpenMenu==YES) {
-        if (indexPath.row==6 && indexPath.section==0) {
-            Soundselectvc *vc=[[Soundselectvc alloc]init];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-    }
     /*
     if (indexPath.row!=3) {
         for (UIView *view in self.view.subviews) {
@@ -711,21 +733,56 @@ typedef enum
 
 
 
--(UIView*)viewForContainerAtIndexPath:(NSIndexPath *)indexPath {
+-(UIView*)viewForContainerAtIndexPath:(NSIndexPath *)indexPath time:(NSString*)str_time{
     //if ([self isExtendedCellIndexPath:indexPath]) {
     UIDatePicker *datePicker=[[UIDatePicker alloc]init];
-    datePicker.minimumDate=[NSDate date];
-    datePicker.maximumDate=[[NSDate alloc]initWithTimeIntervalSinceNow:1000000000];
+    BOOL b_use_datePicker=YES;
+    if (str_time==nil) {
+        datePicker.minimumDate=[NSDate date];
+        datePicker.maximumDate=[[NSDate alloc]initWithTimeIntervalSinceNow:1000000000];
+    }
+    else {
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        
+        [dateFormatter setDateFormat: @"yyyy-MM-dd HH:mm:ss"];
+        
+        NSDate *destDate= [dateFormatter dateFromString:str_time];
+        
+        NSTimeInterval secondsInterval= [destDate timeIntervalSinceDate:[NSDate date]];
+        if (secondsInterval<0) {
+            b_use_datePicker=NO;
+        }
+        else {
+            datePicker.minimumDate=destDate;
+            
+            datePicker.maximumDate=[[NSDate alloc]initWithTimeIntervalSinceNow:1000000000];
+
+        }
+        
+    }
+   
     if (_date_select!=nil) {
         datePicker.date=_date_select;
     }
        // [datePicker setLocale:[NSLocale alloc]:@"zh_Hans_CN"];
     [datePicker setLocale:[[NSLocale alloc]initWithLocaleIdentifier:@"zh_Hans_CN"]];
     [datePicker addTarget:self action:@selector(dateChanged:) forControlEvents:UIControlEventValueChanged];
-    UIView *dropDownView=datePicker;
+    if (b_use_datePicker==YES) {
+        UIView *dropDownView=datePicker;
+        dropDownView.center=CGPointMake([UIScreen mainScreen].bounds.size.width/2, 120);
         
-    return dropDownView;
-  //  }
+        return dropDownView;
+
+    }
+    else {
+        UILabel *lbl_time=[[UILabel alloc]initWithFrame:CGRectMake(10, 0, [UIScreen mainScreen].bounds.size.width-20, 240)];
+        lbl_time.text=[NSString stringWithFormat:@"提醒时间已过，提醒时间为%@",_str_meeeting_date];
+        lbl_time.textAlignment=NSTextAlignmentCenter;
+        lbl_time.numberOfLines=0;
+        lbl_time.font=[UIFont systemFontOfSize:20];
+        return  lbl_time;
+    }
+     //  }
    // else {
    //     return nil;
    // }
@@ -1000,10 +1057,11 @@ typedef enum
 }
 
 //点击确定 设置好时间之后添加本地提醒  用UILocalNotification来实现。
--(void)scheduleLocalNotificationWithDate:(NSDate *)fireDate {
-    if (_b_isOpenMenu==YES) {
+-(void)scheduleLocalNotificationWithDate:(NSDate *)fireDate sound:(NSString*)str_sound_url {
+   // if (_b_isOpenMenu==YES) {
         //0.创建推送
         UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+        
         //1.设置推送类型
         UIUserNotificationType type = UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
         //2.设置setting
@@ -1018,13 +1076,39 @@ typedef enum
         NSString *str_content=[NSString stringWithFormat:@"%@  %@",_str_FenLei,_str_noteContent];
         [localNotification setAlertBody:str_content];
         //7.推送声音
-        [localNotification setSoundName:@"Thunder Song.m4r"];
+         localNotification.soundName=UILocalNotificationDefaultSoundName;
+        /*
+        if (_str_sound_url==nil) {
+            localNotification.soundName=UILocalNotificationDefaultSoundName;
+        }
+        else {
+            localNotification.soundName=@"/System/Library/Audio/UISounds/alarm.caf";
+        }
+        */
         
         
         //8.添加推送到UIApplication
         [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
 
+   // }
+}
+
+
+
+-(void)tapCell:(NotesTableVIewCell *)cell atIndex:(NSInteger)index {
+    if (index==4) {
+        NSIndexPath *indexPath=[NSIndexPath indexPathForRow:4 inSection:0];
+        [self extendCellAtIndexPath:indexPath];
+        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
     }
+}
+
+-(void)PassSoundValue:(NSString *)str_sound_url {
+    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:6 inSection:0];
+    UITableViewCell *cell=[self.tableView cellForRowAtIndexPath:indexPath];
+    cell.detailTextLabel.text=str_sound_url;
+    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationNone];
+    _str_sound_url=str_sound_url;
 }
 
 

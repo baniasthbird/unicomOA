@@ -25,8 +25,15 @@
     //self.view.backgroundColor=[UIColor colorWithRed:236.0/255.0f green:236.0/255.0f blue:236.0/255.0f alpha:1];
     self.view.backgroundColor=[UIColor whiteColor];
     
-    NSDictionary * dict=@{
-                          NSForegroundColorAttributeName:   [UIColor whiteColor]};
+    NSDictionary * dict;
+    if (iPad) {
+        dict=@{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:[UIFont systemFontOfSize:25]};
+    }
+    else {
+        dict =@{
+                NSForegroundColorAttributeName:   [UIColor whiteColor]};
+        
+    }
     
     self.navigationController.navigationBar.titleTextAttributes=dict;
 
@@ -281,7 +288,7 @@
             return 147;
         }
         else  {
-            return 196;
+            return 292;
         }
         
     }
