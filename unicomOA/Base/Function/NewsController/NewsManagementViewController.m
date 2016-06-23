@@ -70,7 +70,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title=@"公告";
+     self.title=@"公告";
+    
+    NSDictionary * dict;
+    if (iPad) {
+        dict=@{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:[UIFont systemFontOfSize:25]};
+    }
+    else {
+        dict =@{
+                NSForegroundColorAttributeName:   [UIColor whiteColor]};
+        
+    }
+
+    self.navigationController.navigationBar.titleTextAttributes=dict;
     
     UIButton *btn_focus=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 80, 40)];
     [btn_focus setTitle:@"关注列表" forState:UIControlStateNormal];

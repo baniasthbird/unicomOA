@@ -61,8 +61,15 @@
     
     self.title=@"待办审批";
     
-    NSDictionary * dict=@{
-                          NSForegroundColorAttributeName:   [UIColor whiteColor]};
+    NSDictionary * dict;
+    if (iPad) {
+        dict=@{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:[UIFont systemFontOfSize:25]};
+    }
+    else {
+        dict =@{
+                NSForegroundColorAttributeName:   [UIColor whiteColor]};
+        
+    }
     
     self.navigationController.navigationBar.titleTextAttributes=dict;
     

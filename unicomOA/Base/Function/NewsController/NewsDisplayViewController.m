@@ -47,6 +47,18 @@ int i_comment_num;
     // Do any additional setup after loading the view.
     self.title=@"公告详情";
     
+    NSDictionary * dict;
+    if (iPad) {
+        dict=@{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:[UIFont systemFontOfSize:25]};
+    }
+    else {
+        dict =@{
+                NSForegroundColorAttributeName:   [UIColor whiteColor]};
+        
+    }
+    
+    self.navigationController.navigationBar.titleTextAttributes=dict;
+    
     UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"  " style:UIBarButtonItemStyleDone target:self action:@selector(MovePreviousVc:)];
     barButtonItem.tintColor=[UIColor whiteColor];
     [barButtonItem setImage:[UIImage imageNamed:@"returnlogo.png"]];
