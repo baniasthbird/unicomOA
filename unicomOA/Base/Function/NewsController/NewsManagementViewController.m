@@ -307,13 +307,13 @@
         _btn_Select.layer.cornerRadius=self.view.frame.size.height*0.019;
     }
     else if (iPad) {
-        _btn_Select=[[UIButton alloc]initWithFrame:CGRectMake(24, 40, 153.6, 40)];
-        _btn_Select.layer.cornerRadius=self.view.frame.size.height*0.019;
+        _btn_Select=[[UIButton alloc]initWithFrame:CGRectMake(24, 40, 153.6, 28)];
+        _btn_Select.layer.cornerRadius=14;
     }
     
     [_btn_Select setTitle:@"类别" forState:UIControlStateNormal];
     if (iPad) {
-        _btn_Select.titleLabel.font=[UIFont systemFontOfSize:25];
+        _btn_Select.titleLabel.font=[UIFont systemFontOfSize:22];
     }
     else {
         _btn_Select.titleLabel.font=[UIFont systemFontOfSize:12.5];
@@ -386,7 +386,8 @@
             txt_Field.backgroundColor=[UIColor colorWithRed:240/255.0f green:240/255.0f blue:240/255.0f alpha:1];
             txt_Field.layer.cornerRadius=15.0f;
             if (iPad) {
-                txt_Field.font=[UIFont systemFontOfSize:25];
+                txt_Field.font=[UIFont systemFontOfSize:22];
+               
             }
             break;
         }

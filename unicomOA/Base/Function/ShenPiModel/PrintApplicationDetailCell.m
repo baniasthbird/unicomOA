@@ -43,14 +43,21 @@
         self.textLabel.textAlignment=NSTextAlignmentLeft;
         self.textLabel.text=str_name;
         */
-        UILabel *lbl_title=[[UILabel alloc]initWithFrame:CGRectMake(15, 10, [UIScreen mainScreen].bounds.size.width-20, 15)];
+        
+        CGFloat i_left=15;
+        if (iPad) {
+            i_left=50;
+        }
+
+        
+        UILabel *lbl_title=[[UILabel alloc]initWithFrame:CGRectMake(i_left, 10, [UIScreen mainScreen].bounds.size.width-20, 15)];
         lbl_title.textColor=[UIColor blackColor];
         lbl_title.font=[UIFont systemFontOfSize:16];
         lbl_title.textAlignment=NSTextAlignmentLeft;
         lbl_title.text=str_name;
         
         
-        _txt_detail=[[UITextView alloc]initWithFrame:CGRectMake(15, 35, [UIScreen mainScreen].bounds.size.width-30, i_Height-50)];
+        _txt_detail=[[UITextView alloc]initWithFrame:CGRectMake(i_left, 35, [UIScreen mainScreen].bounds.size.width-2*i_left, i_Height-50)];
         
         _txt_detail.textColor=[UIColor colorWithRed:186/255.0f green:186/255.0f blue:186/255.0f alpha:1];
         _txt_detail.textAlignment=NSTextAlignmentLeft;
@@ -71,7 +78,8 @@
        
         //自定义文本框placeholder
        
-        _lbl_tip=[[UILabel alloc]initWithFrame:CGRectMake(17,35,200,40)];
+        
+        _lbl_tip=[[UILabel alloc]initWithFrame:CGRectMake(i_left+2,35,200,40)];
         _lbl_tip.text=str_placeholder;
         _lbl_tip.textColor=[UIColor colorWithRed:186/255.0f green:186/255.0f blue:186/255.0f alpha:1];
         _lbl_tip.textAlignment=NSTextAlignmentLeft;
@@ -83,8 +91,11 @@
         
         
         //自定义文本框字数统计
-        
-        _lbl_count=[[UILabel alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width-50, i_Height-45,32 ,20)];
+        CGFloat i_right=50;
+        if (iPad) {
+            i_right=100;
+        }
+        _lbl_count=[[UILabel alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width-i_right, i_Height-45,32 ,20)];
         _lbl_count.text=@"500";
         _lbl_count.textAlignment=NSTextAlignmentRight;
         _lbl_count.font=[UIFont systemFontOfSize:13];
@@ -112,7 +123,7 @@
 }
 
 -(void)textViewDidChange:(UITextView *)textView {
-    _lbl_count.text=[NSString stringWithFormat:@"%lu",500-_txt_detail.text.length];
+    _lbl_count.text=[NSString stringWithFormat:@"%u",500-_txt_detail.text.length];
     if (textView.text.length==0) {
         [_lbl_tip setHidden:NO];
         _lbl_tip.text=@"请输入备注信息，最多500个字";

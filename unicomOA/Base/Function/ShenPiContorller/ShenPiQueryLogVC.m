@@ -38,8 +38,15 @@
     
     self.view.backgroundColor=[UIColor colorWithRed:243/255.0f green:243/255.0f blue:243/255.0f alpha:1];
     
-    NSDictionary * dict=@{
-                          NSForegroundColorAttributeName:   [UIColor whiteColor]};
+    NSDictionary * dict;
+    if (iPad) {
+        dict=@{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:[UIFont systemFontOfSize:25]};
+    }
+    else {
+        dict =@{
+                NSForegroundColorAttributeName:   [UIColor whiteColor]};
+        
+    }
     
     self.navigationController.navigationBar.titleTextAttributes=dict;
     
@@ -182,7 +189,7 @@
     cell.textLabel.textAlignment=NSTextAlignmentLeft;
     cell.detailTextLabel.textColor=[UIColor colorWithRed:112/255.0f green:112/255.0f blue:112/255.0f alpha:1];
     cell.detailTextLabel.font=[UIFont systemFontOfSize:16];
-
+    cell.selectionStyle=UITableViewCellSelectionStyleNone;
     NSDictionary *dic_tmp=[_arr_ShenPiQueryList objectAtIndex:indexPath.section];
     
    

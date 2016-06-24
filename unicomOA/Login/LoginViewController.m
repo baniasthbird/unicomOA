@@ -256,17 +256,20 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     //服务器设置
     CGFloat i_Width=35.0f;
     CGFloat i_Right=75.0f;
+    CGFloat i_Height=45.0f;
     if (iPhone6 || iPhone6_plus) {
-        i_Width=35.0f;
-        i_Right=75.0f;
+        i_Width=20.0f;
+        i_Right=70.0f;
+        i_Height=45.0f;
     }
     else if (iPhone5_5s || iPhone4_4s) {
-        i_Width=25.0f;
-        i_Right=55.0f;
+        i_Width=15.0f;
+        i_Right=35.0f;
+        i_Height=42.0f;
     }
     
     if (!iPad) {
-        _btn_Server=[self createButtonFrame:CGRectMake(self.view.frame.size.width-i_Right, self.view.frame.size.height-50, i_Width, i_Width) backImageName:@"server.png" title:@"" titleColor:[UIColor grayColor] font:[UIFont systemFontOfSize:13] target:self action:@selector(serverip:)];
+        _btn_Server=[self createButtonFrame:CGRectMake(self.view.frame.size.width-i_Right, self.view.frame.size.height-i_Height, i_Width, i_Width) backImageName:@"server.png" title:@"" titleColor:[UIColor grayColor] font:[UIFont systemFontOfSize:13] target:self action:@selector(serverip:)];
     }
     else {
         _btn_Server=[self createButtonFrame:CGRectMake(600, 898, 30, 30) backImageName:@"server.png" title:@"" titleColor:[UIColor grayColor] font:[UIFont systemFontOfSize:17] target:self action:@selector(serverip:)];
@@ -635,7 +638,7 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
             NSLog(@"正在加载");
             _btn_forgetpassword.enabled=NO;
             _btn_Server.enabled=NO;
-            btn_login.enabled=NO;
+          //  btn_login.enabled=NO;
            
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
@@ -688,6 +691,7 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
             [alert showLXAlertView];
             _btn_forgetpassword.enabled=YES;
             _btn_Server.enabled=YES;
+            btn_login.enabled=YES;
             NSLog(@"请求失败:%@",error.description);
             _i_Success=NO;
            // [self LocalEnter];

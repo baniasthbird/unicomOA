@@ -229,11 +229,14 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
         
         img_View.layer.masksToBounds=YES;
         
-        CGFloat i_left=self.view.frame.size.width*0.05;
+        UILabel *lbl_title;
         if (iPad) {
-            i_left=50;
+             lbl_title=[[UILabel alloc]initWithFrame:CGRectMake(50,200, 150, 40)];
         }
-        UILabel *lbl_title=[[UILabel alloc]initWithFrame:CGRectMake(i_left, item.height*0.77, 100, 20)];
+        else {
+            lbl_title=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.05,item.height*0.77, 100, 20)];
+        }
+        
         
         if (self.userInfo!=nil) {
             img_View.image=item.image;

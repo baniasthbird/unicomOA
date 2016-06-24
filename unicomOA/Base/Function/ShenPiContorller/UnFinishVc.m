@@ -77,7 +77,7 @@
     [barButtonItem setTitleTextAttributes:dict forState:UIControlStateNormal];
     self.navigationItem.leftBarButtonItem = barButtonItem;
     
-    UIBarButtonItem *barButtonItem2 = [[UIBarButtonItem alloc] initWithTitle:@"记录" style:UIBarButtonItemStyleDone target:self action:@selector(QueryLog:)];
+    UIBarButtonItem *barButtonItem2 = [[UIBarButtonItem alloc] initWithTitle:@"审批记录" style:UIBarButtonItemStyleDone target:self action:@selector(QueryLog:)];
     [barButtonItem2 setTitleTextAttributes:dict forState:UIControlStateNormal];
     UIBarButtonItem *barButtonItem3 = [[UIBarButtonItem alloc] initWithTitle:@"提交" style:UIBarButtonItemStyleDone target:self action:@selector(Submit:)];
     [barButtonItem3 setTitleTextAttributes:dict forState:UIControlStateNormal];
@@ -413,6 +413,7 @@
     cell.detailTextLabel.textColor=[UIColor colorWithRed:112/255.0f green:112/255.0f blue:112/255.0f alpha:1];
     cell.detailTextLabel.font=[UIFont systemFontOfSize:16];
     cell.detailTextLabel.textAlignment=NSTextAlignmentRight;
+    cell.selectionStyle=UITableViewCellSelectionStyleNone;
     if ([dic_ctl count]==0) {
         cell.textLabel.text=@"";
         return cell;
@@ -659,6 +660,7 @@
                 cell.accessibilityHint=@"html";
                 cell.accessibilityValue=[dic_tmp objectForKey:@"value"];
                 cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+                cell.detailTextLabel.textColor=[UIColor blueColor];
             }
             else {
                 cell.textLabel.text=@"";
@@ -666,7 +668,14 @@
 
         }
         else {
-            UIButton *btn=[[UIButton alloc]initWithFrame:CGRectMake(25, 7, [UIScreen mainScreen].bounds.size.width-50, 30)];
+            UIButton *btn;
+            if (iPad) {
+                btn=[[UIButton alloc]initWithFrame:CGRectMake(57, 7, [UIScreen mainScreen].bounds.size.width-114, 30)];
+            }
+            else {
+                btn=[[UIButton alloc]initWithFrame:CGRectMake(25, 7, [UIScreen mainScreen].bounds.size.width-50, 30)];
+            }
+            
             btn.backgroundColor=[UIColor colorWithRed:90/255.0f green:134/255.0f blue:243/255.0f alpha:1];
             [btn setTitle:@"提    交" forState:UIControlStateNormal];
             [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

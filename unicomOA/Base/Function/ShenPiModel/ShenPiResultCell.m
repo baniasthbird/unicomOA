@@ -33,6 +33,7 @@
 
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withTitle:(NSString*)str_title withName:(NSString*)str_Name withStatus:(NSString*)str_status ActivityName:(NSString*)str_activename withTime:(NSString*)str_time {
     self=[super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    self.selectionStyle=UITableViewCellSelectionStyleNone;
     if (self) {
         
         UILabel *lbl_title=[[UILabel alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width*0.05, 5, [UIScreen mainScreen].bounds.size.width*0.9, 30)];

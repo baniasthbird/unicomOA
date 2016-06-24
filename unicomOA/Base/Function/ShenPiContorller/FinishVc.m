@@ -83,7 +83,7 @@
     dic_param[@"processInstID"]=_str_processInstID;
     [self PrePareData:dic_param];
     
-    tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped];
+    tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-50) style:UITableViewStyleGrouped];
     tableView.delegate=self;
     tableView.dataSource=self;
     tableView.backgroundColor=[UIColor clearColor];
@@ -286,7 +286,7 @@
     NSString *cellID=@"cellId";
     UITableViewCell *cell=[tb dequeueReusableCellWithIdentifier:cellID];
     if (cell==nil) {
-        cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:cellID];
+        cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellID];
     }
     cell.backgroundColor=[UIColor whiteColor];
     cell.textLabel.textColor=[UIColor blackColor];
@@ -294,6 +294,7 @@
     cell.textLabel.textAlignment=NSTextAlignmentLeft;
     cell.detailTextLabel.textColor=[UIColor colorWithRed:112/255.0f green:112/255.0f blue:112/255.0f alpha:1];
     cell.detailTextLabel.font=[UIFont systemFontOfSize:16];
+    cell.selectionStyle=UITableViewCellSelectionStyleNone;
     if (indexPath.row%2==0) {
         cell.textLabel.backgroundColor=[UIColor colorWithRed:245/255.0f green:245/255.0f blue:245/255.0f alpha:1];
         cell.detailTextLabel.backgroundColor=[UIColor whiteColor];
@@ -392,7 +393,7 @@
                         if (obj_label!=[NSNull null]) {
                             str_label=(NSString*)obj_label;
                         }
-                        PrintFileNavCell *cell=[PrintFileNavCell cellWithTable:tb withTitle:str_title withTileName:str_titlename withLabel:str_label atIndexPath:indexPath];
+                        PrintFileNavCell *cell=[PrintFileNavCell cellWithTable:tb withTitle:str_title withTileName:str_index withLabel:str_label atIndexPath:indexPath];
                         cell.file_data=arr_tableData;
                         cell.file_title=arr_title;
                         cell.str_label=str_label;
@@ -435,6 +436,8 @@
             cell.detailTextLabel.backgroundColor=[UIColor clearColor];
             cell.accessibilityHint=@"html";
             cell.accessibilityValue=[dic_tmp objectForKey:@"value"];
+            cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+            cell.detailTextLabel.textColor=[UIColor blueColor];
         }
         else {
             cell.textLabel.text=@"";
@@ -452,7 +455,8 @@
     CGRect view_title;
     view_title=CGRectMake(0, 0, self.view.frame.size.width, 30);
     UILabel *lbl_sectionTitle=[[UILabel alloc]initWithFrame:view_title];
-    lbl_sectionTitle.textAlignment=NSTextAlignmentLeft;
+    lbl_sectionTitle.textAlignment=NSTextAlignmentCenter;
+    lbl_sectionTitle.font=[UIFont boldSystemFontOfSize:17];
     lbl_sectionTitle.backgroundColor=[UIColor whiteColor];
     NSDictionary *dic_group=[arr_groupList objectAtIndex:section];
     NSString *str_label=[dic_group objectForKey:@"label"];

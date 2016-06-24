@@ -564,11 +564,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/Base/Function/ShenPiModel/PrintApplicationDetailCell.m"
-            timestampString = "488192936.760548"
+            timestampString = "488426470.898286"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
             landmarkName = "-initWithStyle:reuseIdentifier:withName:withPlaceholder:withText:atHeight:"
             landmarkType = "5">
          </BreakpointContent>
