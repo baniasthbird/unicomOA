@@ -16,4 +16,8 @@
 
 @property (nonatomic,strong) NSString *str_title2;
 
+@property (nonatomic,strong) NSString *str_ip;
+
+@property (nonatomic,strong) NSString *str_port;
+
 @end

@@ -896,6 +896,8 @@
         NewsDetailVc *vc=[[NewsDetailVc alloc]init];
         vc.str_value=cell.accessibilityValue;
         vc.str_title2=cell.textLabel.text;
+        vc.str_ip=str_ip;
+        vc.str_port=str_port;
         [self.navigationController pushViewController:vc animated:YES];
     }
     

@@ -15,7 +15,7 @@
 
 
 
-@interface NewsDisplayViewController ()
+@interface NewsDisplayViewController ()<WKNavigationDelegate>
 
 @property (nonatomic,strong) AFHTTPSessionManager *session;
 
@@ -108,13 +108,21 @@ int i_comment_num;
     //设置偏好设置
     config.preferences=[[WKPreferences alloc]init];
     config.preferences.minimumFontSize=18;
-    config.preferences.javaScriptEnabled=NO;
+    config.preferences.javaScriptEnabled=YES;
     config.preferences.javaScriptCanOpenWindowsAutomatically=NO;
     config.processPool=[[WKProcessPool alloc]init];
+    CGFloat i_width= [UIScreen mainScreen].bounds.size.width-20;
+    NSString *js =[NSString stringWithFormat: @"var count = document.images.length;for (var i = 0; i < count; i++) {var image = document.images[i];image.style.width=%f;};window.alert('找到' + count + '张图');",i_width];
+    // 根据JS字符串初始化WKUserScript对象
+    WKUserScript *script = [[WKUserScript alloc] initWithSource:js injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
+    // 根据生成的WKUserScript对象，初始化WKWebViewConfiguration
+    [config.userContentController addUserScript:script];
+
     
     
    
     _wb_content=[[WKWebView alloc]initWithFrame:CGRectMake(0, _h_title+25+self.view.frame.size.height*0.02, self.view.frame.size.width, self.view.frame.size.height-120-_h_title) configuration:config];
+    _wb_content.navigationDelegate=self;
          //_txt_content=[[UITextView alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height*0.20, 15*self.view.frame.size.width/16, self.view.frame.size.height*0.51)];
     
     
@@ -237,8 +245,8 @@ int i_comment_num;
     NSString *str_connection=[self GetConnectionStatus];
     if ([str_connection isEqualToString:@"wifi"] || [str_connection isEqualToString:@"GPRS"]) {
         NSString *str_newsContent= [db fetchInterface:@"NewsContent"];
-        NSString *str_ip=@"";
-        NSString *str_port=@"";
+        __block NSString *str_ip=@"";
+        __block NSString *str_port=@"";
         NSMutableArray *t_array=[db fetchIPAddress];
         if (t_array.count==1) {
             NSArray *arr_ip=[t_array objectAtIndex:0];
@@ -266,7 +274,17 @@ int i_comment_num;
                //  [_lbl_depart sizeToFit];
                 NSString *str_content=[dic_news objectForKey:@"content"];
                 str_content=[NSString stringWithFormat:@"%@%@",_str_headscale,str_content];
-                [_wb_content loadHTMLString:str_content baseURL:nil];
+                NSString *str_relplace1=[NSString stringWithFormat:@"%@%@:%@",@"http://",str_ip,str_port];
+                NSString *str_relplace2=@"<img src=\"";
+                NSString *str_replace_after=[NSString stringWithFormat:@"%@%@",str_relplace2,str_relplace1];
+
+                NSString *str_newcontent=[str_content stringByReplacingOccurrencesOfString:str_relplace2 withString:str_replace_after];
+                
+                // 图片缩放的js代码
+                             
+              //  NSURL *baseUrl=[NSURL URLWithString:@"http://192.168.1.62:8080"];
+                [_wb_content loadHTMLString:str_newcontent baseURL:nil];
+                
                 NSString *str_readnum=[dic_news objectForKey:@"readNum"];
                 i_num=[str_readnum intValue];
                 
@@ -323,6 +341,22 @@ int i_comment_num;
     //设置显示位置
     [l_indicator setCenter:CGPointMake(self.view.frame.size.width / 2.0, self.view.frame.size.height / 2.0)];
     return l_indicator;
+}
+
+
+-(void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
+    [ webView evaluateJavaScript:@"var script = document.createElement('script');"
+     "script.type = 'text/javascript';"
+     "script.text = \"function ResizeImages() { "
+     "var myimg,oldwidth;"
+     "var maxwidth = 320;" // UIWebView中显示的图片宽度
+     "for(i=1;i <document.images.length;i++){"
+     "myimg = document.images[i];"
+     "oldwidth = myimg.width;"
+     "myimg.width = maxwidth;"
+     "}"
+     "}\";"
+     "document.getElementsByTagName('head')[0].appendChild(script);ResizeImages();" completionHandler:nil];
 }
 /*
  

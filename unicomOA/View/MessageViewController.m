@@ -305,19 +305,35 @@
 
 
 -(CGFloat)cellHeightForNews:(NSInteger)i_index titleFont:(CGFloat)i_titleFont otherFont:(CGFloat)i_otherFont {
-    NSDictionary *dic_content=[_arr_NewsList objectAtIndex:i_index];
+  //  @try {
+        if (i_index<[_arr_NewsList count]) {
+            NSDictionary *dic_content=[_arr_NewsList objectAtIndex:i_index];
+            
+            CGFloat h_Title=[UILabel_LabelHeightAndWidth getHeightByWidth:15*self.view.frame.size.width/16 title:[dic_content objectForKey:@"title"] font:[UIFont systemFontOfSize:i_titleFont]];
+            
+            NSString *str_department = [dic_content objectForKey:@"operatorName"];
+            CGFloat w_depart=[UILabel_LabelHeightAndWidth getWidthWithTitle:[dic_content objectForKey:@"operatorName"] font:[UIFont systemFontOfSize:i_otherFont]];
+            CGFloat h_depart=[UILabel_LabelHeightAndWidth getHeightByWidth:w_depart title:str_department font:[UIFont systemFontOfSize:i_otherFont]];
+            CGFloat h_height=h_Title+h_depart;
+            return  h_height+30;
+        }
+        else {
+            return 60;
+            
+        }
 
-    CGFloat h_Title=[UILabel_LabelHeightAndWidth getHeightByWidth:15*self.view.frame.size.width/16 title:[dic_content objectForKey:@"title"] font:[UIFont systemFontOfSize:i_titleFont]];
+ //   } @catch (NSException *exception) {
+   //     NSLog(@"Caught %@%@", [exception name], [exception reason]);
     
-    NSString *str_department = [dic_content objectForKey:@"operatorName"];
-    CGFloat w_depart=[UILabel_LabelHeightAndWidth getWidthWithTitle:[dic_content objectForKey:@"operatorName"] font:[UIFont systemFontOfSize:i_otherFont]];
-    CGFloat h_depart=[UILabel_LabelHeightAndWidth getHeightByWidth:w_depart title:str_department font:[UIFont systemFontOfSize:i_otherFont]];
-    CGFloat h_height=h_Title+h_depart;
-    return  h_height+20;
+  //  } @finally {
+  //      return 0;
+ //   }
+    
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
    
+  //  @try {
         if (indexPath.section==0) {
             RemindCell *r_cell=[RemindCell cellWithTable:tableView DocNum:_i_doc_num FlowNum:_i_flow_num MsgNum:_i_msg_num];
             return r_cell;
@@ -333,77 +349,86 @@
                 return cell;
             }
             else {
-                NewsManagementTableViewCell *cell;
                 
-                /*
-                if (iPhone6 || iPhone6_plus)
-                {
-                    cell=[NewsManagementTableViewCell cellWithTable:tableView withCellHeight:110 titleX:self.view.frame.size.width/32 titleY:0.0f titleW:15*self.view.frame.size.width/16 titleH:50.0f DepartX:self.view.frame.size.width/32 DepartY:60.0f DepartW:3*self.view.frame.size.width/8 DepartH:40.0f TimeX:self.view.frame.size.width/2 TimeY:60.0f TimeW:self.view.frame.size.width/3 TimeH:40.0f canScroll:NO];
-                }
-                else if (iPhone5_5s || iPhone4_4s) {
-                    cell=[NewsManagementTableViewCell cellWithTable:tableView withCellHeight:110 titleX:self.view.frame.size.width/32 titleY:0.0f titleW:15*self.view.frame.size.width/16 titleH:50.0f DepartX:self.view.frame.size.width/32 DepartY:60.0f DepartW:3*self.view.frame.size.width/8 DepartH:40.0f TimeX:self.view.frame.size.width*0.4 TimeY:60.0f TimeW:self.view.frame.size.width*0.5 TimeH:40.0f canScroll:NO];
-                }
-                */
-                NSDictionary *dic_content=[_arr_NewsList objectAtIndex:indexPath.section-1];
-                NSString *str_category=[dic_content objectForKey:@"classname"];
-                CGFloat i_titleFont=0;
-                CGFloat i_otherFont=0;
-                if (iPhone6_plus) {
-                    i_titleFont=16;
-                    i_otherFont=11;
-                }
-                else if (iPad) {
-                    i_titleFont=24;
-                    i_otherFont=18;
-                }
-                else {
-                    i_titleFont=16;
-                    i_otherFont=11;
-                }
-              //  CGFloat h_category=[UILabel_LabelHeighndWidth getHeightByWidth:15*self.view.frame.size.width/16 title:str_category font:[UIFont systemFontOfSize:i_otherFont]];
-                NSString *str_title=[dic_content objectForKey:@"title"];
-                NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str_title];
-                NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-                [paragraphStyle setLineSpacing:5];
-                [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [str_title length])];
-
-                CGFloat h_Title=[UILabel_LabelHeightAndWidth getHeightByWidth:15*self.view.frame.size.width/16 title:[dic_content objectForKey:@"title"] font:[UIFont systemFontOfSize:i_titleFont]];
-                NSString *str_department = [dic_content objectForKey:@"operationDeptName"];
-                CGFloat w_depart=[UILabel_LabelHeightAndWidth getWidthWithTitle:[dic_content objectForKey:@"operatorName"] font:[UIFont systemFontOfSize:i_otherFont]];
-                CGFloat h_depart=[UILabel_LabelHeightAndWidth getHeightByWidth:w_depart title:str_department font:[UIFont systemFontOfSize:i_otherFont]];
-                NSString *str_time =[dic_content objectForKey:@"startDate"];
-                NSArray *arr_time=[str_time componentsSeparatedByString:@" "];
-                NSString *str_time2=[arr_time objectAtIndex:0];
-                NSString *str_depart=[NSString stringWithFormat:@"%@ %@",str_department,str_time2];
-                CGFloat h_height=h_Title+h_depart+20;
-                cell=[NewsManagementTableViewCell cellWithTable:tableView withCellHeight:h_height withTitleHeight:h_Title withButtonHeight:h_depart withTitle:attributedString withCategory:str_category withDepart:str_depart titleFont:i_titleFont otherFont:i_otherFont canScroll:NO withImage:@"hot.png"];
-                cell.delegate=self;
-                cell.str_title=str_title;
-                cell.str_department=str_department;
-                cell.myTag=indexPath.section-1;
-                
-                
-                if ([str_title isEqualToString:selected_title]) {
-                    //if (b_ReplaceDataSource==YES) {
+                if (indexPath.section-1<[_arr_NewsList count]) {
+                    NewsManagementTableViewCell *cell;
+                    NSDictionary *dic_content=[_arr_NewsList objectAtIndex:indexPath.section-1];
+                    NSString *str_category=[dic_content objectForKey:@"classname"];
+                    CGFloat i_titleFont=0;
+                    CGFloat i_otherFont=0;
+                    if (iPhone6_plus) {
+                        i_titleFont=16;
+                        i_otherFont=11;
+                    }
+                    else if (iPad) {
+                        i_titleFont=24;
+                        i_otherFont=18;
+                    }
+                    else {
+                        i_titleFont=16;
+                        i_otherFont=11;
+                    }
+                    //  CGFloat h_category=[UILabel_LabelHeighndWidth getHeightByWidth:15*self.view.frame.size.width/16 title:str_category font:[UIFont systemFontOfSize:i_otherFont]];
+                    NSString *str_title=[dic_content objectForKey:@"title"];
+                    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str_title];
+                    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+                    [paragraphStyle setLineSpacing:5];
+                    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [str_title length])];
+                    
+                    CGFloat h_Title=[UILabel_LabelHeightAndWidth getHeightByWidth:15*self.view.frame.size.width/16 title:[dic_content objectForKey:@"title"] font:[UIFont systemFontOfSize:i_titleFont]];
+                    NSString *str_department = [dic_content objectForKey:@"operationDeptName"];
+                    CGFloat w_depart=[UILabel_LabelHeightAndWidth getWidthWithTitle:[dic_content objectForKey:@"operatorName"] font:[UIFont systemFontOfSize:i_otherFont]];
+                    CGFloat h_depart=[UILabel_LabelHeightAndWidth getHeightByWidth:w_depart title:str_department font:[UIFont systemFontOfSize:i_otherFont]];
+                    NSString *str_time =[dic_content objectForKey:@"startDate"];
+                    NSArray *arr_time=[str_time componentsSeparatedByString:@" "];
+                    NSString *str_time2=[arr_time objectAtIndex:0];
+                    NSString *str_depart=[NSString stringWithFormat:@"%@ %@",str_department,str_time2];
+                    CGFloat h_height=h_Title+h_depart+30;
+                    cell=[NewsManagementTableViewCell cellWithTable:tableView withCellHeight:h_height withTitleHeight:h_Title withButtonHeight:h_depart withTitle:attributedString withCategory:str_category withDepart:str_depart titleFont:i_titleFont otherFont:i_otherFont canScroll:NO withImage:@"hot.png"];
+                    cell.delegate=self;
+                    cell.str_title=str_title;
+                    cell.str_department=str_department;
+                    cell.myTag=indexPath.section-1;
+                    
+                    
+                    if ([str_title isEqualToString:selected_title]) {
+                        //if (b_ReplaceDataSource==YES) {
                         cell.backgroundColor=[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1];
-                   // }
+                        // }
+                        
+                    }
+                    
+                    cell.selectionStyle=UITableViewCellSelectionStyleGray;
+                    
+                    NSObject *obj=[dic_content objectForKey:@"id"];
+                    if (obj!=nil) {
+                        NSNumber *num_index=(NSNumber*)obj;
+                        NSInteger i_index=[num_index integerValue];
+                        cell.tag=i_index;
+                    }
+                    
+                    return cell;
                     
                 }
-                
-                cell.selectionStyle=UITableViewCellSelectionStyleGray;
-
-                NSObject *obj=[dic_content objectForKey:@"id"];
-                if (obj!=nil) {
-                    NSNumber *num_index=(NSNumber*)obj;
-                    NSInteger i_index=[num_index integerValue];
-                    cell.tag=i_index;
+                else {
+                    static NSString *identifier=@"Cell";
+                    UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:identifier];
+                    if (cell==nil) {
+                        cell =[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+                        cell.textLabel.text=@"";
+                    }
+                    return cell;
+                    
                 }
-               // NewsListCell *cell=[NewsListCell cellWithTable:tableView dic:dic_content cellHeight:_i_Height];
-               // return cell;
-                return cell;
+                //  return cell;
                 
             }
         }
+  //  } @catch (NSException *exception) {
+  //      NSLog(@"Caught %@%@", [exception name], [exception reason]);
+  //  } @finally {
+        
+  //  }
     
     
 

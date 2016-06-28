@@ -17,7 +17,6 @@
 @end
 
 @implementation NewsDetailVc
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -41,9 +40,15 @@
     //设置偏好设置
     config.preferences=[[WKPreferences alloc]init];
     config.preferences.minimumFontSize=18;
-    config.preferences.javaScriptEnabled=NO;
-    config.preferences.javaScriptCanOpenWindowsAutomatically=NO;
+    config.preferences.javaScriptEnabled=YES;
+    config.preferences.javaScriptCanOpenWindowsAutomatically=YES;
     config.processPool=[[WKProcessPool alloc]init];
+    CGFloat i_width= [UIScreen mainScreen].bounds.size.width-20;
+    NSString *js =[NSString stringWithFormat: @"var count = document.images.length;for (var i = 0; i < count; i++) {var image = document.images[i];image.style.width=%f;};window.alert('找到' + count + '张图');",i_width];
+    // 根据JS字符串初始化WKUserScript对象
+    WKUserScript *script = [[WKUserScript alloc] initWithSource:js injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
+    // 根据生成的WKUserScript对象，初始化WKWebViewConfiguration
+    [config.userContentController addUserScript:script];
     
     _wb_content=[[WKWebView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-120) configuration:config];
     
@@ -51,7 +56,15 @@
     
     NSString *str_content=[NSString stringWithFormat:@"%@%@",str_headscale,_str_value];
     
-    [_wb_content loadHTMLString:str_content baseURL:nil];
+      
+    NSString *str_relplace1=[NSString stringWithFormat:@"%@%@:%@",@"http://",_str_ip,_str_port];
+    NSString *str_relplace2=@"<img src=\"";
+    NSString *str_replace_after=[NSString stringWithFormat:@"%@%@",str_relplace2,str_relplace1];
+    
+    NSString *str_newcontent=[str_content stringByReplacingOccurrencesOfString:str_relplace2 withString:str_replace_after];
+    
+    
+    [_wb_content loadHTMLString:str_newcontent baseURL:nil];
     
     [self.view addSubview:_wb_content];
 }
