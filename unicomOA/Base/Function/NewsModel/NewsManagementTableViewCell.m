@@ -90,6 +90,7 @@
         
         UIImageView *logoImage=[[UIImageView alloc]initWithFrame:CGRectMake(11, 7.5, 16, 16)];
         CGFloat i_left=17;
+        CGFloat i_width=WHScreenW-34;
         if (str_Image!=nil) {
             if (!iPad) {
                 i_left=32;
@@ -97,20 +98,22 @@
             else {
                 logoImage=[[UIImageView alloc]initWithFrame:CGRectMake(30, 7.5, 23, 23)];
                 i_left=80;
+                i_width=WHScreenW-100;
             }
             logoImage.image=[UIImage imageNamed:str_Image];
         }
         
-        lbl_Title=[[UILabel alloc]initWithFrame:CGRectMake(i_left, 5, WHScreenW-34, h_title)];
+        lbl_Title=[[UILabel alloc]initWithFrame:CGRectMake(i_left, 5, i_width, h_title)];
         
         lbl_Title.font=[UIFont systemFontOfSize:i_titleFont];
         lbl_Title.textColor=[UIColor blackColor];
-        lbl_Title.numberOfLines=0;
+        lbl_Title.numberOfLines=2;
         lbl_Title.attributedText = str_title;
+        lbl_Title.lineBreakMode=NSLineBreakByWordWrapping | NSLineBreakByTruncatingTail;
         [lbl_Title sizeToFit];
         
       //  lbl_Category=[[UILabel alloc] initWithFrame:CGRectMake(i_left, lbl_Title.frame.origin.y+lbl_Title.frame.size.height+5, WHScreenW*0.35, h_depart)];
-        lbl_Category=[[UILabel alloc] initWithFrame:CGRectMake(i_left, cellHeight-h_depart, WHScreenW*0.35, h_depart)];
+        lbl_Category=[[UILabel alloc] initWithFrame:CGRectMake(i_left, cellHeight-h_depart+10, WHScreenW*0.35, h_depart)];
 
         lbl_Category.font=[UIFont systemFontOfSize:i_otherFont];
         lbl_Category.textColor=[UIColor lightGrayColor];
@@ -120,7 +123,7 @@
         [lbl_Category sizeToFit];
 
         
-        lbl_department=[[UILabel alloc]initWithFrame:CGRectMake(WHScreenW*0.5, cellHeight-h_depart, WHScreenW*0.5, h_depart)];
+        lbl_department=[[UILabel alloc]initWithFrame:CGRectMake(WHScreenW*0.5, cellHeight-h_depart+10, WHScreenW*0.5, h_depart)];
         
         lbl_department.font=[UIFont systemFontOfSize:i_otherFont];
         lbl_department.textColor=[UIColor lightGrayColor];

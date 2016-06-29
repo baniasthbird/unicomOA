@@ -84,10 +84,10 @@
         view_line.backgroundColor=[UIColor colorWithRed:204/255.0f green:204/255.0f blue:204/255.0f alpha:1];
         
         if ([str_status isEqualToString:@"已办"]) {
-            _lbl_status.backgroundColor=[UIColor colorWithRed:61/255.0f green:189/255.0f blue:144/255.0f alpha:1];
+            _lbl_status.backgroundColor=[UIColor colorWithRed:21/255.0f green:189/255.0f blue:144/255.0f alpha:1];
         }
         else if ([str_status isEqualToString:@"待办"]) {
-            _lbl_status.backgroundColor=[UIColor colorWithRed:173/255.0f green:173/255.0f blue:173/255.0f alpha:1];
+            _lbl_status.backgroundColor=[UIColor colorWithRed:256/255.0f green:187/255.0f blue:67/255.0f alpha:1];
         }
         else {
             _lbl_status.backgroundColor=[UIColor colorWithRed:246/255.0f green:187/255.0f blue:57/255.0f alpha:1];

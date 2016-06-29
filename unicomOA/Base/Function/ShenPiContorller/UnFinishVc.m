@@ -554,13 +554,14 @@
                     str_value=(NSString*)obj_value;
                 }
                 NSArray *arr_listData=[dic_tmp objectForKey:@"listData"];
-                NSString *str_detail_value=str_label;
+                NSString *str_detail_value=str_value;
                 for (int l=0;l<[arr_listData count];l++) {
                     NSDictionary *dic= [arr_listData objectAtIndex:l];
-                    //   NSString *str_tmp=[dic objectForKey:@"value"];
-                    
-                    str_detail_value=[dic objectForKey:@"label"];
-                    
+                    NSString *str_tmp=[dic objectForKey:@"value"];
+                    if ([str_tmp isEqualToString:str_value]) {
+                         str_detail_value=[dic objectForKey:@"label"];
+                        break;
+                    }
                 }
                 BOOL b_multi=NO;
                 NSString *str_groupKey=[dic_tmp objectForKey:@"groupKey"];

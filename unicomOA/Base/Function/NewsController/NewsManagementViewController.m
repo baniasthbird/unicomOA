@@ -428,13 +428,35 @@
 -(CGFloat)cellHeightForNews:(NSInteger)i_index titleFont:(CGFloat)i_titleFont otherFont:(CGFloat)i_otherFont {
     NSDictionary *dic_content=[_arr_NewsList objectAtIndex:i_index];
     
-    CGFloat h_Title=[UILabel_LabelHeightAndWidth getHeightByWidth:15*self.view.frame.size.width/16 title:[dic_content objectForKey:@"title"] font:[UIFont systemFontOfSize:i_titleFont]];
+    CGFloat h_Title;
+    if (iPad) {
+        h_Title=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width-100 title:[dic_content objectForKey:@"title"] font:[UIFont systemFontOfSize:i_titleFont]];
+    }
+    else {
+        h_Title=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width-30 title:[dic_content objectForKey:@"title"] font:[UIFont systemFontOfSize:i_titleFont]];
+    }
     
     NSString *str_department = [dic_content objectForKey:@"operatorName"];
     CGFloat w_depart=[UILabel_LabelHeightAndWidth getWidthWithTitle:[dic_content objectForKey:@"operatorName"] font:[UIFont systemFontOfSize:i_otherFont]];
     CGFloat h_depart=[UILabel_LabelHeightAndWidth getHeightByWidth:w_depart title:str_department font:[UIFont systemFontOfSize:i_otherFont]];
     CGFloat h_height=h_Title+h_depart;
-    return  h_height+20;
+    if (iPad) {
+        if (h_Title>60) {
+            return 88+h_depart;
+        }
+        else {
+            return h_height+30;
+        }
+    }
+    else {
+        if (h_Title>45) {
+            return 71+h_depart;
+        }
+        else {
+            return h_height+30;
+        }
+    }
+
 }
 
 
@@ -498,7 +520,8 @@
         NSArray *arr_time=[str_time componentsSeparatedByString:@" "];
         NSString *str_time2=[arr_time objectAtIndex:0];
         NSString *str_depart=[NSString stringWithFormat:@"%@ %@",str_department,str_time2];
-        CGFloat h_height=h_Title+h_depart+20;
+        //CGFloat h_height=h_Title+h_depart+20;
+        CGFloat h_height=[self cellHeightForNews:indexPath.row titleFont:i_titleFont otherFont:i_otherFont];
         cell=[NewsManagementTableViewCell cellWithTable:tableView withCellHeight:h_height withTitleHeight:h_Title withButtonHeight:h_depart withTitle:attributedString withCategory:str_category withDepart:str_depart titleFont:i_titleFont otherFont:i_otherFont canScroll:NO withImage:nil];
         cell.delegate=self;
         cell.str_title=str_title;

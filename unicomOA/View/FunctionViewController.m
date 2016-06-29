@@ -169,6 +169,7 @@
     
     tmp_btn.center=CGPointMake(x,y);
     [tmp_btn setValue:[NSNumber numberWithInt:0] forKey:@"column"];
+    /*
     [tmp_btn setTitle:str_title forState:UIControlStateNormal];
     [tmp_btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     if (iPad) {
@@ -184,7 +185,7 @@
         [tmp_btn setTitleEdgeInsets:UIEdgeInsetsMake(50, 0, -73, 0)];
     }
 
-    
+    */
     
     
     [tmp_btn setBackgroundImage:[UIImage imageNamed:str_image] forState:UIControlStateNormal];
