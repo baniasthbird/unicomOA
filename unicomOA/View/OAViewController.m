@@ -96,7 +96,7 @@
     NSMutableDictionary *dic_param1=[NSMutableDictionary dictionary];
     dic_param1[@"pageIndex"]=@"1";
     [self PrePareData:dic_param1 interface:@"UnFinishTaskShenPiList"];
-    
+    [self AddressList];
     //UserInfo *userInfo=[self CreateUserInfo];
     /*
        */
@@ -311,6 +311,65 @@
         
     }
     
+    
+}
+
+
+//首次登陆准备通讯录数据
+//首次连接获取通讯录
+-(void)AddressList {
+    NSString *str_connection=[self GetConnectionStatus];
+    if ([str_connection isEqualToString:@"wifi"] || [str_connection isEqualToString:@"GPRS"]) {
+        NSString *str_ip=@"";
+        NSString *str_port=@"";
+        NSMutableArray *t_array=[db fetchIPAddress];
+        if (t_array.count==1) {
+            NSArray *arr_ip=[t_array objectAtIndex:0];
+            str_ip=[arr_ip objectAtIndex:0];
+            str_port=[arr_ip objectAtIndex:1];
+        }
+        NSString *str_addresslist=[db fetchInterface:@"AddressList"];
+        NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_addresslist];
+        [_session POST:str_url parameters:nil progress:^(NSProgress * _Nonnull uploadProgress) {
+            
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            
+            NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            NSString *str_success= [JSON objectForKey:@"success"];
+            int i_success=[str_success intValue];
+            if (i_success==1) {
+                NSLog(@"获取通讯录列表成功:%@",responseObject);
+                [indicator stopAnimating];
+               // [_refreshControl endRefreshing];
+                NSMutableArray *staffArray=[JSON objectForKey:@"empList"];
+                NSMutableArray *departArray=[JSON objectForKey:@"orgList"];
+                
+                [db InserStaffTable:staffArray];
+                [db InserDepartMentTable:departArray];
+                
+                //  DataSource *dt_tmp=[[DataSource alloc]init];
+                //  _dataArray=[dt_tmp addRealData:staffArray departArray:departArray];
+                //  [self reloadDataForDisplayArray];
+                
+            }
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            [indicator stopAnimating];
+            LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"提示" message:@"连接服务器失败" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+                
+            }];
+            [alert showLXAlertView];
+        }];
+        
+    }
+    else {
+        [indicator stopAnimating];
+       // [_refreshControl endRefreshing];
+        LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"警告" message:@"无网络连接" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+            
+        }];
+        [alert showLXAlertView];
+    }
     
 }
 

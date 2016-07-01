@@ -86,6 +86,8 @@
     selectedIndex=-1;
     b_ReplaceDataSource=NO;
     
+    _baseFunc=[[BaseFunction alloc]init];
+    
     _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-50) style:UITableViewStylePlain];
     _tableView.delegate=self;
     _tableView.dataSource=self;
@@ -264,7 +266,7 @@
         if ([_arr_NewsList count]==0) {
             return 110;
         }
-        else {
+        else  {
             
             
             CGFloat h_height=0;
@@ -308,20 +310,31 @@
   //  @try {
         if (i_index<[_arr_NewsList count]) {
             NSDictionary *dic_content=[_arr_NewsList objectAtIndex:i_index];
-            
-            
-            CGFloat h_Title;
-            if (iPad) {
-                h_Title=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width-100 title:[dic_content objectForKey:@"title"] font:[UIFont systemFontOfSize:i_titleFont]];
+             CGFloat h_Title;
+            NSString *str_title=[_baseFunc GetValueFromDic:dic_content key:@"title"];
+            if (i_index<4) {
+                if (iPad) {
+                    h_Title=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width-100 title:str_title font:[UIFont systemFontOfSize:i_titleFont]];
+                }
+                else {
+                    h_Title=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width-80 title:str_title font:[UIFont systemFontOfSize:i_titleFont]];
+                }
             }
             else {
-                h_Title=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width-30 title:[dic_content objectForKey:@"title"] font:[UIFont systemFontOfSize:i_titleFont]];
+                if (iPad) {
+                    h_Title=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width-100 title:str_title font:[UIFont systemFontOfSize:i_titleFont]];
+                }
+                else {
+                    h_Title=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width-30 title:str_title font:[UIFont systemFontOfSize:i_titleFont]];
+                }
+
             }
+           
             
             
             NSString *str_department = [dic_content objectForKey:@"operatorName"];
-            CGFloat w_depart=[UILabel_LabelHeightAndWidth getWidthWithTitle:[dic_content objectForKey:@"operatorName"] font:[UIFont systemFontOfSize:i_otherFont]];
-            CGFloat h_depart=[UILabel_LabelHeightAndWidth getHeightByWidth:w_depart title:str_department font:[UIFont systemFontOfSize:i_otherFont]];
+          //  CGFloat w_depart=[UILabel_LabelHeightAndWidth getWidthWithTitle:[dic_content objectForKey:@"operatorName"] font:[UIFont systemFontOfSize:i_otherFont]];
+            CGFloat h_depart=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width title:str_department font:[UIFont systemFontOfSize:i_otherFont]];
             CGFloat h_height=h_Title+h_depart;
             if (iPad) {
                 if (h_Title>60) {
@@ -377,7 +390,9 @@
                 if (indexPath.section-1<[_arr_NewsList count]) {
                     NewsManagementTableViewCell *cell;
                     NSDictionary *dic_content=[_arr_NewsList objectAtIndex:indexPath.section-1];
-                    NSString *str_category=[dic_content objectForKey:@"classname"];
+                   // NSString *str_category=[dic_content objectForKey:@"classname"];
+                    NSString *str_category=[_baseFunc GetValueFromDic:dic_content key:@"classname"];
+                    
                     CGFloat i_titleFont=0;
                     CGFloat i_otherFont=0;
                     if (iPhone6_plus) {
@@ -393,24 +408,34 @@
                         i_otherFont=11;
                     }
                     //  CGFloat h_category=[UILabel_LabelHeighndWidth getHeightByWidth:15*self.view.frame.size.width/16 title:str_category font:[UIFont systemFontOfSize:i_otherFont]];
-                    NSString *str_title=[dic_content objectForKey:@"title"];
+                    NSString *str_title=[_baseFunc GetValueFromDic:dic_content key:@"title"];
                     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str_title];
                     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
                     [paragraphStyle setLineSpacing:5];
                     [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [str_title length])];
                     
-                    CGFloat h_Title=[UILabel_LabelHeightAndWidth getHeightByWidth:15*self.view.frame.size.width/16 title:[dic_content objectForKey:@"title"] font:[UIFont systemFontOfSize:i_titleFont]];
-                    NSString *str_department = [dic_content objectForKey:@"operationDeptName"];
-                    CGFloat w_depart=[UILabel_LabelHeightAndWidth getWidthWithTitle:[dic_content objectForKey:@"operatorName"] font:[UIFont systemFontOfSize:i_otherFont]];
-                    CGFloat h_depart=[UILabel_LabelHeightAndWidth getHeightByWidth:w_depart title:str_department font:[UIFont systemFontOfSize:i_otherFont]];
-                    NSString *str_time =[dic_content objectForKey:@"startDate"];
+                    CGFloat h_Title;
+                    if (iPad) {
+                        h_Title=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width-100 title:str_title font:[UIFont systemFontOfSize:i_titleFont]];
+                    }
+                    else {
+                        h_Title=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width-30 title:str_title font:[UIFont systemFontOfSize:i_titleFont]];
+                    }
+                    NSString *str_department =[_baseFunc GetValueFromDic:dic_content key:@"operationDeptName"];
+                   // CGFloat w_depart=[UILabel_LabelHeightAndWidth getWidthWithTitle:[dic_content objectForKey:@"operatorName"] font:[UIFont systemFontOfSize:i_otherFont]];
+                    CGFloat h_depart=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width title:str_department font:[UIFont systemFontOfSize:i_otherFont]];
+                    NSString *str_time =[_baseFunc GetValueFromDic:dic_content key:@"startDate"];
                     NSArray *arr_time=[str_time componentsSeparatedByString:@" "];
                     NSString *str_time2=[arr_time objectAtIndex:0];
                     NSString *str_depart=[NSString stringWithFormat:@"%@ %@",str_department,str_time2];
                     //CGFloat h_height=h_Title+h_depart+30;
                     CGFloat h_height=[self cellHeightForNews:indexPath.section-1 titleFont:i_titleFont otherFont:i_otherFont];
-                    
-                    cell=[NewsManagementTableViewCell cellWithTable:tableView withCellHeight:h_height withTitleHeight:h_Title withButtonHeight:h_depart withTitle:attributedString withCategory:str_category withDepart:str_depart titleFont:i_titleFont otherFont:i_otherFont canScroll:NO withImage:@"hot.png"];
+                    if (indexPath.section<4) {
+                        cell=[NewsManagementTableViewCell cellWithTable:tableView withCellHeight:h_height withTitleHeight:h_Title withButtonHeight:h_depart withTitle:attributedString withCategory:str_category withDepart:str_depart titleFont:i_titleFont otherFont:i_otherFont canScroll:NO withImage:@"hot.png"];
+                    }
+                    else {
+                         cell=[NewsManagementTableViewCell cellWithTable:tableView withCellHeight:h_height withTitleHeight:h_Title withButtonHeight:h_depart withTitle:attributedString withCategory:str_category withDepart:str_depart titleFont:i_titleFont otherFont:i_otherFont canScroll:NO withImage:nil];
+                    }
                     cell.delegate=self;
                     cell.str_title=str_title;
                     cell.str_department=str_department;
@@ -605,6 +630,14 @@
     b_ReplaceDataSource=YES;
 }
 
+-(NSString*)GetValueFromDic:(NSDictionary*)dic_tmp key:(NSString*)str_key {
+    NSObject *obj_tmp=[dic_tmp objectForKey:str_key];
+    NSString *str_tmp=@"";
+    if (obj_tmp!=[NSNull null]) {
+        str_tmp=(NSString*)obj_tmp;
+    }
+    return str_tmp;
+}
 /*
 #pragma mark - Navigation
 

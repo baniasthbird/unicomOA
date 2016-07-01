@@ -71,6 +71,7 @@
     self.view.backgroundColor=[UIColor colorWithRed:246/255.0f green:249/255.0f blue:254/255.0f alpha:1];
     
     
+    _baseFunc=[[BaseFunction alloc]init];
     db=[DataBase sharedinstanceDB];
     
     _session=[AFHTTPSessionManager manager];
@@ -175,11 +176,7 @@
                     else {
                         [indicator stopAnimating];
                         [_refreshControl endRefreshing];
-                        NSObject *obj_msg= [JSON objectForKey:@"msg"];
-                        NSString *str_msg=@"";
-                        if (obj_msg!=[NSNull null]) {
-                            str_msg=(NSString*)obj_msg;
-                        }
+                        NSString *str_msg=[_baseFunc GetValueFromDic:JSON key:@"msg"];
                         LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"提示" message:str_msg cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
                             
                         }];
@@ -355,11 +352,7 @@
         NSString *str_type=[dic_tmp objectForKey:@"type"];
         if ([str_type isEqualToString:@"text"] || [str_type isEqualToString:@"int"] || [str_type isEqualToString:@"date"] || [str_type isEqualToString:@"textarea"]|| [str_type isEqualToString:@"datetime"] || [str_type isEqualToString:@"FLOAT"]) {
             NSString *str_label=[dic_tmp objectForKey:@"label"];
-            NSObject *obj_value=[dic_tmp objectForKey:@"value"];
-            NSString *str_value=@"";
-            if (obj_value!=[NSNull null]) {
-                str_value=(NSString*)obj_value;
-            }
+            NSString *str_value=[_baseFunc GetValueFromDic:dic_tmp key:@"value"];
             cell.textLabel.text=str_label;
             cell.textLabel.numberOfLines=0;
             cell.detailTextLabel.text=str_value;

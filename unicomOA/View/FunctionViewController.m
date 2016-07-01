@@ -24,12 +24,14 @@
 #define kImageWidth 100      //UITAbleViewCell里面图片的宽度
 #define kImageHeight 100     //UITableViewCell里面图片的高度
 
-@interface FunctionViewController ()<ClearRedDotDelegate,MyShenPiViewControllerDelegate>
+@interface FunctionViewController ()<MyShenPiViewControllerDelegate>
 
-@property(nonatomic,strong) UITableView *tableView;
+//@property(nonatomic,strong) UITableView *tableView;
 @property(nonatomic,strong) UIImage *image;
 
 @property (nonatomic,strong) AFHTTPSessionManager *session;
+
+@property (nonatomic,strong) UIImageButton *btn_ShenPi;
 
 @end
 
@@ -83,7 +85,7 @@
     
     CGSize mSize=[[UIScreen mainScreen] bounds].size;
     CGFloat screenWidth=mSize.width;
-    CGFloat screenHeiht=mSize.height;
+    //CGFloat screenHeiht=mSize.height;
     
     [self.tabBarController.tabBar hideBadgeOnItemIndex:2];
     
@@ -111,17 +113,89 @@
         img_View.image=[UIImage imageNamed:@"bg_Nav.png"];
     }
     
+    UILabel *lbl_title1=[[UILabel alloc]initWithFrame:CGRectMake(10, 10, [UIScreen mainScreen].bounds.size.width-10, 15)];
+    lbl_title1.textAlignment=NSTextAlignmentLeft;
+    lbl_title1.text=@"快捷办公";
+    lbl_title1.textColor=[UIColor blackColor];
+    lbl_title1.font=[UIFont systemFontOfSize:14];
     
+    UIView *view_part1=[[UIView alloc]initWithFrame:CGRectMake(8, 35, [UIScreen mainScreen].bounds.size.width-16, 80)];
+    view_part1.backgroundColor=[UIColor clearColor];
+    view_part1.layer.borderWidth=1;
+    view_part1.layer.borderColor=[[UIColor colorWithRed:231/255.0f green:231/255.0f blue:231/255.0f alpha:1] CGColor];
+    
+    UIImageButton *btn_News=[self createImageButton:20 y:17 width:46 height:46 title:@"新闻公告" image:@"News.png"];
+    [btn_News addTarget:self action:@selector(NewsItemClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIImageButton *btn_IVoting=[self createImageButton:95 y:17 width:46 height:46 title:@"在线投票" image:@"IVoting.png"];
+    [btn_IVoting addTarget:self action:@selector(IVotingItemClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    UILabel *lbl_title2=[[UILabel alloc]initWithFrame:CGRectMake(10, 130, [UIScreen mainScreen].bounds.size.width-10, 15)];
+    lbl_title2.textAlignment=NSTextAlignmentLeft;
+    lbl_title2.text=@"常用审批";
+    lbl_title2.textColor=[UIColor blackColor];
+    lbl_title2.font=[UIFont systemFontOfSize:14];
+    
+    UIView *view_part2=[[UIView alloc]initWithFrame:CGRectMake(8, 152, [UIScreen mainScreen].bounds.size.width-16, 160)];
+    view_part2.backgroundColor=[UIColor clearColor];
+    view_part2.layer.borderWidth=1;
+    view_part2.layer.borderColor=[[UIColor colorWithRed:231/255.0f green:231/255.0f blue:231/255.0f alpha:1] CGColor];
+    
+    _btn_ShenPi=[self createImageButton:28 y:169 width:46 height:46 title:@"审批" image:@"ShenPi.png"];
+    [_btn_ShenPi addTarget:self action:@selector(ShenPiItemClick:) forControlEvents:UIControlEventTouchUpInside];
+    if (i_total!=0) {
+        _btn_ShenPi.badgeBgColor=[UIColor redColor];
+       // _btn_ShenPi.badgeCenterOffset=CGPointMake(0, _btn_ShenPi.size.height*0.08);
+        [_btn_ShenPi showBadgeWithStyle:WBadgeStyleNumber value:i_total animationType:WBadgeAnimTypeNone];
+        if (iPad) {
+            [_btn_ShenPi setBadgeFrame:CGRectMake(_btn_ShenPi.badge.frame.origin.x, _btn_ShenPi.badge.frame.origin.y, 35, 35)];
+            _btn_ShenPi.badge.layer.cornerRadius=17.5;
+            _btn_ShenPi.badge.font=[UIFont systemFontOfSize:18];
+            // btn_ShenPi.badge.layer.cornerRadius=btn_ShenPi.badge.frame.size.height*2;
+        }
+        
+    }
+    
+    UILabel *lbl_title3=[[UILabel alloc]initWithFrame:CGRectMake(10, 327, [UIScreen mainScreen].bounds.size.width-10, 15)];
+    lbl_title3.textAlignment=NSTextAlignmentLeft;
+    lbl_title3.text=@"应用中心";
+    lbl_title3.textColor=[UIColor blackColor];
+    lbl_title3.font=[UIFont systemFontOfSize:14];
+    
+    UIView *view_part3=[[UIView alloc]initWithFrame:CGRectMake(8, 349, [UIScreen mainScreen].bounds.size.width-16, 80)];
+    view_part3.backgroundColor=[UIColor clearColor];
+    view_part3.layer.borderWidth=1;
+    view_part3.layer.borderColor=[[UIColor colorWithRed:231/255.0f green:231/255.0f blue:231/255.0f alpha:1] CGColor];
+    
+    UIImageButton *btn_Notes=[self createImageButton:20 y:17 width:46 height:46 title:@"备忘录" image:@"Notes.png"];
+    [btn_Notes addTarget:self action:@selector(NotesItemClick:) forControlEvents:UIControlEventTouchUpInside];
+
+    
+    
+    [self.view addSubview:lbl_title1];
+    [self.view addSubview:lbl_title2];
+    [self.view addSubview:lbl_title3];
+    [view_part1 addSubview:btn_News];
+    [view_part1 addSubview:btn_IVoting];
+    [self.view addSubview:_btn_ShenPi];
+    [view_part3 addSubview:btn_Notes];
+    [self.view addSubview:view_part1];
+    [self.view addSubview:view_part2];
+    [self.view sendSubviewToBack:view_part2];
+    [self.view addSubview:view_part3];
+    
+    /*
     self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, screenWidth, screenHeiht) style:UITableViewStylePlain];
     [self.view addSubview:_tableView];
     self.tableView.dataSource=self;
     self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     self.tableView.delegate=self;
     self.tableView.backgroundColor=[UIColor clearColor];
-    
+    */
    // [self.view addSubview:img_View];
     
-    self.view.backgroundColor=[UIColor colorWithRed:244/255.0f green:245/255.0f blue:249/255.0f alpha:1];
+    self.view.backgroundColor=[UIColor whiteColor];
     
     db=[DataBase sharedinstanceDB];
     
@@ -141,51 +215,34 @@
 }
 
 #pragma mark UITable datasource and delegate
+/*
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
+    return 3;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
+    if (section==0) {
+        return 1;
+    }
+    else if (section==1) {
+        return 2;
+    }
+    else {
+        return 2;
+    }
 }
+*/
 
-
--(UIImageButton *)createImageButton:(CGFloat)x CenterY:(CGFloat)y title:(NSString*)str_title image:(NSString *)str_image {
+-(UIImageButton *)createImageButton:(CGFloat)x y:(CGFloat)y width:(CGFloat)width height:(CGFloat)height title:(NSString*)str_title image:(NSString *)str_image {
     UIImageButton *tmp_btn=[UIImageButton buttonWithType:UIButtonTypeCustom];
-    if ( iPhone6_plus) {
-        tmp_btn.bounds=CGRectMake(0, 0, kImageWidth, kImageHeight);
-    }
-    else if (iPhone6) {
-        tmp_btn.bounds=CGRectMake(0, 0, 92, 92);
-    }
-    else if (iPhone4_4s || iPhone5_5s) {
-        tmp_btn.bounds=CGRectMake(0, 0, 90, 90);
-
-    }
-    else if (iPad) {
-        tmp_btn.bounds=CGRectMake(0, 0, 160, 160);
-    }
+    [tmp_btn setFrame:CGRectMake(x, y, width, height)];
     
     
-    tmp_btn.center=CGPointMake(x,y);
     [tmp_btn setValue:[NSNumber numberWithInt:0] forKey:@"column"];
-    /*
-    [tmp_btn setTitle:str_title forState:UIControlStateNormal];
-    [tmp_btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    if (iPad) {
-        [tmp_btn setTitleEdgeInsets:UIEdgeInsetsMake(50, 0, -150, 0)];
-    }
-    else if (iPhone5_5s) {
-        [tmp_btn setTitleEdgeInsets:UIEdgeInsetsMake(50, 0, -63, 0)];
-    }
-    else if (iPhone6) {
-        [tmp_btn setTitleEdgeInsets:UIEdgeInsetsMake(50, 0, -68, 0)];
-    }
-    else if (iPhone6_plus) {
-        [tmp_btn setTitleEdgeInsets:UIEdgeInsetsMake(50, 0, -73, 0)];
-    }
-
-    */
+    
+  //  [tmp_btn setTitle:str_title forState:UIControlStateNormal];
+  //  tmp_btn.titleLabel.textColor=[UIColor blackColor];
+    //tmp_btn.titleEdgeInsets=UIEdgeInsetsMake(46, 44, 0, 0);
     
     
     [tmp_btn setBackgroundImage:[UIImage imageNamed:str_image] forState:UIControlStateNormal];
@@ -194,6 +251,7 @@
 
 }
 
+/*
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *identifier=@"Cell";
     //自定义UITableGridViewCell
@@ -209,12 +267,6 @@
         UIImageButton *btn_IVoting;
         UIImageButton *btn_Notes;
     
-    UIView *line1_1;
-    UIView *line1_2;
-    
-    UIView *line2_1;
-    UIView *line2_2;
-    UIView *line2_3;
     
         if (iPhone6) {
             btn_News=[self createImageButton:60 CenterY:70 title:@"公告" image:@"News.png"];
@@ -226,11 +278,6 @@
             btn_Notes=[self createImageButton:60 CenterY:70 title:@"备忘录" image:@"Notes.png"];
             [btn_Notes addTarget:self action:@selector(NotesItemClick:) forControlEvents:UIControlEventTouchUpInside];
             
-            line1_1=[[UIView alloc]initWithFrame:CGRectMake(120, 0, 1, 550)];
-            line2_1=[[UIView alloc] initWithFrame:CGRectMake(10, 140, [UIScreen mainScreen].bounds.size.width-20, 1)];
-            line1_2=[[UIView alloc]initWithFrame:CGRectMake(255, 0, 1, 550)];
-            line2_2=[[UIView alloc] initWithFrame:CGRectMake(10, 270, [UIScreen mainScreen].bounds.size.width-20, 1)];
-            line2_3=[[UIView alloc] initWithFrame:CGRectMake(10, 400, [UIScreen mainScreen].bounds.size.width-20, 1)];
             
         }
         else if (iPhone5_5s || iPhone4_4s) {
@@ -243,11 +290,7 @@
             btn_Notes=[self createImageButton:55 CenterY:55 title:@"备忘录" image:@"Notes.png"];
             [btn_Notes addTarget:self action:@selector(NotesItemClick:) forControlEvents:UIControlEventTouchUpInside];
             
-            line1_1=[[UIView alloc]initWithFrame:CGRectMake(110, -20, 1, 470)];
-            line2_1=[[UIView alloc] initWithFrame:CGRectMake(10, 130, [UIScreen mainScreen].bounds.size.width-20, 1)];
-            line1_2=[[UIView alloc]initWithFrame:CGRectMake(220, -20, 1, 470)];
-            line2_2=[[UIView alloc] initWithFrame:CGRectMake(10, 280, [UIScreen mainScreen].bounds.size.width-20, 1)];
-            line2_3=[[UIView alloc] initWithFrame:CGRectMake(10, 430, [UIScreen mainScreen].bounds.size.width-20, 1)];
+        
 
         }
         else if (iPhone6_plus)
@@ -261,21 +304,14 @@
                 btn_Notes=[self createImageButton:70 CenterY:75 title:@"备忘录" image:@"Notes.png"];
                [btn_Notes addTarget:self action:@selector(NotesItemClick:) forControlEvents:UIControlEventTouchUpInside];
             
-            line1_1=[[UIView alloc]initWithFrame:CGRectMake(135, 0, 1, 610)];
-            line2_1=[[UIView alloc] initWithFrame:CGRectMake(10, 160, [UIScreen mainScreen].bounds.size.width-20, 1)];
-            line1_2=[[UIView alloc]initWithFrame:CGRectMake(270, 0, 1, 610)];
-            line2_2=[[UIView alloc] initWithFrame:CGRectMake(10, 310, [UIScreen mainScreen].bounds.size.width-20, 1)];
-            line2_3=[[UIView alloc] initWithFrame:CGRectMake(10, 460, [UIScreen mainScreen].bounds.size.width-20, 1)];
-        }
+                  }
         else if (iPad) {
             btn_News=[self createImageButton:122 CenterY:102 title:@"公告" image:@"News.png"];
             [btn_News addTarget:self action:@selector(NewsItemClick:) forControlEvents:UIControlEventTouchUpInside];
-            line1_1=[[UIView alloc]initWithFrame:CGRectMake(250, 0, 1, 765)];
-            line2_1=[[UIView alloc] initWithFrame:CGRectMake(10, 250, [UIScreen mainScreen].bounds.size.width-20, 1)];
+         
             btn_ShenPi=[self createImageButton:378 CenterY:102 title:@"审批" image:@"ShenPi.png"];
             [btn_ShenPi addTarget:self action:@selector(ShenPiItemClick:) forControlEvents:UIControlEventTouchUpInside];
-            line1_2=[[UIView alloc]initWithFrame:CGRectMake(500, 0, 1, 765)];
-            line2_2=[[UIView alloc] initWithFrame:CGRectMake(10, 500, [UIScreen mainScreen].bounds.size.width-20, 1)];
+          
             btn_IVoting=[self createImageButton:634 CenterY:102 title:@"投票" image:@"IVoting.png"];
            // [btn_IVoting addTarget:self action:@selector(IVotingItemClick:) forControlEvents:UIControlEventTouchUpInside];
             btn_Notes=[self createImageButton:122 CenterY:102 title:@"备忘录" image:@"Notes.png"];
@@ -299,22 +335,14 @@
         }
        
     
-    line1_1.backgroundColor=[UIColor colorWithRed:232/255.0f green:232/255.0f blue:232/255.0f alpha:1];
-    line1_2.backgroundColor=[UIColor colorWithRed:232/255.0f green:232/255.0f blue:232/255.0f alpha:1];
-    line2_1.backgroundColor=[UIColor colorWithRed:232/255.0f green:232/255.0f blue:232/255.0f alpha:1];
-    line2_2.backgroundColor=[UIColor colorWithRed:232/255.0f green:232/255.0f blue:232/255.0f alpha:1];
-    line2_3.backgroundColor=[UIColor colorWithRed:232/255.0f green:232/255.0f blue:232/255.0f alpha:1];
+ 
     
     
         if (indexPath.row==0) {
             [cell addSubview:btn_News];
             [cell addSubview:btn_ShenPi];
             [cell addSubview:btn_IVoting];
-            [cell addSubview:line1_1];
-            [cell addSubview:line1_2];
-            [cell addSubview:line2_1];
-            [cell addSubview:line2_2];
-            [cell addSubview:line2_3];
+      
             cell.backgroundColor=[UIColor colorWithRed:244/255.0f green:245/255.0f blue:249/255.0f alpha:1];
             [array addObject:btn_News];
             [array addObject:btn_ShenPi];
@@ -335,7 +363,9 @@
         
         return cell;
 }
+*/
 
+/*
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (iPad) {
         return 270;
@@ -349,20 +379,21 @@
     else {
         return kImageHeight+30;
     }
-    
 }
+
+
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     //不让tableViewcellY有选中效果
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
-
+*/
 -(void)NewsItemClick:(UIImageButton *)button {
 #pragma mark 控制红点通知
     
     NewsManagementViewController *newsView=[[NewsManagementViewController alloc]init];
     newsView.b_hasnews= button.badge.isHidden;
-    newsView.delegate=self;
+    //newsView.delegate=self;
     newsView.userInfo=_userInfo;
     [self.navigationController pushViewController:newsView animated:YES];
 }
@@ -403,6 +434,7 @@
     [self.navigationController pushViewController:notesView animated:YES];
 }
 
+/*
 -(void)ClearNewsRedDot {
     UITableViewCell *cell=[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     UITableGridViewCell *news_cell=(UITableGridViewCell*)cell;
@@ -416,9 +448,8 @@
         }
     }
     [self.tableView reloadData];
-    
 }
-
+*/
 //点击审批后返回时刷新badgeValue
 -(void)RefreshBadge:(NSMutableDictionary*)param {
     NSString *str_connection=[self GetConnectionStatus];
@@ -460,7 +491,12 @@
                     NSArray *arr_TaskList=[JSON1 objectForKey:@"taskList"];
                     NSInteger i_integer=[str_totalPage integerValue];
                     i_total=[arr_TaskList count]+(i_integer-1)*10;
-                    [self.tableView reloadData];
+                    _btn_ShenPi.badgeBgColor=[UIColor redColor];
+                    // _btn_ShenPi.badgeCenterOffset=CGPointMake(0, _btn_ShenPi.size.height*0.08);
+                    [_btn_ShenPi showBadgeWithStyle:WBadgeStyleNumber value:i_total animationType:WBadgeAnimTypeNone];
+                    [self.view setNeedsDisplay];
+
+                  //  [self.tableView reloadData];
                 } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                     
                 }];
@@ -501,11 +537,15 @@
                 NSArray *arr_TaskList=[JSON objectForKey:@"taskList"];
                 NSInteger i_integer=[_str_page integerValue];
                 i_total=[arr_TaskList count]+(i_integer-1)*10;
+               // [_btn_ShenPi setNeedsDisplay];
+                _btn_ShenPi.badgeBgColor=[UIColor redColor];
+                // _btn_ShenPi.badgeCenterOffset=CGPointMake(0, _btn_ShenPi.size.height*0.08);
+                [_btn_ShenPi showBadgeWithStyle:WBadgeStyleNumber value:i_total animationType:WBadgeAnimTypeNone];
+                [self.view setNeedsDisplay];
                 
                 
                 
-                
-                 [self.tableView reloadData];
+               //  [self.tableView reloadData];
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             [indicator stopAnimating];

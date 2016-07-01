@@ -143,6 +143,7 @@
 		684A715D1CD9DC5F00A892B1 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 684A715C1CD9DC5F00A892B1 /* MobileCoreServices.framework */; };
 		684E93D31CFD537600545D55 /* UITabBar+badge.m in Sources */ = {isa = PBXBuildFile; fileRef = 684E93D21CFD537600545D55 /* UITabBar+badge.m */; };
 		685233931CD9F9DE0093E368 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 685233921CD9F9DE0093E368 /* MapKit.framework */; };
+		6853A3F91D2679C500AE5145 /* BaseFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 6853A3F81D2679C500AE5145 /* BaseFunction.m */; };
 		68579FA31CC0BBCE00597FBD /* ShenPiAgreeWithCarDeploy.m in Sources */ = {isa = PBXBuildFile; fileRef = 68579FA21CC0BBCE00597FBD /* ShenPiAgreeWithCarDeploy.m */; };
 		68579FA61CC0C21100597FBD /* CarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68579FA51CC0C21100597FBD /* CarModel.m */; };
 		68579FA91CC0C88600597FBD /* CarDeployCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68579FA81CC0C88600597FBD /* CarDeployCell.m */; };
@@ -530,6 +531,8 @@
 		684E93D11CFD537600545D55 /* UITabBar+badge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITabBar+badge.h"; path = "View/UITabBar+badge.h"; sourceTree = "<group>"; };
 		684E93D21CFD537600545D55 /* UITabBar+badge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITabBar+badge.m"; path = "View/UITabBar+badge.m"; sourceTree = "<group>"; };
 		685233921CD9F9DE0093E368 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		6853A3F71D2679C500AE5145 /* BaseFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseFunction.h; sourceTree = "<group>"; };
+		6853A3F81D2679C500AE5145 /* BaseFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseFunction.m; sourceTree = "<group>"; };
 		68579FA11CC0BBCE00597FBD /* ShenPiAgreeWithCarDeploy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShenPiAgreeWithCarDeploy.h; path = Base/Function/ShenPiContorller/ShenPiAgreeWithCarDeploy.h; sourceTree = "<group>"; };
 		68579FA21CC0BBCE00597FBD /* ShenPiAgreeWithCarDeploy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShenPiAgreeWithCarDeploy.m; path = Base/Function/ShenPiContorller/ShenPiAgreeWithCarDeploy.m; sourceTree = "<group>"; };
 		68579FA41CC0C21100597FBD /* CarModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CarModel.h; path = Base/Function/ShenPiModel/CarModel.h; sourceTree = "<group>"; };
@@ -861,6 +864,7 @@
 		2C703CEB1CDECCAA00C7EF77 /* DevKit */ = {
 			isa = PBXGroup;
 			children = (
+				6853A3F61D2679C500AE5145 /* Base */,
 				2C703CEC1CDECCB800C7EF77 /* db */,
 			);
 			name = DevKit;
@@ -1375,6 +1379,16 @@
 				6846EC6B1CFAD48300A400C5 /* YBMonitorNetWorkState.m */,
 			);
 			name = NetWork;
+			sourceTree = "<group>";
+		};
+		6853A3F61D2679C500AE5145 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				6853A3F71D2679C500AE5145 /* BaseFunction.h */,
+				6853A3F81D2679C500AE5145 /* BaseFunction.m */,
+			);
+			name = Base;
+			path = DevKit/Base;
 			sourceTree = "<group>";
 		};
 		6884D2CD1CD98B4A006215E5 /* UIView-MGBadgeView */ = {
@@ -1959,6 +1973,7 @@
 				2C5460A81C82F5C3005C5AB9 /* UserEntity.m in Sources */,
 				2CFEAD2D1C717FDC0054730E /* SettingViewController.m in Sources */,
 				6846D3531CAB5A1E004BD285 /* IVotingManamentController.m in Sources */,
+				6853A3F91D2679C500AE5145 /* BaseFunction.m in Sources */,
 				68D05CC01C97AC050039220F /* SendFeedBackViewController.m in Sources */,
 				682B68B01CB618DD002EC60F /* PrintApplicationNoFileCell.m in Sources */,
 				6884D2D01CD98B4A006215E5 /* UIView+MGBadgeView.m in Sources */,

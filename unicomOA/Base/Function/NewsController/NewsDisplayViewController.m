@@ -107,7 +107,7 @@ int i_comment_num;
     WKWebViewConfiguration *config=[[WKWebViewConfiguration alloc]init];
     //设置偏好设置
     config.preferences=[[WKPreferences alloc]init];
-    config.preferences.minimumFontSize=18;
+    config.preferences.minimumFontSize=10;
     config.preferences.javaScriptEnabled=YES;
     config.preferences.javaScriptCanOpenWindowsAutomatically=NO;
     config.processPool=[[WKProcessPool alloc]init];
@@ -121,7 +121,7 @@ int i_comment_num;
     
     
    
-    _wb_content=[[WKWebView alloc]initWithFrame:CGRectMake(0, _h_title+25+self.view.frame.size.height*0.02, self.view.frame.size.width, self.view.frame.size.height-120-_h_title) configuration:config];
+    _wb_content=[[WKWebView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) configuration:config];
     _wb_content.navigationDelegate=self;
          //_txt_content=[[UITextView alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height*0.20, 15*self.view.frame.size.width/16, self.view.frame.size.height*0.51)];
     
@@ -134,8 +134,8 @@ int i_comment_num;
     //_txt_content.text=@"国务院有关部门、直属机构，各省、自治区、直辖市发展改革委、物价局：\n        为贯彻落实党的十八届三中全会精神和国务院关于进一步简政放权、推进职能转变的要求，根据当前市场竞争情况，经商住房和城乡建设部同意，决定放开部分建设项目服务收费标准。现就有关事项通知如下：\n        放开除政府投资项目及政府委托服务以外的建设项目前期工作咨询、工程勘察设计、招标代理、工程监理等4项服务收费标准，实行市场调节价。采用直接投资和资本金注入的政府投资项目，以及政府委托的上述服务收费，继续实行政府指导价管理，执行规定的收费标准；实行市场调节价的专业服务收费，由委托双方依据服务成本、服务质量和市场供求状况等协商确定。\n        各级价格主管部门要强化市场价格监测，加强市场价格行为监管和反价格垄断执法，依法查处各类价格违法行为，维护正常的市场秩序，保障市场主体合法权益。\n        在放开收费标准过程中遇到的问题和建议，请及时报告我委（价格司）。\n        上述规定自2014年8月1日起执行。此前有关规定与本通知不符的，按本通知规定执行。\n                   国家发展改革委                2014年7月10日";
    // _txt_content.scrollEnabled=YES;
    // _txt_content.editable=NO;
-    [self.view addSubview:_lbl_depart];
-    [self.view addSubview:_lbl_label];
+   // [self.view addSubview:_lbl_depart];
+    //[self.view addSubview:_lbl_label];
     [self.view addSubview:_wb_content];
     
     [indicator startAnimating];
@@ -261,19 +261,28 @@ int i_comment_num;
             NSDictionary *dic_news= [JSON objectForKey:@"news"];
             if (dic_news.count>0) {
                 [indicator stopAnimating];
-                _lbl_label.text=[dic_news objectForKey:@"title"];
+                NSString *str_title=[dic_news objectForKey:@"title"];
+                _lbl_label.text=str_title; 
                 NSString *str_depart=[dic_news objectForKey:@"operationDeptName"];
                 NSString *str_operator=[dic_news objectForKey:@"operatorName"];
                 NSString *str_date=[dic_news objectForKey:@"addTime"];
                 NSArray *arr_date=[str_date componentsSeparatedByString:@" "];
                 NSString *str_day=[arr_date objectAtIndex:0];
-                NSString *str_departlabel=[NSString stringWithFormat:@"      %@    %@ %@",str_depart,str_operator,str_day];
+                NSString *str_departlabel=[NSString stringWithFormat:@"%@      %@     %@",str_depart,str_operator,str_day];
                 _lbl_depart.text=str_departlabel;
                // _h_depart=[UILabel_LabelHeightAndWidth getHeightByWidth:_lbl_depart.frame.size.width title:str_departlabel font:[UIFont systemFontOfSize:14]];
                // _lbl_depart.frame=CGRectMake(0, _h_title+5, [UIScreen mainScreen].bounds.size.width, _h_depart);
                //  [_lbl_depart sizeToFit];
                 NSString *str_content=[dic_news objectForKey:@"content"];
-                str_content=[NSString stringWithFormat:@"%@%@",_str_headscale,str_content];
+                NSString *str_title_style1=@"<p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; font-size: 24px; text-indent: 0em; font-stretch: normal; line-height: 32px; font-family: &quot;Microsoft Yahei&quot;; color: rgb(64, 64, 64); text-align: center; white-space: normal; background-color: rgb(255, 255, 255);\">";
+              
+                NSString *str_depart_style1=@"<p style=\"margin-top: 5px; margin-bottom: 0px; padding: 0px; font-size: 12px; text-indent: 0em; font-stretch: normal; line-height: 10px; font-family: &quot;Microsoft Yahei&quot;; color: rgb(117, 117, 117); text-align: center; white-space: normal; background-color: rgb(255, 255, 255);\">";
+                
+                NSString *str_title_style2=@"</p>";
+                NSString *str_title_new=[NSString stringWithFormat:@"%@%@%@",str_title_style1,str_title,str_title_style2];
+                
+                NSString *str_depart_new=[NSString stringWithFormat:@"%@%@%@",str_depart_style1,str_departlabel,str_title_style2];
+                str_content=[NSString stringWithFormat:@"%@%@%@%@",_str_headscale,str_title_new,str_depart_new,str_content];
                 NSString *str_relplace1=[NSString stringWithFormat:@"%@%@:%@",@"http://",str_ip,str_port];
                 NSString *str_relplace2=@"<img src=\"";
                 NSString *str_replace_after=[NSString stringWithFormat:@"%@%@",str_relplace2,str_relplace1];

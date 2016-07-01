@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "UserInfo.h"
 
-@interface FunctionViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@interface FunctionViewController : UIViewController
 
 @property (nonatomic,strong) UserInfo *userInfo;
 

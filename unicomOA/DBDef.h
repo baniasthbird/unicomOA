@@ -62,7 +62,27 @@
 #define CAR_SHENPI2  @"CAR_SHENPI2"
 #define CAR_MODEL    @"CAR_MODEL"
 
+//员工表
+#define STAFF_TABLENAME @"STAFF_TABLE"
+#define STAFF_ID        @"EMPID"
+#define STAFF_USERNAME  @"EMPNAME"
+#define STAFF_GENDER    @"SEX"
+#define STAFF_ORG_ID    @"ORGID"
+#define STAFF_ORG_NAME  @"ORGNAME"
+#define STAFF_EMAIL     @"OEMAIL"
+#define STAFF_POSINAME  @"POSINAME"
+#define STAFF_MOBILE    @"MOBILENO"
+#define STAFF_TEL       @"OTEL"
+#define STAFF_IMG       @"IMG"
+#define STAFF_TABLE_ID  @"STAFF_ID"
 
+//部门表
+#define DEPART_TABLENAME @"DEPART_TABLE"
+#define DEPART_ID        @"DEPART_ID"
+#define DEPART_ORGID     @"ORGID"
+#define DEPART_ORGNAME   @"ORGNAME"
+#define DEPART_PARENTID  @"PARENTORGID"
 
+//#define DEPART_ID        @""
 
 #endif /* DBDef_h */

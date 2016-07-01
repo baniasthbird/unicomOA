@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseFunction.h"
 //已办审批界面
 @interface FinishVc : UIViewController
 
@@ -15,5 +16,7 @@
 @property (nonatomic,strong) NSString *str_url;
 
 @property (nonatomic,strong) NSString *str_title;
+
+@property (nonatomic,strong) BaseFunction *baseFunc;
 
 @end

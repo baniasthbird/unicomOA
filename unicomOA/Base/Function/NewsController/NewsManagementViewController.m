@@ -107,6 +107,7 @@
     
     //[self.view addGestureRecognizer:singleTap];
     
+    _baseFunc=[[BaseFunction alloc]init];
     _i_pageIndex=1;
     _i_classId=0;
     
@@ -420,7 +421,7 @@
 
 -(void)BackToAppCenter:(UIButton*)Btn {
    
-    [self.delegate ClearNewsRedDot];
+    //[self.delegate ClearNewsRedDot];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -490,7 +491,7 @@
    
     if ([_arr_NewsList count]!=0) {
         NSDictionary *dic_content=[_arr_NewsList objectAtIndex:indexPath.row];
-        NSString *str_category=[dic_content objectForKey:@"classname"];
+        NSString *str_category=[_baseFunc GetValueFromDic:dic_content key:@"classname"];
         CGFloat i_titleFont=0;
         CGFloat i_otherFont=0;
         if (iPhone6_plus) {
@@ -506,17 +507,24 @@
             i_otherFont=11;
         }
         //  CGFloat h_category=[UILabel_LabelHeightAndWidth getHeightByWidth:15*self.view.frame.size.width/16 title:str_category font:[UIFont systemFontOfSize:i_otherFont]];
-        NSString *str_title=[dic_content objectForKey:@"title"];
+        NSString *str_title=[_baseFunc GetValueFromDic:dic_content key:@"title"];
         NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str_title];
         NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
         [paragraphStyle setLineSpacing:5];
         [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [str_title length])];
         
-        CGFloat h_Title=[UILabel_LabelHeightAndWidth getHeightByWidth:15*self.view.frame.size.width/16 title:[dic_content objectForKey:@"title"] font:[UIFont systemFontOfSize:i_titleFont]];
-        NSString *str_department = [dic_content objectForKey:@"operationDeptName"];
-        CGFloat w_depart=[UILabel_LabelHeightAndWidth getWidthWithTitle:[dic_content objectForKey:@"operatorName"] font:[UIFont systemFontOfSize:i_otherFont]];
-        CGFloat h_depart=[UILabel_LabelHeightAndWidth getHeightByWidth:w_depart title:str_department font:[UIFont systemFontOfSize:i_otherFont]];
-        NSString *str_time =[dic_content objectForKey:@"startDate"];
+        CGFloat h_Title;
+        if (iPad) {
+            h_Title=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width-100 title:str_title font:[UIFont systemFontOfSize:i_titleFont]];
+        }
+        else {
+            h_Title=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width-30 title:str_title font:[UIFont systemFontOfSize:i_titleFont]];
+        }
+
+        NSString *str_department =[_baseFunc GetValueFromDic:dic_content key:@"operationDeptName"];
+       // CGFloat w_depart=[UILabel_LabelHeightAndWidth getWidthWithTitle:[dic_content objectForKey:@"operatorName"] font:[UIFont systemFontOfSize:i_otherFont]];
+        CGFloat h_depart=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width title:str_department font:[UIFont systemFontOfSize:i_otherFont]];
+        NSString *str_time =[_baseFunc GetValueFromDic:dic_content key:@"startDate"];
         NSArray *arr_time=[str_time componentsSeparatedByString:@" "];
         NSString *str_time2=[arr_time objectAtIndex:0];
         NSString *str_depart=[NSString stringWithFormat:@"%@ %@",str_department,str_time2];

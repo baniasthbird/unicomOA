@@ -30,6 +30,8 @@
 
 @property (nonatomic,strong) UIRefreshControl *refreshControl;
 
+@property BOOL b_hasData;
+
 @end
 
 @implementation ContactViewControllerNew {
@@ -55,6 +57,10 @@ CGFloat i_Height=-1;
     return self;
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+}
 
 -(void)viewDidLoad {
     [super viewDidLoad];
@@ -72,6 +78,11 @@ CGFloat i_Height=-1;
     
     self.view.backgroundColor=[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1];
     
+
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"刷新" style:UIBarButtonItemStyleDone target:self action:@selector(refresh:)];
+    [barButtonItem setTitleTextAttributes:dict forState:UIControlStateNormal];
+
+   // self.navigationItem.rightBarButtonItem=barButtonItem;
     
     if (iPhone4_4s || iPhone5_5s) {
         i_Height=68;
@@ -92,7 +103,7 @@ CGFloat i_Height=-1;
     [bg_base sendSubviewToBack:bg_View];
     
     indicator=[self AddLoop];
-    [indicator startAnimating];
+   // [indicator startAnimating];
     [self.view addSubview:indicator];
     
     db=[DataBase sharedinstanceDB];
@@ -103,10 +114,11 @@ CGFloat i_Height=-1;
     [_session.requestSerializer setTimeoutInterval:10.0f];
 
 
-   
-    [self AddressList];
+
     
-    self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 20, self.view.frame.size.width, self.view.frame.size.height-120)];
+    //[self AddressList];
+    
+    self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-100)];
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
     self.tableView.backgroundColor=[UIColor clearColor];
@@ -123,7 +135,7 @@ CGFloat i_Height=-1;
     [self.view addSubview:self.tableView];
     
     
-    self.tableView.sectionHeaderHeight=40;
+   // self.tableView.sectionHeaderHeight=40;
     
     
     self.resultViewController=[[SearchResultViewController alloc]initWithStyle:UITableViewStylePlain];
@@ -132,6 +144,7 @@ CGFloat i_Height=-1;
     
     self.searchcontroller=[[UISearchController alloc] initWithSearchResultsController:self.resultViewController];
     
+   
     self.searchcontroller.searchResultsUpdater=self;
     
     self.searchcontroller.searchBar.delegate=self;
@@ -142,7 +155,7 @@ CGFloat i_Height=-1;
     
     [[[[self.searchcontroller.searchBar.subviews objectAtIndex:0] subviews]objectAtIndex:0]removeFromSuperview];
     
-    [self.searchcontroller.searchBar setFrame:CGRectMake(0, 20, self.view.frame.size.width, i_Height-40)];
+    [self.searchcontroller.searchBar setFrame:CGRectMake(0, 20, self.view.frame.size.width,40)];
     
     
   //  self.searchcontroller.dimsBackgroundDuringPresentation=NO;
@@ -163,18 +176,26 @@ CGFloat i_Height=-1;
     
     self.tableView.tableHeaderView=self.searchcontroller.searchBar;
     
+    
+    
     self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     
+    
+    
     DataSource *dt_tmp=[[DataSource alloc]init];
-    _dataArray=[dt_tmp addTestData];
+   // _dataArray=[dt_tmp addTestData];
+    NSMutableArray *arr_staff=[db fetchAllStaff];
+    NSMutableArray *arr_depart=[db fetchAllDepart];
+    NSMutableArray  *dataArray=[dt_tmp addRealData:arr_staff departArray:arr_depart];
+    _dataArray=dataArray;
     /*
     //添加演示数据
     [self addTestData];
      */
     //初始化将要显示的数据
-    [self reloadDataForDisplayArray];
+    [self reloadDataForDisplayArray:dataArray];
     
-    
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
     
 }
 
@@ -184,6 +205,7 @@ CGFloat i_Height=-1;
 }
 
 
+//首次连接获取通讯录
 -(void)AddressList {
     NSString *str_connection=[self GetConnectionStatus];
     if ([str_connection isEqualToString:@"wifi"] || [str_connection isEqualToString:@"GPRS"]) {
@@ -203,17 +225,21 @@ CGFloat i_Height=-1;
            
             NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             NSString *str_success= [JSON objectForKey:@"success"];
-            int i_success=[str_success intValue];
-            if (i_success==1) {
+            BOOL i_success=[str_success boolValue];
+            if (i_success==YES) {
                  NSLog(@"获取通讯录列表成功:%@",responseObject);
                  [indicator stopAnimating];
-                [_refreshControl endRefreshing];
+                
                 NSMutableArray *staffArray=[JSON objectForKey:@"empList"];
                 NSMutableArray *departArray=[JSON objectForKey:@"orgList"];
+                //更新数据库
+                db=[DataBase sharedinstanceDB];
+                [db UpdateStaffTable:staffArray];
+                [db UpdateDepartmentTable:departArray];
                 DataSource *dt_tmp=[[DataSource alloc]init];
-                _dataArray=[dt_tmp addRealData:staffArray departArray:departArray];
-                [self reloadDataForDisplayArray];
-                
+                NSMutableArray *dataArray=[dt_tmp addRealData:staffArray departArray:departArray];
+                [self reloadDataForDisplayArray:dataArray];
+                [_refreshControl endRefreshing];
             }
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -227,7 +253,7 @@ CGFloat i_Height=-1;
     }
     else {
         [indicator stopAnimating];
-        [_refreshControl endRefreshing];
+       // [_refreshControl endRefreshing];
         LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"警告" message:@"无网络连接" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
             
         }];
@@ -306,7 +332,9 @@ CGFloat i_Height=-1;
     return _displayArray.count;
 }
 
+/*
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
     UILabel *lbl_title=[[UILabel alloc]initWithFrame:CGRectMake(0, i_Height, self.view.frame.size.width, 40)];
     lbl_title.text=@"      组织结构";
     lbl_title.textColor=[UIColor blackColor];
@@ -315,7 +343,7 @@ CGFloat i_Height=-1;
     lbl_title.backgroundColor=[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1];
     return lbl_title;
 }
-
+*/
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *indentifier = @"level0cell";
@@ -456,7 +484,7 @@ CGFloat i_Height=-1;
 /*---------------------------------------
  初始化将要显示的cell的数据
  --------------------------------------- */
--(void)reloadDataForDisplayArray {
+-(void)reloadDataForDisplayArray:(NSMutableArray*)dataArray {
     NSMutableArray *tmp = [[NSMutableArray alloc]init];
     for (CLTreeViewNode *node in _dataArray) {
         [tmp addObject:node];
@@ -626,9 +654,14 @@ CGFloat i_Height=-1;
         [self AddressList];
         
     });
-    
+}
+
+-(void)refresh:(UIButton*)sender {
+    [indicator startAnimating];
+    [self AddressList];
     
 }
+
 
 
 @end

@@ -8,6 +8,7 @@
 
 #import "DataBase.h"
 
+
 @implementation DataBase
 
 -(void)dealloc {
@@ -51,6 +52,7 @@
         NSString *dbname=@"Mydatabase.db";
         _database=[[FMDatabase alloc] initWithPath:[self databasePath:dbname]];
          NSLog(@"database init");
+        _base_func=[[BaseFunction alloc]init];
     }
     return self;
 }
@@ -112,7 +114,27 @@
     } else {
         NSLog(@"success to creating CAR table");
     }
+    
+    //生成员工表
+    NSString *sqlCreateTableStaff=[NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS '%@' ('%@' INTEGER PRIMARY KEY AUTOINCREMENT, '%@' TEXT, '%@' TEXT , '%@' TEXT ,'%@' TEXT , '%@' TEXT , '%@' TEXT , '%@' TEXT , '%@' TEXT , '%@' TEXT, '%@' TEXT )",STAFF_TABLENAME,STAFF_TABLE_ID,STAFF_ID,STAFF_USERNAME,STAFF_GENDER,STAFF_ORG_ID,STAFF_ORG_NAME,STAFF_EMAIL,STAFF_POSINAME,STAFF_MOBILE,STAFF_TEL,STAFF_IMG];
+    BOOL resStaff=[_database executeUpdate:sqlCreateTableStaff];
+    if (!resStaff) {
+        NSLog(@"error when creating staff table");
+    }
+    else {
+        NSLog(@"success to creating staff table");
+    }
 
+    
+    //生成部门表
+    NSString *sqlCreateTableDepartment=[NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS '%@' ( '%@' INTEGER PRIMARY KEY AUTOINCREMENT, '%@' TEXT , '%@' TEXT , '%@' TEXT)",DEPART_TABLENAME,DEPART_ID,DEPART_ORGID,DEPART_ORGNAME,DEPART_PARENTID];
+    BOOL resDepart=[_database executeUpdate:sqlCreateTableDepartment];
+    if (!resDepart) {
+        NSLog(@"error when creating depart table");
+    }
+    else {
+        NSLog(@"success to creating depart table");
+    }
 
 }
 
@@ -310,6 +332,124 @@
     }
 }
 
+/*
+-(NSString*)GetValueFromDic:(NSDictionary*)dic_tmp key:(NSString*)str_key {
+    NSObject *obj_tmp=[dic_tmp objectForKey:str_key];
+    NSString *str_tmp=@"";
+    if (obj_tmp!=[NSNull null]) {
+        str_tmp=(NSString*)obj_tmp;
+    }
+    return str_tmp;
+}
+*/
+
+-(void)InserStaffTable:(NSMutableArray*)arr_staff {
+    NSMutableArray *t_array=[self fetchAllStaff];
+    if ([t_array count]==0) {
+        if ([_database open]) {
+            if ([arr_staff count]>0) {
+                for (int i=0;i<[arr_staff count];i++) {
+                    NSDictionary *dic_tmp=[arr_staff objectAtIndex:i];
+                    NSString *str_email=[_base_func GetValueFromDic:dic_tmp key:@"oemail"];
+                    NSString *str_orgname=[_base_func GetValueFromDic:dic_tmp key:@"orgname"];
+                    NSString *str_posiname=[_base_func GetValueFromDic:dic_tmp key:@"posiname"];
+                    NSString *str_empname=[_base_func GetValueFromDic:dic_tmp key:@"empname"];
+                    NSString *str_mobileno=[_base_func GetValueFromDic:dic_tmp key:@"mobileno"];
+                    NSString *str_otel=[_base_func GetValueFromDic:dic_tmp key:@"otel"];
+                    NSString *str_sex=[_base_func GetValueFromDic:dic_tmp key:@"sex"];
+                    NSString *str_orgid=[_base_func GetValueFromDic:dic_tmp key:@"orgid"];
+                    NSString *str_empid=[_base_func GetValueFromDic:dic_tmp key:@"empid"];
+                    NSString *str_img=@"";
+                    
+                    NSString *instrSQL=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@') VALUES ('%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@')",STAFF_TABLENAME,STAFF_ID,STAFF_USERNAME,STAFF_GENDER,STAFF_ORG_NAME,STAFF_POSINAME,STAFF_TEL,STAFF_MOBILE,STAFF_EMAIL,STAFF_ORG_ID,STAFF_IMG,str_empid,str_empname,str_sex,str_orgname,str_posiname,str_otel,str_mobileno,str_email,str_orgid,str_img];
+                    BOOL res=[_database executeUpdate:instrSQL];
+                    if (res) {
+                        NSLog(@"更新员工成功!");
+                    }
+                    else {
+                        NSLog(@"更新员工失败!");
+                    }
+                }
+            }
+        }
+    }
+}
+
+-(void)InserDepartMentTable:(NSMutableArray *)arr_department {
+    NSMutableArray *t_array=[self fetchAllDepart];
+    if ([t_array count]==0) {
+        if ([_database open]) {
+            if ([arr_department count]>0) {
+                for (int i=0;i<[arr_department count];i++) {
+                    NSDictionary *dic_tmp=[arr_department objectAtIndex:i];
+                    NSString *str_orgid=[_base_func GetValueFromDic:dic_tmp key:@"orgid"];
+                    NSString *str_orgname=[_base_func GetValueFromDic:dic_tmp key:@"orgname"];
+                    NSString *str_parentorgid=[_base_func GetValueFromDic:dic_tmp key:@"parentorgid"];
+                    
+                    NSString *insertSQL=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' , '%@' ) VALUES ('%@' , '%@' , '%@')",DEPART_TABLENAME,DEPART_ORGID,DEPART_ORGNAME,DEPART_PARENTID,str_orgid,str_orgname,str_parentorgid];
+                    BOOL res=[_database executeUpdate:insertSQL];
+                    if (res) {
+                        NSLog(@"更新部门成功!");
+                    }
+                    else {
+                        NSLog(@"更新员工失败");
+                    }
+                }
+            }
+        }
+    }
+}
+
+-(NSMutableArray*)fetchAllStaff {
+     [_database open];
+     NSString *sql=[NSString stringWithFormat:@"SELECT * FROM %@", STAFF_TABLENAME];
+     NSMutableArray *array=[@[] mutableCopy];
+    
+     FMResultSet *rs=[_database executeQuery:sql];
+    while ([rs next]) {
+        NSString *str_empid=[rs stringForColumn:STAFF_ID];
+        NSString *str_empname=[rs stringForColumn:STAFF_USERNAME];
+        NSString *str_sex=[rs stringForColumn:STAFF_GENDER];
+        NSString *str_posi=[rs stringForColumn:STAFF_POSINAME];
+        NSString *str_orgname=[rs stringForColumn:STAFF_ORG_NAME];
+        NSString *str_orgid=[rs stringForColumn:STAFF_ORG_ID];
+        NSString *str_mobile=[rs stringForColumn:STAFF_MOBILE];
+        NSString *str_tel=[rs stringForColumn:STAFF_TEL];
+        NSString *str_email=[rs stringForColumn:STAFF_EMAIL];
+        NSString *str_img=[rs stringForColumn:STAFF_IMG];
+        NSArray *arr_staff=@[str_empid,str_empname,str_sex,str_posi,str_orgname,str_orgid,str_mobile,str_tel,str_email,str_img];
+        NSArray *arr_key=@[@"empid",@"empname",@"sex",@"posiname",@"orgname",@"orgid",@"mobileno",@"otel",@"oemail",@"img"];
+        NSDictionary *dic_staff=[NSDictionary dictionaryWithObjects:arr_staff forKeys:arr_key];
+        [array addObject:dic_staff];
+    }
+    
+    [_database close];
+    return  array;
+    
+}
+
+
+-(NSMutableArray*)fetchAllDepart {
+    [_database open];
+    NSString *sql=[NSString stringWithFormat:@"SELECT * FROM %@",DEPART_TABLENAME];
+    NSMutableArray *array=[@[] mutableCopy];
+    
+    FMResultSet *rs=[_database executeQuery:sql];
+    while ([rs next]) {
+        NSString *str_id=[rs stringForColumn:DEPART_ORGID];
+        NSString *str_name=[rs stringForColumn:DEPART_ORGNAME];
+        NSString *str_parentid=[rs stringForColumn:DEPART_PARENTID];
+        NSArray *arr_depart=@[str_id,str_name,str_parentid];
+        NSArray *arr_key=@[@"orgid",@"orgname",@"parentorgid"];
+        NSDictionary *dic_depart=[NSDictionary dictionaryWithObjects:arr_depart forKeys:arr_key];
+        [array addObject:dic_depart];
+    }
+    
+    [_database close];
+    return array;
+}
+
+
 //获取接口数据表
 -(NSMutableArray*)fetchAllInterface {
     [_database open];
@@ -398,6 +538,41 @@
     }
 }
 
+-(void)DeleteStaffTable {
+    if ([_database open]) {
+        NSString *deleteSql=[NSString stringWithFormat:@"DELETE FROM %@",STAFF_TABLENAME];
+        
+        BOOL res=[_database executeUpdate:deleteSql];
+        if (res) {
+            NSLog(@"成功删除员工表");
+        }
+        else {
+            NSLog(@"删除员工表失败");
+        }
+        
+    }
+
+}
+
+-(void)DeleteDepartmentTable {
+    if ([_database open]) {
+        NSString *deleteSql=[NSString stringWithFormat:@"DELETE FROM %@",DEPART_TABLENAME];
+        
+        BOOL res=[_database executeUpdate:deleteSql];
+        if (res) {
+            NSLog(@"成功删除部门表");
+        }
+        else {
+            NSLog(@"删除部门表失败");
+        }
+        
+    }
+    
+}
+
+
+
+
 -(NSMutableArray*)fetchAllNotes {
     [_database open];
     NSString *sql=[NSString stringWithFormat:@"SELECT * FROM %@", NOTES_TABLENAME];
@@ -468,6 +643,116 @@
 
     }
 }
+
+
+
+-(void)UpdateStaffTable:(NSMutableArray *)arr_staff {
+    if ([_database open]) {
+        if ([arr_staff count]>0) {
+            [self DeleteStaffTable];
+            
+            for (int i=0;i<[arr_staff count];i++) {
+                NSDictionary *dic_tmp=[arr_staff objectAtIndex:i];
+                NSString *str_email=[_base_func GetValueFromDic:dic_tmp key:@"oemail"];
+                NSString *str_orgname=[_base_func GetValueFromDic:dic_tmp key:@"orgname"];
+                NSString *str_posiname=[_base_func GetValueFromDic:dic_tmp key:@"posiname"];
+                NSString *str_empname=[_base_func GetValueFromDic:dic_tmp key:@"empname"];
+                NSString *str_mobileno=[_base_func GetValueFromDic:dic_tmp key:@"mobileno"];
+                NSString *str_otel=[_base_func GetValueFromDic:dic_tmp key:@"otel"];
+                NSString *str_sex=[_base_func GetValueFromDic:dic_tmp key:@"sex"];
+                NSString *str_orgid=[_base_func GetValueFromDic:dic_tmp key:@"orgid"];
+                NSString *str_empid=[_base_func GetValueFromDic:dic_tmp key:@"empid"];
+                NSString *str_img=@"";
+                
+               
+                                  //插入
+                    NSString *instrSQL=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@') VALUES ('%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@')",STAFF_TABLENAME,STAFF_ID,STAFF_USERNAME,STAFF_GENDER,STAFF_ORG_NAME,STAFF_POSINAME,STAFF_TEL,STAFF_MOBILE,STAFF_EMAIL,STAFF_ORG_ID,STAFF_IMG,str_empid,str_empname,str_sex,str_orgname,str_posiname,str_otel,str_mobileno,str_email,str_orgid,str_img];
+                    BOOL res=[_database executeUpdate:instrSQL];
+                    if (res) {
+                        NSLog(@"插入新员工成功!");
+                    }
+                    else {
+                        NSLog(@"插入新员工失败!");
+                    
+                }
+            }
+        }
+    }
+}
+
+
+-(void)UpdateDepartmentTable:(NSMutableArray *)arr_department {
+    if ([_database open]) {
+        if ([arr_department count]>0) {
+            [self DeleteDepartmentTable];
+            for (int i=0;i<[arr_department count];i++) {
+                NSDictionary *dic_tmp=[arr_department objectAtIndex:i];
+                NSString *str_orgid=[_base_func GetValueFromDic:dic_tmp key:@"orgid"];
+                NSString *str_orgname=[_base_func GetValueFromDic:dic_tmp key:@"orgname"];
+                NSString *str_parentorgid=[_base_func GetValueFromDic:dic_tmp key:@"parentorgid"];
+                
+               
+                    NSString *insertSQL=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' , '%@' ) VALUES ('%@' , '%@' , '%@')",DEPART_TABLENAME,DEPART_ORGID,DEPART_ORGNAME,DEPART_PARENTID,str_orgid,str_orgname,str_parentorgid];
+                    BOOL res=[_database executeUpdate:insertSQL];
+                    if (res) {
+                        NSLog(@"添加部门成功!");
+                    }
+                    else {
+                        NSLog(@"添加员工失败");
+                    }
+
+                
+            }
+        }
+    }
+}
+
+
+-(NSDictionary*)fetchSingleStaff:(NSString*)str_empid {
+    [_database open];
+    NSDictionary *dic_staff;
+    NSString *sql=[NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@ = %@ ", STAFF_TABLENAME,STAFF_ID,str_empid];
+
+    FMResultSet *rs=[_database executeQuery:sql];
+    while ([rs next]) {
+        NSString *str_empid=[rs stringForColumn:STAFF_ID];
+        NSString *str_empname=[rs stringForColumn:STAFF_USERNAME];
+        NSString *str_sex=[rs stringForColumn:STAFF_GENDER];
+        NSString *str_posi=[rs stringForColumn:STAFF_POSINAME];
+        NSString *str_orgname=[rs stringForColumn:STAFF_ORG_NAME];
+        NSString *str_orgid=[rs stringForColumn:STAFF_ORG_ID];
+        NSString *str_mobile=[rs stringForColumn:STAFF_MOBILE];
+        NSString *str_tel=[rs stringForColumn:STAFF_TEL];
+        NSString *str_email=[rs stringForColumn:STAFF_EMAIL];
+        NSString *str_img=[rs stringForColumn:STAFF_IMG];
+        NSArray *arr_staff=@[str_empid,str_empname,str_sex,str_posi,str_orgname,str_orgid,str_mobile,str_tel,str_email,str_img];
+        NSArray *arr_key=@[@"empid",@"empname",@"sex",@"posiname",@"orgname",@"orgid",@"mobileno",@"otel",@"oemail",@"img"];
+        dic_staff=[NSDictionary dictionaryWithObjects:arr_staff forKeys:arr_key];
+    }
+    
+    [_database close];
+    return dic_staff;
+}
+
+-(NSDictionary*)fetchSingleDepartment:(NSString*)str_orgid {
+    [_database open];
+    NSDictionary *dic_depart;
+    NSString *sql=[NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@ = %@",DEPART_TABLENAME,DEPART_ORGID,str_orgid];
+    FMResultSet *rs=[_database executeQuery:sql];
+    while ([rs next]) {
+        NSString *str_id=[rs stringForColumn:DEPART_ORGID];
+        NSString *str_name=[rs stringForColumn:DEPART_ORGNAME];
+        NSString *str_parentid=[rs stringForColumn:DEPART_PARENTID];
+        NSArray *arr_depart=@[str_id,str_name,str_parentid];
+        NSArray *arr_key=@[@"orgid",@"orgname",@"parentorgid"];
+        dic_depart=[NSDictionary dictionaryWithObjects:arr_depart forKeys:arr_key];
+    }
+    
+    [_database close];
+    return dic_depart;
+    
+}
+
 //根据条件查找某一条备忘录
 //-(NSMutableDictionary*)fetchNotes:(
 

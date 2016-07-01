@@ -11,11 +11,14 @@
 #import "UserInfo.h"
 #import "DataBase.h"
 #import "AFNetworking.h"
+#import "BaseFunction.h"
 
 @interface MessageViewController : UIViewController
 
 @property (nonatomic,weak) OAViewController *delegate;
 
 @property (nonatomic,strong) UserInfo *userInfo;
+
+@property (nonatomic,strong) BaseFunction *baseFunc;
 
 @end

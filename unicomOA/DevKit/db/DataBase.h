@@ -16,10 +16,14 @@
 
 #import "CarService.h"
 
+#import "BaseFunction.h"
+
 
 @interface DataBase : NSObject
 
 @property (nonatomic,strong) FMDatabase *database;  //数据库操作对象
+
+@property (nonatomic,strong) BaseFunction *base_func;
 
 +(DataBase *)sharedinstanceDB;
 -(void)initTables;
@@ -28,7 +32,14 @@
 -(void)InsertIPTable:(NSString*)str_ipaddr port:(NSString*)str_port IP_Mark:(NSString*)str_mark;
 -(void)InsertInterFaceTable;
 -(void)InsertNotesTable:(NSMutableDictionary *)dic_notes;
+//添加通讯录（首次登录时使用）
+-(void)InserStaffTable:(NSMutableArray*)arr_staff;
+//添加部门（首次登录时使用）
+-(void)InserDepartMentTable:(NSMutableArray*)arr_department;
 
+//更新通讯录
+-(void)UpdateStaffTable:(NSMutableArray*)arr_staff;
+-(void)UpdateDepartmentTable:(NSMutableArray*)arr_department;
 
 -(void)UpdateIPTable:(NSString*)str_ipaddr port:(NSString*)str_port IP_Mark:(NSString*)str_mark;
 -(void)UpdateInterFaceTable:(NSMutableDictionary*)dic_inerface;
@@ -38,6 +49,8 @@
 -(NSMutableArray*)fetchIPAddress;
 -(NSMutableArray*)fetchAllInterface;
 -(NSMutableArray*)fetchAllNotes;
+-(NSMutableArray*)fetchAllStaff;
+-(NSMutableArray*)fetchAllDepart;
 
 -(void)DeleteNotesTable:(NSString*)str_index;
 
