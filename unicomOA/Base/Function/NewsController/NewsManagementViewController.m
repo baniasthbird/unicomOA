@@ -18,6 +18,8 @@
 #import "AFNetworking.h"
 #import "LXAlertView.h"
 #import "UILabel+LabelHeightAndWidth.h"
+#import "NewsSubVC.h"
+
 
 
 @interface NewsManagementViewController ()
@@ -48,6 +50,8 @@
 @property (nonatomic,strong) NSMutableDictionary *news_param;
 
 @property (nonatomic,strong) UIRefreshControl *refreshControl;
+
+//@property (strong, nonatomic) FDSlideBar *slideBar;
 
 @end
 
@@ -260,22 +264,11 @@
 
 -(void)buildView {
     
-    CGFloat t_height=0;
-    if (iPhone5_5s) {
-        t_height=self.view.frame.size.height*0.1;
-    }
-    else if (iPhone6) {
-        t_height=self.view.frame.size.height*0.095;
-    }
-    else if (iPhone6_plus) {
-        t_height=self.view.frame.size.height*0.09;
-    }
-    
     if (iPad) {
           _tableView=[[UITableView alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.005, 95, self.view.frame.size.width*0.99, 880) style:UITableViewStylePlain];
     }
     else {
-         _tableView=[[UITableView alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.005, t_height, self.view.frame.size.width*0.99, self.view.frame.size.height*0.755) style:UITableViewStylePlain];
+         _tableView=[[UITableView alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.005, 46, self.view.frame.size.width*0.99, self.view.frame.size.height*0.755) style:UITableViewStylePlain];
     }
    
     
@@ -323,7 +316,7 @@
     [_btn_Select setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_btn_Select setBackgroundColor:[UIColor colorWithRed:80.0/255.0f green:124.0f/255.0f blue:236.0f/255.0f alpha:1]];
     UIImageView *img_view=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"down_arrow"]];
-    [img_view setFrame:CGRectMake(_btn_Select.frame.size.width*0.87, _btn_Select.frame.size.height*0.5-img_view.size.height/2, img_view.size.width, img_view.size.height)];
+  //  [img_view setFrame:CGRectMake(_btn_Select.frame.size.width*0.87, _btn_Select.frame.size.height*0.5-img_view.size.height/2, img_view.size.width, img_view.size.height)];
     [_btn_Select addSubview:img_view];
     if (iPhone5_5s || iPhone4_4s) {
         _btn_Select.titleLabel.font=[UIFont systemFontOfSize:15];
@@ -397,15 +390,21 @@
     //[_searchBar setTextColor:[UIColor blackColor]];
     
     
-    [self.view addSubview:_btn_Select];
-    [self.view addSubview:_tableView];
-    [self.view addSubview:_searchBar];
+ //   [self.view addSubview:_btn_Select];
+  //  [self setupSlideBar];
+   // [self.view addSubview:_tableView];
+    
+    [self setUpAllViewController];
+    
+ //   [self.view addSubview:_searchBar];
    // [self.view addSubview:btn_previous];
    // [self.view addSubview:btn_next];
    // [self.view addSubview:_lbl_label];
    // [self.view addSubview:_txt_pages];
     
     self.view.backgroundColor=[UIColor colorWithRed:246/255.0f green:249/255.0f blue:254/255.0f alpha:1];
+    
+   // self.definesPresentationContext = YES;
     
     _arr_News=[NSMutableArray arrayWithCapacity:2];
     
@@ -855,6 +854,82 @@
     
 }
 
+/*
+// Set up a slideBar and add it into view
+- (void)setupSlideBar {
+    FDSlideBar *sliderBar = [[FDSlideBar alloc] init];
+    sliderBar.backgroundColor = [UIColor colorWithRed: 82/ 255.0 green:126/ 255.0 blue:237/ 255.0 alpha:1.0];
+    
+    // Init the titles of all the item
+    sliderBar.itemsTitle = @[@"全部", @"公司通知", @"部门通知", @"内部新闻", @"外部新闻", @"规章制度"];
+    
+    // Set some style to the slideBar
+    sliderBar.itemColor = [UIColor whiteColor];
+    sliderBar.itemSelectedColor = [UIColor orangeColor];
+    sliderBar.sliderColor = [UIColor orangeColor];
+    
+    // Add the callback with the action that any item be selected
+    [sliderBar slideBarItemSelectedCallback:^(NSUInteger idx) {
+        
+    }];
+    [self.view addSubview:sliderBar];
+    _slideBar = sliderBar;
+}
+*/
+
+- (void)setUpAllViewController {
+    
+    self.isfullScreen=YES;
+    NSMutableDictionary *news_param1=[NSMutableDictionary dictionary];
+    NSMutableDictionary *news_param2=[NSMutableDictionary dictionary];
+    NSMutableDictionary *news_param3=[NSMutableDictionary dictionary];
+    NSMutableDictionary *news_param4=[NSMutableDictionary dictionary];
+    NSMutableDictionary *news_param5=[NSMutableDictionary dictionary];
+    NSMutableDictionary *news_param6=[NSMutableDictionary dictionary];
+    
+    NewsSubVC *wordVc1 = [[NewsSubVC alloc] init];
+    wordVc1.title = @"全部";
+    news_param1[@"pageIndex"]=@"1";
+    news_param1[@"classId"]=@"0";
+    wordVc1.news_param=news_param1;
+    [self addChildViewController:wordVc1];
+    
+    NewsSubVC *wordVc2 = [[NewsSubVC alloc] init];
+    wordVc2.title = @"公司通知";
+    news_param2[@"pageIndex"]=@"1";
+    news_param2[@"classId"]=@"1";
+    wordVc2.news_param=news_param2;
+    [self addChildViewController:wordVc2];
+    
+    NewsSubVC *wordVc3 = [[NewsSubVC alloc] init];
+    wordVc3.title = @"部门通知";
+    news_param3[@"pageIndex"]=@"1";
+    news_param3[@"classId"]=@"2";
+    wordVc3.news_param=news_param3;
+    [self addChildViewController:wordVc3];
+    
+    NewsSubVC *wordVc4 = [[NewsSubVC alloc] init];
+    wordVc4.title = @"内部新闻";
+    news_param4[@"pageIndex"]=@"1";
+    news_param4[@"classId"]=@"3";
+    wordVc4.news_param=news_param4;
+    [self addChildViewController:wordVc4];
+    
+    NewsSubVC *wordVc5 = [[NewsSubVC alloc] init];
+    wordVc5.title = @"外部新闻";
+    news_param5[@"pageIndex"]=@"1";
+    news_param5[@"classId"]=@"4";
+    wordVc5.news_param=news_param5;
+    [self addChildViewController:wordVc5];
+    
+    NewsSubVC *wordVc6 = [[NewsSubVC alloc] init];
+    wordVc6.title = @"规章制度";
+    news_param6[@"pageIndex"]=@"1";
+    news_param6[@"classId"]=@"5";
+    wordVc6.news_param=news_param6;
+    [self addChildViewController:wordVc6];
+
+}
 
 
 @end

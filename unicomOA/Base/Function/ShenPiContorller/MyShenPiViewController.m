@@ -21,6 +21,7 @@
 #import "UnFinishVc.h"
 #import "FinishVc.h"
 #import "UILabel+LabelHeightAndWidth.h"
+#import "ShenPiSubVc.h"
 
 
 @interface MyShenPiViewController()<UITableViewDelegate,UITableViewDataSource,UnFinishVcDelegate>
@@ -43,15 +44,17 @@
 @property (nonatomic,strong,nonnull) NSArray *leftArrayColor;
 @property (nonatomic,strong,nonnull) NSArray *rightArrayColor;
 
+@property (nonatomic,strong,nonnull) UISegmentedControl   *segmentCtr;
+
 @property (nonatomic,strong) UITableView *tableView;
 
 @property NSInteger i_sectionClicked;
 
 //审批状态搜索关键字
-@property (nonatomic,strong) NSString *str_searchKeyword1;
+//@property (nonatomic,strong) NSString *str_searchKeyword1;
 
 //审批类型搜索关键字
-@property (nonatomic,strong) NSString *str_searchKeyword2;
+//@property (nonatomic,strong) NSString *str_searchKeyword2;
 
 
 @property (nonatomic,strong) AFHTTPSessionManager *session;
@@ -82,6 +85,9 @@
     NSMutableDictionary *dic_url2;
     
     UIActivityIndicatorView *indicator;
+    
+    //是否是待办流程
+    BOOL b_isDaiBan;
 }
 
 -(void)viewDidLoad {
@@ -129,6 +135,7 @@
     [_session.requestSerializer setHTTPShouldHandleCookies:YES];
     [_session.requestSerializer setTimeoutInterval:10.0f];
     
+    /*
     _i_sectionClicked=-1;
     
     CGFloat i_Height=40;
@@ -158,7 +165,19 @@
     _i_pageIndex1=1;
     _i_pageIndex2=1;
     dic_param1[@"pageIndex"]=@"1";
+    
+    NSArray *titleArray = @[@"待办任务",@"已办任务"];
+    //  3.segment按钮
+    _segmentCtr= [[UISegmentedControl alloc]initWithItems:titleArray];
+    _segmentCtr.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 40);
+    _segmentCtr.selectedSegmentIndex = 0;
+    
+    [_segmentCtr addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventValueChanged];
+    _segmentCtr.tintColor = [UIColor orangeColor];//去掉颜色,现在整个segment都看不见
+    [self.view addSubview:_segmentCtr];
+    
     //dic_param2[@"pageIndex"]=@"1";
+    b_isDaiBan=YES;
     [self PrePareData:dic_param1 interface:@"UnFinishTaskShenPiList"];
     //[self PrePareData:dic_param2 interface:@"FinishTaskShenPiList"];
     
@@ -173,14 +192,15 @@
     self.rightArrayColor=@[[UIColor blackColor],[UIColor colorWithRed:246/255.0f green:88/255.0f blue:87/255.0f alpha:1],[UIColor colorWithRed:80/255.0f green:125/255.0f blue:236/255.0f alpha:1],[UIColor colorWithRed:80/255.0f green:125/255.0f blue:236/255.0f alpha:1]];
 
     
-    _str_searchKeyword1=@"待办";
-    _str_searchKeyword2=@"全部";
+    //_str_searchKeyword1=@"待办";
+    //_str_searchKeyword2=@"全部";
     
-    [self setupTopView];
+   // [self setupTopView];
     
     [indicator startAnimating];
     [self.view addSubview:indicator];
-    
+    */
+    [self setUpAllViewController];
     
 }
 
@@ -192,6 +212,7 @@
 /**
  *  设置头部
  */
+/*
 - (void)setupTopView
 {
     self.topView = [[UIView alloc] init];
@@ -344,15 +365,10 @@
         };
     };
 }
+*/
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    if ([_str_searchKeyword2 isEqualToString:@"全部"] && [_str_searchKeyword1 isEqualToString:@"全部"]) {
-        return [_arr_MyShenPi count];
-    }
-    else {
-        return   [_arr_SearchResult count];
-    }
-    
+    return [_arr_MyShenPi count];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -398,13 +414,14 @@
 
 -(CGFloat)cellHeightForShenPi:(NSInteger)i_index otherFont:(CGFloat)i_otherFont {
     NSMutableDictionary *dic_tmp=[NSMutableDictionary dictionary];
-    if ([_str_searchKeyword2 isEqualToString:@"全部"] && [_str_searchKeyword1 isEqualToString:@"全部"]) {
+   // if ([_str_searchKeyword2 isEqualToString:@"全部"] && [_str_searchKeyword1 isEqualToString:@"全部"]) {
         dic_tmp=[_arr_MyShenPi objectAtIndex:i_index];
-    }
+   // }
+    /*
     else if ([_str_searchKeyword2 isEqualToString:@"全部"]) {
         dic_tmp=[_arr_SearchResult objectAtIndex:i_index];
     }
-    
+    */
     //流程标题
     NSString *str_title=[dic_tmp objectForKey:@"processInstName"];
     
@@ -541,7 +558,7 @@
 //根据条件筛选
 -(NSMutableArray*)CreateSearchResult:(NSString*)str_condition1 con2:(NSString*)str_condition2 {
     NSMutableArray *arr_result=[[NSMutableArray alloc]init];
-    if (_arr_MyShenPi.count>0 || _arr_SearchResult.count>0) {
+    //if (_arr_MyShenPi.count>0 || _arr_SearchResult.count>0) {
         if ([str_condition1 isEqualToString:@"全部"] && [str_condition2 isEqualToString:@"全部"]) {
             //根据类型筛选
             [arr_MyReview removeAllObjects];
@@ -577,7 +594,7 @@
             arr_result=[self CreateSearchResultAdvanced:arr_result con2:str_condition2];
         }
         */
-    }
+//    }
     return arr_result;
 }
 
@@ -786,23 +803,30 @@
                     }
                 }
                 NSArray *arr_list=[JSON objectForKey:str_listname];
-                for (int i=0;i<[arr_list count];i++) {
-                    [arr_MyReview addObject:[arr_list objectAtIndex:i]];
+                if ([arr_list count]==0) {
+                    [arr_MyReview removeAllObjects];
                 }
-                NSString *str_totalPage=[JSON objectForKey:@"totalPage"];
+                else {
+                    for (int i=0;i<[arr_list count];i++) {
+                        [arr_MyReview addObject:[arr_list objectAtIndex:i]];
+                    }
+
+                }
+                               NSString *str_totalPage=[JSON objectForKey:@"totalPage"];
                 if ([str_interface isEqualToString:@"UnFinishTaskShenPiList"]) {
                     _i_page_Total1=[str_totalPage integerValue];
                 }
                 else if ([str_interface isEqualToString:@"FinishTaskShenPiList"]) {
                     _i_page_Total2=[str_totalPage integerValue];
                 }
-                if ([_str_searchKeyword2 isEqualToString:@"全部"] && [_str_searchKeyword1 isEqualToString:@"全部"]) {
+               // if ([_str_searchKeyword2 isEqualToString:@"全部"] && [_str_searchKeyword1 isEqualToString:@"全部"]) {
                     _arr_MyShenPi=[arr_MyReview mutableCopy];
-                }
+               // }
+                /*
                 else if ([_str_searchKeyword2 isEqualToString:@"全部"]) {
                     _arr_SearchResult=[arr_MyReview mutableCopy];
                 }
-                
+                */
                 [self.tableView reloadData];
                 // [self.tableView reloadData];
             }
@@ -838,6 +862,7 @@
     //NSLog(@"height:%f contentYoffset:%f frame.y:%f",height,contentYoffset,scrollView.frame.origin.y);
     if (distanceFromBottom<height) {
         //  NSLog((@"end of table"));
+        /*
         if ([_str_searchKeyword1 isEqualToString:@"全部"])
         {
             //  [self PareData:dic_param];
@@ -853,14 +878,15 @@
                 [self PrePareData:dic_param2 interface:@"FinishTaskShenPiList"];
             }
         }
-        else if ([_str_searchKeyword1 isEqualToString:@"已办"]) {
+         */
+       if (b_isDaiBan==NO) {
             if (_i_pageIndex2<_i_page_Total2) {
                 _i_pageIndex2=_i_pageIndex2+1;
                 dic_param2[@"pageIndex"]=[NSString stringWithFormat:@"%ld",(long)_i_pageIndex2];
                 [self PrePareData:dic_param2 interface:@"FinishTaskShenPiList"];
             }
         }
-        else if ([_str_searchKeyword1 isEqualToString:@"待办"]) {
+        else  {
             if (_i_pageIndex1<_i_page_Total1) {
                 _i_pageIndex1=_i_pageIndex1+1;
                 dic_param1[@"pageIndex"]=[NSString stringWithFormat:@"%ld",(long)_i_pageIndex1];
@@ -873,12 +899,14 @@
 
 -(MyShenPiCell*)CreateCell:(UITableView*)tableView indexPath:(NSIndexPath*)indexPath {
     NSDictionary *dic_task;
-    if ([_str_searchKeyword2 isEqualToString:@"全部"] && [_str_searchKeyword1 isEqualToString:@"全部"]) {
+    //if ([_str_searchKeyword2 isEqualToString:@"全部"] && [_str_searchKeyword1 isEqualToString:@"全部"]) {
         dic_task=[_arr_MyShenPi objectAtIndex:indexPath.section];
-    }
+   // }
+    /*
     else if ([_str_searchKeyword2 isEqualToString:@"全部"]) {
         dic_task=[_arr_SearchResult objectAtIndex:indexPath.section];
     }
+     */
     //流程类别
     NSString *str_categroy=[dic_task objectForKey:@"processChName"];
     //流程标题
@@ -941,18 +969,12 @@
     
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         [arr_MyReview removeAllObjects];
-        if ([_str_searchKeyword1 isEqualToString:@"全部"]) {
-            dic_param1[@"pageIndex"]=@"1";
-            dic_param2[@"pageIndex"]=@"1";
-            [self PrePareData:dic_param1 interface:@"UnFinishTaskShenPiList"];
-            [self PrePareData:dic_param2 interface:@"FinishTaskShenPiList"];
-        }
-        else if ([_str_searchKeyword1 isEqualToString:@"待办"]) {
+        if (b_isDaiBan==NO) {
             dic_param1[@"pageIndex"]=@"1";
             [self PrePareData:dic_param1 interface:@"UnFinishTaskShenPiList"];
             
         }
-        else if ([_str_searchKeyword1 isEqualToString:@"已办"]) {
+        else {
             dic_param2[@"pageIndex"]=@"1";
             [self PrePareData:dic_param2 interface:@"FinishTaskShenPiList"];
         }
@@ -972,6 +994,40 @@
     [self PrePareData:dic_param1 interface:@"UnFinishTaskShenPiList"];
    
 }
+
+//点击切换
+-(void)segmentAction:(UISegmentedControl *)sender {
+    if (sender.selectedSegmentIndex==0) {
+        b_isDaiBan=YES;
+        dic_param1[@"pageIndex"]=@"1";
+        [self PrePareData:dic_param1 interface:@"UnFinishTaskShenPiList"];
+    }
+    else if (sender.selectedSegmentIndex==1) {
+        b_isDaiBan=NO;
+        dic_param2[@"pageIndex"]=@"1";
+        [self PrePareData:dic_param2 interface:@"FinishTaskShenPiList"];
+    }
+}
+
+- (void)setUpAllViewController {
+    self.isfullScreen=YES;
+    self.isShowTitleCover=YES;
+    self.coverColor=[UIColor whiteColor];
+    self.selColor=[UIColor colorWithRed:73/255.0f green:118/255.0f blue:231/255.0f alpha:1];
+   
+    
+    ShenPiSubVc *vc1=[[ShenPiSubVc alloc]init];
+    vc1.title=@"待办任务";
+    vc1.b_isDaiBan=YES;
+    
+    ShenPiSubVc *vc2=[[ShenPiSubVc alloc]init];
+    vc2.title=@"已办任务";
+    vc2.b_isDaiBan=NO;
+    
+    [self addChildViewController:vc1];
+    [self addChildViewController:vc2];
+}
+
 
 
 @end

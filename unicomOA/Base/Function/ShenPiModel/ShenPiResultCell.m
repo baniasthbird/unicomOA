@@ -51,7 +51,11 @@
         lbl_info.text=str_info;
         [lbl_title sizeToFit];
         
-        UILabel *lbl_decision=[[UILabel alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width-80, lbl_title.frame.size.height+10, 40, 20)];
+        CGFloat i_left=80;
+        if (iPhone5_5s) {
+            i_left=50;
+        }
+        UILabel *lbl_decision=[[UILabel alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width-i_left, lbl_title.frame.size.height+10, 40, 20)];
         lbl_decision.textColor=[UIColor whiteColor];
         lbl_decision.textAlignment=NSTextAlignmentCenter;
         lbl_decision.font=[UIFont systemFontOfSize:12];
@@ -72,7 +76,8 @@
             lbl_decision.text=@"暂存";
         }
         else {
-            lbl_decision.backgroundColor=[UIColor blueColor];
+            lbl_decision.backgroundColor=[UIColor colorWithRed:137/255.0f green:207/255.0f blue:240/255.0f alpha:1];
+            lbl_decision.text=@"未处理";
         }
         lbl_decision.layer.cornerRadius=5;
         lbl_decision.layer.masksToBounds=YES;

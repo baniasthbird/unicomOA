@@ -124,10 +124,10 @@
     view_part1.layer.borderWidth=1;
     view_part1.layer.borderColor=[[UIColor colorWithRed:231/255.0f green:231/255.0f blue:231/255.0f alpha:1] CGColor];
     
-    UIImageButton *btn_News=[self createImageButton:20 y:17 width:46 height:46 title:@"新闻公告" image:@"News.png"];
+    UIImageButton *btn_News=[self createImageButton:20 y:10 width:60 height:60 title:@"新闻公告" image:@"News.png"];
     [btn_News addTarget:self action:@selector(NewsItemClick:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIImageButton *btn_IVoting=[self createImageButton:95 y:17 width:46 height:46 title:@"在线投票" image:@"IVoting.png"];
+    UIImageButton *btn_IVoting=[self createImageButton:95 y:10 width:60 height:60 title:@"在线投票" image:@"IVoting.png"];
     [btn_IVoting addTarget:self action:@selector(IVotingItemClick:) forControlEvents:UIControlEventTouchUpInside];
     
     
@@ -142,7 +142,7 @@
     view_part2.layer.borderWidth=1;
     view_part2.layer.borderColor=[[UIColor colorWithRed:231/255.0f green:231/255.0f blue:231/255.0f alpha:1] CGColor];
     
-    _btn_ShenPi=[self createImageButton:28 y:169 width:46 height:46 title:@"审批" image:@"ShenPi.png"];
+    _btn_ShenPi=[self createImageButton:28 y:162 width:60 height:60 title:@"审批" image:@"ShenPi.png"];
     [_btn_ShenPi addTarget:self action:@selector(ShenPiItemClick:) forControlEvents:UIControlEventTouchUpInside];
     if (i_total!=0) {
         _btn_ShenPi.badgeBgColor=[UIColor redColor];
@@ -168,7 +168,7 @@
     view_part3.layer.borderWidth=1;
     view_part3.layer.borderColor=[[UIColor colorWithRed:231/255.0f green:231/255.0f blue:231/255.0f alpha:1] CGColor];
     
-    UIImageButton *btn_Notes=[self createImageButton:20 y:17 width:46 height:46 title:@"备忘录" image:@"Notes.png"];
+    UIImageButton *btn_Notes=[self createImageButton:20 y:10 width:60 height:60 title:@"备忘录" image:@"Notes.png"];
     [btn_Notes addTarget:self action:@selector(NotesItemClick:) forControlEvents:UIControlEventTouchUpInside];
 
     

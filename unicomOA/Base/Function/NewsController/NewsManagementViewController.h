@@ -12,6 +12,7 @@
 #import "NewsDisplayViewController.h"
 #import "UserInfo.h"
 #import "BaseFunction.h"
+#import "LXSegmentController.h"
 /*
 @protocol ClearRedDotDelegate
 
@@ -20,7 +21,7 @@
 @end
 */
 
-@interface NewsManagementViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,NIDropDownDelegate,NewsTapDelegate,FocusNewsPassDelegate,UITextFieldDelegate,UISearchBarDelegate>
+@interface NewsManagementViewController : LXSegmentController<UITableViewDataSource,UITableViewDelegate,NIDropDownDelegate,NewsTapDelegate,FocusNewsPassDelegate,UITextFieldDelegate,UISearchBarDelegate>
 {
     NIDropDown *dropDown;
 }

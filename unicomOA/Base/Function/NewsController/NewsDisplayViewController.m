@@ -56,7 +56,9 @@ int i_comment_num;
                 NSForegroundColorAttributeName:   [UIColor whiteColor]};
         
     }
-    
+   // [self.navigationController.navigationBar setFrame:CGRectMake(0, 20, [UIScreen mainScreen].bounds.size.width, 44)];
+   // [self.navigationController.navigationBar setHidden:NO];
+  //  self.navigationController.navigationBar.backgroundColor=[UIColor blackColor];
     self.navigationController.navigationBar.titleTextAttributes=dict;
     
     UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"  " style:UIBarButtonItemStyleDone target:self action:@selector(MovePreviousVc:)];
@@ -65,6 +67,14 @@ int i_comment_num;
     
     //[barButtonItem setTitleTextAttributes:dict forState:UIControlStateNormal];
     self.navigationItem.leftBarButtonItem = barButtonItem;
+    
+    
+    UIButton *btn_back=[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    [btn_back setImage:[UIImage imageNamed:@"returnlogo.png"] forState:UIControlStateNormal];
+    [btn_back setBackgroundColor:[UIColor blueColor]];
+    [btn_back addTarget:self action:@selector(MovePreviousVc:) forControlEvents:UIControlEventTouchUpInside];
+    
+  //  [self.view addSubview:btn_back];
     indicator=[self AddLoop];
     
     db=[DataBase sharedinstanceDB];

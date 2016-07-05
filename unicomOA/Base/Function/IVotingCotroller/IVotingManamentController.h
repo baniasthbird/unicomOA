@@ -10,8 +10,9 @@
 #import "NIDropDown.h"
 #import "VotingCell.h"
 #import "UserInfo.h"
+#import "LXSegmentController.h"
 
-@interface IVotingManamentController : UIViewController<UITableViewDataSource,UITableViewDelegate,NIDropDownDelegate,VotingTapDelegate> {
+@interface IVotingManamentController : LXSegmentController<UITableViewDataSource,UITableViewDelegate,NIDropDownDelegate,VotingTapDelegate> {
     NIDropDown *dropDown;
 }
 

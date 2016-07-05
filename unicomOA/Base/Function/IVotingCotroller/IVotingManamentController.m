@@ -9,6 +9,7 @@
 #import "IVotingManamentController.h"
 #import "IVotingDisplayController.h"
 #import "IVotingResultViewController.h"
+#import "IVotingSubVc.h"
 
 @interface IVotingManamentController()
 
@@ -34,7 +35,8 @@
     [barButtonItem setTitleTextAttributes:dict forState:UIControlStateNormal];
     self.navigationItem.leftBarButtonItem = barButtonItem;
     
-    [self buildView];
+    //[self buildView];
+    [self setUpAllViewController];
 }
 
 -(void)didReceiveMemoryWarning {
@@ -209,6 +211,32 @@
 
 -(void)MovePreviousVc:(UIButton*)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)setUpAllViewController {
+     self.isfullScreen=YES;
+    
+    IVotingSubVc *vote1=[[IVotingSubVc alloc]init];
+    vote1.title=@"全部";
+    vote1.str_condition=@"全部";
+    vote1.user_Info=_user_Info;
+    [self addChildViewController:vote1];
+    
+    IVotingSubVc *vote2=[[IVotingSubVc alloc]init];
+    vote2.title=@"正在投票";
+    vote2.str_condition=@"正在投票";
+    vote2.user_Info=_user_Info;
+    [self addChildViewController:vote2];
+    
+    IVotingSubVc *vote3=[[IVotingSubVc alloc]init];
+    vote3.title=@"已经结束";
+    vote3.str_condition=@"已经结束";
+    vote3.user_Info=_user_Info;
+    [self addChildViewController:vote3];
+    
+    
+
+    
 }
 
 @end
