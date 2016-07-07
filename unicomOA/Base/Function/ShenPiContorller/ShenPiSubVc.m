@@ -75,6 +75,8 @@
     
     
     indicator=[self AddLoop];
+    [indicator startAnimating];
+    [self.view addSubview:indicator];
     //设置refreshControl的属性
     _refreshControl=[[UIRefreshControl alloc]init];
     _refreshControl.attributedTitle=[[NSAttributedString alloc]initWithString:@"加载中..." attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14], NSForegroundColorAttributeName:[UIColor blackColor]}];
@@ -89,7 +91,6 @@
         [self PrePareData:dic_param interface:@"FinishTaskShenPiList"];
     }
 
-    
     [self.view addSubview:_tableView];
     
     
@@ -344,9 +345,18 @@
                     [arr_MyReview removeAllObjects];
                 }
                 else {
-                    for (int i=0;i<[arr_list count];i++) {
-                        [arr_MyReview addObject:[arr_list objectAtIndex:i]];
+                    if ([arr_MyReview count]>0) {
+                        for (int i=0;i<[arr_list count];i++) {
+                            NSDictionary *dic_tmp=[arr_list objectAtIndex:i];
+                            if (![arr_MyReview containsObject:dic_tmp]) {
+                                [arr_MyReview addObject:dic_tmp];
+                            }
+                        }
                     }
+                    else {
+                        [arr_MyReview addObjectsFromArray:arr_list];
+                    }
+                   
                     
                 }
                 NSString *str_totalPage=[JSON objectForKey:@"totalPage"];

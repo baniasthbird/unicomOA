@@ -9,6 +9,7 @@
 #import "RemindCell.h"
 #import "UILabel+LabelHeightAndWidth.h"
 
+
 @interface RemindCell()
 
 @property (nonatomic,strong) UILabel *lbl_count;
@@ -34,6 +35,18 @@
         seperatorline1.backgroundColor=[UIColor colorWithRed:191/255.0f green:191/255.0f blue:191/255.0f alpha:1];
         UIView *seperatorline2=[[UIView alloc]initWithFrame:CGRectMake(2*[UIScreen mainScreen].bounds.size.width/3, 0, 1, 70)];
         seperatorline2.backgroundColor=[UIColor colorWithRed:191/255.0f green:191/255.0f blue:191/255.0f alpha:1];
+        
+        UIView *view1=[[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width/3, 70)];
+        view1.backgroundColor=[UIColor clearColor];
+        view1.userInteractionEnabled=YES;
+        
+        //添加tapGesture
+        UITapGestureRecognizer *singelTap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(NavToShenPi:)];
+        singelTap.numberOfTapsRequired=1;
+        singelTap.numberOfTouchesRequired=1;
+        singelTap.delegate=self;
+        
+        
         
         UILabel *lbl_title1=[[UILabel alloc]initWithFrame:CGRectMake(0, 8, [UIScreen mainScreen].bounds.size.width/3, 30)];
         lbl_title1.font=[UIFont systemFontOfSize:16];
@@ -99,12 +112,18 @@
         lbl_num3.layer.masksToBounds=YES;
         
 
+        [view1 addGestureRecognizer:singelTap];
+        
         [self.contentView addSubview:seperatorline1];
         [self.contentView addSubview:seperatorline2];
-        [self.contentView addSubview:lbl_title1];
+        [view1 addSubview:lbl_title1];
+        [view1 addSubview:lbl_num1];
+        [self.contentView addSubview:view1];
+       // [self.contentView addSubview:lbl_title1];
         [self.contentView addSubview:lbl_title2];
         [self.contentView addSubview:lbl_title3];
-        [self.contentView addSubview:lbl_num1];
+      //  [self.contentView addSubview:lbl_num1];
+        
         [self.contentView addSubview:lbl_num2];
         [self.contentView addSubview:lbl_num3];
         
@@ -154,6 +173,13 @@
        // [self.contentView addSubview:_lbl_count];
     }
     return self;
+}
+
+
+
+-(void)NavToShenPi:(UITapGestureRecognizer*)sender {
+    [_delegate PassNavToShenPi];
+  
 }
                 
 @end

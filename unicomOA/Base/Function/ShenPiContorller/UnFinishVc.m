@@ -20,8 +20,9 @@
 #import "UILabel+LabelHeightAndWidth.h"
 #import "ShenPiQueryLogVC.h"
 #import "ListCell.h"
+#import "ShenPiResultCell.h"
 
-@interface UnFinishVc ()<UITableViewDataSource,UITableViewDelegate,ListFileControllerDelegate,PrintApplicationDetailCellDelegate>
+@interface UnFinishVc ()<UITableViewDataSource,UITableViewDelegate,ListFileControllerDelegate,PrintApplicationDetailCellDelegate,UIGestureRecognizerDelegate>
 
 @property (nonatomic,strong) AFHTTPSessionManager *session;
 
@@ -53,6 +54,8 @@
     
     UIActivityIndicatorView *indicator;
     
+    NSArray *arr_ShenPiQueryList;
+    
     BOOL b_Table;
 }
 
@@ -82,9 +85,21 @@
     UIBarButtonItem *barButtonItem3 = [[UIBarButtonItem alloc] initWithTitle:@"提交" style:UIBarButtonItemStyleDone target:self action:@selector(Submit:)];
     [barButtonItem3 setTitleTextAttributes:dict forState:UIControlStateNormal];
     //self.navigationItem.rightBarButtonItems=[NSArray arrayWithObjects:barButtonItem3,barButtonItem2, nil];
-    self.navigationItem.rightBarButtonItem=barButtonItem2;
+    //self.navigationItem.rightBarButtonItem=barButtonItem2;
     
     self.view.backgroundColor=[UIColor colorWithRed:246/255.0f green:249/255.0f blue:254/255.0f alpha:1];
+    
+    //侧滑返回
+    id target = self.navigationController.interactivePopGestureRecognizer.delegate;
+    
+    // handleNavigationTransition:为系统私有API,即系统自带侧滑手势的回调方法，我们在自己的手势上直接用它的回调方法
+    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:target action:@selector(handleNavigationTransition:)];
+    panGesture.delegate = self; // 设置手势代理，拦截手势触发
+    [self.view addGestureRecognizer:panGesture];
+    
+    // 一定要禁止系统自带的滑动手势
+    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    
     
     b_Table=NO;
     
@@ -103,7 +118,7 @@
     
     dic_bkvalue=[NSMutableDictionary dictionary];
     
-    tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-60) style:UITableViewStylePlain];
+    tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-60) style:UITableViewStyleGrouped];
     tableView.delegate=self;
     tableView.dataSource=self;
     tableView.backgroundColor=[UIColor clearColor];
@@ -173,7 +188,11 @@
                         dic_ctl=[self manageData:arr_groupList ctlList:arr_ctlList];
                         str_url_postdata=[dic_result objectForKey:@"url"];
                         dic_m_ctl=[self DispalyUIAdvance:dic_ctl];
-                        [tableView reloadData];
+                        NSMutableDictionary *dic_querylog=[NSMutableDictionary dictionary];
+                        dic_querylog[@"processInstID"]=_str_processInstID;
+                        [self PrePareQueryLog:dic_querylog ip:str_ip port:str_port];
+                       // dic_querylog[@"processInstI"]
+                       // [tableView reloadData];
                     }
                 }
                 else {
@@ -188,7 +207,11 @@
                         dic_ctl=[self manageData:arr_groupList ctlList:arr_ctlList];
                         str_url_postdata=[JSON objectForKey:@"url"];
                         dic_m_ctl=[self DispalyUIAdvance:dic_ctl];
-                        [tableView reloadData];
+                        NSMutableDictionary *dic_querylog=[NSMutableDictionary dictionary];
+                        dic_querylog[@"processInstID"]=_str_processInstID;
+                        [self PrePareQueryLog:dic_querylog ip:str_ip port:str_port];
+
+                       // [tableView reloadData];
                     }
                     else {
                         [indicator stopAnimating];
@@ -365,7 +388,7 @@
         return 1;
     }
     else {
-        return [arr_groupList count]+1;
+        return [arr_groupList count]+2;
     }
 }
 
@@ -375,7 +398,7 @@
     }
     else {
         NSString *str_index=[NSString stringWithFormat:@"%ld",(long)section];
-        if (section!=[arr_groupList count]) {
+        if (section<[arr_groupList count]-1) {
             NSArray *arr_ctl= [dic_m_ctl objectForKey:str_index];
             NSInteger i_count=0;
             for (int i=0;i<[arr_ctl count];i++) {
@@ -393,7 +416,30 @@
             }
             return i_count;
         }
-        else {
+        else if (section==[arr_groupList count]-1) {
+            return [arr_ShenPiQueryList count];
+        }
+        else if (section==[arr_groupList count]) {
+            str_index=[NSString stringWithFormat:@"%ld",section-1];
+            NSArray *arr_ctl= [dic_m_ctl objectForKey:str_index];
+            NSInteger i_count=0;
+            for (int i=0;i<[arr_ctl count];i++) {
+                NSDictionary *dic_tmp=[arr_ctl objectAtIndex:i];
+                NSString *str_type= [dic_tmp objectForKey:@"type"];
+                if (![str_type isEqualToString:@"hidden"]) {
+                    i_count=i_count+1;
+                }
+                /*
+                 else if ([str_type isEqualToString:@"tableView"]) {
+                 NSArray *arr_list=[dic_tmp objectForKey:@"tableData"];
+                 i_count=i_count+[arr_list count];
+                 }
+                 */
+            }
+            return i_count;
+            
+        }
+        else  {
             return 1;
         }
     }
@@ -420,8 +466,13 @@
     }
     else {
         NSString *str_index=@"";
-        if (indexPath.section!=[arr_groupList count]) {
-            str_index=[NSString stringWithFormat:@"%ld",(long)indexPath.section];
+        if (indexPath.section<[arr_groupList count]-1 || indexPath.section==[arr_groupList count]) {
+            if (indexPath.section<[arr_groupList count]-1) {
+                str_index=[NSString stringWithFormat:@"%ld",(long)indexPath.section];
+            }
+            else if (indexPath.section==[arr_groupList count]) {
+                str_index=[NSString stringWithFormat:@"%ld",indexPath.section-1];
+            }
             NSArray *arr_tmp=  [dic_m_ctl objectForKey:str_index];
             NSDictionary  *dic_tmp=[arr_tmp objectAtIndex:indexPath.row];
             NSString *str_type=[dic_tmp objectForKey:@"type"];
@@ -668,7 +719,28 @@
             }
 
         }
-        else {
+        else if (indexPath.section==[arr_groupList count]-1) {
+            NSDictionary *dic_tmp=[arr_ShenPiQueryList objectAtIndex:indexPath.row];
+            NSString *str_name=[dic_tmp objectForKey:@"name"];
+            NSObject *obj_content=[dic_tmp objectForKey:@"content"];
+            NSString *str_content=@"";
+            if (obj_content!=[NSNull null]) {
+                str_content=(NSString*)obj_content;
+            }
+            NSString *str_decision=[dic_tmp objectForKey:@"decision"];
+            NSString *str_date=[dic_tmp objectForKey:@"endTime"];
+            NSArray *arr_date=[str_date componentsSeparatedByString:@"."];
+            str_date=[arr_date objectAtIndex:0];
+            NSString *str_activename=[dic_tmp objectForKey:@"activityName"];
+            NSString *str_status=@"";
+            str_status=str_decision;
+            ShenPiResultCell *cell=[ShenPiResultCell cellWithTable:tableView withTitle:_str_title withName:str_name withStatus:str_status withTime:str_date ActivityName:str_activename atIndex:indexPath];
+            cell.layer.borderWidth=1;
+            cell.layer.borderColor=[[UIColor colorWithRed:231/255.0f green:231/255.0f blue:231/255.0f alpha:1] CGColor];
+            return cell;
+
+        }
+        else  {
             UIButton *btn;
             if (iPad) {
                 btn=[[UIButton alloc]initWithFrame:CGRectMake(57, 7, [UIScreen mainScreen].bounds.size.width-114, 30)];
@@ -699,28 +771,45 @@
     lbl_sectionTitle.textAlignment=NSTextAlignmentCenter;
     lbl_sectionTitle.font=[UIFont boldSystemFontOfSize:17];
     lbl_sectionTitle.backgroundColor=[UIColor whiteColor];
-    if (section!=[arr_groupList count]) {
-        NSDictionary *dic_group=[arr_groupList objectAtIndex:section];
-        NSString *str_label=[dic_group objectForKey:@"label"];
-        if (str_label!=nil) {
-            lbl_sectionTitle.text=[NSString stringWithFormat:@"     %@",str_label];
+    if (arr_groupList!=nil) {
+        if (section<[arr_groupList count]-1 || section==[arr_groupList count]) {
+            NSInteger i_index=-1;
+            if (section<[arr_groupList count]-1) {
+                i_index=section;
+            }
+            else if (section==[arr_groupList count]) {
+                i_index=[arr_groupList count]-1;
+            }
+            NSDictionary *dic_group=[arr_groupList objectAtIndex:i_index];
+            NSString *str_label=[dic_group objectForKey:@"label"];
+            if (str_label!=nil) {
+                lbl_sectionTitle.text=[NSString stringWithFormat:@"%@",str_label];
+            }
+            else {
+                lbl_sectionTitle.text=@"请稍后,正在加载中...";
+            }
+            
+            
+            [view addSubview:lbl_sectionTitle];
+            return view;
+            
+        }
+        else if (section==[arr_groupList count]-1) {
+            lbl_sectionTitle.text=@"审批记录";
+            [view addSubview:lbl_sectionTitle];
+            return view;
         }
         else {
-            lbl_sectionTitle.text=@"请稍后,正在加载中...";
+            return nil;
         }
-        
-        
-        [view addSubview:lbl_sectionTitle];
-        return view;
-
     }
     else {
         return nil;
     }
-   }
+}
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (section!=[arr_groupList count]) {
+    if (section<[arr_groupList count]+1) {
         return 30;
     }
     else {
@@ -757,16 +846,67 @@
         return 44;
     }
      */
-    NSString *str_index=[NSString stringWithFormat:@"%ld",(long)indexPath.section];
-    NSArray *arr_tmp=  [dic_m_ctl objectForKey:str_index];
-    if (indexPath.row<[arr_tmp count]) {
-        NSDictionary  *dic_tmp=[arr_tmp objectAtIndex:indexPath.row];
-        NSString *str_type=[dic_tmp objectForKey:@"type"];
-       // NSString *str_readonly=[dic_tmp objectForKey:@"readonly"];
-        NSString *str_groupKey=[dic_tmp objectForKey:@"groupKey"];
-    //    BOOL b_readonly=[str_readonly boolValue];
-        if ([str_type isEqualToString:@"textarea"]) {
-            if (![str_groupKey isEqualToString:@"audit"]) {
+    if (indexPath.section<[arr_groupList count]-1 || indexPath.section==[arr_groupList count]) {
+        NSString *str_index=@"";
+        if (indexPath.section<[arr_groupList count]) {
+            str_index=[NSString stringWithFormat:@"%ld",(long)indexPath.section];
+        }
+        else if (indexPath.section==[arr_groupList count]) {
+            str_index=[NSString stringWithFormat:@"%ld",indexPath.section-1];
+        }
+        NSArray *arr_tmp=  [dic_m_ctl objectForKey:str_index];
+        if (indexPath.row<[arr_tmp count]) {
+            NSDictionary  *dic_tmp=[arr_tmp objectAtIndex:indexPath.row];
+            NSString *str_type=[dic_tmp objectForKey:@"type"];
+            // NSString *str_readonly=[dic_tmp objectForKey:@"readonly"];
+            NSString *str_groupKey=[dic_tmp objectForKey:@"groupKey"];
+            //    BOOL b_readonly=[str_readonly boolValue];
+            if ([str_type isEqualToString:@"textarea"]) {
+                if (![str_groupKey isEqualToString:@"audit"]) {
+                    NSObject *obj_label=[dic_tmp objectForKey:@"label"];
+                    NSString *str_label=@"";
+                    if (obj_label!=[NSNull null]) {
+                        str_label=(NSString*)obj_label;
+                    }
+                    NSObject *obj_value=[dic_tmp objectForKey:@"value"];
+                    NSString *str_value=@"";
+                    if (obj_value!=[NSNull null]) {
+                        str_value=(NSString*)obj_value;
+                    }
+                    if (![str_value isEqualToString:@""] || ![str_label isEqualToString:@""]) {
+                        CGFloat rowHeightValue=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width*0.4 title:str_value font:[UIFont systemFontOfSize:14]];
+                        CGFloat rowHeightLabel=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width*0.1 title:str_label font:[UIFont systemFontOfSize:14]];
+                        if (rowHeightLabel>rowHeightValue)
+                        {
+                            if (rowHeightLabel>34) {
+                                return  rowHeightLabel+20;
+                            }
+                            else {
+                                return 44;
+                            }
+                        }
+                        else {
+                            if (rowHeightValue>34) {
+                                return rowHeightValue+10;
+                            }
+                            else {
+                                return  44;
+                            }
+                            
+                        }
+                    }
+                    else {
+                        return 180;
+                    }
+                    
+                }
+                else {
+                    return  180;
+                    
+                }
+            }
+            else if (![str_type isEqualToString:@"html"]) {
+                //下午完善
                 NSObject *obj_label=[dic_tmp objectForKey:@"label"];
                 NSString *str_label=@"";
                 if (obj_label!=[NSNull null]) {
@@ -779,67 +919,28 @@
                 }
                 if (![str_value isEqualToString:@""] || ![str_label isEqualToString:@""]) {
                     CGFloat rowHeightValue=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width*0.4 title:str_value font:[UIFont systemFontOfSize:14]];
-                    CGFloat rowHeightLabel=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width*0.1 title:str_label font:[UIFont systemFontOfSize:14]];
-                    if (rowHeightLabel>rowHeightValue)
-                    {
-                        if (rowHeightLabel>34) {
-                            return  rowHeightLabel+20;
-                        }
-                        else {
+                    CGFloat rowHeightLabel=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width*0.2 title:str_label font:[UIFont systemFontOfSize:14]];
+                    if (rowHeightLabel>rowHeightValue) {
+                        if (rowHeightLabel<34) {
                             return 44;
                         }
+                        else {
+                            return rowHeightLabel+20;
+                        }
                     }
                     else {
-                        if (rowHeightValue>34) {
-                            return rowHeightValue+10;
+                        if (rowHeightValue<34) {
+                            return 44;
                         }
                         else {
-                            return  44;
+                            return rowHeightValue+20;
                         }
-                        
                     }
                 }
                 else {
-                    return 180;
+                    return 44;
                 }
-
-            }
-            else {
-                return  180;
                 
-            }
-        }
-        else if (![str_type isEqualToString:@"html"]) {
-            //下午完善
-            NSObject *obj_label=[dic_tmp objectForKey:@"label"];
-            NSString *str_label=@"";
-            if (obj_label!=[NSNull null]) {
-                str_label=(NSString*)obj_label;
-            }
-            NSObject *obj_value=[dic_tmp objectForKey:@"value"];
-            NSString *str_value=@"";
-            if (obj_value!=[NSNull null]) {
-                str_value=(NSString*)obj_value;
-            }
-            if (![str_value isEqualToString:@""] || ![str_label isEqualToString:@""]) {
-                CGFloat rowHeightValue=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width*0.4 title:str_value font:[UIFont systemFontOfSize:14]];
-                CGFloat rowHeightLabel=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width*0.2 title:str_label font:[UIFont systemFontOfSize:14]];
-                if (rowHeightLabel>rowHeightValue) {
-                    if (rowHeightLabel<34) {
-                        return 44;
-                    }
-                    else {
-                        return rowHeightLabel+20;
-                    }
-                }
-                else {
-                    if (rowHeightValue<34) {
-                        return 44;
-                    }
-                    else {
-                        return rowHeightValue+20;
-                    }
-                }
             }
             else {
                 return 44;
@@ -847,12 +948,15 @@
             
         }
         else {
-            return 44;
+            return  44;
         }
 
     }
+    else if (indexPath.section==[arr_groupList count]-1) {
+        return 60;
+    }
     else {
-        return  44;
+        return 44;
     }
     
     
@@ -1005,8 +1109,6 @@
         //[self NewsList:_news_param];
         
     });
-    
-    
 }
 
 
@@ -1016,6 +1118,80 @@
     NSDictionary  *dic_tmp=[arr_tmp objectAtIndex:i_indexPath.row];
     [dic_tmp setValue:str_text forKey:@"value"];
 }
+
+
+-(void)PrePareQueryLog:(NSMutableDictionary*)param ip:(NSString*)str_data_ip port:(NSString*)str_data_port {
+    // NSString *str_connection=[self GetConnectionStatus];
+    // if ([str_connection isEqualToString:@"wifi"] || [str_connection isEqualToString:@"GPRS"]) {
+    //    NSString *str_ip=@"";
+    //    NSString *str_port=@"";
+    //    NSMutableArray *t_array=[db fetchIPAddress];
+    //     if (t_array.count==1) {
+    //         NSArray *arr_ip=[t_array objectAtIndex:0];
+    //         str_ip=[arr_ip objectAtIndex:0];
+    //         str_port=[arr_ip objectAtIndex:1];
+    //     }
+    
+    
+    NSString *str_urldata=[db fetchInterface:@"TaskLog"];
+    NSCharacterSet *whitespace = [NSCharacterSet  whitespaceAndNewlineCharacterSet];
+    str_urldata= [str_urldata stringByTrimmingCharactersInSet:whitespace];
+    NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_data_ip,str_data_port,str_urldata];
+    [_session POST:str_url parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        NSString *str_success=[JSON objectForKey:@"success"];
+        BOOL b_success=[str_success boolValue];
+        if (b_success==YES) {
+            [indicator stopAnimating];
+            arr_ShenPiQueryList=[JSON objectForKey:@"list"];
+            [tableView reloadData];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [indicator stopAnimating];
+        [_refreshControl endRefreshing];
+        LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"提示" message:@"无法连接到服务器" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+            
+        }];
+        [alert showLXAlertView];
+    }];
+    
+    /*
+     }
+     else {
+     [indicator stopAnimating];
+     [_refreshControl endRefreshing];
+     LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"警告" message:@"无网络连接" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+     
+     }];
+     [alert showLXAlertView];
+     }
+     */
+}
+
+
+// 什么时候调用，每次触发手势之前都会询问下代理方法，是否触发
+// 作用：拦截手势触发
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+{
+    // 当当前控制器是根控制器时，不可以侧滑返回，所以不能使其触发手势
+    if(self.navigationController.childViewControllers.count == 1)
+    {
+        return NO;
+    }
+    
+    return YES;
+}
+
+
+
+
+-(void)handleNavigationTransition:(UIGestureRecognizer *)sender {
+    
+}
+
 /*
 #pragma mark - Navigation
 

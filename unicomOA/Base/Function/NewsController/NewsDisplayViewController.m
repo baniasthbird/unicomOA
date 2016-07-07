@@ -121,8 +121,9 @@ int i_comment_num;
     config.preferences.javaScriptEnabled=YES;
     config.preferences.javaScriptCanOpenWindowsAutomatically=NO;
     config.processPool=[[WKProcessPool alloc]init];
-    CGFloat i_width= [UIScreen mainScreen].bounds.size.width-20;
-    NSString *js =[NSString stringWithFormat: @"var count = document.images.length;for (var i = 0; i < count; i++) {var image = document.images[i];image.style.width=%f;};window.alert('找到' + count + '张图');",i_width];
+   // CGFloat i_width= [UIScreen mainScreen].bounds.size.width-20;
+   // NSString *js =[NSString stringWithFormat: @"var count = document.images.length;\n for (var i = 0; i < count; i++)\n {var image = document.images[i];\n var imgWidth=image.style.width;\n  var imgHeight=image.style.height;\n  var iRatio=imgHeight/imgWidth;\n    var targetHeight=iRatio*%f\n  image.style.width=%f;\n  image.style.height=targetHeight;\n };",i_width,i_width];
+    NSString *js=[NSString stringWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"imageResize" ofType:@"js" ] encoding:NSUTF8StringEncoding error:nil];
     // 根据JS字符串初始化WKUserScript对象
     WKUserScript *script = [[WKUserScript alloc] initWithSource:js injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
     // 根据生成的WKUserScript对象，初始化WKWebViewConfiguration
@@ -131,7 +132,7 @@ int i_comment_num;
     
     
    
-    _wb_content=[[WKWebView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) configuration:config];
+    _wb_content=[[WKWebView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-40) configuration:config];
     _wb_content.navigationDelegate=self;
          //_txt_content=[[UITextView alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height*0.20, 15*self.view.frame.size.width/16, self.view.frame.size.height*0.51)];
     
@@ -284,6 +285,27 @@ int i_comment_num;
                // _lbl_depart.frame=CGRectMake(0, _h_title+5, [UIScreen mainScreen].bounds.size.width, _h_depart);
                //  [_lbl_depart sizeToFit];
                 NSString *str_content=[dic_news objectForKey:@"content"];
+                str_content=str_content.lowercaseString;
+                //替换字体
+                NSRange searchRange=NSMakeRange(0, str_content.length);
+                NSRange foundRange;
+                while (searchRange.location<str_content.length) {
+                    searchRange.length=str_content.length-searchRange.location;
+                    foundRange=[str_content rangeOfString:@"font-size" options:nil range:searchRange];
+                   // foundRange=[str_content rangeOfString:@"" options:NSStringCompareOptions.foundRange range:<#(NSRange)#>]
+                    if (foundRange.location!=NSNotFound) {
+                      
+                        searchRange.location=foundRange.location+foundRange.length;
+                        NSRange fontsizeRange=NSMakeRange(searchRange.location+2, 2);
+                        NSString *str_fontsize= [str_content substringWithRange:fontsizeRange];
+                        NSLog(@"找到字体");
+                        str_content=[str_content stringByReplacingCharactersInRange:fontsizeRange withString:@"16"];
+                    }
+                    else {
+                        break;
+                    }
+                }
+                
                 NSString *str_title_style1=@"<p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; font-size: 24px; text-indent: 0em; font-stretch: normal; line-height: 32px; font-family: &quot;Microsoft Yahei&quot;; color: rgb(64, 64, 64); text-align: center; white-space: normal; background-color: rgb(255, 255, 255);\">";
               
                 NSString *str_depart_style1=@"<p style=\"margin-top: 5px; margin-bottom: 0px; padding: 0px; font-size: 12px; text-indent: 0em; font-stretch: normal; line-height: 10px; font-family: &quot;Microsoft Yahei&quot;; color: rgb(117, 117, 117); text-align: center; white-space: normal; background-color: rgb(255, 255, 255);\">";
@@ -293,16 +315,56 @@ int i_comment_num;
                 
                 NSString *str_depart_new=[NSString stringWithFormat:@"%@%@%@",str_depart_style1,str_departlabel,str_title_style2];
                 str_content=[NSString stringWithFormat:@"%@%@%@%@",_str_headscale,str_title_new,str_depart_new,str_content];
+                
+                //替换图片源
                 NSString *str_relplace1=[NSString stringWithFormat:@"%@%@:%@",@"http://",str_ip,str_port];
                 NSString *str_relplace2=@"<img src=\"";
                 NSString *str_replace_after=[NSString stringWithFormat:@"%@%@",str_relplace2,str_relplace1];
 
                 NSString *str_newcontent=[str_content stringByReplacingOccurrencesOfString:str_relplace2 withString:str_replace_after];
                 
+
+                //若源代码中存在doc、docx、ppt、pptx、xls、xlsx字样的，全部去掉从<p处全部去
+                NSRange range1=[str_newcontent rangeOfString:@"doc"];
+                NSRange range2=[str_newcontent rangeOfString:@"xls"];
+                NSRange range3=[str_newcontent rangeOfString:@"ppt"];
+                 NSString *str_newcontent2=@"";
+                if (range1.length>0 || range2.length>0 || range3.length>0) {
+                   
+                    NSLog(@"找到office文档");
+                    NSArray *arr_tmp= [str_newcontent componentsSeparatedByString:@"<p"];
+                    NSMutableArray *arr_new_content=[NSMutableArray arrayWithArray:arr_tmp];
+                    for (int i=(int)[arr_new_content count]-1;i>-0;i--) {
+                        NSString *str_tmp=[arr_new_content objectAtIndex:i];
+                        NSRange rangesub1=[str_tmp rangeOfString:@"doc"];
+                        NSRange rangesub2=[str_tmp rangeOfString:@"xls"];
+                        NSRange rangesub3=[str_tmp rangeOfString:@"ppt"];
+                        if (rangesub1.length>0 || rangesub2.length>0 || rangesub3.length > 0) {
+                            [arr_new_content removeObjectAtIndex:i];
+                        }
+                    }
+                    NSLog(@"删减完成");
+                    
+                    for (int i=1;i<[arr_new_content count];i++) {
+                        NSString *str_tmp=[arr_new_content objectAtIndex:i];
+                        str_tmp=[NSString stringWithFormat:@"%@%@",@"<p",str_tmp];
+                        str_newcontent2=[NSString stringWithFormat:@"%@%@",str_newcontent2,str_tmp];
+                    }
+                    str_newcontent2=[NSString stringWithFormat:@"%@%@",[arr_new_content objectAtIndex:0],str_newcontent2];
+                }
+               
+                
                 // 图片缩放的js代码
                              
               //  NSURL *baseUrl=[NSURL URLWithString:@"http://192.168.1.62:8080"];
-                [_wb_content loadHTMLString:str_newcontent baseURL:nil];
+                if (![str_newcontent2 isEqualToString:@""]) {
+                     [_wb_content loadHTMLString:str_newcontent2 baseURL:nil];
+                }
+                else {
+                    [_wb_content loadHTMLString:str_newcontent baseURL:nil];
+
+                }
+               
                 
                 NSString *str_readnum=[dic_news objectForKey:@"readNum"];
                 i_num=[str_readnum intValue];
@@ -362,7 +424,7 @@ int i_comment_num;
     return l_indicator;
 }
 
-
+/*
 -(void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
     [ webView evaluateJavaScript:@"var script = document.createElement('script');"
      "script.type = 'text/javascript';"
@@ -377,6 +439,7 @@ int i_comment_num;
      "}\";"
      "document.getElementsByTagName('head')[0].appendChild(script);ResizeImages();" completionHandler:nil];
 }
+*/
 /*
  
 #pragma mark - Navigation

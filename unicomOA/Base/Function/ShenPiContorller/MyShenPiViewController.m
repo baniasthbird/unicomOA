@@ -127,7 +127,7 @@
     dic_param2=[NSMutableDictionary dictionary];
    
     indicator=[self AddLoop];
-    arr_MyReview=[[NSMutableArray alloc]init];
+        arr_MyReview=[[NSMutableArray alloc]init];
     db=[DataBase sharedinstanceDB];
     
     _session=[AFHTTPSessionManager manager];
@@ -1012,6 +1012,7 @@
 - (void)setUpAllViewController {
     self.isfullScreen=YES;
     self.isShowTitleCover=YES;
+    self.bgColor=[UIColor colorWithRed:73/255.0f green:118/255.0f blue:231/255.0f alpha:1];
     self.coverColor=[UIColor whiteColor];
     self.selColor=[UIColor colorWithRed:73/255.0f green:118/255.0f blue:231/255.0f alpha:1];
    

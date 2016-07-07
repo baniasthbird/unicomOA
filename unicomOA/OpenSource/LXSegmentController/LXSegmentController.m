@@ -193,9 +193,9 @@
         
         UIScrollView *titleScrollView = [[UIScrollView alloc] init];
         
-        titleScrollView.backgroundColor = [UIColor colorWithRed:73/255.0f green:118/255.0f blue:231/255.0f alpha:1];
+      //  titleScrollView.backgroundColor = [UIColor colorWithRed:73/255.0f green:118/255.0f blue:231/255.0f alpha:1];
         
-      //  titleScrollView.backgroundColor=[UIColor whiteColor];
+       // titleScrollView.backgroundColor=self.bgColor;
         
         
         [self.contentView addSubview:titleScrollView];
@@ -222,6 +222,7 @@
         _contentScrollView.bounces = NO;
         _contentScrollView.delegate = self;
         _contentScrollView.dataSource = self;
+       
         [self.contentView insertSubview:contentScrollView belowSubview:self.titleScrollView];
         
     }
@@ -408,6 +409,8 @@
         // 注册cell
         [self.contentScrollView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:ID];
         self.contentScrollView.backgroundColor = self.view.backgroundColor;
+        _titleScrollView.backgroundColor=self.bgColor;
+      //  self.contentScrollView.backgroundColor=self.bgColor;
         
         // 初始化
         [self setUp];

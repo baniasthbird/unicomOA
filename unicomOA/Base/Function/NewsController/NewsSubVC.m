@@ -62,7 +62,7 @@
 - (UITableView *)tableView
 {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 160) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 150) style:UITableViewStylePlain];
         _tableView.dataSource = self;
         _tableView.delegate = self;
     }
@@ -70,8 +70,11 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     if ([self.tableView numberOfRowsInSection:0]>0) {
          [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+       // [self.tableView setContentOffset:CGPointMake(0, 40)];
+         
     }
    
 }
@@ -79,7 +82,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.view.backgroundColor = [UIColor colorWithRed:random()%255/255.0 green:random()%255/255.0 blue:random()%255/255.0 alpha:1];
+   // self.view.backgroundColor = [UIColor colorWithRed:random()%255/255.0 green:random()%255/255.0 blue:random()%255/255.0 alpha:1];
+    self.view.backgroundColor=[UIColor clearColor];
     
     db=[DataBase sharedinstanceDB];
     
@@ -89,7 +93,9 @@
     [_session.requestSerializer setTimeoutInterval:10.0f];
     
     indicator=[self AddLoop];
-    
+    [indicator startAnimating];
+    [self.view addSubview:indicator];
+
     _i_pageIndex=1;
     
     selectedIndex=-1;
@@ -382,8 +388,13 @@
                 
                 
                 [self.tableView reloadData];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    //刷新完成
+                      [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+                      [self.tableView setContentOffset:CGPointMake(0, 40)];
+                });
                 
-                [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+             
             }
             
             

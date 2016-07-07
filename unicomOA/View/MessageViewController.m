@@ -14,9 +14,10 @@
 #import "UILabel+LabelHeightAndWidth.h"
 #import "YBMonitorNetWorkState.h"
 #import "LXAlertView.h"
+#import "MyShenPiViewController.h"
 
 
-@interface MessageViewController ()<UITableViewDelegate,UITableViewDataSource,NewsTapDelegate,YBMonitorNetWorkStateDelegate>
+@interface MessageViewController ()<UITableViewDelegate,UITableViewDataSource,NewsTapDelegate,YBMonitorNetWorkStateDelegate,RemindCellDelegate>
 
 @property (nonatomic,strong) UITableView *tableView;
 
@@ -373,6 +374,8 @@
   //  @try {
         if (indexPath.section==0) {
             RemindCell *r_cell=[RemindCell cellWithTable:tableView DocNum:_i_doc_num FlowNum:_i_flow_num MsgNum:_i_msg_num];
+            r_cell.delegate=self;
+            r_cell.selectionStyle=UITableViewCellSelectionStyleNone;
             return r_cell;
         }
         else  {
@@ -637,6 +640,13 @@
         str_tmp=(NSString*)obj_tmp;
     }
     return str_tmp;
+}
+
+-(void)PassNavToShenPi {
+    NSLog(@"单击事件");
+    MyShenPiViewController *viewController=[[MyShenPiViewController alloc] init];
+    viewController.userInfo=_userInfo;
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 /*
 #pragma mark - Navigation

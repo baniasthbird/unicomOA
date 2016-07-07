@@ -110,6 +110,7 @@
 		6838153F1CBCCB2A00E6AFD3 /* PrintApplicationDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 6838153E1CBCCB2A00E6AFD3 /* PrintApplicationDetail.m */; };
 		683815421CBCDAA400E6AFD3 /* PrintFileDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 683815411CBCDAA400E6AFD3 /* PrintFileDetail.m */; };
 		683815451CBCE28500E6AFD3 /* PrintFileNavCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 683815441CBCE28500E6AFD3 /* PrintFileNavCell.m */; };
+		683D5A2B1D2DF6E6002958D3 /* imageResize.js in Resources */ = {isa = PBXBuildFile; fileRef = 683D5A2A1D2DF6E6002958D3 /* imageResize.js */; };
 		683EFF5F1CDC7B9C0049326B /* locate.png in Resources */ = {isa = PBXBuildFile; fileRef = 683EFF5E1CDC7B9C0049326B /* locate.png */; };
 		68462DCC1CF587540044A806 /* UILabel+LabelHeightAndWidth.m in Sources */ = {isa = PBXBuildFile; fileRef = 68462DCB1CF587540044A806 /* UILabel+LabelHeightAndWidth.m */; };
 		6846D3531CAB5A1E004BD285 /* IVotingManamentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6846D3521CAB5A1E004BD285 /* IVotingManamentController.m */; };
@@ -475,6 +476,7 @@
 		683815411CBCDAA400E6AFD3 /* PrintFileDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrintFileDetail.m; path = Base/Function/ShenPiContorller/PrintFileDetail.m; sourceTree = "<group>"; };
 		683815431CBCE28500E6AFD3 /* PrintFileNavCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrintFileNavCell.h; path = Base/Function/ShenPiModel/PrintFileNavCell.h; sourceTree = "<group>"; };
 		683815441CBCE28500E6AFD3 /* PrintFileNavCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrintFileNavCell.m; path = Base/Function/ShenPiModel/PrintFileNavCell.m; sourceTree = "<group>"; };
+		683D5A2A1D2DF6E6002958D3 /* imageResize.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = imageResize.js; sourceTree = "<group>"; };
 		683EFF5C1CDC22D40049326B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		683EFF5D1CDC22D40049326B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		683EFF5E1CDC7B9C0049326B /* locate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = locate.png; sourceTree = "<group>"; };
@@ -836,6 +838,7 @@
 			isa = PBXGroup;
 			children = (
 				2CFEAD391C71C90C0054730E /* PrefixHeader.pch */,
+				683D5A2A1D2DF6E6002958D3 /* imageResize.js */,
 				2C35B04B1C7062160003BF6C /* main.m */,
 				2CFEAD3A1C71CAFB0054730E /* WxHxD.h */,
 				2CFEADA41C769EBF0054730E /* friends.plist */,
@@ -1893,6 +1896,7 @@
 				687E74BA1D113B9500F67884 /* check_off.png in Resources */,
 				68E779E41CB34A8E006DA5B9 /* contacts_collect@2x.png in Resources */,
 				68F8E1801CD042AA005D2727 /* myApplication.png in Resources */,
+				683D5A2B1D2DF6E6002958D3 /* imageResize.js in Resources */,
 				6846EC5A1CF99C7C00A400C5 /* IQKeyboardManager.bundle in Resources */,
 				68B38F091D19248A00F28034 /* tablerow.png in Resources */,
 				68F8E18C1CD04409005D2727 /* alarm.png in Resources */,

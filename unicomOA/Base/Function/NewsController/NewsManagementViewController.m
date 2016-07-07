@@ -880,6 +880,25 @@
 - (void)setUpAllViewController {
     
     self.isfullScreen=YES;
+    self.isShowUnderLine=YES;
+    self.bgColor=[UIColor colorWithRed:246/255.0f green:249/255.0f blue:254/255.0f alpha:1];
+    self.norColor=[UIColor blackColor];
+    self.selColor=[UIColor colorWithRed:73/255.0f green:118/255.0f blue:231/255.0f alpha:1];
+    self.underLineColor=[UIColor colorWithRed:73/255.0f green:118/255.0f blue:231/255.0f alpha:1];
+    
+    if (iPhone5_5s) {
+        self.titleFont=[UIFont systemFontOfSize:14];
+    }
+    else if (iPhone6) {
+        self.titleFont=[UIFont systemFontOfSize:16];
+    }
+    else if (iPhone6_plus) {
+        self.titleFont=[UIFont systemFontOfSize:18];
+    }
+    else if (iPad) {
+        self.titleFont=[UIFont systemFontOfSize:18];
+    }
+    
     NSMutableDictionary *news_param1=[NSMutableDictionary dictionary];
     NSMutableDictionary *news_param2=[NSMutableDictionary dictionary];
     NSMutableDictionary *news_param3=[NSMutableDictionary dictionary];
