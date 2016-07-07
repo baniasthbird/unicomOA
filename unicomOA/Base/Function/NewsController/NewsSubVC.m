@@ -72,8 +72,8 @@
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     if ([self.tableView numberOfRowsInSection:0]>0) {
-         [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
-       // [self.tableView setContentOffset:CGPointMake(0, 40)];
+        // [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+        [self.tableView setContentOffset:CGPointMake(0, 40)];
          
     }
    
@@ -390,7 +390,7 @@
                 [self.tableView reloadData];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     //刷新完成
-                      [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+                    //  [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
                       [self.tableView setContentOffset:CGPointMake(0, 40)];
                 });
                 

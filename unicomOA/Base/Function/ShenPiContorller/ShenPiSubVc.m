@@ -403,7 +403,7 @@
     
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         [arr_MyReview removeAllObjects];
-        if (_b_isDaiBan==NO) {
+        if (_b_isDaiBan==YES) {
             dic_param[@"pageIndex"]=@"1";
             [self PrePareData:dic_param interface:@"UnFinishTaskShenPiList"];
             

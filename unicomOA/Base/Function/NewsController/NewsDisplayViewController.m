@@ -74,6 +74,8 @@ int i_comment_num;
     [btn_back setBackgroundColor:[UIColor blueColor]];
     [btn_back addTarget:self action:@selector(MovePreviousVc:) forControlEvents:UIControlEventTouchUpInside];
     
+    
+    
   //  [self.view addSubview:btn_back];
     indicator=[self AddLoop];
     
@@ -423,6 +425,9 @@ int i_comment_num;
     [l_indicator setCenter:CGPointMake(self.view.frame.size.width / 2.0, self.view.frame.size.height / 2.0)];
     return l_indicator;
 }
+
+
+
 
 /*
 -(void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {

@@ -23,6 +23,7 @@
     // Override point for customization after application launch.
     //在这里判断是否可以系统更新
         // [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:70/255.0f green:156/255.0f blue:241/255.0f alpha:1]];
+    sleep(2);
     if (iPad) {
          [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"bg_Nav-IPad.png"] forBarMetrics:UIBarMetricsDefault];
     }
