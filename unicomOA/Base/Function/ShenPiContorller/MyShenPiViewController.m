@@ -1012,9 +1012,12 @@
 - (void)setUpAllViewController {
     self.isfullScreen=YES;
     self.isShowTitleCover=YES;
-    self.bgColor=[UIColor colorWithRed:73/255.0f green:118/255.0f blue:231/255.0f alpha:1];
+    self.b_isShenPi=YES;
+   // self.bgColor=[UIColor colorWithRed:73/255.0f green:118/255.0f blue:231/255.0f alpha:1];
+    self.bgColor=[UIColor whiteColor];
     self.coverColor=[UIColor whiteColor];
     self.selColor=[UIColor colorWithRed:73/255.0f green:118/255.0f blue:231/255.0f alpha:1];
+    self.norColor=[UIColor colorWithRed:179/255.0f green:179/255.0f blue:179/255.0f alpha:1];
    
     
     ShenPiSubVc *vc1=[[ShenPiSubVc alloc]init];

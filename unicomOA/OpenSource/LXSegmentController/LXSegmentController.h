@@ -51,6 +51,9 @@ typedef enum : NSUInteger {
  */
 @property (nonatomic, assign) BOOL isfullScreen;
 
+//是否是审批专用
+@property (nonatomic,assign) BOOL isShenPi;
+
 /**
     根据角标，选中对应的控制器
  */

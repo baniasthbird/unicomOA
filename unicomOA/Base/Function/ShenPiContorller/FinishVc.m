@@ -526,7 +526,7 @@
             NSString *str_activename=[dic_tmp objectForKey:@"activityName"];
             NSString *str_status=@"";
             str_status=str_decision;
-            ShenPiResultCell *cell=[ShenPiResultCell cellWithTable:tableView withTitle:_str_title withName:str_name withStatus:str_status withTime:str_date ActivityName:str_activename atIndex:indexPath];
+            ShenPiResultCell *cell=[ShenPiResultCell cellWithTable:tableView withContent:str_content withName:str_name withStatus:str_status withTime:str_date ActivityName:str_activename atIndex:indexPath];
             return cell;
             
         }

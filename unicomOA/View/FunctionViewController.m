@@ -124,10 +124,10 @@
     view_part1.layer.borderWidth=1;
     view_part1.layer.borderColor=[[UIColor colorWithRed:231/255.0f green:231/255.0f blue:231/255.0f alpha:1] CGColor];
     
-    UIImageButton *btn_News=[self createImageButton:20 y:10 width:60 height:60 title:@"新闻公告" image:@"News.png"];
+    UIImageButton *btn_News=[self createImageButton:20 y:10 width:50 height:50 title:@"新闻" image:@"News.png"];
     [btn_News addTarget:self action:@selector(NewsItemClick:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIImageButton *btn_IVoting=[self createImageButton:95 y:10 width:60 height:60 title:@"在线投票" image:@"IVoting.png"];
+    UIImageButton *btn_IVoting=[self createImageButton:95 y:10 width:50 height:50 title:@"投票" image:@"IVoting.png"];
     [btn_IVoting addTarget:self action:@selector(IVotingItemClick:) forControlEvents:UIControlEventTouchUpInside];
     
     
@@ -142,7 +142,7 @@
     view_part2.layer.borderWidth=1;
     view_part2.layer.borderColor=[[UIColor colorWithRed:231/255.0f green:231/255.0f blue:231/255.0f alpha:1] CGColor];
     
-    _btn_ShenPi=[self createImageButton:28 y:162 width:60 height:60 title:@"审批" image:@"ShenPi.png"];
+    _btn_ShenPi=[self createImageButton:28 y:162 width:50 height:50 title:@"审批" image:@"ShenPi.png"];
     [_btn_ShenPi addTarget:self action:@selector(ShenPiItemClick:) forControlEvents:UIControlEventTouchUpInside];
     if (i_total!=0) {
         _btn_ShenPi.badgeBgColor=[UIColor redColor];
@@ -168,7 +168,7 @@
     view_part3.layer.borderWidth=1;
     view_part3.layer.borderColor=[[UIColor colorWithRed:231/255.0f green:231/255.0f blue:231/255.0f alpha:1] CGColor];
     
-    UIImageButton *btn_Notes=[self createImageButton:20 y:10 width:60 height:60 title:@"备忘录" image:@"Notes.png"];
+    UIImageButton *btn_Notes=[self createImageButton:20 y:10 width:50 height:50 title:@"备忘录" image:@"Notes.png"];
     [btn_Notes addTarget:self action:@selector(NotesItemClick:) forControlEvents:UIControlEventTouchUpInside];
 
     
@@ -240,12 +240,18 @@
     
     [tmp_btn setValue:[NSNumber numberWithInt:0] forKey:@"column"];
     
-  //  [tmp_btn setTitle:str_title forState:UIControlStateNormal];
-  //  tmp_btn.titleLabel.textColor=[UIColor blackColor];
-    //tmp_btn.titleEdgeInsets=UIEdgeInsetsMake(46, 44, 0, 0);
+    [tmp_btn setTitle:str_title forState:UIControlStateNormal];
+   
+    tmp_btn.titleEdgeInsets=UIEdgeInsetsMake(70, 0, 0, 0);
+    
     
     
     [tmp_btn setBackgroundImage:[UIImage imageNamed:str_image] forState:UIControlStateNormal];
+    
+     //tmp_btn.titleLabel.textColor=[UIColor blackColor];
+    [tmp_btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    
+    tmp_btn.titleLabel.font=[UIFont systemFontOfSize:14];
     
     return tmp_btn;
 

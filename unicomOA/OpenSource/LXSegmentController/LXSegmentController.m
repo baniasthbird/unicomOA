@@ -156,6 +156,10 @@
         
         coverView.layer.cornerRadius = _coverCornerRadius;
         
+        coverView.layer.borderWidth=1;
+        
+        coverView.layer.borderColor=[_selColor CGColor];
+        
         [self.titleScrollView insertSubview:coverView atIndex:0];
         
         _coverView = coverView;
@@ -197,6 +201,9 @@
         
        // titleScrollView.backgroundColor=self.bgColor;
         
+       // titleScrollView.layer.borderWidth=1;
+        
+       // titleScrollView.layer.borderColor=[[UIColor colorWithRed:179/255.0f green:179/255.0f blue:179/255.0f alpha:1] CGColor];
         
         [self.contentView addSubview:titleScrollView];
         
@@ -595,6 +602,28 @@
             
             label.frame = CGRectMake(viewX, viewY, viewW, viewH);
             
+            
+            //UIView *coverView=[[UIView alloc]initWithFrame:CGRectMake(viewX+15, viewY+10, viewW-30, viewH-20)];
+            
+            if (_b_isShenPi==YES) {
+                UIView *coverView=[[UIView alloc]init];
+                
+                coverView.frame=CGRectMake(15, 10, viewW-30, viewH-20);
+                
+                coverView.backgroundColor=[UIColor clearColor];
+                
+                coverView.layer.borderWidth=1;
+                
+                coverView.layer.cornerRadius=5;
+                
+                coverView.layer.borderColor=[[UIColor colorWithRed:179/255.0f green:179/255.0f blue:179/255.0f alpha:0.3] CGColor];
+                
+                [label addSubview:coverView];
+                
+                [label sendSubviewToBack:coverView];
+            }
+           
+            
             // 监听标题的点击
             UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(titleViewClick:)];
             [label addGestureRecognizer:tap];
@@ -898,12 +927,14 @@
    // CGFloat border = 5;
    // CGFloat coverH = titleBounds.size.height + 2 * border;
    // CGFloat coverW = titleBounds.size.width + 2 * border;
-    CGFloat coverH=label.frame.size.height-4;
-    CGFloat coverW=label.frame.size.width-4;
+    CGFloat coverH=label.frame.size.height-20;
+    CGFloat coverW=label.frame.size.width-30;
     
     //self.coverView.y = (label.height - coverH) * 0.5;
-    self.coverView.y=2;
+    self.coverView.y=10;
     self.coverView.height = coverH;
+    
+    self.coverView.layer.cornerRadius=5;
     
     
     // 最开始不需要动画
@@ -912,12 +943,12 @@
       //  self.coverView.width=label.frame.size.width;
         
       //  self.coverView.x = label.x - border;
-        self.coverView.x=label.frame.origin.x+2;
+        self.coverView.x=label.frame.origin.x+15;
         return;
     }
     
     // 点击时候需要动画
-    [UIView animateWithDuration:0.25 animations:^{
+    [UIView animateWithDuration:0.15 animations:^{
        // self.coverView.width = coverW;
        //  self.coverView.width=label.frame.size.width;
         
@@ -926,7 +957,7 @@
         //  self.coverView.width=label.frame.size.width;
         
         //  self.coverView.x = label.x - border;
-        self.coverView.x=label.frame.origin.x+2;
+        self.coverView.x=label.frame.origin.x+15;
 
     }];
     
@@ -963,7 +994,7 @@
     }
     
     // 点击时候需要动画
-    [UIView animateWithDuration:0.25 animations:^{
+    [UIView animateWithDuration:0 animations:^{
         self.underLine.width = underLineW;
         self.underLine.center = CGPointMake(label.centerX, self.underLine.center.y);
 //        self.underLine.x = label.x;

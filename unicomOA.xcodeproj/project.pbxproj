@@ -179,6 +179,7 @@
 		68B38F0E1D19441500F28034 /* disagree.png in Resources */ = {isa = PBXBuildFile; fileRef = 68B38F0D1D19441500F28034 /* disagree.png */; };
 		68B38F101D19441C00F28034 /* agree.png in Resources */ = {isa = PBXBuildFile; fileRef = 68B38F0F1D19441C00F28034 /* agree.png */; };
 		68C0A5BC1CBF6667008BEE27 /* ShenPiStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C0A5BB1CBF6667008BEE27 /* ShenPiStatus.m */; };
+		68C33B741D34C58B00FCC0F1 /* LogTriangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C33B731D34C58B00FCC0F1 /* LogTriangleView.m */; };
 		68D05CBA1C9791000039220F /* PasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D05CB91C9791000039220F /* PasswordViewController.m */; };
 		68D05CC01C97AC050039220F /* SendFeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D05CBF1C97AC050039220F /* SendFeedBackViewController.m */; };
 		68D05CC41C97B3530039220F /* SendFeedbackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D05CC31C97B3530039220F /* SendFeedbackView.m */; };
@@ -602,6 +603,8 @@
 		68B38F0F1D19441C00F28034 /* agree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = agree.png; sourceTree = "<group>"; };
 		68C0A5BA1CBF6667008BEE27 /* ShenPiStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShenPiStatus.h; path = Base/Function/ShenPiModel/ShenPiStatus.h; sourceTree = "<group>"; };
 		68C0A5BB1CBF6667008BEE27 /* ShenPiStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShenPiStatus.m; path = Base/Function/ShenPiModel/ShenPiStatus.m; sourceTree = "<group>"; };
+		68C33B721D34C58B00FCC0F1 /* LogTriangleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LogTriangleView.h; path = Base/Function/ShenPiModel/LogTriangleView.h; sourceTree = "<group>"; };
+		68C33B731D34C58B00FCC0F1 /* LogTriangleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LogTriangleView.m; path = Base/Function/ShenPiModel/LogTriangleView.m; sourceTree = "<group>"; };
 		68D05CB81C9791000039220F /* PasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PasswordViewController.h; path = Base/Settings/Controller/PasswordViewController.h; sourceTree = "<group>"; };
 		68D05CB91C9791000039220F /* PasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PasswordViewController.m; path = Base/Settings/Controller/PasswordViewController.m; sourceTree = "<group>"; };
 		68D05CBE1C97AC050039220F /* SendFeedBackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SendFeedBackViewController.h; path = Base/Settings/Controller/SendFeedBackViewController.h; sourceTree = "<group>"; };
@@ -1644,6 +1647,8 @@
 				68C0A5BB1CBF6667008BEE27 /* ShenPiStatus.m */,
 				68579FA41CC0C21100597FBD /* CarModel.h */,
 				68579FA51CC0C21100597FBD /* CarModel.m */,
+				68C33B721D34C58B00FCC0F1 /* LogTriangleView.h */,
+				68C33B731D34C58B00FCC0F1 /* LogTriangleView.m */,
 			);
 			name = ShenPiModel;
 			sourceTree = "<group>";
@@ -2032,6 +2037,7 @@
 				6853A3F91D2679C500AE5145 /* BaseFunction.m in Sources */,
 				68D05CC01C97AC050039220F /* SendFeedBackViewController.m in Sources */,
 				682B68B01CB618DD002EC60F /* PrintApplicationNoFileCell.m in Sources */,
+				68C33B741D34C58B00FCC0F1 /* LogTriangleView.m in Sources */,
 				6884D2D01CD98B4A006215E5 /* UIView+MGBadgeView.m in Sources */,
 				68EEDE571CBB2E19003295EB /* DYCAddress.m in Sources */,
 				2CB7DB651CA3C5970057633D /* MemberInfoViewController.m in Sources */,

@@ -154,7 +154,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/Base/Function/ShenPiContorller/FinishVc.m"
-            timestampString = "489560661.215638"
+            timestampString = "489978057.083418"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "597"
@@ -186,7 +186,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/Base/Function/ShenPiContorller/FinishVc.m"
-            timestampString = "489560661.215638"
+            timestampString = "489978057.083418"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "536"
@@ -506,7 +506,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/Base/Function/ShenPiContorller/FinishVc.m"
-            timestampString = "489560661.215638"
+            timestampString = "489978057.083418"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "788"
@@ -586,11 +586,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/View/FunctionViewController.m"
-            timestampString = "489054831.888762"
+            timestampString = "490006478.456911"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "607"
-            endingLineNumber = "607"
+            startingLineNumber = "613"
+            endingLineNumber = "613"
             landmarkName = "-RefreshBadgeNumber"
             landmarkType = "5">
          </BreakpointContent>
@@ -602,11 +602,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/View/FunctionViewController.m"
-            timestampString = "489054831.888762"
+            timestampString = "490006478.456911"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "476"
-            endingLineNumber = "476"
+            startingLineNumber = "482"
+            endingLineNumber = "482"
             landmarkName = "-RefreshBadge:"
             landmarkType = "5">
          </BreakpointContent>
@@ -618,11 +618,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/View/FunctionViewController.m"
-            timestampString = "489054831.888762"
+            timestampString = "490006478.456911"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "490"
-            endingLineNumber = "490"
+            startingLineNumber = "496"
+            endingLineNumber = "496"
             landmarkName = "-RefreshBadge:"
             landmarkType = "5">
          </BreakpointContent>
@@ -634,11 +634,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/View/FunctionViewController.m"
-            timestampString = "489054831.888762"
+            timestampString = "490006478.456911"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "494"
-            endingLineNumber = "494"
+            startingLineNumber = "500"
+            endingLineNumber = "500"
             landmarkName = "-RefreshBadge:"
             landmarkType = "5">
          </BreakpointContent>
@@ -650,11 +650,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/View/FunctionViewController.m"
-            timestampString = "489054831.888762"
+            timestampString = "490006478.456911"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "473"
-            endingLineNumber = "473"
+            startingLineNumber = "479"
+            endingLineNumber = "479"
             landmarkName = "-RefreshBadge:"
             landmarkType = "5">
          </BreakpointContent>
@@ -666,11 +666,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/View/FunctionViewController.m"
-            timestampString = "489054831.888762"
+            timestampString = "490006478.456911"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "466"
-            endingLineNumber = "466"
+            startingLineNumber = "472"
+            endingLineNumber = "472"
             landmarkName = "-RefreshBadge:"
             landmarkType = "5">
             <Locations>
@@ -730,11 +730,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/View/FunctionViewController.m"
-            timestampString = "489054831.888762"
+            timestampString = "490006478.456911"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "537"
-            endingLineNumber = "537"
+            startingLineNumber = "543"
+            endingLineNumber = "543"
             landmarkName = "-PrePareData:interface:"
             landmarkType = "5">
          </BreakpointContent>
@@ -746,11 +746,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/View/FunctionViewController.m"
-            timestampString = "489054831.888762"
+            timestampString = "490006478.456911"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "526"
-            endingLineNumber = "526"
+            startingLineNumber = "532"
+            endingLineNumber = "532"
             landmarkName = "-PrePareData:interface:"
             landmarkType = "5">
             <Locations>
@@ -794,11 +794,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/View/FunctionViewController.m"
-            timestampString = "489054831.888762"
+            timestampString = "490006478.456911"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "475"
-            endingLineNumber = "475"
+            startingLineNumber = "481"
+            endingLineNumber = "481"
             landmarkName = "-RefreshBadge:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1178,11 +1178,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/Base/Function/NewsController/NewsDisplayViewController.m"
-            timestampString = "489575477.526716"
+            timestampString = "489991280.188899"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "119"
-            endingLineNumber = "119"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -1194,11 +1194,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/Base/Function/NewsController/NewsDisplayViewController.m"
-            timestampString = "489575477.526716"
+            timestampString = "489991280.188899"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "294"
-            endingLineNumber = "294"
+            startingLineNumber = "296"
+            endingLineNumber = "296"
             landmarkName = "-NewsContent:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1594,12 +1594,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/Base/Function/ShenPiModel/ShenPiResultCell.m"
-            timestampString = "488426987.109746"
+            timestampString = "490002918.311381"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
-            landmarkName = "-initWithStyle:reuseIdentifier:withTitle:withName:withStatus:ActivityName:withTime:"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
+            landmarkName = "-initWithStyle:reuseIdentifier:withContent:withName:withStatus:ActivityName:withTime:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2024,11 +2024,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/View/FunctionViewController.m"
-            timestampString = "489054831.888762"
+            timestampString = "490006478.456911"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "272"
-            endingLineNumber = "272"
+            startingLineNumber = "278"
+            endingLineNumber = "278"
             landmarkName = "@implementation FunctionViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -2056,11 +2056,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/View/FunctionViewController.m"
-            timestampString = "489054831.888762"
+            timestampString = "490006478.456911"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "527"
-            endingLineNumber = "527"
+            startingLineNumber = "533"
+            endingLineNumber = "533"
             landmarkName = "-PrePareData:interface:"
             landmarkType = "5">
             <Locations>
@@ -2104,11 +2104,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/View/FunctionViewController.m"
-            timestampString = "489054831.888762"
+            timestampString = "490006478.456911"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "329"
-            endingLineNumber = "329"
+            startingLineNumber = "335"
+            endingLineNumber = "335"
             landmarkName = "@implementation FunctionViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -2728,11 +2728,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/Base/Function/NewsController/NewsDisplayViewController.m"
-            timestampString = "489575477.526716"
+            timestampString = "489991280.188899"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "279"
-            endingLineNumber = "279"
+            startingLineNumber = "281"
+            endingLineNumber = "281"
             landmarkName = "-NewsContent:"
             landmarkType = "5">
             <Locations>
@@ -2776,11 +2776,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/Base/Function/NewsController/NewsDisplayViewController.m"
-            timestampString = "489575477.526716"
+            timestampString = "489991280.188899"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "283"
-            endingLineNumber = "283"
+            startingLineNumber = "285"
+            endingLineNumber = "285"
             landmarkName = "-NewsContent:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2792,11 +2792,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/Base/Function/NewsController/NewsDisplayViewController.m"
-            timestampString = "489575477.526716"
+            timestampString = "489991280.188899"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "371"
-            endingLineNumber = "371"
+            startingLineNumber = "373"
+            endingLineNumber = "373"
             landmarkName = "-NewsContent:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2808,11 +2808,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/Base/Function/NewsController/NewsDisplayViewController.m"
-            timestampString = "489575477.526716"
+            timestampString = "489991280.188899"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "335"
-            endingLineNumber = "335"
+            startingLineNumber = "337"
+            endingLineNumber = "337"
             landmarkName = "-NewsContent:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2824,13 +2824,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/Base/Function/NewsController/NewsDisplayViewController.m"
-            timestampString = "489575477.526716"
+            timestampString = "489991280.188899"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "461"
-            endingLineNumber = "461"
-            landmarkName = "@implementation NewsDisplayViewController"
-            landmarkType = "3">
+            startingLineNumber = "463"
+            endingLineNumber = "463">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2840,11 +2838,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/Base/Function/NewsController/NewsDisplayViewController.m"
-            timestampString = "489575477.526716"
+            timestampString = "489991280.188899"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "382"
-            endingLineNumber = "382"
+            startingLineNumber = "384"
+            endingLineNumber = "384"
             landmarkName = "-NewsContent:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2856,11 +2854,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/Base/Function/NewsController/NewsDisplayViewController.m"
-            timestampString = "489575477.526716"
+            timestampString = "489991280.188899"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "378"
-            endingLineNumber = "378"
+            startingLineNumber = "380"
+            endingLineNumber = "380"
             landmarkName = "-NewsContent:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2888,11 +2886,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/Base/Function/NewsController/NewsDisplayViewController.m"
-            timestampString = "489575477.526716"
+            timestampString = "489991280.188899"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "329"
-            endingLineNumber = "329"
+            startingLineNumber = "331"
+            endingLineNumber = "331"
             landmarkName = "-NewsContent:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3112,11 +3110,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/View/FunctionViewController.m"
-            timestampString = "489054831.888762"
+            timestampString = "490006478.456911"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "541"
-            endingLineNumber = "541"
+            startingLineNumber = "547"
+            endingLineNumber = "547"
             landmarkName = "-PrePareData:interface:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3128,11 +3126,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/View/FunctionViewController.m"
-            timestampString = "489054831.888762"
+            timestampString = "490006478.456911"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "544"
-            endingLineNumber = "544"
+            startingLineNumber = "550"
+            endingLineNumber = "550"
             landmarkName = "-PrePareData:interface:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3208,11 +3206,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/OpenSource/LXSegmentController/LXSegmentController.m"
-            timestampString = "489545484.238075"
+            timestampString = "489983755.995076"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "382"
-            endingLineNumber = "382"
+            startingLineNumber = "389"
+            endingLineNumber = "389"
             landmarkName = "-viewDidLayoutSubviews"
             landmarkType = "5">
          </BreakpointContent>
@@ -3224,11 +3222,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/OpenSource/LXSegmentController/LXSegmentController.m"
-            timestampString = "489545484.238075"
+            timestampString = "489983755.995076"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "388"
-            endingLineNumber = "388"
+            startingLineNumber = "395"
+            endingLineNumber = "395"
             landmarkName = "-viewDidLayoutSubviews"
             landmarkType = "5">
          </BreakpointContent>
@@ -3240,11 +3238,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/Base/Function/NewsController/NewsSubVC.m"
-            timestampString = "489563188.13466"
+            timestampString = "489996138.315904"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "468"
-            endingLineNumber = "468"
+            startingLineNumber = "470"
+            endingLineNumber = "470"
             landmarkName = "-scrollViewDidScroll:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3256,11 +3254,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/Base/Function/NewsController/NewsSubVC.m"
-            timestampString = "489562036.785401"
+            timestampString = "489996138.315904"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "375"
-            endingLineNumber = "375"
+            startingLineNumber = "377"
+            endingLineNumber = "377"
             landmarkName = "-NewsList:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3272,11 +3270,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/Base/Function/NewsController/NewsSubVC.m"
-            timestampString = "489562036.785401"
+            timestampString = "489996138.315904"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "357"
-            endingLineNumber = "357"
+            startingLineNumber = "359"
+            endingLineNumber = "359"
             landmarkName = "-NewsList:"
             landmarkType = "5">
             <Locations>
@@ -3320,11 +3318,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/Base/Function/NewsController/NewsSubVC.m"
-            timestampString = "489562036.785401"
+            timestampString = "489996138.315904"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "387"
-            endingLineNumber = "387"
+            startingLineNumber = "389"
+            endingLineNumber = "389"
             landmarkName = "-NewsList:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3336,11 +3334,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/Base/Function/NewsController/NewsSubVC.m"
-            timestampString = "489563188.13466"
+            timestampString = "489996138.315904"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "459"
-            endingLineNumber = "459"
+            startingLineNumber = "461"
+            endingLineNumber = "461"
             landmarkName = "-scrollViewDidScroll:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3368,11 +3366,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/Base/Function/NewsController/NewsSubVC.m"
-            timestampString = "489562036.785401"
+            timestampString = "489996138.315904"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "364"
-            endingLineNumber = "364"
+            startingLineNumber = "366"
+            endingLineNumber = "366"
             landmarkName = "-NewsList:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3384,11 +3382,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/Base/Function/NewsController/NewsSubVC.m"
-            timestampString = "489562036.785401"
+            timestampString = "489996138.315904"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "380"
-            endingLineNumber = "380"
+            startingLineNumber = "382"
+            endingLineNumber = "382"
             landmarkName = "-NewsList:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3400,11 +3398,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/Base/Function/NewsController/NewsSubVC.m"
-            timestampString = "489562036.785401"
+            timestampString = "489996138.315904"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "365"
-            endingLineNumber = "365"
+            startingLineNumber = "367"
+            endingLineNumber = "367"
             landmarkName = "-NewsList:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3416,11 +3414,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/Base/Function/NewsController/NewsSubVC.m"
-            timestampString = "489563188.13466"
+            timestampString = "489996138.315904"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "547"
-            endingLineNumber = "547"
+            startingLineNumber = "549"
+            endingLineNumber = "549"
             landmarkName = "-updateSearchResultsForSearchController:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3432,11 +3430,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/Base/Function/NewsController/NewsSubVC.m"
-            timestampString = "489563188.13466"
+            timestampString = "489996138.315904"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "550"
-            endingLineNumber = "550"
+            startingLineNumber = "552"
+            endingLineNumber = "552"
             landmarkName = "-updateSearchResultsForSearchController:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3528,7 +3526,23 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/Base/Function/NewsController/NewsDisplayViewController.m"
-            timestampString = "489377496.314056"
+            timestampString = "489991280.188899"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
+            landmarkName = "-viewDidLoad"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "unicomOA/Base/Function/NewsController/NewsDisplayViewController.m"
+            timestampString = "489991280.188899"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "64"
@@ -3543,30 +3557,14 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "unicomOA/Base/Function/NewsController/NewsDisplayViewController.m"
-            timestampString = "489377496.314056"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
-            landmarkName = "-viewDidLoad"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "unicomOA/Base/Function/NewsController/NewsSubVC.m"
-            timestampString = "489562036.785401"
+            timestampString = "489996078.861461"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "330"
-            endingLineNumber = "330"
-            landmarkName = "-tableView:didSelectRowAtIndexPath:"
-            landmarkType = "5">
+            startingLineNumber = "331"
+            endingLineNumber = "331"
+            landmarkName = "@implementation NewsSubVC"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3592,13 +3590,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/Base/Function/NewsController/NewsSubVC.m"
-            timestampString = "489562036.785401"
+            timestampString = "489996078.861461"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "336"
-            endingLineNumber = "336"
-            landmarkName = "-tableView:didSelectRowAtIndexPath:"
-            landmarkType = "5">
+            startingLineNumber = "337"
+            endingLineNumber = "337"
+            landmarkName = "@implementation NewsSubVC"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3608,11 +3606,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/Base/Function/NewsController/NewsSubVC.m"
-            timestampString = "489563188.13466"
+            timestampString = "489996138.315904"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "529"
-            endingLineNumber = "529"
+            startingLineNumber = "531"
+            endingLineNumber = "531"
             landmarkName = "-updateSearchResultsForSearchController:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3624,11 +3622,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/Base/Function/NewsController/NewsDisplayViewController.m"
-            timestampString = "489575477.526716"
+            timestampString = "489991280.188899"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -3640,11 +3638,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/Base/Function/NewsController/NewsDisplayViewController.m"
-            timestampString = "489575477.526716"
+            timestampString = "489991280.188899"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "333"
-            endingLineNumber = "333"
+            startingLineNumber = "335"
+            endingLineNumber = "335"
             landmarkName = "-NewsContent:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3816,7 +3814,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/Base/Function/ShenPiContorller/FinishVc.m"
-            timestampString = "489560661.215638"
+            timestampString = "489978057.083418"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "568"
@@ -3832,7 +3830,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/Base/Function/ShenPiContorller/FinishVc.m"
-            timestampString = "489560661.215638"
+            timestampString = "489978057.083418"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "750"
@@ -3864,7 +3862,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/Base/Function/ShenPiContorller/FinishVc.m"
-            timestampString = "489560661.215638"
+            timestampString = "489978057.083418"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "518"
@@ -4024,11 +4022,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/OpenSource/LXSegmentController/LXSegmentController.m"
-            timestampString = "489402309.529943"
+            timestampString = "489983606.8487"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "187"
-            endingLineNumber = "187"
+            startingLineNumber = "191"
+            endingLineNumber = "191"
             landmarkName = "-titleLabels"
             landmarkType = "5">
          </BreakpointContent>
@@ -4056,11 +4054,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/OpenSource/LXSegmentController/LXSegmentController.m"
-            timestampString = "489545484.238075"
+            timestampString = "489983755.995076"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "401"
-            endingLineNumber = "401"
+            startingLineNumber = "408"
+            endingLineNumber = "408"
             landmarkName = "-viewWillAppear:"
             landmarkType = "5">
          </BreakpointContent>
@@ -4072,11 +4070,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/OpenSource/LXSegmentController/LXSegmentController.m"
-            timestampString = "489402624.31274"
+            timestampString = "489983755.995076"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "216"
-            endingLineNumber = "216"
+            startingLineNumber = "223"
+            endingLineNumber = "223"
             landmarkName = "-contentScrollView"
             landmarkType = "5">
          </BreakpointContent>
@@ -4084,15 +4082,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/OpenSource/LXSegmentController/LXSegmentController.m"
-            timestampString = "489545722.119792"
+            timestampString = "489986692.765828"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "764"
-            endingLineNumber = "764"
+            startingLineNumber = "793"
+            endingLineNumber = "793"
             landmarkName = "-setUpCoverOffset:rightLabel:leftLabel:"
             landmarkType = "5">
          </BreakpointContent>
@@ -4100,15 +4098,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/OpenSource/LXSegmentController/LXSegmentController.m"
-            timestampString = "489545722.119792"
+            timestampString = "489986692.765828"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "752"
-            endingLineNumber = "752"
+            startingLineNumber = "781"
+            endingLineNumber = "781"
             landmarkName = "-setUpUnderLineOffset:rightLabel:leftLabel:"
             landmarkType = "5">
          </BreakpointContent>
@@ -4116,15 +4114,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/OpenSource/LXSegmentController/LXSegmentController.m"
-            timestampString = "489545722.119792"
+            timestampString = "489989863.517346"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1102"
-            endingLineNumber = "1102"
+            startingLineNumber = "1133"
+            endingLineNumber = "1133"
             landmarkName = "-scrollViewDidScroll:"
             landmarkType = "5">
          </BreakpointContent>
@@ -4136,11 +4134,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/OpenSource/LXSegmentController/LXSegmentController.m"
-            timestampString = "489545722.119792"
+            timestampString = "489986692.765828"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "870"
-            endingLineNumber = "870"
+            startingLineNumber = "899"
+            endingLineNumber = "899"
             landmarkName = "-selectTitleView:"
             landmarkType = "5">
          </BreakpointContent>
@@ -4152,11 +4150,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/OpenSource/LXSegmentController/LXSegmentController.m"
-            timestampString = "489404475.336276"
+            timestampString = "489983606.8487"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "196"
-            endingLineNumber = "196"
+            startingLineNumber = "200"
+            endingLineNumber = "200"
             landmarkName = "-titleScrollView"
             landmarkType = "5">
          </BreakpointContent>
@@ -4168,11 +4166,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/OpenSource/LXSegmentController/LXSegmentController.m"
-            timestampString = "489545722.119792"
+            timestampString = "489986692.765828"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "904"
-            endingLineNumber = "904"
+            startingLineNumber = "933"
+            endingLineNumber = "933"
             landmarkName = "-setUpCoverView:"
             landmarkType = "5">
          </BreakpointContent>
@@ -4184,11 +4182,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/OpenSource/LXSegmentController/LXSegmentController.m"
-            timestampString = "489545722.119792"
+            timestampString = "489986692.765828"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "899"
-            endingLineNumber = "899"
+            startingLineNumber = "928"
+            endingLineNumber = "928"
             landmarkName = "-setUpCoverView:"
             landmarkType = "5">
          </BreakpointContent>
@@ -4248,11 +4246,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/Base/Function/NewsController/NewsDisplayViewController.m"
-            timestampString = "489575477.526716"
+            timestampString = "489991280.188899"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "331"
-            endingLineNumber = "331"
+            startingLineNumber = "333"
+            endingLineNumber = "333"
             landmarkName = "-NewsContent:"
             landmarkType = "5">
          </BreakpointContent>
@@ -4264,11 +4262,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/Base/Function/NewsController/NewsSubVC.m"
-            timestampString = "489563188.13466"
+            timestampString = "489996138.315904"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "397"
-            endingLineNumber = "397"
+            startingLineNumber = "399"
+            endingLineNumber = "399"
             landmarkName = "-NewsList:"
             landmarkType = "5">
          </BreakpointContent>
@@ -4296,11 +4294,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/Base/Function/NewsController/NewsDisplayViewController.m"
-            timestampString = "489575477.526716"
+            timestampString = "489991280.188899"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "151"
-            endingLineNumber = "151"
+            startingLineNumber = "153"
+            endingLineNumber = "153"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -4344,11 +4342,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/OpenSource/LXSegmentController/LXSegmentController.m"
-            timestampString = "489545426.60017"
+            timestampString = "489983606.8487"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "198"
-            endingLineNumber = "198"
+            startingLineNumber = "202"
+            endingLineNumber = "202"
             landmarkName = "-titleScrollView"
             landmarkType = "5">
          </BreakpointContent>
@@ -4360,11 +4358,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/OpenSource/LXSegmentController/LXSegmentController.m"
-            timestampString = "489545483.129745"
+            timestampString = "489983755.995076"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "225"
-            endingLineNumber = "225"
+            startingLineNumber = "232"
+            endingLineNumber = "232"
             landmarkName = "-contentScrollView"
             landmarkType = "5">
          </BreakpointContent>
@@ -4376,11 +4374,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/Base/Function/NewsController/NewsDisplayViewController.m"
-            timestampString = "489575477.526716"
+            timestampString = "489991280.188899"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "139"
-            endingLineNumber = "139"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -4392,11 +4390,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/Base/Function/NewsController/NewsDisplayViewController.m"
-            timestampString = "489575477.526716"
+            timestampString = "489991280.188899"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "359"
-            endingLineNumber = "359"
+            startingLineNumber = "361"
+            endingLineNumber = "361"
             landmarkName = "-NewsContent:"
             landmarkType = "5">
          </BreakpointContent>
@@ -4408,11 +4406,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/Base/Function/NewsController/NewsDisplayViewController.m"
-            timestampString = "489575477.526716"
+            timestampString = "489991280.188899"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "354"
-            endingLineNumber = "354"
+            startingLineNumber = "356"
+            endingLineNumber = "356"
             landmarkName = "-NewsContent:"
             landmarkType = "5">
          </BreakpointContent>
@@ -4424,11 +4422,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/Base/Function/NewsController/NewsDisplayViewController.m"
-            timestampString = "489575477.526716"
+            timestampString = "489991280.188899"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "364"
-            endingLineNumber = "364"
+            startingLineNumber = "366"
+            endingLineNumber = "366"
             landmarkName = "-NewsContent:"
             landmarkType = "5">
          </BreakpointContent>
@@ -4488,11 +4486,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/Base/Function/NewsController/NewsSubVC.m"
-            timestampString = "489563199.790531"
+            timestampString = "489996138.315904"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "393"
-            endingLineNumber = "393"
+            startingLineNumber = "395"
+            endingLineNumber = "395"
             landmarkName = "-NewsList:"
             landmarkType = "5">
          </BreakpointContent>
@@ -4504,11 +4502,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/Base/Function/NewsController/NewsDisplayViewController.m"
-            timestampString = "489575477.526716"
+            timestampString = "489991280.188899"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "320"
-            endingLineNumber = "320"
+            startingLineNumber = "322"
+            endingLineNumber = "322"
             landmarkName = "-NewsContent:"
             landmarkType = "5">
          </BreakpointContent>
@@ -4520,11 +4518,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/Base/Function/NewsController/NewsDisplayViewController.m"
-            timestampString = "489575477.526716"
+            timestampString = "489991280.188899"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "313"
-            endingLineNumber = "313"
+            startingLineNumber = "315"
+            endingLineNumber = "315"
             landmarkName = "-NewsContent:"
             landmarkType = "5">
          </BreakpointContent>
@@ -4536,11 +4534,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/Base/Function/NewsController/NewsDisplayViewController.m"
-            timestampString = "489575477.526716"
+            timestampString = "489991280.188899"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "301"
-            endingLineNumber = "301"
+            startingLineNumber = "303"
+            endingLineNumber = "303"
             landmarkName = "-NewsContent:"
             landmarkType = "5">
          </BreakpointContent>
@@ -4552,11 +4550,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/Base/Function/NewsController/NewsDisplayViewController.m"
-            timestampString = "489575477.526716"
+            timestampString = "489991280.188899"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "314"
-            endingLineNumber = "314"
+            startingLineNumber = "316"
+            endingLineNumber = "316"
             landmarkName = "-NewsContent:"
             landmarkType = "5">
          </BreakpointContent>
@@ -4568,11 +4566,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/Base/Function/NewsController/NewsDisplayViewController.m"
-            timestampString = "489575477.526716"
+            timestampString = "489991280.188899"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "339"
-            endingLineNumber = "339"
+            startingLineNumber = "341"
+            endingLineNumber = "341"
             landmarkName = "-NewsContent:"
             landmarkType = "5">
          </BreakpointContent>
@@ -4654,6 +4652,246 @@
             startingLineNumber = "489"
             endingLineNumber = "489"
             landmarkName = "-scrollViewDidScroll:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "unicomOA/Base/Function/ShenPiContorller/ShenPiQueryLogVC.m"
+            timestampString = "489975773.318905"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "193"
+            endingLineNumber = "193"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "unicomOA/Base/Function/ShenPiContorller/FinishVc.m"
+            timestampString = "489978057.083418"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "516"
+            endingLineNumber = "516"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "unicomOA/Base/Function/ShenPiContorller/FinishVc.m"
+            timestampString = "489976886.471154"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "252"
+            endingLineNumber = "252"
+            landmarkName = "-PrePareQueryLog:ip:port:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "unicomOA/Base/Function/ShenPiModel/ShenPiResultCell.m"
+            timestampString = "490008558.077269"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
+            landmarkName = "-initWithStyle:reuseIdentifier:withContent:withName:withStatus:ActivityName:withTime:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "unicomOA/Base/Function/ShenPiModel/ShenPiResultCell.m"
+            timestampString = "489998494.615584"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "-initWithStyle:reuseIdentifier:withContent:withName:withStatus:ActivityName:withTime:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "unicomOA/Base/Function/ShenPiContorller/FinishVc.m"
+            timestampString = "489979923.487045"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "526"
+            endingLineNumber = "526"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "unicomOA/OpenSource/LXSegmentController/LXSegmentController.m"
+            timestampString = "489986692.765828"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "908"
+            endingLineNumber = "908"
+            landmarkName = "-selectTitleView:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "unicomOA/OpenSource/LXSegmentController/LXSegmentController.m"
+            timestampString = "489984281.862675"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "542"
+            endingLineNumber = "542"
+            landmarkName = "-setUpAllTitle"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "unicomOA/OpenSource/LXSegmentController/LXSegmentController.m"
+            timestampString = "489984369.177189"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "442"
+            endingLineNumber = "442"
+            landmarkName = "-setUpTitleWidth"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "unicomOA/OpenSource/LXSegmentController/LXSegmentController.m"
+            timestampString = "489986692.765828"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "794"
+            endingLineNumber = "794"
+            landmarkName = "-setUpCoverOffset:rightLabel:leftLabel:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "unicomOA/OpenSource/LXSegmentController/LXSegmentController.m"
+            timestampString = "489986930.315462"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "867"
+            endingLineNumber = "867"
+            landmarkName = "-selectTitleView:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "unicomOA/OpenSource/LXSegmentController/LXSegmentController.m"
+            timestampString = "489989863.517346"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1124"
+            endingLineNumber = "1124"
+            landmarkName = "-scrollViewDidScroll:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "unicomOA/OpenSource/LXSegmentController/LXSegmentController.m"
+            timestampString = "489989863.517346"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1078"
+            endingLineNumber = "1078"
+            landmarkName = "-scrollViewDidEndDecelerating:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "unicomOA/Base/Function/ShenPiModel/LogTriangleView.m"
+            timestampString = "489999991.012376"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "-drawRect:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "unicomOA/View/FunctionViewController.m"
+            timestampString = "490005869.003229"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "243"
+            endingLineNumber = "243"
+            landmarkName = "-createImageButton:y:width:height:title:image:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

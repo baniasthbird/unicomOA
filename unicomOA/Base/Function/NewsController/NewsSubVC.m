@@ -130,7 +130,7 @@
     
     self.searchcontroller.dimsBackgroundDuringPresentation = YES;            //是否添加半透明覆盖层
     
-    self.searchcontroller.hidesNavigationBarDuringPresentation = YES;     //是否隐藏导航栏
+    self.searchcontroller.hidesNavigationBarDuringPresentation = NO;     //是否隐藏导航栏
     
     
     
@@ -324,8 +324,9 @@
     // Dispose of any resources that can be recreated.
 }
 
-
+/*
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     NSDictionary *dic=arr_searchList[indexPath.row];
     NewsDisplayViewController *vc=[[NewsDisplayViewController alloc]init];
@@ -334,8 +335,9 @@
     vc.str_label=[dic objectForKey:@"title"];
     
     [self.navigationController pushViewController:vc animated:YES];
-    
+ 
 }
+*/
 
 //获得最新新闻
 //0525 筛选在下拉刷新后有问题，逻辑需重新梳理
