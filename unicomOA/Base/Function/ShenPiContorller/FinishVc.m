@@ -102,7 +102,7 @@
     tableView.delegate=self;
     tableView.dataSource=self;
     tableView.backgroundColor=[UIColor clearColor];
-    tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
+    tableView.separatorStyle=UITableViewCellSeparatorStyleSingleLine;
     
     _refreshControl=[[UIRefreshControl alloc]init];
     _refreshControl.attributedTitle=[[NSAttributedString alloc]initWithString:@"加载中..." attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14], NSForegroundColorAttributeName:[UIColor blackColor]}];

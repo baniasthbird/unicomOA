@@ -19,11 +19,22 @@
     UIBezierPath *path = [[UIBezierPath alloc] init];
     
     //path移动到开始画图的位置
-    [path moveToPoint:CGPointMake([UIScreen mainScreen].bounds.size.width*0.05, 0)];
+    CGFloat i_Start=0;
+    if (iPhone5_5s || iPhone6) {
+        i_Start=16;
+    }
+    else if (iPhone6_plus) {
+        i_Start=20;
+    }
+    else if (iPad) {
+        i_Start=48;
+    }
+    [path moveToPoint:CGPointMake(i_Start, 0)];
+    
     //从开始位置画一条直线到（160， 150）
-    [path addLineToPoint:CGPointMake([UIScreen mainScreen].bounds.size.width*0.05+40, 0)];
+    [path addLineToPoint:CGPointMake(i_Start+40, 0)];
     //在从（160，150）画一条线到（10，150）
-    [path addLineToPoint:CGPointMake([UIScreen mainScreen].bounds.size.width*0.05, 40)];
+    [path addLineToPoint:CGPointMake(i_Start, 40)];
     
     //关闭path
     [path closePath];

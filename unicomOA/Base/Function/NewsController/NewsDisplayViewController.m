@@ -290,25 +290,101 @@ int i_comment_num;
                //  [_lbl_depart sizeToFit];
                 NSString *str_content=[dic_news objectForKey:@"content"];
                 str_content=str_content.lowercaseString;
-                //替换字体
+                //替换字号为16号
                 NSRange searchRange=NSMakeRange(0, str_content.length);
                 NSRange foundRange;
                 while (searchRange.location<str_content.length) {
                     searchRange.length=str_content.length-searchRange.location;
-                    foundRange=[str_content rangeOfString:@"font-size" options:nil range:searchRange];
+                    foundRange=[str_content rangeOfString:@"font-size:" options:nil range:searchRange];
                    // foundRange=[str_content rangeOfString:@"" options:NSStringCompareOptions.foundRange range:<#(NSRange)#>]
                     if (foundRange.location!=NSNotFound) {
-                      
                         searchRange.location=foundRange.location+foundRange.length;
-                        NSRange fontsizeRange=NSMakeRange(searchRange.location+2, 2);
+                        NSRange fontsizeRange=NSMakeRange(searchRange.location, 4);
                         NSString *str_fontsize= [str_content substringWithRange:fontsizeRange];
-                        NSLog(@"找到字体");
-                        str_content=[str_content stringByReplacingCharactersInRange:fontsizeRange withString:@"16"];
+                        NSRange range_keyword=[str_fontsize rangeOfString:@"px"];
+                        if (range_keyword.location!=NSNotFound) {
+                            str_content=[str_content stringByReplacingCharactersInRange:fontsizeRange withString:@"16px"];
+                        }
+                        else {
+                            NSRange fontsizeRange=NSMakeRange(searchRange.location, 5);
+                            str_content=[str_content stringByReplacingCharactersInRange:fontsizeRange withString:@"16px"];
+                        }
                     }
                     else {
                         break;
                     }
                 }
+                
+                //替换行距为180%
+                NSRange foundRange2;
+                NSRange searchRange2=NSMakeRange(0, str_content.length);
+                while (searchRange2.location<str_content.length) {
+                    searchRange2.length=str_content.length-searchRange2.location;
+                    foundRange2=[str_content rangeOfString:@"line-height:" options:nil range:searchRange2];
+                    // foundRange=[str_content rangeOfString:@"" options:NSStringCompareOptions.foundRange range:<#(NSRange)#>]
+                    if (foundRange2.location!=NSNotFound) {
+                        searchRange2.location=foundRange2.location+foundRange2.length;
+                        NSRange fontsizeRange=NSMakeRange(searchRange2.location, 5);
+                        NSString *str_fontsize= [str_content substringWithRange:fontsizeRange];
+                        NSRange range_keyword=[str_fontsize rangeOfString:@";"];
+                        if (range_keyword.location!=NSNotFound) {
+                            str_content=[str_content stringByReplacingCharactersInRange:fontsizeRange withString:@"180%;"];
+                        }
+                        else {
+                            NSRange range_keyword=[str_fontsize rangeOfString:@"%"];
+                            if (range_keyword.location!=NSNotFound) {
+                                str_content=[str_content stringByReplacingCharactersInRange:fontsizeRange withString:@"180%"];
+                            }
+                            NSRange range_keyword2=[str_fontsize rangeOfString:@"px"];
+                            if (range_keyword2.location!=NSNotFound) {
+                                NSRange range_keyword3=[str_fontsize rangeOfString:@"\""];
+                                if (range_keyword3.location!=NSNotFound) {
+                                    str_content=[str_content stringByReplacingCharactersInRange:fontsizeRange withString:@"180%\""];
+                                }
+                                else {
+                                    str_content=[str_content stringByReplacingCharactersInRange:fontsizeRange withString:@"180%"];
+                                }
+                                
+                            }
+
+                        }
+                    }
+                    else {
+                        break;
+                    }
+                }
+
+                //设置每段前空两行
+                NSRange foundRange3;
+                NSRange searchRange3=NSMakeRange(0, str_content.length);
+                BOOL b_Replace=NO;
+                while (searchRange3.location<str_content.length) {
+                    searchRange3.length=str_content.length-searchRange3.location;
+                    foundRange3=[str_content rangeOfString:@"text-indent:" options:nil range:searchRange3];
+                    // foundRange=[str_content rangeOfString:@"" options:NSStringCompareOptions.foundRange range:<#(NSRange)#>]
+                    if (foundRange3.location!=NSNotFound) {
+                        searchRange3.location=foundRange3.location+foundRange3.length;
+                        NSRange fontsizeRange=NSMakeRange(searchRange3.location, 4);
+                        NSString *str_fontsize= [str_content substringWithRange:fontsizeRange];
+                        NSRange range_keyword=[str_fontsize rangeOfString:@"px"];
+                        if (range_keyword.location!=NSNotFound) {
+                            str_content=[str_content stringByReplacingCharactersInRange:fontsizeRange withString:@"2em"];
+                        }
+                        else {
+                            NSRange range_keyword2=[str_fontsize rangeOfString:@"p"];
+                            if (range_keyword2.location!=NSNotFound) {
+                                fontsizeRange=NSMakeRange(searchRange3.location, 5);
+                                str_content=[str_content stringByReplacingCharactersInRange:fontsizeRange withString:@"2em"];
+                            }
+                        }
+                        b_Replace=YES;
+                    }
+                    else {
+                        break;
+                    }
+                }
+
+                
                 
                 NSString *str_title_style1=@"<p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; font-size: 24px; text-indent: 0em; font-stretch: normal; line-height: 32px; font-family: &quot;Microsoft Yahei&quot;; color: rgb(64, 64, 64); text-align: center; white-space: normal; background-color: rgb(255, 255, 255);\">";
               

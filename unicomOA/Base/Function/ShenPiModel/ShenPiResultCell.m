@@ -38,21 +38,21 @@
     if (self) {
         UILabel *lbl_name=[[UILabel alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width*0.05+50, 0, [UIScreen mainScreen].bounds.size.width*0.4, 20)];
         lbl_name.textColor=[UIColor colorWithRed:94/255.0f green:145/255.0f blue:172/255.0f alpha:1];
-        lbl_name.font=[UIFont systemFontOfSize:18];
+        lbl_name.font=[UIFont systemFontOfSize:16];
         lbl_name.textAlignment=NSTextAlignmentLeft;
         lbl_name.text=str_Name;
         [lbl_name sizeToFit];
         
-        UILabel *lbl_time=[[UILabel alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width*0.5, 55, [UIScreen mainScreen].bounds.size.width*0.45, 20)];
+        UILabel *lbl_time=[[UILabel alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width*0.5, 60, [UIScreen mainScreen].bounds.size.width*0.45, 10)];
         lbl_time.textColor=[UIColor colorWithRed:177/255.0f green:177/255.0f blue:177/255.0f alpha:1];
         lbl_time.font=[UIFont systemFontOfSize:14];
         lbl_time.textAlignment=NSTextAlignmentRight;
         lbl_time.text=str_time;
         //[lbl_time sizeToFit];
         
-        UILabel *lbl_info=[[UILabel alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width*0.5, 0, [UIScreen mainScreen].bounds.size.width*0.45, 30)];
+        UILabel *lbl_info=[[UILabel alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width*0.5, 0, [UIScreen mainScreen].bounds.size.width*0.45, 20)];
         lbl_info.textColor=[UIColor colorWithRed:94/255.0f green:145/255.0f blue:172/255.0f alpha:1];
-        lbl_info.font=[UIFont systemFontOfSize:18];
+        lbl_info.font=[UIFont systemFontOfSize:16];
         lbl_info.numberOfLines=1;
         lbl_info.textAlignment=NSTextAlignmentRight;
         NSString *str_info=str_activename;
@@ -62,8 +62,8 @@
         UILabel *lbl_content=[[UILabel alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width*0.05+50, 25, [UIScreen mainScreen].bounds.size.width*0.9-100, 30)];
         lbl_content.textColor=[UIColor blackColor];
         lbl_content.text=str_Content;
-        lbl_content.textAlignment=NSTextAlignmentCenter;
-        lbl_content.font=[UIFont systemFontOfSize:18];
+        lbl_content.textAlignment=NSTextAlignmentLeft;
+        lbl_content.font=[UIFont systemFontOfSize:16];
         
         CGFloat i_left=80;
         if (iPhone5_5s) {
@@ -80,13 +80,13 @@
             [lbl_decision setFrame:CGRectMake(8, -37,[UIScreen mainScreen].bounds.size.width*0.3, 30)];
         }
         else if (iPhone6) {
-            [lbl_decision setFrame:CGRectMake(8, -32,[UIScreen mainScreen].bounds.size.width*0.3, 30)];
+            [lbl_decision setFrame:CGRectMake(6, -32,[UIScreen mainScreen].bounds.size.width*0.3, 30)];
         }
         else if (iPhone5_5s) {
             [lbl_decision setFrame:CGRectMake(8, -27,[UIScreen mainScreen].bounds.size.width*0.3, 30)];
         }
         else if (iPad) {
-            [lbl_decision setFrame:CGRectMake(8, -72,[UIScreen mainScreen].bounds.size.width*0.3, 30)];
+            [lbl_decision setFrame:CGRectMake(18, -75,[UIScreen mainScreen].bounds.size.width*0.3, 30)];
         }
         
         lbl_decision.textColor=[UIColor whiteColor];

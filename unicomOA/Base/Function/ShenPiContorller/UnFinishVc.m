@@ -122,6 +122,7 @@
     tableView.delegate=self;
     tableView.dataSource=self;
     tableView.backgroundColor=[UIColor clearColor];
+    tableView.separatorStyle=UITableViewCellSeparatorStyleSingleLine;
     
     _refreshControl=[[UIRefreshControl alloc]init];
     _refreshControl.attributedTitle=[[NSAttributedString alloc]initWithString:@"加载中..." attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14], NSForegroundColorAttributeName:[UIColor blackColor]}];
@@ -953,7 +954,7 @@
 
     }
     else if (indexPath.section==[arr_groupList count]-1) {
-        return 60;
+        return 80;
     }
     else {
         return 44;

@@ -83,6 +83,7 @@
     [self.refreshControl addTarget:self action:@selector(handleRefresh:) forControlEvents:UIControlEventValueChanged];
     
     [self.tableView addSubview:_refreshControl];
+    self.tableView.backgroundColor=[UIColor colorWithRed:247/255.0f green:247/255.0f blue:247/255.0f alpha:1];
     
     if (_b_isDaiBan==YES) {
         [self PrePareData:dic_param interface:@"UnFinishTaskShenPiList"];
