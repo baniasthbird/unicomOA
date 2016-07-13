@@ -60,7 +60,6 @@ int i_comment_num;
    // [self.navigationController.navigationBar setHidden:NO];
   //  self.navigationController.navigationBar.backgroundColor=[UIColor blackColor];
     
-    self.navigationController.interactivePopGestureRecognizer.delegate = (id)self;
     self.navigationController.navigationBar.titleTextAttributes=dict;
     
     UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"  " style:UIBarButtonItemStyleDone target:self action:@selector(MovePreviousVc:)];

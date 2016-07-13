@@ -143,6 +143,8 @@
 		684A71591CD9DC4100A892B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 684A71581CD9DC4100A892B1 /* Foundation.framework */; };
 		684A715B1CD9DC4800A892B1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 684A715A1CD9DC4800A892B1 /* QuartzCore.framework */; };
 		684A715D1CD9DC5F00A892B1 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 684A715C1CD9DC5F00A892B1 /* MobileCoreServices.framework */; };
+		684E0C531D363B9B008088FD /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 684E0C521D363B9B008088FD /* BaseViewController.m */; };
+		684E0C561D363E88008088FD /* POPAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 684E0C551D363E88008088FD /* POPAnimation.m */; };
 		684E93D31CFD537600545D55 /* UITabBar+badge.m in Sources */ = {isa = PBXBuildFile; fileRef = 684E93D21CFD537600545D55 /* UITabBar+badge.m */; };
 		685233931CD9F9DE0093E368 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 685233921CD9F9DE0093E368 /* MapKit.framework */; };
 		6853A3F91D2679C500AE5145 /* BaseFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 6853A3F81D2679C500AE5145 /* BaseFunction.m */; };
@@ -541,6 +543,10 @@
 		684A71581CD9DC4100A892B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		684A715A1CD9DC4800A892B1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		684A715C1CD9DC5F00A892B1 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		684E0C511D363B9B008088FD /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseViewController.h; path = Base/Function/NewsController/BaseViewController.h; sourceTree = "<group>"; };
+		684E0C521D363B9B008088FD /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseViewController.m; path = Base/Function/NewsController/BaseViewController.m; sourceTree = "<group>"; };
+		684E0C541D363E88008088FD /* POPAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = POPAnimation.h; path = Base/Function/NewsModel/POPAnimation.h; sourceTree = "<group>"; };
+		684E0C551D363E88008088FD /* POPAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = POPAnimation.m; path = Base/Function/NewsModel/POPAnimation.m; sourceTree = "<group>"; };
 		684E93D11CFD537600545D55 /* UITabBar+badge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITabBar+badge.h"; path = "View/UITabBar+badge.h"; sourceTree = "<group>"; };
 		684E93D21CFD537600545D55 /* UITabBar+badge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITabBar+badge.m"; path = "View/UITabBar+badge.m"; sourceTree = "<group>"; };
 		685233921CD9F9DE0093E368 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -948,6 +954,8 @@
 				68A5D8051D2A054800000F95 /* NewsSubVC.m */,
 				68A5D80A1D2A560400000F95 /* NewsTableViewResultController.h */,
 				68A5D80B1D2A560400000F95 /* NewsTableViewResultController.m */,
+				684E0C511D363B9B008088FD /* BaseViewController.h */,
+				684E0C521D363B9B008088FD /* BaseViewController.m */,
 			);
 			name = NewsController;
 			sourceTree = "<group>";
@@ -961,6 +969,8 @@
 				2CDC2BF11C9117FE0067693B /* NewsManagementTableViewCell.m */,
 				68462DCA1CF587540044A806 /* UILabel+LabelHeightAndWidth.h */,
 				68462DCB1CF587540044A806 /* UILabel+LabelHeightAndWidth.m */,
+				684E0C541D363E88008088FD /* POPAnimation.h */,
+				684E0C551D363E88008088FD /* POPAnimation.m */,
 			);
 			name = NewsModel;
 			sourceTree = "<group>";
@@ -2002,6 +2012,7 @@
 				683815361CBC941300E6AFD3 /* CarApplicationDetail.m in Sources */,
 				6846EC501CF99C7C00A400C5 /* IQUIViewController+Additions.m in Sources */,
 				68EEDE721CBB911A003295EB /* MCMenuButton.m in Sources */,
+				684E0C561D363E88008088FD /* POPAnimation.m in Sources */,
 				2CFEAD1A1C7168980054730E /* SignInViewController.m in Sources */,
 				6838153F1CBCCB2A00E6AFD3 /* PrintApplicationDetail.m in Sources */,
 				6846EC551CF99C7C00A400C5 /* IQBarButtonItem.m in Sources */,
@@ -2060,6 +2071,7 @@
 				68DEEBD71CBE0FF7003DB7AA /* PrintShenPiDetail.m in Sources */,
 				2CFEAD2A1C717FCB0054730E /* FunctionViewController.m in Sources */,
 				2CFEADEF1C7C06CB0054730E /* CellModel.m in Sources */,
+				684E0C531D363B9B008088FD /* BaseViewController.m in Sources */,
 				68ED4E4F1CB4EFD2000E8A7B /* PrintApplication.m in Sources */,
 				2CFEADBC1C76A6440054730E /* HeadView.m in Sources */,
 				2CDC2BF21C9117FE0067693B /* NewsManagementTableViewCell.m in Sources */,

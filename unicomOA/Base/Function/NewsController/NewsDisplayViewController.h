@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "UserInfo.h"
+#import "BaseViewController.h"
 @import WebKit;
 
 @protocol FocusNewsPassDelegate
@@ -16,7 +17,7 @@
 
 @end
 
-@interface NewsDisplayViewController : UIViewController
+@interface NewsDisplayViewController : BaseViewController
 
 @property (strong,nonatomic) NSString *str_label;
 
