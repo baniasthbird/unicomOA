@@ -15,9 +15,10 @@
 #import "YBMonitorNetWorkState.h"
 #import "LXAlertView.h"
 #import "MyShenPiViewController.h"
+#import "FunctionViewController.h"
 
 
-@interface MessageViewController ()<UITableViewDelegate,UITableViewDataSource,NewsTapDelegate,YBMonitorNetWorkStateDelegate,RemindCellDelegate>
+@interface MessageViewController ()<UITableViewDelegate,UITableViewDataSource,NewsTapDelegate,YBMonitorNetWorkStateDelegate,RemindCellDelegate,MyShenPiViewControllerDelegate>
 
 @property (nonatomic,strong) UITableView *tableView;
 
@@ -148,8 +149,8 @@
     NSString *str_connection=[self GetConnectionStatus];
     if ([str_connection isEqualToString:@"wifi"] || [str_connection isEqualToString:@"GPRS"]) {
         NSString *str_taskCount= [db fetchInterface:@"TaskCount"];
-        NSString *str_ip=@"";
-        NSString *str_port=@"";
+        __block NSString *str_ip=@"";
+        __block NSString *str_port=@"";
         NSMutableArray *t_array=[db fetchIPAddress];
         if (t_array.count==1) {
             NSArray *arr_ip=[t_array objectAtIndex:0];
@@ -165,8 +166,8 @@
             NSLog(@"请求未读消息成功:%@",responseObject);
             NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             NSString *str_success= [JSON objectForKey:@"success"];
-            int i_success=[str_success intValue];
-            if (i_success==1) {
+            BOOL i_success=[str_success boolValue];
+            if (i_success==YES) {
                  [self.refreshControl endRefreshing];
                 NSString *str_docnum= [JSON objectForKey:@"docNum"];
                 NSString *str_flownum= [JSON objectForKey:@"flowNum"];
@@ -174,9 +175,45 @@
                 _i_doc_num=[str_docnum intValue];
                 _i_flow_num=[str_flownum intValue];
                 _i_msg_num=[str_msgnum intValue];
+                //0715 zr 接口不完善前临时添加
+                NSString *str_UnFinish=[db fetchInterface:@"UnFinishTaskShenPiList"];
+                __block NSString *str_url2=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_UnFinish];
+                __block NSMutableDictionary *dic_param1=[NSMutableDictionary dictionary];
+                dic_param1[@"pageIndex"]=@"1";
+                [_session POST:str_url2 parameters:dic_param1 progress:^(NSProgress * _Nonnull uploadProgress) {
+                    
+                } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                    NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+                    NSString *str_success= [JSON objectForKey:@"success"];
+                    BOOL b_success=[str_success boolValue];
+                    if (b_success==YES) {
+                        __block NSString *str_totalPage=[JSON objectForKey:@"totalPage"];
+                        dic_param1[@"pageIndex"]=str_totalPage;
+                        [_session POST:str_url2 parameters:dic_param1 progress:^(NSProgress * _Nonnull uploadProgress) {
+                            
+                        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                            NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+                            NSString *str_success= [JSON objectForKey:@"success"];
+                            BOOL b_success=[str_success boolValue];
+                            if (b_success==YES) {
+                                NSArray *arr_TaskList=[JSON objectForKey:@"taskList"];
+                                NSInteger i_page=[str_totalPage integerValue];
+                                _i_flow_num=(i_page-1)*10+[arr_TaskList count];
+                                
+                                NSIndexSet *indexSet=[NSIndexSet indexSetWithIndex:0];
+                                [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
+
+                            }
+                        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                            
+                        }];
+
+                    }
+                } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                    
+                }];
                 // _count=_i_doc_num+_i_flow_num+_i_msg_num;
-                NSIndexSet *indexSet=[NSIndexSet indexSetWithIndex:0];
-                [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
+                
             }
             
             
@@ -646,8 +683,70 @@
     NSLog(@"单击事件");
     MyShenPiViewController *viewController=[[MyShenPiViewController alloc] init];
     viewController.userInfo=_userInfo;
+    viewController.delegate=self;
     [self.navigationController pushViewController:viewController animated:YES];
 }
+
+-(void)RefreshBadgeNumber {
+    [self RefreshFlowNum];
+    
+    UINavigationController *nav1=[self.parentViewController.parentViewController.childViewControllers objectAtIndex:2];
+    FunctionViewController *func_vc=(FunctionViewController*)[nav1.childViewControllers objectAtIndex:0];
+    [func_vc RefreshNum];
+}
+
+-(void)RefreshFlowNum {
+    NSMutableDictionary *dic_param1=[NSMutableDictionary dictionary];
+    dic_param1[@"pageIndex"]=@"1";
+    [self RefreshBadge:dic_param1];
+}
+
+-(void)RefreshBadge:(NSMutableDictionary*)param {
+    NSString *str_connection=[self GetConnectionStatus];
+    if ([str_connection isEqualToString:@"wifi"] || [str_connection isEqualToString:@"GPRS"]) {
+        NSString *str_ip=@"";
+        NSString *str_port=@"";
+        NSMutableArray *t_array=[db fetchIPAddress];
+        if (t_array.count==1) {
+            NSArray *arr_ip=[t_array objectAtIndex:0];
+            str_ip=[arr_ip objectAtIndex:0];
+            str_port=[arr_ip objectAtIndex:1];
+        }
+        NSString *str_urldata=[db fetchInterface:@"UnFinishTaskShenPiList"];
+        __block NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_urldata];
+        [_session POST:str_url parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
+            
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            NSString *str_success= [JSON objectForKey:@"success"];
+            BOOL b_success=[str_success boolValue];
+            if (b_success==YES) {
+                NSString *str_totalPage=[JSON objectForKey:@"totalPage"];
+                param[@"pageIndex"]=str_totalPage;
+                [_session POST:str_url parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
+                    
+                } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                    NSDictionary *JSON1=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+                    NSArray *arr_TaskList=[JSON1 objectForKey:@"taskList"];
+                    NSInteger i_integer=[str_totalPage integerValue];
+                    _i_flow_num=(i_integer-1)*10+[arr_TaskList count];
+                    NSIndexSet *indexSet=[NSIndexSet indexSetWithIndex:0];
+                    [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
+
+                } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                    
+                }];
+            }
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            
+        }];
+
+    }
+}
+
+
+
 /*
 #pragma mark - Navigation
 

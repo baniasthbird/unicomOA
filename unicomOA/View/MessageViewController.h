@@ -21,4 +21,6 @@
 
 @property (nonatomic,strong) BaseFunction *baseFunc;
 
+-(void)RefreshFlowNum;
+
 @end

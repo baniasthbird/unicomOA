@@ -41,7 +41,7 @@
     
     UIBarButtonItem *barButtonItem2 = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStyleDone target:self action:@selector(NewVc:)];
     [barButtonItem2 setTitleTextAttributes:dict forState:UIControlStateNormal];
-    self.navigationItem.rightBarButtonItem = barButtonItem2;
+  //  self.navigationItem.rightBarButtonItem = barButtonItem2;
     
     
     _dic_backvalue=[NSMutableDictionary dictionary];
@@ -167,7 +167,10 @@
         _i_selectedindexpath=indexPath;
         [self.tableview reloadData];
     }
-    
+    if ([_dic_backvalue count]!=0) {
+        [_delegate sendBackValue:_dic_backvalue indexPath:_indexPath title:_str_title];
+    }
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 /*

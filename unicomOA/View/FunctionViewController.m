@@ -19,6 +19,8 @@
 #import "AFNetworking.h"
 #import "LXAlertView.h"
 #import "UITabBar+badge.h"
+#import "MessageViewController.h"
+
 
 
 #define kImageWidth 100      //UITAbleViewCell里面图片的宽度
@@ -692,10 +694,27 @@
 
 
 -(void)RefreshBadgeNumber {
+    [self RefreshNum];
+    
+    UINavigationController *nav1=[self.parentViewController.parentViewController.childViewControllers objectAtIndex:0];
+    MessageViewController *message_vc=(MessageViewController*)[nav1.childViewControllers objectAtIndex:0];
+    [message_vc RefreshFlowNum];
+
+}
+
+-(void)RefreshNum {
     NSMutableDictionary *dic_param1=[NSMutableDictionary dictionary];
     dic_param1[@"pageIndex"]=@"1";
     [self RefreshBadge:dic_param1];
+}
 
+-(void)Badge_Minus {
+    if (i_total>0) {
+        i_total=i_total-1;
+        _btn_ShenPi.badgeBgColor=[UIColor redColor];
+        [_btn_ShenPi showBadgeWithStyle:WBadgeStyleNumber value:i_total animationType:WBadgeAnimTypeNone];
+        [self.view setNeedsDisplay];
+    }
 }
 /*
 #pragma mark - Navigation

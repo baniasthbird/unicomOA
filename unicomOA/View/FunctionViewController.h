@@ -15,4 +15,7 @@
 
 @property (nonatomic,strong) NSString *str_page;
 
+//审批的数字减1方法
+-(void)RefreshNum;
+
 @end

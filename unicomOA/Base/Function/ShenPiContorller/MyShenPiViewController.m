@@ -992,6 +992,8 @@
     dic_param1[@"pageIndex"]=@"1";
     [self.tableView setContentOffset:CGPointMake(0, 0) animated:NO];
     [self PrePareData:dic_param1 interface:@"UnFinishTaskShenPiList"];
+    
+    //zr 0715 在审批中完成刷新的过程中，消息的待办自动减少
    
 }
 

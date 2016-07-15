@@ -39,22 +39,21 @@
     //关闭path
     [path closePath];
     
+    NSInteger i_decision=[_str_decision integerValue];
     //三角形内填充绿色
-    if ([_str_decision isEqualToString:@"1"]) {
+    if (i_decision==1 || i_decision>3) {
         [[UIColor colorWithRed:61/255.0f green:189/255.0f blue:143/255.0f alpha:1] setFill];
     }
-    else if ([_str_decision isEqualToString:@"2"]) {
+    else if (i_decision==2) {
         [[UIColor colorWithRed:247/255.0f green:35/255.0f blue:0/255.0f alpha:1] setFill];
     }
-    else if ([_str_decision isEqualToString:@"3"]) {
+    else if (i_decision==3) {
         [[UIColor colorWithRed:173/255.0f green:173/255.0f blue:173/255.0f alpha:1] setFill];
     }
-    else if ([_str_decision isEqualToString:@"0"]) {
+    else if (i_decision==0) {
         [[UIColor colorWithRed:246/255.0f green:187/255.0f blue:67/255.0f alpha:1] setFill];
     }
-    else {
-        [[UIColor colorWithRed:137/255.0f green:207/255.0f blue:240/255.0f alpha:1] setFill];
-    }
+    
     
     [path fill];
     //三角形的边框为红色

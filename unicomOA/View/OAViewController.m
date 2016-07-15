@@ -33,6 +33,7 @@
 @implementation OAViewController {
     UIActivityIndicatorView *indicator;
     FunctionViewController *func;
+    MessageViewController *message;
 }
 
 /*
@@ -107,7 +108,7 @@
     NSData *data=[[NSUserDefaults standardUserDefaults] objectForKey:@"user"];
     UserInfo *userInfo=[NSKeyedUnarchiver unarchiveObjectWithData:data];
     
-    MessageViewController *message=[[MessageViewController alloc]init];
+    message=[[MessageViewController alloc]init];
     message.delegate=self;
     message.userInfo=userInfo;
     
@@ -271,7 +272,7 @@
         NSString *str_urldata=[db fetchInterface:str_interface];
         NSCharacterSet *whitespace = [NSCharacterSet  whitespaceAndNewlineCharacterSet];
         str_urldata= [str_urldata stringByTrimmingCharactersInSet:whitespace];
-        NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_urldata];
+        __block NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_urldata];
         [_session POST:str_url parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
             
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -282,7 +283,7 @@
             if (b_success==YES) {
                 [indicator stopAnimating];
                 NSLog(@"获取审批列表成功");
-                NSString *str_totalPage=[JSON objectForKey:@"totalPage"];
+                __block NSString *str_totalPage=[JSON objectForKey:@"totalPage"];
                 NSInteger i_totalPage=[str_totalPage integerValue];
                 if (i_totalPage>0) {
                     [self.tabBar showBadgeOnItemIndex:2];

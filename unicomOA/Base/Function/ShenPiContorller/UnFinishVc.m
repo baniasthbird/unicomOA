@@ -22,6 +22,7 @@
 #import "ListCell.h"
 #import "ShenPiResultCell.h"
 
+
 @interface UnFinishVc ()<UITableViewDataSource,UITableViewDelegate,ListFileControllerDelegate,PrintApplicationDetailCellDelegate,UIGestureRecognizerDelegate>
 
 @property (nonatomic,strong) AFHTTPSessionManager *session;
@@ -291,6 +292,9 @@
     //提交申请
     // NSMutableDictionary *dic_submit=[[NSMutableDictionary alloc]init];
     if (str_url_postdata!=nil) {
+       
+      
+        
         NSString *str_urldata=str_url_postdata;
         NSCharacterSet *whitespace = [NSCharacterSet  whitespaceAndNewlineCharacterSet];
         str_urldata= [str_urldata stringByTrimmingCharactersInSet:whitespace];
@@ -354,6 +358,15 @@
                     
                 }];
                 [alert showLXAlertView];
+                /*
+                UINavigationController *nav1=[self.parentViewController.parentViewController.childViewControllers objectAtIndex:0];
+                MessageViewController *message_vc=(MessageViewController*)[nav1.childViewControllers objectAtIndex:0];
+                [message_vc FlowNum_Minus];
+                
+                UINavigationController *nav2=[self.parentViewController.parentViewController.childViewControllers objectAtIndex:2];
+                FunctionViewController *func_vc=(FunctionViewController*)[nav2.childViewControllers objectAtIndex:0];
+                [func_vc Badge_Minus];
+                */
                  [_delegate RefreshUnFinishView];
                 [self.navigationController popViewControllerAnimated:YES];
                
@@ -744,19 +757,22 @@
         else  {
             UIButton *btn;
             if (iPad) {
-                btn=[[UIButton alloc]initWithFrame:CGRectMake(57, 7, [UIScreen mainScreen].bounds.size.width-114, 30)];
+                btn=[[UIButton alloc]initWithFrame:CGRectMake(57, 7, [UIScreen mainScreen].bounds.size.width-114, 40)];
             }
             else {
-                btn=[[UIButton alloc]initWithFrame:CGRectMake(25, 7, [UIScreen mainScreen].bounds.size.width-50, 30)];
+                btn=[[UIButton alloc]initWithFrame:CGRectMake(25, 7, [UIScreen mainScreen].bounds.size.width-50, 40)];
             }
-            
+            btn.layer.cornerRadius=20;
             btn.backgroundColor=[UIColor colorWithRed:90/255.0f green:134/255.0f blue:243/255.0f alpha:1];
             [btn setTitle:@"提    交" forState:UIControlStateNormal];
             [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            btn.titleLabel.font=[UIFont systemFontOfSize:18];
+            btn.titleLabel.font=[UIFont systemFontOfSize:21];
             [btn addTarget:self action:@selector(Submit:) forControlEvents:UIControlEventTouchUpInside];
             [cell.contentView addSubview:btn];
             cell.selectionStyle=UITableViewCellSelectionStyleNone;
+            cell.backgroundColor=[UIColor clearColor];
+            cell.layer.borderColor=[[UIColor clearColor] CGColor];
+            cell.layer.borderWidth=0;
             
         }
     }
@@ -957,7 +973,7 @@
         return 80;
     }
     else {
-        return 44;
+        return 54;
     }
     
     

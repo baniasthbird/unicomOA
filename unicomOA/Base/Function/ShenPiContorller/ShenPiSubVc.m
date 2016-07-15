@@ -452,6 +452,9 @@
     [self.tableView setContentOffset:CGPointMake(0, 0) animated:NO];
     [self PrePareData:dic_param interface:@"UnFinishTaskShenPiList"];
     
+    
+    
+    
 }
 
 

@@ -93,28 +93,33 @@
         lbl_decision.textAlignment=NSTextAlignmentLeft;
         lbl_decision.font=[UIFont systemFontOfSize:12];
         lbl_decision.transform=CGAffineTransformMakeRotation(-M_PI/4);
-        if ([str_status isEqualToString:@"1"]) {
+        NSInteger i_status=[str_status integerValue];
+        if (i_status==1 || i_status>3) {
           //  lbl_decision.backgroundColor=[UIColor colorWithRed:61/255.0f green:189/255.0f blue:143/255.0f alpha:1];
             lbl_decision.text=@"同意";
             
         }
-        else if ([str_status isEqualToString:@"2"]) {
+        else if (i_status==2) {
         //    lbl_decision.backgroundColor=[UIColor colorWithRed:247/255.0f green:35/255.0f blue:0/255.0f alpha:1];
             lbl_decision.text=@"退回";
         }
-        else if ([str_status isEqualToString:@"3"]) {
+        
+        else if (i_status==3) {
         //    lbl_decision.backgroundColor=[UIColor colorWithRed:173/255.0f green:173/255.0f blue:173/255.0f alpha:1];
                 lbl_decision.text=@"废弃";
         }
-        else if ([str_status isEqualToString:@"0"]) {
+        
+        else if (i_status==0) {
        //     lbl_decision.backgroundColor=[UIColor colorWithRed:246/255.0f green:187/255.0f blue:67/255.0f alpha:1];
                 lbl_decision.text=@"暂存";
         }
+        /*
         else {
       //      lbl_decision.backgroundColor=[UIColor colorWithRed:137/255.0f green:207/255.0f blue:240/255.0f alpha:1];
             lbl_decision.font=[UIFont systemFontOfSize:9.5];
                             lbl_decision.text=@"未处理";
         }
+        */
     //    lbl_decision.layer.cornerRadius=5;
     //    lbl_decision.layer.masksToBounds=YES;
         

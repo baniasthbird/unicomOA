@@ -123,6 +123,7 @@ CGFloat i_Height=-1;
     self.tableView.dataSource=self;
     self.tableView.backgroundColor=[UIColor clearColor];
     
+    
     _refreshControl=[[UIRefreshControl alloc] init];
     
     //设置refreshControl的属性
@@ -178,7 +179,7 @@ CGFloat i_Height=-1;
     
     
     
-    self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
+    self.tableView.separatorStyle=UITableViewCellSeparatorStyleSingleLine;
     
     
     

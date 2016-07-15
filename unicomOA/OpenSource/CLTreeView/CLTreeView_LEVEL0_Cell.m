@@ -35,11 +35,16 @@
     _imgView.frame = imgFrame;
     */
     CGRect nameFrame = _name.frame;
-    nameFrame.origin.x = 62 + addX;
+    nameFrame.origin.x = 32 + addX;
     _name.frame = nameFrame;
     if (iPad) {
-        _name.font=[UIFont systemFontOfSize:20];
-        _staffnum.font=[UIFont systemFontOfSize:20];
+        _name.font=[UIFont boldSystemFontOfSize:20];
+        _staffnum.font=[UIFont boldSystemFontOfSize:20];
+    }
+    else {
+        _name.font=[UIFont boldSystemFontOfSize:14];
+        _staffnum.font=[UIFont boldSystemFontOfSize:14];
+
     }
 }
 
