@@ -74,9 +74,7 @@
 
     
     
-    indicator=[self AddLoop];
-    [indicator startAnimating];
-    [self.view addSubview:indicator];
+   
     //设置refreshControl的属性
     _refreshControl=[[UIRefreshControl alloc]init];
     _refreshControl.attributedTitle=[[NSAttributedString alloc]initWithString:@"加载中..." attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14], NSForegroundColorAttributeName:[UIColor blackColor]}];
@@ -93,6 +91,10 @@
     }
 
     [self.view addSubview:_tableView];
+    
+    indicator=[self AddLoop];
+    [indicator startAnimating];
+    [self.view addSubview:indicator];
     
     
 

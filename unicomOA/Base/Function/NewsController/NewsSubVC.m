@@ -40,7 +40,7 @@
 
 @property (nonatomic,strong) BaseFunction *baseFunc;
 
-
+@property (nonatomic,strong) UIRefreshControl *refreshControl;
 
 @end
 
@@ -92,9 +92,7 @@
     [_session.requestSerializer setHTTPShouldHandleCookies:YES];
     [_session.requestSerializer setTimeoutInterval:10.0f];
     
-    indicator=[self AddLoop];
-    [indicator startAnimating];
-    [self.view addSubview:indicator];
+   
 
     _i_pageIndex=1;
     
@@ -143,11 +141,22 @@
     
     self.tableView.tableHeaderView=self.searchcontroller.searchBar;
     
+    //设置refreshControl的属性
+    _refreshControl=[[UIRefreshControl alloc] init];
+    _refreshControl.attributedTitle=[[NSAttributedString alloc]initWithString:@"加载中..." attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14], NSForegroundColorAttributeName:[UIColor blackColor]}];
+    [self.refreshControl addTarget:self action:@selector(handleRefresh:) forControlEvents:UIControlEventValueChanged];
+    
+    [self.tableView addSubview:_refreshControl];
+
     
     
     [self NewsList:_news_param];
     
     [self.view addSubview:self.tableView];
+    
+    indicator=[self AddLoop];
+    [indicator startAnimating];
+    [self.view addSubview:indicator];
     
     
   //  self.definesPresentationContext = YES;
@@ -366,6 +375,7 @@
             BOOL b_success=[str_success boolValue];
             if (b_success==1) {
                 [indicator stopAnimating];
+                [_refreshControl endRefreshing];
                 NSLog(@"获取新闻列表成功:%@",responseObject);
                 NSObject *obj=[JSON objectForKey:@"totalPage"];
                 NSNumber *l_totalPage=(NSNumber*)obj;
@@ -387,8 +397,6 @@
                 }
                
 
-                
-                
                 [self.tableView reloadData];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     //刷新完成
@@ -558,6 +566,21 @@
     
 }
 
+
+-(void)handleRefresh:(id)paramSender {
+    // 模拟2秒后刷新数据
+    int64_t delayInSeconds = 2.0f;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        //停止刷新
+        [self.refreshControl endRefreshing];
+        //tableview中插入一条数据
+        [self NewsList:_news_param];
+    });
+    
+    
+}
 
 /*
 #pragma mark - Navigation
