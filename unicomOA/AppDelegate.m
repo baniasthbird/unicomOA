@@ -115,4 +115,8 @@
     AudioServicesPlaySystemSound(sound);
 }
 
+
+-(void)application:(UIApplication*)application didReceiveRemoteNotification:(nonnull NSDictionary *)userInfo {
+    
+}
 @end

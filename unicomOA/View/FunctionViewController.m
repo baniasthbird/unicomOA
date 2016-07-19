@@ -292,6 +292,8 @@
     dic_param1[@"pageIndex"]=_str_page;
     [self PrePareData:dic_param1 interface:@"UnFinishTaskShenPiList"];
 
+    [self.view addSubview:indicator];
+    [indicator startAnimating];
 }
 
 - (void)didReceiveMemoryWarning {

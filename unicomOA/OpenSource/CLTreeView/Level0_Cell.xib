@@ -15,18 +15,9 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Department" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b6q-gz-DdM">
-                        <rect key="frame" x="28" y="12" width="180" height="28"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="180" id="L69-C4-mZf"/>
-                            <constraint firstAttribute="height" constant="28" id="g7d-xt-mMz"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="efA-Jj-IX0">
-                        <rect key="frame" x="281" y="16" width="19" height="18"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <rect key="frame" x="270" y="16" width="22" height="22"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -37,13 +28,22 @@
                             <constraint firstAttribute="width" constant="12" id="lsH-3t-D5p"/>
                         </constraints>
                     </imageView>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Department" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b6q-gz-DdM">
+                        <rect key="frame" x="28" y="12" width="180" height="28"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="180" id="L69-C4-mZf"/>
+                            <constraint firstAttribute="height" constant="28" id="g7d-xt-mMz"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="4Ba-jB-7hg" firstAttribute="leading" secondItem="9VF-SQ-uWX" secondAttribute="leadingMargin" id="6Zk-SX-Tz3"/>
                     <constraint firstItem="b6q-gz-DdM" firstAttribute="top" secondItem="9VF-SQ-uWX" secondAttribute="topMargin" constant="4" id="Ejs-2b-sEw"/>
                     <constraint firstItem="4Ba-jB-7hg" firstAttribute="top" secondItem="9VF-SQ-uWX" secondAttribute="topMargin" constant="11" id="LrL-sQ-fAq"/>
                     <constraint firstItem="b6q-gz-DdM" firstAttribute="leading" secondItem="4Ba-jB-7hg" secondAttribute="trailing" constant="8" id="WTo-2Q-psw"/>
-                    <constraint firstItem="efA-Jj-IX0" firstAttribute="trailing" secondItem="9VF-SQ-uWX" secondAttribute="trailingMargin" constant="-12" id="Ykv-sz-VHL"/>
+                    <constraint firstItem="efA-Jj-IX0" firstAttribute="trailing" secondItem="9VF-SQ-uWX" secondAttribute="trailingMargin" constant="-20" id="Ykv-sz-VHL"/>
                     <constraint firstItem="efA-Jj-IX0" firstAttribute="top" secondItem="9VF-SQ-uWX" secondAttribute="topMargin" constant="8" id="ZN8-TH-JHc"/>
                 </constraints>
             </tableViewCellContentView>

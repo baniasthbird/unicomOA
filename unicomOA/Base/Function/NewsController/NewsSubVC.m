@@ -530,13 +530,15 @@
 #pragma mark -search bar delegate
 
 -(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    [indicator stopAnimating];
     [searchBar resignFirstResponder];
+    
 }
 
 #pragma mark- UISearchResultUpdating
 
 -(void)updateSearchResultsForSearchController:(UISearchController *)searchController {
-    [indicator startAnimating];
+   
     [arr_searchList removeAllObjects];
     /*
     if (self.searchArray!=nil) {
@@ -546,7 +548,7 @@
     //筛选条件
     NSString *searchtext=searchController.searchBar.text;
     if (![searchtext isEqualToString:@""]) {
-       
+        [indicator startAnimating];
         for (int i=0;i<[_arr_NewsList count];i++) {
             NSDictionary *dic_tmp=[_arr_NewsList objectAtIndex:i];
             NSString *str_title=[dic_tmp objectForKey:@"title"];
@@ -560,6 +562,7 @@
         _resultViewController.nav=self.navigationController;
         
         [_resultViewController.tableView reloadData];
+        [indicator stopAnimating];
 
     }
     

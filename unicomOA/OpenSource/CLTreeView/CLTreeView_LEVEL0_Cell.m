@@ -42,8 +42,8 @@
         _staffnum.font=[UIFont boldSystemFontOfSize:20];
     }
     else {
-        _name.font=[UIFont boldSystemFontOfSize:14];
-        _staffnum.font=[UIFont boldSystemFontOfSize:14];
+        _name.font=[UIFont boldSystemFontOfSize:18];
+        _staffnum.font=[UIFont boldSystemFontOfSize:18];
 
     }
 }

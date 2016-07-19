@@ -162,7 +162,7 @@
         [_session POST:str_url1 parameters:nil progress:^(NSProgress * _Nonnull uploadProgress) {
             
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            [indicator stopAnimating];
+           
             NSLog(@"请求未读消息成功:%@",responseObject);
             NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             NSString *str_success= [JSON objectForKey:@"success"];
@@ -199,7 +199,7 @@
                                 NSArray *arr_TaskList=[JSON objectForKey:@"taskList"];
                                 NSInteger i_page=[str_totalPage integerValue];
                                 _i_flow_num=(i_page-1)*10+[arr_TaskList count];
-                                
+                                 [indicator stopAnimating];
                                 NSIndexSet *indexSet=[NSIndexSet indexSetWithIndex:0];
                                 [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
 
