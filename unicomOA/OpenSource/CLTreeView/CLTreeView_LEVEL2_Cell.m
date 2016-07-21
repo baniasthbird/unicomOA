@@ -41,6 +41,8 @@
     CGRect nameFrame = _name.frame;
     nameFrame.origin.x = 62 + addX;
     _name.frame = nameFrame;
+    
+   
     /*
     CGRect signtureFrame = _signture.frame;
     signtureFrame.origin.x = 62 + addX;

@@ -20,6 +20,7 @@
 #import "LXAlertView.h"
 #import "UITabBar+badge.h"
 #import "MessageViewController.h"
+#import "UnFinishViewController.h"
 
 
 
@@ -34,6 +35,16 @@
 @property (nonatomic,strong) AFHTTPSessionManager *session;
 
 @property (nonatomic,strong) UIImageButton *btn_ShenPi;
+
+@property (nonatomic,strong) UIImageButton *btn_BanGong;
+
+@property (nonatomic,strong) UIImageButton *btn_ShouQian;
+
+@property (nonatomic,strong) UIImageButton *btn_ShengChan;
+
+@property (nonatomic,strong) UIImageButton *btn_HeTong;
+
+@property (nonatomic,strong) UIImageButton *btn_ShiWu;
 
 @end
 
@@ -116,69 +127,80 @@
     }
     
     CGFloat i_title1_x=10;
-    CGFloat i_title1_y=10;
+    CGFloat i_title1_y=16;
     CGFloat i_title_w=[UIScreen mainScreen].bounds.size.width-10;
     CGFloat i_title_h=15;
     CGFloat i_title_font=14;
     
-    CGFloat view_part1_x=8;
+    CGFloat view_part_x=0;
     CGFloat view_part1_y=35;
-    CGFloat view_part_w=[UIScreen mainScreen].bounds.size.width-16;
+    CGFloat view_part_w=[UIScreen mainScreen].bounds.size.width;
     CGFloat view_part_h=80;
+
     
-    CGFloat news_x=20;
-    CGFloat news_y=10;
+    CGFloat btn_x=18;
+    CGFloat btn_y=10;
     CGFloat btn_w=50;
     
-    CGFloat vote_x=95;
-    CGFloat vote_y=10;
+    CGFloat btn_x_2=96;
+    CGFloat btn_x_3=174;
+    CGFloat btn_x_4=252;
+    
     
     CGFloat i_title2_x=10;
-    CGFloat i_title2_y=130;
+    CGFloat i_title2_y=136;
     
-    CGFloat i_viewpart2_x=8;
+    
     CGFloat i_viewpart2_y=152;
+
     
-    CGFloat shenpi_x=28;
+   
     CGFloat shenpi_y=162;
     
+    CGFloat shenpi_y_2=242;
+    
     CGFloat i_title3_x=10;
-    CGFloat i_title3_y=327;
+    CGFloat i_title3_y=333;
     
-    CGFloat i_viewpart3_x=8;
+   
     CGFloat i_viewpart3_y=349;
-    
-    CGFloat i_notes_x=20;
-    CGFloat i_notes_y=10;
     
     CGFloat i_insets=70;
     
     if (iPhone6) {
-        i_title1_y=20;
-        view_part1_y=45;
-        i_title2_y=150;
-        i_viewpart2_y=172;
-        shenpi_y=182;
-        i_title3_y=367;
-        i_viewpart3_y=389;
-        view_part_h=90;
-        btn_w=55;
-        vote_x=110;
+        btn_x=28;
+        btn_x_2=116;
+        btn_x_3=204;
+        btn_x_4=292;
+        i_title1_y=13;
+        view_part1_y=40;
+        i_title2_y=158;
+        i_viewpart2_y=185;
+        shenpi_y=200;
+        i_title3_y=408;
+        i_viewpart3_y=430;
+        view_part_h=106;
+        btn_w=60;
         i_insets=80;
+        shenpi_y_2=295;
     }
     else if (iPhone6_plus) {
-        i_title1_y=40;
-        view_part1_y=65;
+        btn_x=25;
+        btn_x_2=125;
+        btn_x_3=225;
+        btn_x_4=325;
+        i_title1_y=20;
+        view_part1_y=40;
         i_title2_y=180;
-        i_viewpart2_y=202;
+        i_viewpart2_y=200;
         shenpi_y=212;
-        i_title3_y=418;
-        i_viewpart3_y=439;
-        view_part_h=100;
+        i_title3_y=460;
+        i_viewpart3_y=479;
+        view_part_h=110;
         btn_w=65;
-        vote_x=140;
         i_insets=90;
         i_title_font=16;
+        shenpi_y_2=312;
 
     }
     else if (iPad) {
@@ -191,9 +213,9 @@
         i_viewpart3_y=609;
         view_part_h=140;
         btn_w=100;
-        vote_x=220;
         i_insets=130;
         i_title_font=18;
+        shenpi_y_2=392;
 
     }
     
@@ -204,16 +226,23 @@
     lbl_title1.textColor=[UIColor blackColor];
     lbl_title1.font=[UIFont systemFontOfSize:i_title_font];
     
-    UIView *view_part1=[[UIView alloc]initWithFrame:CGRectMake(view_part1_x, view_part1_y, view_part_w, view_part_h)];
-    view_part1.backgroundColor=[UIColor clearColor];
+    UIView *view_part1=[[UIView alloc]initWithFrame:CGRectMake(view_part_x, view_part1_y, view_part_w, view_part_h)];
+    view_part1.backgroundColor=[UIColor whiteColor];
     view_part1.layer.borderWidth=1;
     view_part1.layer.borderColor=[[UIColor colorWithRed:231/255.0f green:231/255.0f blue:231/255.0f alpha:1] CGColor];
     
-    UIImageButton *btn_News=[self createImageButton:news_x y:news_y width:btn_w height:btn_w title:@"新闻" image:@"News.png" insets:i_insets];
+    UIImageButton *btn_News=[self createImageButton:btn_x y:btn_y width:btn_w height:btn_w title:@"新闻" image:@"News.png" insets:i_insets isFinish:YES];
     [btn_News addTarget:self action:@selector(NewsItemClick:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIImageButton *btn_IVoting=[self createImageButton:vote_x y:vote_y width:btn_w height:btn_w title:@"投票" image:@"IVoting.png" insets:i_insets];
-    [btn_IVoting addTarget:self action:@selector(IVotingItemClick:) forControlEvents:UIControlEventTouchUpInside];
+    UIImageButton *btn_GongGao=[self createImageButton:btn_x_2 y:btn_y width:btn_w height:btn_w title:@"公告" image:@"GongGao.png" insets:i_insets isFinish:YES];
+    [btn_GongGao addTarget:self action:@selector(GongGaoClick:) forControlEvents:UIControlEventTouchUpInside];
+
+    UIImageButton *btn_XiaoXi=[self createImageButton:btn_x_3 y:btn_y width:btn_w height:btn_w title:@"消息" image:@"Message.png" insets:i_insets isFinish:NO];
+    [btn_XiaoXi addTarget:self action:@selector(XiaoXiClick:) forControlEvents:UIControlEventTouchUpInside];
+
+    UIImageButton *btn_ChuanYue=[self createImageButton:btn_x_4 y:btn_y width:btn_w height:btn_w title:@"传阅" image:@"ChuanYue.png" insets:i_insets isFinish:NO];
+    [btn_ChuanYue addTarget:self action:@selector(ChuanYueClick:) forControlEvents:UIControlEventTouchUpInside];
+
     
     
     UILabel *lbl_title2=[[UILabel alloc]initWithFrame:CGRectMake(i_title2_x, i_title2_y, i_title_w, i_title_h)];
@@ -222,12 +251,12 @@
     lbl_title2.textColor=[UIColor blackColor];
     lbl_title2.font=[UIFont systemFontOfSize:i_title_font];
     
-    UIView *view_part2=[[UIView alloc]initWithFrame:CGRectMake(i_viewpart2_x, i_viewpart2_y, view_part_w, view_part_h*2)];
-    view_part2.backgroundColor=[UIColor clearColor];
+    UIView *view_part2=[[UIView alloc]initWithFrame:CGRectMake(view_part_x, i_viewpart2_y, view_part_w, view_part_h*2)];
+    view_part2.backgroundColor=[UIColor whiteColor];
     view_part2.layer.borderWidth=1;
     view_part2.layer.borderColor=[[UIColor colorWithRed:231/255.0f green:231/255.0f blue:231/255.0f alpha:1] CGColor];
     
-    _btn_ShenPi=[self createImageButton:shenpi_x y:shenpi_y width:btn_w height:btn_w title:@"审批" image:@"ShenPi.png" insets:i_insets];
+    _btn_ShenPi=[self createImageButton:btn_x y:shenpi_y width:btn_w height:btn_w title:@"审批" image:@"ShenPi.png" insets:i_insets isFinish:YES];
     [_btn_ShenPi addTarget:self action:@selector(ShenPiItemClick:) forControlEvents:UIControlEventTouchUpInside];
     if (i_total!=0) {
         _btn_ShenPi.badgeBgColor=[UIColor redColor];
@@ -239,8 +268,23 @@
             _btn_ShenPi.badge.font=[UIFont systemFontOfSize:18];
             // btn_ShenPi.badge.layer.cornerRadius=btn_ShenPi.badge.frame.size.height*2;
         }
-        
     }
+    
+    _btn_BanGong=[self createImageButton:btn_x_2 y:shenpi_y width:btn_w height:btn_w title:@"办公" image:@"BanGong.png" insets:i_insets isFinish:NO];
+    [_btn_BanGong addTarget:self action:@selector(BanGongItemClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    _btn_ShouQian=[self createImageButton:btn_x_3 y:shenpi_y width:btn_w height:btn_w title:@"售前" image:@"ShouQian.png" insets:i_insets isFinish:NO];
+    [_btn_ShouQian addTarget:self action:@selector(ShouQianItemClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    _btn_ShengChan=[self createImageButton:btn_x_4 y:shenpi_y width:btn_w height:btn_w title:@"生产" image:@"ShengChan.png" insets:i_insets isFinish:NO];
+    [_btn_ShengChan addTarget:self action:@selector(ShengChanItemClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    _btn_HeTong=[self createImageButton:btn_x y:shenpi_y_2 width:btn_w height:btn_w title:@"合同" image:@"HeTong.png" insets:i_insets isFinish:NO];
+    [_btn_HeTong addTarget:self action:@selector(HeTongItemClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    _btn_ShiWu=[self createImageButton:btn_x_2 y:shenpi_y_2 width:btn_w height:btn_w title:@"事务" image:@"ShiWu.png" insets:i_insets isFinish:NO];
+    [_btn_ShiWu addTarget:self action:@selector(ShiWuItemClick:) forControlEvents:UIControlEventTouchUpInside];
+
     
     UILabel *lbl_title3=[[UILabel alloc]initWithFrame:CGRectMake(i_title3_x, i_title3_y, i_title_w, i_title_h)];
     lbl_title3.textAlignment=NSTextAlignmentLeft;
@@ -248,13 +292,19 @@
     lbl_title3.textColor=[UIColor blackColor];
     lbl_title3.font=[UIFont systemFontOfSize:i_title_font];
     
-    UIView *view_part3=[[UIView alloc]initWithFrame:CGRectMake(i_viewpart3_x, i_viewpart3_y, view_part_w, view_part_h)];
-    view_part3.backgroundColor=[UIColor clearColor];
+    UIView *view_part3=[[UIView alloc]initWithFrame:CGRectMake(view_part_x, i_viewpart3_y, view_part_w, view_part_h)];
+    view_part3.backgroundColor=[UIColor whiteColor];
     view_part3.layer.borderWidth=1;
     view_part3.layer.borderColor=[[UIColor colorWithRed:231/255.0f green:231/255.0f blue:231/255.0f alpha:1] CGColor];
     
-    UIImageButton *btn_Notes=[self createImageButton:i_notes_x y:i_notes_y width:btn_w height:btn_w title:@"备忘录" image:@"Notes.png" insets:i_insets];
+    UIImageButton *btn_Notes=[self createImageButton:btn_x y:btn_y width:btn_w height:btn_w title:@"备忘录" image:@"Notes.png" insets:i_insets isFinish:YES];
     [btn_Notes addTarget:self action:@selector(NotesItemClick:) forControlEvents:UIControlEventTouchUpInside];
+
+    UIImageButton *btn_IVoting=[self createImageButton:btn_x_2 y:btn_y width:btn_w height:btn_w title:@"投票" image:@"IVoting.png" insets:i_insets isFinish:YES];
+    [btn_IVoting addTarget:self action:@selector(IVotingItemClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIImageButton *btn_JueCe=[self createImageButton:btn_x_3 y:btn_y width:btn_w height:btn_w title:@"决策" image:@"JueCe.png" insets:i_insets isFinish:NO];
+    [btn_JueCe addTarget:self action:@selector(JueCeItemClick:) forControlEvents:UIControlEventTouchUpInside];
 
     
     
@@ -262,9 +312,18 @@
     [self.view addSubview:lbl_title2];
     [self.view addSubview:lbl_title3];
     [view_part1 addSubview:btn_News];
-    [view_part1 addSubview:btn_IVoting];
+    [view_part1 addSubview:btn_GongGao];
+    [view_part1 addSubview:btn_XiaoXi];
+    [view_part1 addSubview:btn_ChuanYue];
     [self.view addSubview:_btn_ShenPi];
+    [self.view addSubview:_btn_BanGong];
+    [self.view addSubview:_btn_ShouQian];
+    [self.view addSubview:_btn_ShengChan];
+    [self.view addSubview:_btn_HeTong];
+    [self.view addSubview:_btn_ShiWu];
     [view_part3 addSubview:btn_Notes];
+    [view_part3 addSubview:btn_IVoting];
+    [view_part3 addSubview:btn_JueCe];
     [self.view addSubview:view_part1];
     [self.view addSubview:view_part2];
     [self.view sendSubviewToBack:view_part2];
@@ -280,7 +339,7 @@
     */
    // [self.view addSubview:img_View];
     
-    self.view.backgroundColor=[UIColor whiteColor];
+    self.view.backgroundColor=[UIColor colorWithRed:230/255.0f green:230/255.0f blue:230/255.0f alpha:1];
     
     db=[DataBase sharedinstanceDB];
     
@@ -320,7 +379,7 @@
 }
 */
 
--(UIImageButton *)createImageButton:(CGFloat)x y:(CGFloat)y width:(CGFloat)width height:(CGFloat)height title:(NSString*)str_title image:(NSString *)str_image insets:(CGFloat)insets {
+-(UIImageButton *)createImageButton:(CGFloat)x y:(CGFloat)y width:(CGFloat)width height:(CGFloat)height title:(NSString*)str_title image:(NSString *)str_image insets:(CGFloat)insets isFinish:(BOOL)b_Finish{
     UIImageButton *tmp_btn=[UIImageButton buttonWithType:UIButtonTypeCustom];
     [tmp_btn setFrame:CGRectMake(x, y, width, height)];
     
@@ -336,7 +395,13 @@
     [tmp_btn setBackgroundImage:[UIImage imageNamed:str_image] forState:UIControlStateNormal];
     
      //tmp_btn.titleLabel.textColor=[UIColor blackColor];
-    [tmp_btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    if (b_Finish==YES) {
+        [tmp_btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    }
+    else {
+        [tmp_btn setTitleColor:[UIColor colorWithRed:154/255.0f green:154/255.0f blue:154/255.0f alpha:1] forState:UIControlStateNormal];
+    }
+    
     
     tmp_btn.titleLabel.font=[UIFont systemFontOfSize:14];
     
@@ -491,6 +556,69 @@
     [self.navigationController pushViewController:newsView animated:YES];
 }
 
+//公告
+-(void)GongGaoClick:(UIImageButton *)button {
+    
+}
+
+//消息
+-(void)XiaoXiClick:(UIImageButton *)button {
+    UnFinishViewController *view=[[UnFinishViewController alloc]init];
+    view.str_title=@"系统消息";
+    [self.navigationController pushViewController:view animated:YES];
+}
+
+//传阅
+-(void)ChuanYueClick:(UIImageButton *)button {
+    UnFinishViewController *view=[[UnFinishViewController alloc]init];
+    view.str_title=@"公文传阅";
+    [self.navigationController pushViewController:view animated:YES];
+}
+
+//决策
+-(void)JueCeItemClick:(UIImageButton *)button {
+    UnFinishViewController *view=[[UnFinishViewController alloc]init];
+    view.str_title=@"决策辅助";
+    [self.navigationController pushViewController:view animated:YES];
+}
+
+//办公
+-(void)BanGongItemClick:(UIImageButton *)button {
+    UnFinishViewController *view=[[UnFinishViewController alloc]init];
+    view.str_title=@"办公审批";
+    [self.navigationController pushViewController:view animated:YES];
+}
+
+//售前
+-(void)ShouQianItemClick:(UIImageButton *)button {
+    UnFinishViewController *view=[[UnFinishViewController alloc]init];
+    view.str_title=@"售前审批";
+    [self.navigationController pushViewController:view animated:YES];
+}
+
+//生产
+-(void)ShengChanItemClick:(UIImageButton *)button {
+    UnFinishViewController *view=[[UnFinishViewController alloc]init];
+    view.str_title=@"生产审批";
+    [self.navigationController pushViewController:view animated:YES];
+}
+
+//合同
+-(void)HeTongItemClick:(UIImageButton *)button {
+    UnFinishViewController *view=[[UnFinishViewController alloc]init];
+    view.str_title=@"合同审批";
+    [self.navigationController pushViewController:view animated:YES];
+}
+
+//事务
+-(void)ShiWuItemClick:(UIImageButton *)button {
+    UnFinishViewController *view=[[UnFinishViewController alloc]init];
+    view.str_title=@"事务审批";
+    [self.navigationController pushViewController:view animated:YES];
+}
+
+
+//审批
 -(void)ShenPiItemClick:(UIImageButton *)button {
     /*
     NSString *msg = [NSString stringWithFormat:@"第%i行 第%i列",button.row + 1, button.column + 1];

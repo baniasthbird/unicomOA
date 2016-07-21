@@ -84,14 +84,18 @@
         
         
         CGFloat i_Width=0;
+        CGFloat i_Font=16;
         if (iPhone4_4s || iPhone5_5s) {
             i_Width=320.0f;
+            i_Font=14;
         }
         else if (iPhone6) {
             i_Width=375.0f;
+            i_Font=17;
         }
         else {
             i_Width=414.0f;
+            i_Font=18;
         }
         
        // _view_bg=[[UIView alloc]initWithFrame:CGRectMake(self.contentView.frame.origin.x, self.contentView.frame.origin.y, self.contentView.frame.size.width, 40)];
@@ -105,7 +109,7 @@
         
         lbl_arrangement=[[UILabel alloc]initWithFrame:CGRectMake(_view_bg.frame.origin.x+60, _view_bg.frame.origin.y, _view_bg.frame.size.width*0.3, 40.0f)];
         lbl_arrangement.textColor=[UIColor whiteColor];
-        lbl_arrangement.font=[UIFont systemFontOfSize:14];
+        lbl_arrangement.font=[UIFont systemFontOfSize:i_Font];
         [_view_bg addSubview:lbl_arrangement];
 
         _img_clock=[[UIImageView alloc]initWithFrame:CGRectMake(_view_bg.frame.origin.x+_view_bg.frame.size.width*0.45, _view_bg.frame.origin.y+5, 30, 30)];
@@ -114,18 +118,18 @@
         
         lbl_time=[[UILabel alloc]initWithFrame:CGRectMake(_view_bg.frame.origin.x+_view_bg.frame.size.width*0.55, _view_bg.frame.origin.y, _view_bg.frame.size.width*0.5, 40.0f)];
         lbl_time.textColor=[UIColor whiteColor];
-        lbl_time.font=[UIFont systemFontOfSize:14];
+        lbl_time.font=[UIFont systemFontOfSize:i_Font];
         
         [_view_bg addSubview:lbl_time];
         
         lbl_content=[[UILabel alloc]initWithFrame:CGRectMake(self.contentView.frame.origin.x+5, self.contentView.frame.origin.y+45, self.contentView.frame.size.width, 60.0f)];
         lbl_content.textColor=[UIColor colorWithRed:164/255.0f green:164/255.0f blue:164/255.0f alpha:1];
-        lbl_content.font=[UIFont boldSystemFontOfSize:14];
+        lbl_content.font=[UIFont boldSystemFontOfSize:i_Font];
         
         lbl_time2=[[UILabel alloc]initWithFrame:CGRectMake(self.contentView.frame.origin.x+5
                                                            , self.contentView.frame.origin.y+140.0f, self.contentView.frame.size.width*0.6, 20.0f)];
         lbl_time2.textColor=[UIColor colorWithRed:164/255.0f green:164/255.0f blue:164/255.0f alpha:1];
-        lbl_time2.font=[UIFont boldSystemFontOfSize:14];
+        lbl_time2.font=[UIFont boldSystemFontOfSize:i_Font];
         
         //baseView.backgroundColor=[UIColor whiteColor];
         //[baseView addSubview:lbl_arrangement];

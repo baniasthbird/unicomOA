@@ -16,6 +16,7 @@
 @property (nonatomic) BOOL isExpanded;//节点是否展开
 @property (strong,nonatomic) NSMutableArray *sonNodes;//子节点
 @property (nonatomic) int tag;      //节点tag
+@property (nonatomic) BOOL isStat;    //是否是统计数据
 
 @end
 

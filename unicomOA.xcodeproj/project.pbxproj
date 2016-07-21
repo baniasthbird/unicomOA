@@ -99,6 +99,7 @@
 		68212DF31CF3FAE40022955A /* Soundselectvc.m in Sources */ = {isa = PBXBuildFile; fileRef = 68212DF21CF3FAE40022955A /* Soundselectvc.m */; };
 		6822656F1C96B4C400AB29C0 /* NewsSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6822656E1C96B4C400AB29C0 /* NewsSettingViewController.m */; };
 		6825E1081CED507400EA4D87 /* ShenPiAppVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6825E1071CED507400EA4D87 /* ShenPiAppVC.m */; };
+		682A46D01D3F69E800FCED9E /* CDFInitialsAvatar.m in Sources */ = {isa = PBXBuildFile; fileRef = 682A46CF1D3F69E800FCED9E /* CDFInitialsAvatar.m */; };
 		682B68B01CB618DD002EC60F /* PrintApplicationNoFileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 682B68AF1CB618DD002EC60F /* PrintApplicationNoFileCell.m */; };
 		682B68B61CB64482002EC60F /* AddPrintFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 682B68B51CB64482002EC60F /* AddPrintFile.m */; };
 		682B68B91CB64683002EC60F /* AddPrintFileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 682B68B81CB64683002EC60F /* AddPrintFileCell.m */; };
@@ -110,6 +111,8 @@
 		6838153F1CBCCB2A00E6AFD3 /* PrintApplicationDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 6838153E1CBCCB2A00E6AFD3 /* PrintApplicationDetail.m */; };
 		683815421CBCDAA400E6AFD3 /* PrintFileDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 683815411CBCDAA400E6AFD3 /* PrintFileDetail.m */; };
 		683815451CBCE28500E6AFD3 /* PrintFileNavCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 683815441CBCE28500E6AFD3 /* PrintFileNavCell.m */; };
+		683A452E1D40CAC900B91D82 /* UnFinishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 683A452D1D40CAC900B91D82 /* UnFinishViewController.m */; };
+		683A45301D40D35E00B91D82 /* unfinish.png in Resources */ = {isa = PBXBuildFile; fileRef = 683A452F1D40D35E00B91D82 /* unfinish.png */; };
 		683D5A2B1D2DF6E6002958D3 /* imageResize.js in Resources */ = {isa = PBXBuildFile; fileRef = 683D5A2A1D2DF6E6002958D3 /* imageResize.js */; };
 		683EFF5F1CDC7B9C0049326B /* locate.png in Resources */ = {isa = PBXBuildFile; fileRef = 683EFF5E1CDC7B9C0049326B /* locate.png */; };
 		68462DCC1CF587540044A806 /* UILabel+LabelHeightAndWidth.m in Sources */ = {isa = PBXBuildFile; fileRef = 68462DCB1CF587540044A806 /* UILabel+LabelHeightAndWidth.m */; };
@@ -457,6 +460,8 @@
 		6822656E1C96B4C400AB29C0 /* NewsSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsSettingViewController.m; path = Base/Settings/Controller/NewsSettingViewController.m; sourceTree = "<group>"; };
 		6825E1061CED507400EA4D87 /* ShenPiAppVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShenPiAppVC.h; path = Base/Function/ShenPiContorller/ShenPiAppVC.h; sourceTree = "<group>"; };
 		6825E1071CED507400EA4D87 /* ShenPiAppVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShenPiAppVC.m; path = Base/Function/ShenPiContorller/ShenPiAppVC.m; sourceTree = "<group>"; };
+		682A46CE1D3F69E800FCED9E /* CDFInitialsAvatar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDFInitialsAvatar.h; sourceTree = "<group>"; };
+		682A46CF1D3F69E800FCED9E /* CDFInitialsAvatar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDFInitialsAvatar.m; sourceTree = "<group>"; };
 		682B68AE1CB618DD002EC60F /* PrintApplicationNoFileCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrintApplicationNoFileCell.h; path = Base/Function/ShenPiModel/PrintApplicationNoFileCell.h; sourceTree = "<group>"; };
 		682B68AF1CB618DD002EC60F /* PrintApplicationNoFileCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrintApplicationNoFileCell.m; path = Base/Function/ShenPiModel/PrintApplicationNoFileCell.m; sourceTree = "<group>"; };
 		682B68B41CB64482002EC60F /* AddPrintFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddPrintFile.h; path = Base/Function/ShenPiContorller/AddPrintFile.h; sourceTree = "<group>"; };
@@ -479,6 +484,9 @@
 		683815411CBCDAA400E6AFD3 /* PrintFileDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrintFileDetail.m; path = Base/Function/ShenPiContorller/PrintFileDetail.m; sourceTree = "<group>"; };
 		683815431CBCE28500E6AFD3 /* PrintFileNavCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrintFileNavCell.h; path = Base/Function/ShenPiModel/PrintFileNavCell.h; sourceTree = "<group>"; };
 		683815441CBCE28500E6AFD3 /* PrintFileNavCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrintFileNavCell.m; path = Base/Function/ShenPiModel/PrintFileNavCell.m; sourceTree = "<group>"; };
+		683A452C1D40CAC900B91D82 /* UnFinishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UnFinishViewController.h; path = Base/Unfinish/UnFinishViewController.h; sourceTree = "<group>"; };
+		683A452D1D40CAC900B91D82 /* UnFinishViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UnFinishViewController.m; path = Base/Unfinish/UnFinishViewController.m; sourceTree = "<group>"; };
+		683A452F1D40D35E00B91D82 /* unfinish.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unfinish.png; sourceTree = "<group>"; };
 		683D5A2A1D2DF6E6002958D3 /* imageResize.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = imageResize.js; sourceTree = "<group>"; };
 		683EFF5C1CDC22D40049326B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		683EFF5D1CDC22D40049326B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
@@ -1079,6 +1087,7 @@
 		2CFEADCD1C770D1D0054730E /* FunctionViewBase */ = {
 			isa = PBXGroup;
 			children = (
+				683A452B1D40CA8200B91D82 /* UnFinish */,
 				68ED4E281CB49213000E8A7B /* ShenPi */,
 				6846D34E1CAB5998004BD285 /* IVoting */,
 				6846D34D1CAB5988004BD285 /* Notes */,
@@ -1252,6 +1261,25 @@
 			name = Controller;
 			sourceTree = "<group>";
 		};
+		682A46CD1D3F69E800FCED9E /* CDFInitialsAvatar */ = {
+			isa = PBXGroup;
+			children = (
+				682A46CE1D3F69E800FCED9E /* CDFInitialsAvatar.h */,
+				682A46CF1D3F69E800FCED9E /* CDFInitialsAvatar.m */,
+			);
+			name = CDFInitialsAvatar;
+			path = OpenSource/CDFInitialsAvatar;
+			sourceTree = "<group>";
+		};
+		683A452B1D40CA8200B91D82 /* UnFinish */ = {
+			isa = PBXGroup;
+			children = (
+				683A452C1D40CAC900B91D82 /* UnFinishViewController.h */,
+				683A452D1D40CAC900B91D82 /* UnFinishViewController.m */,
+			);
+			name = UnFinish;
+			sourceTree = "<group>";
+		};
 		6846D34B1CAB5965004BD285 /* IVotingView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1316,6 +1344,7 @@
 		6846D35D1CABC483004BD285 /* OpenSource */ = {
 			isa = PBXGroup;
 			children = (
+				682A46CD1D3F69E800FCED9E /* CDFInitialsAvatar */,
 				68A5D7F61D2A037500000F95 /* LXSegmentController */,
 				6846EC671CFAD43200A400C5 /* NetWork */,
 				6846EC261CF99C7C00A400C5 /* IQKeyboardManager */,
@@ -1735,6 +1764,7 @@
 				68B38F0D1D19441500F28034 /* disagree.png */,
 				687E74B81D113B9500F67884 /* check_off.png */,
 				687E74B91D113B9500F67884 /* check_on.png */,
+				683A452F1D40D35E00B91D82 /* unfinish.png */,
 				682086CE1D1A34440032A191 /* logoimage-IPad.png */,
 				2CBA8E1F1CD3B33400BDF625 /* printmission.png */,
 				68F36D681CD1F3320027A97A /* aboutbg.png */,
@@ -1880,6 +1910,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				68F8E1791CD042AA005D2727 /* bg_Nav.png in Resources */,
+				683A45301D40D35E00B91D82 /* unfinish.png in Resources */,
 				68F8E1841CD042AA005D2727 /* position.png in Resources */,
 				68B38F071D18E03300F28034 /* down_arrow_blue@2x.png in Resources */,
 				68F8E1821CD042AA005D2727 /* newApplication.png in Resources */,
@@ -2108,6 +2139,7 @@
 				2CDC2BE41C8FFD6C0067693B /* NIDropDown.m in Sources */,
 				6846EC581CF99C7C00A400C5 /* IQToolbar.m in Sources */,
 				2CFEADB41C76A6350054730E /* CellFrameModel.m in Sources */,
+				682A46D01D3F69E800FCED9E /* CDFInitialsAvatar.m in Sources */,
 				68D05CC41C97B3530039220F /* SendFeedbackView.m in Sources */,
 				6846EC541CF99C7C00A400C5 /* IQTextView.m in Sources */,
 				2CDC2BF51C924DAC0067693B /* NewsDisplayViewController.m in Sources */,
@@ -2180,6 +2212,7 @@
 				68E779F91CB37D6A006DA5B9 /* Friend.m in Sources */,
 				6846EC5D1CFA733900A400C5 /* ListFileController.m in Sources */,
 				2CFEADBD1C76A6440054730E /* MessageCell.m in Sources */,
+				683A452E1D40CAC900B91D82 /* UnFinishViewController.m in Sources */,
 				6838153C1CBCB5E700E6AFD3 /* ShenPiResultCell.m in Sources */,
 				683815451CBCE28500E6AFD3 /* PrintFileNavCell.m in Sources */,
 				68ED4E551CB5078C000E8A7B /* PrintApplicationDetailCell.m in Sources */,

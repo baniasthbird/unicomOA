@@ -10,6 +10,7 @@
 #import "CLTree.h"
 #import "MemberInfoViewController.h"
 
+
 @interface DataSource()
 
 
@@ -34,7 +35,7 @@
                 long l_parentID=[(NSNumber*)parentID longLongValue];
                 if (l_parentID==1) {
                     NSString *str_orgname=[tmp_dic objectForKey:@"orgname"];
-                    CLTreeViewNode *node=[self CreateLevel0Node:str_orgname];
+                    CLTreeViewNode *node=[self CreateLevel0Node:str_orgname stat:NO];
                     NSString *str_orgid=[tmp_dic objectForKey:@"orgid"];
                     node.tag=[str_orgid intValue];
                     node=[self AddSubNode:node departarray:departArray];
@@ -64,7 +65,10 @@
           
         }
         
-        
+        NSString *str_staffcount=[NSString stringWithFormat:@"%lu%@",(unsigned long)staffArray.count,@"位联系人"];
+        CLTreeViewNode *node_staffcount=[self CreateLevel0Node:str_staffcount stat:YES];
+        node_staffcount.tag=1000;
+        [arr_tmp addObject:node_staffcount];
     }
     return arr_tmp;
 }
@@ -119,12 +123,13 @@
 
 #pragma mark 添加真实数据所需的方法
 //添加第0级菜单
--(CLTreeViewNode*)CreateLevel0Node:(NSString*)str_name {
+-(CLTreeViewNode*)CreateLevel0Node:(NSString*)str_name stat:(BOOL)b_stat{
     CLTreeViewNode *node0=[[CLTreeViewNode alloc]init];
     node0.nodeLevel=0;
     node0.type=0;
     node0.sonNodes=nil;
     node0.isExpanded=FALSE;
+    node0.isStat=b_stat;
     CLTreeView_LEVEL0_Model *tmp0=[[CLTreeView_LEVEL0_Model alloc]init];
     tmp0.name=str_name;
     tmp0.num=@"0";
@@ -234,7 +239,8 @@
             else {
                 str_email=(NSString*)obj_email;
             }
-            CLTreeViewNode *node=[self CreateLevel2Node:str_name signture:str_position headImgPath:@"headLogo.png" headImgUrl:nil gender:str_sex department:str_department cell:str_cell phone:str_phone email:str_email];
+         //   CLTreeViewNode *node=[self CreateLevel2Node:str_name signture:str_position headImgPath:@"headLogo.png" headImgUrl:nil gender:str_sex department:str_department cell:str_cell phone:str_phone email:str_email];
+               CLTreeViewNode *node=[self CreateLevel2Node:str_name signture:str_position headImgPath:nil headImgUrl:nil gender:str_sex department:str_department cell:str_cell phone:str_phone email:str_email];
             [arr_staff addObject:node];
         }
     }

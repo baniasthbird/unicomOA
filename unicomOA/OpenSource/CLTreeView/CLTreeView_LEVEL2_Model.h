@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+
 @interface CLTreeView_LEVEL2_Model : NSObject
 
 @property (strong,nonatomic) NSString *name;
@@ -19,6 +20,8 @@
 @property (strong,nonatomic) NSString *cellphonenum;
 @property (strong,nonatomic) NSString *phonenum;
 @property (strong,nonatomic) NSString *email;
+@property(nonatomic, strong) NSData *icon;//头像图片
+//@property (strong,nonatomic) UserImg  *user_Img;
 
 @end
 

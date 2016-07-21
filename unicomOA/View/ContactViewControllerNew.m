@@ -14,6 +14,7 @@
 #import "AFNetworking.h"
 #import "UILabel+LabelHeightAndWidth.h"
 #import "LXAlertView.h"
+#import "CDFInitialsAvatar.h"
 
 
 @interface ContactViewControllerNew()
@@ -37,6 +38,8 @@
 @implementation ContactViewControllerNew {
     DataBase *db;
     UIActivityIndicatorView *indicator;
+    
+    NSUInteger i_stat;
 }
 
 CGFloat i_Height=-1;
@@ -174,20 +177,18 @@ CGFloat i_Height=-1;
     lbl_title.textAlignment=NSTextAlignmentLeft;
     lbl_title.font=[UIFont systemFontOfSize:15];
     
-    
     self.tableView.tableHeaderView=self.searchcontroller.searchBar;
-    
-    
-    
+
     self.tableView.separatorStyle=UITableViewCellSeparatorStyleSingleLine;
-    
-    
     
     DataSource *dt_tmp=[[DataSource alloc]init];
    // _dataArray=[dt_tmp addTestData];
     NSMutableArray *arr_staff=[db fetchAllStaff];
+   // NSInteger i_staff_count=[arr_staff count];
+    i_stat=[arr_staff count];
     NSMutableArray *arr_depart=[db fetchAllDepart];
     NSMutableArray  *dataArray=[dt_tmp addRealData:arr_staff departArray:arr_depart];
+    
     _dataArray=dataArray;
     /*
     //添加演示数据
@@ -233,6 +234,7 @@ CGFloat i_Height=-1;
                 
                 NSMutableArray *staffArray=[JSON objectForKey:@"empList"];
                 NSMutableArray *departArray=[JSON objectForKey:@"orgList"];
+                i_stat=[staffArray count];
                 //更新数据库
                 db=[DataBase sharedinstanceDB];
                 [db UpdateStaffTable:staffArray];
@@ -353,14 +355,33 @@ CGFloat i_Height=-1;
     CLTreeViewNode *node = [_displayArray objectAtIndex:indexPath.row];
     
     if(node.type == 0){//类型为0的cell
-        CLTreeView_LEVEL0_Cell *cell = [tableView dequeueReusableCellWithIdentifier:indentifier];
-        if(cell == nil){
-            cell = [[[NSBundle mainBundle] loadNibNamed:@"Level0_Cell" owner:self options:nil] lastObject];
+        if (node.isStat==NO) {
+            CLTreeView_LEVEL0_Cell *cell = [tableView dequeueReusableCellWithIdentifier:indentifier];
+            if(cell == nil){
+                cell = [[[NSBundle mainBundle] loadNibNamed:@"Level0_Cell" owner:self options:nil] lastObject];
+            }
+            cell.node = node;
+            [self loadDataForTreeViewCell:cell with:node];//重新给cell装载数据
+            [cell setNeedsDisplay]; //重新描绘cell
+            return cell;
         }
-        cell.node = node;
-        [self loadDataForTreeViewCell:cell with:node];//重新给cell装载数据
-        [cell setNeedsDisplay]; //重新描绘cell
-        return cell;
+        else {
+            NSString *ID=[NSString stringWithFormat:@"Cell%ld%ld", (long)[indexPath section], (long)[indexPath row]];
+            UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+            //UITableViewCell *cell=[tableView cellForRowAtIndexPath:indexPath];
+            if (cell==nil) {
+                cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
+                
+            }
+            cell.backgroundColor=[UIColor whiteColor];
+            UILabel *lbl_label=[[UILabel alloc]initWithFrame:CGRectMake(cell.contentView.frame.origin.x, cell.contentView.frame.origin.y, [UIScreen mainScreen].bounds.size.width, cell.contentView.frame.size.height)];
+            lbl_label.textColor=[UIColor colorWithRed:154/255.0f green:154/255.0f blue:154/255.0f alpha:1];
+            lbl_label.font=[UIFont boldSystemFontOfSize:18];
+            lbl_label.textAlignment=NSTextAlignmentCenter;
+            lbl_label.text=[NSString stringWithFormat:@"%ld%@",(long)i_stat,@"位联系人"];
+            [cell.contentView addSubview:lbl_label];
+            return cell;
+        }
     }
     else if(node.type == 1){//类型为1的cell
         CLTreeView_LEVEL1_Cell *cell = [tableView dequeueReusableCellWithIdentifier:indentifier1];
@@ -422,10 +443,17 @@ CGFloat i_Height=-1;
             //本地图片
             [((CLTreeView_LEVEL2_Cell*)cell).headImg setImage:[UIImage imageNamed:nodeData.headImgPath]];
         }
-        else if (nodeData.headImgUrl != nil){
+        else {
+            UIImageView *imgView=((CLTreeView_LEVEL2_Cell*)cell).headImg;
+            UIImage *img= [self setTxcolorAndTitle:nodeData.name fid:nodeData.cellphonenum imgView:imgView];
+            [((CLTreeView_LEVEL2_Cell*)cell).headImg setImage:img];
+                    }
+        if (nodeData.headImgUrl != nil){
             //加载图片，这里是同步操作。建议使用SDWebImage异步加载图片
             [((CLTreeView_LEVEL2_Cell*)cell).headImg setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:nodeData.headImgUrl]]];
         }
+       
+        
     }
 }
 
@@ -450,7 +478,13 @@ CGFloat i_Height=-1;
         viewController.str_Name= nodeData.name;
         viewController.str_Gender=nodeData.gender;
         //本地图片
-        viewController.str_img=nodeData.headImgPath;
+        if (nodeData.headImgPath==nil)
+        {
+            viewController.str_img=@"headLogo.png";
+        }
+        else {
+            viewController.str_img=nodeData.headImgPath;
+        }
        // FriendGroup *tmp_friend=[_friendsData objectAtIndex:indexPath.section];
         viewController.str_department=nodeData.department;
         
@@ -661,6 +695,46 @@ CGFloat i_Height=-1;
     [indicator startAnimating];
     [self AddressList];
     
+}
+
+
+-(UIImage*)setTxcolorAndTitle:(NSString*)title fid:(NSString*)fid imgView:(UIImageView*)imgView
+{
+    NSArray *tximgLis=@[@"tx_one",@"tx_two",@"tx_three",@"tx_four",@"tx_five",@"tx_six",@"tx_seven"];
+    NSString *strImg;
+    if(fid.length!=0)//利用号码不同来随机颜色
+    {
+        NSString *strCarc= fid.length<7? [fid substringToIndex:fid.length]:[fid substringToIndex:7];
+        int allnum=[strCarc intValue];
+        strImg=tximgLis[allnum%7];
+    }else
+    {
+        strImg=tximgLis[0];
+    }
+    if(title.length!=0)
+    {
+       // title= title.length<2? [title substringToIndex:title.length]:[title substringToIndex:2];
+        title=[title substringFromIndex:title.length-1];
+    }else
+    {
+        title=@"测试";
+    }
+    
+    
+    CDFInitialsAvatar *topAvatar = [[CDFInitialsAvatar alloc] initWithRect:imgView.bounds fullName:title];
+    
+    topAvatar.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:strImg]];
+   // topAvatar.backgroundColor=[UIColor lightGrayColor];
+    
+    topAvatar.initialsFont=[UIFont fontWithName:@"STHeitiTC-Light" size:14];
+    CALayer *mask = [CALayer layer]; // this will become a mask for UIImageView
+    UIImage *maskImage = [UIImage imageNamed:@"AvatarMask"]; // circle, in this case
+    mask.contents = (id)[maskImage CGImage];
+    mask.frame = imgView.bounds;
+    imgView.layer.mask = mask;
+    imgView.layer.cornerRadius = YES;
+    imgView.image = topAvatar.imageRepresentation;
+    return  topAvatar.imageRepresentation;
 }
 
 
