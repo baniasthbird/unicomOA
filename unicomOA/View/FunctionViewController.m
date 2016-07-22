@@ -550,15 +550,21 @@
 #pragma mark 控制红点通知
     
     NewsManagementViewController *newsView=[[NewsManagementViewController alloc]init];
-    newsView.b_hasnews= button.badge.isHidden;
     //newsView.delegate=self;
+    newsView.b_isNews=YES;
+    newsView.str_title=@"新闻";
     newsView.userInfo=_userInfo;
     [self.navigationController pushViewController:newsView animated:YES];
 }
 
 //公告
 -(void)GongGaoClick:(UIImageButton *)button {
-    
+    NewsManagementViewController *newsView=[[NewsManagementViewController alloc]init];
+    //newsView.delegate=self;
+    newsView.b_isNews=NO;
+    newsView.str_title=@"公告";
+    newsView.userInfo=_userInfo;
+    [self.navigationController pushViewController:newsView animated:YES];
 }
 
 //消息

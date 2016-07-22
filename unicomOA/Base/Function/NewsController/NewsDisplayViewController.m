@@ -323,16 +323,21 @@ int i_comment_num;
                     // foundRange=[str_content rangeOfString:@"" options:NSStringCompareOptions.foundRange range:<#(NSRange)#>]
                     if (foundRange2.location!=NSNotFound) {
                         searchRange2.location=foundRange2.location+foundRange2.length;
-                        NSRange fontsizeRange=NSMakeRange(searchRange2.location, 5);
+                        NSRange searchRange_sub=NSMakeRange(searchRange2.location, str_content.length-searchRange2.location);
+                        NSRange foundRange_sub=[str_content rangeOfString:@";" options:nil range:searchRange_sub];
+                        if (foundRange_sub.location-searchRange2.location>9) {
+                            foundRange_sub=[str_content rangeOfString:@"\"" options:nil range:searchRange_sub];
+                        }
+                        NSRange fontsizeRange=NSMakeRange(searchRange2.location, foundRange_sub.location-searchRange2.location+1);
                         NSString *str_fontsize= [str_content substringWithRange:fontsizeRange];
                         NSRange range_keyword=[str_fontsize rangeOfString:@";"];
                         if (range_keyword.location!=NSNotFound) {
                             str_content=[str_content stringByReplacingCharactersInRange:fontsizeRange withString:@"180%;"];
                         }
                         else {
-                            NSRange range_keyword=[str_fontsize rangeOfString:@"%"];
+                            NSRange range_keyword=[str_fontsize rangeOfString:@"\""];
                             if (range_keyword.location!=NSNotFound) {
-                                str_content=[str_content stringByReplacingCharactersInRange:fontsizeRange withString:@"180%"];
+                                str_content=[str_content stringByReplacingCharactersInRange:fontsizeRange withString:@"180%\""];
                             }
                             NSRange range_keyword2=[str_fontsize rangeOfString:@"px"];
                             if (range_keyword2.location!=NSNotFound) {
@@ -345,8 +350,12 @@ int i_comment_num;
                                 }
                                 
                             }
+                            else {
+                                
+                            }
 
                         }
+                        
                     }
                     else {
                         break;
@@ -363,11 +372,17 @@ int i_comment_num;
                     // foundRange=[str_content rangeOfString:@"" options:NSStringCompareOptions.foundRange range:<#(NSRange)#>]
                     if (foundRange3.location!=NSNotFound) {
                         searchRange3.location=foundRange3.location+foundRange3.length;
-                        NSRange fontsizeRange=NSMakeRange(searchRange3.location, 4);
+                        NSRange searchRange_sub=NSMakeRange(searchRange3.location, str_content.length-searchRange3.location);
+                        NSRange foundRange_sub=[str_content rangeOfString:@";" options:nil range:searchRange_sub];
+                        if (foundRange_sub.location-searchRange3.location>9) {
+                            foundRange_sub=[str_content rangeOfString:@"\"" options:nil range:searchRange_sub];
+                        }
+
+                        NSRange fontsizeRange=NSMakeRange(searchRange3.location, foundRange_sub.location-searchRange3.location+1);
                         NSString *str_fontsize= [str_content substringWithRange:fontsizeRange];
-                        NSRange range_keyword=[str_fontsize rangeOfString:@"px"];
+                        NSRange range_keyword=[str_fontsize rangeOfString:@";"];
                         if (range_keyword.location!=NSNotFound) {
-                            str_content=[str_content stringByReplacingCharactersInRange:fontsizeRange withString:@"2em"];
+                            str_content=[str_content stringByReplacingCharactersInRange:fontsizeRange withString:@"2em;"];
                         }
                         else {
                             NSRange range_keyword2=[str_fontsize rangeOfString:@"p"];
@@ -384,6 +399,28 @@ int i_comment_num;
                 }
 
                 
+                if (b_Replace==NO) {
+                    //找每一段<p
+                    /*
+                    NSRange foundRange4;
+                    NSRange searchRange4=NSMakeRange(0, str_content.length);
+                    while (searchRange4.location<str_content.length) {
+                        searchRange4.length=str_content.length-searchRange4.location;
+                        foundRange4=[str_content rangeOfString:@"<p style=\"" options:nil range:searchRange4];
+                        if (foundRange4.location!=NSNotFound) {
+                            NSRange fontsizeRange=NSMakeRange(foundRange4.location, 10);
+                            NSString *str_fontsize= [str_content substringWithRange:fontsizeRange];
+                            str_content=[str_content stringByReplacingCharactersInRange:fontsizeRange withString:@"<p style=\" text-indent:2em;"];
+                            searchRange4.location=foundRange4.location+28;
+                        }
+                        else {
+                            break;
+                        }
+                    }
+                    */
+                    
+                    
+                }
                 
                 NSString *str_title_style1=@"<p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; font-size: 24px; text-indent: 0em; font-stretch: normal; line-height: 32px; font-family: &quot;Microsoft Yahei&quot;; color: rgb(64, 64, 64); text-align: center; white-space: normal; background-color: rgb(255, 255, 255);\">";
               

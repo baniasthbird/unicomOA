@@ -445,7 +445,7 @@ CGFloat i_Height=-1;
         }
         else {
             UIImageView *imgView=((CLTreeView_LEVEL2_Cell*)cell).headImg;
-            UIImage *img= [self setTxcolorAndTitle:nodeData.name fid:nodeData.cellphonenum imgView:imgView];
+            UIImage *img= [self setTxcolorAndTitle:nodeData.name fid:nodeData.signture imgView:imgView];
             [((CLTreeView_LEVEL2_Cell*)cell).headImg setImage:img];
                     }
         if (nodeData.headImgUrl != nil){
@@ -702,6 +702,31 @@ CGFloat i_Height=-1;
 {
     NSArray *tximgLis=@[@"tx_one",@"tx_two",@"tx_three",@"tx_four",@"tx_five",@"tx_six",@"tx_seven"];
     NSString *strImg;
+    
+    //根据不同职务配置颜色
+    NSRange range=[fid rangeOfString:@"经理"];
+    if (range.location!=NSNotFound) {
+        strImg=tximgLis[0];
+    }
+    else {
+        NSRange range=[fid rangeOfString:@"主任"];
+        if (range.location!=NSNotFound) {
+            strImg=tximgLis[1];
+        }
+        else {
+            NSRange range=[fid rangeOfString:@"总监"];
+            if (range.location!=NSNotFound) {
+                strImg=tximgLis[1];
+            }
+            else {
+                strImg=tximgLis[4];
+            }
+
+        }
+        
+
+    }
+       /*
     if(fid.length!=0)//利用号码不同来随机颜色
     {
         NSString *strCarc= fid.length<7? [fid substringToIndex:fid.length]:[fid substringToIndex:7];
@@ -711,6 +736,7 @@ CGFloat i_Height=-1;
     {
         strImg=tximgLis[0];
     }
+    */
     if(title.length!=0)
     {
        // title= title.length<2? [title substringToIndex:title.length]:[title substringToIndex:2];

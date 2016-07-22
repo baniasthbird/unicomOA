@@ -74,7 +74,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-     self.title=@"公告";
+     self.title=_str_title;
     
     NSDictionary * dict;
     if (iPad) {
@@ -130,7 +130,7 @@
     [_session.requestSerializer setHTTPShouldHandleCookies:YES];
     [_session.requestSerializer setTimeoutInterval:10.0f];
     
-    [self buildView];
+    [self buildView:_b_isNews];
     
     [self NewsListCount];
     
@@ -262,7 +262,7 @@
     
 }
 
--(void)buildView {
+-(void)buildView:(BOOL)b_isNews {
     
     if (iPad) {
           _tableView=[[UITableView alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.005, 95, self.view.frame.size.width*0.99, 880) style:UITableViewStylePlain];
@@ -394,7 +394,7 @@
   //  [self setupSlideBar];
    // [self.view addSubview:_tableView];
     
-    [self setUpAllViewController];
+    [self setUpAllViewController:b_isNews];
     
  //   [self.view addSubview:_searchBar];
    // [self.view addSubview:btn_previous];
@@ -877,7 +877,7 @@
 }
 */
 
-- (void)setUpAllViewController {
+- (void)setUpAllViewController:(BOOL)b_isNews {
     
     self.isfullScreen=YES;
     self.isShowUnderLine=YES;
@@ -911,43 +911,57 @@
     news_param1[@"pageIndex"]=@"1";
     news_param1[@"classId"]=@"0";
     wordVc1.news_param=news_param1;
-    [self addChildViewController:wordVc1];
+   
+    
     
     NewsSubVC *wordVc2 = [[NewsSubVC alloc] init];
     wordVc2.title = @"公司通知";
     news_param2[@"pageIndex"]=@"1";
     news_param2[@"classId"]=@"1";
     wordVc2.news_param=news_param2;
-    [self addChildViewController:wordVc2];
+    
     
     NewsSubVC *wordVc3 = [[NewsSubVC alloc] init];
     wordVc3.title = @"部门通知";
     news_param3[@"pageIndex"]=@"1";
     news_param3[@"classId"]=@"2";
     wordVc3.news_param=news_param3;
-    [self addChildViewController:wordVc3];
+   
     
     NewsSubVC *wordVc4 = [[NewsSubVC alloc] init];
     wordVc4.title = @"内部新闻";
     news_param4[@"pageIndex"]=@"1";
     news_param4[@"classId"]=@"3";
     wordVc4.news_param=news_param4;
-    [self addChildViewController:wordVc4];
+    
     
     NewsSubVC *wordVc5 = [[NewsSubVC alloc] init];
     wordVc5.title = @"外部新闻";
     news_param5[@"pageIndex"]=@"1";
     news_param5[@"classId"]=@"4";
     wordVc5.news_param=news_param5;
-    [self addChildViewController:wordVc5];
+   
     
     NewsSubVC *wordVc6 = [[NewsSubVC alloc] init];
     wordVc6.title = @"规章制度";
     news_param6[@"pageIndex"]=@"1";
     news_param6[@"classId"]=@"5";
     wordVc6.news_param=news_param6;
-    [self addChildViewController:wordVc6];
-
+   
+    if (b_isNews==YES) {
+        [self addChildViewController:wordVc1];
+        [self addChildViewController:wordVc4];
+        [self addChildViewController:wordVc5];
+    }
+    else {
+        [self addChildViewController:wordVc1];
+        [self addChildViewController:wordVc2];
+        [self addChildViewController:wordVc3];
+        [self addChildViewController:wordVc6];
+    }
+    
+    
+    
 }
 
 

@@ -36,6 +36,10 @@
 
 @property  BOOL b_hasnews;
 
+@property BOOL b_isNews;
+
+@property (nonatomic,strong) NSString *str_title;
+
 @property (nonatomic,strong) UserInfo *userInfo;
 
 @property (nonatomic,strong) BaseFunction *baseFunc;

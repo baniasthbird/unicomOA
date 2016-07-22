@@ -112,7 +112,6 @@
 		683815421CBCDAA400E6AFD3 /* PrintFileDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 683815411CBCDAA400E6AFD3 /* PrintFileDetail.m */; };
 		683815451CBCE28500E6AFD3 /* PrintFileNavCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 683815441CBCE28500E6AFD3 /* PrintFileNavCell.m */; };
 		683A452E1D40CAC900B91D82 /* UnFinishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 683A452D1D40CAC900B91D82 /* UnFinishViewController.m */; };
-		683A45301D40D35E00B91D82 /* unfinish.png in Resources */ = {isa = PBXBuildFile; fileRef = 683A452F1D40D35E00B91D82 /* unfinish.png */; };
 		683D5A2B1D2DF6E6002958D3 /* imageResize.js in Resources */ = {isa = PBXBuildFile; fileRef = 683D5A2A1D2DF6E6002958D3 /* imageResize.js */; };
 		683EFF5F1CDC7B9C0049326B /* locate.png in Resources */ = {isa = PBXBuildFile; fileRef = 683EFF5E1CDC7B9C0049326B /* locate.png */; };
 		68462DCC1CF587540044A806 /* UILabel+LabelHeightAndWidth.m in Sources */ = {isa = PBXBuildFile; fileRef = 68462DCB1CF587540044A806 /* UILabel+LabelHeightAndWidth.m */; };
@@ -183,6 +182,7 @@
 		68B38F0C1D1927D500F28034 /* ListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B38F0B1D1927D500F28034 /* ListCell.m */; };
 		68B38F0E1D19441500F28034 /* disagree.png in Resources */ = {isa = PBXBuildFile; fileRef = 68B38F0D1D19441500F28034 /* disagree.png */; };
 		68B38F101D19441C00F28034 /* agree.png in Resources */ = {isa = PBXBuildFile; fileRef = 68B38F0F1D19441C00F28034 /* agree.png */; };
+		68B6DE741D42113C00EC3889 /* unfinish.png in Resources */ = {isa = PBXBuildFile; fileRef = 68B6DE731D42113C00EC3889 /* unfinish.png */; };
 		68C0A5BC1CBF6667008BEE27 /* ShenPiStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C0A5BB1CBF6667008BEE27 /* ShenPiStatus.m */; };
 		68C33B741D34C58B00FCC0F1 /* LogTriangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C33B731D34C58B00FCC0F1 /* LogTriangleView.m */; };
 		68D05CBA1C9791000039220F /* PasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D05CB91C9791000039220F /* PasswordViewController.m */; };
@@ -486,7 +486,6 @@
 		683815441CBCE28500E6AFD3 /* PrintFileNavCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrintFileNavCell.m; path = Base/Function/ShenPiModel/PrintFileNavCell.m; sourceTree = "<group>"; };
 		683A452C1D40CAC900B91D82 /* UnFinishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UnFinishViewController.h; path = Base/Unfinish/UnFinishViewController.h; sourceTree = "<group>"; };
 		683A452D1D40CAC900B91D82 /* UnFinishViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UnFinishViewController.m; path = Base/Unfinish/UnFinishViewController.m; sourceTree = "<group>"; };
-		683A452F1D40D35E00B91D82 /* unfinish.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unfinish.png; sourceTree = "<group>"; };
 		683D5A2A1D2DF6E6002958D3 /* imageResize.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = imageResize.js; sourceTree = "<group>"; };
 		683EFF5C1CDC22D40049326B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		683EFF5D1CDC22D40049326B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
@@ -615,6 +614,7 @@
 		68B38F0B1D1927D500F28034 /* ListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ListCell.m; path = Base/Function/ShenPiModel/ListCell.m; sourceTree = "<group>"; };
 		68B38F0D1D19441500F28034 /* disagree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = disagree.png; sourceTree = "<group>"; };
 		68B38F0F1D19441C00F28034 /* agree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = agree.png; sourceTree = "<group>"; };
+		68B6DE731D42113C00EC3889 /* unfinish.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unfinish.png; sourceTree = "<group>"; };
 		68C0A5BA1CBF6667008BEE27 /* ShenPiStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShenPiStatus.h; path = Base/Function/ShenPiModel/ShenPiStatus.h; sourceTree = "<group>"; };
 		68C0A5BB1CBF6667008BEE27 /* ShenPiStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShenPiStatus.m; path = Base/Function/ShenPiModel/ShenPiStatus.m; sourceTree = "<group>"; };
 		68C33B721D34C58B00FCC0F1 /* LogTriangleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LogTriangleView.h; path = Base/Function/ShenPiModel/LogTriangleView.h; sourceTree = "<group>"; };
@@ -1763,8 +1763,8 @@
 				2CBA8E1E1CD3B33400BDF625 /* mission_unfinished.png */,
 				68B38F0D1D19441500F28034 /* disagree.png */,
 				687E74B81D113B9500F67884 /* check_off.png */,
+				68B6DE731D42113C00EC3889 /* unfinish.png */,
 				687E74B91D113B9500F67884 /* check_on.png */,
-				683A452F1D40D35E00B91D82 /* unfinish.png */,
 				682086CE1D1A34440032A191 /* logoimage-IPad.png */,
 				2CBA8E1F1CD3B33400BDF625 /* printmission.png */,
 				68F36D681CD1F3320027A97A /* aboutbg.png */,
@@ -1910,7 +1910,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				68F8E1791CD042AA005D2727 /* bg_Nav.png in Resources */,
-				683A45301D40D35E00B91D82 /* unfinish.png in Resources */,
+				68B6DE741D42113C00EC3889 /* unfinish.png in Resources */,
 				68F8E1841CD042AA005D2727 /* position.png in Resources */,
 				68B38F071D18E03300F28034 /* down_arrow_blue@2x.png in Resources */,
 				68F8E1821CD042AA005D2727 /* newApplication.png in Resources */,
