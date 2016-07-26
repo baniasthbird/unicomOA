@@ -12,4 +12,6 @@
 
 @property (nonatomic,strong) NSMutableDictionary *news_param;
 
+@property BOOL b_News;
+
 @end

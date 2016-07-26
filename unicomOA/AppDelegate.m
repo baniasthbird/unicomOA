@@ -10,6 +10,8 @@
 #import "LoginViewController.h"
 #import "LXAlertView.h"
 #import <AudioToolbox/AudioToolbox.h>
+#import "XZMCoreNewFeatureVC.h"
+#import "CALayer+Transition.h"
 
 
 @interface AppDelegate ()
@@ -23,7 +25,7 @@
     // Override point for customization after application launch.
     //在这里判断是否可以系统更新
         // [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:70/255.0f green:156/255.0f blue:241/255.0f alpha:1]];
-    sleep(2);
+    
     if (iPad) {
          [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"bg_Nav-IPad.png"] forBarMetrics:UIBarMetricsDefault];
     }
@@ -31,17 +33,79 @@
         [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"bg_Nav.png"] forBarMetrics:UIBarMetricsDefault];
     }
     
-     NSString *str_url=@"https://app.hnsi.cn/hnti_soa/unicomOA.plist";
-     BOOL b_update= [self checkUpdate:str_url];
-     LoginViewController *login=[[LoginViewController alloc]init];
-     login.b_update=b_update;
-     UINavigationController *nav=[[UINavigationController alloc]initWithRootViewController:login];
-     self.window.rootViewController=nav;
+    
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]) {
+        self.window.rootViewController=[XZMCoreNewFeatureVC newFeatureVCWithImageNames:@[@"new1",@"new2",@"new3",@"LauchImage"] enterBlock:^{
+            NSLog(@"进入主页面");
+            [self enter];
+        } configuration:^(UIButton *enterButton) {
+            [enterButton setBackgroundImage:[UIImage imageNamed:@"btn_nor"] forState:UIControlStateNormal];
+            [enterButton setBackgroundImage:[UIImage imageNamed:@"btn_pressed"] forState:UIControlStateHighlighted];
+            enterButton.bounds = CGRectMake(0, 0, 120, 40);
+            enterButton.center = CGPointMake(KScreenW * 0.5, KScreenH* 0.85);
+        }];
+        /*
+        if ([launchView isMemberOfClass:[UIImageView class]]) {
+            UIImageView *img_launchView=(UIImageView*)launchView;
+            [img_launchView setImage:[UIImage imageNamed:@"FirstImage"]];
+        }
+        
+        // 这里判断是否第一次
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"第一次"
+                                                      message:@"进入App"
+                                                     delegate:self
+                                            cancelButtonTitle:@"我知道了"
+                                            otherButtonTitles:nil];
+        [alert show];
+        */
+    }
+    else {
+        /*
+        if ([launchView isMemberOfClass:[UIImageView class]]) {
+           
+        }
+        sleep(2);
+         */
+        sleep(2);
+        [self enter];
+        
+    }
+   
    
     
+    
+    
+    return YES;
+}
+
+-(void)enter {
+    NSString *str_url=@"https://app.hnsi.cn/hnti_soa/unicomOA.plist";
+    BOOL b_update= [self checkUpdate:str_url];
+    LoginViewController *login=[[LoginViewController alloc]init];
+    login.b_update=b_update;
+    UINavigationController *nav=[[UINavigationController alloc]initWithRootViewController:login];
     NSDictionary *attributes=[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:248/255.0f green:144/255.0f blue:34/255.0f alpha:1],NSForegroundColorAttributeName,nil];
     [nav.navigationBar setTitleTextAttributes:attributes];
-    
+    self.window.rootViewController=nav;
+}
+
+
+-(BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"everLaunched"]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"everLaunched"];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunch"];
+    }
+    else {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"firstLaunch"];
+    }
+
+    /*
+    UIViewController *viewController=[[UIStoryboard storyboardWithName:@"LaunchScreen" bundle:nil] instantiateViewControllerWithIdentifier:@"LaunchScreen"];
+    UIView *launchView = viewController.view;
+    UIImageView *imgView=[[UIImageView alloc]initWithFrame:launchView.frame];
+    imgView.image=[UIImage imageNamed:@"new1"];
+    [launchView addSubview:imgView];
+  */
     return YES;
 }
 
@@ -119,4 +183,7 @@
 -(void)application:(UIApplication*)application didReceiveRemoteNotification:(nonnull NSDictionary *)userInfo {
     
 }
+
+
+
 @end

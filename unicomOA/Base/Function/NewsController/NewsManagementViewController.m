@@ -62,7 +62,7 @@
     
     NSMutableArray *arr_tmpList;
     
-    UIActivityIndicatorView *indicator;
+   // UIActivityIndicatorView *indicator;
     
     NSInteger selectedIndex;
     
@@ -121,7 +121,7 @@
     
     arr_tmpList=[[NSMutableArray alloc]init];
     
-    indicator=[self AddLoop];
+   // indicator=[self AddLoop];
     
     db=[DataBase sharedinstanceDB];
     
@@ -139,8 +139,8 @@
     _news_param[@"classId"]=@"0";
     [self NewsList:_news_param];
     
-    [indicator startAnimating];
-    [self.view addSubview:indicator];
+ //   [indicator startAnimating];
+ //   [self.view addSubview:indicator];
 
     
     
@@ -210,7 +210,7 @@
             NSString *str_success= [JSON objectForKey:@"success"];
             BOOL b_success=[str_success boolValue];
             if (b_success==1) {
-                [indicator stopAnimating];
+           //     [indicator stopAnimating];
                 NSLog(@"获取新闻列表成功:%@",responseObject);
                 NSObject *obj=[JSON objectForKey:@"totalPage"];
                 NSNumber *l_totalPage=(NSNumber*)obj;
@@ -227,7 +227,7 @@
             
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            [indicator stopAnimating];
+         //   [indicator stopAnimating];
             LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"提示" message:@"连接服务器失败" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
                 
             }];
@@ -236,7 +236,7 @@
 
     }
     else {
-        [indicator stopAnimating];
+     //   [indicator stopAnimating];
         LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"警告" message:@"无网络连接" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
             
         }];
@@ -910,6 +910,8 @@
     wordVc1.title = @"全部";
     news_param1[@"pageIndex"]=@"1";
     news_param1[@"classId"]=@"0";
+    news_param1[@"type"]=@"2";
+    wordVc1.b_News=YES;
     wordVc1.news_param=news_param1;
    
     
@@ -918,6 +920,8 @@
     wordVc2.title = @"公司通知";
     news_param2[@"pageIndex"]=@"1";
     news_param2[@"classId"]=@"1";
+    news_param2[@"type"]=@"1";
+    wordVc2.b_News=YES;
     wordVc2.news_param=news_param2;
     
     
@@ -925,6 +929,8 @@
     wordVc3.title = @"部门通知";
     news_param3[@"pageIndex"]=@"1";
     news_param3[@"classId"]=@"2";
+    news_param3[@"type"]=@"1";
+    wordVc3.b_News=YES;
     wordVc3.news_param=news_param3;
    
     
@@ -932,6 +938,8 @@
     wordVc4.title = @"内部新闻";
     news_param4[@"pageIndex"]=@"1";
     news_param4[@"classId"]=@"3";
+    news_param4[@"type"]=@"2";
+    wordVc4.b_News=YES;
     wordVc4.news_param=news_param4;
     
     
@@ -939,13 +947,15 @@
     wordVc5.title = @"外部新闻";
     news_param5[@"pageIndex"]=@"1";
     news_param5[@"classId"]=@"4";
+    news_param5[@"type"]=@"2";
+    wordVc5.b_News=YES;
     wordVc5.news_param=news_param5;
    
     
     NewsSubVC *wordVc6 = [[NewsSubVC alloc] init];
     wordVc6.title = @"规章制度";
     news_param6[@"pageIndex"]=@"1";
-    news_param6[@"classId"]=@"5";
+    wordVc6.b_News=NO;
     wordVc6.news_param=news_param6;
    
     if (b_isNews==YES) {
@@ -954,7 +964,6 @@
         [self addChildViewController:wordVc5];
     }
     else {
-        [self addChildViewController:wordVc1];
         [self addChildViewController:wordVc2];
         [self addChildViewController:wordVc3];
         [self addChildViewController:wordVc6];

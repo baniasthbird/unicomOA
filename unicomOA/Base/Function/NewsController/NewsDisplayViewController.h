@@ -19,6 +19,8 @@
 
 @interface NewsDisplayViewController : BaseViewController
 
+@property BOOL b_News;
+
 @property (strong,nonatomic) NSString *str_label;
 
 @property (strong,nonatomic) NSString *str_depart;

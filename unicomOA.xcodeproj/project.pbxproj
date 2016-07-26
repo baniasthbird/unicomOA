@@ -189,6 +189,8 @@
 		68D05CC01C97AC050039220F /* SendFeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D05CBF1C97AC050039220F /* SendFeedBackViewController.m */; };
 		68D05CC41C97B3530039220F /* SendFeedbackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D05CC31C97B3530039220F /* SendFeedbackView.m */; };
 		68D05CC71C97F6470039220F /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D05CC61C97F6470039220F /* AboutViewController.m */; };
+		68D41B0B1D4738CB0001075E /* CALayer+Transition.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D41B081D4738CB0001075E /* CALayer+Transition.m */; };
+		68D41B0C1D4738CB0001075E /* XZMCoreNewFeatureVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D41B0A1D4738CB0001075E /* XZMCoreNewFeatureVC.m */; };
 		68DA1EC61CE4640B0065517B /* newsbodcast.png in Resources */ = {isa = PBXBuildFile; fileRef = 68DA1EC51CE4640B0065517B /* newsbodcast.png */; };
 		68DEEBC51CBDCED6003DB7AA /* MyShenPiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DEEBC41CBDCED6003DB7AA /* MyShenPiViewController.m */; };
 		68DEEBC81CBDDA91003DB7AA /* MyShenPiCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DEEBC71CBDDA91003DB7AA /* MyShenPiCell.m */; };
@@ -627,6 +629,10 @@
 		68D05CC31C97B3530039220F /* SendFeedbackView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SendFeedbackView.m; path = Base/Settings/Modal/SendFeedbackView.m; sourceTree = "<group>"; };
 		68D05CC51C97F6470039220F /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AboutViewController.h; path = Base/Settings/Controller/AboutViewController.h; sourceTree = "<group>"; };
 		68D05CC61C97F6470039220F /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AboutViewController.m; path = Base/Settings/Controller/AboutViewController.m; sourceTree = "<group>"; };
+		68D41B071D4738CB0001075E /* CALayer+Transition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+Transition.h"; sourceTree = "<group>"; };
+		68D41B081D4738CB0001075E /* CALayer+Transition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+Transition.m"; sourceTree = "<group>"; };
+		68D41B091D4738CB0001075E /* XZMCoreNewFeatureVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XZMCoreNewFeatureVC.h; sourceTree = "<group>"; };
+		68D41B0A1D4738CB0001075E /* XZMCoreNewFeatureVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XZMCoreNewFeatureVC.m; sourceTree = "<group>"; };
 		68DA1EC51CE4640B0065517B /* newsbodcast.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newsbodcast.png; sourceTree = "<group>"; };
 		68DEEBC31CBDCED6003DB7AA /* MyShenPiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyShenPiViewController.h; path = Base/Function/ShenPiContorller/MyShenPiViewController.h; sourceTree = "<group>"; };
 		68DEEBC41CBDCED6003DB7AA /* MyShenPiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyShenPiViewController.m; path = Base/Function/ShenPiContorller/MyShenPiViewController.m; sourceTree = "<group>"; };
@@ -1089,7 +1095,6 @@
 			children = (
 				683A452B1D40CA8200B91D82 /* UnFinish */,
 				68ED4E281CB49213000E8A7B /* ShenPi */,
-				6846D34E1CAB5998004BD285 /* IVoting */,
 				6846D34D1CAB5988004BD285 /* Notes */,
 				6846D34C1CAB5977004BD285 /* News */,
 				2CFEADCE1C770D6F0054730E /* UIImageButton.h */,
@@ -1300,6 +1305,7 @@
 		6846D34D1CAB5988004BD285 /* Notes */ = {
 			isa = PBXGroup;
 			children = (
+				6846D34E1CAB5998004BD285 /* IVoting */,
 				2CFEADEA1C7C06B60054730E /* NotesModel */,
 				2CFEADDE1C7C050F0054730E /* NotesViews */,
 				2CFEADD41C79A3550054730E /* NotesController */,
@@ -1344,6 +1350,7 @@
 		6846D35D1CABC483004BD285 /* OpenSource */ = {
 			isa = PBXGroup;
 			children = (
+				68D41B051D4738CB0001075E /* XZMCoreNewFeatureVC */,
 				682A46CD1D3F69E800FCED9E /* CDFInitialsAvatar */,
 				68A5D7F61D2A037500000F95 /* LXSegmentController */,
 				6846EC671CFAD43200A400C5 /* NetWork */,
@@ -1532,6 +1539,26 @@
 				68DEEBE21CBE30E6003DB7AA /* UserInfo.m */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		68D41B051D4738CB0001075E /* XZMCoreNewFeatureVC */ = {
+			isa = PBXGroup;
+			children = (
+				68D41B061D4738CB0001075E /* Category */,
+				68D41B091D4738CB0001075E /* XZMCoreNewFeatureVC.h */,
+				68D41B0A1D4738CB0001075E /* XZMCoreNewFeatureVC.m */,
+			);
+			name = XZMCoreNewFeatureVC;
+			path = OpenSource/XZMCoreNewFeatureVC;
+			sourceTree = "<group>";
+		};
+		68D41B061D4738CB0001075E /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				68D41B071D4738CB0001075E /* CALayer+Transition.h */,
+				68D41B081D4738CB0001075E /* CALayer+Transition.m */,
+			);
+			path = Category;
 			sourceTree = "<group>";
 		};
 		68E779BB1CB34A72006DA5B9 /* CLTreeView */ = {
@@ -2101,6 +2128,7 @@
 				68052C2F1CAD167400A93BDA /* UIView+WZLBadge.m in Sources */,
 				68DEEBD71CBE0FF7003DB7AA /* PrintShenPiDetail.m in Sources */,
 				2CFEAD2A1C717FCB0054730E /* FunctionViewController.m in Sources */,
+				68D41B0C1D4738CB0001075E /* XZMCoreNewFeatureVC.m in Sources */,
 				2CFEADEF1C7C06CB0054730E /* CellModel.m in Sources */,
 				684E0C531D363B9B008088FD /* BaseViewController.m in Sources */,
 				68ED4E4F1CB4EFD2000E8A7B /* PrintApplication.m in Sources */,
@@ -2122,6 +2150,7 @@
 				2CDC2BDD1C8FBFC90067693B /* NewsManagementViewController.m in Sources */,
 				2C703CF21CDECD1100C7EF77 /* DataBase.m in Sources */,
 				68E779DF1CB34A8E006DA5B9 /* CLTreeView_LEVEL1_Model.m in Sources */,
+				68D41B0B1D4738CB0001075E /* CALayer+Transition.m in Sources */,
 				682B68B91CB64683002EC60F /* AddPrintFileCell.m in Sources */,
 				68ED4E2B1CB49432000E8A7B /* ShenPiManagementController.m in Sources */,
 				68E779DD1CB34A8E006DA5B9 /* CLTreeView_LEVEL0_Model.m in Sources */,

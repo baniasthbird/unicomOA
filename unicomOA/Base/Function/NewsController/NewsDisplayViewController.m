@@ -259,6 +259,9 @@ int i_comment_num;
     NSString *str_connection=[self GetConnectionStatus];
     if ([str_connection isEqualToString:@"wifi"] || [str_connection isEqualToString:@"GPRS"]) {
         NSString *str_newsContent= [db fetchInterface:@"NewsContent"];
+        if (_b_News==NO) {
+            str_newsContent=@"/default/mobile/oa/com.hnsi.erp.mobile.oa.RulesSearch.detail.biz.ext";
+        }
         __block NSString *str_ip=@"";
         __block NSString *str_port=@"";
         NSMutableArray *t_array=[db fetchIPAddress];
@@ -273,220 +276,45 @@ int i_comment_num;
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             NSDictionary *dic_news= [JSON objectForKey:@"news"];
-            if (dic_news.count>0) {
+            NSString *str_title=@"";
+            NSString *str_departlabel=@"";
+            NSString *str_content=@"";
+            if (dic_news!=nil) {
                 [indicator stopAnimating];
-                NSString *str_title=[dic_news objectForKey:@"title"];
+                str_title=[dic_news objectForKey:@"title"];
                 _lbl_label.text=str_title; 
                 NSString *str_depart=[dic_news objectForKey:@"operationDeptName"];
                 NSString *str_operator=[dic_news objectForKey:@"operatorName"];
                 NSString *str_date=[dic_news objectForKey:@"addTime"];
                 NSArray *arr_date=[str_date componentsSeparatedByString:@" "];
                 NSString *str_day=[arr_date objectAtIndex:0];
-                NSString *str_departlabel=[NSString stringWithFormat:@"%@      %@     %@",str_depart,str_operator,str_day];
+                str_departlabel=[NSString stringWithFormat:@"%@      %@     %@",str_depart,str_operator,str_day];
                 _lbl_depart.text=str_departlabel;
                // _h_depart=[UILabel_LabelHeightAndWidth getHeightByWidth:_lbl_depart.frame.size.width title:str_departlabel font:[UIFont systemFontOfSize:14]];
                // _lbl_depart.frame=CGRectMake(0, _h_title+5, [UIScreen mainScreen].bounds.size.width, _h_depart);
                //  [_lbl_depart sizeToFit];
-                NSString *str_content=[dic_news objectForKey:@"content"];
+                str_content=[dic_news objectForKey:@"content"];
                 str_content=str_content.lowercaseString;
-                //替换字号为16号
-                NSRange searchRange=NSMakeRange(0, str_content.length);
-                NSRange foundRange;
-                while (searchRange.location<str_content.length) {
-                    searchRange.length=str_content.length-searchRange.location;
-                    foundRange=[str_content rangeOfString:@"font-size:" options:nil range:searchRange];
-                   // foundRange=[str_content rangeOfString:@"" options:NSStringCompareOptions.foundRange range:<#(NSRange)#>]
-                    if (foundRange.location!=NSNotFound) {
-                        searchRange.location=foundRange.location+foundRange.length;
-                        NSRange fontsizeRange=NSMakeRange(searchRange.location, 4);
-                        NSString *str_fontsize= [str_content substringWithRange:fontsizeRange];
-                        NSRange range_keyword=[str_fontsize rangeOfString:@"px"];
-                        if (range_keyword.location!=NSNotFound) {
-                            str_content=[str_content stringByReplacingCharactersInRange:fontsizeRange withString:@"16px"];
-                        }
-                        else {
-                            NSRange fontsizeRange=NSMakeRange(searchRange.location, 5);
-                            str_content=[str_content stringByReplacingCharactersInRange:fontsizeRange withString:@"16px"];
-                        }
-                    }
-                    else {
-                        break;
-                    }
-                }
-                
-                //替换行距为180%
-                NSRange foundRange2;
-                NSRange searchRange2=NSMakeRange(0, str_content.length);
-                while (searchRange2.location<str_content.length) {
-                    searchRange2.length=str_content.length-searchRange2.location;
-                    foundRange2=[str_content rangeOfString:@"line-height:" options:nil range:searchRange2];
-                    // foundRange=[str_content rangeOfString:@"" options:NSStringCompareOptions.foundRange range:<#(NSRange)#>]
-                    if (foundRange2.location!=NSNotFound) {
-                        searchRange2.location=foundRange2.location+foundRange2.length;
-                        NSRange searchRange_sub=NSMakeRange(searchRange2.location, str_content.length-searchRange2.location);
-                        NSRange foundRange_sub=[str_content rangeOfString:@";" options:nil range:searchRange_sub];
-                        if (foundRange_sub.location-searchRange2.location>9) {
-                            foundRange_sub=[str_content rangeOfString:@"\"" options:nil range:searchRange_sub];
-                        }
-                        NSRange fontsizeRange=NSMakeRange(searchRange2.location, foundRange_sub.location-searchRange2.location+1);
-                        NSString *str_fontsize= [str_content substringWithRange:fontsizeRange];
-                        NSRange range_keyword=[str_fontsize rangeOfString:@";"];
-                        if (range_keyword.location!=NSNotFound) {
-                            str_content=[str_content stringByReplacingCharactersInRange:fontsizeRange withString:@"180%;"];
-                        }
-                        else {
-                            NSRange range_keyword=[str_fontsize rangeOfString:@"\""];
-                            if (range_keyword.location!=NSNotFound) {
-                                str_content=[str_content stringByReplacingCharactersInRange:fontsizeRange withString:@"180%\""];
-                            }
-                            NSRange range_keyword2=[str_fontsize rangeOfString:@"px"];
-                            if (range_keyword2.location!=NSNotFound) {
-                                NSRange range_keyword3=[str_fontsize rangeOfString:@"\""];
-                                if (range_keyword3.location!=NSNotFound) {
-                                    str_content=[str_content stringByReplacingCharactersInRange:fontsizeRange withString:@"180%\""];
-                                }
-                                else {
-                                    str_content=[str_content stringByReplacingCharactersInRange:fontsizeRange withString:@"180%"];
-                                }
-                                
-                            }
-                            else {
-                                
-                            }
-
-                        }
-                        
-                    }
-                    else {
-                        break;
-                    }
-                }
-
-                //设置每段前空两行
-                NSRange foundRange3;
-                NSRange searchRange3=NSMakeRange(0, str_content.length);
-                BOOL b_Replace=NO;
-                while (searchRange3.location<str_content.length) {
-                    searchRange3.length=str_content.length-searchRange3.location;
-                    foundRange3=[str_content rangeOfString:@"text-indent:" options:nil range:searchRange3];
-                    // foundRange=[str_content rangeOfString:@"" options:NSStringCompareOptions.foundRange range:<#(NSRange)#>]
-                    if (foundRange3.location!=NSNotFound) {
-                        searchRange3.location=foundRange3.location+foundRange3.length;
-                        NSRange searchRange_sub=NSMakeRange(searchRange3.location, str_content.length-searchRange3.location);
-                        NSRange foundRange_sub=[str_content rangeOfString:@";" options:nil range:searchRange_sub];
-                        if (foundRange_sub.location-searchRange3.location>9) {
-                            foundRange_sub=[str_content rangeOfString:@"\"" options:nil range:searchRange_sub];
-                        }
-
-                        NSRange fontsizeRange=NSMakeRange(searchRange3.location, foundRange_sub.location-searchRange3.location+1);
-                        NSString *str_fontsize= [str_content substringWithRange:fontsizeRange];
-                        NSRange range_keyword=[str_fontsize rangeOfString:@";"];
-                        if (range_keyword.location!=NSNotFound) {
-                            str_content=[str_content stringByReplacingCharactersInRange:fontsizeRange withString:@"2em;"];
-                        }
-                        else {
-                            NSRange range_keyword2=[str_fontsize rangeOfString:@"p"];
-                            if (range_keyword2.location!=NSNotFound) {
-                                fontsizeRange=NSMakeRange(searchRange3.location, 5);
-                                str_content=[str_content stringByReplacingCharactersInRange:fontsizeRange withString:@"2em"];
-                            }
-                        }
-                        b_Replace=YES;
-                    }
-                    else {
-                        break;
-                    }
-                }
-
-                
-                if (b_Replace==NO) {
-                    //找每一段<p
-                    /*
-                    NSRange foundRange4;
-                    NSRange searchRange4=NSMakeRange(0, str_content.length);
-                    while (searchRange4.location<str_content.length) {
-                        searchRange4.length=str_content.length-searchRange4.location;
-                        foundRange4=[str_content rangeOfString:@"<p style=\"" options:nil range:searchRange4];
-                        if (foundRange4.location!=NSNotFound) {
-                            NSRange fontsizeRange=NSMakeRange(foundRange4.location, 10);
-                            NSString *str_fontsize= [str_content substringWithRange:fontsizeRange];
-                            str_content=[str_content stringByReplacingCharactersInRange:fontsizeRange withString:@"<p style=\" text-indent:2em;"];
-                            searchRange4.location=foundRange4.location+28;
-                        }
-                        else {
-                            break;
-                        }
-                    }
-                    */
-                    
-                    
-                }
-                
-                NSString *str_title_style1=@"<p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; font-size: 24px; text-indent: 0em; font-stretch: normal; line-height: 32px; font-family: &quot;Microsoft Yahei&quot;; color: rgb(64, 64, 64); text-align: center; white-space: normal; background-color: rgb(255, 255, 255);\">";
-              
-                NSString *str_depart_style1=@"<p style=\"margin-top: 5px; margin-bottom: 0px; padding: 0px; font-size: 12px; text-indent: 0em; font-stretch: normal; line-height: 10px; font-family: &quot;Microsoft Yahei&quot;; color: rgb(117, 117, 117); text-align: center; white-space: normal; background-color: rgb(255, 255, 255);\">";
-                
-                NSString *str_title_style2=@"</p>";
-                NSString *str_title_new=[NSString stringWithFormat:@"%@%@%@",str_title_style1,str_title,str_title_style2];
-                
-                NSString *str_depart_new=[NSString stringWithFormat:@"%@%@%@",str_depart_style1,str_departlabel,str_title_style2];
-                str_content=[NSString stringWithFormat:@"%@%@%@%@",_str_headscale,str_title_new,str_depart_new,str_content];
-                
-                //替换图片源
-                NSString *str_relplace1=[NSString stringWithFormat:@"%@%@:%@",@"http://",str_ip,str_port];
-                NSString *str_relplace2=@"<img src=\"";
-                NSString *str_replace_after=[NSString stringWithFormat:@"%@%@",str_relplace2,str_relplace1];
-
-                NSString *str_newcontent=[str_content stringByReplacingOccurrencesOfString:str_relplace2 withString:str_replace_after];
-                
-
-                //若源代码中存在doc、docx、ppt、pptx、xls、xlsx字样的，全部去掉从<p处全部去
-                NSRange range1=[str_newcontent rangeOfString:@"doc"];
-                NSRange range2=[str_newcontent rangeOfString:@"xls"];
-                NSRange range3=[str_newcontent rangeOfString:@"ppt"];
-                 NSString *str_newcontent2=@"";
-                if (range1.length>0 || range2.length>0 || range3.length>0) {
-                   
-                    NSLog(@"找到office文档");
-                    NSArray *arr_tmp= [str_newcontent componentsSeparatedByString:@"<p"];
-                    NSMutableArray *arr_new_content=[NSMutableArray arrayWithArray:arr_tmp];
-                    for (int i=(int)[arr_new_content count]-1;i>-0;i--) {
-                        NSString *str_tmp=[arr_new_content objectAtIndex:i];
-                        NSRange rangesub1=[str_tmp rangeOfString:@"doc"];
-                        NSRange rangesub2=[str_tmp rangeOfString:@"xls"];
-                        NSRange rangesub3=[str_tmp rangeOfString:@"ppt"];
-                        if (rangesub1.length>0 || rangesub2.length>0 || rangesub3.length > 0) {
-                            [arr_new_content removeObjectAtIndex:i];
-                        }
-                    }
-                    NSLog(@"删减完成");
-                    
-                    for (int i=1;i<[arr_new_content count];i++) {
-                        NSString *str_tmp=[arr_new_content objectAtIndex:i];
-                        str_tmp=[NSString stringWithFormat:@"%@%@",@"<p",str_tmp];
-                        str_newcontent2=[NSString stringWithFormat:@"%@%@",str_newcontent2,str_tmp];
-                    }
-                    str_newcontent2=[NSString stringWithFormat:@"%@%@",[arr_new_content objectAtIndex:0],str_newcontent2];
-                }
-               
-                
-                // 图片缩放的js代码
-                             
-              //  NSURL *baseUrl=[NSURL URLWithString:@"http://192.168.1.62:8080"];
-                if (![str_newcontent2 isEqualToString:@""]) {
-                     [_wb_content loadHTMLString:str_newcontent2 baseURL:nil];
-                }
-                else {
-                    [_wb_content loadHTMLString:str_newcontent baseURL:nil];
-
-                }
-               
-                
-                NSString *str_readnum=[dic_news objectForKey:@"readNum"];
-                i_num=[str_readnum intValue];
-                
-                [self.view setNeedsDisplay];
             }
+            else {
+                NSDictionary *dic_data = [JSON objectForKey:@"data"];
+                if (dic_data!=nil) {
+                     [indicator stopAnimating];
+                    str_title=[dic_data objectForKey:@"title"];
+                    NSString *str_operator=[dic_data objectForKey:@"operatorName"];
+                    NSObject *obj=[dic_data objectForKey:@"content"];
+                    if (obj==[NSNull null]) {
+                        str_content=@"";
+                    }
+                    NSString *str_date=[dic_data objectForKey:@"operationTime"];
+                    NSArray *arr_date=[str_date componentsSeparatedByString:@" "];
+                    NSString *str_day=[arr_date objectAtIndex:0];
+                    str_departlabel=[NSString stringWithFormat:@"      %@     %@",str_operator,str_day];
+                    str_content=str_content.lowercaseString;
+                }
+            }
+            [self ModifyContent:str_content title:str_title departlabel:str_departlabel ip:str_ip port:str_port];
+            
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             [indicator stopAnimating];
             LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"提示" message:@"无法连接到服务器" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
@@ -508,10 +336,211 @@ int i_comment_num;
 
 }
 
+-(void)ModifyContent:(NSString*)str_content title:(NSString*)str_title departlabel:(NSString*)str_departlabel ip:(NSString*)str_ip port:(NSString*)str_port {
+    //替换字号为16号
+    NSRange searchRange=NSMakeRange(0, str_content.length);
+    NSRange foundRange;
+    while (searchRange.location<str_content.length) {
+        searchRange.length=str_content.length-searchRange.location;
+        foundRange=[str_content rangeOfString:@"font-size:" options:nil range:searchRange];
+        // foundRange=[str_content rangeOfString:@"" options:NSStringCompareOptions.foundRange range:<#(NSRange)#>]
+        if (foundRange.location!=NSNotFound) {
+            searchRange.location=foundRange.location+foundRange.length;
+            NSRange fontsizeRange=NSMakeRange(searchRange.location, 4);
+            NSString *str_fontsize= [str_content substringWithRange:fontsizeRange];
+            NSRange range_keyword=[str_fontsize rangeOfString:@"px"];
+            if (range_keyword.location!=NSNotFound) {
+                str_content=[str_content stringByReplacingCharactersInRange:fontsizeRange withString:@"16px"];
+            }
+            else {
+                NSRange fontsizeRange=NSMakeRange(searchRange.location, 5);
+                str_content=[str_content stringByReplacingCharactersInRange:fontsizeRange withString:@"16px"];
+            }
+        }
+        else {
+            break;
+        }
+    }
+    
+    //替换行距为180%
+    NSRange foundRange2;
+    NSRange searchRange2=NSMakeRange(0, str_content.length);
+    while (searchRange2.location<str_content.length) {
+        searchRange2.length=str_content.length-searchRange2.location;
+        foundRange2=[str_content rangeOfString:@"line-height:" options:nil range:searchRange2];
+        // foundRange=[str_content rangeOfString:@"" options:NSStringCompareOptions.foundRange range:<#(NSRange)#>]
+        if (foundRange2.location!=NSNotFound) {
+            searchRange2.location=foundRange2.location+foundRange2.length;
+            NSRange searchRange_sub=NSMakeRange(searchRange2.location, str_content.length-searchRange2.location);
+            NSRange foundRange_sub=[str_content rangeOfString:@";" options:nil range:searchRange_sub];
+            if (foundRange_sub.location-searchRange2.location>9) {
+                foundRange_sub=[str_content rangeOfString:@"\"" options:nil range:searchRange_sub];
+            }
+            NSRange fontsizeRange=NSMakeRange(searchRange2.location, foundRange_sub.location-searchRange2.location+1);
+            NSString *str_fontsize= [str_content substringWithRange:fontsizeRange];
+            NSRange range_keyword=[str_fontsize rangeOfString:@";"];
+            if (range_keyword.location!=NSNotFound) {
+                str_content=[str_content stringByReplacingCharactersInRange:fontsizeRange withString:@"180%;"];
+            }
+            else {
+                NSRange range_keyword=[str_fontsize rangeOfString:@"\""];
+                if (range_keyword.location!=NSNotFound) {
+                    str_content=[str_content stringByReplacingCharactersInRange:fontsizeRange withString:@"180%\""];
+                }
+                NSRange range_keyword2=[str_fontsize rangeOfString:@"px"];
+                if (range_keyword2.location!=NSNotFound) {
+                    NSRange range_keyword3=[str_fontsize rangeOfString:@"\""];
+                    if (range_keyword3.location!=NSNotFound) {
+                        str_content=[str_content stringByReplacingCharactersInRange:fontsizeRange withString:@"180%\""];
+                    }
+                    else {
+                        str_content=[str_content stringByReplacingCharactersInRange:fontsizeRange withString:@"180%"];
+                    }
+                    
+                }
+                else {
+                    
+                }
+                
+            }
+            
+        }
+        else {
+            break;
+        }
+    }
+    
+    //设置每段前空两行
+    NSRange foundRange3;
+    NSRange searchRange3=NSMakeRange(0, str_content.length);
+    BOOL b_Replace=NO;
+    while (searchRange3.location<str_content.length) {
+        searchRange3.length=str_content.length-searchRange3.location;
+        foundRange3=[str_content rangeOfString:@"text-indent:" options:nil range:searchRange3];
+        // foundRange=[str_content rangeOfString:@"" options:NSStringCompareOptions.foundRange range:<#(NSRange)#>]
+        if (foundRange3.location!=NSNotFound) {
+            searchRange3.location=foundRange3.location+foundRange3.length;
+            NSRange searchRange_sub=NSMakeRange(searchRange3.location, str_content.length-searchRange3.location);
+            NSRange foundRange_sub=[str_content rangeOfString:@";" options:nil range:searchRange_sub];
+            if (foundRange_sub.location-searchRange3.location>9) {
+                foundRange_sub=[str_content rangeOfString:@"\"" options:nil range:searchRange_sub];
+            }
+            
+            NSRange fontsizeRange=NSMakeRange(searchRange3.location, foundRange_sub.location-searchRange3.location+1);
+            NSString *str_fontsize= [str_content substringWithRange:fontsizeRange];
+            NSRange range_keyword=[str_fontsize rangeOfString:@";"];
+            if (range_keyword.location!=NSNotFound) {
+                str_content=[str_content stringByReplacingCharactersInRange:fontsizeRange withString:@"2em;"];
+            }
+            else {
+                NSRange range_keyword2=[str_fontsize rangeOfString:@"p"];
+                if (range_keyword2.location!=NSNotFound) {
+                    fontsizeRange=NSMakeRange(searchRange3.location, 5);
+                    str_content=[str_content stringByReplacingCharactersInRange:fontsizeRange withString:@"2em"];
+                }
+            }
+            b_Replace=YES;
+        }
+        else {
+            break;
+        }
+    }
+    
+    
+    if (b_Replace==NO) {
+        //找每一段<p
+        /*
+         NSRange foundRange4;
+         NSRange searchRange4=NSMakeRange(0, str_content.length);
+         while (searchRange4.location<str_content.length) {
+         searchRange4.length=str_content.length-searchRange4.location;
+         foundRange4=[str_content rangeOfString:@"<p style=\"" options:nil range:searchRange4];
+         if (foundRange4.location!=NSNotFound) {
+         NSRange fontsizeRange=NSMakeRange(foundRange4.location, 10);
+         NSString *str_fontsize= [str_content substringWithRange:fontsizeRange];
+         str_content=[str_content stringByReplacingCharactersInRange:fontsizeRange withString:@"<p style=\" text-indent:2em;"];
+         searchRange4.location=foundRange4.location+28;
+         }
+         else {
+         break;
+         }
+         }
+         */
+        
+        
+    }
+    
+    NSString *str_title_style1=@"<p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; font-size: 24px; text-indent: 0em; font-stretch: normal; line-height: 32px; font-family: &quot;Microsoft Yahei&quot;; color: rgb(64, 64, 64); text-align: center; white-space: normal; background-color: rgb(255, 255, 255);\">";
+    
+    NSString *str_depart_style1=@"<p style=\"margin-top: 5px; margin-bottom: 0px; padding: 0px; font-size: 12px; text-indent: 0em; font-stretch: normal; line-height: 10px; font-family: &quot;Microsoft Yahei&quot;; color: rgb(117, 117, 117); text-align: center; white-space: normal; background-color: rgb(255, 255, 255);\">";
+    
+    NSString *str_title_style2=@"</p>";
+    NSString *str_title_new=[NSString stringWithFormat:@"%@%@%@",str_title_style1,str_title,str_title_style2];
+    
+    NSString *str_depart_new=[NSString stringWithFormat:@"%@%@%@",str_depart_style1,str_departlabel,str_title_style2];
+    str_content=[NSString stringWithFormat:@"%@%@%@%@",_str_headscale,str_title_new,str_depart_new,str_content];
+    
+    //替换图片源
+    NSString *str_relplace1=[NSString stringWithFormat:@"%@%@:%@",@"http://",str_ip,str_port];
+    NSString *str_relplace2=@"<img src=\"";
+    NSString *str_replace_after=[NSString stringWithFormat:@"%@%@",str_relplace2,str_relplace1];
+    
+    NSString *str_newcontent=[str_content stringByReplacingOccurrencesOfString:str_relplace2 withString:str_replace_after];
+    
+    
+    //若源代码中存在doc、docx、ppt、pptx、xls、xlsx字样的，全部去掉从<p处全部去
+    NSRange range1=[str_newcontent rangeOfString:@"doc"];
+    NSRange range2=[str_newcontent rangeOfString:@"xls"];
+    NSRange range3=[str_newcontent rangeOfString:@"ppt"];
+    NSString *str_newcontent2=@"";
+    if (range1.length>0 || range2.length>0 || range3.length>0) {
+        
+        NSLog(@"找到office文档");
+        NSArray *arr_tmp= [str_newcontent componentsSeparatedByString:@"<p"];
+        NSMutableArray *arr_new_content=[NSMutableArray arrayWithArray:arr_tmp];
+        for (int i=(int)[arr_new_content count]-1;i>-0;i--) {
+            NSString *str_tmp=[arr_new_content objectAtIndex:i];
+            NSRange rangesub1=[str_tmp rangeOfString:@"doc"];
+            NSRange rangesub2=[str_tmp rangeOfString:@"xls"];
+            NSRange rangesub3=[str_tmp rangeOfString:@"ppt"];
+            if (rangesub1.length>0 || rangesub2.length>0 || rangesub3.length > 0) {
+                [arr_new_content removeObjectAtIndex:i];
+            }
+        }
+        NSLog(@"删减完成");
+        
+        for (int i=1;i<[arr_new_content count];i++) {
+            NSString *str_tmp=[arr_new_content objectAtIndex:i];
+            str_tmp=[NSString stringWithFormat:@"%@%@",@"<p",str_tmp];
+            str_newcontent2=[NSString stringWithFormat:@"%@%@",str_newcontent2,str_tmp];
+        }
+        str_newcontent2=[NSString stringWithFormat:@"%@%@",[arr_new_content objectAtIndex:0],str_newcontent2];
+    }
+    
+    
+    // 图片缩放的js代码
+    
+    //  NSURL *baseUrl=[NSURL URLWithString:@"http://192.168.1.62:8080"];
+    if (![str_newcontent2 isEqualToString:@""]) {
+        [_wb_content loadHTMLString:str_newcontent2 baseURL:nil];
+    }
+    else {
+        [_wb_content loadHTMLString:str_newcontent baseURL:nil];
+        
+    }
+    
+    
+    //NSString *str_readnum=[dic_news objectForKey:@"readNum"];
+    //i_num=[str_readnum intValue];
+    
+    [self.view setNeedsDisplay];
+}
+
 -(NSString*)GetConnectionStatus {
     NSString *currentNetWorkState=[[NSUserDefaults standardUserDefaults] objectForKey:@"connection"];
     return currentNetWorkState;
 }
+
 
 
 

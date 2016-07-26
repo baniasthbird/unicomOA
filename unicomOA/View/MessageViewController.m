@@ -612,6 +612,7 @@
     news_controller.str_label=cell.str_title;
     news_controller.str_depart=cell.str_department;
     news_controller.userInfo=_userInfo;
+    news_controller.b_News=YES;
     selected_title=cell.str_title;
     [self.navigationController pushViewController:news_controller animated:YES];
 }
