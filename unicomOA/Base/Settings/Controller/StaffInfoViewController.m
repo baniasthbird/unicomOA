@@ -10,15 +10,20 @@
 #import "ChangePhoneNumViewController.h"
 #import "SettingViewController.h"
 #import "LZActionSheet.h"
+#import "AFNetworking.h"
+#import "DataBase.h"
 
 @interface StaffInfoViewController ()<LZActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @property (nonatomic,strong) UIImageView *img_Head;
 
+@property (nonatomic,strong) AFHTTPSessionManager *session;
+
 @end
 
-@implementation StaffInfoViewController
-
+@implementation StaffInfoViewController {
+     DataBase *db;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -45,6 +50,14 @@
     barButtonItem.tintColor=[UIColor whiteColor];
     [barButtonItem setImage:[UIImage imageNamed:@"returnlogo.png"]];
     self.navigationItem.leftBarButtonItem = barButtonItem;
+    
+    _session=[AFHTTPSessionManager manager];
+    _session.responseSerializer= [AFHTTPResponseSerializer serializer];
+    [_session.requestSerializer setHTTPShouldHandleCookies:YES];
+    [_session.requestSerializer setTimeoutInterval:10.0f];
+    
+     db=[DataBase sharedinstanceDB];
+
     
 }
 
@@ -305,7 +318,7 @@
             imagePickerController.allowsEditing=YES;
             imagePickerController.sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
             [self presentViewController:imagePickerController animated:YES completion:^{
-                
+            
             }];
         }
             break;
@@ -333,6 +346,42 @@
     [_img_Head setImage:saveImage];
     
     _userInfo.str_Logo=fullPath;
+    
+    [self UploadImgToServer:fullPath];
+    
+    
+}
+
+
+//图片上传至服务器
+-(void)UploadImgToServer:(NSString*)str_path {
+    NSString *str_upload= [db fetchInterface:@"UploadImg"];
+    NSMutableArray *arr_ip=[db fetchIPAddress];
+    NSString *str_url=@"";
+    if (arr_ip!=nil && ![str_upload isEqualToString:@""]) {
+        NSArray  *arr_sub_ip=[arr_ip objectAtIndex:0];
+        NSString *str_ip=[arr_sub_ip objectAtIndex:0];
+        NSString *str_port=[arr_sub_ip objectAtIndex:1];
+        str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_upload];
+    }
+    UIImage *img_tmp=[UIImage imageWithContentsOfFile:str_path];
+    
+    NSData *imageData=UIImagePNGRepresentation(img_tmp);
+    
+  [_session POST:str_url parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+      [formData appendPartWithFileData:imageData name:@"test" fileName:@"headimg.jpg" mimeType:@"image/jpeg"];
+  } progress:^(NSProgress * _Nonnull uploadProgress) {
+      
+  } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+      NSLog(@"Response:%@",responseObject);
+      NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+      int i=0;
+      i=i+1;
+
+  } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+      NSLog(@"Error: %@",error);
+  }];
+    
 }
 
 

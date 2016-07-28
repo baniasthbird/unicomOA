@@ -247,7 +247,7 @@
 //初始化接口数据表
 -(void)InsertInterFaceTable {
     NSMutableArray *t_array=[self fetchAllInterface];
-    if (t_array.count==0) {
+    if (t_array.count == 0) {
         if ([_database open]) {
             //登陆
             NSString *insertSql1=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",INTERFACE_TABLENAME,INTERFACE_NAME,INTERFACE_VALUE,@"Login",@"/default/mobile/user/com.hnsi.erp.mobile.user.LoginManager.login.biz.ext"];
@@ -320,9 +320,29 @@
             //审批记录
             NSString *insertSql18=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",INTERFACE_TABLENAME,INTERFACE_NAME,INTERFACE_VALUE,@"TaskLog",@"/default/mobile/oa/com.hnsi.erp.mobile.oa.TaskAuditSearch.queryDisposeLog.biz.ext"];
             BOOL res18=[_database executeUpdate:insertSql18];
+            
+            //规章制度列表
+            NSString *insertSql19=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",INTERFACE_TABLENAME,INTERFACE_NAME,INTERFACE_VALUE,@"RulesSearch",@"/default/mobile/oa/com.hnsi.erp.mobile.oa.RulesSearch.list.biz.ext"];
+            BOOL res19=[_database executeUpdate:insertSql19];
+            
+            //规章制度详细内容
+            NSString *insertSql20=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",INTERFACE_TABLENAME,INTERFACE_NAME,INTERFACE_VALUE,@"RulesDetail",@"/default/mobile/oa/com.hnsi.erp.mobile.oa.RulesSearch.detail.biz.ext"];
+            BOOL res20=[_database executeUpdate:insertSql20];
+
+            //待办流程数量统计
+            NSString *insertSql21=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",INTERFACE_TABLENAME,INTERFACE_NAME,INTERFACE_VALUE,@"TaskCountUnfinish",@"/default/mobile/oa/com.hnsi.erp.mobile.oa.TaskAuditSearch.count.biz.ext"];
+            BOOL res21=[_database executeUpdate:insertSql21];
+            
+            //系统消息详细内容
+            NSString *insertSql22=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",INTERFACE_TABLENAME,INTERFACE_NAME,INTERFACE_VALUE,@"SysMsgDetail",@"/default/mobile/oa/com.hnsi.erp.mobile.common.MsgManager.getData.biz.ext"];
+            BOOL res22=[_database executeUpdate:insertSql22];
+            
+            //头像上传
+            NSString *insertSql23=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",INTERFACE_TABLENAME,INTERFACE_NAME,INTERFACE_VALUE,@"UploadImg",@"/default/mobile/user/com.hnsi.erp.mobile.user.AddressListManager.upload.biz.ext"];
+            BOOL res23=[_database executeUpdate:insertSql23];
 
 
-            if (res1 && res2 && res3 && res4 && res5 && res6 && res7 && res8 && res9 && res10 && res11 && res12 && res13 && res14 && res15 && res16 && res17 && res18 ) {
+            if (res1 && res2 && res3 && res4 && res5 && res6 && res7 && res8 && res9 && res10 && res11 && res12 && res13 && res14 && res15 && res16 && res17 && res18 && res19 && res20 && res21 && res22 && res23 ) {
                 NSLog(@"成功添加数据至接口表");
             }
             else {
@@ -330,8 +350,64 @@
             }
         }
     }
+    else if (t_array.count>0) {
+        [self ModifyUrl:@"Login"];
+        [self ModifyUrl:@"Logout"];
+        [self ModifyUrl:@"ChangePassword"];
+        [self ModifyUrl:@"AddressList"];
+        [self ModifyUrl:@"ListSearch"];
+        [self ModifyUrl:@"TaskRemind"];
+        [self ModifyUrl:@"UnreadMessage"];
+        [self ModifyUrl:@"UnreadDoc"];
+        [self ModifyUrl:@"TaskCount"];
+        [self ModifyUrl:@"NewsListCount"];
+        [self ModifyUrl:@"NewsList"];
+        [self ModifyUrl:@"NewsContent"];
+        [self ModifyUrl:@"NewsComment"];
+        [self ModifyUrl:@"AddComment"];
+        [self ModifyUrl:@"TaskAudit"];
+        [self ModifyUrl:@"UnFinishTaskShenPiList"];
+        [self ModifyUrl:@"FinishTaskShenPiList"];
+        [self ModifyUrl:@"TaskLog"];
+        [self ModifyUrl:@"RulesSearch"];
+        [self ModifyUrl:@"RulesDetail"];
+        [self ModifyUrl:@"TaskCountUnfinish"];
+        [self ModifyUrl:@"SysMsgDetail"];
+        [self ModifyUrl:@"UploadImg"];
+    }
 }
 
+
+-(void)ModifyUrl:(NSString*)str_keyword {
+    NSString *str_url=[self fetchInterface:str_keyword];
+    if ([str_url isEqualToString:@""]) {
+        NSString *insertSql=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",INTERFACE_TABLENAME,INTERFACE_NAME,INTERFACE_VALUE,str_keyword,str_url];
+        if ([_database open]) {
+            BOOL res=[_database executeUpdate:insertSql];
+            if (res) {
+                NSLog(@"%@成功添加至接口表",str_keyword);
+            }
+            else {
+                NSLog(@"插入接口失败");
+            }
+
+        }
+    }
+    else {
+        NSString *updateSql=[NSString stringWithFormat:@"UPDATE '%@' SET '%@' = '%@' WHERE '%@' = '%@' ", INTERFACE_TABLENAME , INTERFACE_VALUE,str_url, INTERFACE_NAME, str_keyword];
+        if ([_database open]) {
+            BOOL res=[_database executeUpdate:updateSql];
+            if (res) {
+                NSLog(@"%@成功更新至接口表",str_keyword);
+            }
+            else {
+                NSLog(@"更新接口失败");
+            }
+        }
+       
+
+    }
+}
 /*
 -(NSString*)GetValueFromDic:(NSDictionary*)dic_tmp key:(NSString*)str_key {
     NSObject *obj_tmp=[dic_tmp objectForKey:str_key];
@@ -662,10 +738,10 @@
                 NSString *str_sex=[_base_func GetValueFromDic:dic_tmp key:@"sex"];
                 NSString *str_orgid=[_base_func GetValueFromDic:dic_tmp key:@"orgid"];
                 NSString *str_empid=[_base_func GetValueFromDic:dic_tmp key:@"empid"];
-                NSString *str_img=@"";
+                NSString *str_img=[_base_func GetValueFromDic:dic_tmp key:@"headimg"];
                 
                
-                                  //插入
+                //插入
                     NSString *instrSQL=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@') VALUES ('%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@')",STAFF_TABLENAME,STAFF_ID,STAFF_USERNAME,STAFF_GENDER,STAFF_ORG_NAME,STAFF_POSINAME,STAFF_TEL,STAFF_MOBILE,STAFF_EMAIL,STAFF_ORG_ID,STAFF_IMG,str_empid,str_empname,str_sex,str_orgname,str_posiname,str_otel,str_mobileno,str_email,str_orgid,str_img];
                     BOOL res=[_database executeUpdate:instrSQL];
                     if (res) {
