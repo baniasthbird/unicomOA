@@ -39,11 +39,52 @@
     [btn_back addTarget:self action:@selector(BackToAppCenter:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]initWithCustomView:btn_back];
     
-    UIImageView *imgView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
-    imgView.image=[UIImage imageNamed:@"unfinish"];
+    
+    UIImageView *imgView=[[UIImageView alloc]initWithFrame:CGRectMake(0, -64, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
+    if ([_str_title isEqualToString:@"系统消息"]) {
+         imgView.image=[UIImage imageNamed:@"XiaoXiView"];
+    }
+    else if ([_str_title isEqualToString:@"公文传阅"]) {
+        imgView.image=[UIImage imageNamed:@"chuanyueView"];
+    }
+    else if ([_str_title isEqualToString:@"办公审批"]) {
+        imgView.image=[UIImage imageNamed:@"chuanyueView"];
+    }
+    else if ([_str_title isEqualToString:@"售前审批"]) {
+        imgView.image=[UIImage imageNamed:@"ShouQianView"];
+    }
+    else if ([_str_title isEqualToString:@"生产审批"]) {
+        imgView.image=[UIImage imageNamed:@"ShengChanView"];
+    }
+    else if ([_str_title isEqualToString:@"合同审批"]) {
+        imgView.image=[UIImage imageNamed:@"HeTongView"];
+    }
+    else if ([_str_title isEqualToString:@"事务审批"]) {
+        imgView.image=[UIImage imageNamed:@"ShiWuView"];
+    }
+    else if ([_str_title isEqualToString:@"决策辅助"]) {
+        imgView.image=[UIImage imageNamed:@"JueCeView"];
+    }
+    
     
     [self.view addSubview:imgView];
     
+    CGFloat btnx;
+    CGFloat btny;
+    CGFloat btnw;
+    CGFloat btnh;
+    
+        btnx=[UIScreen mainScreen].bounds.size.width-130;
+        btny=[UIScreen mainScreen].bounds.size.height-233;
+        btnw=130;
+        btnh=150;
+    
+    UIButton *btn=[[UIButton alloc]initWithFrame:CGRectMake(btnx,btny,btnw,btnh)];
+    btn.backgroundColor=[UIColor clearColor];
+    [btn addTarget:self action:@selector(btnBack:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:btn];
+    /*
     LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"提示" message:@"该功能正在审核中\n敬请期待" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
         if (clickIndex==0) {
             [self.navigationController popViewControllerAnimated:YES];
@@ -51,11 +92,15 @@
         
     }];
     [alert showLXAlertView];
-    
+    */
     
     
    // self.view.backgroundColor=[UIColor colorWithRed:154/255.0f green:154/255.0f blue:154/255.0f alpha:0.9];
     // Do any additional setup after loading the view.
+}
+
+-(void)btnBack:(UIButton*)sender  {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

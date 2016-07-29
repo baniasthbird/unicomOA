@@ -363,13 +363,21 @@
         NSString *str_ip=[arr_sub_ip objectAtIndex:0];
         NSString *str_port=[arr_sub_ip objectAtIndex:1];
         str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_upload];
+        NSString *urltmps=[str_url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        str_url=urltmps;
     }
     UIImage *img_tmp=[UIImage imageWithContentsOfFile:str_path];
     
-    NSData *imageData=UIImagePNGRepresentation(img_tmp);
+    NSData *imageData=UIImageJPEGRepresentation(img_tmp, 0.5);
+    
+    NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
+    formatter.dateFormat=@"yyyyMMddHHmmss";
+    NSString *str=[formatter stringFromDate:[NSDate date]];
+    NSString *fileName=[NSString stringWithFormat:@"%@.jpg",str];
     
   [_session POST:str_url parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-      [formData appendPartWithFileData:imageData name:@"test" fileName:@"headimg.jpg" mimeType:@"image/jpeg"];
+      //name参数，服务器端文件夹，filename参数，服务器端文件名
+      [formData appendPartWithFileData:imageData name:@"data" fileName:fileName mimeType:@"image/jpeg"];
   } progress:^(NSProgress * _Nonnull uploadProgress) {
       
   } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {

@@ -347,9 +347,9 @@
     _session.responseSerializer= [AFHTTPResponseSerializer serializer];
     [_session.requestSerializer setHTTPShouldHandleCookies:YES];
     
-    NSMutableDictionary *dic_param1=[NSMutableDictionary dictionary];
-    dic_param1[@"pageIndex"]=_str_page;
-    [self PrePareData:dic_param1 interface:@"UnFinishTaskShenPiList"];
+   // NSMutableDictionary *dic_param1=[NSMutableDictionary dictionary];
+   // dic_param1[@"pageIndex"]=_str_page;
+    [self PrePareData:nil interface:@"TaskCountUnfinish"];
 
     [self.view addSubview:indicator];
     [indicator startAnimating];
@@ -643,6 +643,7 @@
     MyShenPiViewController *viewController=[[MyShenPiViewController alloc] init];
     viewController.userInfo=_userInfo;
     viewController.delegate=self;
+    viewController.i_Class=0;
     [self.navigationController pushViewController:viewController animated:YES];
 
 }
@@ -689,7 +690,7 @@
             str_ip=[arr_ip objectAtIndex:0];
             str_port=[arr_ip objectAtIndex:1];
         }
-        NSString *str_urldata=[db fetchInterface:@"UnFinishTaskShenPiList"];
+        NSString *str_urldata=[db fetchInterface:@"TaskCountUnfinish"];
         NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_urldata];
         [_session POST:str_url parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
             
@@ -698,6 +699,12 @@
             NSString *str_success= [JSON objectForKey:@"success"];
             BOOL b_success=[str_success boolValue];
             if (b_success==YES) {
+                NSString *str_total=[JSON objectForKey:@"c0"];
+                i_total=[str_total integerValue];
+                _btn_ShenPi.badgeBgColor=[UIColor redColor];
+                [_btn_ShenPi showBadgeWithStyle:WBadgeStyleNumber value:i_total animationType:WBadgeAnimTypeNone];
+                [self.view setNeedsDisplay];
+               /*
                NSString *str_totalPage=[JSON objectForKey:@"totalPage"];
                 NSMutableDictionary *dic_param1=[NSMutableDictionary dictionary];
                 dic_param1[@"pageIndex"]=str_totalPage;
@@ -727,6 +734,7 @@
                 } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                     
                 }];
+                */
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             
@@ -761,9 +769,14 @@
             if (b_success==YES) {
                 [indicator stopAnimating];
                 NSLog(@"获取审批列表成功");
+                NSString *str_total= [JSON objectForKey:@"c0"];
+                i_total=[str_total integerValue];
+                /*
                 NSArray *arr_TaskList=[JSON objectForKey:@"taskList"];
                 NSInteger i_integer=[_str_page integerValue];
                 i_total=[arr_TaskList count]+(i_integer-1)*10;
+                 */
+                
                // [_btn_ShenPi setNeedsDisplay];
                 _btn_ShenPi.badgeBgColor=[UIColor redColor];
                 // _btn_ShenPi.badgeCenterOffset=CGPointMake(0, _btn_ShenPi.size.height*0.08);

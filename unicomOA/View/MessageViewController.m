@@ -175,6 +175,10 @@
                 _i_doc_num=[str_docnum intValue];
                 _i_flow_num=[str_flownum intValue];
                 _i_msg_num=[str_msgnum intValue];
+                [indicator stopAnimating];
+                NSIndexSet *indexSet=[NSIndexSet indexSetWithIndex:0];
+                [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
+                /*
                 //0715 zr 接口不完善前临时添加
                 NSString *str_UnFinish=[db fetchInterface:@"UnFinishTaskShenPiList"];
                 __block NSString *str_url2=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_UnFinish];
@@ -213,7 +217,7 @@
                     
                 }];
                 // _count=_i_doc_num+_i_flow_num+_i_msg_num;
-                
+                */
             }
             
             
@@ -703,47 +707,7 @@
 }
 
 -(void)RefreshBadge:(NSMutableDictionary*)param {
-    NSString *str_connection=[self GetConnectionStatus];
-    if ([str_connection isEqualToString:@"wifi"] || [str_connection isEqualToString:@"GPRS"]) {
-        NSString *str_ip=@"";
-        NSString *str_port=@"";
-        NSMutableArray *t_array=[db fetchIPAddress];
-        if (t_array.count==1) {
-            NSArray *arr_ip=[t_array objectAtIndex:0];
-            str_ip=[arr_ip objectAtIndex:0];
-            str_port=[arr_ip objectAtIndex:1];
-        }
-        NSString *str_urldata=[db fetchInterface:@"UnFinishTaskShenPiList"];
-        __block NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_urldata];
-        [_session POST:str_url parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
-            
-        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-            NSString *str_success= [JSON objectForKey:@"success"];
-            BOOL b_success=[str_success boolValue];
-            if (b_success==YES) {
-                NSString *str_totalPage=[JSON objectForKey:@"totalPage"];
-                param[@"pageIndex"]=str_totalPage;
-                [_session POST:str_url parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
-                    
-                } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                    NSDictionary *JSON1=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-                    NSArray *arr_TaskList=[JSON1 objectForKey:@"taskList"];
-                    NSInteger i_integer=[str_totalPage integerValue];
-                    _i_flow_num=(i_integer-1)*10+[arr_TaskList count];
-                    NSIndexSet *indexSet=[NSIndexSet indexSetWithIndex:0];
-                    [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
-
-                } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                    
-                }];
-            }
-            
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            
-        }];
-
-    }
+    [self NewsCount];
 }
 
 

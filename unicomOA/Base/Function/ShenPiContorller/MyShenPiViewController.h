@@ -29,4 +29,6 @@
 
 @property (nonatomic,strong) id<MyShenPiViewControllerDelegate> delegate;
 
+@property NSInteger i_Class;
+
 @end

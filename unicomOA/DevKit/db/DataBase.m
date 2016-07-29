@@ -314,7 +314,7 @@
             BOOL res16=[_database executeUpdate:insertSql16];
             
             //已办流程审批列表
-            NSString *insertSql17=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",INTERFACE_TABLENAME,INTERFACE_NAME,INTERFACE_VALUE,@"FinishTaskShenPiList",@" /default/mobile/oa/com.hnsi.erp.mobile.oa.TaskAuditSearch.finishedList.biz.ext"];
+            NSString *insertSql17=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",INTERFACE_TABLENAME,INTERFACE_NAME,INTERFACE_VALUE,@"FinishTaskShenPiList",@"/default/mobile/oa/com.hnsi.erp.mobile.oa.TaskAuditSearch.finishedList.biz.ext"];
             BOOL res17=[_database executeUpdate:insertSql17];
             
             //审批记录
@@ -381,6 +381,76 @@
 -(void)ModifyUrl:(NSString*)str_keyword {
     NSString *str_url=[self fetchInterface:str_keyword];
     if ([str_url isEqualToString:@""]) {
+        if ([str_keyword isEqualToString:@"Login"]) {
+            str_url=@"/default/mobile/user/com.hnsi.erp.mobile.user.LoginManager.login.biz.ext";
+        }
+        else if ([str_keyword isEqualToString:@"Logout"]) {
+            str_url=@"/default/mobile/user/com.hnsi.erp.mobile.user.LoginManager.logout.biz.ext";
+        }
+        else if ([str_keyword isEqualToString:@"ChangePassword"]) {
+            str_url=@"/default/mobile/user/com.hnsi.erp.mobile.user.LoginManager.updatePassword.biz.ext";
+        }
+        else if ([str_keyword isEqualToString:@"AddressList"]) {
+            str_url=@"/default/mobile/user/com.hnsi.erp.mobile.user.AddressListManager.list.biz.ext";
+        }
+        else if ([str_keyword isEqualToString:@"ListSearch"]) {
+            str_url=@"/default/mobile/user/com.hnsi.erp.mobile.user.AddressListManager.search.biz.ext";
+        }
+        else if ([str_keyword isEqualToString:@"TaskRemind"]) {
+            str_url=@"/default/mobile/oa/com.hnsi.erp.mobile.oa.TaskSearch.flowList.biz.ext";
+        }
+        else if ([str_keyword isEqualToString:@"UnreadMessage"]) {
+            str_url=@"/default/mobile/oa/com.hnsi.erp.mobile.oa.TaskSearch.msgList.biz.ext";
+        }
+        else if ([str_keyword isEqualToString:@"UnreadDoc"]) {
+            str_url=@"/default/mobile/oa/com.hnsi.erp.mobile.oa.TaskSearch.docList.biz.ext";
+        }
+        else if ([str_keyword isEqualToString:@"TaskCount"]) {
+            str_url=@"/default/mobile/oa/com.hnsi.erp.mobile.oa.TaskSearch.count.biz.ext";
+        }
+        else if ([str_keyword isEqualToString:@"NewsListCount"]) {
+            str_url=@"/default/mobile/oa/com.hnsi.erp.mobile.oa.NewsSearch.count.biz.ext";
+        }
+        else if ([str_keyword isEqualToString:@"NewsList"]) {
+            str_url=@"/default/mobile/oa/com.hnsi.erp.mobile.oa.NewsSearch.list.biz.ext";
+        }
+        else if ([str_keyword isEqualToString:@"NewsContent"]) {
+            str_url=@"/default/mobile/oa/com.hnsi.erp.mobile.oa.NewsSearch.getNews.biz.ext";
+        }
+        else if ([str_keyword isEqualToString:@"NewsComment"]) {
+            str_url=@"/default/mobile/oa/com.hnsi.erp.mobile.oa.NewsSearch.commentList.biz.ext";
+        }
+        else if ([str_keyword isEqualToString:@"AddComment"]) {
+            str_url=@"/default/mobile/oa/com.hnsi.erp.mobile.oa.NewsSearch.addComment.biz.ext";
+        }
+        else if ([str_keyword isEqualToString:@"TaskAudit"]) {
+            str_url=@"/default/mobile/oa/com.hnsi.erp.mobile.oa.TaskAuditSearch.procdefList.biz.ext";
+        }
+        else if ([str_keyword isEqualToString:@"UnFinishTaskShenPiList"]) {
+            str_url=@"/default/mobile/oa/com.hnsi.erp.mobile.oa.TaskAuditSearch.pendingList.biz.ext";
+        }
+        else if ([str_keyword isEqualToString:@"FinishTaskShenPiList"]) {
+            str_url=@"/default/mobile/oa/com.hnsi.erp.mobile.oa.TaskAuditSearch.finishedList.biz.ext";
+        }
+        else if ([str_keyword isEqualToString:@"TaskLog"]) {
+            str_url=@"/default/mobile/oa/com.hnsi.erp.mobile.oa.TaskAuditSearch.queryDisposeLog.biz.ext";
+        }
+        else if ([str_keyword isEqualToString:@"RulesSearch"]) {
+            str_url=@"/default/mobile/oa/com.hnsi.erp.mobile.oa.RulesSearch.list.biz.ext";
+        }
+        else if ([str_keyword isEqualToString:@"RulesDetail"]) {
+            str_url=@"/default/mobile/oa/com.hnsi.erp.mobile.oa.RulesSearch.detail.biz.ext";
+        }
+        else if ([str_keyword isEqualToString:@"TaskCountUnfinish"]) {
+            str_url=@"/default/mobile/oa/com.hnsi.erp.mobile.oa.TaskAuditSearch.count.biz.ext";
+        }
+        else if ([str_keyword isEqualToString:@"SysMsgDetail"]) {
+            str_url=@"/default/mobile/oa/com.hnsi.erp.mobile.common.MsgManager.getData.biz.ext";
+        }
+        else if ([str_keyword isEqualToString:@"UploadImg"]) {
+            str_url=@"/default/mobile/user/com.hnsi.erp.mobile.user.AddressListManager.upload.biz.ext";
+        }
+        
         NSString *insertSql=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",INTERFACE_TABLENAME,INTERFACE_NAME,INTERFACE_VALUE,str_keyword,str_url];
         if ([_database open]) {
             BOOL res=[_database executeUpdate:insertSql];
@@ -390,7 +460,7 @@
             else {
                 NSLog(@"插入接口失败");
             }
-
+            [_database close];
         }
     }
     else {
@@ -403,6 +473,7 @@
             else {
                 NSLog(@"更新接口失败");
             }
+            [_database close];
         }
        
 

@@ -153,6 +153,8 @@
 		68579FA31CC0BBCE00597FBD /* ShenPiAgreeWithCarDeploy.m in Sources */ = {isa = PBXBuildFile; fileRef = 68579FA21CC0BBCE00597FBD /* ShenPiAgreeWithCarDeploy.m */; };
 		68579FA61CC0C21100597FBD /* CarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68579FA51CC0C21100597FBD /* CarModel.m */; };
 		68579FA91CC0C88600597FBD /* CarDeployCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68579FA81CC0C88600597FBD /* CarDeployCell.m */; };
+		686AAB9E1D4B44B0002775C2 /* SysMsgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 686AAB9D1D4B44B0002775C2 /* SysMsgViewController.m */; };
+		686AABA11D4B522C002775C2 /* SysMsgSubVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 686AABA01D4B522C002775C2 /* SysMsgSubVc.m */; };
 		68723EB61CF839DA0019ACD8 /* UnFinishVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 68723EB51CF839DA0019ACD8 /* UnFinishVc.m */; };
 		68723EB91CF839F50019ACD8 /* FinishVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 68723EB81CF839F50019ACD8 /* FinishVc.m */; };
 		687E74BA1D113B9500F67884 /* check_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 687E74B81D113B9500F67884 /* check_off.png */; };
@@ -567,6 +569,10 @@
 		68579FA51CC0C21100597FBD /* CarModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CarModel.m; path = Base/Function/ShenPiModel/CarModel.m; sourceTree = "<group>"; };
 		68579FA71CC0C88600597FBD /* CarDeployCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CarDeployCell.h; path = Base/Function/ShenPiModel/CarDeployCell.h; sourceTree = "<group>"; };
 		68579FA81CC0C88600597FBD /* CarDeployCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CarDeployCell.m; path = Base/Function/ShenPiModel/CarDeployCell.m; sourceTree = "<group>"; };
+		686AAB9C1D4B44B0002775C2 /* SysMsgViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SysMsgViewController.h; path = Base/Function/SysMsg/MsgController/SysMsgViewController.h; sourceTree = "<group>"; };
+		686AAB9D1D4B44B0002775C2 /* SysMsgViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SysMsgViewController.m; path = Base/Function/SysMsg/MsgController/SysMsgViewController.m; sourceTree = "<group>"; };
+		686AAB9F1D4B522C002775C2 /* SysMsgSubVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SysMsgSubVc.h; path = Base/Function/SysMsg/MsgController/SysMsgSubVc.h; sourceTree = "<group>"; };
+		686AABA01D4B522C002775C2 /* SysMsgSubVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SysMsgSubVc.m; path = Base/Function/SysMsg/MsgController/SysMsgSubVc.m; sourceTree = "<group>"; };
 		68723EB41CF839DA0019ACD8 /* UnFinishVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UnFinishVc.h; path = Base/Function/ShenPiContorller/UnFinishVc.h; sourceTree = "<group>"; };
 		68723EB51CF839DA0019ACD8 /* UnFinishVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UnFinishVc.m; path = Base/Function/ShenPiContorller/UnFinishVc.m; sourceTree = "<group>"; };
 		68723EB71CF839F50019ACD8 /* FinishVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FinishVc.h; path = Base/Function/ShenPiContorller/FinishVc.h; sourceTree = "<group>"; };
@@ -1093,6 +1099,7 @@
 		2CFEADCD1C770D1D0054730E /* FunctionViewBase */ = {
 			isa = PBXGroup;
 			children = (
+				686AAB981D4B43A6002775C2 /* SysMsg */,
 				683A452B1D40CA8200B91D82 /* UnFinish */,
 				68ED4E281CB49213000E8A7B /* ShenPi */,
 				6846D34E1CAB5998004BD285 /* IVoting */,
@@ -1473,6 +1480,41 @@
 			);
 			name = Base;
 			path = DevKit/Base;
+			sourceTree = "<group>";
+		};
+		686AAB981D4B43A6002775C2 /* SysMsg */ = {
+			isa = PBXGroup;
+			children = (
+				686AAB9B1D4B4400002775C2 /* MsgView */,
+				686AAB9A1D4B43D0002775C2 /* MsgController */,
+				686AAB991D4B43C4002775C2 /* MsgModel */,
+			);
+			name = SysMsg;
+			sourceTree = "<group>";
+		};
+		686AAB991D4B43C4002775C2 /* MsgModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = MsgModel;
+			sourceTree = "<group>";
+		};
+		686AAB9A1D4B43D0002775C2 /* MsgController */ = {
+			isa = PBXGroup;
+			children = (
+				686AAB9C1D4B44B0002775C2 /* SysMsgViewController.h */,
+				686AAB9D1D4B44B0002775C2 /* SysMsgViewController.m */,
+				686AAB9F1D4B522C002775C2 /* SysMsgSubVc.h */,
+				686AABA01D4B522C002775C2 /* SysMsgSubVc.m */,
+			);
+			name = MsgController;
+			sourceTree = "<group>";
+		};
+		686AAB9B1D4B4400002775C2 /* MsgView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = MsgView;
 			sourceTree = "<group>";
 		};
 		6884D2CD1CD98B4A006215E5 /* UIView-MGBadgeView */ = {
@@ -2104,6 +2146,7 @@
 				2CFEAD2D1C717FDC0054730E /* SettingViewController.m in Sources */,
 				6846D3531CAB5A1E004BD285 /* IVotingManamentController.m in Sources */,
 				6853A3F91D2679C500AE5145 /* BaseFunction.m in Sources */,
+				686AABA11D4B522C002775C2 /* SysMsgSubVc.m in Sources */,
 				68D05CC01C97AC050039220F /* SendFeedBackViewController.m in Sources */,
 				682B68B01CB618DD002EC60F /* PrintApplicationNoFileCell.m in Sources */,
 				68C33B741D34C58B00FCC0F1 /* LogTriangleView.m in Sources */,
@@ -2185,6 +2228,7 @@
 				2CFEADF31C7C27020054730E /* UIViewExt.m in Sources */,
 				2CFEAD191C7168980054730E /* LoginViewController.m in Sources */,
 				2CFEAD451C72B8B90054730E /* LGSettingSection.m in Sources */,
+				686AAB9E1D4B44B0002775C2 /* SysMsgViewController.m in Sources */,
 				68EEDE761CBB911A003295EB /* MCPopMenuPresentAnimator.m in Sources */,
 				68052C2C1CAD167400A93BDA /* UIBarButtonItem+WZLBadge.m in Sources */,
 				68E8F3791D1249270062E864 /* AlarmCell.m in Sources */,

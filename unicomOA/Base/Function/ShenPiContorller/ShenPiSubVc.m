@@ -73,7 +73,8 @@
     [_session.requestSerializer setTimeoutInterval:10.0f];
 
     
-    
+    dic_param[@"pageIndex"]=@"1";
+    dic_param[@"sys"]=[NSString stringWithFormat:@"%ld",(long)_i_Class];
    
     //设置refreshControl的属性
     _refreshControl=[[UIRefreshControl alloc]init];
@@ -408,11 +409,13 @@
         [arr_MyReview removeAllObjects];
         if (_b_isDaiBan==YES) {
             dic_param[@"pageIndex"]=@"1";
+            dic_param[@"sys"]=[NSString stringWithFormat:@"%ld",(long)_i_Class];
             [self PrePareData:dic_param interface:@"UnFinishTaskShenPiList"];
             
         }
         else {
             dic_param[@"pageIndex"]=@"1";
+            dic_param[@"sys"]=[NSString stringWithFormat:@"%ld",(long)_i_Class];
             [self PrePareData:dic_param interface:@"FinishTaskShenPiList"];
         }
         [indicator stopAnimating];
@@ -451,6 +454,7 @@
     [arr_MyReview removeAllObjects];
     _i_pageIndex=1;
     dic_param[@"pageIndex"]=@"1";
+    dic_param[@"sys"]=[NSString stringWithFormat:@"%ld",(long)_i_Class];
     [self.tableView setContentOffset:CGPointMake(0, 0) animated:NO];
     [self PrePareData:dic_param interface:@"UnFinishTaskShenPiList"];
     
@@ -488,6 +492,7 @@
         if (_i_pageIndex<_i_page_Total) {
             _i_pageIndex=_i_pageIndex+1;
             dic_param[@"pageIndex"]=[NSString stringWithFormat:@"%ld",(long)_i_pageIndex];
+            dic_param[@"sys"]=[NSString stringWithFormat:@"%ld",(long)_i_Class];
             if (_b_isDaiBan==NO) {
                 [self PrePareData:dic_param interface:@"FinishTaskShenPiList"];
             }

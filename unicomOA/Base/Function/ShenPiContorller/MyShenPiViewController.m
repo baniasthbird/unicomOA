@@ -1025,10 +1025,12 @@
     ShenPiSubVc *vc1=[[ShenPiSubVc alloc]init];
     vc1.title=@"待办任务";
     vc1.b_isDaiBan=YES;
+    vc1.i_Class=_i_Class;
     
     ShenPiSubVc *vc2=[[ShenPiSubVc alloc]init];
     vc2.title=@"已办任务";
     vc2.b_isDaiBan=NO;
+    vc2.i_Class=_i_Class;
     
     [self addChildViewController:vc1];
     [self addChildViewController:vc2];
