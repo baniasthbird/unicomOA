@@ -40,12 +40,20 @@
         view1.backgroundColor=[UIColor clearColor];
         view1.userInteractionEnabled=YES;
         
+        UIView *view3=[[UIView alloc]initWithFrame:CGRectMake(2*[UIScreen mainScreen].bounds.size.width/3, 0, [UIScreen mainScreen].bounds.size.width/3, 70)];
+        view3.backgroundColor=[UIColor clearColor];
+        view3.userInteractionEnabled=YES;
+        
         //添加tapGesture
         UITapGestureRecognizer *singelTap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(NavToShenPi:)];
         singelTap.numberOfTapsRequired=1;
         singelTap.numberOfTouchesRequired=1;
         singelTap.delegate=self;
         
+        UITapGestureRecognizer *singleTap3=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(NavToMessage:)];
+        singleTap3.numberOfTapsRequired=1;
+        singleTap3.numberOfTouchesRequired=1;
+        singleTap3.delegate=self;
         
         
         UILabel *lbl_title1=[[UILabel alloc]initWithFrame:CGRectMake(0, 8, [UIScreen mainScreen].bounds.size.width/3, 30)];
@@ -60,7 +68,7 @@
         lbl_title2.text=@"公文传阅";
         lbl_title2.textAlignment=NSTextAlignmentCenter;
         
-        UILabel *lbl_title3=[[UILabel alloc]initWithFrame:CGRectMake(2*[UIScreen mainScreen].bounds.size.width/3, 8, [UIScreen mainScreen].bounds.size.width/3, 30)];
+        UILabel *lbl_title3=[[UILabel alloc]initWithFrame:CGRectMake(0, 8, [UIScreen mainScreen].bounds.size.width/3, 30)];
         lbl_title3.font=[UIFont systemFontOfSize:16];
         lbl_title3.textColor=[UIColor blackColor];
         lbl_title3.text=@"系统消息";
@@ -97,7 +105,7 @@
         lbl_num2.layer.masksToBounds=YES;
         
         
-        UILabel *lbl_num3=[[UILabel alloc]initWithFrame:CGRectMake(2*[UIScreen mainScreen].bounds.size.width/3, 40, [UIScreen mainScreen].bounds.size.width/3, 30)];
+        UILabel *lbl_num3=[[UILabel alloc]initWithFrame:CGRectMake(0, 40, [UIScreen mainScreen].bounds.size.width/3, 30)];
         lbl_num3.font=[UIFont systemFontOfSize:16];
         lbl_num3.backgroundColor=[UIColor colorWithRed:254/255.0f green:83/255.0f blue:81/255.0f alpha:1];
         lbl_num3.textColor=[UIColor whiteColor];
@@ -106,26 +114,32 @@
         CGFloat width_3=[UILabel_LabelHeightAndWidth getWidthWithTitle:lbl_num3.text font:[UIFont systemFontOfSize:16]];
         width_3=width_3+20;
         CGFloat height_3=[UILabel_LabelHeightAndWidth getHeightByWidth:width_3 title:lbl_num3.text font:[UIFont systemFontOfSize:16]];
-        [lbl_num3 setFrame:CGRectMake(5*[UIScreen mainScreen].bounds.size.width/6-width_3/2, 40, width_3, height_3)];
+        [lbl_num3 setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/6-width_3/2, 40, width_3, height_3)];
        // [lbl_num3 sizeToFit];
         lbl_num3.layer.cornerRadius=10;
         lbl_num3.layer.masksToBounds=YES;
         
 
         [view1 addGestureRecognizer:singelTap];
+        [view3 addGestureRecognizer:singleTap3];
         
         [self.contentView addSubview:seperatorline1];
         [self.contentView addSubview:seperatorline2];
         [view1 addSubview:lbl_title1];
         [view1 addSubview:lbl_num1];
         [self.contentView addSubview:view1];
+        
+        [view3 addSubview:lbl_title3];
+        [view3 addSubview:lbl_num3];
+        [self.contentView addSubview:view3];
        // [self.contentView addSubview:lbl_title1];
         [self.contentView addSubview:lbl_title2];
-        [self.contentView addSubview:lbl_title3];
+       // [self.contentView addSubview:lbl_title3];
       //  [self.contentView addSubview:lbl_num1];
         
         [self.contentView addSubview:lbl_num2];
-        [self.contentView addSubview:lbl_num3];
+       // [self.contentView addSubview:lbl_num3];
+        
         
         /*
         //self.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
@@ -180,6 +194,10 @@
 -(void)NavToShenPi:(UITapGestureRecognizer*)sender {
     [_delegate PassNavToShenPi];
   
+}
+
+-(void)NavToMessage:(UITapGestureRecognizer*)sender {
+    [_delegate PassNaveToMessage];
 }
                 
 @end

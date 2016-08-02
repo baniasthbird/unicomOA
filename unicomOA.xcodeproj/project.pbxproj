@@ -97,6 +97,9 @@
 		682086CD1D1A32E50032A191 /* bg_Nav-IPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 682086CC1D1A32E50032A191 /* bg_Nav-IPad.png */; };
 		682086CF1D1A34440032A191 /* logoimage-IPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 682086CE1D1A34440032A191 /* logoimage-IPad.png */; };
 		68212DF31CF3FAE40022955A /* Soundselectvc.m in Sources */ = {isa = PBXBuildFile; fileRef = 68212DF21CF3FAE40022955A /* Soundselectvc.m */; };
+		68224D3C1D4F21FD002AC0F1 /* SysMsgResultVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 68224D3B1D4F21FD002AC0F1 /* SysMsgResultVc.m */; };
+		68224D3F1D4F2530002AC0F1 /* SysMsgDisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68224D3E1D4F2530002AC0F1 /* SysMsgDisplayController.m */; };
+		68224D421D4F470A002AC0F1 /* SysMsgTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68224D411D4F470A002AC0F1 /* SysMsgTableViewCell.m */; };
 		6822656F1C96B4C400AB29C0 /* NewsSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6822656E1C96B4C400AB29C0 /* NewsSettingViewController.m */; };
 		6825E1081CED507400EA4D87 /* ShenPiAppVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6825E1071CED507400EA4D87 /* ShenPiAppVC.m */; };
 		682A46D01D3F69E800FCED9E /* CDFInitialsAvatar.m in Sources */ = {isa = PBXBuildFile; fileRef = 682A46CF1D3F69E800FCED9E /* CDFInitialsAvatar.m */; };
@@ -460,6 +463,12 @@
 		68212DF01CF3EA6A0022955A /* Thunder Song.m4r */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Thunder Song.m4r"; sourceTree = "<group>"; };
 		68212DF11CF3FAE40022955A /* Soundselectvc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Soundselectvc.h; path = Base/Function/Controller/Soundselectvc.h; sourceTree = "<group>"; };
 		68212DF21CF3FAE40022955A /* Soundselectvc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Soundselectvc.m; path = Base/Function/Controller/Soundselectvc.m; sourceTree = "<group>"; };
+		68224D3A1D4F21FD002AC0F1 /* SysMsgResultVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SysMsgResultVc.h; path = Base/Function/SysMsg/MsgController/SysMsgResultVc.h; sourceTree = "<group>"; };
+		68224D3B1D4F21FD002AC0F1 /* SysMsgResultVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SysMsgResultVc.m; path = Base/Function/SysMsg/MsgController/SysMsgResultVc.m; sourceTree = "<group>"; };
+		68224D3D1D4F2530002AC0F1 /* SysMsgDisplayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SysMsgDisplayController.h; path = Base/Function/SysMsg/MsgController/SysMsgDisplayController.h; sourceTree = "<group>"; };
+		68224D3E1D4F2530002AC0F1 /* SysMsgDisplayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SysMsgDisplayController.m; path = Base/Function/SysMsg/MsgController/SysMsgDisplayController.m; sourceTree = "<group>"; };
+		68224D401D4F470A002AC0F1 /* SysMsgTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SysMsgTableViewCell.h; path = Base/Function/SysMsg/MsgView/SysMsgTableViewCell.h; sourceTree = "<group>"; };
+		68224D411D4F470A002AC0F1 /* SysMsgTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SysMsgTableViewCell.m; path = Base/Function/SysMsg/MsgView/SysMsgTableViewCell.m; sourceTree = "<group>"; };
 		6822656D1C96B4C400AB29C0 /* NewsSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsSettingViewController.h; path = Base/Settings/Controller/NewsSettingViewController.h; sourceTree = "<group>"; };
 		6822656E1C96B4C400AB29C0 /* NewsSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsSettingViewController.m; path = Base/Settings/Controller/NewsSettingViewController.m; sourceTree = "<group>"; };
 		6825E1061CED507400EA4D87 /* ShenPiAppVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShenPiAppVC.h; path = Base/Function/ShenPiContorller/ShenPiAppVC.h; sourceTree = "<group>"; };
@@ -1506,6 +1515,10 @@
 				686AAB9D1D4B44B0002775C2 /* SysMsgViewController.m */,
 				686AAB9F1D4B522C002775C2 /* SysMsgSubVc.h */,
 				686AABA01D4B522C002775C2 /* SysMsgSubVc.m */,
+				68224D3A1D4F21FD002AC0F1 /* SysMsgResultVc.h */,
+				68224D3B1D4F21FD002AC0F1 /* SysMsgResultVc.m */,
+				68224D3D1D4F2530002AC0F1 /* SysMsgDisplayController.h */,
+				68224D3E1D4F2530002AC0F1 /* SysMsgDisplayController.m */,
 			);
 			name = MsgController;
 			sourceTree = "<group>";
@@ -1513,6 +1526,8 @@
 		686AAB9B1D4B4400002775C2 /* MsgView */ = {
 			isa = PBXGroup;
 			children = (
+				68224D401D4F470A002AC0F1 /* SysMsgTableViewCell.h */,
+				68224D411D4F470A002AC0F1 /* SysMsgTableViewCell.m */,
 			);
 			name = MsgView;
 			sourceTree = "<group>";
@@ -2134,6 +2149,7 @@
 				68E779DC1CB34A8E006DA5B9 /* CLTreeView_LEVEL0_Cell.m in Sources */,
 				6846D3631CABC496004BD285 /* RadioGroup.m in Sources */,
 				68F173C91C99034500A8BEA3 /* StaffInfoViewController.m in Sources */,
+				68224D421D4F470A002AC0F1 /* SysMsgTableViewCell.m in Sources */,
 				2CFEAD241C717F910054730E /* MessageViewController.m in Sources */,
 				2CFEAD331C7183930054730E /* BaseNavigationViewController.m in Sources */,
 				68D05CBA1C9791000039220F /* PasswordViewController.m in Sources */,
@@ -2266,6 +2282,7 @@
 				2C99721E1CA21E0E00B803FC /* ChangePhoneNumStep3.m in Sources */,
 				68A5D80C1D2A560400000F95 /* NewsTableViewResultController.m in Sources */,
 				2CFEAD361C7188500054730E /* OAViewController.m in Sources */,
+				68224D3C1D4F21FD002AC0F1 /* SysMsgResultVc.m in Sources */,
 				2CFEAD181C7168980054730E /* forgetPasswordViewController.m in Sources */,
 				68723EB91CF839F50019ACD8 /* FinishVc.m in Sources */,
 				68EEDE561CBB2E19003295EB /* Address.m in Sources */,
@@ -2275,6 +2292,7 @@
 				2CB7DB621CA2C3150057633D /* ServerIPViewController.m in Sources */,
 				2CE320EE1CB6B4B000B36793 /* PrintFiles.m in Sources */,
 				2C74F0791CAEACDA00CC5C5F /* PhoneLabelView.m in Sources */,
+				68224D3F1D4F2530002AC0F1 /* SysMsgDisplayController.m in Sources */,
 				2CFEADE91C7C05830054730E /* UIButton+Extra.m in Sources */,
 				68EEDE751CBB911A003295EB /* MCPopMenuItem.m in Sources */,
 				6882C3181CA8D78300CDEB1A /* LogoView.m in Sources */,
@@ -2443,6 +2461,7 @@
 			baseConfigurationReference = 43F5D90068DFD3BE0870646D /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
@@ -2464,6 +2483,7 @@
 			baseConfigurationReference = CECFF6537388F9C53C969858 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;

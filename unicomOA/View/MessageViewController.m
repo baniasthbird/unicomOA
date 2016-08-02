@@ -16,6 +16,7 @@
 #import "LXAlertView.h"
 #import "MyShenPiViewController.h"
 #import "FunctionViewController.h"
+#import "SysMsgViewController.h"
 
 
 @interface MessageViewController ()<UITableViewDelegate,UITableViewDataSource,NewsTapDelegate,YBMonitorNetWorkStateDelegate,RemindCellDelegate,MyShenPiViewControllerDelegate>
@@ -690,6 +691,14 @@
     viewController.userInfo=_userInfo;
     viewController.delegate=self;
     [self.navigationController pushViewController:viewController animated:YES];
+}
+
+-(void)PassNaveToMessage {
+    NSLog(@"单击事件");
+    SysMsgViewController *vc=[[SysMsgViewController alloc] init];
+    vc.userInfo=_userInfo;
+    vc.str_title=@"系统消息";
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)RefreshBadgeNumber {

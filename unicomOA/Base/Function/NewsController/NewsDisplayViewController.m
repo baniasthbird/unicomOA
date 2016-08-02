@@ -54,7 +54,6 @@ int i_comment_num;
     else {
         dict =@{
                 NSForegroundColorAttributeName:   [UIColor whiteColor]};
-        
     }
    // [self.navigationController.navigationBar setFrame:CGRectMake(0, 20, [UIScreen mainScreen].bounds.size.width, 44)];
    // [self.navigationController.navigationBar setHidden:NO];

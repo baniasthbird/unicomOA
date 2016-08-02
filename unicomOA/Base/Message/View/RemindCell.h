@@ -13,6 +13,8 @@
 
 -(void)PassNavToShenPi;
 
+-(void)PassNaveToMessage;
+
 @end
 
 @interface RemindCell : UITableViewCell

@@ -10,4 +10,6 @@
 
 @interface SysMsgSubVc : UIViewController
 
+@property (nonatomic,strong) NSMutableDictionary *sysmsg_param;
+
 @end

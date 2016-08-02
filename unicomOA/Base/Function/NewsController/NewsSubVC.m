@@ -485,7 +485,7 @@
             i_index=i_index+1;
             NSString *str_success= [JSON objectForKey:@"success"];
             BOOL b_success=[str_success boolValue];
-            if (b_success==1) {
+            if (b_success==YES) {
                 [indicator stopAnimating];
                 [_refreshControl endRefreshing];
                 NSLog(@"获取新闻列表成功:%@",responseObject);

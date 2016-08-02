@@ -7,6 +7,7 @@
 //
 
 #import "BaseFunction.h"
+#import "UILabel+LabelHeightAndWidth.h"
 
 @implementation BaseFunction
 
@@ -52,6 +53,57 @@
     //设置显示位置
     [l_indicator setCenter:CGPointMake([UIScreen mainScreen].bounds.size.width/ 2.0, [UIScreen mainScreen].bounds.size.height/ 2.0)];
     return l_indicator;
+}
+
+
+-(CGFloat)cellHeightForNews:(NSInteger)i_index titleFont:(CGFloat)i_titleFont otherFont:(CGFloat)i_otherFont array:(NSMutableArray*)arr_list keywordtitle:(NSString*)str_keywordTitle keywordName:(NSString*)str_keywordName keywordTime:(NSString*)str_keywordTime  {
+    NSDictionary *dic_content=[arr_list objectAtIndex:i_index];
+    
+    CGFloat h_Title;
+    if (iPad) {
+        h_Title=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width-100 title:[dic_content objectForKey:str_keywordTitle] font:[UIFont systemFontOfSize:i_titleFont]];
+    }
+    else {
+        h_Title=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width-30 title:[dic_content objectForKey:str_keywordTitle] font:[UIFont systemFontOfSize:i_titleFont]];
+    }
+    
+    NSString *str_department = [dic_content objectForKey:str_keywordName];
+    CGFloat h_depart=0;
+    CGFloat h_height=0;
+    if (str_department!=nil) {
+        CGFloat w_depart=[UILabel_LabelHeightAndWidth getWidthWithTitle:[dic_content objectForKey:str_keywordName] font:[UIFont systemFontOfSize:i_otherFont]];
+        h_depart=[UILabel_LabelHeightAndWidth getHeightByWidth:w_depart title:str_department font:[UIFont systemFontOfSize:i_otherFont]];
+        h_height=h_Title+h_depart;
+    }
+    else {
+        CGFloat w_depart=[UILabel_LabelHeightAndWidth getWidthWithTitle:[dic_content objectForKey:str_keywordTime] font:[UIFont systemFontOfSize:i_otherFont]];
+        str_department=[dic_content objectForKey:str_keywordTime];
+        h_depart=[UILabel_LabelHeightAndWidth getHeightByWidth:w_depart title:str_department font:[UIFont systemFontOfSize:i_otherFont]];
+        h_height=h_Title+h_depart;
+    }
+    
+    if (iPad) {
+        if (h_Title>60) {
+            return 88+h_depart;
+        }
+        else {
+            return h_height+30;
+        }
+    }
+    else {
+        if (h_Title>45) {
+            return 71+h_depart;
+        }
+        else {
+            return h_height+30;
+        }
+    }
+    
+}
+
+-(NSString*)GetConnectionStatus {
+    NSString *currentNetWorkState=[[NSUserDefaults standardUserDefaults] objectForKey:@"connection"];
+    return currentNetWorkState;
 }
 
 @end

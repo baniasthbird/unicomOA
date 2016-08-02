@@ -10,7 +10,9 @@
 #import "UserInfo.h"
 #import "BaseFunction.h"
 
-@interface SysMsgViewController : LXSegmentController<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>
+//@interface SysMsgViewController : LXSegmentController
+
+@interface SysMsgViewController : UIViewController
 
 @property (nonatomic,strong) UITableView *tableView;
 

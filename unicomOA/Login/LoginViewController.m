@@ -636,11 +636,11 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     {
         [_session POST:str_url parameters:_params progress:^(NSProgress * _Nonnull uploadProgress) {
             NSLog(@"正在加载");
-            _btn_forgetpassword.enabled=NO;
-            _btn_Server.enabled=NO;
+           [self.view setUserInteractionEnabled:NO];
           //  btn_login.enabled=NO;
            
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+             [self.view setUserInteractionEnabled:YES];
             NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             if (JSON.count==1) {
                 [indicator stopAnimating];
@@ -685,6 +685,7 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             [indicator stopAnimating];
+            [self.view setUserInteractionEnabled:YES];
             LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"警告" message:@"无法连接到服务器" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
                 
             }];

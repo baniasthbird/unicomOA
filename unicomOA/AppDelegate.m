@@ -35,7 +35,7 @@
     
     
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]) {
-        self.window.rootViewController=[XZMCoreNewFeatureVC newFeatureVCWithImageNames:@[@"new1",@"new2",@"new3",@"LauchImage"] enterBlock:^{
+        self.window.rootViewController=[XZMCoreNewFeatureVC newFeatureVCWithImageNames:@[@"new1",@"new2",@"new3"] enterBlock:^{
             NSLog(@"进入主页面");
             [self enter];
         } configuration:^(UIButton *enterButton) {

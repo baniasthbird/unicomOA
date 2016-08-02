@@ -17,6 +17,10 @@
 #pragma mark 刷新统一管理
 -(UIActivityIndicatorView*)AddLoop;
 
+-(CGFloat)cellHeightForNews:(NSInteger)i_index titleFont:(CGFloat)i_titleFont otherFont:(CGFloat)i_otherFont array:(NSMutableArray*)arr_list keywordtitle:(NSString*)str_keywordTitle keywordName:(NSString*)str_keywordName keywordTime:(NSString*)str_keywordTime;
+
+-(NSString*)GetConnectionStatus;
+
 @property (nonatomic,strong) UIRefreshControl *refreshControl;
 
 @end

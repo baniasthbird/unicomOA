@@ -21,6 +21,7 @@
 #import "UITabBar+badge.h"
 #import "MessageViewController.h"
 #import "UnFinishViewController.h"
+#import "SysMsgViewController.h"
 
 
 
@@ -237,7 +238,7 @@
     UIImageButton *btn_GongGao=[self createImageButton:btn_x_2 y:btn_y width:btn_w height:btn_w title:@"公告" image:@"GongGao.png" insets:i_insets isFinish:YES];
     [btn_GongGao addTarget:self action:@selector(GongGaoClick:) forControlEvents:UIControlEventTouchUpInside];
 
-    UIImageButton *btn_XiaoXi=[self createImageButton:btn_x_3 y:btn_y width:btn_w height:btn_w title:@"消息" image:@"Message.png" insets:i_insets isFinish:NO];
+    UIImageButton *btn_XiaoXi=[self createImageButton:btn_x_3 y:btn_y width:btn_w height:btn_w title:@"消息" image:@"Message.png" insets:i_insets isFinish:YES];
     [btn_XiaoXi addTarget:self action:@selector(XiaoXiClick:) forControlEvents:UIControlEventTouchUpInside];
 
     UIImageButton *btn_ChuanYue=[self createImageButton:btn_x_4 y:btn_y width:btn_w height:btn_w title:@"传阅" image:@"ChuanYue.png" insets:i_insets isFinish:NO];
@@ -569,9 +570,17 @@
 
 //消息
 -(void)XiaoXiClick:(UIImageButton *)button {
+    /*
     UnFinishViewController *view=[[UnFinishViewController alloc]init];
     view.str_title=@"系统消息";
     [self.navigationController pushViewController:view animated:YES];
+     */
+    SysMsgViewController *vc=[[SysMsgViewController alloc]init];
+    vc.b_isSysMsg=YES;
+    vc.str_title=@"系统消息";
+    vc.userInfo=_userInfo;
+    [self.navigationController pushViewController:vc animated:YES];
+    
 }
 
 //传阅
@@ -760,9 +769,9 @@
         str_urldata= [str_urldata stringByTrimmingCharactersInSet:whitespace];
         NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_urldata];
         [_session POST:str_url parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
-            
+            [self.view setUserInteractionEnabled:NO];
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            
+            [self.view setUserInteractionEnabled:YES];
             NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             NSString *str_success= [JSON objectForKey:@"success"];
             BOOL b_success=[str_success boolValue];
