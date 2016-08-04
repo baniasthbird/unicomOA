@@ -65,7 +65,7 @@
 }
 
 -(void)MovePreviousVc:(UIButton*)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 -(void)MoveNextVc:(UIButton*)sender {
@@ -115,7 +115,7 @@
         [_delegate editValue:_printFiles editFile:tmp_file];
     }
     
-  [self.navigationController popViewControllerAnimated:YES];
+  [self.navigationController popViewControllerAnimated:NO];
 }
 
 #pragma mark tableView 方法

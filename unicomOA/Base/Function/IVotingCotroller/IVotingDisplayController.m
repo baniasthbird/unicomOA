@@ -208,7 +208,7 @@
     viewController.str_title=_str_title;
     viewController.str_condition=@"投票进行中";
     viewController.user_Info=_user_Info;
-    [self.navigationController pushViewController:viewController animated:YES];
+    [self.navigationController pushViewController:viewController animated:NO];
 }
 
 -(void)Vote:(UIButton*)sender {
@@ -236,11 +236,11 @@
         NSLog(@"点击了确定按钮");
     }];
     [alertController addAction:cancelAction];
-    [self presentViewController:alertController animated:YES completion:nil];
+    [self presentViewController:alertController animated:NO completion:nil];
 }
 
 
 -(void)MovePreviousVc:(UIButton*)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 @end

@@ -17,6 +17,7 @@
 #import "MyShenPiViewController.h"
 #import "FunctionViewController.h"
 #import "SysMsgViewController.h"
+#import "UnFinishViewController.h"
 
 
 @interface MessageViewController ()<UITableViewDelegate,UITableViewDataSource,NewsTapDelegate,YBMonitorNetWorkStateDelegate,RemindCellDelegate,MyShenPiViewControllerDelegate>
@@ -619,7 +620,7 @@
     news_controller.userInfo=_userInfo;
     news_controller.b_News=YES;
     selected_title=cell.str_title;
-    [self.navigationController pushViewController:news_controller animated:YES];
+    [self.navigationController pushViewController:news_controller animated:NO];
 }
 
 -(void)sideslipCellRemoveCell:(NewsManagementTableViewCell *)cell atIndex:(NSInteger)index {
@@ -690,7 +691,15 @@
     MyShenPiViewController *viewController=[[MyShenPiViewController alloc] init];
     viewController.userInfo=_userInfo;
     viewController.delegate=self;
-    [self.navigationController pushViewController:viewController animated:YES];
+    [self.navigationController pushViewController:viewController animated:NO];
+}
+
+
+-(void)PassNavToChuanYue {
+     NSLog(@"单击事件");
+    UnFinishViewController *vc=[[UnFinishViewController alloc]init];
+    vc.str_title=@"公文传阅";
+    [self.navigationController pushViewController:vc animated:NO];
 }
 
 -(void)PassNaveToMessage {
@@ -698,8 +707,10 @@
     SysMsgViewController *vc=[[SysMsgViewController alloc] init];
     vc.userInfo=_userInfo;
     vc.str_title=@"系统消息";
-    [self.navigationController pushViewController:vc animated:YES];
+    [self.navigationController pushViewController:vc animated:NO];
 }
+
+
 
 -(void)RefreshBadgeNumber {
     [self RefreshFlowNum];

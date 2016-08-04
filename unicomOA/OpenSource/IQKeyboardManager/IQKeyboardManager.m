@@ -613,7 +613,7 @@ void _IQShowLog(NSString *logString);
             
             if (_lastScrollView.shouldRestoreScrollViewContentOffset)
             {
-                [_lastScrollView setContentOffset:_startingContentOffset animated:YES];
+                [_lastScrollView setContentOffset:_startingContentOffset animated:NO];
             }
 
             _startingContentInsets = UIEdgeInsetsZero;
@@ -638,7 +638,7 @@ void _IQShowLog(NSString *logString);
 
             if (_lastScrollView.shouldRestoreScrollViewContentOffset)
             {
-                [_lastScrollView setContentOffset:_startingContentOffset animated:YES];
+                [_lastScrollView setContentOffset:_startingContentOffset animated:NO];
             }
             
             _lastScrollView = superScrollView;

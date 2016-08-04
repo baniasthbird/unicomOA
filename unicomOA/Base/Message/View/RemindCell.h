@@ -15,6 +15,8 @@
 
 -(void)PassNaveToMessage;
 
+-(void)PassNavToChuanYue;
+
 @end
 
 @interface RemindCell : UITableViewCell

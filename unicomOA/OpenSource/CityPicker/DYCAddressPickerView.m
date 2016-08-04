@@ -112,12 +112,12 @@
                 _cityArray = [NSMutableArray arrayWithArray:_province.sonAddress];
                 _city = _cityArray[0];
                 [self reloadComponent:1];
-                [self selectRow:0 inComponent:1 animated:YES];
+                [self selectRow:0 inComponent:1 animated:NO];
                 if (_city.sonAddress.count) {
                     _countyArray = [NSMutableArray arrayWithArray:_city.sonAddress];
                     _county = _countyArray[0];
                     [self reloadComponent:2];
-                    [self selectRow:0 inComponent:2 animated:YES];
+                    [self selectRow:0 inComponent:2 animated:NO];
                 }
                 else
                 {
@@ -138,7 +138,7 @@
                 _countyArray = [NSMutableArray arrayWithArray:_city.sonAddress];
                 _county = _countyArray[0];
                 [self reloadComponent:2];
-                [self selectRow:0 inComponent:2 animated:YES];
+                [self selectRow:0 inComponent:2 animated:NO];
             }
             else
             {

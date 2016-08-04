@@ -100,7 +100,7 @@
 }
 
 -(void)btnBack:(UIButton*)sender  {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -109,7 +109,7 @@
 }
 
 -(void)BackToAppCenter:(UIButton*)Btn {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 -(void)buildView:(NSString*)str_title {

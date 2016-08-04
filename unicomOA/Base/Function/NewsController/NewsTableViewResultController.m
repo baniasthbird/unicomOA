@@ -58,7 +58,7 @@
     vc.news_index=[str_id integerValue];
     vc.str_label=[dic objectForKey:@"title"];
     if (_nav!=nil) {
-        [_nav pushViewController:vc animated:YES];
+        [_nav pushViewController:vc animated:NO];
         // [self..navigationController pushViewController:vc animated:YES];
         [self.view setHidden:YES];
         UISearchController *searchControl=(UISearchController*)self.parentViewController;

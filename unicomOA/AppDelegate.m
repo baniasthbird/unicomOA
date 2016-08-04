@@ -14,6 +14,7 @@
 #import "CALayer+Transition.h"
 
 
+
 @interface AppDelegate ()
 
 @end
@@ -35,6 +36,7 @@
     
     
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]) {
+        /*
         self.window.rootViewController=[XZMCoreNewFeatureVC newFeatureVCWithImageNames:@[@"new1",@"new2",@"new3"] enterBlock:^{
             NSLog(@"进入主页面");
             [self enter];
@@ -44,21 +46,9 @@
             enterButton.bounds = CGRectMake(0, 0, 120, 40);
             enterButton.center = CGPointMake(KScreenW * 0.5, KScreenH* 0.85);
         }];
-        /*
-        if ([launchView isMemberOfClass:[UIImageView class]]) {
-            UIImageView *img_launchView=(UIImageView*)launchView;
-            [img_launchView setImage:[UIImage imageNamed:@"FirstImage"]];
-        }
+         */
         
-        // 这里判断是否第一次
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"第一次"
-                                                      message:@"进入App"
-                                                     delegate:self
-                                            cancelButtonTitle:@"我知道了"
-                                            otherButtonTitles:nil];
-        [alert show];
-        */
-    }
+          }
     else {
         /*
         if ([launchView isMemberOfClass:[UIImageView class]]) {
@@ -67,9 +57,9 @@
         sleep(2);
          */
         sleep(2);
-        [self enter];
-        
     }
+    
+     [self enter];
    
    
     
@@ -94,9 +84,22 @@
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"everLaunched"]) {
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"everLaunched"];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunch"];
+        NSString *str_version= [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+        double d_version=[str_version doubleValue];
+        [[NSUserDefaults standardUserDefaults] setDouble:d_version forKey:@"systemversion"];
     }
     else {
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"firstLaunch"];
+        NSString *str_version= [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+        double d_version=[str_version doubleValue];
+        double d_older_version=[[NSUserDefaults standardUserDefaults] doubleForKey:@"systemversion"];
+        if (d_older_version!=d_version) {
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunch"];
+            [[NSUserDefaults standardUserDefaults] setDouble:d_version forKey:@"systemversion"];
+        }
+        else {
+            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"firstLaunch"];
+        }
+       
     }
 
     /*

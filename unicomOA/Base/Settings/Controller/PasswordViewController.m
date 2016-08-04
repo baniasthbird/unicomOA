@@ -152,12 +152,12 @@
         dic_param[@"newPassword"]=_str_newPwd;
         [self UpdatePassword:dic_param];
     }
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 -(void)MovePreviousVc:(UIButton*)sender {
     b_back=YES;
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 

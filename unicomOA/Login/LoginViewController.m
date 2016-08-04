@@ -18,6 +18,7 @@
 #import "AFNetworkReachabilityManager.h"
 #import "settingPasswordViewController.h"
 #import "YBMonitorNetWorkState.h"
+#import "HcdGuideView.h"
 
 
 
@@ -95,6 +96,21 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
 -(void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]) {
+        NSMutableArray *images = [NSMutableArray new];
+        
+        [images addObject:[UIImage imageNamed:@"new1"]];
+        [images addObject:[UIImage imageNamed:@"new2"]];
+        [images addObject:[UIImage imageNamed:@"new3"]];
+        
+        [[HcdGuideViewManager sharedInstance] showGuideViewWithImages:images
+                                                       andButtonTitle:@"立即体验"
+                                                  andButtonTitleColor:[UIColor blueColor]
+                                                     andButtonBGColor:[UIColor clearColor]
+                                                 andButtonBorderColor:[UIColor blueColor]];
+
+    }
     
     if (_b_update==YES) {
         NSString *str_msg1=@"有新版本，是否下载？\n";
@@ -422,14 +438,14 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
    // PasswordViewController *vc=[[PasswordViewController alloc]init];
    // [self.navigationController pushViewController:vc animated:YES];
     
-    [self.navigationController pushViewController:[[settingPasswordViewController alloc]init] animated:YES];
+    [self.navigationController pushViewController:[[settingPasswordViewController alloc]init] animated:NO];
 }
 
 
 -(void)serverip:(UIButton*)button {
     ServerIPViewController *vc=[[ServerIPViewController alloc]init];
     vc.delegate=self;
-    [self.navigationController pushViewController:vc animated:YES];
+    [self.navigationController pushViewController:vc animated:NO];
 }
 
 
@@ -825,7 +841,7 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     [self saveUserInfo:userInfo];
     OAViewController *viewController=[[OAViewController alloc]init];
   //  viewController.user_Info=userInfo;
-    [self.navigationController pushViewController:viewController animated:YES];
+    [self.navigationController pushViewController:viewController animated:NO];
 }
 
 

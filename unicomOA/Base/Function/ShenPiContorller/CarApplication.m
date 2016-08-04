@@ -66,7 +66,7 @@
 
 
 -(void)MovePreviousVc:(UIButton*)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 -(void)SubmitToPrint:(UIButton*)sender {
@@ -84,7 +84,7 @@
         }
     }
     
-    [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-3] animated:YES];
+    [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-3] animated:NO];
 }
 
 
@@ -326,7 +326,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (![self isExtendedCellIndexPath:indexPath]) {
         if (indexPath.row==7 || indexPath.row==8 || indexPath.row==9 || indexPath.row==10) {
-            [self.tableview deselectRowAtIndexPath:indexPath animated:YES];
+            [self.tableview deselectRowAtIndexPath:indexPath animated:NO];
             [self extendCellAtIndexPath:indexPath];
         }
     }
@@ -334,7 +334,7 @@
     if (indexPath.row==6) {
         CarUser *viewController=[[CarUser alloc]init];
         viewController.delegate=self;
-        [self.navigationController pushViewController:viewController animated:YES];
+        [self.navigationController pushViewController:viewController animated:NO];
     }
     
 }
@@ -370,7 +370,7 @@
         }
         
         [self.tableview endUpdates];
-        [self.tableview scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+        [self.tableview scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
     
     
 }

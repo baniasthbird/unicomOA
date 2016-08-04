@@ -127,7 +127,7 @@
 }
 
 -(void)MovePreviousVc:(UIButton*)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 @end

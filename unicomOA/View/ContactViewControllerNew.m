@@ -468,7 +468,7 @@ CGFloat i_Height=-1;
  处理cell选中事件，需要自定义的部分
  --------------------------------------- */
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     CLTreeViewNode *node = [_displayArray objectAtIndex:indexPath.row];
     [self reloadDataForDisplayArrayChangeAt:indexPath.row];//修改cell的状态(关闭或打开)
     if(node.type == 2){
@@ -492,7 +492,7 @@ CGFloat i_Height=-1;
         viewController.str_cellphone=nodeData.cellphonenum;
         viewController.str_phonenum=nodeData.phonenum;
         viewController.str_email=nodeData.email;
-        [self.navigationController pushViewController:viewController animated:YES];
+        [self.navigationController pushViewController:viewController animated:NO];
     }
     else {
         CLTreeView_LEVEL0_Cell *cell = (CLTreeView_LEVEL0_Cell*)[tableView cellForRowAtIndexPath:indexPath];

@@ -115,11 +115,11 @@
     if (_str_phonenum!=nil) {
          viewController.str_cellphone=_str_phonenum;
     }
-    [self.navigationController pushViewController:viewController animated:YES];
+    [self.navigationController pushViewController:viewController animated:NO];
 }
 
 -(void)MovePreviousVc:(UIButton*)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 -(void)startTime {

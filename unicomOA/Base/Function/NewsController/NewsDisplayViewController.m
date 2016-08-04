@@ -229,12 +229,12 @@ int i_comment_num;
     viewController.userInfo=_userInfo;
     viewController.news_index=_news_index;
    // viewController.str=[NSString stringWithFormat:@"%d",i_comment_num];
-    [self.navigationController pushViewController:viewController animated:YES];
+    [self.navigationController pushViewController:viewController animated:NO];
 }
 
 
 -(void)MovePreviousVc:(UIButton*)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 

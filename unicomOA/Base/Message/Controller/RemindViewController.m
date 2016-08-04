@@ -190,7 +190,7 @@
     frame.origin.x = self.scroll.frame.size.width * self.currentPages;
     frame.origin.y = 0;
     frame.size = _scroll.frame.size;
-    [_scroll scrollRectToVisible:frame animated:YES];
+    [_scroll scrollRectToVisible:frame animated:NO];
 }
 
 
@@ -210,7 +210,7 @@
 
 -(void)MovePreviousVc:(UIButton *)sender {
     
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:NO];
     
 }
 

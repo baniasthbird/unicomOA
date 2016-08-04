@@ -71,12 +71,12 @@ NSInteger i_count=0;
     viewController.delegate=self;
     viewController.usrInfo=_user_Info;
     viewController.i_index=[self newDay];
-    [self.navigationController pushViewController:viewController animated:YES];
+    [self.navigationController pushViewController:viewController animated:NO];
    // [self.navigationController presentViewController:viewController animated:YES completion:nil];
 }
 
 -(void)BackToAppCenter:(UIButton*)btn {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 //判断是否是新的一天
@@ -210,7 +210,7 @@ NSInteger i_count=0;
    
     
     
-    [self.navigationController pushViewController:new_controller animated:YES];
+    [self.navigationController pushViewController:new_controller animated:NO];
 }
 
 
@@ -321,7 +321,7 @@ NSInteger i_count=0;
             new_controller.dic_notes=dic_note;
             new_controller.delegate=self;
             
-            [self.navigationController pushViewController:new_controller animated:YES];
+            [self.navigationController pushViewController:new_controller animated:NO];
             break;
         }
         case 1: {

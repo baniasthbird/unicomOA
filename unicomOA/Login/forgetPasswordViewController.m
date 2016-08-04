@@ -109,11 +109,11 @@
 
 -(void)MoveNextVc:(UIButton*)sender {
     SMSCodeViewController *vc=[[SMSCodeViewController alloc]init];
-    [self.navigationController pushViewController:vc animated:YES];
+    [self.navigationController pushViewController:vc animated:NO];
 }
 
 -(void)MovePreviousVc:(UIButton*)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 

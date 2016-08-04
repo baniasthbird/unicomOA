@@ -86,7 +86,7 @@
     
     
     //[SVProgressHUD showSuccessWithStatus:@"修改成功"];
-    [self.navigationController pushViewController:[[LoginViewController alloc]init] animated:YES];
+    [self.navigationController pushViewController:[[LoginViewController alloc]init] animated:NO];
 }
 
 -(UITextField *)createTextFielfFrame:(CGRect)frame font:(UIFont *)font placeholder:(NSString *)placeholder
@@ -151,7 +151,7 @@
 
 -(void)clickaddBtn
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 

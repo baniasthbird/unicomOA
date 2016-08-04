@@ -385,7 +385,7 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
     if (indexPath.section==0 && indexPath.row==0) {
         StaffInfoViewController *staffController=[[StaffInfoViewController alloc]init];
         staffController.userInfo=_userInfo;
-        [self.navigationController pushViewController:staffController animated:YES];
+        [self.navigationController pushViewController:staffController animated:NO];
     }
     /*
     else if (indexPath.section==0 && indexPath.row==0) {
@@ -395,7 +395,7 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
     */
     else if (indexPath.section==1 && indexPath.row==0) {
         PasswordViewController *passwordController=[[PasswordViewController alloc]init];
-        [self.navigationController pushViewController:passwordController animated:YES];
+        [self.navigationController pushViewController:passwordController animated:NO];
     }
     else if (indexPath.section==1 && indexPath.row==1) {
         /*
@@ -434,7 +434,7 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
       //  SendFeedBackViewController *sendController=[[SendFeedBackViewController alloc]init];
       //  [self.navigationController pushViewController:sendController animated:YES];
         AboutViewController *aboutController=[[AboutViewController alloc]init];
-        [self.navigationController pushViewController:aboutController animated:YES];
+        [self.navigationController pushViewController:aboutController animated:NO];
     }
     /*
     else if (indexPath.section==2 && indexPath.row==1) {
@@ -514,7 +514,7 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
             UINavigationController *nav=[[UINavigationController alloc]initWithRootViewController:login];
             [[UIApplication sharedApplication] keyWindow].rootViewController=nav;
             
-            [self presentViewController:[[UIApplication sharedApplication] keyWindow].rootViewController animated:YES completion:nil];
+            [self presentViewController:[[UIApplication sharedApplication] keyWindow].rootViewController animated:NO completion:nil];
            // NSArray *arr_vc=[NSArray arrayWithObjects:vc, nil];
            // [self.navigationController setViewControllers:arr_vc animated:YES];
         }

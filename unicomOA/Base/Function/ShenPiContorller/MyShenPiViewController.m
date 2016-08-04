@@ -206,7 +206,7 @@
 
 -(void)MovePreviousVc:(UIButton*)sender {
     [_delegate RefreshBadgeNumber];
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 /**
@@ -485,7 +485,7 @@
         vc.str_workItemID=str_workItemID;
         vc.str_title=str_processTitle;
         vc.delegate=self;
-        [self.navigationController pushViewController:vc animated:YES];
+        [self.navigationController pushViewController:vc animated:NO];
     }
     else if ([cell.lbl_status.text isEqualToString:@"已办"]) {
         NSString *str_key=[dic_tmp objectForKey:@"processDefName"];
@@ -496,7 +496,7 @@
         vc.str_url=str_url;
         vc.str_processInstID=str_processInstID;
         vc.str_title=str_processTitle;
-        [self.navigationController pushViewController:vc animated:YES];
+        [self.navigationController pushViewController:vc animated:NO];
 
     }
     /*

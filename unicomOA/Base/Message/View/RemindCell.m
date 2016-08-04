@@ -40,6 +40,10 @@
         view1.backgroundColor=[UIColor clearColor];
         view1.userInteractionEnabled=YES;
         
+        UIView *view2=[[UIView alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/3, 0, [UIScreen mainScreen].bounds.size.width/3, 70)];
+        view2.backgroundColor=[UIColor clearColor];
+        view2.userInteractionEnabled=YES;
+        
         UIView *view3=[[UIView alloc]initWithFrame:CGRectMake(2*[UIScreen mainScreen].bounds.size.width/3, 0, [UIScreen mainScreen].bounds.size.width/3, 70)];
         view3.backgroundColor=[UIColor clearColor];
         view3.userInteractionEnabled=YES;
@@ -49,6 +53,12 @@
         singelTap.numberOfTapsRequired=1;
         singelTap.numberOfTouchesRequired=1;
         singelTap.delegate=self;
+        
+        UITapGestureRecognizer *singleTap2=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(NavToChuanYue:)];
+        singleTap2.numberOfTapsRequired=1;
+        singleTap2.numberOfTouchesRequired=1;
+        singleTap2.delegate=self;
+        
         
         UITapGestureRecognizer *singleTap3=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(NavToMessage:)];
         singleTap3.numberOfTapsRequired=1;
@@ -62,7 +72,7 @@
         lbl_title1.text=@"待办流程";
         lbl_title1.textAlignment=NSTextAlignmentCenter;
         
-        UILabel *lbl_title2=[[UILabel alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/3, 8, [UIScreen mainScreen].bounds.size.width/3, 30)];
+        UILabel *lbl_title2=[[UILabel alloc]initWithFrame:CGRectMake(0, 8, [UIScreen mainScreen].bounds.size.width/3, 30)];
         lbl_title2.font=[UIFont systemFontOfSize:16];
         lbl_title2.textColor=[UIColor blackColor];
         lbl_title2.text=@"公文传阅";
@@ -89,7 +99,7 @@
         lbl_num1.layer.cornerRadius=10;
         lbl_num1.layer.masksToBounds=YES;
         
-        UILabel *lbl_num2=[[UILabel alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/3, 40, [UIScreen mainScreen].bounds.size.width/3, 30)];
+        UILabel *lbl_num2=[[UILabel alloc]initWithFrame:CGRectMake(0, 40, [UIScreen mainScreen].bounds.size.width/3, 30)];
         lbl_num2.font=[UIFont systemFontOfSize:16];
         lbl_num2.backgroundColor=[UIColor colorWithRed:254/255.0f green:83/255.0f blue:81/255.0f alpha:1];
         lbl_num2.textColor=[UIColor whiteColor];
@@ -98,7 +108,7 @@
         CGFloat width_2=[UILabel_LabelHeightAndWidth getWidthWithTitle:lbl_num2.text font:[UIFont systemFontOfSize:16]];
         width_2=width_2+20;
         CGFloat height_2=[UILabel_LabelHeightAndWidth getHeightByWidth:width_2 title:lbl_num2.text font:[UIFont systemFontOfSize:16]];
-        [lbl_num2 setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2-width_2/2, 40, width_2, height_2)];
+        [lbl_num2 setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/6-width_2/2, 40, width_2, height_2)];
       //  [lbl_num2 sizeToFit];
 
         lbl_num2.layer.cornerRadius=10;
@@ -121,6 +131,7 @@
         
 
         [view1 addGestureRecognizer:singelTap];
+        [view2 addGestureRecognizer:singleTap2];
         [view3 addGestureRecognizer:singleTap3];
         
         [self.contentView addSubview:seperatorline1];
@@ -129,15 +140,19 @@
         [view1 addSubview:lbl_num1];
         [self.contentView addSubview:view1];
         
+        [view2 addSubview:lbl_title2];
+        [view2 addSubview:lbl_num2];
+        [self.contentView addSubview:view2];
+        
         [view3 addSubview:lbl_title3];
         [view3 addSubview:lbl_num3];
         [self.contentView addSubview:view3];
        // [self.contentView addSubview:lbl_title1];
-        [self.contentView addSubview:lbl_title2];
+       // [self.contentView addSubview:lbl_title2];
        // [self.contentView addSubview:lbl_title3];
       //  [self.contentView addSubview:lbl_num1];
         
-        [self.contentView addSubview:lbl_num2];
+      //  [self.contentView addSubview:lbl_num2];
        // [self.contentView addSubview:lbl_num3];
         
         
@@ -176,7 +191,6 @@
         _lbl_count.textColor=[UIColor whiteColor];
         _lbl_count.font=[UIFont systemFontOfSize:13];
         CGSize titleSize = [self.textLabel.text sizeWithFont:self.textLabel.font constrainedToSize:CGSizeMake(MAXFLOAT, 30)];
-        //   CGSize titleSize= self.textLabel.text boundingRectWithSize:<#(CGSize)#> options:<#(NSStringDrawingOptions)#> attributes:<#(nullable NSDictionary<NSString *,id> *)#> context:<#(nullable NSStringDrawingContext *)#>
         CGFloat width1=[UILabel_LabelHeightAndWidth getWidthWithTitle:_lbl_count.text font:_lbl_count.font];
         _lbl_count.frame=CGRectMake(titleSize.width+55, 10, width1, width1);
         
@@ -198,6 +212,10 @@
 
 -(void)NavToMessage:(UITapGestureRecognizer*)sender {
     [_delegate PassNaveToMessage];
+}
+
+-(void)NavToChuanYue:(UITapGestureRecognizer*)sender {
+    [_delegate PassNavToChuanYue];
 }
                 
 @end

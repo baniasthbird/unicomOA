@@ -118,7 +118,7 @@
 
 
 -(void)MovePreviousVc:(UIButton*)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -198,7 +198,7 @@
                             
                         }];
                         [alert showLXAlertView];
-                        [self.navigationController popViewControllerAnimated:YES];
+                        [self.navigationController popViewControllerAnimated:NO];
                         
                     }
                 }
@@ -302,7 +302,7 @@
     ShenPiQueryLogVC *vc=[[ShenPiQueryLogVC alloc]init];
     vc.str_processInstID=_str_processInstID;
     vc.str_titleName=_str_title;
-    [self.navigationController pushViewController:vc animated:YES];
+    [self.navigationController pushViewController:vc animated:NO];
     
 }
 
@@ -602,13 +602,13 @@
         viewController.arr_data=tmp_Files;
         viewController.arr_title=tmp_Title;
         viewController.str_title=str_title;
-        [self.navigationController pushViewController:viewController animated:YES];
+        [self.navigationController pushViewController:viewController animated:NO];
     }
     else if ([cell.accessibilityHint isEqualToString:@"html"]) {
         NewsDetailVc *vc=[[NewsDetailVc alloc]init];
         vc.str_value=cell.accessibilityValue;
         vc.str_title2=cell.textLabel.text;
-        [self.navigationController pushViewController:vc animated:YES];
+        [self.navigationController pushViewController:vc animated:NO];
     }
 }
 

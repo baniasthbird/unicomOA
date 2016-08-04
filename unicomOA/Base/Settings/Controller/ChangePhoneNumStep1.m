@@ -84,11 +84,11 @@
 -(void)MoveNextVc:(UIButton*)sender {
     ChangePhoneNumStep2 *viewController=[[ChangePhoneNumStep2 alloc]init];
     viewController.user_Info=_userInfo;
-    [self.navigationController pushViewController:viewController animated:YES];
+    [self.navigationController pushViewController:viewController animated:NO];
 }
 
 -(void)MovePreviousVc:(UIButton*)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 /*

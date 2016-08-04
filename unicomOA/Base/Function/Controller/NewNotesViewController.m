@@ -232,7 +232,7 @@ typedef enum
     //[delegate passValue:_str_notesFenLei Content:_str_noteContent Time:_str_date TimeNow:dateString PicPath:_str_pic_path coordx:str_coordx coordy:str_coordy address:_str_location_content];
     [delegate passValue:_str_FenLei Content:_str_noteContent Time:meetingString TimeNow:dateString PicPath:_str_pic_path coordx:str_coordx coordy:str_coordy address:_str_location_content index:str_index];
     
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 
@@ -618,7 +618,7 @@ typedef enum
 
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-   [tableView deselectRowAtIndexPath:indexPath animated:YES];
+   [tableView deselectRowAtIndexPath:indexPath animated:NO];
     if (indexPath.row==3 && indexPath.section==0) {
         MapViewController *viewController=[[MapViewController alloc]init];
         viewController.userInfo=_usrInfo;
@@ -627,7 +627,7 @@ typedef enum
             //viewController.placemark=_addr_placemark;
             viewController.touchMapCoord=_coord_placemark;
         }
-        [self.navigationController pushViewController:viewController animated:YES];
+        [self.navigationController pushViewController:viewController animated:NO];
     }
     else if (indexPath.row==6 && indexPath.section==0) {
         Soundselectvc *vc=[[Soundselectvc alloc]init];
@@ -678,7 +678,7 @@ typedef enum
     [self.tableView reloadRowsAtIndexPaths:@[self.openedMenuCellIndex] withRowAnimation:UITableViewRowAnimationFade];
     MenuTableViewCell *cell=[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     cell.indexPathLabel.text=menuTableViewCell.indexPathLabel.text;
-    [self.tableView scrollToRowAtIndexPath:self.openedMenuCellIndex atScrollPosition:UITableViewScrollPositionNone animated:YES];
+    [self.tableView scrollToRowAtIndexPath:self.openedMenuCellIndex atScrollPosition:UITableViewScrollPositionNone animated:NO];
 }
 
 -(void)menuTableViewCell:(MenuTableViewCell *)menuTableViewCell didSeletedMentItemAtIndex:(NSInteger)menuItemIndex
@@ -919,7 +919,7 @@ typedef enum
 }
 
 -(void)MovePreviousVc:(UIButton*)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 -(void)buttonPressed:(UITapGestureRecognizer *)gestrueRecognizer {
@@ -939,7 +939,7 @@ typedef enum
             imagePickerController.delegate=self;
             imagePickerController.allowsEditing=YES;
             imagePickerController.sourceType=UIImagePickerControllerSourceTypeCamera;
-            [self presentViewController:imagePickerController animated:YES completion:^{
+            [self presentViewController:imagePickerController animated:NO completion:^{
                 
             }];
         }
@@ -951,7 +951,7 @@ typedef enum
             imagePickerController.delegate=self;
             imagePickerController.allowsEditing=YES;
             imagePickerController.sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
-            [self presentViewController:imagePickerController animated:YES completion:^{
+            [self presentViewController:imagePickerController animated:NO completion:^{
                 
             }];
 
@@ -995,7 +995,7 @@ typedef enum
 
 //拍照完成或选择头像完成后的事件
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
-    [picker dismissViewControllerAnimated:YES completion:^{
+    [picker dismissViewControllerAnimated:NO completion:^{
     }];
     
     UIImage *image=[info objectForKey:UIImagePickerControllerOriginalImage];

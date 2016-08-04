@@ -45,7 +45,7 @@
     {
         // 此时，创建一个UIPercentDrivenInteractiveTransition交互对象，来控制整个过程中动画的状态
         _interactiveTransition = [[UIPercentDrivenInteractiveTransition alloc] init];
-        [self.navigationController popViewControllerAnimated:YES];
+        [self.navigationController popViewControllerAnimated:NO];
     }
     else if(recognizer.state == UIGestureRecognizerStateChanged)
     {

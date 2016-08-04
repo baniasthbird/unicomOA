@@ -146,7 +146,7 @@
 }
 
 -(void)MovePreviousVc:(UIButton*)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 -(void)PrePareData:(NSMutableDictionary*)param {
@@ -227,7 +227,7 @@
                             
                         }];
                         [alert showLXAlertView];
-                        [self.navigationController popViewControllerAnimated:YES];
+                        [self.navigationController popViewControllerAnimated:NO];
                     }
                 }
             }
@@ -284,7 +284,7 @@
     ShenPiQueryLogVC *vc=[[ShenPiQueryLogVC alloc]init];
     vc.str_processInstID=_str_processInstID;
     vc.str_titleName=_str_title;
-    [self.navigationController pushViewController:vc animated:YES];
+    [self.navigationController pushViewController:vc animated:NO];
 }
 
 

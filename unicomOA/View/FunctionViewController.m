@@ -555,7 +555,7 @@
     newsView.b_isNews=YES;
     newsView.str_title=@"新闻";
     newsView.userInfo=_userInfo;
-    [self.navigationController pushViewController:newsView animated:YES];
+    [self.navigationController pushViewController:newsView animated:NO];
 }
 
 //公告
@@ -565,7 +565,7 @@
     newsView.b_isNews=NO;
     newsView.str_title=@"公告";
     newsView.userInfo=_userInfo;
-    [self.navigationController pushViewController:newsView animated:YES];
+    [self.navigationController pushViewController:newsView animated:NO];
 }
 
 //消息
@@ -579,7 +579,7 @@
     vc.b_isSysMsg=YES;
     vc.str_title=@"系统消息";
     vc.userInfo=_userInfo;
-    [self.navigationController pushViewController:vc animated:YES];
+    [self.navigationController pushViewController:vc animated:NO];
     
 }
 
@@ -587,49 +587,49 @@
 -(void)ChuanYueClick:(UIImageButton *)button {
     UnFinishViewController *view=[[UnFinishViewController alloc]init];
     view.str_title=@"公文传阅";
-    [self.navigationController pushViewController:view animated:YES];
+    [self.navigationController pushViewController:view animated:NO];
 }
 
 //决策
 -(void)JueCeItemClick:(UIImageButton *)button {
     UnFinishViewController *view=[[UnFinishViewController alloc]init];
     view.str_title=@"决策辅助";
-    [self.navigationController pushViewController:view animated:YES];
+    [self.navigationController pushViewController:view animated:NO];
 }
 
 //办公
 -(void)BanGongItemClick:(UIImageButton *)button {
     UnFinishViewController *view=[[UnFinishViewController alloc]init];
     view.str_title=@"办公审批";
-    [self.navigationController pushViewController:view animated:YES];
+    [self.navigationController pushViewController:view animated:NO];
 }
 
 //售前
 -(void)ShouQianItemClick:(UIImageButton *)button {
     UnFinishViewController *view=[[UnFinishViewController alloc]init];
     view.str_title=@"售前审批";
-    [self.navigationController pushViewController:view animated:YES];
+    [self.navigationController pushViewController:view animated:NO];
 }
 
 //生产
 -(void)ShengChanItemClick:(UIImageButton *)button {
     UnFinishViewController *view=[[UnFinishViewController alloc]init];
     view.str_title=@"生产审批";
-    [self.navigationController pushViewController:view animated:YES];
+    [self.navigationController pushViewController:view animated:NO];
 }
 
 //合同
 -(void)HeTongItemClick:(UIImageButton *)button {
     UnFinishViewController *view=[[UnFinishViewController alloc]init];
     view.str_title=@"合同审批";
-    [self.navigationController pushViewController:view animated:YES];
+    [self.navigationController pushViewController:view animated:NO];
 }
 
 //事务
 -(void)ShiWuItemClick:(UIImageButton *)button {
     UnFinishViewController *view=[[UnFinishViewController alloc]init];
     view.str_title=@"事务审批";
-    [self.navigationController pushViewController:view animated:YES];
+    [self.navigationController pushViewController:view animated:NO];
 }
 
 
@@ -653,14 +653,14 @@
     viewController.userInfo=_userInfo;
     viewController.delegate=self;
     viewController.i_Class=0;
-    [self.navigationController pushViewController:viewController animated:YES];
+    [self.navigationController pushViewController:viewController animated:NO];
 
 }
 
 -(void)IVotingItemClick:(UIImageButton *)button {
     IVotingManamentController *viewController=[[IVotingManamentController alloc]init];
     viewController.user_Info=_userInfo;
-    [self.navigationController pushViewController:viewController animated:YES];
+    [self.navigationController pushViewController:viewController animated:NO];
 
 }
 
@@ -668,7 +668,7 @@
 -(void)NotesItemClick:(UIImageButton *)button {
     NotesViewController *notesView=[[NotesViewController alloc]init];
     notesView.user_Info=_userInfo;
-    [self.navigationController pushViewController:notesView animated:YES];
+    [self.navigationController pushViewController:notesView animated:NO];
 }
 
 /*

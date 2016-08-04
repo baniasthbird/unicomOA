@@ -282,7 +282,7 @@
     
     SettingViewController *viewController=[[SettingViewController alloc]init];
     viewController.userInfo=_userInfo;
-    [self.navigationController pushViewController:viewController animated:YES];
+    [self.navigationController pushViewController:viewController animated:NO];
      
      //[self.navigationController popViewControllerAnimated:YES];
 }
@@ -307,7 +307,7 @@
             imagePickerController.delegate=self;
             imagePickerController.allowsEditing=YES;
             imagePickerController.sourceType=UIImagePickerControllerSourceTypeCamera;
-            [self presentViewController:imagePickerController animated:YES completion:^{
+            [self presentViewController:imagePickerController animated:NO completion:^{
                 
             }];
         }
@@ -317,7 +317,7 @@
             imagePickerController.delegate=self;
             imagePickerController.allowsEditing=YES;
             imagePickerController.sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
-            [self presentViewController:imagePickerController animated:YES completion:^{
+            [self presentViewController:imagePickerController animated:NO completion:^{
             
             }];
         }

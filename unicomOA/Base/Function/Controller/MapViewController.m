@@ -279,7 +279,7 @@
 
 
 -(void)MovePreviousVc:(UIButton*)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 
@@ -289,6 +289,6 @@
         [_delegate PassMapValue:_placemark Coordinate:_touchMapCoord];
 
     }
-        [self.navigationController popViewControllerAnimated:YES];
+        [self.navigationController popViewControllerAnimated:NO];
 }
 @end

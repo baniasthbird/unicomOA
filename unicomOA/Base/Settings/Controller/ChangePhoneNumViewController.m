@@ -134,14 +134,14 @@
 -(void)MoveNextVc:(UIButton*)sender {
     ChangePhoneNumStep1 *viewController=[[ChangePhoneNumStep1 alloc]init];
     viewController.userInfo=_user_Info;
-    [self.navigationController pushViewController:viewController animated:YES];
+    [self.navigationController pushViewController:viewController animated:NO];
     
     
 }
 
 
 -(void)MovePreviousVc:(UIButton*)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 /*
 #pragma mark - Navigation

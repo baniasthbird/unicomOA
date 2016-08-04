@@ -312,7 +312,7 @@
 }
 
 -(void)MovePreviousVc:(UIButton*)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 
@@ -329,7 +329,7 @@
             vc.recipients=@[_str_cellphone];
             vc.body=@"";
             
-            [self presentViewController:vc animated:YES completion:nil];
+            [self presentViewController:vc animated:NO completion:nil];
         }
     }
     
@@ -399,7 +399,7 @@
 }
 
 -(void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:NO completion:nil];
 }
 
 @end

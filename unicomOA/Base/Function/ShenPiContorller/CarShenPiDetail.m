@@ -73,14 +73,14 @@
         ShenPiAgreeWithCarDeploy *viewController=[[ShenPiAgreeWithCarDeploy alloc]init];
         viewController.delegate=self;
         viewController.user_info=_user_Info;
-        [self.navigationController pushViewController:viewController animated:YES];
+        [self.navigationController pushViewController:viewController animated:NO];
         
     }
     else if (self.service.shenpi_1==nil && self.service.shenpi_2==nil) {
         ShenPiAgree *viewController=[[ShenPiAgree alloc]init];
         viewController.delegate=self;
         viewController.userInfo=_user_Info;
-        [self.navigationController pushViewController:viewController animated:YES];
+        [self.navigationController pushViewController:viewController animated:NO];
     }
     
 }
@@ -89,7 +89,7 @@
     ShenPiDisAgree *viewController=[[ShenPiDisAgree alloc]init];
     viewController.delegate=self;
     viewController.userInfo=_user_Info;
-    [self.navigationController pushViewController:viewController animated:YES];
+    [self.navigationController pushViewController:viewController animated:NO];
 }
 
 -(void)SignToCopy:(UIButton*)sender {
@@ -114,7 +114,7 @@
 
 -(void)MovePreviousVc:(UIButton*)sender {
     [_delegate CarRefreshTableView];
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 -(void)SendAgreeStatus:(ShenPiStatus *)tmp_status {

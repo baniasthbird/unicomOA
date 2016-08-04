@@ -81,11 +81,11 @@
     ChangePhoneNumStep3 *viewController=[[ChangePhoneNumStep3 alloc]init];
     viewController.user_Info=_user_Info;
     viewController.str_phonenum=_txt_num.text;
-    [self.navigationController pushViewController:viewController animated:YES];
+    [self.navigationController pushViewController:viewController animated:NO];
 }
 
 -(void)MovePreviousVc:(UIButton*)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 /*
 #pragma mark - Navigation

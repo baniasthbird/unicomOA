@@ -69,7 +69,7 @@
 }
 
 -(void)MovePreviousVc:(UIButton*)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 //添加演示数据 (先根据demo在代码中添加，再组成plist文件以方便调整)
@@ -350,13 +350,13 @@
  处理cell选中事件，需要自定义的部分
  --------------------------------------- */
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     CLTreeViewNode *node = [_displayArray objectAtIndex:indexPath.row];
     [self reloadDataForDisplayArrayChangeAt:indexPath.row];//修改cell的状态(关闭或打开)
     if(node.type == 2){
         CLTreeView_LEVEL2_Model *nodeData = node.nodeData;
         [self.delegate CarUserName:nodeData.name];
-        [self.navigationController popViewControllerAnimated:YES];
+        [self.navigationController popViewControllerAnimated:NO];
            }
     else {
         CLTreeView_LEVEL0_Cell *cell = (CLTreeView_LEVEL0_Cell*)[tableView cellForRowAtIndexPath:indexPath];

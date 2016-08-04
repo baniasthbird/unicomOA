@@ -65,7 +65,7 @@
     vc.str_phonenum=str_tel;
     vc.str_email=str_email;
     if (_nav!=nil) {
-        [_nav pushViewController:vc animated:YES];
+        [_nav pushViewController:vc animated:NO];
     }
     //[self.navigationController pushViewController:vc animated:YES];
     

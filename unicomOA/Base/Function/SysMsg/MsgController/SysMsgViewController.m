@@ -98,7 +98,7 @@
 }
 
 -(void)BackToAppCenter:(UIButton*)Btn {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 -(void)buildView {
@@ -355,7 +355,7 @@
         SysMsgDisplayController *vc=[[SysMsgDisplayController alloc]init];
         vc.i_id=cellTag;
         vc.str_title=@"系统消息内容";
-        [self.navigationController pushViewController:vc animated:YES];
+        [self.navigationController pushViewController:vc animated:NO];
         
     }
 }
