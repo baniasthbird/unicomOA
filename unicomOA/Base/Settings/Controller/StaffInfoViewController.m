@@ -108,7 +108,16 @@
         lbl_title.font=[UIFont systemFontOfSize:24];
         lbl_title.textColor=[UIColor blackColor];
         
-        UIImage *imageHead=[UIImage imageNamed:_userInfo.str_Logo];
+        UIImage *imageHead=[[UIImage alloc]init];
+        if ([_userInfo.str_Logo isEqualToString:@"headLogo.png"]) {
+            imageHead=[UIImage imageNamed:_userInfo.str_Logo];
+        }
+        else {
+            NSString *str_picname=[NSString stringWithFormat:@"%@.%@",_userInfo.str_username,@"png"];
+            NSString *fullPath=  [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:str_picname];
+            imageHead=[[UIImage alloc]initWithContentsOfFile:fullPath];
+        }
+        
         _img_Head=[[UIImageView alloc]initWithImage:imageHead];
         [_img_Head.layer setMasksToBounds:YES];
         _img_Head.layer.cornerRadius=37.0f;
@@ -282,6 +291,9 @@
     
     SettingViewController *viewController=[[SettingViewController alloc]init];
     viewController.userInfo=_userInfo;
+    if (f_v<9.0) {
+        self.navigationController.delegate=nil;
+    }
     [self.navigationController pushViewController:viewController animated:NO];
      
      //[self.navigationController popViewControllerAnimated:YES];
@@ -336,14 +348,22 @@
     
     UIImage *image=[info objectForKey:UIImagePickerControllerOriginalImage];
     
+    NSString *str_picname=[NSString stringWithFormat:@"%@.%@",_userInfo.str_username,@"png"];
     //保存图片至本地
-    [self saveImage:image withName:@"demo.png"];
+    [self saveImage:image withName:str_picname];
     
-    NSString *fullPath=[[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"demo.png"];
+    NSString *fullPath=[[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:str_picname];
     
     UIImage *saveImage=[[UIImage alloc]initWithContentsOfFile:fullPath];
     
+    
+   
+    
     [_img_Head setImage:saveImage];
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:str_picname forKey:@"Logo"];
+    [userDefaults synchronize];
     
     _userInfo.str_Logo=fullPath;
     

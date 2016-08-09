@@ -71,11 +71,17 @@ NSInteger i_count=0;
     viewController.delegate=self;
     viewController.usrInfo=_user_Info;
     viewController.i_index=[self newDay];
+    if (f_v<9.0) {
+        self.navigationController.delegate=nil;
+    }
     [self.navigationController pushViewController:viewController animated:NO];
    // [self.navigationController presentViewController:viewController animated:YES completion:nil];
 }
 
 -(void)BackToAppCenter:(UIButton*)btn {
+    if (f_v<9.0) {
+        self.navigationController.delegate=nil;
+    }
     [self.navigationController popViewControllerAnimated:NO];
 }
 
@@ -209,7 +215,9 @@ NSInteger i_count=0;
     
    
     
-    
+    if (f_v<9.0) {
+        self.navigationController.delegate=nil;
+    }
     [self.navigationController pushViewController:new_controller animated:NO];
 }
 
@@ -320,7 +328,9 @@ NSInteger i_count=0;
             NSDictionary *dic_note=(NSDictionary*)cell.myNotes;
             new_controller.dic_notes=dic_note;
             new_controller.delegate=self;
-            
+            if (f_v<9.0) {
+                self.navigationController.delegate=nil;
+            }
             [self.navigationController pushViewController:new_controller animated:NO];
             break;
         }

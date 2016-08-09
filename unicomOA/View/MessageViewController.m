@@ -121,6 +121,8 @@
     [_session.requestSerializer setHTTPShouldHandleCookies:YES];
     [_session.requestSerializer setTimeoutInterval:10.0f];
     
+    //zr 0809
+    
     indicator=[self AddLoop];
     [indicator startAnimating];
     [self.view addSubview:indicator];
@@ -130,7 +132,7 @@
     news_param[@"classId"]=@"0";
     [self NewsList:news_param];
     [self NewsCount];
-   
+    
     //}
     
 }
@@ -620,6 +622,9 @@
     news_controller.userInfo=_userInfo;
     news_controller.b_News=YES;
     selected_title=cell.str_title;
+    if (f_v<9.0) {
+        self.navigationController.delegate=nil;
+    }
     [self.navigationController pushViewController:news_controller animated:NO];
 }
 
@@ -691,6 +696,9 @@
     MyShenPiViewController *viewController=[[MyShenPiViewController alloc] init];
     viewController.userInfo=_userInfo;
     viewController.delegate=self;
+    if (f_v<9.0) {
+        self.navigationController.delegate=nil;
+    }
     [self.navigationController pushViewController:viewController animated:NO];
 }
 
@@ -699,6 +707,9 @@
      NSLog(@"单击事件");
     UnFinishViewController *vc=[[UnFinishViewController alloc]init];
     vc.str_title=@"公文传阅";
+    if (f_v<9.0) {
+        self.navigationController.delegate=nil;
+    }
     [self.navigationController pushViewController:vc animated:NO];
 }
 
@@ -707,6 +718,9 @@
     SysMsgViewController *vc=[[SysMsgViewController alloc] init];
     vc.userInfo=_userInfo;
     vc.str_title=@"系统消息";
+    if (f_v<9.0) {
+        self.navigationController.delegate=nil;
+    }
     [self.navigationController pushViewController:vc animated:NO];
 }
 
@@ -728,6 +742,11 @@
 
 -(void)RefreshBadge:(NSMutableDictionary*)param {
     [self NewsCount];
+}
+
+-(void)dealloc {
+    self.tableView.delegate=nil;
+    self.tableView.dataSource=nil;
 }
 
 

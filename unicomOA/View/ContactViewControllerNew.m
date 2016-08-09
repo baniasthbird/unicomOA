@@ -492,6 +492,11 @@ CGFloat i_Height=-1;
         viewController.str_cellphone=nodeData.cellphonenum;
         viewController.str_phonenum=nodeData.phonenum;
         viewController.str_email=nodeData.email;
+        /*
+        if (f_v<9.0) {
+            self.navigationController.delegate=nil;
+        }
+         */
         [self.navigationController pushViewController:viewController animated:NO];
     }
     else {

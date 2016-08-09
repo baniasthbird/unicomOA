@@ -120,7 +120,17 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
     LGSettingSection *section1=[LGSettingSection initWithHeaderTitle:@"" footerTitle:nil];
     //添加行
     LGSettingItem *item1=[LGSettingItem initWithtitle:_userInfo.str_name];
-    item1.image=[UIImage imageNamed:_userInfo.str_Logo];
+    if ([_userInfo.str_Logo isEqualToString:@"headLogo.png"]) {
+        item1.image=[UIImage imageNamed:_userInfo.str_Logo];
+    }
+    else {
+        //item1.image=[UIImage imageWithContentsOfFile:_userInfo.str_Logo];
+        NSString *str_picname=[NSString stringWithFormat:@"%@.%@",_userInfo.str_username,@"png"];
+        NSString *fullPath=  [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:str_picname];
+        UIImage *saveImage=[[UIImage alloc]initWithContentsOfFile:fullPath];
+        item1.image=saveImage;
+    }
+    
     if (iPhone5_5s || iPhone4_4s) {
         item1.height=112;
     }
@@ -385,6 +395,9 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
     if (indexPath.section==0 && indexPath.row==0) {
         StaffInfoViewController *staffController=[[StaffInfoViewController alloc]init];
         staffController.userInfo=_userInfo;
+        if (f_v<9.0) {
+            self.navigationController.delegate=nil;
+        }
         [self.navigationController pushViewController:staffController animated:NO];
     }
     /*
@@ -395,6 +408,9 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
     */
     else if (indexPath.section==1 && indexPath.row==0) {
         PasswordViewController *passwordController=[[PasswordViewController alloc]init];
+        if (f_v<9.0) {
+            self.navigationController.delegate=nil;
+        }
         [self.navigationController pushViewController:passwordController animated:NO];
     }
     else if (indexPath.section==1 && indexPath.row==1) {
@@ -434,6 +450,9 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
       //  SendFeedBackViewController *sendController=[[SendFeedBackViewController alloc]init];
       //  [self.navigationController pushViewController:sendController animated:YES];
         AboutViewController *aboutController=[[AboutViewController alloc]init];
+        if (f_v<9.0) {
+            self.navigationController.delegate=nil;
+        }
         [self.navigationController pushViewController:aboutController animated:NO];
     }
     /*

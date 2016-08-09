@@ -555,6 +555,9 @@
     newsView.b_isNews=YES;
     newsView.str_title=@"新闻";
     newsView.userInfo=_userInfo;
+    if (f_v<9.0) {
+        self.navigationController.delegate=nil;
+    }
     [self.navigationController pushViewController:newsView animated:NO];
 }
 
@@ -565,6 +568,9 @@
     newsView.b_isNews=NO;
     newsView.str_title=@"公告";
     newsView.userInfo=_userInfo;
+    if (f_v<9.0) {
+        self.navigationController.delegate=nil;
+    }
     [self.navigationController pushViewController:newsView animated:NO];
 }
 
@@ -579,6 +585,9 @@
     vc.b_isSysMsg=YES;
     vc.str_title=@"系统消息";
     vc.userInfo=_userInfo;
+    if (f_v<9.0) {
+        self.navigationController.delegate=nil;
+    }
     [self.navigationController pushViewController:vc animated:NO];
     
 }
@@ -587,6 +596,9 @@
 -(void)ChuanYueClick:(UIImageButton *)button {
     UnFinishViewController *view=[[UnFinishViewController alloc]init];
     view.str_title=@"公文传阅";
+    if (f_v<9.0) {
+        self.navigationController.delegate=nil;
+    }
     [self.navigationController pushViewController:view animated:NO];
 }
 
@@ -594,6 +606,9 @@
 -(void)JueCeItemClick:(UIImageButton *)button {
     UnFinishViewController *view=[[UnFinishViewController alloc]init];
     view.str_title=@"决策辅助";
+    if (f_v<9.0) {
+        self.navigationController.delegate=nil;
+    }
     [self.navigationController pushViewController:view animated:NO];
 }
 
@@ -601,6 +616,9 @@
 -(void)BanGongItemClick:(UIImageButton *)button {
     UnFinishViewController *view=[[UnFinishViewController alloc]init];
     view.str_title=@"办公审批";
+    if (f_v<9.0) {
+        self.navigationController.delegate=nil;
+    }
     [self.navigationController pushViewController:view animated:NO];
 }
 
@@ -608,6 +626,9 @@
 -(void)ShouQianItemClick:(UIImageButton *)button {
     UnFinishViewController *view=[[UnFinishViewController alloc]init];
     view.str_title=@"售前审批";
+    if (f_v<9.0) {
+        self.navigationController.delegate=nil;
+    }
     [self.navigationController pushViewController:view animated:NO];
 }
 
@@ -615,6 +636,9 @@
 -(void)ShengChanItemClick:(UIImageButton *)button {
     UnFinishViewController *view=[[UnFinishViewController alloc]init];
     view.str_title=@"生产审批";
+    if (f_v<9.0) {
+        self.navigationController.delegate=nil;
+    }
     [self.navigationController pushViewController:view animated:NO];
 }
 
@@ -622,6 +646,9 @@
 -(void)HeTongItemClick:(UIImageButton *)button {
     UnFinishViewController *view=[[UnFinishViewController alloc]init];
     view.str_title=@"合同审批";
+    if (f_v<9.0) {
+        self.navigationController.delegate=nil;
+    }
     [self.navigationController pushViewController:view animated:NO];
 }
 
@@ -629,6 +656,9 @@
 -(void)ShiWuItemClick:(UIImageButton *)button {
     UnFinishViewController *view=[[UnFinishViewController alloc]init];
     view.str_title=@"事务审批";
+    if (f_v<9.0) {
+        self.navigationController.delegate=nil;
+    }
     [self.navigationController pushViewController:view animated:NO];
 }
 
@@ -653,6 +683,9 @@
     viewController.userInfo=_userInfo;
     viewController.delegate=self;
     viewController.i_Class=0;
+    if (f_v<9.0) {
+        self.navigationController.delegate=nil;
+    }
     [self.navigationController pushViewController:viewController animated:NO];
 
 }
@@ -660,6 +693,9 @@
 -(void)IVotingItemClick:(UIImageButton *)button {
     IVotingManamentController *viewController=[[IVotingManamentController alloc]init];
     viewController.user_Info=_userInfo;
+    if (f_v<9.0) {
+        self.navigationController.delegate=nil;
+    }
     [self.navigationController pushViewController:viewController animated:NO];
 
 }
@@ -668,6 +704,9 @@
 -(void)NotesItemClick:(UIImageButton *)button {
     NotesViewController *notesView=[[NotesViewController alloc]init];
     notesView.user_Info=_userInfo;
+    if (f_v<9.0) {
+        self.navigationController.delegate=nil;
+    }
     [self.navigationController pushViewController:notesView animated:NO];
 }
 

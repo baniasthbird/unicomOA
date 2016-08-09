@@ -227,6 +227,9 @@
         vc.str_workItemID=str_workItemID;
         vc.str_title=str_processTitle;
         vc.delegate=self;
+        if (f_v<9.0) {
+            self.navigationController.delegate=nil;
+        }
         [self.navigationController pushViewController:vc animated:NO];
     }
     else if ([cell.lbl_status.text isEqualToString:@"已办"]) {
@@ -238,6 +241,9 @@
         vc.str_url=str_url;
         vc.str_processInstID=str_processInstID;
         vc.str_title=str_processTitle;
+        if (f_v<9.0) {
+            self.navigationController.delegate=nil;
+        }
         [self.navigationController pushViewController:vc animated:NO];
         
     }

@@ -98,6 +98,9 @@
 }
 
 -(void)BackToAppCenter:(UIButton*)Btn {
+    if (f_v<9.0) {
+        self.navigationController.delegate=nil;
+    }
     [self.navigationController popViewControllerAnimated:NO];
 }
 
@@ -355,6 +358,9 @@
         SysMsgDisplayController *vc=[[SysMsgDisplayController alloc]init];
         vc.i_id=cellTag;
         vc.str_title=@"系统消息内容";
+        if (f_v<9.0) {
+            self.navigationController.delegate=nil;
+        }
         [self.navigationController pushViewController:vc animated:NO];
         
     }
@@ -459,6 +465,11 @@
         //tableview中插入一条数据
        // [self SysMsgList:_news_param];
     });
+}
+
+-(void)dealloc {
+    self.tableView.delegate=nil;
+    self.tableView.dataSource=nil;
 }
 
 

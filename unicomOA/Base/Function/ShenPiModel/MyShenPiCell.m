@@ -75,7 +75,9 @@
         else if (iPad) {
             
         }
-        img_Logo.image=[UIImage imageNamed:str_Image];
+        if (str_Image!=nil) {
+             img_Logo.image=[UIImage imageNamed:str_Image];
+        }
         lbl_name.textColor=[UIColor blackColor];
         lbl_category.textColor=[UIColor colorWithRed:165/255.0f green:165/255.0f blue:165/255.0f alpha:1];
         lbl_Title.textColor=[UIColor colorWithRed:165/255.0f green:165/255.0f blue:165/255.0f alpha:1];

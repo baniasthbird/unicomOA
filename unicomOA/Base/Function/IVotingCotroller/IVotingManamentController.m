@@ -193,6 +193,9 @@
         IVotingDisplayController *viewController=[[IVotingDisplayController alloc]init];
         viewController.str_title=cell.lbl_Titile.text;
         viewController.user_Info=_user_Info;
+        if (f_v<9.0) {
+            self.navigationController.delegate=nil;
+        }
         [self.navigationController pushViewController:viewController animated:NO];
     }
     else  {
@@ -200,6 +203,9 @@
         viewController.str_title=cell.lbl_Titile.text;
         viewController.str_condition=@"已经结束";
         viewController.user_Info=_user_Info;
+        if (f_v<9.0) {
+            self.navigationController.delegate=nil;
+        }
         [self.navigationController pushViewController:viewController animated:NO];
     }
     NSLog(@"进入投票页");
@@ -210,6 +216,9 @@
 }
 
 -(void)MovePreviousVc:(UIButton*)sender {
+    if (f_v<9.0) {
+        self.navigationController.delegate=nil;
+    }
     [self.navigationController popViewControllerAnimated:NO];
 }
 

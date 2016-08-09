@@ -70,12 +70,18 @@
 
 
 -(void)MovePreviousVc:(UIButton*)sender {
+    if (f_v<9.0) {
+        self.navigationController.delegate=nil;
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)NewVc:(UIButton*)sender {
     if ([_dic_backvalue count]!=0) {
         [_delegate sendBackValue:_dic_backvalue indexPath:_indexPath title:_str_title];
+    }
+    if (f_v<9.0) {
+        self.navigationController.delegate=nil;
     }
     [self.navigationController popViewControllerAnimated:YES];
     
@@ -169,6 +175,9 @@
     }
     if ([_dic_backvalue count]!=0) {
         [_delegate sendBackValue:_dic_backvalue indexPath:_indexPath title:_str_title];
+    }
+    if (f_v<9.0) {
+        self.navigationController.delegate=nil;
     }
     [self.navigationController popViewControllerAnimated:YES];
 }

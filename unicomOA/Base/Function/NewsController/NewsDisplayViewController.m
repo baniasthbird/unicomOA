@@ -15,7 +15,9 @@
 
 
 
-@interface NewsDisplayViewController ()<WKNavigationDelegate>
+@interface NewsDisplayViewController ()<WKNavigationDelegate> {
+    NSURLSessionDownloadTask *_downloadTask;
+}
 
 @property (nonatomic,strong) AFHTTPSessionManager *session;
 
@@ -27,12 +29,15 @@
 
 @property CGFloat h_title;
 
+
 @end
 
 @implementation NewsDisplayViewController {
     DataBase *db;
     
     UIActivityIndicatorView *indicator;
+    
+    NSURL *str_download_path;
 }
 
 
@@ -123,6 +128,7 @@ int i_comment_num;
     config.preferences.javaScriptEnabled=YES;
     config.preferences.javaScriptCanOpenWindowsAutomatically=NO;
     config.processPool=[[WKProcessPool alloc]init];
+    config.selectionGranularity = WKSelectionGranularityCharacter;
    // CGFloat i_width= [UIScreen mainScreen].bounds.size.width-20;
    // NSString *js =[NSString stringWithFormat: @"var count = document.images.length;\n for (var i = 0; i < count; i++)\n {var image = document.images[i];\n var imgWidth=image.style.width;\n  var imgHeight=image.style.height;\n  var iRatio=imgHeight/imgWidth;\n    var targetHeight=iRatio*%f\n  image.style.width=%f;\n  image.style.height=targetHeight;\n };",i_width,i_width];
     NSString *js=[NSString stringWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"imageResize" ofType:@"js" ] encoding:NSUTF8StringEncoding error:nil];
@@ -234,6 +240,9 @@ int i_comment_num;
 
 
 -(void)MovePreviousVc:(UIButton*)sender {
+    if (f_v<9.0) {
+        self.navigationController.delegate=nil;
+    }
     [self.navigationController popViewControllerAnimated:NO];
 }
 
@@ -278,7 +287,7 @@ int i_comment_num;
             NSString *str_title=@"";
             NSString *str_departlabel=@"";
             NSString *str_content=@"";
-            NSString *str_files=@"";
+            NSObject *obj_files;
             if (dic_news!=nil) {
                 [indicator stopAnimating];
                 str_title=[dic_news objectForKey:@"title"];
@@ -314,10 +323,17 @@ int i_comment_num;
                     NSString *str_day=[arr_date objectAtIndex:0];
                     str_departlabel=[NSString stringWithFormat:@"      %@     %@",str_operator,str_day];
                     str_content=str_content.lowercaseString;
-                    str_files=[dic_data objectForKey:@"files"];
+                    obj_files=[dic_data objectForKey:@"files"];
+                    if (obj_files!=[NSNull null]) {
+                        //zr 如果是ios9可按这种方法打开word文档
+                        UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"打开附件" style:UIBarButtonItemStyleDone target:self action:@selector(OpenFile:)];
+                        barButtonItem.tintColor=[UIColor whiteColor];
+                        self.navigationItem.rightBarButtonItem=barButtonItem;
+                        [self.view setNeedsDisplay];
+                    }
                 }
             }
-            [self ModifyContent:str_content title:str_title departlabel:str_departlabel ip:str_ip port:str_port file:str_files];
+            [self ModifyContent:str_content title:str_title departlabel:str_departlabel ip:str_ip port:str_port file:obj_files];
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             [indicator stopAnimating];
@@ -340,18 +356,24 @@ int i_comment_num;
 
 }
 
--(void)ModifyContent:(NSString*)str_content title:(NSString*)str_title departlabel:(NSString*)str_departlabel ip:(NSString*)str_ip port:(NSString*)str_port file:(NSString*)str_file{
+-(void)ModifyContent:(NSString*)str_content title:(NSString*)str_title departlabel:(NSString*)str_departlabel ip:(NSString*)str_ip port:(NSString*)str_port file:(NSObject*)obj_file{
     if (_b_News==NO) {
-        if (![str_file isEqualToString:@""]) {
-            //如果是规章制度，完善str_content
-            
-            NSArray *arr_content=[str_file componentsSeparatedByString:@"|"];
-            NSString *str_file_title=[arr_content objectAtIndex:0];
-            NSString *str_file_id=[arr_content objectAtIndex:1];
-            NSString *str_file_link=[NSString stringWithFormat:@"%@%@%@%@%@%@",@"http://",str_ip,@":",str_port,@"/default/erp/common/fileUpload/download.jsp?isOpen=false&fileid=",str_file_id];
-            NSString  *str_link_content=[NSString stringWithFormat:@"%@%@%@%@%@%@%@",@"<p style=\"line-height:180%;\"><a style=\"font-size:16px; color:#0066cc;\" href=\"",str_file_link,@"\"title=\"",str_file_title,@"\">",str_file_title,@"</a></p>"];
-            //  str_link_content=[NSString stringWithFormat:@"%@%@%@%@",@"<p style=\"line-height:180%; font-size:16px;\">",@"请在PC端查看附件",str_file_title,@"</p>"];
-            str_content=[NSString stringWithFormat:@"%@%@",str_content,str_link_content];
+        if (obj_file!=[NSNull null]) {
+            NSString *str_file=(NSString*)obj_file;
+            if (![str_file isEqualToString:@""]) {
+                //如果是规章制度，完善str_content
+                
+                NSArray *arr_content=[str_file componentsSeparatedByString:@"|"];
+                NSString *str_file_title=[arr_content objectAtIndex:0];
+                NSString *str_file_id=[arr_content objectAtIndex:1];
+                NSString *str_file_link=[NSString stringWithFormat:@"%@%@%@%@%@%@",@"http://",str_ip,@":",str_port,@"/default/erp/common/fileUpload/download.jsp?isOpen=false&fileid=",str_file_id];
+                [self DownLoadFile:str_file_link title:str_file_title content:str_content];
+            //    NSString  *str_link_content=[NSString stringWithFormat:@"%@%@%@%@%@%@%@",@"<p style=\"line-height:180%;\"><a style=\"font-size:16px; color:#0066cc;\" href=\"",str_file_link,@"\"title=\"",str_file_title,@"\">",str_file_title,@"</a></p>"];
+                  NSString  *str_link_content=[NSString stringWithFormat:@"%@%@%@%@%@%@",@"<p style=\"line-height:180%;\"><a style=\"font-size:16px;",@"\"title=\"",str_file_title,@"\">",str_file_title,@"</a></p>"];
+                //  str_link_content=[NSString stringWithFormat:@"%@%@%@%@",@"<p style=\"line-height:180%; font-size:16px;\">",@"请在PC端查看附件",str_file_title,@"</p>"];
+                str_content=[NSString stringWithFormat:@"%@%@",str_content,str_link_content];
+            }
+
         }
     }
     else {
@@ -527,28 +549,7 @@ int i_comment_num;
     NSString *str_depart_new=[NSString stringWithFormat:@"%@%@%@",str_depart_style1,str_departlabel,str_title_style2];
     NSString *str_newcontent=[NSString stringWithFormat:@"%@%@%@%@",_str_headscale,str_title_new,str_depart_new,str_content];
     
-    
-    
-    
-    
-    
-    
-    // 图片缩放的js代码
-    
-    //  NSURL *baseUrl=[NSURL URLWithString:@"http://192.168.1.62:8080"];
-    /*
-    if (![str_newcontent2 isEqualToString:@""]) {
-        [_wb_content loadHTMLString:str_newcontent2 baseURL:nil];
-    }
-    else {
-     */
-        [_wb_content loadHTMLString:str_newcontent baseURL:nil];
-        
-    //}
-    
-    
-    //NSString *str_readnum=[dic_news objectForKey:@"readNum"];
-    //i_num=[str_readnum intValue];
+    [_wb_content loadHTMLString:str_newcontent baseURL:nil];
     
     [self.view setNeedsDisplay];
 }
@@ -587,8 +588,76 @@ int i_comment_num;
 }
 
 
+-(void)dealloc {
+    
+}
 
 
+-(void)DownLoadFile:(NSString*)str_file_link title:(NSString*)str_file_title content:(NSString*)str_content{
+    //远程地址
+  //  NSURL *url=[NSURL URLWithString:str_file_link];
+    
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    
+    NSURL *URL = [NSURL URLWithString:str_file_link];
+    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+    
+    NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
+        NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
+        return [documentsDirectoryURL URLByAppendingPathComponent:[response suggestedFilename]];
+    } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+        NSLog(@"File downloaded to: %@", filePath);
+        str_download_path=filePath;
+        
+        //zr 如果是ios9可按这种方法打开word文档
+        UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"打开附件" style:UIBarButtonItemStyleDone target:self action:@selector(OpenFile:)];
+        barButtonItem.tintColor=[UIColor whiteColor];
+        self.navigationItem.rightBarButtonItem=barButtonItem;
+        [self.view setNeedsDisplay];
+       // [_wb_content loadFileURL:filePath allowingReadAccessToURL:filePath];
+       // [self.view setNeedsDisplay];
+
+        
+    }];
+    [downloadTask resume];
+
+}
+
+-(void)OpenFile:(UIButton*)sender {
+    //如果系统是ios9
+    CGFloat f_version = [[[UIDevice currentDevice]systemVersion] floatValue];
+    if (f_version>9.0f) {
+        [_wb_content loadFileURL:str_download_path allowingReadAccessToURL:str_download_path];
+    }
+    else {
+        NSURL *fileURL = [self fileURLForBuggyWKWebView8:str_download_path];
+        NSURLRequest *request = [NSURLRequest requestWithURL:fileURL];
+        [_wb_content loadRequest:request];
+    }
+    self.navigationItem.rightBarButtonItem=nil;
+    [self.view setNeedsDisplay];
+}
+
+
+//将文件copy到tmp目录
+- (NSURL *)fileURLForBuggyWKWebView8:(NSURL *)fileURL {
+    NSError *error = nil;
+    if (!fileURL.fileURL || ![fileURL checkResourceIsReachableAndReturnError:&error]) {
+        return nil;
+    }
+    // Create "/temp/www" directory
+    NSFileManager *fileManager= [NSFileManager defaultManager];
+    NSURL *temDirURL = [[NSURL fileURLWithPath:NSTemporaryDirectory()] URLByAppendingPathComponent:@"www"];
+    [fileManager createDirectoryAtURL:temDirURL withIntermediateDirectories:YES attributes:nil error:&error];
+    
+    NSURL *dstURL = [temDirURL URLByAppendingPathComponent:fileURL.lastPathComponent];
+    // Now copy given file to the temp directory
+    [fileManager removeItemAtURL:dstURL error:&error];
+    [fileManager copyItemAtURL:fileURL toURL:dstURL error:&error];
+    // Files in "/temp/www" load flawlesly :)
+    return dstURL;
+}
 /*
 -(void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
     [ webView evaluateJavaScript:@"var script = document.createElement('script');"

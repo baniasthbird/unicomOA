@@ -9,6 +9,9 @@
 #import "MemberInfoViewController.h"
 #import "LogoView.h"
 #import "PhoneLabelView.h"
+#import "ContactViewControllerNew.h"
+#import "AppDelegate.h"
+
 @import MessageUI;
 
 @interface MemberInfoViewController ()<MFMessageComposeViewControllerDelegate>
@@ -312,7 +315,16 @@
 }
 
 -(void)MovePreviousVc:(UIButton*)sender {
-    [self.navigationController popViewControllerAnimated:NO];
+    
+    if (f_v<9.0) {
+        AppDelegate *app=[[UIApplication sharedApplication] delegate];
+        UINavigationController *nav=[[app.window.rootViewController.childViewControllers objectAtIndex:1].childViewControllers objectAtIndex:1];
+        [nav popViewControllerAnimated:YES];
+    }
+    else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    
 }
 
 
@@ -332,6 +344,11 @@
             [self presentViewController:vc animated:NO completion:nil];
         }
     }
+    
+}
+
+-(void)viewWillDisappear:(BOOL)animated {
+     self.navigationController.delegate=nil;
     
 }
 /*
@@ -401,5 +418,11 @@
 -(void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result {
     [self dismissViewControllerAnimated:NO completion:nil];
 }
+
+-(void) dealloc {
+    self.tableView.delegate=nil;
+    self.tableView.dataSource=nil;
+}
+
 
 @end

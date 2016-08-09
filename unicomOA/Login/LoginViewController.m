@@ -437,7 +437,9 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
 {
    // PasswordViewController *vc=[[PasswordViewController alloc]init];
    // [self.navigationController pushViewController:vc animated:YES];
-    
+    if (f_v<9.0) {
+        self.navigationController.delegate=nil;
+    }
     [self.navigationController pushViewController:[[settingPasswordViewController alloc]init] animated:NO];
 }
 
@@ -445,6 +447,9 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
 -(void)serverip:(UIButton*)button {
     ServerIPViewController *vc=[[ServerIPViewController alloc]init];
     vc.delegate=self;
+    if (f_v<9.0) {
+        self.navigationController.delegate=nil;
+    }
     [self.navigationController pushViewController:vc animated:NO];
 }
 
@@ -836,11 +841,26 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     }
     userInfo.str_email=str_email;
     userInfo.str_phonenum=str_tel;
-    userInfo.str_Logo=@"headLogo.png";
+    NSString *str_Logo=[[NSUserDefaults standardUserDefaults] objectForKey:@"Logo"];
+    if (str_Logo==nil) {
+        userInfo.str_Logo=@"headLogo.png";
+    }
+    else {
+        if ([str_Logo isEqualToString:@""]) {
+            userInfo.str_Logo=@"headLogo.png";
+        }
+        else {
+            userInfo.str_Logo=str_Logo;
+        }
+    }
+    
     
     [self saveUserInfo:userInfo];
     OAViewController *viewController=[[OAViewController alloc]init];
   //  viewController.user_Info=userInfo;
+    if (f_v<9.0) {
+        self.navigationController.delegate=nil;
+    }
     [self.navigationController pushViewController:viewController animated:NO];
 }
 
@@ -906,6 +926,7 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         [userDefaults setObject:nil forKey:@"name"];
         [userDefaults setObject:nil forKey:@"password"];
+        [userDefaults setObject:@"" forKey:@"Logo"];
         [userDefaults synchronize];
         
     }

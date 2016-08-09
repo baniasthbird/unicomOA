@@ -44,6 +44,8 @@
                        [self SetNode0Num:node num:node.sonNodes.count];
                     }
                     else {
+                       CLTreeViewNode  *newnode=[self AddStaff:node staffArray:staffArray];
+                       // [self SetNode0Num:node num:node.sonNodes.count];
                         NSMutableArray *arr_subnodes=[[NSMutableArray alloc]init];
                         NSInteger i_count=0;
                         for (int i=0;i<node.sonNodes.count;i++) {

@@ -8,12 +8,15 @@
 
 #import "SearchResultViewController.h"
 #import "MemberInfoViewController.h"
+#import "AppDelegate.h"
 
 @implementation SearchResultViewController
 
 -(void)viewDidLoad {
     //self.tableView.frame=CGRectMake(0, 80, self.view.frame.size.width, self.view.frame.size.height);
     [super viewDidLoad];
+   
+    
 }
 
 -(void)didReceiveMemoryWarning {
@@ -65,12 +68,30 @@
     vc.str_phonenum=str_tel;
     vc.str_email=str_email;
     if (_nav!=nil) {
-        [_nav pushViewController:vc animated:NO];
+        
+        if (f_v<9.0) {
+            //zr 0809  不能直接传uinavigationcontroller
+            AppDelegate *app=[[UIApplication sharedApplication] delegate];
+            UINavigationController *nav=[[app.window.rootViewController.childViewControllers objectAtIndex:1].childViewControllers objectAtIndex:1];
+            [nav pushViewController:vc animated:YES];
+
+        }
+        else {
+            [_nav pushViewController:vc animated:NO];
+        }
+        
     }
     //[self.navigationController pushViewController:vc animated:YES];
     
    // [self presentViewController:vc animated:YES completion:nil];
     
 }
+
+-(void)dealloc {
+    self.tableView.delegate=nil;
+    self.tableView.dataSource=nil;
+}
+
+
 
 @end

@@ -231,7 +231,9 @@ typedef enum
     //[delegate passValue:_str_notesFenLei Content:_str_noteContent Time:_str_date TimeNow:dateString];
     //[delegate passValue:_str_notesFenLei Content:_str_noteContent Time:_str_date TimeNow:dateString PicPath:_str_pic_path coordx:str_coordx coordy:str_coordy address:_str_location_content];
     [delegate passValue:_str_FenLei Content:_str_noteContent Time:meetingString TimeNow:dateString PicPath:_str_pic_path coordx:str_coordx coordy:str_coordy address:_str_location_content index:str_index];
-    
+    if (f_v<9.0) {
+        self.navigationController.delegate=nil;
+    }
     [self.navigationController popViewControllerAnimated:NO];
 }
 
@@ -627,6 +629,9 @@ typedef enum
             //viewController.placemark=_addr_placemark;
             viewController.touchMapCoord=_coord_placemark;
         }
+        if (f_v<9.0) {
+            self.navigationController.delegate=nil;
+        }
         [self.navigationController pushViewController:viewController animated:NO];
     }
     else if (indexPath.row==6 && indexPath.section==0) {
@@ -919,6 +924,9 @@ typedef enum
 }
 
 -(void)MovePreviousVc:(UIButton*)sender {
+    if (f_v<9.0) {
+        self.navigationController.delegate=nil;
+    }
     [self.navigationController popViewControllerAnimated:NO];
 }
 

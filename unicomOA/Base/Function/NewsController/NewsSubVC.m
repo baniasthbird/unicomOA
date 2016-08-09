@@ -631,6 +631,9 @@
     cell.backgroundColor=[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1];
     selectedIndex=index;
     selected_title=cell.str_title;
+    if (f_v<9.0) {
+        self.navigationController.delegate=nil;
+    }
     [self.navigationController pushViewController:news_controller animated:NO];
     
 }

@@ -75,6 +75,9 @@
 }
 
 -(void)MovePreviousVc:(UIButton*)sender {
+    if (f_v<9.0) {
+        self.navigationController.delegate=nil;
+    }
     [self.navigationController popViewControllerAnimated:NO];
 }
 

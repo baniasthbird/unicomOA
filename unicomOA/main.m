@@ -11,6 +11,13 @@
 
 int main(int argc, char * argv[]) {
     @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
+        @try
+        {
+            return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
+        }
+        @catch (NSException *exception)
+        {
+            NSLog(@"Stack Trace:: %@", [exception callStackSymbols]);
+        }
     }
 }

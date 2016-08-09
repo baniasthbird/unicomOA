@@ -208,6 +208,9 @@
     viewController.str_title=_str_title;
     viewController.str_condition=@"投票进行中";
     viewController.user_Info=_user_Info;
+    if (f_v<9.0) {
+        self.navigationController.delegate=nil;
+    }
     [self.navigationController pushViewController:viewController animated:NO];
 }
 
@@ -241,6 +244,9 @@
 
 
 -(void)MovePreviousVc:(UIButton*)sender {
+    if (f_v<9.0) {
+        self.navigationController.delegate=nil;
+    }
     [self.navigationController popViewControllerAnimated:NO];
 }
 @end

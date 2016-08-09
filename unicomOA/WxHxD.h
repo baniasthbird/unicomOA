@@ -12,6 +12,8 @@
 // 高度
 #define  Height                            [UIScreen mainScreen].bounds.size.height
 
+#define f_v                                [[UIDevice currentDevice].systemVersion floatValue]
+
 // 状态栏高度
 #define  StatusBarHeight                   20.f
 

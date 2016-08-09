@@ -432,6 +432,9 @@
     if ([cell.str_category isEqualToString:@"预约用车"]) {
         CarApplicationDetail *viewController=[[CarApplicationDetail alloc]init];
         viewController.service=cell.car_service;
+        if (f_v<9.0) {
+            self.navigationController.delegate=nil;
+        }
         [self.navigationController pushViewController:viewController animated:YES];
     }
     else if ([cell.str_category isEqualToString:@"复印"]) {

@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "UserInfo.h"
 #import "LXSegmentController.h"
+#import "UnFinishVc.h"
+
 @class MyShenPiViewController;
 @protocol MyShenPiViewControllerDelegate <NSObject>
 
@@ -17,8 +19,7 @@
 @end
 
 //我的审批页面
-
-@interface MyShenPiViewController : LXSegmentController
+@interface MyShenPiViewController : LXSegmentController<UITableViewDelegate,UITableViewDataSource,UnFinishVcDelegate>
 
 //我的审批事项
 @property (nonatomic,strong) NSMutableArray *arr_MyShenPi;

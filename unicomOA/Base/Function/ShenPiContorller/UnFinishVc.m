@@ -146,6 +146,9 @@
 }
 
 -(void)MovePreviousVc:(UIButton*)sender {
+    if (f_v<9.0) {
+        self.navigationController.delegate=nil;
+    }
     [self.navigationController popViewControllerAnimated:NO];
 }
 
@@ -227,6 +230,9 @@
                             
                         }];
                         [alert showLXAlertView];
+                        if (f_v<9.0) {
+                            self.navigationController.delegate=nil;
+                        }
                         [self.navigationController popViewControllerAnimated:NO];
                     }
                 }
@@ -284,6 +290,9 @@
     ShenPiQueryLogVC *vc=[[ShenPiQueryLogVC alloc]init];
     vc.str_processInstID=_str_processInstID;
     vc.str_titleName=_str_title;
+    if (f_v<9.0) {
+        self.navigationController.delegate=nil;
+    }
     [self.navigationController pushViewController:vc animated:NO];
 }
 
@@ -368,6 +377,9 @@
                 [func_vc Badge_Minus];
                 */
                  [_delegate RefreshUnFinishView];
+                if (f_v<9.0) {
+                    self.navigationController.delegate=nil;
+                }
                 [self.navigationController popViewControllerAnimated:YES];
                
 
@@ -995,6 +1007,9 @@
         viewController.arr_data=tmp_Files;
         viewController.arr_title=tmp_Title;
         viewController.str_title=str_label;
+        if (f_v<9.0) {
+            self.navigationController.delegate=nil;
+        }
         [self.navigationController pushViewController:viewController animated:YES];
     }
     else if ([cell.accessibilityHint isEqualToString:@"canPopList"]) {
@@ -1012,6 +1027,9 @@
         }
         
         vc.delegate=self;
+        if (f_v<9.0) {
+            self.navigationController.delegate=nil;
+        }
         [self.navigationController pushViewController:vc animated:YES];
     }
     else if ([cell.accessibilityHint isEqualToString:@"html"]) {
@@ -1020,6 +1038,9 @@
         vc.str_title2=cell.textLabel.text;
         vc.str_ip=str_ip;
         vc.str_port=str_port;
+        if (f_v<9.0) {
+            self.navigationController.delegate=nil;
+        }
         [self.navigationController pushViewController:vc animated:YES];
     }
     

@@ -18,13 +18,13 @@
 #import "DataBase.h"
 #import "AFNetworking.h"
 #import "LXAlertView.h"
-#import "UnFinishVc.h"
+
 #import "FinishVc.h"
 #import "UILabel+LabelHeightAndWidth.h"
 #import "ShenPiSubVc.h"
 
 
-@interface MyShenPiViewController()<UITableViewDelegate,UITableViewDataSource,UnFinishVcDelegate>
+@interface MyShenPiViewController()
 
 /**
  *  头部筛选模块
@@ -206,6 +206,9 @@
 
 -(void)MovePreviousVc:(UIButton*)sender {
     [_delegate RefreshBadgeNumber];
+    if (f_v<9.0) {
+        self.navigationController.delegate=nil;
+    }
     [self.navigationController popViewControllerAnimated:NO];
 }
 
@@ -485,6 +488,9 @@
         vc.str_workItemID=str_workItemID;
         vc.str_title=str_processTitle;
         vc.delegate=self;
+        if (f_v<9.0) {
+            self.navigationController.delegate=nil;
+        }
         [self.navigationController pushViewController:vc animated:NO];
     }
     else if ([cell.lbl_status.text isEqualToString:@"已办"]) {
@@ -496,8 +502,10 @@
         vc.str_url=str_url;
         vc.str_processInstID=str_processInstID;
         vc.str_title=str_processTitle;
+        if (f_v<9.0) {
+            self.navigationController.delegate=nil;
+        }
         [self.navigationController pushViewController:vc animated:NO];
-
     }
     /*
      _i_sectionClicked=indexPath.section;
@@ -1036,6 +1044,19 @@
     [self addChildViewController:vc2];
 }
 
+-(void)dealloc {
+    self.tableView.delegate=nil;
+    self.tableView.dataSource=nil;
+}
 
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+}
+
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+}
 
 @end
