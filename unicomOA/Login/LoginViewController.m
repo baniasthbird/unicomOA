@@ -19,6 +19,7 @@
 #import "settingPasswordViewController.h"
 #import "YBMonitorNetWorkState.h"
 #import "HcdGuideView.h"
+#import "BaseFunction.h"
 
 
 
@@ -66,6 +67,8 @@
     UILabel *lbl_ip;
     
     BOOL b_rememberPwd;
+    
+    BaseFunction *baseFunc;
 }
 
 static NSString *kServerSessionCookie=@"JSESSIONID";
@@ -146,6 +149,7 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     View.backgroundColor=[UIColor whiteColor];
     [self.view addSubview:View];
     
+    baseFunc=[[BaseFunction alloc]init];
   //  NSString *bundleid=[ [NSBundle mainBundle] bundleIdentifier];
     _i_Success=NO;
     
@@ -829,6 +833,11 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     NSString *str_cellphone=[dic_usr objectForKey:@"mobileno"];
     NSString *str_posiname=[dic_usr objectForKey:@"posiname"];
     NSString *str_tel=[dic_usr objectForKey:@"otel"];
+   // NSString *str_imgurl=[dic_usr objectForKey:@"headimg"];
+    NSString *str_imgurl=[baseFunc GetValueFromDic:dic_usr key:@"headimg"];
+    if (![str_imgurl isEqualToString:@""]) {
+        [self DownloadImage:str_imgurl name:str_name];
+    }
     userInfo.str_name=str_name;
     userInfo.str_username=str_name;
     userInfo.str_gender=str_gender;
@@ -842,16 +851,22 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     userInfo.str_email=str_email;
     userInfo.str_phonenum=str_tel;
     NSString *str_Logo=[[NSUserDefaults standardUserDefaults] objectForKey:@"Logo"];
-    if (str_Logo==nil) {
-        userInfo.str_Logo=@"headLogo.png";
-    }
-    else {
-        if ([str_Logo isEqualToString:@""]) {
+    if ([str_imgurl isEqualToString:@""]) {
+        if (str_Logo==nil) {
             userInfo.str_Logo=@"headLogo.png";
         }
         else {
-            userInfo.str_Logo=str_Logo;
+            if ([str_Logo isEqualToString:@""]) {
+                userInfo.str_Logo=@"headLogo.png";
+            }
+            else {
+                userInfo.str_Logo=str_Logo;
+            }
         }
+    }
+    else {
+        NSString *str_picname=[NSString stringWithFormat:@"%@%@",str_name,@".jpg"];
+        userInfo.str_Logo=str_picname;
     }
     
     
@@ -932,6 +947,36 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     }
 }
 
+-(void)DownloadImage:(NSString*)str_img_link name:(NSString*)str_name {
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    NSMutableArray *t_array=[db fetchIPAddress];
+    NSString *str_ip=@"";
+    NSString *str_port=@"";
+    if (t_array.count==1) {
+        NSArray *arr_ip=[t_array objectAtIndex:0];
+        str_ip=[arr_ip objectAtIndex:0];
+        str_port=[arr_ip objectAtIndex:1];
+    }
+    
+    str_img_link=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_img_link];
+    NSURL *URL = [NSURL URLWithString:str_img_link];
+    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+    
+    NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
+        NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
+        NSString *str_filename=[NSString stringWithFormat:@"%@%@",str_name,@".jpg"];
+        return [documentsDirectoryURL URLByAppendingPathComponent:str_filename];
+    } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+        NSLog(@"File downloaded to: %@", filePath);
+        
+        
+        
+    }];
+    [downloadTask resume];
+    
+    
+}
 
 
 

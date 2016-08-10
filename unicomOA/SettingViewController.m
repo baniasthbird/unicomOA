@@ -120,8 +120,14 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
     LGSettingSection *section1=[LGSettingSection initWithHeaderTitle:@"" footerTitle:nil];
     //添加行
     LGSettingItem *item1=[LGSettingItem initWithtitle:_userInfo.str_name];
+    NSString *str_tmp_picname=[NSString stringWithFormat:@"%@%@",_userInfo.str_name,@".jpg"];
     if ([_userInfo.str_Logo isEqualToString:@"headLogo.png"]) {
         item1.image=[UIImage imageNamed:_userInfo.str_Logo];
+    }
+    else if ([_userInfo.str_Logo isEqualToString:str_tmp_picname]) {
+        NSString *fullPath=  [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:str_tmp_picname];
+        UIImage *saveImage=[[UIImage alloc]initWithContentsOfFile:fullPath];
+        item1.image=saveImage;
     }
     else {
         //item1.image=[UIImage imageWithContentsOfFile:_userInfo.str_Logo];

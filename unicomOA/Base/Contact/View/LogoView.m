@@ -72,9 +72,14 @@
         
         self.backgroundView=img_bgView;
         _lbl_name=[[UILabel alloc]initWithFrame:CGRectMake(self.frame.size.width*0.65, self.frame.size.height*0.5, self.frame.size.width/3, self.frame.size.height)];
-       
+        UIImage *imageHead=[[UIImage alloc]init];
+        if (![str_img isEqualToString:@"headLogo.png"]) {
+            imageHead=[UIImage imageWithContentsOfFile:str_img];
+        }
+        else {
+            imageHead=[UIImage imageNamed:str_img];
+        }
         
-        UIImage *imageHead=[UIImage imageNamed:str_img];
         _img_Head=[[UIImageView alloc]initWithImage:imageHead];
         _img_Head.backgroundColor=[UIColor clearColor];
         if (iPhone4_4s || iPhone5_5s) {

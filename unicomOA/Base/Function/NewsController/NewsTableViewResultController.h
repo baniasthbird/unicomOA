@@ -15,4 +15,6 @@
 
 @property (strong,nonatomic) UINavigationController *nav;
 
+@property BOOL b_news;
+
 @end

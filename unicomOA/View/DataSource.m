@@ -9,6 +9,10 @@
 #import "DataSource.h"
 #import "CLTree.h"
 #import "MemberInfoViewController.h"
+#import "AFNetworking.h"
+#import "DataBase.h"
+
+
 
 
 @interface DataSource()
@@ -17,7 +21,10 @@
 
 @end
 
-@implementation DataSource
+@implementation DataSource {
+    NSInteger i_ungroup_num;
+    
+}
 
 
 
@@ -44,8 +51,6 @@
                        [self SetNode0Num:node num:node.sonNodes.count];
                     }
                     else {
-                       CLTreeViewNode  *newnode=[self AddStaff:node staffArray:staffArray];
-                       // [self SetNode0Num:node num:node.sonNodes.count];
                         NSMutableArray *arr_subnodes=[[NSMutableArray alloc]init];
                         NSInteger i_count=0;
                         for (int i=0;i<node.sonNodes.count;i++) {
@@ -56,7 +61,13 @@
                             i_count=i_count+subNodes.sonNodes.count;
                         }
                         node.sonNodes=arr_subnodes;
+                        node=[self AddStaff:node staffArray:staffArray];
+                        i_count=i_count+i_ungroup_num;
                         [self SetNode0Num:node num:i_count];
+                        
+                       // CLTreeViewNode  *newnode=[self AddStaff:node staffArray:staffArray];
+                       // [self SetNode0Num:newnode num:newnode.sonNodes.count];
+
                         
                     }
                    // [self AddStaff:node staffArray:staffArray];
@@ -220,9 +231,11 @@
             NSObject *obj_cell=[dic objectForKey:@"mobileno"];
             NSObject *obj_phone=[dic objectForKey:@"otel"];
             NSObject *obj_email=[dic objectForKey:@"oemail"];
+            NSObject *obj_photo=[dic objectForKey:@"img"];
             NSString *str_cell;
             NSString *str_phone;
             NSString *str_email;
+            NSString *str_img;
             if (obj_cell==[NSNull null]) {
                 str_cell=nil;
             }
@@ -241,12 +254,38 @@
             else {
                 str_email=(NSString*)obj_email;
             }
-         //   CLTreeViewNode *node=[self CreateLevel2Node:str_name signture:str_position headImgPath:@"headLogo.png" headImgUrl:nil gender:str_sex department:str_department cell:str_cell phone:str_phone email:str_email];
-               CLTreeViewNode *node=[self CreateLevel2Node:str_name signture:str_position headImgPath:nil headImgUrl:nil gender:str_sex department:str_department cell:str_cell phone:str_phone email:str_email];
+            str_img =(NSString*)obj_photo;
+            if ([str_img isEqualToString:@""] || str_img==nil) {
+                str_img=@"";
+            }
+            else {
+                str_img=(NSString*)obj_photo;
+                [self DownloadImage:str_img name:str_name];
+            }
+            
+            //   CLTreeViewNode *node=[self CreateLevel2Node:str_name signture:str_position headImgPath:@"headLogo.png" headImgUrl:nil gender:str_sex department:str_department cell:str_cell phone:str_phone email:str_email];
+            CLTreeViewNode *node=[self CreateLevel2Node:str_name signture:str_position headImgPath:nil headImgUrl:str_img gender:str_sex department:str_department cell:str_cell phone:str_phone email:str_email];
             [arr_staff addObject:node];
+            
         }
     }
-    node.sonNodes=arr_staff;
+    if (node.sonNodes==nil) {
+        node.sonNodes=arr_staff;
+    }
+    else {
+        i_ungroup_num=0;
+        CLTreeViewNode *node_tree=[node.sonNodes objectAtIndex:0];
+        if (node_tree.nodeLevel==1) {
+            NSUInteger i_count= [arr_staff count];
+            NSString *str_count=[NSString stringWithFormat:@"%lu",(unsigned long)i_count];
+            CLTreeViewNode *sub_node=[self CreateLevel1Node:@"未分组" sonCnt:str_count];
+            sub_node.sonNodes=arr_staff;
+            [node.sonNodes addObject:sub_node];
+            i_ungroup_num=i_count;
+        }
+        
+    }
+    
     return node;
 }
 
@@ -294,7 +333,7 @@
     tmp0.name = str_name;
     tmp0.signture = str_signture;
     tmp0.headImgPath = str_headImgPath;
-    tmp0.headImgUrl = nil;
+    tmp0.headImgUrl = [NSURL URLWithString:str_headImgUrl];
     tmp0.gender=str_gender;
     tmp0.department=str_department;
     tmp0.cellphonenum=str_cellphone;
@@ -305,5 +344,37 @@
     return node0;
 }
 
+
+-(void)DownloadImage:(NSString*)str_img_link name:(NSString*)str_name {
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    DataBase *db=[DataBase sharedinstanceDB];
+    NSMutableArray *t_array=[db fetchIPAddress];
+    NSString *str_ip=@"";
+    NSString *str_port=@"";
+    if (t_array.count==1) {
+        NSArray *arr_ip=[t_array objectAtIndex:0];
+        str_ip=[arr_ip objectAtIndex:0];
+        str_port=[arr_ip objectAtIndex:1];
+    }
+
+    str_img_link=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_img_link];
+    NSURL *URL = [NSURL URLWithString:str_img_link];
+    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+    
+    NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
+        NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
+        NSString *str_filename=[NSString stringWithFormat:@"%@%@",str_name,@".jpg"];
+        return [documentsDirectoryURL URLByAppendingPathComponent:str_filename];
+    } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+        NSLog(@"File downloaded to: %@", filePath);
+        
+        
+        
+    }];
+    [downloadTask resume];
+
+
+}
 
 @end

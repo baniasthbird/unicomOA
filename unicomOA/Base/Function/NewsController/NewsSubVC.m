@@ -680,6 +680,7 @@
         
         _resultViewController.dataArray=arr_searchList;
         _resultViewController.nav=self.navigationController;
+        _resultViewController.b_news=_b_News;
         
         [_resultViewController.tableView reloadData];
         [indicator stopAnimating];

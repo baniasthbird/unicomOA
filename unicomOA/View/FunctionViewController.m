@@ -53,7 +53,7 @@
     DataBase *db;
     UIActivityIndicatorView *indicator;
     NSInteger i_total;
-    
+    NSInteger i_bangong;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -271,7 +271,7 @@
         }
     }
     
-    _btn_BanGong=[self createImageButton:btn_x_2 y:shenpi_y width:btn_w height:btn_w title:@"办公" image:@"BanGong.png" insets:i_insets isFinish:NO];
+    _btn_BanGong=[self createImageButton:btn_x_2 y:shenpi_y width:btn_w height:btn_w title:@"办公" image:@"BanGong.png" insets:i_insets isFinish:YES];
     [_btn_BanGong addTarget:self action:@selector(BanGongItemClick:) forControlEvents:UIControlEventTouchUpInside];
     
     _btn_ShouQian=[self createImageButton:btn_x_3 y:shenpi_y width:btn_w height:btn_w title:@"售前" image:@"ShouQian.png" insets:i_insets isFinish:NO];
@@ -614,12 +614,23 @@
 
 //办公
 -(void)BanGongItemClick:(UIImageButton *)button {
+    /*
     UnFinishViewController *view=[[UnFinishViewController alloc]init];
     view.str_title=@"办公审批";
     if (f_v<9.0) {
         self.navigationController.delegate=nil;
     }
     [self.navigationController pushViewController:view animated:NO];
+     */
+    MyShenPiViewController *viewController=[[MyShenPiViewController alloc] init];
+    viewController.userInfo=_userInfo;
+    viewController.delegate=self;
+    viewController.i_Class=1;
+    viewController.str_title=@"办公审批";
+    if (f_v<9.0) {
+        self.navigationController.delegate=nil;
+    }
+    [self.navigationController pushViewController:viewController animated:NO];
 }
 
 //售前
@@ -683,6 +694,7 @@
     viewController.userInfo=_userInfo;
     viewController.delegate=self;
     viewController.i_Class=0;
+    viewController.str_title=@"我的审批";
     if (f_v<9.0) {
         self.navigationController.delegate=nil;
     }
@@ -748,9 +760,12 @@
             BOOL b_success=[str_success boolValue];
             if (b_success==YES) {
                 NSString *str_total=[JSON objectForKey:@"c0"];
+                NSString *str_bangong=[JSON objectForKey:@"c1"];
                 i_total=[str_total integerValue];
+                i_bangong=[str_bangong integerValue];
                 _btn_ShenPi.badgeBgColor=[UIColor redColor];
                 [_btn_ShenPi showBadgeWithStyle:WBadgeStyleNumber value:i_total animationType:WBadgeAnimTypeNone];
+                [_btn_BanGong showBadgeWithStyle:WBadgeStyleNumber value:i_bangong animationType:WBadgeAnimTypeNone];
                 [self.view setNeedsDisplay];
                /*
                NSString *str_totalPage=[JSON objectForKey:@"totalPage"];
@@ -818,7 +833,9 @@
                 [indicator stopAnimating];
                 NSLog(@"获取审批列表成功");
                 NSString *str_total= [JSON objectForKey:@"c0"];
+                NSString *str_bangong=[JSON objectForKey:@"c1"];
                 i_total=[str_total integerValue];
+                i_bangong=[str_bangong integerValue];
                 /*
                 NSArray *arr_TaskList=[JSON objectForKey:@"taskList"];
                 NSInteger i_integer=[_str_page integerValue];
@@ -829,6 +846,7 @@
                 _btn_ShenPi.badgeBgColor=[UIColor redColor];
                 // _btn_ShenPi.badgeCenterOffset=CGPointMake(0, _btn_ShenPi.size.height*0.08);
                 [_btn_ShenPi showBadgeWithStyle:WBadgeStyleNumber value:i_total animationType:WBadgeAnimTypeNone];
+                [_btn_BanGong showBadgeWithStyle:WBadgeStyleNumber value:i_bangong animationType:WBadgeAnimTypeNone];
                 [self.view setNeedsDisplay];
                 
                 

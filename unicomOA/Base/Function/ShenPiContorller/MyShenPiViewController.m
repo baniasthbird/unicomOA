@@ -92,7 +92,7 @@
 
 -(void)viewDidLoad {
     [super viewDidLoad];
-    self.title=@"我的审批";
+    self.title=_str_title;
     
     NSDictionary * dict;
     if (iPad) {

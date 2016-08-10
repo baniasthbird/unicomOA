@@ -348,7 +348,7 @@
     
     UIImage *image=[info objectForKey:UIImagePickerControllerOriginalImage];
     
-    NSString *str_picname=[NSString stringWithFormat:@"%@.%@",_userInfo.str_username,@"png"];
+    NSString *str_picname=[NSString stringWithFormat:@"%@.%@",_userInfo.str_username,@"jpg"];
     //保存图片至本地
     [self saveImage:image withName:str_picname];
     
@@ -403,8 +403,12 @@
   } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
       NSLog(@"Response:%@",responseObject);
       NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-      int i=0;
-      i=i+1;
+      BOOL b_success=[JSON objectForKey:@"b_success"];
+      if (b_success==YES) {
+          
+      }
+     
+      
 
   } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
       NSLog(@"Error: %@",error);

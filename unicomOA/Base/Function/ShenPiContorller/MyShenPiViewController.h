@@ -32,4 +32,6 @@
 
 @property NSInteger i_Class;
 
+@property (nonatomic,strong) NSString *str_title;
+
 @end

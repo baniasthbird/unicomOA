@@ -57,6 +57,7 @@
     NSString *str_id=[dic objectForKey:@"id"];
     vc.news_index=[str_id integerValue];
     vc.str_label=[dic objectForKey:@"title"];
+    vc.b_News=_b_news;
     if (_nav!=nil) {
         [_nav pushViewController:vc animated:NO];
         // [self..navigationController pushViewController:vc animated:YES];
