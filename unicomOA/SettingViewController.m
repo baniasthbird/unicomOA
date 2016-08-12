@@ -19,6 +19,7 @@
 #import "DataBase.h"
 #import "LoginViewController.h"
 #import "YBMonitorNetWorkState.h"
+#import "UIImageView+WebCache.h"
 
 
 @interface SettingViewController ()<YBMonitorNetWorkStateDelegate>
@@ -125,15 +126,36 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
         item1.image=[UIImage imageNamed:_userInfo.str_Logo];
     }
     else if ([_userInfo.str_Logo isEqualToString:str_tmp_picname]) {
+        /*
+        NSData * data = [NSData dataWithContentsOfURL:[NSURL URLWithString:_userInfo.str_imgurl]];
+        
+        item1.image = [UIImage imageWithData:data];
+         */
+        /*
+        UIImageView *img_View=[[UIImageView alloc]init];
+      //  [img_View sd_setImageWithURL:[NSURL URLWithString:_userInfo.str_imgurl] placeholderImage:[UIImage imageNamed:str_tmp_picname]];
+        SDWebImageManager *manager=[SDWebImageManager sharedManager];
+        [manager downloadImageWithURL:[NSURL URLWithString:_userInfo.str_imgurl] options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+            
+        } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+            if (image) {
+                img_View.image=image;
+            }
+        }];
+        */
+        
         NSString *fullPath=  [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:str_tmp_picname];
         UIImage *saveImage=[[UIImage alloc]initWithContentsOfFile:fullPath];
         item1.image=saveImage;
+        
+        
     }
     else {
         //item1.image=[UIImage imageWithContentsOfFile:_userInfo.str_Logo];
         NSString *str_picname=[NSString stringWithFormat:@"%@.%@",_userInfo.str_username,@"png"];
         NSString *fullPath=  [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:str_picname];
         UIImage *saveImage=[[UIImage alloc]initWithContentsOfFile:fullPath];
+        
         item1.image=saveImage;
     }
     

@@ -69,6 +69,8 @@
     BOOL b_rememberPwd;
     
     BaseFunction *baseFunc;
+    
+    NSString *str_img_url;
 }
 
 static NSString *kServerSessionCookie=@"JSESSIONID";
@@ -835,10 +837,10 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     NSString *str_posiname=[baseFunc GetValueFromDic:dic_usr key:@"posiname"];
     NSString *str_tel=[baseFunc GetValueFromDic:dic_usr key:@"posiname"];
    // NSString *str_imgurl=[dic_usr objectForKey:@"headimg"];
-    NSString *str_imgurl=[baseFunc GetValueFromDic:dic_usr key:@"headimg"];
-    if (![str_imgurl isEqualToString:@""]) {
+    str_img_url=[baseFunc GetValueFromDic:dic_usr key:@"headimg"];
+    if (![str_img_url isEqualToString:@""]) {
         [self RemoveLocalLogo:str_name];
-        [self DownloadImage:str_imgurl name:str_name];
+        [self DownloadImage:str_img_url name:str_name];
     }
     userInfo.str_name=str_name;
     userInfo.str_username=str_name;
@@ -850,7 +852,7 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     userInfo.str_email=str_email;
     userInfo.str_phonenum=str_tel;
     NSString *str_Logo=[[NSUserDefaults standardUserDefaults] objectForKey:@"Logo"];
-    if ([str_imgurl isEqualToString:@""]) {
+    if ([str_img_url isEqualToString:@""]) {
         if (str_Logo==nil) {
             userInfo.str_Logo=@"headLogo.png";
         }
@@ -875,7 +877,7 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
         NSString *str_picname=[NSString stringWithFormat:@"%@%@",str_name,@".jpg"];
         userInfo.str_Logo=str_picname;
     }
-    
+    userInfo.str_imgurl=str_img_url;
     
     [self saveUserInfo:userInfo];
     OAViewController *viewController=[[OAViewController alloc]init];
@@ -967,6 +969,7 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     }
     
     str_img_link=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_img_link];
+    str_img_url=str_img_link;
     NSURL *URL = [NSURL URLWithString:str_img_link];
     NSURLRequest *request = [NSURLRequest requestWithURL:URL];
     

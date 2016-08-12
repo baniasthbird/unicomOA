@@ -464,7 +464,17 @@ CGFloat i_Height=-1;
                 NSURL *url=nodeData.headImgUrl;
                 NSString *str_url=url.absoluteString;
                 if (![str_url isEqualToString:@""]) {
-                    UIImage *saveImage = [self loadLocalImage:nodeData.name];
+                    NSString *str_ip=@"";
+                    NSString *str_port=@"";
+                    NSMutableArray *t_array=[db fetchIPAddress];
+                    if (t_array.count==1) {
+                        NSArray *arr_ip=[t_array objectAtIndex:0];
+                        str_ip=[arr_ip objectAtIndex:0];
+                        str_port=[arr_ip objectAtIndex:1];
+                    }
+                    str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_url];
+                    NSData * data = [NSData dataWithContentsOfURL:[NSURL URLWithString:str_url]];
+                    UIImage *saveImage = [UIImage imageWithData:data];
                     if (saveImage!=nil) {
                         UIImageView *imgView=((CLTreeView_LEVEL2_Cell*)cell).headImg;
                         imgView.layer.cornerRadius=imgView.frame.size.width/2;
@@ -587,7 +597,8 @@ CGFloat i_Height=-1;
  --------------------------------------- */
 -(void)reloadDataForDisplayArray:(NSMutableArray*)dataArray {
     NSMutableArray *tmp = [[NSMutableArray alloc]init];
-    for (CLTreeViewNode *node in _dataArray) {
+    _dataArray=dataArray;
+    for (CLTreeViewNode *node in dataArray) {
         [tmp addObject:node];
         if(node.isExpanded){
             for(CLTreeViewNode *node2 in node.sonNodes){

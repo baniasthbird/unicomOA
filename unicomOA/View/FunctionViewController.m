@@ -22,13 +22,14 @@
 #import "MessageViewController.h"
 #import "UnFinishViewController.h"
 #import "SysMsgViewController.h"
+#import "XSpotLight.h"
 
 
 
 #define kImageWidth 100      //UITAbleViewCell里面图片的宽度
 #define kImageHeight 100     //UITableViewCell里面图片的高度
 
-@interface FunctionViewController ()<MyShenPiViewControllerDelegate>
+@interface FunctionViewController ()<MyShenPiViewControllerDelegate,XSpotLightDelegate>
 
 //@property(nonatomic,strong) UITableView *tableView;
 @property(nonatomic,strong) UIImage *image;
@@ -220,6 +221,26 @@
 
     }
     
+    XSpotLight *SpotLight=[[XSpotLight alloc]init];
+    SpotLight.messageArray=@[@"新增办公审批"];
+    CGFloat i_x=147;
+    CGFloat i_y=292;
+    if (iPhone5_5s) {
+        i_x=122;
+        i_y=250;
+    }
+    else if (iPhone6_plus) {
+        i_x=156;
+        i_y=310;
+    }
+    SpotLight.rectArray=@[[NSValue valueWithCGRect:CGRectMake(i_x, i_y, 50, 500)]];
+    SpotLight.delegate=self;
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]) {
+        [self presentViewController:SpotLight animated:NO completion:^{
+            
+        }];
+    }
+
     
     UILabel *lbl_title1=[[UILabel alloc]initWithFrame:CGRectMake(i_title1_x, i_title1_y, i_title_w, i_title_h)];
     lbl_title1.textAlignment=NSTextAlignmentLeft;
@@ -930,6 +951,10 @@
         [_btn_ShenPi showBadgeWithStyle:WBadgeStyleNumber value:i_total animationType:WBadgeAnimTypeNone];
         [self.view setNeedsDisplay];
     }
+}
+
+-(void)XSpotLightClicked:(NSInteger)index {
+    
 }
 /*
 #pragma mark - Navigation

@@ -31,4 +31,6 @@
 
 @property (nonatomic,strong) NSString *str_Logo;
 
+@property (nonatomic,strong) NSString *str_imgurl;
+
 @end

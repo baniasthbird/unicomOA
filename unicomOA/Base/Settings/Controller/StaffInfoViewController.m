@@ -15,7 +15,7 @@
 #import "MBProgressHUD.h"
 #import "XSpotLight.h"
 
-#define SCREEN_WIDTH ([UIScreen mainScreen].bounds.size.width)
+
 
 @interface StaffInfoViewController ()<LZActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,XSpotLightDelegate>
 
@@ -52,7 +52,7 @@
     SpotLight.messageArray=@[@"点击可上传头像"];
     CGFloat i_left=58;
     CGFloat i_height=115;
-    SpotLight.rectArray=@[[NSValue valueWithCGRect:CGRectMake(SCREEN_WIDTH - i_left, i_height, 50, 500)]];
+    SpotLight.rectArray=@[[NSValue valueWithCGRect:CGRectMake(Width - i_left, i_height, 50, 500)]];
     SpotLight.delegate=self;
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]) {
         [self presentViewController:SpotLight animated:NO completion:^{
@@ -147,7 +147,7 @@
             [_img_Head setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width*0.88, 13, 74, 74)];
         }
         else {
-            [_img_Head setFrame:CGRectMake(SCREEN_WIDTH-95, 13, 74, 74)];
+            [_img_Head setFrame:CGRectMake(Width-95, 13, 74, 74)];
         }
         
         _img_Head.userInteractionEnabled=YES;
