@@ -256,7 +256,15 @@
             }
             str_img =(NSString*)obj_photo;
             if ([str_img isEqualToString:@""] || str_img==nil) {
-                str_img=@"";
+                obj_photo=[dic objectForKey:@"headimg"];
+                if (obj_photo!=[NSNull null] && obj_photo!=nil) {
+                    str_img=(NSString*)obj_photo;
+                    [self DownloadImage:str_img name:str_name];
+                }
+                else {
+                    str_img=@"";
+                }
+                
             }
             else {
                 str_img=(NSString*)obj_photo;
@@ -357,6 +365,8 @@
         str_ip=[arr_ip objectAtIndex:0];
         str_port=[arr_ip objectAtIndex:1];
     }
+    
+    [self RemoveLocalLogo:str_name];
 
     str_img_link=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_img_link];
     NSURL *URL = [NSURL URLWithString:str_img_link];
@@ -368,13 +378,30 @@
         return [documentsDirectoryURL URLByAppendingPathComponent:str_filename];
     } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
         NSLog(@"File downloaded to: %@", filePath);
-        
-        
+        NSString *str_filename=[NSString stringWithFormat:@"%@%@",str_name,@".jpg"];
+        NSString *fullPath=  [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:str_filename];
+        UIImage *img=[UIImage imageWithContentsOfFile:fullPath];
+        if (img==nil) {
+            
+        }
+       
         
     }];
     [downloadTask resume];
+}
 
-
+//zr 0811 当发现下载图片与已有图片有冲突时，先删除已有图片
+-(void)RemoveLocalLogo:(NSString*)str_name {
+    NSString *str_picname=[NSString stringWithFormat:@"%@.%@",str_name,@"jpg"];
+    NSString *fullPath=  [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:str_picname];
+    UIImage *img=[UIImage imageWithContentsOfFile:fullPath];
+    NSFileManager *fileManager=[NSFileManager defaultManager];
+    BOOL bExist=[fileManager fileExistsAtPath:fullPath];
+    if (bExist) {
+        NSError *err;
+        [fileManager removeItemAtPath:fullPath error:&err];
+    }
+    
 }
 
 @end

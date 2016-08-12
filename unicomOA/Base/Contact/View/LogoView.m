@@ -34,9 +34,9 @@
 {
     static NSString *cellID = @"sideslipCell";
     LogoView *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-    if (!cell) {
+   // if (!cell) {
         cell = [[LogoView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID withName:str_Name withImage:str_img];
-    }
+ //   }
     return cell;
 }
 
@@ -81,6 +81,16 @@
         }
         
         _img_Head=[[UIImageView alloc]initWithImage:imageHead];
+        /*
+        _img_Head=[[UIImageView alloc]init];
+        NSRange r_search=[str_img rangeOfString:@".jpg"];
+        if (r_search.location!=NSNotFound) {
+            _img_Head=[[UIImageView alloc]initWithImage:imageHead];
+        }
+        else {
+            _img_Head
+        }
+        */
         _img_Head.backgroundColor=[UIColor clearColor];
         if (iPhone4_4s || iPhone5_5s) {
             [_img_Head setFrame:CGRectMake(115, 20, 88, 88)];

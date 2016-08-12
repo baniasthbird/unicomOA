@@ -159,8 +159,13 @@
 		68579FA31CC0BBCE00597FBD /* ShenPiAgreeWithCarDeploy.m in Sources */ = {isa = PBXBuildFile; fileRef = 68579FA21CC0BBCE00597FBD /* ShenPiAgreeWithCarDeploy.m */; };
 		68579FA61CC0C21100597FBD /* CarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68579FA51CC0C21100597FBD /* CarModel.m */; };
 		68579FA91CC0C88600597FBD /* CarDeployCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68579FA81CC0C88600597FBD /* CarDeployCell.m */; };
+		686A36FF1D5D642900288011 /* XManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 686A36FA1D5D642900288011 /* XManager.m */; };
+		686A37001D5D642900288011 /* XSpotLight.m in Sources */ = {isa = PBXBuildFile; fileRef = 686A36FC1D5D642900288011 /* XSpotLight.m */; };
+		686A37011D5D642900288011 /* XSpotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 686A36FE1D5D642900288011 /* XSpotView.m */; };
 		686AAB9E1D4B44B0002775C2 /* SysMsgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 686AAB9D1D4B44B0002775C2 /* SysMsgViewController.m */; };
 		686AABA11D4B522C002775C2 /* SysMsgSubVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 686AABA01D4B522C002775C2 /* SysMsgSubVc.m */; };
+		686C80011D5C0CC00071A410 /* libMBProgressHUD.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686C80001D5C0CC00071A410 /* libMBProgressHUD.a */; };
+		686C80031D5C7D0E0071A410 /* libSDWebImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686C80021D5C7D0E0071A410 /* libSDWebImage.a */; };
 		68723EB61CF839DA0019ACD8 /* UnFinishVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 68723EB51CF839DA0019ACD8 /* UnFinishVc.m */; };
 		68723EB91CF839F50019ACD8 /* FinishVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 68723EB81CF839F50019ACD8 /* FinishVc.m */; };
 		687E74BA1D113B9500F67884 /* check_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 687E74B81D113B9500F67884 /* check_off.png */; };
@@ -588,10 +593,18 @@
 		68579FA51CC0C21100597FBD /* CarModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CarModel.m; path = Base/Function/ShenPiModel/CarModel.m; sourceTree = "<group>"; };
 		68579FA71CC0C88600597FBD /* CarDeployCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CarDeployCell.h; path = Base/Function/ShenPiModel/CarDeployCell.h; sourceTree = "<group>"; };
 		68579FA81CC0C88600597FBD /* CarDeployCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CarDeployCell.m; path = Base/Function/ShenPiModel/CarDeployCell.m; sourceTree = "<group>"; };
+		686A36F91D5D642900288011 /* XManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XManager.h; sourceTree = "<group>"; };
+		686A36FA1D5D642900288011 /* XManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XManager.m; sourceTree = "<group>"; };
+		686A36FB1D5D642900288011 /* XSpotLight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XSpotLight.h; sourceTree = "<group>"; };
+		686A36FC1D5D642900288011 /* XSpotLight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XSpotLight.m; sourceTree = "<group>"; };
+		686A36FD1D5D642900288011 /* XSpotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XSpotView.h; sourceTree = "<group>"; };
+		686A36FE1D5D642900288011 /* XSpotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XSpotView.m; sourceTree = "<group>"; };
 		686AAB9C1D4B44B0002775C2 /* SysMsgViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SysMsgViewController.h; path = Base/Function/SysMsg/MsgController/SysMsgViewController.h; sourceTree = "<group>"; };
 		686AAB9D1D4B44B0002775C2 /* SysMsgViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SysMsgViewController.m; path = Base/Function/SysMsg/MsgController/SysMsgViewController.m; sourceTree = "<group>"; };
 		686AAB9F1D4B522C002775C2 /* SysMsgSubVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SysMsgSubVc.h; path = Base/Function/SysMsg/MsgController/SysMsgSubVc.h; sourceTree = "<group>"; };
 		686AABA01D4B522C002775C2 /* SysMsgSubVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SysMsgSubVc.m; path = Base/Function/SysMsg/MsgController/SysMsgSubVc.m; sourceTree = "<group>"; };
+		686C80001D5C0CC00071A410 /* libMBProgressHUD.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMBProgressHUD.a; path = "../../../Library/Developer/Xcode/DerivedData/unicomOA-casyuftkadckdjdwnuvyvlrozdco/Build/Products/Debug-iphonesimulator/libMBProgressHUD.a"; sourceTree = "<group>"; };
+		686C80021D5C7D0E0071A410 /* libSDWebImage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDWebImage.a; path = "../../../Library/Developer/Xcode/DerivedData/unicomOA-casyuftkadckdjdwnuvyvlrozdco/Build/Products/Debug-iphonesimulator/libSDWebImage.a"; sourceTree = "<group>"; };
 		68723EB41CF839DA0019ACD8 /* UnFinishVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UnFinishVc.h; path = Base/Function/ShenPiContorller/UnFinishVc.h; sourceTree = "<group>"; };
 		68723EB51CF839DA0019ACD8 /* UnFinishVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UnFinishVc.m; path = Base/Function/ShenPiContorller/UnFinishVc.m; sourceTree = "<group>"; };
 		68723EB71CF839F50019ACD8 /* FinishVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FinishVc.h; path = Base/Function/ShenPiContorller/FinishVc.h; sourceTree = "<group>"; };
@@ -785,6 +798,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				686C80031D5C7D0E0071A410 /* libSDWebImage.a in Frameworks */,
+				686C80011D5C0CC00071A410 /* libMBProgressHUD.a in Frameworks */,
 				6882288F1CE01D96007F5861 /* libsqlite3.0.tbd in Frameworks */,
 				6882288D1CE013A1007F5861 /* libFMDB.a in Frameworks */,
 				68008F511CDAE27F001A4D64 /* CoreLocation.framework in Frameworks */,
@@ -819,6 +834,8 @@
 		04DF743BC07CED8E72262A08 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				686C80021D5C7D0E0071A410 /* libSDWebImage.a */,
+				686C80001D5C0CC00071A410 /* libMBProgressHUD.a */,
 				6882288E1CE01D96007F5861 /* libsqlite3.0.tbd */,
 				6882288C1CE013A1007F5861 /* libFMDB.a */,
 				68008F501CDAE27F001A4D64 /* CoreLocation.framework */,
@@ -1376,6 +1393,7 @@
 		6846D35D1CABC483004BD285 /* OpenSource */ = {
 			isa = PBXGroup;
 			children = (
+				686A36F81D5D642900288011 /* SpotLight */,
 				6846E6D61D518CA5005287A1 /* HcdGuideView */,
 				68D41B051D4738CB0001075E /* XZMCoreNewFeatureVC */,
 				682A46CD1D3F69E800FCED9E /* CDFInitialsAvatar */,
@@ -1515,6 +1533,20 @@
 			);
 			name = Base;
 			path = DevKit/Base;
+			sourceTree = "<group>";
+		};
+		686A36F81D5D642900288011 /* SpotLight */ = {
+			isa = PBXGroup;
+			children = (
+				686A36F91D5D642900288011 /* XManager.h */,
+				686A36FA1D5D642900288011 /* XManager.m */,
+				686A36FB1D5D642900288011 /* XSpotLight.h */,
+				686A36FC1D5D642900288011 /* XSpotLight.m */,
+				686A36FD1D5D642900288011 /* XSpotView.h */,
+				686A36FE1D5D642900288011 /* XSpotView.m */,
+			);
+			name = SpotLight;
+			path = OpenSource/SpotLight;
 			sourceTree = "<group>";
 		};
 		686AAB981D4B43A6002775C2 /* SysMsg */ = {
@@ -2158,6 +2190,7 @@
 				6838153F1CBCCB2A00E6AFD3 /* PrintApplicationDetail.m in Sources */,
 				6846EC551CF99C7C00A400C5 /* IQBarButtonItem.m in Sources */,
 				68DEEBE01CBE1D61003DB7AA /* ShenPiCopy.m in Sources */,
+				686A36FF1D5D642900288011 /* XManager.m in Sources */,
 				68DEEBC51CBDCED6003DB7AA /* MyShenPiViewController.m in Sources */,
 				2CE320F11CB7FF4800B36793 /* CarApplication.m in Sources */,
 				6846EC6C1CFAD48300A400C5 /* Reachability.m in Sources */,
@@ -2262,6 +2295,7 @@
 				68C0A5BC1CBF6667008BEE27 /* ShenPiStatus.m in Sources */,
 				68EEDE581CBB2E19003295EB /* DYCAddressPickerView.m in Sources */,
 				683815301CBC79F500E6AFD3 /* CarService.m in Sources */,
+				686A37001D5D642900288011 /* XSpotLight.m in Sources */,
 				689713701CE336E1008BB4AB /* UnReadMessageCell.m in Sources */,
 				683815421CBCDAA400E6AFD3 /* PrintFileDetail.m in Sources */,
 				2C3F219C1C85837F00EBD122 /* NotesTableVIewCell.m in Sources */,
@@ -2345,6 +2379,7 @@
 				2CA10C8B1CA18F17008D6394 /* ChangePhoneNumStep1.m in Sources */,
 				2CFEADB71C76A6350054730E /* MessageModel.m in Sources */,
 				2CFEADC01C76A6520054730E /* ChatViewController.m in Sources */,
+				686A37011D5D642900288011 /* XSpotView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

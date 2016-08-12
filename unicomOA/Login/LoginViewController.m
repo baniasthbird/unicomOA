@@ -825,17 +825,19 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
 //登录成功转至下一页
 -(void)MoveToNextPage:(NSDictionary*)dic_usr {
     UserInfo *userInfo=[[UserInfo alloc]init];
-    NSString *str_name=[dic_usr objectForKey:@"empname"];
-    NSString *str_orgname=[dic_usr objectForKey:@"orgname"];
-    NSString *str_gender=[dic_usr objectForKey:@"sex"];
-    NSObject *obj_email=[dic_usr objectForKey:@"oemail"];
-    NSString *str_email=[dic_usr objectForKey:@"oemail"];
-    NSString *str_cellphone=[dic_usr objectForKey:@"mobileno"];
-    NSString *str_posiname=[dic_usr objectForKey:@"posiname"];
-    NSString *str_tel=[dic_usr objectForKey:@"otel"];
+    NSString *str_name=[baseFunc GetValueFromDic:dic_usr key:@"empname"];
+    NSString *str_orgname=[baseFunc GetValueFromDic:dic_usr key:@"orgname"];
+
+    NSString *str_gender=[baseFunc GetValueFromDic:dic_usr key:@"sex"];
+    NSString *str_email=[baseFunc GetValueFromDic:dic_usr key:@"oemail"];
+
+    NSString *str_cellphone=[baseFunc GetValueFromDic:dic_usr key:@"mobileno"];
+    NSString *str_posiname=[baseFunc GetValueFromDic:dic_usr key:@"posiname"];
+    NSString *str_tel=[baseFunc GetValueFromDic:dic_usr key:@"posiname"];
    // NSString *str_imgurl=[dic_usr objectForKey:@"headimg"];
     NSString *str_imgurl=[baseFunc GetValueFromDic:dic_usr key:@"headimg"];
     if (![str_imgurl isEqualToString:@""]) {
+        [self RemoveLocalLogo:str_name];
         [self DownloadImage:str_imgurl name:str_name];
     }
     userInfo.str_name=str_name;
@@ -845,9 +847,6 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     userInfo.str_position=str_posiname;
     userInfo.str_cellphone=str_cellphone;
    //    userInfo.str_email=str_email;
-    if (obj_email==[NSNull null]) {
-        str_email=@"未绑定";
-    }
     userInfo.str_email=str_email;
     userInfo.str_phonenum=str_tel;
     NSString *str_Logo=[[NSUserDefaults standardUserDefaults] objectForKey:@"Logo"];
@@ -860,7 +859,15 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
                 userInfo.str_Logo=@"headLogo.png";
             }
             else {
-                userInfo.str_Logo=str_Logo;
+                NSArray *arr_logo=[str_Logo componentsSeparatedByString:@"."];
+                NSString *str_logoname=[arr_logo objectAtIndex:0];
+                if ([str_logoname isEqualToString:str_name]) {
+                    userInfo.str_Logo=str_Logo;
+                }
+                else {
+                    userInfo.str_Logo=@"headLogo.png";
+                }
+                
             }
         }
     }
@@ -978,6 +985,18 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     
 }
 
+//zr 0811 当发现下载图片与已有图片有冲突时，先删除已有图片
+-(void)RemoveLocalLogo:(NSString*)str_name {
+    NSString *str_picname=[NSString stringWithFormat:@"%@.%@",str_name,@"jpg"];
+    NSString *fullPath=  [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:str_picname];
+    NSFileManager *fileManager=[NSFileManager defaultManager];
+    BOOL bExist=[fileManager fileExistsAtPath:fullPath];
+    if (bExist) {
+        NSError *err;
+        [fileManager removeItemAtPath:fullPath error:&err];
+    }
+    
+}
 
 
 

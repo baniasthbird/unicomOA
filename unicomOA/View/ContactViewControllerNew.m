@@ -15,9 +15,10 @@
 #import "UILabel+LabelHeightAndWidth.h"
 #import "LXAlertView.h"
 #import "CDFInitialsAvatar.h"
+#import "XSpotLight.h"
 
 
-@interface ContactViewControllerNew()
+@interface ContactViewControllerNew()<XSpotLightDelegate>
 
 @property (strong,nonatomic) NSMutableArray *dataArray;  //保存全部数据的数组
 @property (strong,nonatomic) NSArray *displayArray;      //保存要显示在界面上的数据的数组
@@ -82,6 +83,17 @@ CGFloat i_Height=-1;
     self.view.backgroundColor=[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1];
     
 
+    XSpotLight *SpotLight=[[XSpotLight alloc]init];
+    SpotLight.messageArray=@[@"通讯录可查看用户头像"];
+    SpotLight.rectArray=@[[NSValue valueWithCGRect:CGRectMake(0,0,0,0)]];
+    SpotLight.delegate=self;
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]) {
+        [self presentViewController:SpotLight animated:NO completion:^{
+            
+        }];
+    }
+    
+    
     UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"刷新" style:UIBarButtonItemStyleDone target:self action:@selector(refresh:)];
     [barButtonItem setTitleTextAttributes:dict forState:UIControlStateNormal];
 
@@ -439,31 +451,45 @@ CGFloat i_Height=-1;
         CGFloat w_depart=[UILabel_LabelHeightAndWidth getWidthWithTitle:nodeData.signture font:[UIFont systemFontOfSize:13]];
         ((CLTreeView_LEVEL2_Cell*)cell).signture.frame=CGRectMake([UIScreen mainScreen].bounds.size.width-w_depart-10, 10, w_depart, 30);
         [((CLTreeView_LEVEL2_Cell*)cell).signture sizeToFit];
-        if (nodeData.headImgUrl != nil){
-            //加载图片，这里是同步操作。建议使用SDWebImage异步加载图片
-            NSURL *url=nodeData.headImgUrl;
-            NSString *str_url=url.absoluteString;
-            if (![str_url isEqualToString:@""]) {
-                NSString *str_picname=[NSString stringWithFormat:@"%@.%@",nodeData.name,@"jpg"];
-                NSString *fullPath=  [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:str_picname];
-                UIImage *saveImage=[[UIImage alloc]initWithContentsOfFile:fullPath];
-                UIImageView *imgView=((CLTreeView_LEVEL2_Cell*)cell).headImg;
-                imgView.layer.cornerRadius=imgView.frame.size.width/2;
-                imgView.layer.masksToBounds=YES;
-                [((CLTreeView_LEVEL2_Cell*)cell).headImg setImage:saveImage];
-                
-            }
-            else {
-                if(nodeData.headImgPath != nil){
-                    //本地图片
-                    [((CLTreeView_LEVEL2_Cell*)cell).headImg setImage:[UIImage imageNamed:nodeData.headImgPath]];
+        if ([nodeData.name isEqualToString:_userInfo.str_name]) {
+            UIImage *saveImage = [self loadLocalImage:nodeData.name];
+            UIImageView *imgView=((CLTreeView_LEVEL2_Cell*)cell).headImg;
+            imgView.layer.cornerRadius=imgView.frame.size.width/2;
+            imgView.layer.masksToBounds=YES;
+            [((CLTreeView_LEVEL2_Cell*)cell).headImg setImage:saveImage];
+        }
+        else {
+            if (nodeData.headImgUrl != nil){
+                //加载图片，这里是同步操作。建议使用SDWebImage异步加载图片
+                NSURL *url=nodeData.headImgUrl;
+                NSString *str_url=url.absoluteString;
+                if (![str_url isEqualToString:@""]) {
+                    UIImage *saveImage = [self loadLocalImage:nodeData.name];
+                    if (saveImage!=nil) {
+                        UIImageView *imgView=((CLTreeView_LEVEL2_Cell*)cell).headImg;
+                        imgView.layer.cornerRadius=imgView.frame.size.width/2;
+                        imgView.layer.masksToBounds=YES;
+                        [((CLTreeView_LEVEL2_Cell*)cell).headImg setImage:saveImage];
+                    }
+                    else {
+                        UIImageView *imgView=((CLTreeView_LEVEL2_Cell*)cell).headImg;
+                        UIImage *img= [self setTxcolorAndTitle:nodeData.name fid:nodeData.signture imgView:imgView];
+                        [((CLTreeView_LEVEL2_Cell*)cell).headImg setImage:img];
+                    }
                 }
                 else {
-                    UIImageView *imgView=((CLTreeView_LEVEL2_Cell*)cell).headImg;
-                    UIImage *img= [self setTxcolorAndTitle:nodeData.name fid:nodeData.signture imgView:imgView];
-                    [((CLTreeView_LEVEL2_Cell*)cell).headImg setImage:img];
+                    if(nodeData.headImgPath != nil){
+                        //本地图片
+                        [((CLTreeView_LEVEL2_Cell*)cell).headImg setImage:[UIImage imageNamed:nodeData.headImgPath]];
+                    }
+                    else {
+                        UIImageView *imgView=((CLTreeView_LEVEL2_Cell*)cell).headImg;
+                        UIImage *img= [self setTxcolorAndTitle:nodeData.name fid:nodeData.signture imgView:imgView];
+                        [((CLTreeView_LEVEL2_Cell*)cell).headImg setImage:img];
+                    }
                 }
             }
+
         }
         
         
@@ -490,22 +516,37 @@ CGFloat i_Height=-1;
         MemberInfoViewController *viewController=[[MemberInfoViewController alloc] init];
         viewController.str_Name= nodeData.name;
         viewController.str_Gender=nodeData.gender;
-        //本地图片
-        if ([nodeData.headImgUrl.absoluteString isEqualToString:@""]) {
-            if (nodeData.headImgPath==nil)
-            {
-                viewController.str_img=@"headLogo.png";
-            }
-            else {
-                viewController.str_img=nodeData.headImgPath;
-            }
-        }
-        else {
+        if ([nodeData.name isEqualToString:_userInfo.str_name]) {
             NSString *str_picname=[NSString stringWithFormat:@"%@.%@",nodeData.name,@"jpg"];
             NSString *fullPath=  [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:str_picname];
             viewController.str_img=fullPath;
         }
-               // FriendGroup *tmp_friend=[_friendsData objectAtIndex:indexPath.section];
+        else {
+            //本地图片
+            if ([nodeData.headImgUrl.absoluteString isEqualToString:@""]) {
+                if (nodeData.headImgPath==nil)
+                {
+                    viewController.str_img=@"headLogo.png";
+                }
+                else {
+                    viewController.str_img=nodeData.headImgPath;
+                }
+            }
+            else {
+                NSString *str_picname=[NSString stringWithFormat:@"%@.%@",nodeData.name,@"jpg"];
+                NSString *fullPath=  [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:str_picname];
+                UIImage *img=[UIImage imageWithContentsOfFile:fullPath];
+                if (img!=nil) {
+                    viewController.str_img=fullPath;
+                }
+                else {
+                    viewController.str_img=@"headLogo.png";
+                }
+                
+            }
+
+        }
+                       // FriendGroup *tmp_friend=[_friendsData objectAtIndex:indexPath.section];
         viewController.str_department=nodeData.department;
         
         viewController.str_carrer=nodeData.signture;
@@ -788,6 +829,15 @@ CGFloat i_Height=-1;
     return  topAvatar.imageRepresentation;
 }
 
+-(UIImage*)loadLocalImage:(NSString*)str_name {
+    NSString *str_picname=[NSString stringWithFormat:@"%@.%@",str_name,@"jpg"];
+    NSString *fullPath=  [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:str_picname];
+    UIImage *saveImage=[[UIImage alloc]initWithContentsOfFile:fullPath];
+    return  saveImage;
+}
 
+-(void)XSpotLightClicked:(NSInteger)index{
+    NSLog(@"%ld",(long)index);
+}
 
 @end

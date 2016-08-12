@@ -11,14 +11,23 @@
 #import "PhoneLabelView.h"
 #import "ContactViewControllerNew.h"
 #import "AppDelegate.h"
+#import "AFNetworking.h"
+#import "DataBase.h"
+#import "LXAlertView.h"
+#import "UIImageView+WebCache.h"
 
 @import MessageUI;
 
 @interface MemberInfoViewController ()<MFMessageComposeViewControllerDelegate>
 
+@property (nonatomic,strong) AFHTTPSessionManager *session;
+
 @end
 
-@implementation MemberInfoViewController
+@implementation MemberInfoViewController {
+     DataBase *db;
+     UIImage *imgLogo;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -28,6 +37,19 @@
     //self.view.backgroundColor=[UIColor colorWithRed:236.0/255.0f green:236.0/255.0f blue:236.0/255.0f alpha:1];
     self.view.backgroundColor=[UIColor whiteColor];
     
+    db=[DataBase sharedinstanceDB];
+    
+    _session=[AFHTTPSessionManager manager];
+    _session.responseSerializer= [AFHTTPResponseSerializer serializer];
+    [_session.requestSerializer setHTTPShouldHandleCookies:YES];
+    [_session.requestSerializer setTimeoutInterval:10.0f];
+    
+    NSMutableDictionary *param=[NSMutableDictionary dictionary];
+    param[@"name"]=_str_Name;
+    
+   // [self PrepareData:param];
+    
+   
     NSDictionary * dict;
     if (iPad) {
         dict=@{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:[UIFont systemFontOfSize:25]};
@@ -422,6 +444,62 @@
 -(void) dealloc {
     self.tableView.delegate=nil;
     self.tableView.dataSource=nil;
+}
+
+
+//根据搜索栏查找
+-(void)PrepareData:(NSMutableDictionary*)param {
+    NSString *str_connection=[self GetConnectionStatus];
+    if ([str_connection isEqualToString:@"wifi"] || [str_connection isEqualToString:@"GPRS"]) {
+        __block NSString *str_ip=@"";
+        __block NSString *str_port=@"";
+        NSMutableArray *t_array=[db fetchIPAddress];
+        if (t_array.count==1) {
+            NSArray *arr_ip=[t_array objectAtIndex:0];
+            str_ip=[arr_ip objectAtIndex:0];
+            str_port=[arr_ip objectAtIndex:1];
+        }
+        NSString *str_listsearch=[db fetchInterface:@"ListSearch"];
+        NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_listsearch];
+        [_session POST:str_url parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
+            
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+           // [indicator stopAnimating];
+            NSLog(@"查询通讯录成功");
+            NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            NSString *str_success= [JSON objectForKey:@"success"];
+            BOOL b_success=[str_success boolValue];
+            if (b_success==YES) {
+                NSArray *arr_result=[JSON objectForKey:@"empList"];
+                NSDictionary *dic_info=[arr_result objectAtIndex:0];
+                NSString *str_imgurl=[dic_info objectForKey:@"headimg"];
+                str_imgurl=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_imgurl];
+                _str_img=str_imgurl;
+                [self.tableView reloadData];
+                
+               
+            }
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+          //  [indicator stopAnimating];
+            LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"提示" message:@"无法连接到服务器" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+                
+            }];
+            [alert showLXAlertView];
+        }];
+    }
+    else {
+       // [indicator stopAnimating];
+        LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"警告" message:@"无网络连接" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+            
+        }];
+        [alert showLXAlertView];
+    }
+    
+}
+
+-(NSString*)GetConnectionStatus {
+    NSString *currentNetWorkState=[[NSUserDefaults standardUserDefaults] objectForKey:@"connection"];
+    return currentNetWorkState;
 }
 
 

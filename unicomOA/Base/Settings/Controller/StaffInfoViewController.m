@@ -12,8 +12,12 @@
 #import "LZActionSheet.h"
 #import "AFNetworking.h"
 #import "DataBase.h"
+#import "MBProgressHUD.h"
+#import "XSpotLight.h"
 
-@interface StaffInfoViewController ()<LZActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+#define SCREEN_WIDTH ([UIScreen mainScreen].bounds.size.width)
+
+@interface StaffInfoViewController ()<LZActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,XSpotLightDelegate>
 
 @property (nonatomic,strong) UIImageView *img_Head;
 
@@ -44,6 +48,19 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
+    XSpotLight *SpotLight=[[XSpotLight alloc]init];
+    SpotLight.messageArray=@[@"点击可上传头像"];
+    CGFloat i_left=58;
+    CGFloat i_height=115;
+    SpotLight.rectArray=@[[NSValue valueWithCGRect:CGRectMake(SCREEN_WIDTH - i_left, i_height, 50, 500)]];
+    SpotLight.delegate=self;
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]) {
+        [self presentViewController:SpotLight animated:NO completion:^{
+            
+        }];
+    }
+    
+
     
     UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"  " style:UIBarButtonItemStyleDone target:self action:@selector(MovePreviousVc:)];
     [barButtonItem setTitleTextAttributes:dict forState:UIControlStateNormal];
@@ -109,8 +126,13 @@
         lbl_title.textColor=[UIColor blackColor];
         
         UIImage *imageHead=[[UIImage alloc]init];
+        NSString *str_tmp_picname=[NSString stringWithFormat:@"%@%@",_userInfo.str_name,@".jpg"];
         if ([_userInfo.str_Logo isEqualToString:@"headLogo.png"]) {
             imageHead=[UIImage imageNamed:_userInfo.str_Logo];
+        }
+        else if ([_userInfo.str_Logo isEqualToString:str_tmp_picname]) {
+            NSString *fullPath=  [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:str_tmp_picname];
+            imageHead=[[UIImage alloc]initWithContentsOfFile:fullPath];
         }
         else {
             NSString *str_picname=[NSString stringWithFormat:@"%@.%@",_userInfo.str_username,@"png"];
@@ -125,7 +147,7 @@
             [_img_Head setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width*0.88, 13, 74, 74)];
         }
         else {
-            [_img_Head setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width*0.68, 13, 74, 74)];
+            [_img_Head setFrame:CGRectMake(SCREEN_WIDTH-95, 13, 74, 74)];
         }
         
         _img_Head.userInteractionEnabled=YES;
@@ -365,7 +387,8 @@
     [userDefaults setObject:str_picname forKey:@"Logo"];
     [userDefaults synchronize];
     
-    _userInfo.str_Logo=fullPath;
+    NSString *str_pic_name=[NSString stringWithFormat:@"%@%@",_userInfo.str_name,@".jpg"];
+    _userInfo.str_Logo=str_pic_name;
     
     [self UploadImgToServer:fullPath];
     
@@ -375,6 +398,7 @@
 
 //图片上传至服务器
 -(void)UploadImgToServer:(NSString*)str_path {
+    MBProgressHUD *hud;
     NSString *str_upload= [db fetchInterface:@"UploadImg"];
     NSMutableArray *arr_ip=[db fetchIPAddress];
     NSString *str_url=@"";
@@ -395,22 +419,50 @@
     NSString *str=[formatter stringFromDate:[NSDate date]];
     NSString *fileName=[NSString stringWithFormat:@"%@.jpg",str];
     
+    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode=MBProgressHUDModeText;
+    hud.labelText=@"上传中，请稍后...";
+    
   [_session POST:str_url parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
       //name参数，服务器端文件夹，filename参数，服务器端文件名
       [formData appendPartWithFileData:imageData name:@"data" fileName:fileName mimeType:@"image/jpeg"];
   } progress:^(NSProgress * _Nonnull uploadProgress) {
       
   } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+      
       NSLog(@"Response:%@",responseObject);
       NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-      BOOL b_success=[JSON objectForKey:@"b_success"];
-      if (b_success==YES) {
+      NSString *str_success=[JSON objectForKey:@"b_success"];
+      NSInteger i_success=[str_success integerValue];
+      if (i_success==0) {
+          NSString *str_msg=[JSON objectForKey:@"msg"];
+          NSRange search=[str_msg rangeOfString:@"上传成功"];
+          if (search.location!=NSNotFound) {
+              hud.labelText=@"上传成功";
+              hud.removeFromSuperViewOnHide=YES;
+              [hud hide:YES afterDelay:1];
+          }
+          NSRange search_fail=[str_msg rangeOfString:@"上传失败"];
+          if (search_fail.location!=NSNotFound) {
+              hud.labelText=str_msg;
+              hud.removeFromSuperViewOnHide=YES;
+              [hud hide:YES afterDelay:1];
+          }
           
       }
+      else {
+          hud.labelText=@"上传失败";
+          hud.removeFromSuperViewOnHide=YES;
+          [hud hide:YES afterDelay:1];
+      }
+    
      
       
 
   } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+      hud.labelText=@"上传失败";
+      hud.removeFromSuperViewOnHide=YES;
+      [hud hide:YES afterDelay:1];
       NSLog(@"Error: %@",error);
   }];
     
@@ -425,7 +477,9 @@
 }
 
 
-
+-(void)XSpotLightClicked:(NSInteger)index {
+    
+}
 
 /*
 // Override to support conditional editing of the table view.
