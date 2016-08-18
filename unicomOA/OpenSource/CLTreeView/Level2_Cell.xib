@@ -16,7 +16,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Flywarrior" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gFg-eR-6uT">
-                        <rect key="frame" x="60" y="15" width="72" height="20"/>
+                        <rect key="frame" x="72" y="15" width="72" height="20"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <color key="textColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -28,16 +28,16 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="K9n-iB-LM1">
-                        <rect key="frame" x="18" y="10" width="30" height="30"/>
+                        <rect key="frame" x="18" y="4" width="42" height="42"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="30" id="7tr-Pv-FAk"/>
-                            <constraint firstAttribute="height" constant="30" id="Q9A-gD-ScV"/>
+                            <constraint firstAttribute="width" constant="42" id="7tr-Pv-FAk"/>
+                            <constraint firstAttribute="height" constant="42" id="Q9A-gD-ScV"/>
                         </constraints>
                     </imageView>
                 </subviews>
                 <color key="backgroundColor" red="0.96470588235294119" green="0.97647058823529409" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
-                    <constraint firstItem="K9n-iB-LM1" firstAttribute="top" secondItem="mdF-UF-Tws" secondAttribute="topMargin" constant="2" id="0nW-dT-TRh"/>
+                    <constraint firstItem="K9n-iB-LM1" firstAttribute="top" secondItem="mdF-UF-Tws" secondAttribute="topMargin" constant="-4" id="0nW-dT-TRh"/>
                     <constraint firstItem="o7Y-0s-vdZ" firstAttribute="top" secondItem="mdF-UF-Tws" secondAttribute="topMargin" constant="7" id="2s2-93-oRs"/>
                     <constraint firstAttribute="trailingMargin" secondItem="o7Y-0s-vdZ" secondAttribute="trailing" constant="12" id="D9P-XT-113"/>
                     <constraint firstItem="gFg-eR-6uT" firstAttribute="leading" secondItem="K9n-iB-LM1" secondAttribute="trailing" constant="12" id="kIE-aN-y4M"/>

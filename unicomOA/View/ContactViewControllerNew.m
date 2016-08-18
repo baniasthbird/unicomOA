@@ -84,7 +84,7 @@ CGFloat i_Height=-1;
     
 
     XSpotLight *SpotLight=[[XSpotLight alloc]init];
-    SpotLight.messageArray=@[@"通讯录可查看用户头像"];
+    SpotLight.messageArray=@[@"调整头像大小，下拉刷新可查看最新用户头像"];
     SpotLight.rectArray=@[[NSValue valueWithCGRect:CGRectMake(0,0,0,0)]];
     SpotLight.delegate=self;
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]) {
@@ -263,6 +263,7 @@ CGFloat i_Height=-1;
                 
             }];
             [alert showLXAlertView];
+            [indicator stopAnimating];
         }];
 
     }
@@ -829,7 +830,7 @@ CGFloat i_Height=-1;
     topAvatar.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:strImg]];
    // topAvatar.backgroundColor=[UIColor lightGrayColor];
     
-    topAvatar.initialsFont=[UIFont fontWithName:@"STHeitiTC-Light" size:14];
+    topAvatar.initialsFont=[UIFont fontWithName:@"STHeitiTC-Light" size:18];
     CALayer *mask = [CALayer layer]; // this will become a mask for UIImageView
     UIImage *maskImage = [UIImage imageNamed:@"AvatarMask"]; // circle, in this case
     mask.contents = (id)[maskImage CGImage];

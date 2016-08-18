@@ -7,8 +7,10 @@
 //
 
 #import "AboutViewController.h"
+#import "LXAlertView.h"
+#import "XSpotLight.h"
 
-@interface AboutViewController ()
+@interface AboutViewController ()<UIGestureRecognizerDelegate,XSpotLightDelegate>
 
 @end
 
@@ -73,6 +75,39 @@
     }
     lbl_version.textAlignment=NSTextAlignmentCenter;
     
+#pragma mark 二维码
+    UIImage *img_qrcode=[UIImage imageNamed:@"iphoneqrcode.png"];
+    UIImageView *img_qrcodeview=[[UIImageView alloc]initWithImage:img_qrcode];
+    if (iPhone6 || iPhone6_plus) {
+        [img_qrcodeview setFrame:CGRectMake(self.view.frame.size.width*0.5-img_qrcode.size.width*0.4, self.view.frame.size.height/8+lbl_version.frame.size.height*2, img_qrcode.size.width*0.8, img_qrcode.size.height*0.8)];
+    }
+    else if (iPhone5_5s) {
+         [img_qrcodeview setFrame:CGRectMake(self.view.frame.size.width*0.5-img_qrcode.size.width*0.4, self.view.frame.size.height/8+lbl_version.frame.size.height*1.5, img_qrcode.size.width*0.8, img_qrcode.size.height*0.8)];
+    }
+    else if (iPad){
+        [img_qrcodeview setFrame:CGRectMake(self.view.frame.size.width/2-img_qrcode.size.width/2, self.view.frame.size.height/8, img_qrcode.size.width, img_qrcode.size.height)];
+    }
+    img_qrcodeview.userInteractionEnabled=YES;
+    
+   // UITapGestureRecognizer *singTap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(NavToDownLoad:)];
+     UILongPressGestureRecognizer *singTap=[[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(NavToDownLoad:)];
+    [singTap setDelegate:self];
+    singTap.minimumPressDuration=1;
+    [img_qrcodeview addGestureRecognizer:singTap];
+
+#pragma mark 二维码下载提示
+    UILabel *lbl_downloadhint=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2-image.size.width*2, img_qrcodeview.frame.origin.y+img_qrcodeview.frame.size.height*0.8, image.size.width*4, 80)];
+    lbl_downloadhint.text=@"长按二维码下载客户端";
+    lbl_downloadhint.textColor=[UIColor whiteColor];
+    if (iPad) {
+        lbl_downloadhint.font=[UIFont systemFontOfSize:20];
+    }
+    else {
+        lbl_downloadhint.font=[UIFont systemFontOfSize:14];
+        
+    }
+    lbl_downloadhint.textAlignment=NSTextAlignmentCenter;
+    
 #pragma mark 服务条款
     UIButton *btn_service=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2-image.size.width*0.4, self.view.frame.size.height*0.65, image.size.width*0.4, 15)];
     [btn_service setTitle:@"服务条款" forState:UIControlStateNormal];
@@ -132,8 +167,21 @@
     [self.view addSubview:lbl_version];
   //  [self.view addSubview:btn_service];
   //  [self.view addSubview:btn_secret];
+    [self.view addSubview:img_qrcodeview];
+    [self.view addSubview:lbl_downloadhint];
     [self.view addSubview:lbl_copyright];
     [self.view addSubview:lbl_copyright_en];
+    
+    XSpotLight *SpotLight=[[XSpotLight alloc]init];
+    SpotLight.messageArray=@[@"新增长按二维码下载客户端"];
+    SpotLight.rectArray=@[[NSValue valueWithCGRect:CGRectMake(0,0,0,0)]];
+    SpotLight.delegate=self;
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]) {
+        [self presentViewController:SpotLight animated:NO completion:^{
+            
+        }];
+    }
+
     
 }
 
@@ -157,6 +205,34 @@
     }
     [self.navigationController popViewControllerAnimated:NO];
 }
+
+-(void)NavToDownLoad:(UILongPressGestureRecognizer*)gesture {
+  //  if (gesture.state==UIGestureRecognizerStateBegan) {
+    if ([gesture state] == UIGestureRecognizerStateBegan) {
+        
+        //长按事件开始"
+        //do something
+        NSString *DownLoadLink;
+        DownLoadLink = @"https://app.hnsi.cn/hnti_soa/";
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:DownLoadLink]];
+        exit(0);
+
+    }
+    else if ([gesture state] == UIGestureRecognizerStateEnded) {
+        //长按事件结束
+        //do something
+      
+    }
+           //}
+   // else if (gesture.state==UIGestureRecognizerStateEnded) {
+     //   NSLog(@"end");
+   // }
+}
+
+-(void)XSpotLightClicked:(NSInteger)index {
+    
+}
+
 /*
 #pragma mark - Navigation
 

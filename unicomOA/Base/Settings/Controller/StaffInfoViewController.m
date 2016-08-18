@@ -55,9 +55,9 @@
     SpotLight.rectArray=@[[NSValue valueWithCGRect:CGRectMake(Width - i_left, i_height, 50, 500)]];
     SpotLight.delegate=self;
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]) {
-        [self presentViewController:SpotLight animated:NO completion:^{
+     //   [self presentViewController:SpotLight animated:NO completion:^{
             
-        }];
+      //  }];
     }
     
 

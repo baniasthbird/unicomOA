@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>INTULocationManager.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>MBProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -32,12 +37,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0C9C63604974133716A1A0990FB054AB</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>58371CEE8FA66C2A647CD9081A900D5A</key>
+		<key>5ECE63415022D33E0CF1E6D65F48B90F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -47,7 +47,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>9B849F1EB6043140E6843C13BCAA70B9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>9F12FB4A63E20F601CFB2E64A65B57C1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E07A1B93D0B5E99C6E979FACDA81D9B4</key>
 		<dict>
 			<key>primary</key>
 			<true/>

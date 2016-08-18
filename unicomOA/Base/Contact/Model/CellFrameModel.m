@@ -45,7 +45,8 @@
     
     //3.内容的Frame
     CGSize textMaxSize = CGSizeMake(textW, MAXFLOAT);
-    CGSize textSize = [message.text sizeWithFont:[UIFont systemFontOfSize:14.0] maxSize:textMaxSize];
+   // CGSize textSize = [message.text sizeWithFont:[UIFont systemFontOfSize:14.0] maxSize:textMaxSize];
+    CGSize textSize = [message.text sizewithFont:[UIFont systemFontOfSize:14.0] maxSize:textMaxSize];
     CGSize textRealSize = CGSizeMake(textSize.width + textPadding * 2, textSize.height + textPadding * 2);
     CGFloat textFrameY = iconFrameY;
     CGFloat textFrameX = message.type ? (2 * padding + iconFrameW) : (frame.size.width - (padding * 2 + iconFrameW + textRealSize.width));

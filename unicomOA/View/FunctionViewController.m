@@ -23,6 +23,7 @@
 #import "UnFinishViewController.h"
 #import "SysMsgViewController.h"
 #import "XSpotLight.h"
+#import "WeatherViewController.h"
 
 
 
@@ -236,9 +237,9 @@
     SpotLight.rectArray=@[[NSValue valueWithCGRect:CGRectMake(i_x, i_y, 50, 500)]];
     SpotLight.delegate=self;
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]) {
-        [self presentViewController:SpotLight animated:NO completion:^{
+    //    [self presentViewController:SpotLight animated:NO completion:^{
             
-        }];
+   //     }];
     }
 
     
@@ -328,7 +329,8 @@
     UIImageButton *btn_JueCe=[self createImageButton:btn_x_3 y:btn_y width:btn_w height:btn_w title:@"决策" image:@"JueCe.png" insets:i_insets isFinish:NO];
     [btn_JueCe addTarget:self action:@selector(JueCeItemClick:) forControlEvents:UIControlEventTouchUpInside];
 
-    
+    UIImageButton *btn_Weather=[self createImageButton:btn_x_4 y:btn_y width:btn_w height:btn_w title:@"天气" image:@"Weather.png" insets:i_insets isFinish:NO];
+    [btn_Weather addTarget:self action:@selector(WeatherItemClick:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:lbl_title1];
     [self.view addSubview:lbl_title2];
@@ -346,6 +348,7 @@
     [view_part3 addSubview:btn_Notes];
     [view_part3 addSubview:btn_IVoting];
     [view_part3 addSubview:btn_JueCe];
+    [view_part3 addSubview:btn_Weather];
     [self.view addSubview:view_part1];
     [self.view addSubview:view_part2];
     [self.view sendSubviewToBack:view_part2];
@@ -741,6 +744,15 @@
         self.navigationController.delegate=nil;
     }
     [self.navigationController pushViewController:notesView animated:NO];
+}
+
+-(void)WeatherItemClick:(UIImageButton *)button {
+    WeatherViewController *vc=[[WeatherViewController alloc]init];
+    if (f_v<9.0) {
+        self.navigationController.delegate=nil;
+    }
+    [self.navigationController pushViewController:vc animated:NO];
+
 }
 
 /*
