@@ -281,6 +281,14 @@
         node.sonNodes=arr_staff;
     }
     else {
+        //zr 0824
+        for (int i=0;i<[arr_staff count];i++) {
+            CLTreeViewNode *subNode=[arr_staff objectAtIndex:i];
+            [node.sonNodes addObject:subNode];
+        }
+        i_ungroup_num=[arr_staff count];
+        //[node.sonNodes addObject:arr_staff];
+        /*
         i_ungroup_num=0;
         CLTreeViewNode *node_tree=[node.sonNodes objectAtIndex:0];
         if (node_tree.nodeLevel==1) {
@@ -291,6 +299,7 @@
             [node.sonNodes addObject:sub_node];
             i_ungroup_num=i_count;
         }
+        */
         
     }
     

@@ -454,10 +454,17 @@ CGFloat i_Height=-1;
         [((CLTreeView_LEVEL2_Cell*)cell).signture sizeToFit];
         if ([nodeData.name isEqualToString:_userInfo.str_name]) {
             UIImage *saveImage = [self loadLocalImage:nodeData.name];
-            UIImageView *imgView=((CLTreeView_LEVEL2_Cell*)cell).headImg;
-            imgView.layer.cornerRadius=imgView.frame.size.width/2;
-            imgView.layer.masksToBounds=YES;
-            [((CLTreeView_LEVEL2_Cell*)cell).headImg setImage:saveImage];
+            if (saveImage!=nil) {
+                UIImageView *imgView=((CLTreeView_LEVEL2_Cell*)cell).headImg;
+                imgView.layer.cornerRadius=imgView.frame.size.width/2;
+                imgView.layer.masksToBounds=YES;
+                [((CLTreeView_LEVEL2_Cell*)cell).headImg setImage:saveImage];
+            }
+            else {
+                UIImageView *imgView=((CLTreeView_LEVEL2_Cell*)cell).headImg;
+                UIImage *img= [self setTxcolorAndTitle:nodeData.name fid:nodeData.gender imgView:imgView];
+                [((CLTreeView_LEVEL2_Cell*)cell).headImg setImage:img];
+            }
         }
         else {
             if (nodeData.headImgUrl != nil){
@@ -495,7 +502,7 @@ CGFloat i_Height=-1;
                     }
                     else {
                         UIImageView *imgView=((CLTreeView_LEVEL2_Cell*)cell).headImg;
-                        UIImage *img= [self setTxcolorAndTitle:nodeData.name fid:nodeData.signture imgView:imgView];
+                        UIImage *img= [self setTxcolorAndTitle:nodeData.name fid:nodeData.gender imgView:imgView];
                         [((CLTreeView_LEVEL2_Cell*)cell).headImg setImage:img];
                     }
                 }
@@ -520,7 +527,9 @@ CGFloat i_Height=-1;
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     CLTreeViewNode *node = [_displayArray objectAtIndex:indexPath.row];
-    [self reloadDataForDisplayArrayChangeAt:indexPath.row];//修改cell的状态(关闭或打开)
+    if (node.type!=2) {
+         [self reloadDataForDisplayArrayChangeAt:indexPath.row];//修改cell的状态(关闭或打开)
+    }
     if(node.type == 2){
         CLTreeView_LEVEL2_Model *nodeData = node.nodeData;
         //处理叶子节点选中，此处需要自定义
@@ -580,8 +589,6 @@ CGFloat i_Height=-1;
             [self rotateArrow:cell with:0];
         }
     }
-
-
 }
 
 /*---------------------------------------
@@ -619,6 +626,7 @@ CGFloat i_Height=-1;
 /*---------------------------------------
  修改cell的状态(关闭或打开)
  --------------------------------------- */
+//zr 0823 加载数据多时卡，得优化
 -(void) reloadDataForDisplayArrayChangeAt:(NSInteger)row {
     NSMutableArray *tmp=[[NSMutableArray alloc]init];
     NSInteger cnt=0;
@@ -776,11 +784,20 @@ CGFloat i_Height=-1;
 }
 
 
--(UIImage*)setTxcolorAndTitle:(NSString*)title fid:(NSString*)fid imgView:(UIImageView*)imgView
+-(UIImage*)setTxcolorAndTitle:(NSString*)title fid:(NSString*)sex imgView:(UIImageView*)imgView
 {
     NSArray *tximgLis=@[@"tx_one",@"tx_two",@"tx_three",@"tx_four",@"tx_five",@"tx_six",@"tx_seven"];
     NSString *strImg;
     
+    //zr 0823 根据性别配置颜色
+    if ([sex isEqualToString:@"男"]) {
+        strImg=tximgLis[0];
+    }
+    else if ([sex isEqualToString:@"女"]) {
+        strImg=tximgLis[6];
+    }
+    
+    /*
     //根据不同职务配置颜色
     NSRange range=[fid rangeOfString:@"经理"];
     if (range.location!=NSNotFound) {
@@ -804,6 +821,7 @@ CGFloat i_Height=-1;
         
 
     }
+     */
        /*
     if(fid.length!=0)//利用号码不同来随机颜色
     {
@@ -815,6 +833,7 @@ CGFloat i_Height=-1;
         strImg=tximgLis[0];
     }
     */
+    
     if(title.length!=0)
     {
        // title= title.length<2? [title substringToIndex:title.length]:[title substringToIndex:2];

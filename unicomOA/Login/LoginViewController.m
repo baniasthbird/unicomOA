@@ -312,7 +312,8 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     
     [self.view addSubview:btn_login];
    // [self.view addSubview:btn_newuser];
-    [self.view addSubview:_btn_forgetpassword];
+    //zr 20160819 暂时去掉忘记密码，后期找回密码接口做好后添加
+   // [self.view addSubview:_btn_forgetpassword];
     
     [self.view addSubview:_btn_Server];
 }

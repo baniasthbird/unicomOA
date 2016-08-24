@@ -20,12 +20,10 @@
 
 @interface MemberInfoViewController ()<MFMessageComposeViewControllerDelegate>
 
-@property (nonatomic,strong) AFHTTPSessionManager *session;
 
 @end
 
 @implementation MemberInfoViewController {
-     DataBase *db;
      UIImage *imgLogo;
 }
 
@@ -36,13 +34,6 @@
     
     //self.view.backgroundColor=[UIColor colorWithRed:236.0/255.0f green:236.0/255.0f blue:236.0/255.0f alpha:1];
     self.view.backgroundColor=[UIColor whiteColor];
-    
-    db=[DataBase sharedinstanceDB];
-    
-    _session=[AFHTTPSessionManager manager];
-    _session.responseSerializer= [AFHTTPResponseSerializer serializer];
-    [_session.requestSerializer setHTTPShouldHandleCookies:YES];
-    [_session.requestSerializer setTimeoutInterval:10.0f];
     
     NSMutableDictionary *param=[NSMutableDictionary dictionary];
     param[@"name"]=_str_Name;
@@ -150,9 +141,6 @@
     UIImageView *img_View=[[UIImageView alloc]init];
     img_View.image=[UIImage imageNamed:@"membertablecell.png"];
     
-    
-       
-    
     if (indexPath.section==0) {
         if (indexPath.row==0) {
             LogoView *cell=[LogoView cellWithTable:tableView withName:nil withImage:_str_img];
@@ -188,7 +176,7 @@
             lbl_name.text=_str_cellphone;
             lbl_name.textColor=[UIColor colorWithRed:85/255.0f green:129/255.0f blue:239/255.0f alpha:1];
             lbl_name.userInteractionEnabled=YES;
-            UITapGestureRecognizer *labelTapGestureRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(labelTouchUpInside:)];
+            UITapGestureRecognizer *labelTapGestureRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(CellPhone:)];
             [lbl_name addGestureRecognizer:labelTapGestureRecognizer];
             cell.backgroundView=img_View;
             /*
@@ -214,10 +202,13 @@
             lbl_num.text=@"固定电话";
             lbl_num.font=[UIFont systemFontOfSize:16];
             lbl_num.textColor=[UIColor colorWithRed:165/255.0f green:165/255.0f blue:165/255.0f alpha:1];
+            if (![_str_phonenum isEqualToString:@""]) {
+                _str_phonenum=[NSString stringWithFormat:@"%@%@",@"0371-",_str_phonenum];
+            }
             lbl_name.text=_str_phonenum;
             lbl_name.textColor=[UIColor colorWithRed:85/255.0f green:129/255.0f blue:239/255.0f alpha:1];
             lbl_name.userInteractionEnabled=YES;
-            UITapGestureRecognizer *labelTapGestureRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(labelTouchUpInside:)];
+            UITapGestureRecognizer *labelTapGestureRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(TelePhone:)];
             [lbl_name addGestureRecognizer:labelTapGestureRecognizer];
             cell.backgroundView=img_View;
             [cell.contentView addSubview:lbl_num];
@@ -418,7 +409,7 @@
 */
 
 //点击电话后，拨打电话功能
--(void)labelTouchUpInside:(UITapGestureRecognizer *)recognizer {
+-(void)CellPhone:(UITapGestureRecognizer *)recognizer {
     if (_str_cellphone!=nil) {
         //判断是否是正常的手机号码 zr 0516 继续完善
         if (_str_cellphone.length==11 && [self isPureInt:_str_cellphone]==YES) {
@@ -426,8 +417,16 @@
             UIWebView *callWebView=[[UIWebView alloc]init];
             [callWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
             [self.view addSubview:callWebView];
-
         }
+    }
+}
+
+-(void)TelePhone:(UITapGestureRecognizer *)recognizer {
+    if (![_str_phonenum isEqualToString:@""]) {
+        NSMutableString *str=[[NSMutableString alloc]initWithFormat:@"tel:%@",_str_phonenum];
+        UIWebView *callWebView=[[UIWebView alloc]init];
+        [callWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
+        [self.view addSubview:callWebView];
     }
 }
 
@@ -447,55 +446,6 @@
 }
 
 
-//根据搜索栏查找
--(void)PrepareData:(NSMutableDictionary*)param {
-    NSString *str_connection=[self GetConnectionStatus];
-    if ([str_connection isEqualToString:@"wifi"] || [str_connection isEqualToString:@"GPRS"]) {
-        __block NSString *str_ip=@"";
-        __block NSString *str_port=@"";
-        NSMutableArray *t_array=[db fetchIPAddress];
-        if (t_array.count==1) {
-            NSArray *arr_ip=[t_array objectAtIndex:0];
-            str_ip=[arr_ip objectAtIndex:0];
-            str_port=[arr_ip objectAtIndex:1];
-        }
-        NSString *str_listsearch=[db fetchInterface:@"ListSearch"];
-        NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_listsearch];
-        [_session POST:str_url parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
-            
-        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-           // [indicator stopAnimating];
-            NSLog(@"查询通讯录成功");
-            NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-            NSString *str_success= [JSON objectForKey:@"success"];
-            BOOL b_success=[str_success boolValue];
-            if (b_success==YES) {
-                NSArray *arr_result=[JSON objectForKey:@"empList"];
-                NSDictionary *dic_info=[arr_result objectAtIndex:0];
-                NSString *str_imgurl=[dic_info objectForKey:@"headimg"];
-                str_imgurl=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_imgurl];
-                _str_img=str_imgurl;
-                [self.tableView reloadData];
-                
-               
-            }
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-          //  [indicator stopAnimating];
-            LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"提示" message:@"无法连接到服务器" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
-                
-            }];
-            [alert showLXAlertView];
-        }];
-    }
-    else {
-       // [indicator stopAnimating];
-        LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"警告" message:@"无网络连接" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
-            
-        }];
-        [alert showLXAlertView];
-    }
-    
-}
 
 -(NSString*)GetConnectionStatus {
     NSString *currentNetWorkState=[[NSUserDefaults standardUserDefaults] objectForKey:@"connection"];

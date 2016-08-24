@@ -10,4 +10,8 @@
 
 @interface WeatherViewController : UIViewController
 
+@property(nonatomic,assign)int page;
+
+@property (nonatomic,strong) NSString *cityName;
+
 @end

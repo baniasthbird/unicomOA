@@ -32,7 +32,7 @@
         self.frame = frame;
         self.fullName = fullName;
         self.backgroundColor = [UIColor lightGrayColor];
-        self.initialsColor = [UIColor whiteColor];
+        self.initialsColor = [UIColor colorWithRed:65/255.0f green:65/255.0f blue:65/255.0f alpha:1];
         self.initialsFont = nil;
     }
     return self;

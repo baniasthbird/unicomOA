@@ -31,6 +31,7 @@
                         <rect key="frame" x="47" y="16" width="18" height="18"/>
                     </imageView>
                 </subviews>
+                <color key="backgroundColor" red="0.96470588235294119" green="0.97647058823529409" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
                     <constraint firstItem="EAV-vE-hVb" firstAttribute="leading" secondItem="76X-Gj-j9E" secondAttribute="leadingMargin" constant="39" id="3gJ-vD-OLc"/>
                     <constraint firstItem="aXG-U7-9be" firstAttribute="top" secondItem="76X-Gj-j9E" secondAttribute="topMargin" constant="6" id="EWd-eL-Q10"/>

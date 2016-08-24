@@ -68,7 +68,7 @@
     txt_oldName.placeholder=@"请输入旧密码";
     txt_oldName.textColor=[UIColor blackColor];
     txt_oldName.secureTextEntry=YES;
-   // txt_oldName.delegate=self;
+    txt_oldName.delegate=self;
     
     [view_oldPassword addSubview:lbl_oldName];
     [view_oldPassword addSubview:txt_oldName];
@@ -88,7 +88,7 @@
     txt_newPassword.placeholder=@"请输入新密码";
     txt_newPassword.textColor=[UIColor blackColor];
     txt_newPassword.secureTextEntry=YES;
-   // txt_newPassword.delegate=self;
+    txt_newPassword.delegate=self;
     
     [view_newPassword addSubview:lbl_newPassword];
     [view_newPassword addSubview:txt_newPassword];
@@ -131,6 +131,9 @@
     _session.responseSerializer= [AFHTTPResponseSerializer serializer];
     [_session.requestSerializer setHTTPShouldHandleCookies:YES];
     
+    _str_oldPwd=@"";
+    _str_newPwd=@"";
+    
     
     //self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc] initWithCustomView:btn_finish];
     
@@ -143,9 +146,24 @@
 
 
 -(void)btn_Finish:(UIButton *)newBtn {
+    //在点击finish时判断是否更新
     NSMutableDictionary *dic_param=[NSMutableDictionary dictionary];
     if (![txt_oldName.text isEqualToString:@""]) {
         _str_oldPwd=txt_oldName.text;
+    }
+    if (![txt_newPassword.text isEqualToString:@""] && ![txt_confirmPassword.text isEqualToString:@""]) {
+        NSString *str_new1=txt_newPassword.text;
+        NSString *str_new2=txt_confirmPassword.text;
+        if ([str_new1 isEqualToString:str_new2]) {
+            _str_newPwd=str_new2;
+        }
+        else {
+            LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"警告" message:@"两次输入密码不一致" cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+                //NSLog(@"点击index====%ld",clickIndex);
+            }];
+            [alert showLXAlertView];
+            return;
+        }
     }
     if (![_str_newPwd isEqualToString:@""] && ![_str_oldPwd isEqualToString:@""]) {
         dic_param[@"oldPassword"]=_str_oldPwd;
@@ -166,7 +184,12 @@
     [self.navigationController popViewControllerAnimated:NO];
 }
 
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
 
+/*
 -(BOOL)textFieldShouldEndEditing:(UITextField *)textField {
     if (b_back==NO) {
         if (![txt_confirmPassword.text isEqualToString:@""] && ![txt_newPassword.text isEqualToString:@""]) {
@@ -190,10 +213,11 @@
     self.navigationItem.leftBarButtonItem.enabled=YES;
     return YES;
 }
-
+*/
 
 
 -(void)UpdatePassword:(NSMutableDictionary*)dic_param {
+    
     NSString *str_updatePwd= [db fetchInterface:@"ChangePassword"];
     NSString *str_ip=@"";
     NSString *str_port=@"";

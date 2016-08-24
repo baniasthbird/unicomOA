@@ -96,7 +96,7 @@
     [img_qrcodeview addGestureRecognizer:singTap];
 
 #pragma mark 二维码下载提示
-    UILabel *lbl_downloadhint=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2-image.size.width*2, img_qrcodeview.frame.origin.y+img_qrcodeview.frame.size.height*0.8, image.size.width*4, 80)];
+    UILabel *lbl_downloadhint=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2-image.size.width*2, img_qrcodeview.frame.origin.y+img_qrcodeview.frame.size.height*0.8-5, image.size.width*4, 80)];
     lbl_downloadhint.text=@"长按二维码下载客户端";
     lbl_downloadhint.textColor=[UIColor whiteColor];
     if (iPad) {
@@ -135,9 +135,21 @@
     btn_secret.titleLabel.textAlignment=NSTextAlignmentCenter;
     [btn_secret setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btn_secret addTarget:self action:@selector(secretrole:) forControlEvents:UIControlEventTouchUpInside];
+#pragma mark 设计院名称
+    UILabel *lbl_shejiyuan=[[UILabel alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.67, self.view.frame.size.width, 15)];
+    lbl_shejiyuan.textAlignment=NSTextAlignmentCenter;
+    if (iPad) {
+        lbl_shejiyuan.font=[UIFont systemFontOfSize:18];
+    }
+    else {
+        lbl_shejiyuan.font=[UIFont systemFontOfSize:14];
+    }
+    lbl_shejiyuan.textColor=[UIColor whiteColor];
+    lbl_shejiyuan.text=@"河南省信息咨询设计研究有限公司";
+
     
 #pragma mark 版权
-    UILabel *lbl_copyright=[[UILabel alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.69, self.view.frame.size.width, 15)];
+    UILabel *lbl_copyright=[[UILabel alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height*0.70, self.view.frame.size.width, 15)];
     lbl_copyright.textAlignment=NSTextAlignmentCenter;
     if (iPad) {
         lbl_copyright.font=[UIFont systemFontOfSize:18];
@@ -169,6 +181,7 @@
   //  [self.view addSubview:btn_secret];
     [self.view addSubview:img_qrcodeview];
     [self.view addSubview:lbl_downloadhint];
+    [self.view addSubview:lbl_shejiyuan];
     [self.view addSubview:lbl_copyright];
     [self.view addSubview:lbl_copyright_en];
     

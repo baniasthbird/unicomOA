@@ -368,7 +368,7 @@
     [picker dismissViewControllerAnimated:YES completion:^{
     }];
     
-    UIImage *image=[info objectForKey:UIImagePickerControllerOriginalImage];
+    UIImage *image=[info objectForKey:UIImagePickerControllerEditedImage];
     
     NSString *str_picname=[NSString stringWithFormat:@"%@.%@",_userInfo.str_username,@"jpg"];
     //保存图片至本地

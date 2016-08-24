@@ -106,4 +106,19 @@
     return currentNetWorkState;
 }
 
+#pragma 正则匹配手机号
+
++(BOOL)checkTelNumber:(NSString *)telNumber {
+    NSString *pattern = @"^1[34578]\\d{9}$";
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", pattern];
+    BOOL isMatch = [pred evaluateWithObject:telNumber];
+    return isMatch;
+}
+
++(BOOL)checkPassword:(NSString *)password {
+    NSString *passWordRegex = @"^[a-zA-Z0-9]{6,18}+$";
+    NSPredicate *passWordPredicate = [NSPredicate predicateWithFormat:@"SELF MATHCES %@",passWordRegex];
+    return [passWordPredicate evaluateWithObject:password];
+}
+
 @end

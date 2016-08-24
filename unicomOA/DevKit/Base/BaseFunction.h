@@ -23,4 +23,12 @@
 
 @property (nonatomic,strong) UIRefreshControl *refreshControl;
 
+#pragma 正则匹配手机号
++(BOOL)checkTelNumber:(NSString *) telNumber;
+
+#pragma 正则匹配用户密码6-18位数字和字母组合
++(BOOL)checkPassword:(NSString*)password;
+
+
+
 @end

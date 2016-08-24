@@ -9,12 +9,18 @@
 #import "SearchResultViewController.h"
 #import "MemberInfoViewController.h"
 #import "AppDelegate.h"
+#import "UserInfo.h"
 
-@implementation SearchResultViewController
+@implementation SearchResultViewController {
+    UserInfo *usrInfo;
+}
 
 -(void)viewDidLoad {
     //self.tableView.frame=CGRectMake(0, 80, self.view.frame.size.width, self.view.frame.size.height);
     [super viewDidLoad];
+    NSData *data=[[NSUserDefaults standardUserDefaults] objectForKey:@"user"];
+     usrInfo=[NSKeyedUnarchiver unarchiveObjectWithData:data];
+
    
     
 }
@@ -46,7 +52,17 @@
     MemberInfoViewController *vc=[[MemberInfoViewController alloc]init];
     vc.str_Name=[dic objectForKey:@"empname"];
     vc.str_Gender=[dic objectForKey:@"sex"];
-    vc.str_img=@"headLogo.png";
+    //vc.str_img=@"headLogo.png";
+   // if ([vc.str_Name isEqualToString:usrInfo.str_name]) {
+    NSString *str_picname=[NSString stringWithFormat:@"%@.%@",vc.str_Name,@"jpg"];
+    NSString *fullPath=  [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:str_picname];
+    UIImage *img=[UIImage imageWithContentsOfFile:fullPath];
+    if (img!=nil) {
+         vc.str_img=fullPath;
+    }
+    else {
+        vc.str_img=@"headLogo.png";
+    }
     vc.str_department=[dic objectForKey:@"orgname"];
     vc.str_carrer=[dic objectForKey:@"posiname"];
     NSObject *obj_cell=[dic objectForKey:@"mobileno"];

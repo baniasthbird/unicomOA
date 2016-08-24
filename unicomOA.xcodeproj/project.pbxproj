@@ -125,8 +125,8 @@
 		683FDA041D65ABFB005B8F5D /* libFMDB.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6882288C1CE013A1007F5861 /* libFMDB.a */; };
 		683FDA061D65ABFF005B8F5D /* libINTULocationManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 683FDA051D65ABFF005B8F5D /* libINTULocationManager.a */; };
 		683FDA071D65AC02005B8F5D /* libMBProgressHUD.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686C80001D5C0CC00071A410 /* libMBProgressHUD.a */; };
-		683FDA091D65AC05005B8F5D /* libMJExtension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 683FDA081D65AC05005B8F5D /* libMJExtension.a */; };
 		683FDA0A1D65AC08005B8F5D /* libSDWebImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686C80021D5C7D0E0071A410 /* libSDWebImage.a */; };
+		6842B3E41D6AE76800054D6A /* WeatherFileTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 6842B3E31D6AE76800054D6A /* WeatherFileTool.m */; };
 		68462DCC1CF587540044A806 /* UILabel+LabelHeightAndWidth.m in Sources */ = {isa = PBXBuildFile; fileRef = 68462DCB1CF587540044A806 /* UILabel+LabelHeightAndWidth.m */; };
 		6846D3531CAB5A1E004BD285 /* IVotingManamentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6846D3521CAB5A1E004BD285 /* IVotingManamentController.m */; };
 		6846D3561CAB62B1004BD285 /* VotingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6846D3551CAB62B1004BD285 /* VotingCell.m */; };
@@ -547,6 +547,8 @@
 		683FDA011D65A92E005B8F5D /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		683FDA051D65ABFF005B8F5D /* libINTULocationManager.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libINTULocationManager.a; path = "../../../Library/Developer/Xcode/DerivedData/unicomOA-casyuftkadckdjdwnuvyvlrozdco/Build/Products/Debug-iphonesimulator/libINTULocationManager.a"; sourceTree = "<group>"; };
 		683FDA081D65AC05005B8F5D /* libMJExtension.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMJExtension.a; path = "../../../Library/Developer/Xcode/DerivedData/unicomOA-casyuftkadckdjdwnuvyvlrozdco/Build/Products/Debug-iphonesimulator/libMJExtension.a"; sourceTree = "<group>"; };
+		6842B3E21D6AE76800054D6A /* WeatherFileTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WeatherFileTool.h; path = Base/Function/Weather/Tools/WeatherFileTool.h; sourceTree = "<group>"; };
+		6842B3E31D6AE76800054D6A /* WeatherFileTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WeatherFileTool.m; path = Base/Function/Weather/Tools/WeatherFileTool.m; sourceTree = "<group>"; };
 		68462DCA1CF587540044A806 /* UILabel+LabelHeightAndWidth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UILabel+LabelHeightAndWidth.h"; path = "Base/Function/NewsModel/UILabel+LabelHeightAndWidth.h"; sourceTree = "<group>"; };
 		68462DCB1CF587540044A806 /* UILabel+LabelHeightAndWidth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UILabel+LabelHeightAndWidth.m"; path = "Base/Function/NewsModel/UILabel+LabelHeightAndWidth.m"; sourceTree = "<group>"; };
 		6846D3511CAB5A1E004BD285 /* IVotingManamentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IVotingManamentController.h; path = Base/Function/IVotingCotroller/IVotingManamentController.h; sourceTree = "<group>"; };
@@ -874,7 +876,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				683FDA0A1D65AC08005B8F5D /* libSDWebImage.a in Frameworks */,
-				683FDA091D65AC05005B8F5D /* libMJExtension.a in Frameworks */,
 				683FDA071D65AC02005B8F5D /* libMBProgressHUD.a in Frameworks */,
 				683FDA061D65ABFF005B8F5D /* libINTULocationManager.a in Frameworks */,
 				683FDA041D65ABFB005B8F5D /* libFMDB.a in Frameworks */,
@@ -1412,6 +1413,15 @@
 			name = UnFinish;
 			sourceTree = "<group>";
 		};
+		6842B3E11D6AE71700054D6A /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				6842B3E21D6AE76800054D6A /* WeatherFileTool.h */,
+				6842B3E31D6AE76800054D6A /* WeatherFileTool.m */,
+			);
+			name = Tools;
+			sourceTree = "<group>";
+		};
 		6846D34B1CAB5965004BD285 /* IVotingView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1731,6 +1741,7 @@
 		68B68E231D62B70C003B80AC /* Weather */ = {
 			isa = PBXGroup;
 			children = (
+				6842B3E11D6AE71700054D6A /* Tools */,
 				683FD9FF1D6563CA005B8F5D /* city.plist */,
 				68B68E2E1D62F76D003B80AC /* Extension */,
 				68B68E271D62BB20003B80AC /* Modal */,
@@ -2543,6 +2554,7 @@
 				681FFC761CC7828F0086A934 /* LXAlertView.m in Sources */,
 				2CB7DB621CA2C3150057633D /* ServerIPViewController.m in Sources */,
 				2CE320EE1CB6B4B000B36793 /* PrintFiles.m in Sources */,
+				6842B3E41D6AE76800054D6A /* WeatherFileTool.m in Sources */,
 				2C74F0791CAEACDA00CC5C5F /* PhoneLabelView.m in Sources */,
 				68C0A3AA1D65B9FF00985D30 /* MJFoundation.m in Sources */,
 				68224D3F1D4F2530002AC0F1 /* SysMsgDisplayController.m in Sources */,
@@ -2726,7 +2738,7 @@
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/unicomOA/PrefixHeader.pch";
 				INFOPLIST_FILE = unicomOA/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = YES;
@@ -2749,7 +2761,7 @@
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/unicomOA/PrefixHeader.pch";
 				INFOPLIST_FILE = unicomOA/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = NO;
