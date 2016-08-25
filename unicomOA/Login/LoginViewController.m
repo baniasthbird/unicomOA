@@ -836,7 +836,7 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
 
     NSString *str_cellphone=[baseFunc GetValueFromDic:dic_usr key:@"mobileno"];
     NSString *str_posiname=[baseFunc GetValueFromDic:dic_usr key:@"posiname"];
-    NSString *str_tel=[baseFunc GetValueFromDic:dic_usr key:@"posiname"];
+    NSString *str_tel=[baseFunc GetValueFromDic:dic_usr key:@"otel"];
    // NSString *str_imgurl=[dic_usr objectForKey:@"headimg"];
     str_img_url=[baseFunc GetValueFromDic:dic_usr key:@"headimg"];
     if (![str_img_url isEqualToString:@""]) {

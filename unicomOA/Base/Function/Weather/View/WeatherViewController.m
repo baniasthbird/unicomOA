@@ -234,9 +234,29 @@
 }
 
 -(void)initAll {
+    
+    if (self.view.subviews.count>0) {
+        for (UIView *subview in self.view.subviews) {
+            [self removeSubviews:subview];
+        }
+    }
     [self setupUI];            //设置顶部UI
     [self setupData];          //设置顶部UI数据
     [self bottomView];         //加载底部数据
+}
+
+-(void)removeSubviews:(UIView *)subView{
+    if (subView.subviews.count>0)
+    {
+        for (UIView *subViews in subView.subviews)
+        {
+             [self removeSubviews:subViews];
+        }
+    }  else
+    {
+        NSLog(@"%lu",(unsigned long)subView.subviews.count);
+        [subView removeFromSuperview];
+    }
 }
 
 #pragma mark 顶部UI
@@ -245,15 +265,16 @@
      self.view.backgroundColor=[UIColor whiteColor];
     CGRect img_bg=CGRectMake(0, 0, self.view.frame.size.width, SCREEN_HEIGHT*0.74137931034483);
     UIImageView *imageV = [[UIImageView alloc]initWithFrame:img_bg];
-    imageV.image = [UIImage imageNamed:@"sun_bg"];
+    imageV.image = [UIImage imageNamed:@"MoRen"];
+    self.imageV= imageV;
     [self.view addSubview:imageV];
    
-    //self.imageV= imageV;
+  
     
     
     //返回按钮
     UIButton *backbtn = [[UIButton alloc]init];
-    backbtn.frame = CGRectMake(5, 25, 50, 50);
+    backbtn.frame = CGRectMake(5, 35, 40, 40);
     [backbtn setBackgroundImage:[UIImage imageNamed:@"returnlogo.png"] forState:UIControlStateNormal];
     [backbtn addTarget:self action:@selector(backClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:backbtn];
@@ -265,7 +286,7 @@
     CGFloat cityLabelX = (SCREEN_WIDTH - cityLabelW)/2;
     CGFloat cityLabelY = 30;
     UILabel *cityLabel = [[UILabel alloc]init];
-    [self setupWithLabel:cityLabel frame:CGRectMake(cityLabelX, cityLabelY, cityLabelW, cityLabelH) FontSize:30 view:self.view textAlignment:NSTextAlignmentCenter color:[UIColor whiteColor]];
+    [self setupWithLabel:cityLabel frame:CGRectMake(cityLabelX, cityLabelY, cityLabelW, cityLabelH) FontSize:24 view:self.view textAlignment:NSTextAlignmentCenter color:[UIColor whiteColor]];
     self.cityLabel = cityLabel;
     
     //定位图标
@@ -273,26 +294,26 @@
     [locB setImage:[UIImage imageNamed:@"weather_location"] forState:UIControlStateNormal];
     [locB addTarget:self action:@selector(locClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:locB];
-    
-    //天气图片
-    CGFloat todayImgW = 100;
-    CGFloat todayImgH = todayImgW;
-    CGFloat todayImgX = SCREEN_WIDTH*0.63;
-    CGFloat todayImgY= SCREEN_HEIGHT*0.2;
-    
-    UIImageView *todayImg = [[UIImageView alloc]initWithFrame:CGRectMake(todayImgX, todayImgY, todayImgW, todayImgH)];
-    [self.view addSubview:todayImg];
-    self.todayImg = todayImg;
-
 
     //温度
     CGFloat temLabelW = SCREEN_WIDTH*0.35;
-    CGFloat temLabelH = SCREEN_HEIGHT*0.11;
+    CGFloat temLabelH = SCREEN_HEIGHT*0.12;
     CGFloat temLabelX = (SCREEN_WIDTH-temLabelW)/2;
     CGFloat temLabelY = SCREEN_HEIGHT*0.17241379310345;
     UILabel *temLabel = [[UILabel alloc]init];
     [self setupWithLabel:temLabel frame:CGRectMake(temLabelX, temLabelY, temLabelW, temLabelH) FontSize:80 view:self.view textAlignment:NSTextAlignmentCenter color:[UIColor whiteColor]];
     self.temLabel = temLabel;
+    
+    //天气图片
+    CGFloat todayImgW = 70;
+    CGFloat todayImgH = todayImgW;
+    CGFloat todayImgX = SCREEN_WIDTH*0.63;
+    CGFloat todayImgY= SCREEN_HEIGHT*0.21;
+    
+    UIImageView *todayImg = [[UIImageView alloc]initWithFrame:CGRectMake(todayImgX, todayImgY, todayImgW, todayImgH)];
+    [self.view addSubview:todayImg];
+    self.todayImg = todayImg;
+
     
     //日期
     CGFloat dateLW = SCREEN_WIDTH/2;
@@ -352,28 +373,35 @@
     //天气图片
     if ([weatherdata.climate isEqualToString:@"雷阵雨"]) {
         self.todayImg.image =[UIImage imageNamed:@"thunder_w"];
+        [self.imageV setImage:[UIImage imageNamed:@"thunder_bg"]];
     }
     else if ([weatherdata.climate isEqualToString:@"晴"]) {
         self.todayImg.image = [UIImage imageNamed:@"sun_w"];
+        [self.imageV setImage:[UIImage imageNamed:@"sun_bg"]];
     }
     else if ([weatherdata.climate isEqualToString:@"多云"]) {
-        self.todayImg.image = [UIImage imageNamed:@"sunandclound_w"];
+        self.todayImg.image = [UIImage imageNamed:@"sunandcloud_w"];
+        [self.imageV setImage:[UIImage imageNamed:@"sunandcloud_bg"]];
     }
     else if ([weatherdata.climate isEqualToString:@"阴"]) {
-        self.todayImg.image = [UIImage imageNamed:@"clound_w"];
+        self.todayImg.image = [UIImage imageNamed:@"cloud_w"];
+        [self.imageV setImage:[UIImage imageNamed:@"cloud_bg"]];
     }
     //天气以雨为结尾
     else if ([weatherdata.climate hasSuffix:@"雨"]) {
         self.todayImg.image = [UIImage imageNamed:@"rain_w"];
+        [self.imageV setImage:[UIImage imageNamed:@"rain_bg"]];
     }
     else if ([weatherdata.climate hasSuffix:@"雪"]) {
         self.todayImg.image = [UIImage imageNamed:@"snow_w"];
+        [self.imageV setImage:[UIImage imageNamed:@"snow_bg"]];
     }
     else {
         self.todayImg.image = [UIImage imageNamed:@"sandfloat_w"];
+        [self.imageV setImage:[UIImage imageNamed:@"sandfloat_bg"]];
     }
     
-    /*
+    
     //图片动画效果
     [UIView animateKeyframesWithDuration:0.9 delay:0.5 options:UIViewKeyframeAnimationOptionAllowUserInteraction animations:^{
         self.todayImg.transform = CGAffineTransformMakeScale(0.6, 0.6);
@@ -382,7 +410,7 @@
             self.todayImg.transform = CGAffineTransformIdentity;
         }];
     }];
-     */
+    
     
     //温度
    // weatherdata.temperature = [weatherdata.temperature stringByReplacingOccurrencesOfString:@"C" withString:@""];
@@ -411,8 +439,8 @@
     else {
         aqi = @"差";
     }
-    NSString *pmstr=@"PM2.5";
-    pmstr = [pmstr stringByAppendingFormat:@"%@  %@   %d   %@",weatherdata.climate,weatherdata.wind,pm,aqi];
+    NSString *pmstr=[NSString stringWithFormat:@"%@  %@  %@  %d  %@",weatherdata.climate,weatherdata.wind,@"PM2.5",pm,aqi];
+   // pmstr = [pmstr stringByAppendingFormat:@"%@  %@   %d   %@",weatherdata.climate,weatherdata.wind,pm,aqi];
     self.pmLabel.text = pmstr;
     
     [self.temLabel sizeToFit];
@@ -429,6 +457,7 @@
         CGFloat vcY = SCREEN_HEIGHT - vcH;
         UIView *vc =[[UIView alloc]initWithFrame:CGRectMake(vcX, vcY, vcW, vcH)];
       //  vc.backgroundColor = [UIColor colorWithRed:1/255.0f green:1/255.0f blue:1/255.0f alpha:0.2];
+        
         [self.view addSubview:vc];
         self.bottomV = vc;
         
@@ -444,7 +473,13 @@
         //风、天气
         UILabel *cliwindLabel = [[UILabel alloc]init];
         cliwindLabel.numberOfLines = 0;
-        [self setupWithLabel:cliwindLabel frame:CGRectMake(0, CGRectGetMaxY(temLabel.frame), vcW, 50) FontSize:14 view:vc textAlignment:NSTextAlignmentCenter color:[UIColor blackColor]];
+        CGFloat size_cliwind=12;
+        CGFloat cliwindy=CGRectGetMaxY(temLabel.frame)-15;
+        if (iPhone6_plus || iPhone6) {
+            size_cliwind=14;
+            cliwindy=CGRectGetMaxY(temLabel.frame);
+        }
+        [self setupWithLabel:cliwindLabel frame:CGRectMake(0, cliwindy, vcW, 50) FontSize:size_cliwind view:vc textAlignment:NSTextAlignmentCenter color:[UIColor blackColor]];
         
         
         /** 加载数据  */
@@ -472,7 +507,8 @@
         tem=[tem stringByReplacingOccurrencesOfString:@"/" withString:@"-"];
         temLabel.text=tem;
         //风、天气
-        cliwindLabel.text = [weatherdata.climate stringByAppendingFormat:@"\n%@",weatherdata.wind];
+     //   cliwindLabel.text = [weatherdata.climate stringByAppendingFormat:@"\n%@",weatherdata.wind];
+        cliwindLabel.text=weatherdata.climate;
 
     }
 }

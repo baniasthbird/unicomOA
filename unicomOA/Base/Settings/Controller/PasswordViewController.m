@@ -112,10 +112,21 @@
     
     [view_confirmPassword addSubview:lbl_confirm];
     [view_confirmPassword addSubview:txt_confirmPassword];
-    
     [self.view addSubview:view_confirmPassword];
+
     
-    btn_finish=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.2,self.view.frame.size.height*0.45 , self.view.frame.size.width*0.6, 40)];
+    UILabel *lbl_hint=[[UILabel alloc]initWithFrame:CGRectMake(10, self.view.frame.size.height*0.33, self.view.frame.size.width-20, 40)];
+    lbl_hint.numberOfLines=0;
+    lbl_hint.text=@"密码长度6~16位，由英文字母a~z（区分大小写）、数字0~9、特殊字符至少两种组合组成。";
+    lbl_hint.textColor=[UIColor blackColor];
+    lbl_hint.textAlignment=NSTextAlignmentCenter;
+    lbl_hint.font=[UIFont systemFontOfSize:17];
+
+    [lbl_hint sizeToFit];
+    
+    [self.view addSubview:lbl_hint];
+    
+    btn_finish=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.2,self.view.frame.size.height*0.55 , self.view.frame.size.width*0.6, 40)];
     [btn_finish setTitle:@"完成" forState:UIControlStateNormal];
     [btn_finish setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btn_finish setBackgroundColor:[UIColor colorWithRed:70/255.0f green:115/255.0f blue:230/255.0f alpha:1]];

@@ -68,7 +68,13 @@
     NSString *str =@"当前城市-";
     self.title =[str stringByAppendingFormat:@"%@",_currentTitle];
     
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem ItemWithIcon:@"dismiss" highIcon:nil target:self action:@selector(dismissclick)];
+    UIButton *btn_back=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40, 40)];
+    [btn_back setTitle:@"  " forState:UIControlStateNormal];
+    [btn_back setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [btn_back setTintColor:[UIColor whiteColor]];
+    [btn_back setImage:[UIImage imageNamed:@"returnlogo.png"] forState:UIControlStateNormal];
+    [btn_back addTarget:self action:@selector(dismissclick:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:btn_back];
     
     [self initTableView];
     [self initSearchBar];
@@ -214,7 +220,7 @@
 
 }
 
--(void)dismissclick {
+-(void)dismissclick:(UIButton*)Btn {
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
