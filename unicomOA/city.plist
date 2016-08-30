@@ -16,6 +16,30 @@
 	<dict>
 		<key>cities</key>
 		<array>
+			<string>南阳</string>
+			<string>洛阳</string>
+			<string>三门峡</string>
+			<string>商丘</string>
+			<string>焦作</string>
+			<string>开封</string>
+			<string>驻马店</string>
+			<string>濮阳</string>
+			<string>许昌</string>
+			<string>安阳</string>
+			<string>信阳</string>
+			<string>漯河</string>
+			<string>平顶山</string>
+			<string>郑州</string>
+			<string>新乡</string>
+			<string>鹤壁</string>
+			<string>周口</string>
+		</array>
+		<key>state</key>
+		<string>河南</string>
+	</dict>
+	<dict>
+		<key>cities</key>
+		<array>
 			<string>丽水</string>
 			<string>舟山</string>
 			<string>宁波</string>
@@ -341,30 +365,6 @@
 		</array>
 		<key>state</key>
 		<string>湖南</string>
-	</dict>
-	<dict>
-		<key>cities</key>
-		<array>
-			<string>南阳</string>
-			<string>洛阳</string>
-			<string>三门峡</string>
-			<string>商丘</string>
-			<string>焦作</string>
-			<string>开封</string>
-			<string>驻马店</string>
-			<string>濮阳</string>
-			<string>许昌</string>
-			<string>安阳</string>
-			<string>信阳</string>
-			<string>漯河</string>
-			<string>平顶山</string>
-			<string>郑州</string>
-			<string>新乡</string>
-			<string>鹤壁</string>
-			<string>周口</string>
-		</array>
-		<key>state</key>
-		<string>河南</string>
 	</dict>
 	<dict>
 		<key>cities</key>

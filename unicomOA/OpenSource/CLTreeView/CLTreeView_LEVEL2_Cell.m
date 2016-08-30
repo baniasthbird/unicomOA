@@ -7,6 +7,7 @@
 //
 
 #import "CLTreeView_LEVEL2_Cell.h"
+#import "CLTreeView_LEVEL2_Model.h"
 
 @implementation CLTreeView_LEVEL2_Cell
 
@@ -42,7 +43,14 @@
     nameFrame.origin.x = 62 + addX;
     _name.frame = nameFrame;
     
-   
+    CLTreeView_LEVEL2_Model *nodeData = _node.nodeData;
+    if ([nodeData.parentlevel isEqualToString:@"1"]) {
+       self.contentView.backgroundColor=[UIColor whiteColor];
+    }
+    else if ([nodeData.parentlevel isEqualToString:@"0"]) {
+        self.contentView.backgroundColor=[UIColor colorWithRed:246/255.0f green:249/255.0f blue:254/255.0f alpha:1];
+    }
+    
     /*
     CGRect signtureFrame = _signture.frame;
     signtureFrame.origin.x = 62 + addX;

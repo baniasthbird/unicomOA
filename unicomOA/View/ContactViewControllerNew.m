@@ -84,7 +84,7 @@ CGFloat i_Height=-1;
     
 
     XSpotLight *SpotLight=[[XSpotLight alloc]init];
-    SpotLight.messageArray=@[@"调整头像大小，下拉刷新可查看最新用户头像"];
+    SpotLight.messageArray=@[@"优化通讯录排列方式\n优化默认头像显示效果"];
     SpotLight.rectArray=@[[NSValue valueWithCGRect:CGRectMake(0,0,0,0)]];
     SpotLight.delegate=self;
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]) {
@@ -414,6 +414,10 @@ CGFloat i_Height=-1;
         cell.node = node;
         [self loadDataForTreeViewCell:cell with:node];
         [cell setNeedsDisplay];
+        CLTreeView_LEVEL2_Model *nodeData = node.nodeData;
+        if ([nodeData.parentlevel isEqualToString:@"1"]) {
+            cell.backgroundColor=[UIColor whiteColor];
+        }
         return cell;
     }
 
@@ -447,11 +451,13 @@ CGFloat i_Height=-1;
     
     else{
         CLTreeView_LEVEL2_Model *nodeData = node.nodeData;
+        
         ((CLTreeView_LEVEL2_Cell*)cell).name.text = nodeData.name;
         ((CLTreeView_LEVEL2_Cell*)cell).signture.text = nodeData.signture;
         CGFloat w_depart=[UILabel_LabelHeightAndWidth getWidthWithTitle:nodeData.signture font:[UIFont systemFontOfSize:13]];
         ((CLTreeView_LEVEL2_Cell*)cell).signture.frame=CGRectMake([UIScreen mainScreen].bounds.size.width-w_depart-10, 10, w_depart, 30);
         [((CLTreeView_LEVEL2_Cell*)cell).signture sizeToFit];
+        
         if ([nodeData.name isEqualToString:_userInfo.str_name]) {
             UIImage *saveImage = [self loadLocalImage:nodeData.name];
             if (saveImage!=nil) {
@@ -480,9 +486,12 @@ CGFloat i_Height=-1;
                         str_ip=[arr_ip objectAtIndex:0];
                         str_port=[arr_ip objectAtIndex:1];
                     }
-                    str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_url];
-                    NSData * data = [NSData dataWithContentsOfURL:[NSURL URLWithString:str_url]];
-                    UIImage *saveImage = [UIImage imageWithData:data];
+                  //  str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_url];
+                  //  NSData * data = [NSData dataWithContentsOfURL:[NSURL URLWithString:str_url]];
+                  //  UIImage *saveImage = [UIImage imageWithData:data];
+                    NSString *str_picname=[NSString stringWithFormat:@"%@.%@",nodeData.name,@"jpg"];
+                    NSString *fullPath=  [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:str_picname];
+                    UIImage *saveImage=[UIImage imageWithContentsOfFile:fullPath];
                     if (saveImage!=nil) {
                         UIImageView *imgView=((CLTreeView_LEVEL2_Cell*)cell).headImg;
                         imgView.layer.cornerRadius=imgView.frame.size.width/2;

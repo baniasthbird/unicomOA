@@ -90,9 +90,11 @@
     }
     else {
         NSString *str_version= [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-        double d_version=[str_version doubleValue];
-        double d_older_version=[[NSUserDefaults standardUserDefaults] doubleForKey:@"systemversion"];
-        if (d_older_version!=d_version) {
+        float d_version=[str_version floatValue];
+        float d_older_version=[[NSUserDefaults standardUserDefaults] floatForKey:@"systemversion"];
+        NSString *str_version1=[self notRounding:d_version afterPoint:2];
+        NSString *str_older_version=[self notRounding:d_older_version afterPoint:2];
+        if (![str_version1 isEqualToString:str_older_version]) {
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunch"];
             [[NSUserDefaults standardUserDefaults] setDouble:d_version forKey:@"systemversion"];
         }
@@ -136,7 +138,15 @@
     
 }
 
-
+-(NSString *)notRounding:(float)price afterPoint:(int)position{
+    NSDecimalNumberHandler* roundingBehavior = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundPlain scale:position raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:NO];
+    NSDecimalNumber *ouncesDecimal;
+    NSDecimalNumber *roundedOunces;
+    
+    ouncesDecimal = [[NSDecimalNumber alloc] initWithFloat:price];
+    roundedOunces = [ouncesDecimal decimalNumberByRoundingAccordingToBehavior:roundingBehavior];
+    return [NSString stringWithFormat:@"%@",roundedOunces];
+}
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {

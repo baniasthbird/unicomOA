@@ -21,6 +21,7 @@
 @property (strong,nonatomic) NSString *phonenum;
 @property (strong,nonatomic) NSString *email;
 @property(nonatomic, strong) NSData *icon;//头像图片
+@property (strong,nonatomic) NSString *parentlevel;   //父节点等级
 //@property (strong,nonatomic) UserImg  *user_Img;
 
 @end

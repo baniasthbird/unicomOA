@@ -223,23 +223,23 @@
     }
     
     XSpotLight *SpotLight=[[XSpotLight alloc]init];
-    SpotLight.messageArray=@[@"新增办公审批"];
-    CGFloat i_x=147;
-    CGFloat i_y=292;
+    SpotLight.messageArray=@[@"新增天气预报"];
+    CGFloat i_x=323;
+    CGFloat i_y=535;
     if (iPhone5_5s) {
-        i_x=122;
-        i_y=250;
+        i_x=277;
+        i_y=450;
     }
     else if (iPhone6_plus) {
-        i_x=156;
-        i_y=310;
+        i_x=358;
+        i_y=585;
     }
     SpotLight.rectArray=@[[NSValue valueWithCGRect:CGRectMake(i_x, i_y, 50, 500)]];
     SpotLight.delegate=self;
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]) {
-    //    [self presentViewController:SpotLight animated:NO completion:^{
+        [self presentViewController:SpotLight animated:NO completion:^{
             
-   //     }];
+        }];
     }
 
     

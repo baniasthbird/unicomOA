@@ -1152,7 +1152,12 @@
 
 -(void)sendCellValue:(NSString *)str_text indexPath:(NSIndexPath *)i_indexPath {
     NSString *str_index=[NSString stringWithFormat:@"%ld",(long)i_indexPath.section];
+    NSInteger i_dic_count=[dic_m_ctl count];
     NSArray *arr_tmp=  [dic_m_ctl objectForKey:str_index];
+    if (arr_tmp==nil) {
+        str_index=[NSString stringWithFormat:@"%ld",(long)i_dic_count-1];
+        arr_tmp=  [dic_m_ctl objectForKey:str_index];
+    }
     NSDictionary  *dic_tmp=[arr_tmp objectAtIndex:i_indexPath.row];
     [dic_tmp setValue:str_text forKey:@"value"];
 }

@@ -18,6 +18,10 @@
 #import "FunctionViewController.h"
 #import "SysMsgViewController.h"
 #import "UnFinishViewController.h"
+#import "INTULocationManager.h"
+#import "WeatherData.h"
+#import "WeatherViewController.h"
+
 
 
 @interface MessageViewController ()<UITableViewDelegate,UITableViewDataSource,NewsTapDelegate,YBMonitorNetWorkStateDelegate,RemindCellDelegate,MyShenPiViewControllerDelegate>
@@ -38,6 +42,18 @@
 
 @property (nonatomic,strong) UIRefreshControl *refreshControl;
 
+@property (nonatomic, strong) CLGeocoder *geocoder;
+
+@property (nonatomic, assign) double lati;
+
+@property (nonatomic, assign) double longi;
+
+@property (nonatomic, copy) NSString *province;
+
+@property (nonatomic, copy) NSString *city;
+
+@property (nonatomic, copy) NSString *dt;    //当前日期
+
 @end
 
 @implementation MessageViewController {
@@ -49,6 +65,10 @@
     NSString *selected_title;
     
     BOOL b_ReplaceDataSource;
+    
+    NSTimer *timer;
+    
+    
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -65,6 +85,15 @@
     }
     return self;
 }
+
+-(CLGeocoder *)geocoder
+{
+    if (!_geocoder) {
+        self.geocoder = [[CLGeocoder alloc]init];
+    }
+    return _geocoder;
+}
+
 
 
 - (void)viewDidLoad {
@@ -133,9 +162,35 @@
     [self NewsList:news_param];
     [self NewsCount];
     
-    //}
+    [self setupLocation];
     
+    timer=[NSTimer scheduledTimerWithTimeInterval:3600 target:self selector:@selector(setupLocation) userInfo:nil repeats:YES];
 }
+
+
+-(void)setupLocation {
+    INTULocationManager *mgr=[INTULocationManager sharedInstance];
+    [mgr requestLocationWithDesiredAccuracy:INTULocationAccuracyCity timeout:20 block:^(CLLocation *currentLocation, INTULocationAccuracy achievedAccuracy, INTULocationStatus status) {
+        NSLog(@"----%ld",(long)status);
+        
+        self.lati=currentLocation.coordinate.latitude;
+        self.longi=currentLocation.coordinate.longitude;
+        if (self.lati==0 && self.longi==0) {
+            self.lati=34.774831;
+            self.longi=113.681393;
+        }
+        
+        if (status == 1) {
+          //  [MBProgressHUD hideHUD];
+          //  [MBProgressHUD showError:@"请求超时"];
+            [indicator stopAnimating];
+            return;
+        }
+        [self setupCity];
+        
+    }];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -179,7 +234,7 @@
                 _i_doc_num=[str_docnum intValue];
                 _i_flow_num=[str_flownum intValue];
                 _i_msg_num=[str_msgnum intValue];
-                [indicator stopAnimating];
+              //  [indicator stopAnimating];
                 NSIndexSet *indexSet=[NSIndexSet indexSetWithIndex:0];
                 [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
                 /*
@@ -743,6 +798,138 @@
 -(void)RefreshBadge:(NSMutableDictionary*)param {
     [self NewsCount];
 }
+
+
+-(void)setupCity {
+    CLLocationDegrees lati = self.lati;
+    CLLocationDegrees longi = self.longi;
+    CLLocation *loc =[[CLLocation alloc]initWithLatitude:lati longitude:longi];
+    
+    [self.geocoder reverseGeocodeLocation:loc completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+        if (error) {
+            [indicator stopAnimating];
+            NSLog(@"%@",error);
+        }
+        else {
+            CLPlacemark *pm = [placemarks firstObject];
+            
+            NSLog(@"%@",pm.name);
+            NSLog(@"%@ ,%@ ,%@",pm.locality,pm.country,pm.subLocality);
+            
+            if ([pm.name rangeOfString:@"市"].location != NSNotFound) {
+                if ([pm.locality isEqualToString:@"上海市"] || [pm.locality isEqualToString:@"天津市"] || [pm.locality isEqualToString:@"北京市"] || [pm.locality isEqualToString:@"重庆市"]) {
+                    NSRange range =[pm.locality rangeOfString:@"市"];
+                    int loc= (int)range.location;
+                    NSString *citystr =[pm.locality substringToIndex:loc];
+                    
+                    self.city= self.province = citystr;
+                }
+                else {
+                    NSRange range= [pm.name rangeOfString:@"市"];
+                    int loc = (int)range.location;
+                    NSString *str= [pm.name substringToIndex:loc];
+                    str = [str substringFromIndex:2];
+                    
+                    NSRange range1 = [str rangeOfString:@"省"];
+                    int loc1 = (int)range1.location;
+                    
+                    if (range1.location != NSNotFound) {
+                        NSLog(@"%@",str);
+                        self.province = [str substringToIndex:loc1];
+                        self.city = [str substringFromIndex:loc1+1];
+                        
+                        NSLog(@"%@,%@",[str substringToIndex:loc1],[str substringFromIndex:loc1]);
+                    }
+                    else if ([str isEqualToString:@"广西壮族自治区桂林"]) {
+                        self.province=@"广西";
+                        self.city=@"桂林";
+                    }
+                }
+            }
+            else {
+                if ([pm.locality rangeOfString:@"市"].location != NSNotFound) {
+                    NSLog(@"---%@",pm.locality);
+                    NSRange range = [pm.locality rangeOfString:@"市"];
+                    int loc = (int)range.location;
+                    NSString *citystr = [pm.locality substringToIndex:loc];
+                    self.city = self.province = citystr;
+                    
+                }
+                else {
+                    self.city = self.province = @"北京";
+                }
+            }
+            
+            [self requestNet:self.province city:self.city];
+            
+            [[NSUserDefaults standardUserDefaults]setObject:self.province forKey:@"省份"];
+            [[NSUserDefaults standardUserDefaults]setObject:self.city forKey:@"城市"];
+        }
+    }];
+}
+
+#pragma mark 请求网络
+-(void)requestNet:(NSString *)pro city:(NSString *)city
+{
+    NSString *urlstr = [NSString stringWithFormat:@"http://c.3g.163.com/nc/weather/%@|%@.html",pro,city];
+    urlstr = [urlstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    AFHTTPSessionManager *mgr=[AFHTTPSessionManager manager];
+    [mgr GET:urlstr parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        //  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+        [indicator stopAnimating];
+        
+        self.dt = responseObject[@"dt"];
+        NSString *str = [NSString stringWithFormat:@"%@|%@",pro,city];
+        // NSArray *dataArray = [WeatherData objectArrayWithKeyValuesArray:responseObject[str]];
+        NSDictionary *dic=(NSDictionary*)responseObject;
+        NSArray *dataArray_tmp= [dic objectForKey:str];
+       
+        NSDictionary *dic_tmp=[dataArray_tmp objectAtIndex:0];
+
+        //pm2d5
+        WeatherData *wd=[[WeatherData alloc]init];
+        NSObject *i_temperature =[dic objectForKey:@"rt_temperature"];
+        NSString *str_temperature=@"";
+        NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
+        NSNumber *num_temperature=(NSNumber*)i_temperature;
+        str_temperature = [numberFormatter stringFromNumber:num_temperature];
+        wd.temperature=[NSString stringWithFormat:@"%@%@",str_temperature,@"°C"];
+        wd.climate=[dic_tmp objectForKey:@"climate"];
+        
+        NSLog(@"获取天气成功!");
+       // UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"  " style:UIBarButtonItemStyleDone target:self action:@selector(WeatherForcast:)];
+        
+        //UIBarButtonItem *barButtonItem=[UIBarButtonItem ItemWithTitleAndIcon:@"sun_w" title:wd.temperature target:self action:@selector(WeatherForcast:)];
+       // barButtonItem.tintColor=[UIColor whiteColor];
+       // barButtonItem.title=wd.temperature;
+       // [barButtonItem setImage:[UIImage imageNamed:@"returnlogo.png"]];
+        UIButton *btn_weather=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 90, 40)];
+        [btn_weather setImage:[UIImage imageNamed:@"sun_w"] forState:UIControlStateNormal];
+        [btn_weather setTitle:wd.temperature forState:UIControlStateNormal];
+        [btn_weather setImageEdgeInsets:UIEdgeInsetsMake(0, -5, 0, 0)];
+        [btn_weather addTarget:self action:@selector(WeatherForcast:) forControlEvents:UIControlEventTouchUpInside];
+        UIBarButtonItem *barButtonItem=[[UIBarButtonItem alloc]initWithCustomView:btn_weather];
+        self.navigationItem.rightBarButtonItem=barButtonItem;
+        // WeatherData *wd =[WeatherData mj_objectWithKeyValues:dic[@"pm2d5"]];
+        
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [indicator stopAnimating];
+    }];
+}
+
+
+
+-(void)WeatherForcast:(UIButton*)sender {
+    WeatherViewController *vc=[[WeatherViewController alloc]init];
+    if (f_v<9.0) {
+        self.navigationController.delegate=nil;
+    }
+    [self.navigationController pushViewController:vc animated:NO];
+}
+
 
 -(void)dealloc {
     self.tableView.delegate=nil;

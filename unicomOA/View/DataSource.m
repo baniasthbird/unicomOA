@@ -86,6 +86,7 @@
     return arr_tmp;
 }
 
+/*
 //添加演示数据 (先根据demo在代码中添加，再组成plist文件以方便调整)
 -(NSMutableArray*) addTestData {
     
@@ -94,6 +95,7 @@
     CLTreeViewNode *node1=[self CreateLevel0Node:@"第一设计分公司" staff_num:@"2"];
     CLTreeViewNode *node2=[self CreateLevel0Node:@"软信科技子公司" staff_num:@"10"];
     CLTreeViewNode *node3=[self CreateLevel0Node:@"综合管理部" staff_num:@"0"];
+    
     
 // 第一设计分公司
     CLTreeViewNode *node1_2_0=[self CreateLevel2Node:@"崔红涛" signture:@"分公司总经理" headImgPath:@"head1.jpg" headImgUrl:nil gender:@"男" department:@"第一设计分公司" cell:@"18600697151" phone:@"0371-65106156" email:@"2002-sunshine@163.com"];
@@ -133,7 +135,7 @@
     
     
 }
-
+*/
 #pragma mark 添加真实数据所需的方法
 //添加第0级菜单
 -(CLTreeViewNode*)CreateLevel0Node:(NSString*)str_name stat:(BOOL)b_stat{
@@ -216,6 +218,7 @@
 //添加职员
 -(CLTreeViewNode*)AddStaff:(CLTreeViewNode*)node staffArray:(NSMutableArray*)staffArray {
     int i_orgid=node.tag;
+    
     NSMutableArray *arr_staff=[[NSMutableArray alloc]init];
     //暂时不处理人员的orgid为1的情况
     for (int i=0;i<[staffArray count];i++) {
@@ -236,6 +239,7 @@
             NSString *str_phone;
             NSString *str_email;
             NSString *str_img;
+            NSString *str_level;
             if (obj_cell==[NSNull null]) {
                 str_cell=nil;
             }
@@ -271,8 +275,14 @@
                 [self DownloadImage:str_img name:str_name];
             }
             
+            if (node.nodeLevel==0) {
+                str_level=@"0";
+            }
+            else if (node.nodeLevel==1) {
+                str_level=@"1";
+            }
             //   CLTreeViewNode *node=[self CreateLevel2Node:str_name signture:str_position headImgPath:@"headLogo.png" headImgUrl:nil gender:str_sex department:str_department cell:str_cell phone:str_phone email:str_email];
-            CLTreeViewNode *node=[self CreateLevel2Node:str_name signture:str_position headImgPath:nil headImgUrl:str_img gender:str_sex department:str_department cell:str_cell phone:str_phone email:str_email];
+            CLTreeViewNode *node=[self CreateLevel2Node:str_name signture:str_position headImgPath:nil headImgUrl:str_img gender:str_sex department:str_department cell:str_cell phone:str_phone email:str_email parentLevel:str_level];
             [arr_staff addObject:node];
             
         }
@@ -340,7 +350,7 @@
     return node0;
 }
 
--(CLTreeViewNode*)CreateLevel2Node:(NSString*)str_name signture:(NSString*)str_signture headImgPath:(NSString*)str_headImgPath headImgUrl:(NSString*)str_headImgUrl gender:(NSString*)str_gender department:(NSString*)str_department cell:(NSString*)str_cellphone phone:(NSString*)str_phonenum email:(NSString*)str_email{
+-(CLTreeViewNode*)CreateLevel2Node:(NSString*)str_name signture:(NSString*)str_signture headImgPath:(NSString*)str_headImgPath headImgUrl:(NSString*)str_headImgUrl gender:(NSString*)str_gender department:(NSString*)str_department cell:(NSString*)str_cellphone phone:(NSString*)str_phonenum email:(NSString*)str_email parentLevel:(NSString*)str_level{
     CLTreeViewNode *node0 = [[CLTreeViewNode alloc]init];
     node0.nodeLevel = 2;
     node0.type = 2;
@@ -356,6 +366,7 @@
     tmp0.cellphonenum=str_cellphone;
     tmp0.phonenum=str_phonenum;
     tmp0.email=str_email;
+    tmp0.parentlevel=str_level;
     node0.nodeData = tmp0;
     
     return node0;

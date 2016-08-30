@@ -49,12 +49,17 @@
         lbl_Category.textAlignment=NSTextAlignmentLeft;
         [lbl_Category sizeToFit];
         
-        lbl_sendName=[[UILabel alloc]initWithFrame:CGRectMake(WHScreenW*0.65, lbl_Title.frame.size.height+20, WHScreenW*0.2, cellHeight/2-5)];
+        CGFloat i_r_left=Width*0.65;
+        if (iPhone5_5s) {
+            i_r_left=Width*0.6;
+        }
+        lbl_sendName=[[UILabel alloc]initWithFrame:CGRectMake(i_r_left, lbl_Title.frame.size.height+20, Width*0.3, cellHeight/2-5)];
         lbl_sendName.font=[UIFont systemFontOfSize:i_otherFont];
         lbl_sendName.textColor=[UIColor lightGrayColor];
         lbl_sendName.text=str_sendName;
         lbl_sendName.textAlignment=NSTextAlignmentRight;
         [lbl_sendName sizeToFit];
+        
         
         [self.contentView addSubview:lbl_Title];
         [self.contentView addSubview:lbl_Category];

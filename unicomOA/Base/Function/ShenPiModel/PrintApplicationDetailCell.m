@@ -123,7 +123,7 @@
 }
 
 -(void)textViewDidChange:(UITextView *)textView {
-    _lbl_count.text=[NSString stringWithFormat:@"%u",500-_txt_detail.text.length];
+    _lbl_count.text=[NSString stringWithFormat:@"%lu",500-_txt_detail.text.length];
     if (textView.text.length==0) {
         [_lbl_tip setHidden:NO];
         _lbl_tip.text=@"请输入备注信息，最多500个字";
@@ -132,8 +132,12 @@
         _lbl_tip.text=@"";
         [_lbl_tip setHidden:YES];
        // [_delegate sendCellValue:textView.text indexPath:];
-        [_delegate sendCellValue:textView.text indexPath:_i_indexPath];
+      
     }
+}
+
+-(void)textViewDidEndEditing:(UITextView *)textView {
+      [_delegate sendCellValue:textView.text indexPath:_i_indexPath];
 }
 
 

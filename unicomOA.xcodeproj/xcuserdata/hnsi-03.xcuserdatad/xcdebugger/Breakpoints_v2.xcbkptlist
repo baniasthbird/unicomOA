@@ -1428,11 +1428,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/View/MessageViewController.m"
-            timestampString = "492418173.504901"
+            timestampString = "494235834.220767"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "246"
-            endingLineNumber = "246"
+            startingLineNumber = "301"
+            endingLineNumber = "301"
             landmarkName = "@implementation MessageViewController"
             landmarkType = "3">
          </BreakpointContent>
