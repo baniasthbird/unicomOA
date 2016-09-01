@@ -56,6 +56,7 @@
     UIActivityIndicatorView *indicator;
     NSInteger i_total;
     NSInteger i_bangong;
+    NSInteger i_shiwu;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -138,7 +139,7 @@
     CGFloat view_part_x=0;
     CGFloat view_part1_y=35;
     CGFloat view_part_w=[UIScreen mainScreen].bounds.size.width;
-    CGFloat view_part_h=80;
+    CGFloat view_part_h=88;
 
     
     CGFloat btn_x=18;
@@ -305,7 +306,7 @@
     _btn_HeTong=[self createImageButton:btn_x y:shenpi_y_2 width:btn_w height:btn_w title:@"合同" image:@"HeTong.png" insets:i_insets isFinish:NO];
     [_btn_HeTong addTarget:self action:@selector(HeTongItemClick:) forControlEvents:UIControlEventTouchUpInside];
     
-    _btn_ShiWu=[self createImageButton:btn_x_2 y:shenpi_y_2 width:btn_w height:btn_w title:@"事务" image:@"ShiWu.png" insets:i_insets isFinish:NO];
+    _btn_ShiWu=[self createImageButton:btn_x_2 y:shenpi_y_2 width:btn_w height:btn_w title:@"事务" image:@"ShiWu.png" insets:i_insets isFinish:YES];
     [_btn_ShiWu addTarget:self action:@selector(ShiWuItemClick:) forControlEvents:UIControlEventTouchUpInside];
 
     
@@ -329,7 +330,7 @@
     UIImageButton *btn_JueCe=[self createImageButton:btn_x_3 y:btn_y width:btn_w height:btn_w title:@"决策" image:@"JueCe.png" insets:i_insets isFinish:NO];
     [btn_JueCe addTarget:self action:@selector(JueCeItemClick:) forControlEvents:UIControlEventTouchUpInside];
 
-    UIImageButton *btn_Weather=[self createImageButton:btn_x_4 y:btn_y width:btn_w height:btn_w title:@"天气" image:@"Weather.png" insets:i_insets isFinish:NO];
+    UIImageButton *btn_Weather=[self createImageButton:btn_x_4 y:btn_y width:btn_w height:btn_w title:@"天气" image:@"Weather.png" insets:i_insets isFinish:YES];
     [btn_Weather addTarget:self action:@selector(WeatherItemClick:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:lbl_title1];
@@ -689,12 +690,23 @@
 
 //事务
 -(void)ShiWuItemClick:(UIImageButton *)button {
+    /*
     UnFinishViewController *view=[[UnFinishViewController alloc]init];
     view.str_title=@"事务审批";
     if (f_v<9.0) {
         self.navigationController.delegate=nil;
     }
     [self.navigationController pushViewController:view animated:NO];
+     */
+    MyShenPiViewController *viewController=[[MyShenPiViewController alloc] init];
+    viewController.userInfo=_userInfo;
+    viewController.delegate=self;
+    viewController.i_Class=5;
+    viewController.str_title=@"事务审批";
+    if (f_v<9.0) {
+        self.navigationController.delegate=nil;
+    }
+    [self.navigationController pushViewController:viewController animated:NO];
 }
 
 
@@ -794,11 +806,14 @@
             if (b_success==YES) {
                 NSString *str_total=[JSON objectForKey:@"c0"];
                 NSString *str_bangong=[JSON objectForKey:@"c1"];
+                NSString *str_shiwu=[JSON objectForKey:@"c5"];
                 i_total=[str_total integerValue];
                 i_bangong=[str_bangong integerValue];
+                i_shiwu=[str_shiwu integerValue];
                 _btn_ShenPi.badgeBgColor=[UIColor redColor];
                 [_btn_ShenPi showBadgeWithStyle:WBadgeStyleNumber value:i_total animationType:WBadgeAnimTypeNone];
                 [_btn_BanGong showBadgeWithStyle:WBadgeStyleNumber value:i_bangong animationType:WBadgeAnimTypeNone];
+                [_btn_ShiWu showBadgeWithStyle:WBadgeStyleNumber value:i_shiwu animationType:WBadgeAnimTypeNone];
                 [self.view setNeedsDisplay];
                /*
                NSString *str_totalPage=[JSON objectForKey:@"totalPage"];
@@ -867,8 +882,10 @@
                 NSLog(@"获取审批列表成功");
                 NSString *str_total= [JSON objectForKey:@"c0"];
                 NSString *str_bangong=[JSON objectForKey:@"c1"];
+                NSString *str_shiwu=[JSON objectForKey:@"c5"];
                 i_total=[str_total integerValue];
                 i_bangong=[str_bangong integerValue];
+                i_shiwu=[str_shiwu integerValue];
                 /*
                 NSArray *arr_TaskList=[JSON objectForKey:@"taskList"];
                 NSInteger i_integer=[_str_page integerValue];
@@ -880,6 +897,7 @@
                 // _btn_ShenPi.badgeCenterOffset=CGPointMake(0, _btn_ShenPi.size.height*0.08);
                 [_btn_ShenPi showBadgeWithStyle:WBadgeStyleNumber value:i_total animationType:WBadgeAnimTypeNone];
                 [_btn_BanGong showBadgeWithStyle:WBadgeStyleNumber value:i_bangong animationType:WBadgeAnimTypeNone];
+                [_btn_ShiWu showBadgeWithStyle:WBadgeStyleNumber value:i_shiwu animationType:WBadgeAnimTypeNone];
                 [self.view setNeedsDisplay];
                 
                 
