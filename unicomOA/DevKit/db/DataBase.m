@@ -154,6 +154,29 @@
             }
         }
     }
+    else {
+        if ([_database open]) {
+            NSString *deleteSql=[NSString stringWithFormat:@"DELETE FROM %@",IP_TABLENAME];
+            
+            BOOL res=[_database executeUpdate:deleteSql];
+            if (res) {
+                NSLog(@"成功删除IP表");
+            }
+            else {
+                NSLog(@"删除IP表失败");
+            }
+            
+            NSString *insertSql1=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@' , '%@' , '%@') VALUES ('%@', '%@', '%@')",IP_TABLENAME,IP_NAME,IP_PORT,IP_MARK,str_ipaddr,str_port,str_mark];
+            BOOL res2=[_database executeUpdate:insertSql1];
+            if (res2) {
+                NSLog(@"成功添加至IP表!");
+            } else {
+                NSLog(@"添加数据至IP表出错！");
+            }
+
+
+        }
+    }
 }
 
 //获取IP表数据

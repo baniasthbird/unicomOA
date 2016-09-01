@@ -500,7 +500,7 @@ CGFloat i_Height=-1;
                     }
                     else {
                         UIImageView *imgView=((CLTreeView_LEVEL2_Cell*)cell).headImg;
-                        UIImage *img= [self setTxcolorAndTitle:nodeData.name fid:nodeData.signture imgView:imgView];
+                        UIImage *img= [self setTxcolorAndTitle:nodeData.name fid:nodeData.gender imgView:imgView];
                         [((CLTreeView_LEVEL2_Cell*)cell).headImg setImage:img];
                     }
                 }

@@ -524,8 +524,8 @@ int i_comment_num;
 
         //替换图片源
         NSString *str_relplace1=[NSString stringWithFormat:@"%@%@:%@",@"http://",str_ip,str_port];
-        NSString *str_relplace2=@"<img src=\"";
-        NSString *str_replace_after=[NSString stringWithFormat:@"%@%@",str_relplace2,str_relplace1];
+        NSString *str_relplace2=@"/default/ueditor/jsp/upload/image/";
+        NSString *str_replace_after=[NSString stringWithFormat:@"%@%@",str_relplace1,str_relplace2];
         
         str_content=[str_content stringByReplacingOccurrencesOfString:str_relplace2 withString:str_replace_after];
         

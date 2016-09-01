@@ -176,6 +176,9 @@
 #pragma mark 请求网络
 -(void)requestNet:(NSString *)pro city:(NSString *)city
 {
+    if ([city isEqualToString:@"郑州"] || [city isEqualToString:@"开封"] || [city isEqualToString:@"洛阳"] || [city isEqualToString:@"平顶山"] || [city isEqualToString:@"安阳"] || [city isEqualToString:@"鹤壁"] || [city isEqualToString:@"新乡"] || [city isEqualToString:@"焦作"] || [city isEqualToString:@"濮阳"] || [city isEqualToString:@"许昌"] || [city isEqualToString:@"漯河"] || [city isEqualToString:@"三门峡"] || [city isEqualToString:@"商丘"] || [city isEqualToString:@"济源"] || [city isEqualToString:@"驻马店"] || [city isEqualToString:@"南阳"] || [city isEqualToString:@"信阳"] || [city isEqualToString:@"周口"]) {
+        pro=@"河南";
+    }
     NSString *urlstr = [NSString stringWithFormat:@"http://c.3g.163.com/nc/weather/%@|%@.html",pro,city];
     urlstr = [urlstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     AFHTTPSessionManager *mgr=[AFHTTPSessionManager manager];
@@ -186,46 +189,49 @@
         [self.navigationController setNavigationBarHidden:YES];
         self.tabBarController.tabBar.hidden=YES;
       //  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-        self.dt = responseObject[@"dt"];
-        NSString *str = [NSString stringWithFormat:@"%@|%@",pro,city];
-       // NSArray *dataArray = [WeatherData objectArrayWithKeyValuesArray:responseObject[str]];
-        NSDictionary *dic=(NSDictionary*)responseObject;
-        NSArray *dataArray_tmp= [dic objectForKey:str];
-        NSMutableArray *dataArray=[NSMutableArray arrayWithCapacity:[dataArray_tmp count]];
-        for (int i=0;i<[dataArray_tmp count];i++) {
-            NSDictionary *dic_tmp=[dataArray_tmp objectAtIndex:i];
-            WeatherData *weather=[[WeatherData alloc]init];
-            weather.temperature=[dic_tmp objectForKey:@"temperature"];
-            weather.wind=[dic_tmp objectForKey:@"wind"];
-            weather.week=[dic_tmp objectForKey:@"week"];
-            weather.climate=[dic_tmp objectForKey:@"climate"];
-            weather.date=[dic_tmp objectForKey:@"date"];
-            [dataArray addObject:weather];
+        if (responseObject!=nil) {
+            if ([responseObject isKindOfClass:[NSDictionary class]]) {
+                self.dt = responseObject[@"dt"];
+                NSString *str = [NSString stringWithFormat:@"%@|%@",pro,city];
+                // NSArray *dataArray = [WeatherData objectArrayWithKeyValuesArray:responseObject[str]];
+                NSDictionary *dic=(NSDictionary*)responseObject;
+                NSArray *dataArray_tmp= [dic objectForKey:str];
+                NSMutableArray *dataArray=[NSMutableArray arrayWithCapacity:[dataArray_tmp count]];
+                for (int i=0;i<[dataArray_tmp count];i++) {
+                    NSDictionary *dic_tmp=[dataArray_tmp objectAtIndex:i];
+                    WeatherData *weather=[[WeatherData alloc]init];
+                    weather.temperature=[dic_tmp objectForKey:@"temperature"];
+                    weather.wind=[dic_tmp objectForKey:@"wind"];
+                    weather.week=[dic_tmp objectForKey:@"week"];
+                    weather.climate=[dic_tmp objectForKey:@"climate"];
+                    weather.date=[dic_tmp objectForKey:@"date"];
+                    [dataArray addObject:weather];
+                }
+                NSMutableArray *tempArray=[NSMutableArray array];
+                
+                for (WeatherData *weather in dataArray) {
+                    [tempArray addObject:weather];
+                }
+                self.weatherArray = tempArray;
+                
+                //pm2d5
+                NSDictionary *dic_pm2d5=[dic objectForKey:@"pm2d5"];
+                WeatherData *wd=[[WeatherData alloc]init];
+                NSObject *i_temperature =[dic objectForKey:@"rt_temperature"];
+                NSString *str_temperature=@"";
+                NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
+                NSNumber *num_temperature=(NSNumber*)i_temperature;
+                str_temperature = [numberFormatter stringFromNumber:num_temperature];
+                wd.temperature=[NSString stringWithFormat:@"%@%@",str_temperature,@"°"];
+                wd.nbg2=[dic_pm2d5 objectForKey:@"nbg2"];
+                wd.aqi=[dic_pm2d5 objectForKey:@"aqi"];
+                wd.pm2_5=[dic_pm2d5 objectForKey:@"pm2_5"];
+                // WeatherData *wd =[WeatherData mj_objectWithKeyValues:dic[@"pm2d5"]];
+                self.wd=wd;
+                
+                [self initAll];
+            }
         }
-        NSMutableArray *tempArray=[NSMutableArray array];
-        
-        for (WeatherData *weather in dataArray) {
-            [tempArray addObject:weather];
-        }
-        self.weatherArray = tempArray;
-        
-        //pm2d5
-        NSDictionary *dic_pm2d5=[dic objectForKey:@"pm2d5"];
-        WeatherData *wd=[[WeatherData alloc]init];
-        NSObject *i_temperature =[dic objectForKey:@"rt_temperature"];
-        NSString *str_temperature=@"";
-        NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
-        NSNumber *num_temperature=(NSNumber*)i_temperature;
-        str_temperature = [numberFormatter stringFromNumber:num_temperature];
-        wd.temperature=[NSString stringWithFormat:@"%@%@",str_temperature,@"°"];
-        wd.nbg2=[dic_pm2d5 objectForKey:@"nbg2"];
-        wd.aqi=[dic_pm2d5 objectForKey:@"aqi"];
-        wd.pm2_5=[dic_pm2d5 objectForKey:@"pm2_5"];
-       // WeatherData *wd =[WeatherData mj_objectWithKeyValues:dic[@"pm2d5"]];
-        self.wd=wd;
-        
-        [self initAll];
-        
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         

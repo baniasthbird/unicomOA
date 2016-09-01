@@ -871,6 +871,9 @@
 #pragma mark 请求网络
 -(void)requestNet:(NSString *)pro city:(NSString *)city
 {
+    if ([city isEqualToString:@"郑州"] || [city isEqualToString:@"开封"] || [city isEqualToString:@"洛阳"] || [city isEqualToString:@"平顶山"] || [city isEqualToString:@"安阳"] || [city isEqualToString:@"鹤壁"] || [city isEqualToString:@"新乡"] || [city isEqualToString:@"焦作"] || [city isEqualToString:@"濮阳"] || [city isEqualToString:@"许昌"] || [city isEqualToString:@"漯河"] || [city isEqualToString:@"三门峡"] || [city isEqualToString:@"商丘"] || [city isEqualToString:@"济源"] || [city isEqualToString:@"驻马店"] || [city isEqualToString:@"南阳"] || [city isEqualToString:@"信阳"] || [city isEqualToString:@"周口"]) {
+        pro=@"河南";
+    }
     NSString *urlstr = [NSString stringWithFormat:@"http://c.3g.163.com/nc/weather/%@|%@.html",pro,city];
     urlstr = [urlstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     AFHTTPSessionManager *mgr=[AFHTTPSessionManager manager];
@@ -880,38 +883,66 @@
         //  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
         [indicator stopAnimating];
         
-        self.dt = responseObject[@"dt"];
-        NSString *str = [NSString stringWithFormat:@"%@|%@",pro,city];
-        // NSArray *dataArray = [WeatherData objectArrayWithKeyValuesArray:responseObject[str]];
-        NSDictionary *dic=(NSDictionary*)responseObject;
-        NSArray *dataArray_tmp= [dic objectForKey:str];
-       
-        NSDictionary *dic_tmp=[dataArray_tmp objectAtIndex:0];
-
-        //pm2d5
-        WeatherData *wd=[[WeatherData alloc]init];
-        NSObject *i_temperature =[dic objectForKey:@"rt_temperature"];
-        NSString *str_temperature=@"";
-        NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
-        NSNumber *num_temperature=(NSNumber*)i_temperature;
-        str_temperature = [numberFormatter stringFromNumber:num_temperature];
-        wd.temperature=[NSString stringWithFormat:@"%@%@",str_temperature,@"°C"];
-        wd.climate=[dic_tmp objectForKey:@"climate"];
+        if (responseObject!=nil) {
+            if ([responseObject isKindOfClass:[NSDictionary class]]) {
+                self.dt = responseObject[@"dt"];
+                NSString *str = [NSString stringWithFormat:@"%@|%@",pro,city];
+                // NSArray *dataArray = [WeatherData objectArrayWithKeyValuesArray:responseObject[str]];
+                NSDictionary *dic=(NSDictionary*)responseObject;
+                NSArray *dataArray_tmp= [dic objectForKey:str];
+                
+                NSDictionary *dic_tmp=[dataArray_tmp objectAtIndex:0];
+                
+                //pm2d5
+                WeatherData *wd=[[WeatherData alloc]init];
+                NSObject *i_temperature =[dic objectForKey:@"rt_temperature"];
+                NSString *str_temperature=@"";
+                NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
+                NSNumber *num_temperature=(NSNumber*)i_temperature;
+                str_temperature = [numberFormatter stringFromNumber:num_temperature];
+                wd.temperature=[NSString stringWithFormat:@"%@%@",str_temperature,@"°C"];
+                wd.climate=[dic_tmp objectForKey:@"climate"];
+                
+                NSLog(@"获取天气成功!");
+                
+                UIButton *btn_weather=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 90, 40)];
+                if ([wd.climate isEqualToString:@"雷阵雨"]) {
+                    [btn_weather setImage:[UIImage imageNamed:@"thunder_w"] forState:UIControlStateNormal];
+                }
+                else if ([wd.climate isEqualToString:@"晴"]) {
+                    [btn_weather setImage:[UIImage imageNamed:@"sun_w"] forState:UIControlStateNormal];
+                }
+                else if ([wd.climate isEqualToString:@"多云"]) {
+                    [btn_weather setImage:[UIImage imageNamed:@"sunandcloud_w"] forState:UIControlStateNormal];
+                }
+                else if ([wd.climate isEqualToString:@"阴"]) {
+                    [btn_weather setImage:[UIImage imageNamed:@"cloud_w"] forState:UIControlStateNormal];
+                }
+                else if ([wd.climate isEqualToString:@"雨"]) {
+                    [btn_weather setImage:[UIImage imageNamed:@"rain_w"] forState:UIControlStateNormal];
+                }
+                else if ([wd.climate isEqualToString:@"雪"]) {
+                    [btn_weather setImage:[UIImage imageNamed:@"snow_w"] forState:UIControlStateNormal];
+                }
+                else {
+                    [btn_weather setImage:[UIImage imageNamed:@"sandfloat_w"] forState:UIControlStateNormal];
+                }
+                [btn_weather setTitle:wd.temperature forState:UIControlStateNormal];
+                [btn_weather setImageEdgeInsets:UIEdgeInsetsMake(0, -5, 0, 0)];
+                [btn_weather addTarget:self action:@selector(WeatherForcast:) forControlEvents:UIControlEventTouchUpInside];
+                UIBarButtonItem *barButtonItem=[[UIBarButtonItem alloc]initWithCustomView:btn_weather];
+                self.navigationItem.rightBarButtonItem=barButtonItem;
+            }
+        }
         
-        NSLog(@"获取天气成功!");
+        
        // UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"  " style:UIBarButtonItemStyleDone target:self action:@selector(WeatherForcast:)];
         
         //UIBarButtonItem *barButtonItem=[UIBarButtonItem ItemWithTitleAndIcon:@"sun_w" title:wd.temperature target:self action:@selector(WeatherForcast:)];
        // barButtonItem.tintColor=[UIColor whiteColor];
        // barButtonItem.title=wd.temperature;
        // [barButtonItem setImage:[UIImage imageNamed:@"returnlogo.png"]];
-        UIButton *btn_weather=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 90, 40)];
-        [btn_weather setImage:[UIImage imageNamed:@"sun_w"] forState:UIControlStateNormal];
-        [btn_weather setTitle:wd.temperature forState:UIControlStateNormal];
-        [btn_weather setImageEdgeInsets:UIEdgeInsetsMake(0, -5, 0, 0)];
-        [btn_weather addTarget:self action:@selector(WeatherForcast:) forControlEvents:UIControlEventTouchUpInside];
-        UIBarButtonItem *barButtonItem=[[UIBarButtonItem alloc]initWithCustomView:btn_weather];
-        self.navigationItem.rightBarButtonItem=barButtonItem;
+        
         // WeatherData *wd =[WeatherData mj_objectWithKeyValues:dic[@"pm2d5"]];
         
         
