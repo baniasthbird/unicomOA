@@ -29,6 +29,10 @@
 #pragma 正则匹配用户密码6-18位数字和字母组合
 +(BOOL)checkPassword:(NSString*)password;
 
+#pragma 正则匹配数字
+- (BOOL)validateNumber:(NSString *)textString;
 
+#pragma mark 查找指定字符串出现次数
+- (NSInteger)countOccurencesOfString:(NSString*)searchString length:(NSString*)str_orglength;
 
 @end

@@ -88,9 +88,10 @@ CGFloat i_Height=-1;
     SpotLight.rectArray=@[[NSValue valueWithCGRect:CGRectMake(0,0,0,0)]];
     SpotLight.delegate=self;
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]) {
-        [self presentViewController:SpotLight animated:NO completion:^{
+       /* [self presentViewController:SpotLight animated:NO completion:^{
             
         }];
+        */
     }
     
     
@@ -167,7 +168,7 @@ CGFloat i_Height=-1;
     
     //[self.searchcontroller.searchBar sizeToFit];
     
-    self.searchcontroller.searchBar.placeholder=@"搜索姓名";
+    self.searchcontroller.searchBar.placeholder=@"搜索";
     
     [[[[self.searchcontroller.searchBar.subviews objectAtIndex:0] subviews]objectAtIndex:0]removeFromSuperview];
     
@@ -516,6 +517,12 @@ CGFloat i_Height=-1;
                     }
                 }
             }
+            else {
+                UIImageView *imgView=((CLTreeView_LEVEL2_Cell*)cell).headImg;
+                UIImage *img= [self setTxcolorAndTitle:nodeData.name fid:nodeData.gender imgView:imgView];
+                [((CLTreeView_LEVEL2_Cell*)cell).headImg setImage:img];
+                
+            }
 
         }
         
@@ -682,17 +689,42 @@ CGFloat i_Height=-1;
     NSString *searchtext=searchController.searchBar.text;
     if (![searchtext isEqualToString:@""]) {
         NSMutableDictionary *param=[NSMutableDictionary dictionary];
-        param[@"name"]=searchtext;
-        [self FindContact:param];
+        if ([self validateNumber:searchtext]) {
+            param[STAFF_MOBILE]=searchtext;
+            param[STAFF_TEL]=searchtext;
+            [self FindContactLocal:param];
+        }
+        else {
+            param[@"name"]=searchtext;
+            [self FindContact:param];
+        }
     }
     
 }
 
+-(void)FindContactLocal:(NSMutableDictionary*)param {
+    NSString *str_con1=STAFF_MOBILE;
+    NSString *str_con2=STAFF_TEL;
+    NSString *str_key=param[STAFF_MOBILE];
+    NSMutableArray *arr_result=[db GetPeople:str_con1 con2:str_con2 keyword:str_key];
+    if ([arr_result count]>0) {
+        _resultViewController.dataArray=arr_result;
+        _resultViewController.nav=self.navigationController;
+        _resultViewController.str_key=str_key;
+    }
+    else {
+        _resultViewController.dataArray=nil;
+        _resultViewController.nav=nil;
+        _resultViewController.str_key=nil;
+    }
+    [_resultViewController.tableView reloadData];
+}
 
 
 //根据搜索栏查找
 -(void)FindContact:(NSMutableDictionary*)param {
     NSString *str_connection=[self GetConnectionStatus];
+    NSString *str_key=param[@"name"];
     if ([str_connection isEqualToString:@"wifi"] || [str_connection isEqualToString:@"GPRS"]) {
         NSString *str_ip=@"";
         NSString *str_port=@"";
@@ -717,6 +749,7 @@ CGFloat i_Height=-1;
                 if ([arr_result count]>0) {
                     _resultViewController.dataArray=arr_result;
                     _resultViewController.nav=self.navigationController;
+                    _resultViewController.str_key=str_key;
                     
                 }
                 else {
@@ -878,6 +911,13 @@ CGFloat i_Height=-1;
 
 -(void)XSpotLightClicked:(NSInteger)index{
     NSLog(@"%ld",(long)index);
+}
+
+- (BOOL)validateNumber:(NSString *) textString
+{
+    NSString* number=@"^[0-9]+$";
+    NSPredicate *numberPre = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",number];
+    return [numberPre evaluateWithObject:textString];
 }
 
 @end

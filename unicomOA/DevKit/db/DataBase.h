@@ -41,6 +41,10 @@
 -(void)UpdateStaffTable:(NSMutableArray*)arr_staff;
 -(void)UpdateDepartmentTable:(NSMutableArray*)arr_department;
 
+
+//查询通讯录,根据条件
+-(NSMutableArray*)GetPeople:(NSString*)str_condition con2:(NSString*)str_condition2 keyword:(NSString*)str_key;
+
 -(void)UpdateIPTable:(NSString*)str_ipaddr port:(NSString*)str_port IP_Mark:(NSString*)str_mark;
 -(void)UpdateInterFaceTable:(NSMutableDictionary*)dic_inerface;
 -(void)UpdateNotesTable:(NSMutableDictionary*)dic_notes;

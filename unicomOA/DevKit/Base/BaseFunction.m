@@ -108,17 +108,29 @@
 
 #pragma 正则匹配手机号
 
-+(BOOL)checkTelNumber:(NSString *)telNumber {
+-(BOOL)checkTelNumber:(NSString *)telNumber {
     NSString *pattern = @"^1[34578]\\d{9}$";
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", pattern];
     BOOL isMatch = [pred evaluateWithObject:telNumber];
     return isMatch;
 }
 
-+(BOOL)checkPassword:(NSString *)password {
+-(BOOL)checkPassword:(NSString *)password {
     NSString *passWordRegex = @"^[a-zA-Z0-9]{6,18}+$";
     NSPredicate *passWordPredicate = [NSPredicate predicateWithFormat:@"SELF MATHCES %@",passWordRegex];
     return [passWordPredicate evaluateWithObject:password];
+}
+
+- (BOOL)validateNumber:(NSString *) textString
+{
+    NSString* number=@"^[0-9]+$";
+    NSPredicate *numberPre = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",number];
+    return [numberPre evaluateWithObject:textString];
+}
+
+- (NSInteger)countOccurencesOfString:(NSString*)searchString length:(NSString*)str_orglength {
+    NSInteger strCount = [str_orglength length] - [[str_orglength stringByReplacingOccurrencesOfString:searchString withString:@""] length];
+    return strCount / [searchString length];
 }
 
 @end

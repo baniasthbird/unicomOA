@@ -112,6 +112,7 @@
     
     [self.geocoder reverseGeocodeLocation:loc completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
         if (error) {
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
             NSLog(@"%@",error);
         }
         else {

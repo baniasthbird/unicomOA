@@ -53,7 +53,7 @@
     else if ([_str_title isEqualToString:@"售前审批"]) {
         imgView.image=[UIImage imageNamed:@"ShouQianView"];
     }
-    else if ([_str_title isEqualToString:@"生产审批"]) {
+    else if ([_str_title isEqualToString:@"生产审批"] || [_str_title isEqualToString:@"更多审批"]) {
         imgView.image=[UIImage imageNamed:@"ShengChanView"];
     }
     else if ([_str_title isEqualToString:@"合同审批"]) {

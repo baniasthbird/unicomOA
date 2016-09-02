@@ -190,9 +190,11 @@
     SpotLight.rectArray=@[[NSValue valueWithCGRect:CGRectMake(0,0,0,0)]];
     SpotLight.delegate=self;
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]) {
+        /*
         [self presentViewController:SpotLight animated:NO completion:^{
             
         }];
+         */
     }
 
     

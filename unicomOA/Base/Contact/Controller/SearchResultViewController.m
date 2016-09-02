@@ -10,9 +10,11 @@
 #import "MemberInfoViewController.h"
 #import "AppDelegate.h"
 #import "UserInfo.h"
+#import "BaseFunction.h"
 
 @implementation SearchResultViewController {
     UserInfo *usrInfo;
+    BaseFunction *baseFunc;
 }
 
 -(void)viewDidLoad {
@@ -20,7 +22,7 @@
     [super viewDidLoad];
     NSData *data=[[NSUserDefaults standardUserDefaults] objectForKey:@"user"];
      usrInfo=[NSKeyedUnarchiver unarchiveObjectWithData:data];
-
+    baseFunc=[[BaseFunction alloc]init];
    
     
 }
@@ -32,10 +34,33 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (cell==nil) {
-        cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+        cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
     }
     NSDictionary *dic=self.dataArray[indexPath.row];
-    cell.textLabel.text=[dic objectForKey:@"empname"];
+    NSString *str_name=[dic objectForKey:@"empname"];
+    NSString *str_mobile=[baseFunc GetValueFromDic:dic key:@"mobileno"];
+    NSString *str_tel=[baseFunc GetValueFromDic:dic key:@"otel"];
+    NSString *str_num=[NSString stringWithFormat:@"%@    %@",str_mobile,str_tel];
+    NSMutableAttributedString *str_lbl_name=[[NSMutableAttributedString alloc]initWithString:str_name];
+    NSMutableAttributedString *str_lbl=[[NSMutableAttributedString alloc]initWithString:str_num];
+    
+    if ([baseFunc validateNumber:_str_key]) {
+        NSInteger i_count =[baseFunc countOccurencesOfString:_str_key length:str_num];
+        NSString *str_tmp=str_num;
+        for (int i=0;i<i_count;i++) {
+            NSRange rangeNum=[str_tmp rangeOfString:_str_key];
+            if (rangeNum.location!=NSNotFound) {
+                [str_lbl addAttribute:NSForegroundColorAttributeName  value:[UIColor colorWithRed:81/255.0f green:192/255.0f blue:251/255.0f alpha:1] range:NSMakeRange(rangeNum.location, rangeNum.length)];
+            }
+            str_tmp=[str_num substringFromIndex:(rangeNum.location+rangeNum.length)];
+        }
+    }
+    else {
+        [self ColorKeyWord:str_name label:str_lbl_name];
+        
+    }
+    cell.textLabel.attributedText=str_lbl_name;
+    cell.detailTextLabel.attributedText=str_lbl;
     return cell;
 }
 
@@ -108,6 +133,19 @@
     self.tableView.dataSource=nil;
 }
 
+//强调关键字
+-(void)ColorKeyWord:(NSString*)str_org label:(NSMutableAttributedString*)lbl_org{
+    NSInteger i_count =[baseFunc countOccurencesOfString:_str_key length:str_org];
+    NSString *str_tmp=str_org;
+    for (int i=0;i<i_count;i++) {
+        NSRange range=[str_tmp rangeOfString:_str_key];
+        if (range.location!=NSNotFound) {
+            [lbl_org addAttribute:NSForegroundColorAttributeName  value:[UIColor colorWithRed:81/255.0f green:192/255.0f blue:251/255.0f alpha:1] range:NSMakeRange(range.location, range.length)];
+        }
+        str_tmp=[str_org substringFromIndex:(range.location+range.length)];
+    }
+
+}
 
 
 @end

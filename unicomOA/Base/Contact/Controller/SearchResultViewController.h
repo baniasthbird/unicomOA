@@ -14,6 +14,6 @@
 
 @property (strong,nonatomic) UINavigationController *nav;
 
-
+@property (strong,nonatomic) NSString *str_key;
 
 @end
