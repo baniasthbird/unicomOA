@@ -19,7 +19,9 @@
 
 @end
 
-@implementation AppDelegate
+@implementation AppDelegate {
+    NSString *remark;
+}
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -73,6 +75,9 @@
     BOOL b_update= [self checkUpdate:str_url];
     LoginViewController *login=[[LoginViewController alloc]init];
     login.b_update=b_update;
+    if (remark!=nil) {
+        login.str_remark=remark;
+    }
     UINavigationController *nav=[[UINavigationController alloc]initWithRootViewController:login];
     NSDictionary *attributes=[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:248/255.0f green:144/255.0f blue:34/255.0f alpha:1],NSForegroundColorAttributeName,nil];
     [nav.navigationBar setTitleTextAttributes:attributes];
@@ -125,6 +130,11 @@
         NSDictionary* dict3 = [dict2 objectForKey:@"metadata"];
         NSString* newVersion = [dict3 objectForKey:@"bundle-version"];
         CGFloat f_newVersion=[newVersion floatValue];
+        
+        NSString *newRemark=[dict3 objectForKey:@"remark"];
+        if (newRemark!=nil) {
+            remark=newRemark;
+        }
         
         NSDictionary *infoDict = [[NSBundle mainBundle] infoDictionary];
         NSString *myVersion = [infoDict objectForKey:@"CFBundleShortVersionString"];

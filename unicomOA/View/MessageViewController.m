@@ -30,6 +30,8 @@
 
 @property  NSInteger count;
 
+@property NSInteger news_count;
+
 @property NSInteger i_doc_num;
 
 @property NSInteger i_flow_num;
@@ -38,7 +40,7 @@
 
 @property (nonatomic,strong) AFHTTPSessionManager *session;
 
-@property (nonatomic,strong) NSArray *arr_NewsList;
+@property (nonatomic,strong) NSMutableArray *arr_NewsList;
 
 @property (nonatomic,strong) UIRefreshControl *refreshControl;
 
@@ -127,6 +129,7 @@
     _tableView.backgroundColor=[UIColor clearColor];
    
 
+    _arr_NewsList=[[NSMutableArray alloc]init];
     
     i_totalHeight=0;
     _refreshControl=[[UIRefreshControl alloc] init];
@@ -140,7 +143,7 @@
     
     [self.view addSubview:_tableView];
     
-   
+    _news_count=0;
     
     
     db=[DataBase sharedinstanceDB];
@@ -159,7 +162,11 @@
     NSMutableDictionary *news_param=[NSMutableDictionary dictionary];
     news_param[@"pageIndex"]=@"1";
     news_param[@"classId"]=@"0";
-    [self NewsList:news_param];
+    for (int i=1;i<3;i++) {
+        news_param[@"type"]=[NSString stringWithFormat:@"%d",i];
+        [self NewsList:news_param];
+    }
+   
     [self NewsCount];
     
     [self setupLocation];
@@ -227,7 +234,7 @@
             NSString *str_success= [JSON objectForKey:@"success"];
             BOOL i_success=[str_success boolValue];
             if (i_success==YES) {
-                 [self.refreshControl endRefreshing];
+                [self.refreshControl endRefreshing];
                 NSString *str_docnum= [JSON objectForKey:@"docNum"];
                 NSString *str_flownum= [JSON objectForKey:@"flowNum"];
                 NSString *str_msgnum= [JSON objectForKey:@"msgNum"];
@@ -326,10 +333,33 @@
             NSString *str_success= [JSON objectForKey:@"success"];
             int i_success=[str_success intValue];
             if (i_success==1) {
-                _arr_NewsList=[JSON objectForKey:@"list"];
-                if ([_arr_NewsList count]>0) {
+                NSArray *arr_list=[JSON objectForKey:@"list"];
+                
+                [_arr_NewsList addObjectsFromArray:arr_list];
+                _news_count++;
+                if (_news_count==2) {
                   //  [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
-                     [self.tableView reloadData];
+                    _news_count=0;
+                   // NSMutableArray *arr_tmp_NewsList=[[NSMutableArray alloc]initWithCapacity:[_arr_NewsList count]];
+                    for (int i=0; i<[_arr_NewsList count]-1; i++) {
+                        NSDictionary *dic_i=[_arr_NewsList objectAtIndex:i];
+                        NSString *str_date_i=[dic_i objectForKey:@"startDate"];
+                        NSDate *date_i=[self dateFromString:str_date_i];
+                        for (int j=1; j<[_arr_NewsList count]; j++) {
+                            NSDictionary *dic_j=[_arr_NewsList objectAtIndex:j];
+                            NSString *str_date_j=[dic_j objectForKey:@"startDate"];
+                            NSDate *date_j=[self dateFromString:str_date_j];
+                            if (date_i>date_j) {
+                                NSDictionary *dic_tmp=dic_i;
+                                [_arr_NewsList setObject:dic_j atIndexedSubscript:i];
+                                [_arr_NewsList setObject:dic_tmp atIndexedSubscript:j];
+                            }
+                        }
+                    }
+                    NSLog(@"排序");
+                    [self.tableView reloadData];
+                    
+                    
                 }
                 
             }
@@ -350,8 +380,28 @@
     
 }
 
+- (NSDate *)dateFromString:(NSString *)dateString{
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    
+    [dateFormatter setDateFormat: @"yyyy-MM-dd HH:mm:ss.s"];
+    
+    
+    NSDate *destDate= [dateFormatter dateFromString:dateString];
+    
+
+    return destDate;
+    
+}
+
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 11;
+    if ([_arr_NewsList count]<10) {
+         return 11;
+    }
+    else {
+        return [_arr_NewsList count]+1;
+    }
+   
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

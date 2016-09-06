@@ -21,7 +21,7 @@
 }
 
 -(NSString*)GetValueFromArray:(NSArray*)arr_tmp index:(NSInteger)i_index {
-    NSObject *obj_tmp=[arr_tmp objectAtIndex:0];
+    NSObject *obj_tmp=[arr_tmp objectAtIndex:i_index];
     NSString *str_tmp=@"";
     if (obj_tmp!=[NSNull null]) {
         str_tmp=(NSString*)obj_tmp;
@@ -132,5 +132,34 @@
     NSInteger strCount = [str_orglength length] - [[str_orglength stringByReplacingOccurrencesOfString:searchString withString:@""] length];
     return strCount / [searchString length];
 }
+
+-(NSMutableArray*)GetAllSubString:(NSString*)str_origin key:(NSString*)str_key {
+    NSRange searchRange = NSMakeRange(0,str_origin.length);
+    NSMutableArray *arr_Range=[[NSMutableArray alloc]init];
+    NSRange foundRange;
+    NSInteger i_count=0;
+    while (searchRange.location < str_origin.length) {
+        searchRange.length = str_origin.length-searchRange.location;
+        foundRange = [str_origin rangeOfString:str_key options:NSCaseInsensitiveSearch range:searchRange];
+        if (foundRange.location != NSNotFound) {
+            // found an occurrence of the substring! do stuff here
+           
+            NSInteger i_loc=foundRange.location;
+            NSString *str_tmp=[str_origin substringToIndex:i_loc];
+            i_count++;
+            NSString *str_loc=[NSString stringWithFormat:@"%ld",(long)i_loc];
+            [arr_Range addObject:str_loc];
+            
+             searchRange.location = foundRange.location+1;
+        } else {
+            // no more substring to find
+            break;
+        }
+    }
+    
+    return arr_Range;
+    
+}
+
 
 @end

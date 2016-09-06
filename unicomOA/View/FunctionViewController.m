@@ -24,6 +24,7 @@
 #import "SysMsgViewController.h"
 #import "XSpotLight.h"
 #import "WeatherViewController.h"
+#import "WBGuide/RAYNewFunctionGuideVC.h"
 
 
 
@@ -48,6 +49,8 @@
 @property (nonatomic,strong) UIImageButton *btn_HeTong;
 
 @property (nonatomic,strong) UIImageButton *btn_ShiWu;
+
+@property (nonatomic,strong) UIImageButton *btn_more;
 
 @end
 
@@ -131,13 +134,13 @@
     }
     
     CGFloat i_title1_x=10;
-    CGFloat i_title1_y=16;
+    CGFloat i_title1_y=36;
     CGFloat i_title_w=[UIScreen mainScreen].bounds.size.width-10;
     CGFloat i_title_h=15;
     CGFloat i_title_font=14;
     
     CGFloat view_part_x=0;
-    CGFloat view_part1_y=35;
+    CGFloat view_part1_y=55;
     CGFloat view_part_w=[UIScreen mainScreen].bounds.size.width;
     CGFloat view_part_h=88;
 
@@ -152,22 +155,22 @@
     
     
     CGFloat i_title2_x=10;
-    CGFloat i_title2_y=136;
+    CGFloat i_title2_y=166;
     
     
-    CGFloat i_viewpart2_y=152;
+    CGFloat i_viewpart2_y=182;
 
     
    
-    CGFloat shenpi_y=162;
+    CGFloat shenpi_y=192;
     
     CGFloat shenpi_y_2=242;
     
     CGFloat i_title3_x=10;
-    CGFloat i_title3_y=333;
+    CGFloat i_title3_y=293;
     
    
-    CGFloat i_viewpart3_y=349;
+    CGFloat i_viewpart3_y=319;
     
     CGFloat i_insets=70;
     
@@ -176,13 +179,13 @@
         btn_x_2=116;
         btn_x_3=204;
         btn_x_4=292;
-        i_title1_y=13;
-        view_part1_y=40;
-        i_title2_y=158;
-        i_viewpart2_y=185;
-        shenpi_y=200;
-        i_title3_y=408;
-        i_viewpart3_y=430;
+        i_title1_y=56;
+        view_part1_y=78;
+        i_title2_y=205;
+        i_viewpart2_y=227;
+        shenpi_y=237;
+        i_title3_y=361;
+        i_viewpart3_y=383;
         view_part_h=106;
         btn_w=60;
         i_insets=80;
@@ -193,13 +196,13 @@
         btn_x_2=125;
         btn_x_3=225;
         btn_x_4=325;
-        i_title1_y=20;
-        view_part1_y=40;
-        i_title2_y=180;
-        i_viewpart2_y=200;
-        shenpi_y=212;
-        i_title3_y=460;
-        i_viewpart3_y=479;
+        i_title1_y=76;
+        view_part1_y=98;
+        i_title2_y=236;
+        i_viewpart2_y=256;
+        shenpi_y=266;
+        i_title3_y=396;
+        i_viewpart3_y=418;
         view_part_h=110;
         btn_w=65;
         i_insets=90;
@@ -223,8 +226,29 @@
 
     }
     
+    //zr 0906 更新用户引导页面
+    RAYNewFunctionGuideVC *ray_vc=[[RAYNewFunctionGuideVC alloc]init];
+    ray_vc.titles=@[@"新增:天气预报"];
+    if (iPhone5_5s) {
+        ray_vc.frames=@[@"{{165,380},{70,70}}"];
+    }
+    else if (iPhone6) {
+        ray_vc.frames=@[@"{{197,445},{80,80}}"];
+    }
+    else if (iPhone6_plus) {
+        ray_vc.frames=@[@"{{216,480},{85,85}}"];
+    }
+    
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]) {
+    /*
+       [self presentViewController:ray_vc animated:NO completion:^{
+           
+       }];
+    */
+    }
+    
     XSpotLight *SpotLight=[[XSpotLight alloc]init];
-    SpotLight.messageArray=@[@"新增天气预报"];
+    SpotLight.messageArray=@[@"调整应用布局"];
     CGFloat i_x=323;
     CGFloat i_y=535;
     if (iPhone5_5s) {
@@ -235,12 +259,15 @@
         i_x=358;
         i_y=585;
     }
-    SpotLight.rectArray=@[[NSValue valueWithCGRect:CGRectMake(i_x, i_y, 50, 500)]];
+   // SpotLight.rectArray=@[[NSValue valueWithCGRect:CGRectMake(i_x, i_y, 50, 500)]];
+    SpotLight.rectArray=@[[NSValue valueWithCGRect:CGRectMake(0, 0, 0, 0)]];
     SpotLight.delegate=self;
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]) {
+        /*
         [self presentViewController:SpotLight animated:NO completion:^{
             
         }];
+         */
     }
 
     
@@ -275,7 +302,7 @@
     lbl_title2.textColor=[UIColor blackColor];
     lbl_title2.font=[UIFont systemFontOfSize:i_title_font];
     
-    UIView *view_part2=[[UIView alloc]initWithFrame:CGRectMake(view_part_x, i_viewpart2_y, view_part_w, view_part_h*2)];
+    UIView *view_part2=[[UIView alloc]initWithFrame:CGRectMake(view_part_x, i_viewpart2_y, view_part_w, view_part_h)];
     view_part2.backgroundColor=[UIColor whiteColor];
     view_part2.layer.borderWidth=1;
     view_part2.layer.borderColor=[[UIColor colorWithRed:231/255.0f green:231/255.0f blue:231/255.0f alpha:1] CGColor];
@@ -306,9 +333,12 @@
     _btn_HeTong=[self createImageButton:btn_x y:shenpi_y_2 width:btn_w height:btn_w title:@"合同" image:@"HeTong.png" insets:i_insets isFinish:NO];
     [_btn_HeTong addTarget:self action:@selector(HeTongItemClick:) forControlEvents:UIControlEventTouchUpInside];
     
-    _btn_ShiWu=[self createImageButton:btn_x_2 y:shenpi_y_2 width:btn_w height:btn_w title:@"事务" image:@"ShiWu.png" insets:i_insets isFinish:YES];
+   // _btn_ShiWu=[self createImageButton:btn_x_2 y:shenpi_y_2 width:btn_w height:btn_w title:@"事务" image:@"ShiWu.png" insets:i_insets isFinish:YES];
+     _btn_ShiWu=[self createImageButton:btn_x_3 y:shenpi_y width:btn_w height:btn_w title:@"事务" image:@"ShiWu.png" insets:i_insets isFinish:YES];
     [_btn_ShiWu addTarget:self action:@selector(ShiWuItemClick:) forControlEvents:UIControlEventTouchUpInside];
 
+    _btn_more= [self createImageButton:btn_x_4 y:shenpi_y width:btn_w height:btn_w title:@"更多" image:@"More.png" insets:i_insets isFinish:YES];
+    [_btn_more addTarget:self action:@selector(ShengChanItemClick:) forControlEvents:UIControlEventTouchUpInside];
     
     UILabel *lbl_title3=[[UILabel alloc]initWithFrame:CGRectMake(i_title3_x, i_title3_y, i_title_w, i_title_h)];
     lbl_title3.textAlignment=NSTextAlignmentLeft;
@@ -330,7 +360,7 @@
     UIImageButton *btn_JueCe=[self createImageButton:btn_x_3 y:btn_y width:btn_w height:btn_w title:@"决策" image:@"JueCe.png" insets:i_insets isFinish:NO];
     [btn_JueCe addTarget:self action:@selector(JueCeItemClick:) forControlEvents:UIControlEventTouchUpInside];
 
-    UIImageButton *btn_Weather=[self createImageButton:btn_x_4 y:btn_y width:btn_w height:btn_w title:@"天气" image:@"Weather.png" insets:i_insets isFinish:YES];
+    UIImageButton *btn_Weather=[self createImageButton:btn_x_3 y:btn_y width:btn_w height:btn_w title:@"天气" image:@"Weather.png" insets:i_insets isFinish:YES];
     [btn_Weather addTarget:self action:@selector(WeatherItemClick:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:lbl_title1];
@@ -339,16 +369,17 @@
     [view_part1 addSubview:btn_News];
     [view_part1 addSubview:btn_GongGao];
     [view_part1 addSubview:btn_XiaoXi];
-    [view_part1 addSubview:btn_ChuanYue];
+   // [view_part1 addSubview:btn_ChuanYue];
     [self.view addSubview:_btn_ShenPi];
     [self.view addSubview:_btn_BanGong];
-    [self.view addSubview:_btn_ShouQian];
-    [self.view addSubview:_btn_ShengChan];
-    [self.view addSubview:_btn_HeTong];
+  //  [self.view addSubview:_btn_ShouQian];
+   // [self.view addSubview:_btn_ShengChan];
+   // [self.view addSubview:_btn_HeTong];
     [self.view addSubview:_btn_ShiWu];
+    [self.view addSubview:_btn_more];
     [view_part3 addSubview:btn_Notes];
     [view_part3 addSubview:btn_IVoting];
-    [view_part3 addSubview:btn_JueCe];
+   // [view_part3 addSubview:btn_JueCe];
     [view_part3 addSubview:btn_Weather];
     [self.view addSubview:view_part1];
     [self.view addSubview:view_part2];
@@ -671,7 +702,8 @@
 //生产
 -(void)ShengChanItemClick:(UIImageButton *)button {
     UnFinishViewController *view=[[UnFinishViewController alloc]init];
-    view.str_title=@"生产审批";
+   // view.str_title=@"生产审批";
+    view.str_title=@"更多审批";
     if (f_v<9.0) {
         self.navigationController.delegate=nil;
     }

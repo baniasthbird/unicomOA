@@ -119,6 +119,10 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     
     if (_b_update==YES) {
         NSString *str_msg1=@"有新版本，是否下载？\n";
+        if (_str_remark!=nil) {
+            _str_remark=[_str_remark stringByReplacingOccurrencesOfString:@";" withString:@"\n"];
+            str_msg1=[NSString stringWithFormat:@"%@%@",str_msg1,_str_remark];
+        }
         LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"提示" message:str_msg1 cancelBtnTitle:@"稍后下载" otherBtnTitle:@"立即下载" clickIndexBlock:^(NSInteger clickIndex) {
             if (clickIndex==0) {
                 //稍后下载

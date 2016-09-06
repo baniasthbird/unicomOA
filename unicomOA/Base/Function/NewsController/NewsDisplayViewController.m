@@ -12,6 +12,7 @@
 #import "AFNetworking.h"
 #import "UILabel+LabelHeightAndWidth.h"
 #import "LXAlertView.h"
+#import "BaseFunction.h"
 
 
 
@@ -38,6 +39,8 @@
     UIActivityIndicatorView *indicator;
     
     NSURL *str_download_path;
+    
+    BaseFunction *baseFunc;
 }
 
 
@@ -120,6 +123,7 @@ int i_comment_num;
     _lbl_depart.textAlignment=NSTextAlignmentCenter;
     _lbl_depart.text=[NSString stringWithFormat:@"     %@       %@  %@",_str_depart,_str_operator,_str_time];
     
+    baseFunc=[[BaseFunction alloc]init];
     
     WKWebViewConfiguration *config=[[WKWebViewConfiguration alloc]init];
     //设置偏好设置
@@ -352,9 +356,9 @@ int i_comment_num;
         }];
         [alert showLXAlertView];
     }
-    
-
 }
+
+
 
 -(void)ModifyContent:(NSString*)str_content title:(NSString*)str_title departlabel:(NSString*)str_departlabel ip:(NSString*)str_ip port:(NSString*)str_port file:(NSObject*)obj_file{
     if (_b_News==NO) {
@@ -377,12 +381,68 @@ int i_comment_num;
         }
     }
     else {
+        //正则表达寻找里面所有<span  >的部分  替换成固定的格式
+        
+        NSInteger count_span=[baseFunc countOccurencesOfString:@"<span" length:str_content];
+       // NSString *str_newcontent;
+        if (count_span>0) {
+            NSRange searchRange = NSMakeRange(0,str_content.length);
+            NSRange foundRange;
+            NSRange foundEndRange;
+            while (searchRange.location < str_content.length) {
+                searchRange.length = str_content.length-searchRange.location;
+                foundRange = [str_content rangeOfString:@"<span" options:NSCaseInsensitiveSearch range:searchRange];
+                if (foundRange.location != NSNotFound) {
+                    // found an occurrence of the substring! do stuff here
+                    searchRange.location = foundRange.location+1;
+                    searchRange.length=str_content.length-searchRange.location;
+                    foundEndRange=[str_content rangeOfString:@">" options:NSCaseInsensitiveSearch range:searchRange];
+                    NSRange range_span=NSMakeRange(foundRange.location, foundEndRange.location-foundRange.location);
+                    str_content=[str_content stringByReplacingCharactersInRange:range_span withString:@"<span style=\"font-size:16px; font-family:宋体;line-height:180%\""];
+                } else {
+                    // no more substring to find
+                    break;
+                }
+            }
+
+            
+            /*
+            NSMutableArray *arr_span_index=[baseFunc GetAllSubString:str_content key:@"<span"];
+            NSMutableArray *arr_end_index=[baseFunc GetAllSubString:str_content key:@">"];
+            if (arr_span_index!=nil && arr_end_index!=nil) {
+                
+                    NSString *str_span_index=[baseFunc GetValueFromArray:arr_span_index index:0];
+                    NSInteger i_span_index=[str_span_index integerValue];
+                    NSInteger i_end_index=0;
+                    for (int j=0;j<[arr_end_index count];j++) {
+                        NSString *str_end_index=[baseFunc GetValueFromArray:arr_end_index index:j];
+                        i_end_index=[str_end_index integerValue];
+                        if (i_end_index>i_span_index) {
+                        //    NSString *str_index_endString=[str_content substringToIndex:i_end_index];
+                        //    NSString *str_index_spanString=[str_content substringToIndex:i_span_index];
+                        //    NSLog(@"查看>字符串");
+                           
+                            break;
+                        }
+                    }
+                    NSRange range_replace=NSMakeRange(i_span_index, i_end_index-i_span_index);
+                    NSString *str_replace=[str_content substringWithRange:range_replace];
+                     NSLog(@"替换");
+                    str_content=[str_content stringByReplacingOccurrencesOfString:str_replace  withString:@"<span style=\"font-size:16px; font-family:宋体;line-height:180%\""];
+                   
+                
+            }
+             */
+            
+        }
+        
+        /*
         //替换字号为16号
         NSRange searchRange=NSMakeRange(0, str_content.length);
         NSRange foundRange;
         while (searchRange.location<str_content.length) {
             searchRange.length=str_content.length-searchRange.location;
-            foundRange=[str_content rangeOfString:@"font-size:" options:nil range:searchRange];
+            foundRange=[str_content rangeOfString:@"font-size:" options:NSCaseInsensitiveSearch range:searchRange];
             // foundRange=[str_content rangeOfString:@"" options:NSStringCompareOptions.foundRange range:<#(NSRange)#>]
             if (foundRange.location!=NSNotFound) {
                 searchRange.location=foundRange.location+foundRange.length;
@@ -407,14 +467,14 @@ int i_comment_num;
         NSRange searchRange2=NSMakeRange(0, str_content.length);
         while (searchRange2.location<str_content.length) {
             searchRange2.length=str_content.length-searchRange2.location;
-            foundRange2=[str_content rangeOfString:@"line-height:" options:nil range:searchRange2];
+            foundRange2=[str_content rangeOfString:@"line-height:" options:NSCaseInsensitiveSearch range:searchRange2];
             // foundRange=[str_content rangeOfString:@"" options:NSStringCompareOptions.foundRange range:<#(NSRange)#>]
             if (foundRange2.location!=NSNotFound) {
                 searchRange2.location=foundRange2.location+foundRange2.length;
                 NSRange searchRange_sub=NSMakeRange(searchRange2.location, str_content.length-searchRange2.location);
-                NSRange foundRange_sub=[str_content rangeOfString:@";" options:nil range:searchRange_sub];
+                NSRange foundRange_sub=[str_content rangeOfString:@";" options:NSCaseInsensitiveSearch range:searchRange_sub];
                 if (foundRange_sub.location-searchRange2.location>9) {
-                    foundRange_sub=[str_content rangeOfString:@"\"" options:nil range:searchRange_sub];
+                    foundRange_sub=[str_content rangeOfString:@"\"" options:NSCaseInsensitiveSearch range:searchRange_sub];
                 }
                 NSRange fontsizeRange=NSMakeRange(searchRange2.location, foundRange_sub.location-searchRange2.location+1);
                 NSString *str_fontsize= [str_content substringWithRange:fontsizeRange];
@@ -449,21 +509,21 @@ int i_comment_num;
                 break;
             }
         }
-        
+        */
         //设置每段前空两行
         NSRange foundRange3;
         NSRange searchRange3=NSMakeRange(0, str_content.length);
         BOOL b_Replace=NO;
         while (searchRange3.location<str_content.length) {
             searchRange3.length=str_content.length-searchRange3.location;
-            foundRange3=[str_content rangeOfString:@"text-indent:" options:nil range:searchRange3];
+            foundRange3=[str_content rangeOfString:@"text-indent:" options:NSCaseInsensitiveSearch range:searchRange3];
             // foundRange=[str_content rangeOfString:@"" options:NSStringCompareOptions.foundRange range:<#(NSRange)#>]
             if (foundRange3.location!=NSNotFound) {
                 searchRange3.location=foundRange3.location+foundRange3.length;
                 NSRange searchRange_sub=NSMakeRange(searchRange3.location, str_content.length-searchRange3.location);
-                NSRange foundRange_sub=[str_content rangeOfString:@";" options:nil range:searchRange_sub];
+                NSRange foundRange_sub=[str_content rangeOfString:@";" options:NSCaseInsensitiveSearch range:searchRange_sub];
                 if (foundRange_sub.location-searchRange3.location>9) {
-                    foundRange_sub=[str_content rangeOfString:@"\"" options:nil range:searchRange_sub];
+                    foundRange_sub=[str_content rangeOfString:@"\"" options:NSCaseInsensitiveSearch range:searchRange_sub];
                 }
                 
                 NSRange fontsizeRange=NSMakeRange(searchRange3.location, foundRange_sub.location-searchRange3.location+1);

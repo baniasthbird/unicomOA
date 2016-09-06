@@ -35,4 +35,7 @@
 #pragma mark 查找指定字符串出现次数
 - (NSInteger)countOccurencesOfString:(NSString*)searchString length:(NSString*)str_orglength;
 
+#pragma mark 查找指定字符串出现的所有位置
+-(NSMutableArray*)GetAllSubString:(NSString*)str_origin key:(NSString*)str_key;
+
 @end

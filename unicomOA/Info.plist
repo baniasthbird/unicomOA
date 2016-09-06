@@ -29,6 +29,10 @@
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>当前应用需要启用定位服务方可使用</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>WawaSC-Regular.otf</string>
+	</array>
 	<key>UIInterfaceOrientation</key>
 	<string>UIInterfaceOrientationPortrait</string>
 	<key>UILaunchStoryboardName</key>

@@ -12,4 +12,6 @@
 
 @property BOOL b_update;
 
+@property NSString *str_remark;
+
 @end
