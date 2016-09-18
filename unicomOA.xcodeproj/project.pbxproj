@@ -169,7 +169,6 @@
 		6853A3F91D2679C500AE5145 /* BaseFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 6853A3F81D2679C500AE5145 /* BaseFunction.m */; };
 		6854379D1D7E995700A0F4FA /* RAYNewFunctionGuideVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6854379A1D7E995700A0F4FA /* RAYNewFunctionGuideVC.m */; };
 		6854379E1D7E995700A0F4FA /* RAYNewFunctionGuideVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6854379B1D7E995700A0F4FA /* RAYNewFunctionGuideVC.xib */; };
-		6854379F1D7E995700A0F4FA /* WawaSC-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6854379C1D7E995700A0F4FA /* WawaSC-Regular.otf */; };
 		68579FA31CC0BBCE00597FBD /* ShenPiAgreeWithCarDeploy.m in Sources */ = {isa = PBXBuildFile; fileRef = 68579FA21CC0BBCE00597FBD /* ShenPiAgreeWithCarDeploy.m */; };
 		68579FA61CC0C21100597FBD /* CarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68579FA51CC0C21100597FBD /* CarModel.m */; };
 		68579FA91CC0C88600597FBD /* CarDeployCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68579FA81CC0C88600597FBD /* CarDeployCell.m */; };
@@ -632,7 +631,6 @@
 		685437991D7E995700A0F4FA /* RAYNewFunctionGuideVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RAYNewFunctionGuideVC.h; sourceTree = "<group>"; };
 		6854379A1D7E995700A0F4FA /* RAYNewFunctionGuideVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RAYNewFunctionGuideVC.m; sourceTree = "<group>"; };
 		6854379B1D7E995700A0F4FA /* RAYNewFunctionGuideVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RAYNewFunctionGuideVC.xib; sourceTree = "<group>"; };
-		6854379C1D7E995700A0F4FA /* WawaSC-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WawaSC-Regular.otf"; sourceTree = "<group>"; };
 		68579FA11CC0BBCE00597FBD /* ShenPiAgreeWithCarDeploy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShenPiAgreeWithCarDeploy.h; path = Base/Function/ShenPiContorller/ShenPiAgreeWithCarDeploy.h; sourceTree = "<group>"; };
 		68579FA21CC0BBCE00597FBD /* ShenPiAgreeWithCarDeploy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShenPiAgreeWithCarDeploy.m; path = Base/Function/ShenPiContorller/ShenPiAgreeWithCarDeploy.m; sourceTree = "<group>"; };
 		68579FA41CC0C21100597FBD /* CarModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CarModel.h; path = Base/Function/ShenPiModel/CarModel.h; sourceTree = "<group>"; };
@@ -1644,7 +1642,6 @@
 				685437991D7E995700A0F4FA /* RAYNewFunctionGuideVC.h */,
 				6854379A1D7E995700A0F4FA /* RAYNewFunctionGuideVC.m */,
 				6854379B1D7E995700A0F4FA /* RAYNewFunctionGuideVC.xib */,
-				6854379C1D7E995700A0F4FA /* WawaSC-Regular.otf */,
 			);
 			name = WBGuide;
 			path = OpenSource/WBGuide;
@@ -2298,7 +2295,6 @@
 				6854379E1D7E995700A0F4FA /* RAYNewFunctionGuideVC.xib in Resources */,
 				68F8E17E1CD042AA005D2727 /* logoimage.png in Resources */,
 				68F8E1811CD042AA005D2727 /* myApproval.png in Resources */,
-				6854379F1D7E995700A0F4FA /* WawaSC-Regular.otf in Resources */,
 				68EEDE711CBB911A003295EB /* down_arrow@2x.png in Resources */,
 				68F8E17C1CD042AA005D2727 /* LoginView.png in Resources */,
 				68F8E1861CD042AA005D2727 /* returnlogo.png in Resources */,

@@ -37,6 +37,7 @@
     }
     
     
+    
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]) {
         /*
         self.window.rootViewController=[XZMCoreNewFeatureVC newFeatureVCWithImageNames:@[@"new1",@"new2",@"new3"] enterBlock:^{
@@ -62,11 +63,6 @@
     }
     
      [self enter];
-   
-   
-    
-    
-    
     return YES;
 }
 
@@ -81,6 +77,10 @@
     UINavigationController *nav=[[UINavigationController alloc]initWithRootViewController:login];
     NSDictionary *attributes=[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:248/255.0f green:144/255.0f blue:34/255.0f alpha:1],NSForegroundColorAttributeName,nil];
     [nav.navigationBar setTitleTextAttributes:attributes];
+    NSMutableDictionary *attrs = [NSMutableDictionary dictionary];
+    attrs[NSForegroundColorAttributeName] = [UIColor whiteColor];
+    [[UINavigationBar appearance] setTitleTextAttributes:attrs];
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     self.window.rootViewController=nav;
 }
 

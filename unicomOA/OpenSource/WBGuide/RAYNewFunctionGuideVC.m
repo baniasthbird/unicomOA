@@ -46,6 +46,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    UIView *view_touch=[[UIView alloc]initWithFrame:CGRectMake(0, 60, Width, Height-120)];
+    view_touch.backgroundColor=[UIColor clearColor];
+    
+    
+    UITapGestureRecognizer *singleTap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(singleTap:)];
+    [view_touch addGestureRecognizer:singleTap];
+    
+    [self.view addSubview:view_touch];
     
     // Do any additional setup after loading the view from its nib.
 }
@@ -93,6 +101,10 @@
 
 }
 
+-(void)singleTap:(UIGestureRecognizer*)gesture {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (void)resetSubViewsFrameWithBtnFrame:(CGRect)frame{
 
     CGFloat centerX = WINSIZE.width/2;
@@ -135,7 +147,7 @@
         angle = 0;
         arrowsX = x;
         arrowsY = y-arrowsImageViewH;
-        titleLabX = arrowsX-titleLabW+20;
+        titleLabX = arrowsX-titleLabW;
         titleLabY = arrowsY-self.titleLabH+20;
 
         
@@ -165,7 +177,8 @@
  */
 - (CGFloat)labelHeightFromeString:(NSString *)string with:(CGFloat)with
 {
-    CGRect tmpsize = [string boundingRectWithSize:CGSizeMake(with, MAXFLOAT) options:NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesFontLeading  |NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont fontWithName:@"Wawati SC" size:24]} context:nil];
+   // CGRect tmpsize = [string boundingRectWithSize:CGSizeMake(with, MAXFLOAT) options:NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesFontLeading  |NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont fontWithName:@"Wawati SC" size:24]} context:nil];
+     CGRect tmpsize = [string boundingRectWithSize:CGSizeMake(with, MAXFLOAT) options:NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesFontLeading  |NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:24]} context:nil];
     return tmpsize.size.height;
 }
 - (void)startArrowsAnimation{
@@ -194,7 +207,9 @@
         _titleLab =[[UILabel alloc]init];
         _titleLab.textColor = [UIColor whiteColor];
         _titleLab.numberOfLines = 0;
-        _titleLab.font = [UIFont fontWithName:@"Wawati SC" size:24];
+       // _titleLab.font = [UIFont fontWithName:@"Wawati SC" size:24];
+         _titleLab.font = [UIFont systemFontOfSize:24];
+        
         _titleLab.text = @"这是一个新功能，这个功能很牛逼啊很牛B";
     }
     return _titleLab;

@@ -351,6 +351,7 @@
             imagePickerController.delegate=self;
             imagePickerController.allowsEditing=YES;
             imagePickerController.sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
+            [imagePickerController setTitle:@"选择相册照片"];
             [self presentViewController:imagePickerController animated:NO completion:^{
             
             }];

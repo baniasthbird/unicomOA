@@ -469,6 +469,10 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
         */
         
         LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"警告" message:@"是否清空所有缓存数据" cancelBtnTitle:@"取消" otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+            if (clickIndex==1) {
+                NSLog(@"点击index====%ld",(long)clickIndex);
+                [alert setHidden:YES];
+            }
              NSLog(@"点击index====%ld",(long)clickIndex);
         }];
         [alert showLXAlertView];
@@ -550,12 +554,19 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
         }
         else if (clickIndex==1) {
             //清除所有的存储本地的数据
+            
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
             NSDictionary *dic = [defaults dictionaryRepresentation];
             for (id  key in dic) {
-                [defaults removeObjectForKey:key];
+                if ([key isEqualToString:@"name"] || [key isEqualToString:@"password"]) {
+                    continue;
+                }
+                else {
+                    [defaults removeObjectForKey:key];
+                }
             }
             [defaults synchronize];
+            
             LoginViewController *login=[[LoginViewController alloc]init];
             login.b_update=NO;
             UINavigationController *nav=[[UINavigationController alloc]initWithRootViewController:login];

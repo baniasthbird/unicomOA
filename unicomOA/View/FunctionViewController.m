@@ -239,12 +239,12 @@
         ray_vc.frames=@[@"{{216,480},{85,85}}"];
     }
     
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]) {
-    /*
+   if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]) {
+    
        [self presentViewController:ray_vc animated:NO completion:^{
            
        }];
-    */
+    
     }
     
     XSpotLight *SpotLight=[[XSpotLight alloc]init];

@@ -341,6 +341,16 @@
                   //  [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
                     _news_count=0;
                    // NSMutableArray *arr_tmp_NewsList=[[NSMutableArray alloc]initWithCapacity:[_arr_NewsList count]];
+                    
+                    NSSortDescriptor *sortDescriptor;
+                    sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"startDate"
+                                                                 ascending:NO];
+                    NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+                    NSArray *sortedArray = [_arr_NewsList sortedArrayUsingDescriptors:sortDescriptors];
+                    _arr_NewsList=(NSMutableArray*)sortedArray;
+                    NSLog(@"排序");
+                    //先不排序
+                    /*
                     for (int i=0; i<[_arr_NewsList count]-1; i++) {
                         NSDictionary *dic_i=[_arr_NewsList objectAtIndex:i];
                         NSString *str_date_i=[dic_i objectForKey:@"startDate"];
@@ -356,7 +366,8 @@
                             }
                         }
                     }
-                    NSLog(@"排序");
+                    */
+                    
                     [self.tableView reloadData];
                     
                     
