@@ -144,11 +144,12 @@ int i_comment_num;
     
     
    
-    _wb_content=[[WKWebView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-40) configuration:config];
-    _wb_content.navigationDelegate=self;
+  //  _wb_content=[[IMYWebView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-40)];
+    
+   // _wb_content.navigationDelegate=self;
          //_txt_content=[[UITextView alloc]initWithFrame:CGRectMake(self.view.frame.size.width/32, self.view.frame.size.height*0.20, 15*self.view.frame.size.width/16, self.view.frame.size.height*0.51)];
     
-    
+    _wb_content=[[WKWebView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-40) configuration:config];
     _str_headscale=[NSString stringWithFormat:@"%@ %@%@ %@%@ %@",@"<meta",@"name=",@"""viewport""",@"content=",@"""initial-scale=1.0""",@"/>"];
     //[_lbl_content setLineBreakMode:NSLineBreakByWordWrapping];
     
@@ -380,7 +381,6 @@ int i_comment_num;
 
         }
     }
-    else {
         //正则表达寻找里面所有<span  >的部分  替换成固定的格式
         
         NSInteger count_span=[baseFunc countOccurencesOfString:@"<span" length:str_content];
@@ -594,7 +594,7 @@ int i_comment_num;
         NSString *str_replace_after2=[NSString stringWithFormat:@"%@%@",str_replace3,str_relplace1];
         str_content=[str_content stringByReplacingOccurrencesOfString:str_replace3 withString:str_replace_after2];
 
-    }
+    
     
    
     
@@ -687,14 +687,18 @@ int i_comment_num;
 -(void)OpenFile:(UIButton*)sender {
     //如果系统是ios9
     CGFloat f_version = [[[UIDevice currentDevice]systemVersion] floatValue];
+    /*
     if (f_version>9.0f) {
-        [_wb_content loadFileURL:str_download_path allowingReadAccessToURL:str_download_path];
+      // [_wb_content loadFileURL:str_download_path];
+      //  [_wb_content loadRequest:[NSURL URLWithString:str_download_path]];
+    
     }
     else {
+     */
         NSURL *fileURL = [self fileURLForBuggyWKWebView8:str_download_path];
         NSURLRequest *request = [NSURLRequest requestWithURL:fileURL];
         [_wb_content loadRequest:request];
-    }
+  //  }
     self.navigationItem.rightBarButtonItem=nil;
     [self.view setNeedsDisplay];
 }

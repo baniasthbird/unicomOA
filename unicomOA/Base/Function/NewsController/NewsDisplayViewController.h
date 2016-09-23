@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "UserInfo.h"
 #import "BaseViewController.h"
+//#import "IMYWebView.h"
+
 @import WebKit;
 
 @protocol FocusNewsPassDelegate
