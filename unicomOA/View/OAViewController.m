@@ -129,6 +129,7 @@
     
     self.viewControllers=[NSArray arrayWithObjects:navi1,navi2,navi3,navi4, nil];
     
+    /*
     if (!iPad) {
         [self creatButtonWithNormalName:@"message.png" andSelectName:@"message_selected.png" andTitle:@"" andIndex:0];
         [self creatButtonWithNormalName:@"contact.png" andSelectName:@"contact_selected.png" andTitle:@"" andIndex:1];
@@ -136,7 +137,8 @@
         [self creatButtonWithNormalName:@"user.png" andSelectName:@"user_selected.png" andTitle:@"" andIndex:3];
 
     }
-    else {
+     */
+ //   else {
        
         self.tabBar.itemPositioning=UITabBarItemPositioningFill;
         
@@ -166,7 +168,7 @@
         
         
 
-    }
+ //   }
     
     
     /*

@@ -22,6 +22,6 @@
 @property (nonatomic) UITableViewCellAccessoryType type;
 
 /** 设置标题值 类方法 */
-+ (instancetype)initWithtitle:(NSString *)title;
++ (instancetype)initWithtitle:(NSString *)title type:(UITableViewCellAccessoryType)type;
 @end
 

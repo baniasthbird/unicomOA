@@ -887,9 +887,11 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     [self saveUserInfo:userInfo];
     OAViewController *viewController=[[OAViewController alloc]init];
   //  viewController.user_Info=userInfo;
+   /*
     if (f_v<9.0) {
         self.navigationController.delegate=nil;
     }
+    */
     [self.navigationController pushViewController:viewController animated:NO];
 }
 

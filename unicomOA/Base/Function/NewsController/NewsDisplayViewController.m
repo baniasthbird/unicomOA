@@ -565,6 +565,9 @@ int i_comment_num;
                 if (rangesub1.length>0 || rangesub2.length>0 || rangesub3.length > 0) {
                     // [arr_new_content removeObjectAtIndex:i];
                     NSRange rangesub_img_start= [str_tmp rangeOfString:@"<img style="];
+                    if (rangesub_img_start.length==0) {
+                        rangesub_img_start=[str_tmp rangeOfString:@"<img src="];
+                    }
                     NSString *str_img_tmp=[str_tmp substringFromIndex:rangesub_img_start.location];
                     NSRange rangesub_img_end=[str_img_tmp rangeOfString:@"/>"];
                     str_img_tmp=[str_img_tmp substringToIndex:rangesub_img_end.location+2];
@@ -582,17 +585,56 @@ int i_comment_num;
             str_content=[NSString stringWithFormat:@"%@%@",[arr_new_content objectAtIndex:0],str_tmp_content];
         }
 
-        //替换图片源
-        NSString *str_relplace1=[NSString stringWithFormat:@"%@%@:%@",@"http://",str_ip,str_port];
-        NSString *str_relplace2=@"/default/ueditor/jsp/upload/image/";
+    //替换图片源
+    NSString *str_relplace1=[NSString stringWithFormat:@"%@%@:%@",@"http://",str_ip,str_port];
+    NSString *str_relplace2=@"/default/ueditor/jsp/upload/image/";
+    NSRange range_img=[str_content rangeOfString:str_relplace2];
+    if (range_img.length!=0) {
+        NSString *str_tmp_img= [str_content substringToIndex:range_img.location];
+        NSString *str_ip_port=@"http://192.168";
+        NSRange range_ip_port=[str_tmp_img rangeOfString:str_ip_port];
         NSString *str_replace_after=[NSString stringWithFormat:@"%@%@",str_relplace1,str_relplace2];
+        if (range_ip_port.location!=NSNotFound) {
+            if (range_ip_port.location+range_ip_port.length>str_tmp_img.length-10) {
+                NSLog(@"发现IP");
+            }
+            else {
+                str_content=[str_content stringByReplacingOccurrencesOfString:str_relplace2 withString:str_replace_after];
+            }
+        }
+        else {
+            str_content=[str_content stringByReplacingOccurrencesOfString:str_relplace2 withString:str_replace_after];
+        }
+
+    }
+    
         
-        str_content=[str_content stringByReplacingOccurrencesOfString:str_relplace2 withString:str_replace_after];
+    
         
         
-        NSString *str_replace3=@"href=\"";
-        NSString *str_replace_after2=[NSString stringWithFormat:@"%@%@",str_replace3,str_relplace1];
+    NSString *str_replace3=@"href=\"";
+    NSString *str_replace_after2=[NSString stringWithFormat:@"%@%@",str_replace3,str_relplace1];
+    NSRange range_href=[str_content rangeOfString:str_replace3];
+    if (range_href.length!=0) {
+        NSString *str_tmp_href=[str_content substringFromIndex:range_href.location+range_href.length];
+        NSString *str_ip_port=@"http://192.168";
+        NSRange range_ip_port=[str_tmp_href rangeOfString:str_ip_port];
+        if (range_ip_port.location!=NSNotFound) {
+            if (range_ip_port.location<10) {
+                NSLog(@"发现IP");
+            }
+            else {
+                str_content=[str_content stringByReplacingOccurrencesOfString:str_replace3 withString:str_replace_after2];
+            }
+        }
+        else {
+            str_content=[str_content stringByReplacingOccurrencesOfString:str_replace3 withString:str_replace_after2];
+        }
+    }
+    else {
         str_content=[str_content stringByReplacingOccurrencesOfString:str_replace3 withString:str_replace_after2];
+    }
+    
 
     
     

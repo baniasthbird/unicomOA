@@ -26,22 +26,22 @@
 
 }
 
--(void)addItemWithTitle:(NSString*)title {
+-(void)addItemWithTitle:(NSString*)title type:(UITableViewCellAccessoryType)type {
     
     if (!_items) {
         _items = [NSMutableArray array];
  
     }
-    LGSettingItem *item = [LGSettingItem initWithtitle:title];
+    LGSettingItem *item = [LGSettingItem initWithtitle:title type:type];
     [_items addObject:item];
 }
 
--(void)addItemWithTitle:(NSString*)title Image:(UIImage*)image {
+-(void)addItemWithTitle:(NSString*)title Image:(UIImage*)image type:(UITableViewCellAccessoryType)type{
     if (!_items) {
         _items = [NSMutableArray array];
         
     }
-    LGSettingItem *item = [LGSettingItem initWithtitle:title];
+    LGSettingItem *item = [LGSettingItem initWithtitle:title type:type];
     item.image = image;
     [_items addObject:item];
 }

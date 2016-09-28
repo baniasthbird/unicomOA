@@ -86,7 +86,14 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
     return self;
 }
 
-
+-(void)viewDidAppear:(BOOL)animated {
+    NSLog(@"出现");
+       [self.tableView reloadData];
+    /*
+    NSIndexPath *i_indexPath=[NSIndexPath indexPathForRow:2 inSection:0];
+    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:i_indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
+     */
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -120,7 +127,7 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
     //添加第一组
     LGSettingSection *section1=[LGSettingSection initWithHeaderTitle:@"" footerTitle:nil];
     //添加行
-    LGSettingItem *item1=[LGSettingItem initWithtitle:_userInfo.str_name];
+    LGSettingItem *item1=[LGSettingItem initWithtitle:_userInfo.str_name type:UITableViewCellAccessoryNone];
     NSString *str_tmp_picname=[NSString stringWithFormat:@"%@%@",_userInfo.str_name,@".jpg"];
     if ([_userInfo.str_Logo isEqualToString:@"headLogo.png"]) {
         item1.image=[UIImage imageNamed:_userInfo.str_Logo];
@@ -180,22 +187,22 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
     LGSettingSection *section2=[LGSettingSection initWithHeaderTitle:@"" footerTitle:nil];
     //添加行
    // [section2 addItemWithTitle:@"新消息通知"];
-    [section2 addItemWithTitle:@"修改密码"];
-    [section2 addItemWithTitle:@"清除缓存"];
+    [section2 addItemWithTitle:@"修改密码" type:UITableViewCellAccessoryDisclosureIndicator];
+    [section2 addItemWithTitle:@"清除缓存" type:UITableViewCellAccessoryNone];
     [self.groups addObject:section2];
     
     //添加第三组
     LGSettingSection *section3=[LGSettingSection initWithHeaderTitle:@"" footerTitle:nil];
     //添加行
   //  [section3 addItemWithTitle:@"意见反馈"];
-    [section3 addItemWithTitle:@"关于"];
+    [section3 addItemWithTitle:@"关于" type:UITableViewCellAccessoryDisclosureIndicator];
     [self.groups addObject:section3];
     
     
     //添加第四组
     LGSettingSection *section4=[LGSettingSection initWithHeaderTitle:@"" footerTitle:@""];
     //添加行
-    LGSettingItem *item4=[LGSettingItem initWithtitle:@""];
+    LGSettingItem *item4=[LGSettingItem initWithtitle:@"" type:UITableViewCellAccessoryNone];
 
     item4.type=UITableViewCellAccessoryNone   ;
     [section4 addItem:item4];
@@ -242,7 +249,7 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
     static NSString *ID=@"cell";
     UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:ID];
     if (cell==nil) {
-        cell =[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
+        cell =[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:ID];
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
     }
     
@@ -309,6 +316,10 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
     else {
         //设置Cell的标题
         cell.textLabel.text=item.title;
+        if ([item.title isEqualToString:@"清除缓存"]) {
+            cell.detailTextLabel.text=[NSString stringWithFormat:@"(%.2fM)",[self filePath]];
+            
+        }
 
         cell.textLabel.textColor=[UIColor colorWithRed:174/255.0f green:174/255.0f blue:174/255.0f alpha:1];
         if (iPad) {
@@ -467,7 +478,7 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
         
         [self presentViewController:alertController animated:YES completion:nil];
         */
-        
+        /*
         LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"警告" message:@"是否清空所有缓存数据" cancelBtnTitle:@"取消" otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
             if (clickIndex==1) {
                 NSLog(@"点击index====%ld",(long)clickIndex);
@@ -476,7 +487,8 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
              NSLog(@"点击index====%ld",(long)clickIndex);
         }];
         [alert showLXAlertView];
-        
+        */
+         [self clearFile];
     }
     else if (indexPath.section==2 && indexPath.row==0) {
       //  SendFeedBackViewController *sendController=[[SendFeedBackViewController alloc]init];
@@ -603,6 +615,72 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
     NSString *currentNetWorkState=[[NSUserDefaults standardUserDefaults] objectForKey:@"connection"];
     return currentNetWorkState;
 }
+
+
+
+- ( long long ) fileSizeAtPath:( NSString *) filePath{
+    
+    NSFileManager * manager = [ NSFileManager defaultManager ];
+    
+    if ([manager fileExistsAtPath :filePath]){
+        
+        return [[manager attributesOfItemAtPath :filePath error : nil ] fileSize ];
+        
+    }
+    
+    return 0;
+}
+
+-( float )folderSizeAtPath:(NSString*)folderPath {
+    NSFileManager *manager = [NSFileManager defaultManager];
+    if (![manager fileExistsAtPath:folderPath]) {
+        return 0;
+    }
+    
+    NSEnumerator *childFielsEnumerator = [[manager subpathsAtPath:folderPath] objectEnumerator];
+    NSString *fileName;
+    
+    long long folderSize=0;
+    
+    while ((fileName=[childFielsEnumerator nextObject])!=nil) {
+        NSString *fileAbsolutePath = [folderPath stringByAppendingPathComponent:fileName];
+        folderSize += [self fileSizeAtPath:fileAbsolutePath];
+    }
+    
+    return folderSize/(1024.0 * 1024.0);
+}
+
+//显示缓存大小
+-(float)filePath {
+    NSString *cachePath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject];
+    return [self folderSizeAtPath:cachePath];
+}
+
+//清理缓存
+-(void)clearFile {
+    NSString *cachePath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject];
+    NSArray *files = [[NSFileManager defaultManager] subpathsAtPath:cachePath];
+    
+    NSLog(@"cachePath = %@", cachePath);
+    
+    for (NSString *p in files) {
+        NSError *error = nil;
+        NSString *path = [cachePath stringByAppendingPathComponent:p];
+        if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
+            [[NSFileManager defaultManager] removeItemAtPath:path error:&error];
+        }
+    }
+    
+    [self performSelectorOnMainThread:@selector(clearCacheSuccess) withObject:nil waitUntilDone:YES];
+}
+
+-(void)clearCacheSuccess {
+    NSLog(@"清理成功");
+    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"缓存清理完毕" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+    [alertView show];
+    [self.tableView reloadData];
+}
+
 
 /*
  

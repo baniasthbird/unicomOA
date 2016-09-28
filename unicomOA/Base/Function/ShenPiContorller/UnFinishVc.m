@@ -387,6 +387,9 @@
             else {
                 NSString *str_msg=[JSON objectForKey:@"message"];
                 if (str_msg==nil) {
+                    str_msg=[JSON objectForKey:@"msg"];
+                }
+                if (str_msg==nil) {
                     str_msg=@"";
                 }
                 LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"提示" message:str_msg cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
@@ -556,6 +559,12 @@
                             str_value=(NSString*)obj_value;
                         }
                         NSString *str_placeholder=@"";
+                        if (dic_bkvalue!=nil) {
+                            if (dic_bkvalue[@"处理决策"]!=nil) {
+                                NSDictionary *dic_tmp=[dic_bkvalue objectForKey:@"处理决策"];
+                                str_value=[dic_tmp objectForKey:@"text"];
+                            }
+                        }
                         if ([str_value isEqualToString:@""]) {
                             str_placeholder= [NSString stringWithFormat:@"%@%@",@"请输入",str_label];
                         }
@@ -1090,16 +1099,18 @@
         if ([dic_backvalue count]!=0) {
             NSString *str_title=[dic_backvalue objectForKey:@"title"];
             [dic_bkvalue setObject:dic_backvalue forKey:str_title];
-          //  [dic_bkvalue addEntriesFromDictionary:dic_backvalue];
-            /*
-            NSString *str_text=[dic_backvalue objectForKey:@"label"];
-            NSString *str_value=[dic_backvalue objectForKey:@"value"];
-            NSInteger i_value=[str_value integerValue];
-            cell.textLabel.text=str_title;
-            cell.detailTextLabel.text=str_text;
-            cell.tag=i_value;
-             */
-            [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:i_indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
+            if ([str_title isEqualToString:@"处理决策"]) {
+                NSDictionary *dic_tmp=[dic_bkvalue objectForKey:@"处理决策"];
+                NSString *str_text=[dic_tmp objectForKey:@"text"];
+                [self sendSuggestionValue:str_text indexPath:i_indexPath];
+                NSIndexSet *index_set=[[NSIndexSet alloc]initWithIndex:i_indexPath.section];
+                [tableView reloadSections:index_set withRowAnimation:UITableViewRowAnimationNone];
+               
+            }
+            else {
+                 [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:i_indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
+            }
+           
         }
         
         
@@ -1160,6 +1171,30 @@
     }
     NSDictionary  *dic_tmp=[arr_tmp objectAtIndex:i_indexPath.row];
     [dic_tmp setValue:str_text forKey:@"value"];
+}
+
+
+-(void)sendSuggestionValue:(NSString *)str_text indexPath:(NSIndexPath *)i_indexPath {
+    NSString *str_index=[NSString stringWithFormat:@"%ld",(long)i_indexPath.section];
+    NSInteger i_dic_count=[dic_m_ctl count];
+    NSArray *arr_tmp=  [dic_m_ctl objectForKey:str_index];
+    if (arr_tmp==nil) {
+        str_index=[NSString stringWithFormat:@"%ld",(long)i_dic_count-1];
+        arr_tmp=  [dic_m_ctl objectForKey:str_index];
+    }
+    for (int i=0; i<[arr_tmp count]; i++) {
+        NSDictionary *dic_tmp= [arr_tmp objectAtIndex:i];
+        NSString *str_type=[dic_tmp objectForKey:@"type"];
+        if ([str_type isEqualToString:@"textarea"]) {
+            NSString *str_label=[dic_tmp objectForKey:@"label"];
+            if ([str_label isEqualToString:@"处理意见"]) {
+                
+                [dic_tmp setValue:str_text forKey:@"value"];
+            }
+           
+        }
+    }
+    
 }
 
 

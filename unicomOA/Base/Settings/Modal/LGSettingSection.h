@@ -24,9 +24,9 @@
 //添加Item
 -(void)addItem:(LGSettingItem*)item;
 //添加自定义标题的行
--(void)addItemWithTitle:(NSString*)title;
+-(void)addItemWithTitle:(NSString*)title type:(UITableViewCellAccessoryType)type;
 //添加带有左图标的行
--(void)addItemWithTitle:(NSString*)title Image:(UIImage*)image;
+-(void)addItemWithTitle:(NSString*)title Image:(UIImage*)image type:(UITableViewCellAccessoryType)type;
 @end
 
 

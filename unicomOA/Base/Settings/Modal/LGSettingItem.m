@@ -11,7 +11,7 @@
 
 @implementation LGSettingItem
 
-+ (instancetype)initWithtitle:(NSString *)title {
++ (instancetype)initWithtitle:(NSString *)title type:(UITableViewCellAccessoryType)type{
     
     LGSettingItem *item = [[LGSettingItem alloc]init];
     item.title = title;
@@ -22,7 +22,7 @@
         item.height=45;
     }
     
-    item.type = UITableViewCellAccessoryDisclosureIndicator;
+    item.type = type;
     return item;
 }
 

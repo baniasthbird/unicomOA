@@ -146,7 +146,7 @@
 
     
     CGFloat btn_x=18;
-    CGFloat btn_y=10;
+    CGFloat btn_y=13;
     CGFloat btn_w=50;
     
     CGFloat btn_x_2=96;
@@ -162,7 +162,7 @@
 
     
    
-    CGFloat shenpi_y=192;
+    CGFloat shenpi_y=200;
     
     CGFloat shenpi_y_2=242;
     
@@ -200,7 +200,7 @@
         view_part1_y=98;
         i_title2_y=236;
         i_viewpart2_y=256;
-        shenpi_y=266;
+        shenpi_y=270;
         i_title3_y=396;
         i_viewpart3_y=418;
         view_part_h=110;
@@ -241,9 +241,9 @@
     
    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]) {
     
-       [self presentViewController:ray_vc animated:NO completion:^{
+     //  [self presentViewController:ray_vc animated:NO completion:^{
            
-       }];
+     //  }];
     
     }
     

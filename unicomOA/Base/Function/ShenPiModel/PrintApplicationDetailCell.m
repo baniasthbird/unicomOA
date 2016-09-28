@@ -27,10 +27,10 @@
 +(instancetype)cellWithTable:(UITableView *)tableView withName:(NSString *)str_Name withPlaceHolder:(NSString *)str_placeHolder  withText:(NSString*)str_text atIndexPath:(NSIndexPath *)indexPath atHeight:(CGFloat)i_Height{
     static NSString *cellID=@"cellID";
     PrintApplicationDetailCell *cell=[tableView cellForRowAtIndexPath:indexPath];
-    if (!cell) {
+  //  if (!cell) {
         cell=[[PrintApplicationDetailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID withName:str_Name withPlaceholder:str_placeHolder withText:str_text atHeight:i_Height];
-    }
-    return cell;
+  //  }
+     return cell;
 }
 
 
@@ -96,7 +96,8 @@
             i_right=100;
         }
         _lbl_count=[[UILabel alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width-i_right, i_Height-45,32 ,20)];
-        _lbl_count.text=@"500";
+        NSInteger i_count=500-_txt_detail.text.length;
+        _lbl_count.text=[NSString stringWithFormat:@"%ld",(long)i_count];
         _lbl_count.textAlignment=NSTextAlignmentRight;
         _lbl_count.font=[UIFont systemFontOfSize:13];
         _lbl_count.textColor=[UIColor blackColor];
