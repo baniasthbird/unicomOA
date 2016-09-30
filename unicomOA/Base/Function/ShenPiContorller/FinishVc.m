@@ -684,8 +684,8 @@
                     str_value=(NSString*)obj_value;
                 }
                 if (![str_value isEqualToString:@""] || ![str_label isEqualToString:@""]) {
-                    CGFloat rowHeightValue=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width*0.4 title:str_value font:[UIFont systemFontOfSize:14]];
-                    CGFloat rowHeightLabel=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width*0.1 title:str_label font:[UIFont systemFontOfSize:14]];
+                    CGFloat rowHeightValue=[UILabel getHeightByWidth:[UIScreen mainScreen].bounds.size.width*0.4 title:str_value font:[UIFont systemFontOfSize:14]];
+                    CGFloat rowHeightLabel=[UILabel getHeightByWidth:[UIScreen mainScreen].bounds.size.width*0.1 title:str_label font:[UIFont systemFontOfSize:14]];
                     if (rowHeightLabel>rowHeightValue)
                     {
                         if (rowHeightLabel>34) {
@@ -724,8 +724,8 @@
                     str_value=(NSString*)obj_value;
                 }
                 if (![str_value isEqualToString:@""] || ![str_label isEqualToString:@""]) {
-                    CGFloat rowHeightValue=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width*0.4 title:str_value font:[UIFont systemFontOfSize:14]];
-                    CGFloat rowHeightLabel=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width*0.1 title:str_label font:[UIFont systemFontOfSize:14]];
+                    CGFloat rowHeightValue=[UILabel getHeightByWidth:[UIScreen mainScreen].bounds.size.width*0.4 title:str_value font:[UIFont systemFontOfSize:14]];
+                    CGFloat rowHeightLabel=[UILabel getHeightByWidth:[UIScreen mainScreen].bounds.size.width*0.1 title:str_label font:[UIFont systemFontOfSize:14]];
                     if (rowHeightLabel>rowHeightValue)
                     {
                         if (rowHeightLabel>34) {

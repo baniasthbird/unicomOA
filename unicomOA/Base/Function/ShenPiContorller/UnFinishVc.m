@@ -522,7 +522,7 @@
                 cell.textLabel.numberOfLines=0;
                 cell.detailTextLabel.text=str_value;
                 cell.detailTextLabel.numberOfLines=0;
-                CGFloat w_value=[UILabel_LabelHeightAndWidth getWidthWithTitle:str_value font:cell.detailTextLabel.font];
+                CGFloat w_value=[UILabel getWidthWithTitle:str_value font:cell.detailTextLabel.font];
                 if (w_value>[UIScreen mainScreen].bounds.size.width) {
                     int i=0;
                     i=i+1;
@@ -560,8 +560,8 @@
                         }
                         NSString *str_placeholder=@"";
                         if (dic_bkvalue!=nil) {
-                            if (dic_bkvalue[@"处理决策"]!=nil) {
-                                NSDictionary *dic_tmp=[dic_bkvalue objectForKey:@"处理决策"];
+                            if (dic_bkvalue[@"常用意见"]!=nil) {
+                                NSDictionary *dic_tmp=[dic_bkvalue objectForKey:@"常用意见"];
                                 str_value=[dic_tmp objectForKey:@"text"];
                             }
                         }
@@ -912,8 +912,8 @@
                         str_value=(NSString*)obj_value;
                     }
                     if (![str_value isEqualToString:@""] || ![str_label isEqualToString:@""]) {
-                        CGFloat rowHeightValue=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width*0.4 title:str_value font:[UIFont systemFontOfSize:14]];
-                        CGFloat rowHeightLabel=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width*0.1 title:str_label font:[UIFont systemFontOfSize:14]];
+                        CGFloat rowHeightValue=[UILabel getHeightByWidth:[UIScreen mainScreen].bounds.size.width*0.4 title:str_value font:[UIFont systemFontOfSize:14]];
+                        CGFloat rowHeightLabel=[UILabel getHeightByWidth:[UIScreen mainScreen].bounds.size.width*0.1 title:str_label font:[UIFont systemFontOfSize:14]];
                         if (rowHeightLabel>rowHeightValue)
                         {
                             if (rowHeightLabel>34) {
@@ -956,8 +956,8 @@
                     str_value=(NSString*)obj_value;
                 }
                 if (![str_value isEqualToString:@""] || ![str_label isEqualToString:@""]) {
-                    CGFloat rowHeightValue=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width*0.4 title:str_value font:[UIFont systemFontOfSize:14]];
-                    CGFloat rowHeightLabel=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width*0.2 title:str_label font:[UIFont systemFontOfSize:14]];
+                    CGFloat rowHeightValue=[UILabel getHeightByWidth:[UIScreen mainScreen].bounds.size.width*0.4 title:str_value font:[UIFont systemFontOfSize:14]];
+                    CGFloat rowHeightLabel=[UILabel getHeightByWidth:[UIScreen mainScreen].bounds.size.width*0.2 title:str_label font:[UIFont systemFontOfSize:14]];
                     if (rowHeightLabel>rowHeightValue) {
                         if (rowHeightLabel<34) {
                             return 44;
@@ -1099,8 +1099,8 @@
         if ([dic_backvalue count]!=0) {
             NSString *str_title=[dic_backvalue objectForKey:@"title"];
             [dic_bkvalue setObject:dic_backvalue forKey:str_title];
-            if ([str_title isEqualToString:@"处理决策"]) {
-                NSDictionary *dic_tmp=[dic_bkvalue objectForKey:@"处理决策"];
+            if ([str_title isEqualToString:@"常用意见"]) {
+                NSDictionary *dic_tmp=[dic_bkvalue objectForKey:@"常用意见"];
                 NSString *str_text=[dic_tmp objectForKey:@"text"];
                 [self sendSuggestionValue:str_text indexPath:i_indexPath];
                 NSIndexSet *index_set=[[NSIndexSet alloc]initWithIndex:i_indexPath.section];

@@ -554,7 +554,7 @@
             startingLineNumber = "344"
             endingLineNumber = "344"
             landmarkName = "-numberOfSectionsInTableView:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1114,7 +1114,7 @@
             startingLineNumber = "125"
             endingLineNumber = "125"
             landmarkName = "-viewDidLoad"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1412,13 +1412,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/View/MessageViewController.m"
-            timestampString = "494818439.373129"
+            timestampString = "496905175.262438"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "308"
-            endingLineNumber = "308"
-            landmarkName = "@implementation MessageViewController"
-            landmarkType = "3">
+            startingLineNumber = "324"
+            endingLineNumber = "324"
+            landmarkName = "-NewsList:"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

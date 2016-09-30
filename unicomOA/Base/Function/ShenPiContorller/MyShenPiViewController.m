@@ -429,7 +429,7 @@
     NSString *str_title=[dic_tmp objectForKey:@"processInstName"];
     
     str_title=[NSString stringWithFormat:@"%@%@",@"标题:",str_title];
-    CGFloat i_width= [UILabel_LabelHeightAndWidth getWidthWithTitle:str_title font:[UIFont systemFontOfSize:i_otherFont]];
+    CGFloat i_width= [UILabel getWidthWithTitle:str_title font:[UIFont systemFontOfSize:i_otherFont]];
     CGFloat f_linenum=i_width/([UIScreen mainScreen].bounds.size.width-80);
     NSInteger i_linenum=0;
     if (f_linenum<1) {

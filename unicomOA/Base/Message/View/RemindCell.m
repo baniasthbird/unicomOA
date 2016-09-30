@@ -31,20 +31,20 @@
     self=[super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         //添加两条竖线
-        UIView *seperatorline1=[[UIView alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/3, 0, 1, 70)];
+        UIView *seperatorline1=[[UIView alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/3, 0, 1, 40)];
         seperatorline1.backgroundColor=[UIColor colorWithRed:191/255.0f green:191/255.0f blue:191/255.0f alpha:1];
-        UIView *seperatorline2=[[UIView alloc]initWithFrame:CGRectMake(2*[UIScreen mainScreen].bounds.size.width/3, 0, 1, 70)];
+        UIView *seperatorline2=[[UIView alloc]initWithFrame:CGRectMake(2*[UIScreen mainScreen].bounds.size.width/3, 0, 1, 40)];
         seperatorline2.backgroundColor=[UIColor colorWithRed:191/255.0f green:191/255.0f blue:191/255.0f alpha:1];
         
-        UIView *view1=[[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width/3, 70)];
+        UIView *view1=[[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width/3, 30)];
         view1.backgroundColor=[UIColor clearColor];
         view1.userInteractionEnabled=YES;
         
-        UIView *view2=[[UIView alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/3, 0, [UIScreen mainScreen].bounds.size.width/3, 70)];
+        UIView *view2=[[UIView alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/3, 0, [UIScreen mainScreen].bounds.size.width/3, 30)];
         view2.backgroundColor=[UIColor clearColor];
         view2.userInteractionEnabled=YES;
         
-        UIView *view3=[[UIView alloc]initWithFrame:CGRectMake(2*[UIScreen mainScreen].bounds.size.width/3, 0, [UIScreen mainScreen].bounds.size.width/3, 70)];
+        UIView *view3=[[UIView alloc]initWithFrame:CGRectMake(2*[UIScreen mainScreen].bounds.size.width/3, 0, [UIScreen mainScreen].bounds.size.width/3, 30)];
         view3.backgroundColor=[UIColor clearColor];
         view3.userInteractionEnabled=YES;
         
@@ -66,24 +66,36 @@
         singleTap3.delegate=self;
         
         
-        UILabel *lbl_title1=[[UILabel alloc]initWithFrame:CGRectMake(0, 8, [UIScreen mainScreen].bounds.size.width/3, 30)];
-        lbl_title1.font=[UIFont systemFontOfSize:16];
-        lbl_title1.textColor=[UIColor blackColor];
-        lbl_title1.text=@"待办流程";
-        lbl_title1.textAlignment=NSTextAlignmentCenter;
+        UIButton *btn_title1=[self CreateButton:@"待办流程" num:i_flow_num];
+        [btn_title1 addTarget:self action:@selector(MoveToShenPi:) forControlEvents:UIControlEventTouchUpInside];
         
-        UILabel *lbl_title2=[[UILabel alloc]initWithFrame:CGRectMake(0, 8, [UIScreen mainScreen].bounds.size.width/3, 30)];
+            /*
+        btn_title1.font=[UIFont systemFontOfSize:16];
+        btn_title1.textColor=[UIColor blackColor];
+        btn_title1.text=@"待办流程";
+        lbl_title1.textAlignment=NSTextAlignmentCenter;
+        */
+        
+        UIButton *btn_title2 =[self CreateButton:@"公文传阅" num:i_doc_num];
+        [btn_title2 addTarget:self action:@selector(MoveToChuanYue:) forControlEvents:UIControlEventTouchUpInside];
+        
+        /*
+        UILabel *lbl_title2=[[UILabel alloc]initWithFrame:CGRectMake(0, 10, [UIScreen mainScreen].bounds.size.width/3, 20)];
         lbl_title2.font=[UIFont systemFontOfSize:16];
         lbl_title2.textColor=[UIColor blackColor];
         lbl_title2.text=@"公文传阅";
         lbl_title2.textAlignment=NSTextAlignmentCenter;
+         */
         
-        UILabel *lbl_title3=[[UILabel alloc]initWithFrame:CGRectMake(0, 8, [UIScreen mainScreen].bounds.size.width/3, 30)];
+        UIButton *btn_title3 = [self CreateButton:@"系统消息" num:i_msg_num];
+        [btn_title3 addTarget:self action:@selector(MoveToMessage:) forControlEvents:UIControlEventTouchUpInside];
+        /*
+        UILabel *lbl_title3=[[UILabel alloc]initWithFrame:CGRectMake(0, 10, [UIScreen mainScreen].bounds.size.width/3, 20)];
         lbl_title3.font=[UIFont systemFontOfSize:16];
         lbl_title3.textColor=[UIColor blackColor];
         lbl_title3.text=@"系统消息";
         lbl_title3.textAlignment=NSTextAlignmentCenter;
-        
+        */
         
         UILabel *lbl_num1=[[UILabel alloc]initWithFrame:CGRectMake(0, 40, [UIScreen mainScreen].bounds.size.width/3, 30)];
         lbl_num1.font=[UIFont systemFontOfSize:16];
@@ -91,9 +103,9 @@
         lbl_num1.textColor=[UIColor whiteColor];
         lbl_num1.text=[NSString stringWithFormat:@"%ld",(long)i_flow_num];
         lbl_num1.textAlignment=NSTextAlignmentCenter;
-        CGFloat width_1=[UILabel_LabelHeightAndWidth getWidthWithTitle:lbl_num1.text font:[UIFont systemFontOfSize:16]];
+        CGFloat width_1=[UILabel getWidthWithTitle:lbl_num1.text font:[UIFont systemFontOfSize:16]];
         width_1=width_1+20;
-        CGFloat height_1=[UILabel_LabelHeightAndWidth getHeightByWidth:width_1 title:lbl_num1.text font:[UIFont systemFontOfSize:16]];
+        CGFloat height_1=[UILabel getHeightByWidth:width_1 title:lbl_num1.text font:[UIFont systemFontOfSize:16]];
         [lbl_num1 setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/6-width_1/2, 40, width_1, height_1)];
        // [lbl_num1 sizeToFit];
         lbl_num1.layer.cornerRadius=10;
@@ -105,9 +117,9 @@
         lbl_num2.textColor=[UIColor whiteColor];
         lbl_num2.text=[NSString stringWithFormat:@"%ld",(long)i_doc_num];
         lbl_num2.textAlignment=NSTextAlignmentCenter;
-        CGFloat width_2=[UILabel_LabelHeightAndWidth getWidthWithTitle:lbl_num2.text font:[UIFont systemFontOfSize:16]];
+        CGFloat width_2=[UILabel getWidthWithTitle:lbl_num2.text font:[UIFont systemFontOfSize:16]];
         width_2=width_2+20;
-        CGFloat height_2=[UILabel_LabelHeightAndWidth getHeightByWidth:width_2 title:lbl_num2.text font:[UIFont systemFontOfSize:16]];
+        CGFloat height_2=[UILabel getHeightByWidth:width_2 title:lbl_num2.text font:[UIFont systemFontOfSize:16]];
         [lbl_num2 setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/6-width_2/2, 40, width_2, height_2)];
       //  [lbl_num2 sizeToFit];
 
@@ -121,31 +133,31 @@
         lbl_num3.textColor=[UIColor whiteColor];
         lbl_num3.text=[NSString stringWithFormat:@"%ld",(long)i_msg_num];
         lbl_num3.textAlignment=NSTextAlignmentCenter;
-        CGFloat width_3=[UILabel_LabelHeightAndWidth getWidthWithTitle:lbl_num3.text font:[UIFont systemFontOfSize:16]];
+        CGFloat width_3=[UILabel getWidthWithTitle:lbl_num3.text font:[UIFont systemFontOfSize:16]];
         width_3=width_3+20;
-        CGFloat height_3=[UILabel_LabelHeightAndWidth getHeightByWidth:width_3 title:lbl_num3.text font:[UIFont systemFontOfSize:16]];
+        CGFloat height_3=[UILabel getHeightByWidth:width_3 title:lbl_num3.text font:[UIFont systemFontOfSize:16]];
         [lbl_num3 setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/6-width_3/2, 40, width_3, height_3)];
        // [lbl_num3 sizeToFit];
         lbl_num3.layer.cornerRadius=10;
         lbl_num3.layer.masksToBounds=YES;
         
 
-        [view1 addGestureRecognizer:singelTap];
-        [view2 addGestureRecognizer:singleTap2];
-        [view3 addGestureRecognizer:singleTap3];
+     //   [view1 addGestureRecognizer:singelTap];
+     //   [view2 addGestureRecognizer:singleTap2];
+      //  [view3 addGestureRecognizer:singleTap3];
         
         [self.contentView addSubview:seperatorline1];
         [self.contentView addSubview:seperatorline2];
-        [view1 addSubview:lbl_title1];
-        [view1 addSubview:lbl_num1];
+        [view1 addSubview:btn_title1];
+       // [view1 addSubview:lbl_num1];
         [self.contentView addSubview:view1];
         
-        [view2 addSubview:lbl_title2];
-        [view2 addSubview:lbl_num2];
+        [view2 addSubview:btn_title2];
+       // [view2 addSubview:lbl_num2];
         [self.contentView addSubview:view2];
         
-        [view3 addSubview:lbl_title3];
-        [view3 addSubview:lbl_num3];
+        [view3 addSubview:btn_title3];
+      //  [view3 addSubview:lbl_num3];
         [self.contentView addSubview:view3];
        // [self.contentView addSubview:lbl_title1];
        // [self.contentView addSubview:lbl_title2];
@@ -204,6 +216,45 @@
 }
 
 
+-(UIButton*)CreateButton:(NSString*)str_title num:(NSInteger)i_num {
+    UIButton *btn_title1=[[UIButton alloc]initWithFrame:CGRectMake(0, 10, [UIScreen mainScreen].bounds.size.width/3, 20)];
+    [btn_title1 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [btn_title1 setTitle:str_title forState:UIControlStateNormal];
+    btn_title1.titleLabel.font=[UIFont systemFontOfSize:16];
+    [btn_title1 setBackgroundColor:[UIColor clearColor]];
+    btn_title1.titleLabel.textAlignment=NSTextAlignmentCenter;
+  //  [btn_title1 addTarget:self action:@selector(MoveToShenPi:) forControlEvents:UIControlEventTouchUpInside];
+    
+    if (i_num!=0) {
+        CATextLayer  *_badgeLayer = [[CATextLayer alloc] init];
+        _badgeLayer.backgroundColor=[UIColor redColor].CGColor;
+        _badgeLayer.foregroundColor = [UIColor blackColor].CGColor;
+        _badgeLayer.alignmentMode = kCAAlignmentCenter;
+        [_badgeLayer setFrame:CGRectMake(0, 0, 6, 6)];
+        _badgeLayer.position=CGPointMake(btn_title1.frame.size.width/2+30, 0);
+        _badgeLayer.wrapped = YES;
+        _badgeLayer.cornerRadius = 3.0f;
+        // [_badgeLayer setFontSize:16];
+        // [_badgeLayer setString:@"4"];
+        _badgeLayer.anchorPoint=CGPointZero;
+        _badgeLayer.contentsScale = [[UIScreen mainScreen] scale];
+        [btn_title1.layer addSublayer:_badgeLayer];
+    }
+    return btn_title1;
+}
+
+-(void)MoveToShenPi:(UIButton*)sender {
+    [_delegate PassNavToShenPi];
+}
+
+-(void)MoveToChuanYue:(UIButton*)sender {
+    [_delegate PassNavToChuanYue];
+}
+
+-(void)MoveToMessage:(UIButton*)sender {
+    [_delegate PassNaveToMessage];
+
+}
 
 -(void)NavToShenPi:(UITapGestureRecognizer*)sender {
     [_delegate PassNavToShenPi];

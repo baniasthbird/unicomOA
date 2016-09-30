@@ -294,15 +294,15 @@
     
     CGFloat h_Title;
     if (iPad) {
-        h_Title=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width-100 title:str_title font:[UIFont systemFontOfSize:i_titleFont]];
+        h_Title=[UILabel getHeightByWidth:[UIScreen mainScreen].bounds.size.width-100 title:str_title font:[UIFont systemFontOfSize:i_titleFont]];
     }
     else {
-        h_Title=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width-30 title:str_title font:[UIFont systemFontOfSize:i_titleFont]];
+        h_Title=[UILabel getHeightByWidth:[UIScreen mainScreen].bounds.size.width-30 title:str_title font:[UIFont systemFontOfSize:i_titleFont]];
     }
     
     NSString *str_sendempname =[_baseFunc GetValueFromDic:dic_content key:@"sendEmpname"];
     // CGFloat w_depart=[UILabel_LabelHeightAndWidth getWidthWithTitle:[dic_content objectForKey:@"operatorName"] font:[UIFont systemFontOfSize:i_otherFont]];
-    CGFloat h_depart=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width title:str_sendempname font:[UIFont systemFontOfSize:i_otherFont]];
+    CGFloat h_depart=[UILabel getHeightByWidth:[UIScreen mainScreen].bounds.size.width title:str_sendempname font:[UIFont systemFontOfSize:i_otherFont]];
     NSString *str_time =[_baseFunc GetValueFromDic:dic_content key:@"sendTime"];
     NSArray *arr_time=[str_time componentsSeparatedByString:@" "];
     NSString *str_time2=[arr_time objectAtIndex:0];

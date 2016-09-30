@@ -21,6 +21,8 @@
 #import "INTULocationManager.h"
 #import "WeatherData.h"
 #import "WeatherViewController.h"
+#import "NewsNewsTableViewCell.h"
+#import "NewsInformTableViewCell.h"
 
 
 
@@ -69,6 +71,10 @@
     BOOL b_ReplaceDataSource;
     
     NSTimer *timer;
+    
+    NSString *str_ip;
+    
+    NSString *str_port;
     
     
 }
@@ -215,8 +221,8 @@
     NSString *str_connection=[self GetConnectionStatus];
     if ([str_connection isEqualToString:@"wifi"] || [str_connection isEqualToString:@"GPRS"]) {
         NSString *str_taskCount= [db fetchInterface:@"TaskCount"];
-        __block NSString *str_ip=@"";
-        __block NSString *str_port=@"";
+       // __block NSString *str_ip=@"";
+       // __block NSString *str_port=@"";
         NSMutableArray *t_array=[db fetchIPAddress];
         if (t_array.count==1) {
             NSArray *arr_ip=[t_array objectAtIndex:0];
@@ -313,8 +319,8 @@
     NSString *str_connection=[self GetConnectionStatus];
     if ([str_connection isEqualToString:@"wifi"] || [str_connection isEqualToString:@"GPRS"]) {
         NSString *str_newsList= [db fetchInterface:@"NewsList"];
-        NSString *str_ip=@"";
-        NSString *str_port=@"";
+        //NSString *str_ip=@"";
+        //NSString *str_port=@"";
         NSMutableArray *t_array=[db fetchIPAddress];
         if (t_array.count==1) {
             NSArray *arr_ip=[t_array objectAtIndex:0];
@@ -422,7 +428,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==0) {
-        return 70;
+        return 40;
     }
     else {
         if ([_arr_NewsList count]==0) {
@@ -474,29 +480,42 @@
             NSDictionary *dic_content=[_arr_NewsList objectAtIndex:i_index];
              CGFloat h_Title;
             NSString *str_title=[_baseFunc GetValueFromDic:dic_content key:@"title"];
+            NSString *str_category=[_baseFunc GetValueFromDic:dic_content key:@"classname"];
+            if ([str_category rangeOfString:@"通知"].location!=NSNotFound) {
+                h_Title=[UILabel getHeightByWidth:Width*0.92 title:str_title font:[UIFont systemFontOfSize:i_titleFont]];
+            }
+            else if ([str_category rangeOfString:@"新闻"].location!=NSNotFound) {
+                h_Title=[UILabel getHeightByWidth:Width*0.6107 title:str_title font:[UIFont systemFontOfSize:i_titleFont]];
+            }
+            /*
             if (i_index<4) {
                 if (iPad) {
-                    h_Title=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width-100 title:str_title font:[UIFont systemFontOfSize:i_titleFont]];
+                    h_Title=[UILabel getHeightByWidth:[UIScreen mainScreen].bounds.size.width-100 title:str_title font:[UIFont systemFontOfSize:i_titleFont]];
                 }
                 else {
-                    h_Title=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width-80 title:str_title font:[UIFont systemFontOfSize:i_titleFont]];
+                    h_Title=[UILabel getHeightByWidth:[UIScreen mainScreen].bounds.size.width-80 title:str_title font:[UIFont systemFontOfSize:i_titleFont]];
                 }
             }
             else {
                 if (iPad) {
-                    h_Title=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width-100 title:str_title font:[UIFont systemFontOfSize:i_titleFont]];
+                    h_Title=[UILabel getHeightByWidth:[UIScreen mainScreen].bounds.size.width-100 title:str_title font:[UIFont systemFontOfSize:i_titleFont]];
                 }
                 else {
-                    h_Title=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width-30 title:str_title font:[UIFont systemFontOfSize:i_titleFont]];
+                    h_Title=[UILabel getHeightByWidth:[UIScreen mainScreen].bounds.size.width-30 title:str_title font:[UIFont systemFontOfSize:i_titleFont]];
                 }
 
             }
+            */
            
             
             
-            NSString *str_department = [dic_content objectForKey:@"operatorName"];
+            NSString *str_department = [dic_content objectForKey:@"operationDeptName"];
+            NSString *str_date = [dic_content objectForKey:@"startDate"];
+            NSArray *arr_date = [str_date componentsSeparatedByString:@" "];
+            NSString *str_time = [arr_date objectAtIndex:0];
+            str_department = [NSString stringWithFormat:@"%@  %@",str_department,str_time];
           //  CGFloat w_depart=[UILabel_LabelHeightAndWidth getWidthWithTitle:[dic_content objectForKey:@"operatorName"] font:[UIFont systemFontOfSize:i_otherFont]];
-            CGFloat h_depart=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width title:str_department font:[UIFont systemFontOfSize:i_otherFont]];
+            CGFloat h_depart=[UILabel getHeightByWidth:Width title:str_department font:[UIFont systemFontOfSize:i_otherFont]];
             CGFloat h_height=h_Title+h_depart;
             if (iPad) {
                 if (h_Title>60) {
@@ -553,6 +572,8 @@
                 
                 if (indexPath.section-1<[_arr_NewsList count]) {
                     NewsManagementTableViewCell *cell;
+                    NewsNewsTableViewCell *cell_news;
+                    NewsInformTableViewCell *cell_infrom;
                     NSDictionary *dic_content=[_arr_NewsList objectAtIndex:indexPath.section-1];
                    // NSString *str_category=[dic_content objectForKey:@"classname"];
                     NSString *str_category=[_baseFunc GetValueFromDic:dic_content key:@"classname"];
@@ -578,28 +599,74 @@
                     [paragraphStyle setLineSpacing:5];
                     [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [str_title length])];
                     
-                    CGFloat h_Title;
+                    
+                    CGFloat h_Title = 0.0;
+                    if ([str_category rangeOfString:@"通知"].location!=NSNotFound) {
+                        h_Title=[UILabel getHeightByWidth:Width*0.92 title:str_title font:[UIFont systemFontOfSize:i_titleFont]];
+                    }
+                    else if ([str_category rangeOfString:@"新闻"].location!=NSNotFound) {
+                        h_Title=[UILabel getHeightByWidth:0.6107*Width title:str_title font:[UIFont systemFontOfSize:i_titleFont]];
+                    }
+                    /*
                     if (iPad) {
-                        h_Title=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width-100 title:str_title font:[UIFont systemFontOfSize:i_titleFont]];
+                        h_Title=[UILabel getHeightByWidth:[UIScreen mainScreen].bounds.size.width-100 title:str_title font:[UIFont systemFontOfSize:i_titleFont]];
                     }
                     else {
-                        h_Title=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width-30 title:str_title font:[UIFont systemFontOfSize:i_titleFont]];
+                        h_Title=[UILabel getHeightByWidth:[UIScreen mainScreen].bounds.size.width-30 title:str_title font:[UIFont systemFontOfSize:i_titleFont]];
                     }
+                    */
                     NSString *str_department =[_baseFunc GetValueFromDic:dic_content key:@"operationDeptName"];
                    // CGFloat w_depart=[UILabel_LabelHeightAndWidth getWidthWithTitle:[dic_content objectForKey:@"operatorName"] font:[UIFont systemFontOfSize:i_otherFont]];
-                    CGFloat h_depart=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width title:str_department font:[UIFont systemFontOfSize:i_otherFont]];
+                    CGFloat h_depart=[UILabel getHeightByWidth:[UIScreen mainScreen].bounds.size.width title:str_department font:[UIFont systemFontOfSize:i_otherFont]];
                     NSString *str_time =[_baseFunc GetValueFromDic:dic_content key:@"startDate"];
                     NSArray *arr_time=[str_time componentsSeparatedByString:@" "];
                     NSString *str_time2=[arr_time objectAtIndex:0];
                     NSString *str_depart=[NSString stringWithFormat:@"%@ %@",str_department,str_time2];
                     //CGFloat h_height=h_Title+h_depart+30;
                     CGFloat h_height=[self cellHeightForNews:indexPath.section-1 titleFont:i_titleFont otherFont:i_otherFont];
+                    
+                    NSObject *obj=[dic_content objectForKey:@"id"];
+                    NSInteger i_index = 0;
+                    if (obj!=nil) {
+                        NSNumber *num_index=(NSNumber*)obj;
+                        i_index=[num_index integerValue];
+                    }
+                    
+                    NSString *str_imgsrc=[_baseFunc GetValueFromDic:dic_content key:@"imgsrc"];
+
+                    
+                    if ([str_category rangeOfString:@"通知"].location!=NSNotFound) {
+                        cell_infrom=[NewsInformTableViewCell cellWithTable:tableView withCellHeight:h_height withTitleHeight:h_Title withButtonHeight:h_depart withTitle:attributedString withCategory:str_category withDepart:str_depart withDate:str_time2 titleFont:i_titleFont otherFont:i_otherFont];
+                        cell_infrom.delegate=self;
+                        cell_infrom.str_title=str_title;
+                        cell_infrom.str_department=str_department;
+                        cell_infrom.myTag=indexPath.section-1;
+                        cell_infrom.selectionStyle=UITableViewCellSelectionStyleGray;
+                        cell_infrom.tag = i_index;
+                        
+                        return cell_infrom;
+                    }
+                    else if ([str_category rangeOfString:@"新闻"].location!=NSNotFound) {
+                        cell_news=[NewsNewsTableViewCell cellWithTable:tableView withCellHeight:h_height withTitleHeight:h_Title withButtonHeight:h_depart withTitle:attributedString withCategory:str_category withDepart:str_depart withDate:str_time2 titleFont:i_titleFont otherFont:i_otherFont withImage:str_imgsrc];
+                        cell_news.delegate=self;
+                        cell_news.str_title=str_title;
+                        cell_news.str_department=str_department;
+                        
+                        cell_news.myTag=indexPath.section-1;
+                        cell_news.selectionStyle=UITableViewCellSelectionStyleGray;
+                        cell_news.tag = i_index;
+                        
+                        return cell_news;
+                    }
+                    
+                    /*
                     if (indexPath.section<4) {
                         cell=[NewsManagementTableViewCell cellWithTable:tableView withCellHeight:h_height withTitleHeight:h_Title withButtonHeight:h_depart withTitle:attributedString withCategory:str_category withDepart:str_depart titleFont:i_titleFont otherFont:i_otherFont canScroll:NO withImage:@"hot.png"];
                     }
                     else {
                          cell=[NewsManagementTableViewCell cellWithTable:tableView withCellHeight:h_height withTitleHeight:h_Title withButtonHeight:h_depart withTitle:attributedString withCategory:str_category withDepart:str_depart titleFont:i_titleFont otherFont:i_otherFont canScroll:NO withImage:nil];
                     }
+                     */
                     cell.delegate=self;
                     cell.str_title=str_title;
                     cell.str_department=str_department;
@@ -614,13 +681,7 @@
                     }
                     
                     cell.selectionStyle=UITableViewCellSelectionStyleGray;
-                    
-                    NSObject *obj=[dic_content objectForKey:@"id"];
-                    if (obj!=nil) {
-                        NSNumber *num_index=(NSNumber*)obj;
-                        NSInteger i_index=[num_index integerValue];
-                        cell.tag=i_index;
-                    }
+                    cell.tag=i_index;
                     
                     return cell;
                     
@@ -711,8 +772,36 @@
              */
         }
     }
-    else if (indexPath.section==1) {
-        //目前详细信息接口未接入，稍后再试
+    else {
+         NSDictionary *dic_content=[_arr_NewsList objectAtIndex:indexPath.section-1];
+        NSString *str_category=[_baseFunc GetValueFromDic:dic_content key:@"classname"];
+        NSInteger i_index=0;
+        NSString *str_label=@"";
+        NSString *str_depart=@"";
+        if ([str_category rangeOfString:@"通知"].location!=NSNotFound) {
+            NewsInformTableViewCell *cell=(NewsInformTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
+            i_index=cell.tag;
+            str_label=cell.str_title;
+            str_depart=cell.str_department;
+        }
+        else if ([str_category rangeOfString:@"新闻"].location!=NSNotFound) {
+            NewsNewsTableViewCell *cell=(NewsNewsTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
+            i_index=cell.tag;
+            str_label=cell.str_title;
+            str_depart=cell.str_department;
+        }
+        
+        NewsDisplayViewController *news_controller=[[NewsDisplayViewController alloc]init];
+        news_controller.news_index=i_index;
+        news_controller.str_label=str_label;
+        news_controller.str_depart=str_depart;
+        news_controller.userInfo=_userInfo;
+        news_controller.b_News=YES;
+        selected_title=str_label;
+        if (f_v<9.0) {
+            self.navigationController.delegate=nil;
+        }
+        [self.navigationController pushViewController:news_controller animated:NO];
         
     }
 }

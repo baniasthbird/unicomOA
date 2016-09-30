@@ -455,7 +455,7 @@ CGFloat i_Height=-1;
         
         ((CLTreeView_LEVEL2_Cell*)cell).name.text = nodeData.name;
         ((CLTreeView_LEVEL2_Cell*)cell).signture.text = nodeData.signture;
-        CGFloat w_depart=[UILabel_LabelHeightAndWidth getWidthWithTitle:nodeData.signture font:[UIFont systemFontOfSize:13]];
+        CGFloat w_depart=[UILabel getWidthWithTitle:nodeData.signture font:[UIFont systemFontOfSize:13]];
         ((CLTreeView_LEVEL2_Cell*)cell).signture.frame=CGRectMake([UIScreen mainScreen].bounds.size.width-w_depart-10, 10, w_depart, 30);
         [((CLTreeView_LEVEL2_Cell*)cell).signture sizeToFit];
         

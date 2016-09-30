@@ -100,6 +100,8 @@
 		68224D421D4F470A002AC0F1 /* SysMsgTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68224D411D4F470A002AC0F1 /* SysMsgTableViewCell.m */; };
 		6822656F1C96B4C400AB29C0 /* NewsSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6822656E1C96B4C400AB29C0 /* NewsSettingViewController.m */; };
 		6825E1081CED507400EA4D87 /* ShenPiAppVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6825E1071CED507400EA4D87 /* ShenPiAppVC.m */; };
+		6826294B1D9DF5CF00A50AE2 /* NewsNewsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6826294A1D9DF5CF00A50AE2 /* NewsNewsTableViewCell.m */; };
+		6826294E1D9DF5F000A50AE2 /* NewsInformTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6826294D1D9DF5F000A50AE2 /* NewsInformTableViewCell.m */; };
 		682A46D01D3F69E800FCED9E /* CDFInitialsAvatar.m in Sources */ = {isa = PBXBuildFile; fileRef = 682A46CF1D3F69E800FCED9E /* CDFInitialsAvatar.m */; };
 		682B68B01CB618DD002EC60F /* PrintApplicationNoFileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 682B68AF1CB618DD002EC60F /* PrintApplicationNoFileCell.m */; };
 		682B68B61CB64482002EC60F /* AddPrintFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 682B68B51CB64482002EC60F /* AddPrintFile.m */; };
@@ -127,7 +129,6 @@
 		683FDA071D65AC02005B8F5D /* libMBProgressHUD.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686C80001D5C0CC00071A410 /* libMBProgressHUD.a */; };
 		683FDA0A1D65AC08005B8F5D /* libSDWebImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686C80021D5C7D0E0071A410 /* libSDWebImage.a */; };
 		6842B3E41D6AE76800054D6A /* WeatherFileTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 6842B3E31D6AE76800054D6A /* WeatherFileTool.m */; };
-		68462DCC1CF587540044A806 /* UILabel+LabelHeightAndWidth.m in Sources */ = {isa = PBXBuildFile; fileRef = 68462DCB1CF587540044A806 /* UILabel+LabelHeightAndWidth.m */; };
 		6846D3531CAB5A1E004BD285 /* IVotingManamentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6846D3521CAB5A1E004BD285 /* IVotingManamentController.m */; };
 		6846D3561CAB62B1004BD285 /* VotingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6846D3551CAB62B1004BD285 /* VotingCell.m */; };
 		6846D3591CABA8AC004BD285 /* IVotingDisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6846D3581CABA8AC004BD285 /* IVotingDisplayController.m */; };
@@ -226,6 +227,7 @@
 		68C0A3B21D65B9FF00985D30 /* NSString+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C0A3A71D65B9FF00985D30 /* NSString+MJExtension.m */; };
 		68C0A5BC1CBF6667008BEE27 /* ShenPiStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C0A5BB1CBF6667008BEE27 /* ShenPiStatus.m */; };
 		68C33B741D34C58B00FCC0F1 /* LogTriangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C33B731D34C58B00FCC0F1 /* LogTriangleView.m */; };
+		68C91B441D9CC24E00F70FF9 /* UILabel+LabelHeightAndWidth.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C91B431D9CC24E00F70FF9 /* UILabel+LabelHeightAndWidth.m */; };
 		68D05CBA1C9791000039220F /* PasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D05CB91C9791000039220F /* PasswordViewController.m */; };
 		68D05CC01C97AC050039220F /* SendFeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D05CBF1C97AC050039220F /* SendFeedBackViewController.m */; };
 		68D05CC41C97B3530039220F /* SendFeedbackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D05CC31C97B3530039220F /* SendFeedbackView.m */; };
@@ -508,6 +510,10 @@
 		6822656E1C96B4C400AB29C0 /* NewsSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsSettingViewController.m; path = Base/Settings/Controller/NewsSettingViewController.m; sourceTree = "<group>"; };
 		6825E1061CED507400EA4D87 /* ShenPiAppVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShenPiAppVC.h; path = Base/Function/ShenPiContorller/ShenPiAppVC.h; sourceTree = "<group>"; };
 		6825E1071CED507400EA4D87 /* ShenPiAppVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShenPiAppVC.m; path = Base/Function/ShenPiContorller/ShenPiAppVC.m; sourceTree = "<group>"; };
+		682629491D9DF5CF00A50AE2 /* NewsNewsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsNewsTableViewCell.h; path = Base/Function/NewsModel/NewsNewsTableViewCell.h; sourceTree = "<group>"; };
+		6826294A1D9DF5CF00A50AE2 /* NewsNewsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsNewsTableViewCell.m; path = Base/Function/NewsModel/NewsNewsTableViewCell.m; sourceTree = "<group>"; };
+		6826294C1D9DF5F000A50AE2 /* NewsInformTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsInformTableViewCell.h; path = Base/Function/NewsModel/NewsInformTableViewCell.h; sourceTree = "<group>"; };
+		6826294D1D9DF5F000A50AE2 /* NewsInformTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsInformTableViewCell.m; path = Base/Function/NewsModel/NewsInformTableViewCell.m; sourceTree = "<group>"; };
 		682A46CE1D3F69E800FCED9E /* CDFInitialsAvatar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDFInitialsAvatar.h; sourceTree = "<group>"; };
 		682A46CF1D3F69E800FCED9E /* CDFInitialsAvatar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDFInitialsAvatar.m; sourceTree = "<group>"; };
 		682B68AE1CB618DD002EC60F /* PrintApplicationNoFileCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrintApplicationNoFileCell.h; path = Base/Function/ShenPiModel/PrintApplicationNoFileCell.h; sourceTree = "<group>"; };
@@ -551,8 +557,6 @@
 		683FDA081D65AC05005B8F5D /* libMJExtension.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMJExtension.a; path = "../../../Library/Developer/Xcode/DerivedData/unicomOA-casyuftkadckdjdwnuvyvlrozdco/Build/Products/Debug-iphonesimulator/libMJExtension.a"; sourceTree = "<group>"; };
 		6842B3E21D6AE76800054D6A /* WeatherFileTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WeatherFileTool.h; path = Base/Function/Weather/Tools/WeatherFileTool.h; sourceTree = "<group>"; };
 		6842B3E31D6AE76800054D6A /* WeatherFileTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WeatherFileTool.m; path = Base/Function/Weather/Tools/WeatherFileTool.m; sourceTree = "<group>"; };
-		68462DCA1CF587540044A806 /* UILabel+LabelHeightAndWidth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UILabel+LabelHeightAndWidth.h"; path = "Base/Function/NewsModel/UILabel+LabelHeightAndWidth.h"; sourceTree = "<group>"; };
-		68462DCB1CF587540044A806 /* UILabel+LabelHeightAndWidth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UILabel+LabelHeightAndWidth.m"; path = "Base/Function/NewsModel/UILabel+LabelHeightAndWidth.m"; sourceTree = "<group>"; };
 		6846D3511CAB5A1E004BD285 /* IVotingManamentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IVotingManamentController.h; path = Base/Function/IVotingCotroller/IVotingManamentController.h; sourceTree = "<group>"; };
 		6846D3521CAB5A1E004BD285 /* IVotingManamentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IVotingManamentController.m; path = Base/Function/IVotingCotroller/IVotingManamentController.m; sourceTree = "<group>"; };
 		6846D3541CAB62B1004BD285 /* VotingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VotingCell.h; path = Base/Function/IVotingModel/VotingCell.h; sourceTree = "<group>"; };
@@ -741,6 +745,8 @@
 		68C0A5BB1CBF6667008BEE27 /* ShenPiStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShenPiStatus.m; path = Base/Function/ShenPiModel/ShenPiStatus.m; sourceTree = "<group>"; };
 		68C33B721D34C58B00FCC0F1 /* LogTriangleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LogTriangleView.h; path = Base/Function/ShenPiModel/LogTriangleView.h; sourceTree = "<group>"; };
 		68C33B731D34C58B00FCC0F1 /* LogTriangleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LogTriangleView.m; path = Base/Function/ShenPiModel/LogTriangleView.m; sourceTree = "<group>"; };
+		68C91B421D9CC24E00F70FF9 /* UILabel+LabelHeightAndWidth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+LabelHeightAndWidth.h"; sourceTree = "<group>"; };
+		68C91B431D9CC24E00F70FF9 /* UILabel+LabelHeightAndWidth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+LabelHeightAndWidth.m"; sourceTree = "<group>"; };
 		68D05CB81C9791000039220F /* PasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PasswordViewController.h; path = Base/Settings/Controller/PasswordViewController.h; sourceTree = "<group>"; };
 		68D05CB91C9791000039220F /* PasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PasswordViewController.m; path = Base/Settings/Controller/PasswordViewController.m; sourceTree = "<group>"; };
 		68D05CBE1C97AC050039220F /* SendFeedBackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SendFeedBackViewController.h; path = Base/Settings/Controller/SendFeedBackViewController.h; sourceTree = "<group>"; };
@@ -1111,10 +1117,12 @@
 				2CDC2BE31C8FFD6C0067693B /* NIDropDown.m */,
 				2CDC2BF01C9117FE0067693B /* NewsManagementTableViewCell.h */,
 				2CDC2BF11C9117FE0067693B /* NewsManagementTableViewCell.m */,
-				68462DCA1CF587540044A806 /* UILabel+LabelHeightAndWidth.h */,
-				68462DCB1CF587540044A806 /* UILabel+LabelHeightAndWidth.m */,
 				684E0C541D363E88008088FD /* POPAnimation.h */,
 				684E0C551D363E88008088FD /* POPAnimation.m */,
+				682629491D9DF5CF00A50AE2 /* NewsNewsTableViewCell.h */,
+				6826294A1D9DF5CF00A50AE2 /* NewsNewsTableViewCell.m */,
+				6826294C1D9DF5F000A50AE2 /* NewsInformTableViewCell.h */,
+				6826294D1D9DF5F000A50AE2 /* NewsInformTableViewCell.m */,
 			);
 			name = NewsModel;
 			sourceTree = "<group>";
@@ -1631,6 +1639,8 @@
 			children = (
 				6853A3F71D2679C500AE5145 /* BaseFunction.h */,
 				6853A3F81D2679C500AE5145 /* BaseFunction.m */,
+				68C91B421D9CC24E00F70FF9 /* UILabel+LabelHeightAndWidth.h */,
+				68C91B431D9CC24E00F70FF9 /* UILabel+LabelHeightAndWidth.m */,
 			);
 			name = Base;
 			path = DevKit/Base;
@@ -2433,6 +2443,7 @@
 				682B68B01CB618DD002EC60F /* PrintApplicationNoFileCell.m in Sources */,
 				683FD9FE1D654F4D005B8F5D /* UIBarButtonItem+Weather.m in Sources */,
 				68C33B741D34C58B00FCC0F1 /* LogTriangleView.m in Sources */,
+				6826294B1D9DF5CF00A50AE2 /* NewsNewsTableViewCell.m in Sources */,
 				6884D2D01CD98B4A006215E5 /* UIView+MGBadgeView.m in Sources */,
 				68EEDE571CBB2E19003295EB /* DYCAddress.m in Sources */,
 				2CB7DB651CA3C5970057633D /* MemberInfoViewController.m in Sources */,
@@ -2516,6 +2527,7 @@
 				682B68BC1CB64FDE002EC60F /* AddPrintRadioCell.m in Sources */,
 				2CFEADF01C7C06CB0054730E /* MenuItemModel.m in Sources */,
 				68C0A3AB1D65B9FF00985D30 /* MJProperty.m in Sources */,
+				68C91B441D9CC24E00F70FF9 /* UILabel+LabelHeightAndWidth.m in Sources */,
 				6846EC6D1CFAD48300A400C5 /* YBMonitorNetWorkState.m in Sources */,
 				2CFEADF31C7C27020054730E /* UIViewExt.m in Sources */,
 				2CFEAD191C7168980054730E /* LoginViewController.m in Sources */,
@@ -2544,12 +2556,12 @@
 				68EEDE781CBB911A003295EB /* UITableView+SDAutoTableViewCellHeight.m in Sources */,
 				6846EC591CF99C7C00A400C5 /* IQUIView+IQKeyboardToolbar.m in Sources */,
 				2C9DDECA1CD8E257009462E6 /* LYTwoViewController.m in Sources */,
+				6826294E1D9DF5F000A50AE2 /* NewsInformTableViewCell.m in Sources */,
 				68212DF31CF3FAE40022955A /* Soundselectvc.m in Sources */,
 				68C0A3AF1D65B9FF00985D30 /* NSObject+MJCoding.m in Sources */,
 				6846EC521CF99C7C00A400C5 /* IQKeyboardManager.m in Sources */,
 				6846EC571CF99C7C00A400C5 /* IQTitleBarButtonItem.m in Sources */,
 				2CFEAD301C7181F30054730E /* NTButton.m in Sources */,
-				68462DCC1CF587540044A806 /* UILabel+LabelHeightAndWidth.m in Sources */,
 				2CE321101CC2810800B36793 /* DataSource.m in Sources */,
 				2CFEADC61C76A65E0054730E /* UIImage+ResizeImage.m in Sources */,
 				6846EC601CFA897A00A400C5 /* NewsDetailVc.m in Sources */,

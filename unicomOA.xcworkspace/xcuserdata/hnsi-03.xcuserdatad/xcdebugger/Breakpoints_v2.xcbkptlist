@@ -42,12 +42,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/View/MessageViewController.m"
-            timestampString = "495538109.498903"
+            timestampString = "496908326.529907"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "799"
-            endingLineNumber = "799"
-            landmarkName = "-scrollViewDidScroll:"
+            startingLineNumber = "949"
+            endingLineNumber = "949"
+            landmarkName = "-RefreshBadge:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -96,7 +96,7 @@
             startingLineNumber = "606"
             endingLineNumber = "606"
             landmarkName = "-tableView:didSelectRowAtIndexPath:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -128,7 +128,7 @@
             startingLineNumber = "545"
             endingLineNumber = "545"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -176,7 +176,7 @@
             startingLineNumber = "921"
             endingLineNumber = "921"
             landmarkName = "-CreateCell:indexPath:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -256,7 +256,7 @@
             startingLineNumber = "149"
             endingLineNumber = "149"
             landmarkName = "-PrePareData:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -272,7 +272,7 @@
             startingLineNumber = "823"
             endingLineNumber = "823"
             landmarkName = "-PrePareData:interface:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -288,7 +288,7 @@
             startingLineNumber = "478"
             endingLineNumber = "478"
             landmarkName = "-tableView:didSelectRowAtIndexPath:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -304,7 +304,7 @@
             startingLineNumber = "773"
             endingLineNumber = "773"
             landmarkName = "-PrePareData:interface:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -320,7 +320,7 @@
             startingLineNumber = "779"
             endingLineNumber = "779"
             landmarkName = "-PrePareData:interface:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -336,7 +336,7 @@
             startingLineNumber = "491"
             endingLineNumber = "491"
             landmarkName = "-tableView:didSelectRowAtIndexPath:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -352,7 +352,7 @@
             startingLineNumber = "154"
             endingLineNumber = "154"
             landmarkName = "-PrePareData:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -384,7 +384,7 @@
             startingLineNumber = "923"
             endingLineNumber = "923"
             landmarkName = "-CreateCell:indexPath:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -400,7 +400,7 @@
             startingLineNumber = "803"
             endingLineNumber = "803"
             landmarkName = "-handleRefresh:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -416,7 +416,7 @@
             startingLineNumber = "463"
             endingLineNumber = "463"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -432,7 +432,7 @@
             startingLineNumber = "837"
             endingLineNumber = "837"
             landmarkName = "-PrePareData:interface:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -448,7 +448,7 @@
             startingLineNumber = "909"
             endingLineNumber = "909"
             landmarkName = "-CreateCell:indexPath:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -464,7 +464,7 @@
             startingLineNumber = "814"
             endingLineNumber = "814"
             landmarkName = "-PrePareData:interface:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -736,7 +736,7 @@
             startingLineNumber = "759"
             endingLineNumber = "759"
             landmarkName = "-PrePareData:interface:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -784,7 +784,7 @@
             startingLineNumber = "898"
             endingLineNumber = "898"
             landmarkName = "-scrollViewDidScroll:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -912,7 +912,7 @@
             startingLineNumber = "772"
             endingLineNumber = "772"
             landmarkName = "-PrePareData:interface:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -960,7 +960,7 @@
             startingLineNumber = "209"
             endingLineNumber = "209"
             landmarkName = "-NewsList:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -976,7 +976,7 @@
             startingLineNumber = "494"
             endingLineNumber = "494"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -992,7 +992,7 @@
             startingLineNumber = "140"
             endingLineNumber = "140"
             landmarkName = "-viewDidLoad"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1002,12 +1002,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/View/MessageViewController.m"
-            timestampString = "495538109.498903"
+            timestampString = "496908326.529907"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "738"
-            endingLineNumber = "738"
-            landmarkName = "-tapCell:atIndex:"
+            startingLineNumber = "888"
+            endingLineNumber = "888"
+            landmarkName = "-scrollViewDidScroll:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1024,22 +1024,6 @@
             startingLineNumber = "602"
             endingLineNumber = "602"
             landmarkName = "-tableView:heightForRowAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "unicomOA/View/MessageViewController.m"
-            timestampString = "495538109.498903"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "426"
-            endingLineNumber = "426"
-            landmarkName = "-tableView:heightForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1050,12 +1034,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/View/MessageViewController.m"
-            timestampString = "495538109.498903"
+            timestampString = "496908326.529907"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "747"
-            endingLineNumber = "747"
-            landmarkName = "-sideslipCellRemoveCell:atIndex:"
+            startingLineNumber = "897"
+            endingLineNumber = "897"
+            landmarkName = "-GetValueFromDic:key:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1104,7 +1088,7 @@
             startingLineNumber = "414"
             endingLineNumber = "414"
             landmarkName = "-tableView:heightForRowAtIndexPath:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1120,7 +1104,7 @@
             startingLineNumber = "441"
             endingLineNumber = "441"
             landmarkName = "-cellHeightForShenPi:otherFont:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1168,7 +1152,7 @@
             startingLineNumber = "817"
             endingLineNumber = "817"
             landmarkName = "-handleRefresh:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1210,12 +1194,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/View/MessageViewController.m"
-            timestampString = "495538109.498903"
+            timestampString = "496908326.529907"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "733"
-            endingLineNumber = "733"
-            landmarkName = "-tapCell:atIndex:"
+            startingLineNumber = "883"
+            endingLineNumber = "883"
+            landmarkName = "-handleRefresh:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1226,12 +1210,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/View/MessageViewController.m"
-            timestampString = "495538109.498903"
+            timestampString = "496908326.529907"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "745"
-            endingLineNumber = "745"
-            landmarkName = "-tapCell:atIndex:"
+            startingLineNumber = "895"
+            endingLineNumber = "895"
+            landmarkName = "-GetValueFromDic:key:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1242,12 +1226,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/View/MessageViewController.m"
-            timestampString = "495538109.498903"
+            timestampString = "496908326.529907"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "707"
-            endingLineNumber = "707"
-            landmarkName = "-tableView:didSelectRowAtIndexPath:"
+            startingLineNumber = "858"
+            endingLineNumber = "858"
+            landmarkName = "-AddLoop"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1264,7 +1248,7 @@
             startingLineNumber = "177"
             endingLineNumber = "177"
             landmarkName = "-Actiondo:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1280,7 +1264,7 @@
             startingLineNumber = "674"
             endingLineNumber = "674"
             landmarkName = "-tapCell:atIndex:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1296,7 +1280,7 @@
             startingLineNumber = "548"
             endingLineNumber = "548"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1392,7 +1376,7 @@
             startingLineNumber = "675"
             endingLineNumber = "675"
             landmarkName = "-tapCell:atIndex:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1408,7 +1392,7 @@
             startingLineNumber = "495"
             endingLineNumber = "495"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1450,12 +1434,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/View/MessageViewController.m"
-            timestampString = "495538109.498903"
+            timestampString = "496905804.856428"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "647"
-            endingLineNumber = "647"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            startingLineNumber = "770"
+            endingLineNumber = "770"
+            landmarkName = "-tableView:didSelectRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1466,12 +1450,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/View/MessageViewController.m"
-            timestampString = "495538109.498903"
+            timestampString = "496908326.529907"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "732"
-            endingLineNumber = "732"
-            landmarkName = "-tapCell:atIndex:"
+            startingLineNumber = "882"
+            endingLineNumber = "882"
+            landmarkName = "-handleRefresh:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1592,11 +1576,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/View/MessageViewController.m"
-            timestampString = "494818439.373129"
+            timestampString = "496905175.262438"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "228"
-            endingLineNumber = "228"
+            startingLineNumber = "244"
+            endingLineNumber = "244"
             landmarkName = "-NewsCount"
             landmarkType = "7">
             <Locations>
@@ -1646,7 +1630,7 @@
             startingLineNumber = "788"
             endingLineNumber = "788"
             landmarkName = "-PrePareData:interface:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1662,7 +1646,7 @@
             startingLineNumber = "169"
             endingLineNumber = "169"
             landmarkName = "-tableView:didSelectRowAtIndexPath:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1736,7 +1720,7 @@
                   moduleName = "unicomOA"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/hnsi-03/%E9%A1%B9%E7%9B%AE/unicomOA/unicomOA/unicomOA/Base/Function/ShenPiContorller/UnFinishVc.m"
-                  timestampString = "496723994.430886"
+                  timestampString = "496908327.728452"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "359"
@@ -1751,7 +1735,7 @@
                   moduleName = "unicomOA"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/hnsi-03/%E9%A1%B9%E7%9B%AE/unicomOA/unicomOA/unicomOA/Base/Function/ShenPiContorller/UnFinishVc.m"
-                  timestampString = "496723994.432864"
+                  timestampString = "496908327.73054"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "361"
@@ -2376,7 +2360,7 @@
             startingLineNumber = "442"
             endingLineNumber = "442"
             landmarkName = "-cellHeightForNews:titleFont:otherFont:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2424,7 +2408,7 @@
             startingLineNumber = "384"
             endingLineNumber = "384"
             landmarkName = "-buildView:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2450,12 +2434,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/View/MessageViewController.m"
-            timestampString = "495538109.498903"
+            timestampString = "496905175.262438"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "530"
-            endingLineNumber = "530"
-            landmarkName = "-cellHeightForNews:titleFont:otherFont:"
+            startingLineNumber = "557"
+            endingLineNumber = "557"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2544,11 +2528,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/View/MessageViewController.m"
-            timestampString = "495538109.498903"
+            timestampString = "496905804.856428"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "598"
-            endingLineNumber = "598"
+            startingLineNumber = "704"
+            endingLineNumber = "704"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -2560,11 +2544,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/View/MessageViewController.m"
-            timestampString = "495538109.498903"
+            timestampString = "496905175.262438"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "501"
-            endingLineNumber = "501"
+            startingLineNumber = "528"
+            endingLineNumber = "528"
             landmarkName = "-cellHeightForNews:titleFont:otherFont:"
             landmarkType = "7">
          </BreakpointContent>
@@ -2640,11 +2624,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/View/MessageViewController.m"
-            timestampString = "495538109.498903"
+            timestampString = "496905804.856428"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "586"
-            endingLineNumber = "586"
+            startingLineNumber = "663"
+            endingLineNumber = "663"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -2656,11 +2640,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/View/MessageViewController.m"
-            timestampString = "495538109.498903"
+            timestampString = "496905175.262438"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "575"
-            endingLineNumber = "575"
+            startingLineNumber = "615"
+            endingLineNumber = "615"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -2672,11 +2656,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/View/MessageViewController.m"
-            timestampString = "495538109.498903"
+            timestampString = "496905804.856428"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "601"
-            endingLineNumber = "601"
+            startingLineNumber = "707"
+            endingLineNumber = "707"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -2758,7 +2742,7 @@
             startingLineNumber = "823"
             endingLineNumber = "823"
             landmarkName = "-refresh:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2854,7 +2838,7 @@
             startingLineNumber = "594"
             endingLineNumber = "594"
             landmarkName = "-scrollViewDidScroll:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2870,7 +2854,7 @@
             startingLineNumber = "499"
             endingLineNumber = "499"
             landmarkName = "-NewsList:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2886,7 +2870,7 @@
             startingLineNumber = "480"
             endingLineNumber = "480"
             landmarkName = "-NewsList:"
-            landmarkType = "5">
+            landmarkType = "7">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -2934,7 +2918,7 @@
             startingLineNumber = "581"
             endingLineNumber = "581"
             landmarkName = "-scrollViewDidScroll:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2950,7 +2934,7 @@
             startingLineNumber = "487"
             endingLineNumber = "487"
             landmarkName = "-NewsList:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2966,7 +2950,7 @@
             startingLineNumber = "504"
             endingLineNumber = "504"
             landmarkName = "-NewsList:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2982,7 +2966,7 @@
             startingLineNumber = "488"
             endingLineNumber = "488"
             landmarkName = "-NewsList:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2998,7 +2982,7 @@
             startingLineNumber = "679"
             endingLineNumber = "679"
             landmarkName = "-updateSearchResultsForSearchController:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3014,7 +2998,7 @@
             startingLineNumber = "682"
             endingLineNumber = "682"
             landmarkName = "-updateSearchResultsForSearchController:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3174,7 +3158,7 @@
             startingLineNumber = "661"
             endingLineNumber = "661"
             landmarkName = "-updateSearchResultsForSearchController:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3206,7 +3190,7 @@
             startingLineNumber = "801"
             endingLineNumber = "801"
             landmarkName = "-PrePareData:interface:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3222,7 +3206,7 @@
             startingLineNumber = "587"
             endingLineNumber = "587"
             landmarkName = "-CreateSearchResult:con2:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3238,7 +3222,7 @@
             startingLineNumber = "568"
             endingLineNumber = "568"
             landmarkName = "-CreateSearchResult:con2:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3254,7 +3238,7 @@
             startingLineNumber = "830"
             endingLineNumber = "830"
             landmarkName = "-PrePareData:interface:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3334,7 +3318,7 @@
             startingLineNumber = "135"
             endingLineNumber = "135"
             landmarkName = "-PrePareData:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3350,7 +3334,7 @@
             startingLineNumber = "577"
             endingLineNumber = "577"
             landmarkName = "-tableView:viewForHeaderInSection:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3366,7 +3350,7 @@
             startingLineNumber = "765"
             endingLineNumber = "765"
             landmarkName = "-tableView:heightForRowAtIndexPath:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3398,7 +3382,7 @@
             startingLineNumber = "527"
             endingLineNumber = "527"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3414,7 +3398,7 @@
             startingLineNumber = "1013"
             endingLineNumber = "1013"
             landmarkName = "-segmentAction:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3430,7 +3414,7 @@
             startingLineNumber = "831"
             endingLineNumber = "831"
             landmarkName = "-PrePareData:interface:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3574,7 +3558,7 @@
             startingLineNumber = "1022"
             endingLineNumber = "1022"
             landmarkName = "-setUpAllViewController"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3782,7 +3766,7 @@
             startingLineNumber = "519"
             endingLineNumber = "519"
             landmarkName = "-NewsList:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3798,7 +3782,7 @@
             startingLineNumber = "78"
             endingLineNumber = "78"
             landmarkName = "-viewWillAppear:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3926,7 +3910,7 @@
             startingLineNumber = "98"
             endingLineNumber = "98"
             landmarkName = "-viewDidLoad"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3942,7 +3926,7 @@
             startingLineNumber = "515"
             endingLineNumber = "515"
             landmarkName = "-NewsList:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -4038,7 +4022,7 @@
             startingLineNumber = "525"
             endingLineNumber = "525"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -4086,7 +4070,7 @@
             startingLineNumber = "535"
             endingLineNumber = "535"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -4240,11 +4224,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/View/MessageViewController.m"
-            timestampString = "495538109.498903"
+            timestampString = "496905175.262438"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "537"
-            endingLineNumber = "537"
+            startingLineNumber = "564"
+            endingLineNumber = "564"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -4256,11 +4240,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/View/MessageViewController.m"
-            timestampString = "494818439.373129"
+            timestampString = "496905175.262438"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "272"
-            endingLineNumber = "272"
+            startingLineNumber = "288"
+            endingLineNumber = "288"
             landmarkName = "-NewsCount"
             landmarkType = "7">
          </BreakpointContent>
@@ -4278,7 +4262,7 @@
             startingLineNumber = "209"
             endingLineNumber = "209"
             landmarkName = "-MovePreviousVc:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -4342,7 +4326,7 @@
             startingLineNumber = "653"
             endingLineNumber = "653"
             landmarkName = "-searchBarCancelButtonClicked:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -4358,7 +4342,7 @@
             startingLineNumber = "392"
             endingLineNumber = "392"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -4374,7 +4358,7 @@
             startingLineNumber = "395"
             endingLineNumber = "395"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -4406,7 +4390,7 @@
             startingLineNumber = "528"
             endingLineNumber = "528"
             landmarkName = "-loadDataForTreeViewCell:with:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -4438,7 +4422,7 @@
             startingLineNumber = "889"
             endingLineNumber = "889"
             landmarkName = "-setTxcolorAndTitle:fid:imgView:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -4454,7 +4438,7 @@
             startingLineNumber = "894"
             endingLineNumber = "894"
             landmarkName = "-setTxcolorAndTitle:fid:imgView:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -4470,7 +4454,7 @@
             startingLineNumber = "882"
             endingLineNumber = "882"
             landmarkName = "-setTxcolorAndTitle:fid:imgView:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -4502,7 +4486,7 @@
             startingLineNumber = "870"
             endingLineNumber = "870"
             landmarkName = "-setTxcolorAndTitle:fid:imgView:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -4518,7 +4502,7 @@
             startingLineNumber = "416"
             endingLineNumber = "416"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -4534,7 +4518,7 @@
             startingLineNumber = "875"
             endingLineNumber = "875"
             landmarkName = "-setTxcolorAndTitle:fid:imgView:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -4550,7 +4534,7 @@
             startingLineNumber = "831"
             endingLineNumber = "831"
             landmarkName = "-setTxcolorAndTitle:fid:imgView:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -4582,7 +4566,7 @@
             startingLineNumber = "205"
             endingLineNumber = "205"
             landmarkName = "-NewsList:"
-            landmarkType = "5">
+            landmarkType = "7">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -4630,7 +4614,7 @@
             startingLineNumber = "469"
             endingLineNumber = "469"
             landmarkName = "-NewsList:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -4646,7 +4630,7 @@
             startingLineNumber = "479"
             endingLineNumber = "479"
             landmarkName = "-NewsList:"
-            landmarkType = "5">
+            landmarkType = "7">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -4694,7 +4678,7 @@
             startingLineNumber = "467"
             endingLineNumber = "467"
             landmarkName = "-NewsList:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -4710,7 +4694,7 @@
             startingLineNumber = "483"
             endingLineNumber = "483"
             landmarkName = "-NewsList:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -4726,7 +4710,7 @@
             startingLineNumber = "482"
             endingLineNumber = "482"
             landmarkName = "-NewsList:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -4742,7 +4726,7 @@
             startingLineNumber = "109"
             endingLineNumber = "109"
             landmarkName = "-viewDidLoad"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -4758,7 +4742,7 @@
             startingLineNumber = "591"
             endingLineNumber = "591"
             landmarkName = "-scrollViewDidScroll:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -4774,7 +4758,7 @@
             startingLineNumber = "463"
             endingLineNumber = "463"
             landmarkName = "-NewsList:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -4854,7 +4838,7 @@
             startingLineNumber = "283"
             endingLineNumber = "283"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -4870,7 +4854,7 @@
             startingLineNumber = "302"
             endingLineNumber = "302"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -4886,7 +4870,7 @@
             startingLineNumber = "408"
             endingLineNumber = "408"
             landmarkName = "-buildRulesCell:indexPath:tableview:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -4902,7 +4886,7 @@
             startingLineNumber = "413"
             endingLineNumber = "413"
             landmarkName = "-buildRulesCell:indexPath:tableview:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -4918,7 +4902,7 @@
             startingLineNumber = "347"
             endingLineNumber = "347"
             landmarkName = "-buildNewsCell:indexPath:tableview:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -4934,7 +4918,7 @@
             startingLineNumber = "205"
             endingLineNumber = "205"
             landmarkName = "-cellHeightForNews:titleFont:otherFont:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -4950,7 +4934,7 @@
             startingLineNumber = "247"
             endingLineNumber = "247"
             landmarkName = "-tableView:heightForRowAtIndexPath:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -4966,7 +4950,7 @@
             startingLineNumber = "622"
             endingLineNumber = "622"
             landmarkName = "-tapCell:atIndex:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -5110,7 +5094,7 @@
             startingLineNumber = "199"
             endingLineNumber = "199"
             landmarkName = "-viewDidLoad"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -5168,11 +5152,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/View/MessageViewController.m"
-            timestampString = "494818439.373129"
+            timestampString = "496905175.262438"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "217"
-            endingLineNumber = "217"
+            startingLineNumber = "233"
+            endingLineNumber = "233"
             landmarkName = "-NewsCount"
             landmarkType = "7">
          </BreakpointContent>
@@ -5184,11 +5168,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/View/MessageViewController.m"
-            timestampString = "494818439.373129"
+            timestampString = "496905175.262438"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "238"
-            endingLineNumber = "238"
+            startingLineNumber = "254"
+            endingLineNumber = "254"
             landmarkName = "-NewsCount"
             landmarkType = "7">
          </BreakpointContent>
@@ -5254,7 +5238,7 @@
             startingLineNumber = "180"
             endingLineNumber = "180"
             landmarkName = "-SysMsgList:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -5270,7 +5254,7 @@
             startingLineNumber = "255"
             endingLineNumber = "255"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -5286,7 +5270,7 @@
             startingLineNumber = "332"
             endingLineNumber = "332"
             landmarkName = "-buildCell:indexPath:tableview:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -5382,7 +5366,7 @@
             startingLineNumber = "386"
             endingLineNumber = "386"
             landmarkName = "-updateSearchResultsForSearchController:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -5398,7 +5382,7 @@
             startingLineNumber = "391"
             endingLineNumber = "391"
             landmarkName = "-updateSearchResultsForSearchController:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -5526,7 +5510,7 @@
             startingLineNumber = "617"
             endingLineNumber = "617"
             landmarkName = "-tapCell:atIndex:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -5536,12 +5520,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/View/MessageViewController.m"
-            timestampString = "495538109.498903"
+            timestampString = "496908326.529907"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "744"
-            endingLineNumber = "744"
-            landmarkName = "-tapCell:atIndex:"
+            startingLineNumber = "894"
+            endingLineNumber = "894"
+            landmarkName = "-GetValueFromDic:key:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -5638,13 +5622,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/View/MessageViewController.m"
-            timestampString = "495538109.498903"
+            timestampString = "496908326.529907"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "658"
-            endingLineNumber = "658"
-            landmarkName = "-tableView:viewForFooterInSection:"
-            landmarkType = "7">
+            startingLineNumber = "809"
+            endingLineNumber = "809"
+            landmarkName = "@implementation MessageViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -5660,7 +5644,7 @@
             startingLineNumber = "478"
             endingLineNumber = "478"
             landmarkName = "-NewsList:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -5788,7 +5772,7 @@
             startingLineNumber = "474"
             endingLineNumber = "474"
             landmarkName = "-tableView:didSelectRowAtIndexPath:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -5852,7 +5836,7 @@
             startingLineNumber = "427"
             endingLineNumber = "427"
             landmarkName = "-BackToAppCenter:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -5868,7 +5852,7 @@
             startingLineNumber = "425"
             endingLineNumber = "425"
             landmarkName = "-BackToAppCenter:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -5878,12 +5862,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/View/MessageViewController.m"
-            timestampString = "495538109.498903"
+            timestampString = "496908326.529907"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "815"
-            endingLineNumber = "815"
-            landmarkName = "-PassNavToShenPi"
+            startingLineNumber = "965"
+            endingLineNumber = "965"
+            landmarkName = "-setupCity"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -5900,7 +5884,7 @@
             startingLineNumber = "209"
             endingLineNumber = "209"
             landmarkName = "-MovePreviousVc:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -5932,7 +5916,7 @@
             startingLineNumber = "70"
             endingLineNumber = "70"
             landmarkName = "-viewDidLoad"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -5942,11 +5926,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/View/MessageViewController.m"
-            timestampString = "494818439.373129"
+            timestampString = "496905175.262438"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
             landmarkName = "-viewDidLoad"
             landmarkType = "7">
          </BreakpointContent>
@@ -6060,7 +6044,7 @@
             startingLineNumber = "203"
             endingLineNumber = "203"
             landmarkName = "-viewDidLoad"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -6188,7 +6172,7 @@
             startingLineNumber = "900"
             endingLineNumber = "900"
             landmarkName = "-setTxcolorAndTitle:fid:imgView:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -6268,7 +6252,7 @@
             startingLineNumber = "1036"
             endingLineNumber = "1036"
             landmarkName = "-setUpAllViewController"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -6892,7 +6876,7 @@
             startingLineNumber = "493"
             endingLineNumber = "493"
             landmarkName = "-loadDataForTreeViewCell:with:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -6908,7 +6892,7 @@
             startingLineNumber = "479"
             endingLineNumber = "479"
             landmarkName = "-loadDataForTreeViewCell:with:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -6924,7 +6908,7 @@
             startingLineNumber = "671"
             endingLineNumber = "671"
             landmarkName = "-reloadDataForDisplayArrayChangeAt:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -6940,7 +6924,7 @@
             startingLineNumber = "241"
             endingLineNumber = "241"
             landmarkName = "-AddressList"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -6956,7 +6940,7 @@
             startingLineNumber = "263"
             endingLineNumber = "263"
             landmarkName = "-AddressList"
-            landmarkType = "5">
+            landmarkType = "7">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -7004,7 +6988,7 @@
             startingLineNumber = "498"
             endingLineNumber = "498"
             landmarkName = "-loadDataForTreeViewCell:with:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -7340,7 +7324,7 @@
             startingLineNumber = "242"
             endingLineNumber = "242"
             landmarkName = "-AddressList"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -7356,7 +7340,7 @@
             startingLineNumber = "237"
             endingLineNumber = "237"
             landmarkName = "-AddressList"
-            landmarkType = "5">
+            landmarkType = "7">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -7404,7 +7388,7 @@
             startingLineNumber = "256"
             endingLineNumber = "256"
             landmarkName = "-AddressList"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -7516,7 +7500,7 @@
             startingLineNumber = "504"
             endingLineNumber = "504"
             landmarkName = "-loadDataForTreeViewCell:with:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -7532,7 +7516,7 @@
             startingLineNumber = "515"
             endingLineNumber = "515"
             landmarkName = "-loadDataForTreeViewCell:with:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -7580,7 +7564,7 @@
             startingLineNumber = "366"
             endingLineNumber = "366"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -7596,7 +7580,7 @@
             startingLineNumber = "759"
             endingLineNumber = "759"
             landmarkName = "-FindContact:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -7612,7 +7596,7 @@
             startingLineNumber = "211"
             endingLineNumber = "211"
             landmarkName = "-viewDidLoad"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -7628,7 +7612,7 @@
             startingLineNumber = "257"
             endingLineNumber = "257"
             landmarkName = "-AddressList"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -7644,7 +7628,7 @@
             startingLineNumber = "537"
             endingLineNumber = "537"
             landmarkName = "-tableView:heightForRowAtIndexPath:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -7660,7 +7644,7 @@
             startingLineNumber = "349"
             endingLineNumber = "349"
             landmarkName = "-tableView:numberOfRowsInSection:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -7692,7 +7676,7 @@
             startingLineNumber = "546"
             endingLineNumber = "546"
             landmarkName = "-tableView:didSelectRowAtIndexPath:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -7740,7 +7724,7 @@
             startingLineNumber = "647"
             endingLineNumber = "647"
             landmarkName = "-reloadDataForDisplayArrayChangeAt:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -7756,7 +7740,7 @@
             startingLineNumber = "650"
             endingLineNumber = "650"
             landmarkName = "-reloadDataForDisplayArrayChangeAt:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -7820,7 +7804,7 @@
             startingLineNumber = "250"
             endingLineNumber = "250"
             landmarkName = "-AddressList"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -8012,7 +7996,7 @@
             startingLineNumber = "800"
             endingLineNumber = "800"
             landmarkName = "-PrePareData:interface:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -8076,7 +8060,7 @@
             startingLineNumber = "455"
             endingLineNumber = "455"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -8092,7 +8076,7 @@
             startingLineNumber = "425"
             endingLineNumber = "425"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -8108,7 +8092,7 @@
             startingLineNumber = "175"
             endingLineNumber = "175"
             landmarkName = "-PrePareData:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -8124,7 +8108,7 @@
             startingLineNumber = "190"
             endingLineNumber = "190"
             landmarkName = "-PrePareData:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -8140,7 +8124,7 @@
             startingLineNumber = "173"
             endingLineNumber = "173"
             landmarkName = "-PrePareData:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -8172,7 +8156,7 @@
             startingLineNumber = "62"
             endingLineNumber = "62"
             landmarkName = "-viewDidLoad"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -8182,12 +8166,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/View/MessageViewController.m"
-            timestampString = "495538109.498903"
+            timestampString = "496908326.529907"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "924"
-            endingLineNumber = "924"
-            landmarkName = "-setupCity"
+            startingLineNumber = "1074"
+            endingLineNumber = "1074"
+            landmarkName = "-requestNet:city:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -8204,7 +8188,7 @@
             startingLineNumber = "652"
             endingLineNumber = "652"
             landmarkName = "-reloadDataForDisplayArrayChangeAt:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -8220,7 +8204,7 @@
             startingLineNumber = "412"
             endingLineNumber = "412"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -8284,7 +8268,7 @@
             startingLineNumber = "420"
             endingLineNumber = "420"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -8332,7 +8316,7 @@
             startingLineNumber = "456"
             endingLineNumber = "456"
             landmarkName = "-loadDataForTreeViewCell:with:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -8342,11 +8326,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/View/MessageViewController.m"
-            timestampString = "495538109.498903"
+            timestampString = "496908326.529907"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "935"
-            endingLineNumber = "935"
+            startingLineNumber = "1085"
+            endingLineNumber = "1085"
             landmarkName = "-requestNet:city:"
             landmarkType = "7">
          </BreakpointContent>
@@ -8358,11 +8342,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/View/MessageViewController.m"
-            timestampString = "495538109.498903"
+            timestampString = "496908326.529907"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "947"
-            endingLineNumber = "947"
+            startingLineNumber = "1097"
+            endingLineNumber = "1097"
             landmarkName = "-requestNet:city:"
             landmarkType = "7">
          </BreakpointContent>
@@ -8380,7 +8364,7 @@
             startingLineNumber = "477"
             endingLineNumber = "477"
             landmarkName = "-loadDataForTreeViewCell:with:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -8396,7 +8380,7 @@
             startingLineNumber = "711"
             endingLineNumber = "711"
             landmarkName = "-FindContactLocal:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -8412,7 +8396,7 @@
             startingLineNumber = "692"
             endingLineNumber = "692"
             landmarkName = "-updateSearchResultsForSearchController:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -8476,7 +8460,7 @@
             startingLineNumber = "150"
             endingLineNumber = "150"
             landmarkName = "-GetAllSubString:key:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -8486,11 +8470,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/View/MessageViewController.m"
-            timestampString = "495538109.498903"
+            timestampString = "496905175.262438"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "354"
-            endingLineNumber = "354"
+            startingLineNumber = "370"
+            endingLineNumber = "370"
             landmarkName = "-NewsList:"
             landmarkType = "7">
          </BreakpointContent>
@@ -8502,12 +8486,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/View/MessageViewController.m"
-            timestampString = "495538109.498903"
+            timestampString = "496905175.262438"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "398"
-            endingLineNumber = "398"
-            landmarkName = "-dateFromString:"
+            startingLineNumber = "414"
+            endingLineNumber = "414"
+            landmarkName = "-numberOfSectionsInTableView:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -8556,7 +8540,7 @@
             startingLineNumber = "178"
             endingLineNumber = "178"
             landmarkName = "-SysMsgList:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -8598,11 +8582,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/View/MessageViewController.m"
-            timestampString = "495536698.576915"
+            timestampString = "496905175.262438"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "328"
-            endingLineNumber = "328"
+            startingLineNumber = "344"
+            endingLineNumber = "344"
             landmarkName = "-NewsList:"
             landmarkType = "7">
             <Locations>
@@ -8646,11 +8630,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/View/MessageViewController.m"
-            timestampString = "495538109.498903"
+            timestampString = "496905175.262438"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "351"
-            endingLineNumber = "351"
+            startingLineNumber = "367"
+            endingLineNumber = "367"
             landmarkName = "-NewsList:"
             landmarkType = "7">
          </BreakpointContent>
@@ -8786,7 +8770,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/Base/Function/ShenPiContorller/UnFinishVc.m"
@@ -9084,6 +9068,150 @@
             startingLineNumber = "615"
             endingLineNumber = "615"
             landmarkName = "-ModifyContent:title:departlabel:ip:port:file:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "unicomOA/Base/Function/ShenPiContorller/UnFinishVc.m"
+            timestampString = "496748468.109107"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1178"
+            endingLineNumber = "1178"
+            landmarkName = "-sendSuggestionValue:indexPath:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "unicomOA/View/MessageViewController.m"
+            timestampString = "496905804.856428"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "685"
+            endingLineNumber = "685"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "unicomOA/View/MessageViewController.m"
+            timestampString = "496905175.262438"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "584"
+            endingLineNumber = "584"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "unicomOA/View/MessageViewController.m"
+            timestampString = "496908326.529907"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "852"
+            endingLineNumber = "852"
+            landmarkName = "-AddLoop"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "unicomOA/View/MessageViewController.m"
+            timestampString = "496905175.262438"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "626"
+            endingLineNumber = "626"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "unicomOA/View/MessageViewController.m"
+            timestampString = "496905175.262438"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "650"
+            endingLineNumber = "650"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "unicomOA/View/MessageViewController.m"
+            timestampString = "496905175.262438"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "513"
+            endingLineNumber = "513"
+            landmarkName = "-cellHeightForNews:titleFont:otherFont:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "unicomOA/View/MessageViewController.m"
+            timestampString = "496905890.627034"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "635"
+            endingLineNumber = "635"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "unicomOA/Base/Function/NewsModel/NewsNewsTableViewCell.m"
+            timestampString = "496906145.790409"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
+            landmarkName = "-initWithStyle:reuseIdentifier:withCellHeight:withTitleHeight:withButtonHeight:withCateGory:withDate:withTitle:withDepartment:titleFont:otherFont:withImage:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

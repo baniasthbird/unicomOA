@@ -61,24 +61,24 @@
     
     CGFloat h_Title;
     if (iPad) {
-        h_Title=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width-100 title:[dic_content objectForKey:str_keywordTitle] font:[UIFont systemFontOfSize:i_titleFont]];
+        h_Title=[UILabel getHeightByWidth:[UIScreen mainScreen].bounds.size.width-100 title:[dic_content objectForKey:str_keywordTitle] font:[UIFont systemFontOfSize:i_titleFont]];
     }
     else {
-        h_Title=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width-30 title:[dic_content objectForKey:str_keywordTitle] font:[UIFont systemFontOfSize:i_titleFont]];
+        h_Title=[UILabel getHeightByWidth:[UIScreen mainScreen].bounds.size.width-30 title:[dic_content objectForKey:str_keywordTitle] font:[UIFont systemFontOfSize:i_titleFont]];
     }
     
     NSString *str_department = [dic_content objectForKey:str_keywordName];
     CGFloat h_depart=0;
     CGFloat h_height=0;
     if (str_department!=nil) {
-        CGFloat w_depart=[UILabel_LabelHeightAndWidth getWidthWithTitle:[dic_content objectForKey:str_keywordName] font:[UIFont systemFontOfSize:i_otherFont]];
-        h_depart=[UILabel_LabelHeightAndWidth getHeightByWidth:w_depart title:str_department font:[UIFont systemFontOfSize:i_otherFont]];
+        CGFloat w_depart=[UILabel getWidthWithTitle:[dic_content objectForKey:str_keywordName] font:[UIFont systemFontOfSize:i_otherFont]];
+        h_depart=[UILabel getHeightByWidth:w_depart title:str_department font:[UIFont systemFontOfSize:i_otherFont]];
         h_height=h_Title+h_depart;
     }
     else {
-        CGFloat w_depart=[UILabel_LabelHeightAndWidth getWidthWithTitle:[dic_content objectForKey:str_keywordTime] font:[UIFont systemFontOfSize:i_otherFont]];
+        CGFloat w_depart=[UILabel getWidthWithTitle:[dic_content objectForKey:str_keywordTime] font:[UIFont systemFontOfSize:i_otherFont]];
         str_department=[dic_content objectForKey:str_keywordTime];
-        h_depart=[UILabel_LabelHeightAndWidth getHeightByWidth:w_depart title:str_department font:[UIFont systemFontOfSize:i_otherFont]];
+        h_depart=[UILabel getHeightByWidth:w_depart title:str_department font:[UIFont systemFontOfSize:i_otherFont]];
         h_height=h_Title+h_depart;
     }
     

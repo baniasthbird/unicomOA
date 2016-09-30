@@ -127,10 +127,10 @@
         lbl_category.text=str_Categroy;
         CGFloat h_cate=0;
         if (iPad) {
-             h_cate =[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width-100 title:str_Categroy font:[UIFont systemFontOfSize:20]];
+             h_cate =[UILabel getHeightByWidth:[UIScreen mainScreen].bounds.size.width-100 title:str_Categroy font:[UIFont systemFontOfSize:20]];
         }
         else {
-            h_cate =[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width-100 title:str_Categroy font:[UIFont systemFontOfSize:16]];
+            h_cate =[UILabel getHeightByWidth:[UIScreen mainScreen].bounds.size.width-100 title:str_Categroy font:[UIFont systemFontOfSize:16]];
         }
        
         [lbl_category setFrame:CGRectMake(75, 5, [UIScreen mainScreen].bounds.size.width-100, h_cate)];

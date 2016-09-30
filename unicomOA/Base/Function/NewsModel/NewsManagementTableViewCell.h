@@ -12,7 +12,6 @@
 
 @protocol NewsTapDelegate <NSObject>
 
-@required
 
 /**移除的代理方法*/
 -(void)sideslipCellRemoveCell:(NewsManagementTableViewCell*)cell atIndex:(NSInteger)index;

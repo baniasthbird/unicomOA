@@ -1,22 +1,14 @@
 //
-//  UILabel+LabelHeightAndWidth.m
+//  UILabel+LaelHeightAndWidth.m
 //  unicomOA
 //
-//  Created by hnsi-03 on 16/5/25.
+//  Created by hnsi-03 on 2016/9/29.
 //  Copyright © 2016年 zr-mac. All rights reserved.
 //
 
 #import "UILabel+LabelHeightAndWidth.h"
 
-@implementation UILabel_LabelHeightAndWidth
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
+@implementation UILabel (LabelHeightAndWidth)
 
 + (CGFloat)getHeightByWidth:(CGFloat)width title:(NSString *)title font:(UIFont *)font
 {
@@ -37,4 +29,5 @@
     [label sizeToFit];
     return label.frame.size.width;
 }
+
 @end

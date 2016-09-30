@@ -109,7 +109,7 @@ int i_comment_num;
     _lbl_label.font=[UIFont systemFontOfSize:24];
     _lbl_label.textColor=[UIColor blackColor];
     _lbl_label.text=_str_label;
-    _h_title=[UILabel_LabelHeightAndWidth getHeightByWidth:_lbl_label.frame.size.width title:_str_label font:[UIFont systemFontOfSize:24]];
+    _h_title=[UILabel getHeightByWidth:_lbl_label.frame.size.width title:_str_label font:[UIFont systemFontOfSize:24]];
     _lbl_label.frame=CGRectMake(self.view.frame.size.width/32, 10, 15*self.view.frame.size.width/16, _h_title);
     _lbl_label.textAlignment=NSTextAlignmentCenter;
     //[_lbl_label sizeToFit];

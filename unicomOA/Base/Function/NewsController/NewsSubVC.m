@@ -185,24 +185,24 @@
     
     CGFloat h_Title;
     if (iPad) {
-        h_Title=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width-100 title:[dic_content objectForKey:@"title"] font:[UIFont systemFontOfSize:i_titleFont]];
+        h_Title=[UILabel getHeightByWidth:[UIScreen mainScreen].bounds.size.width-100 title:[dic_content objectForKey:@"title"] font:[UIFont systemFontOfSize:i_titleFont]];
     }
     else {
-        h_Title=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width-30 title:[dic_content objectForKey:@"title"] font:[UIFont systemFontOfSize:i_titleFont]];
+        h_Title=[UILabel getHeightByWidth:[UIScreen mainScreen].bounds.size.width-30 title:[dic_content objectForKey:@"title"] font:[UIFont systemFontOfSize:i_titleFont]];
     }
     
     NSString *str_department = [dic_content objectForKey:@"operatorName"];
     CGFloat h_depart=0;
     CGFloat h_height=0;
     if (str_department!=nil) {
-        CGFloat w_depart=[UILabel_LabelHeightAndWidth getWidthWithTitle:[dic_content objectForKey:@"operatorName"] font:[UIFont systemFontOfSize:i_otherFont]];
-        h_depart=[UILabel_LabelHeightAndWidth getHeightByWidth:w_depart title:str_department font:[UIFont systemFontOfSize:i_otherFont]];
+        CGFloat w_depart=[UILabel getWidthWithTitle:[dic_content objectForKey:@"operatorName"] font:[UIFont systemFontOfSize:i_otherFont]];
+        h_depart=[UILabel getHeightByWidth:w_depart title:str_department font:[UIFont systemFontOfSize:i_otherFont]];
         h_height=h_Title+h_depart;
     }
     else {
-        CGFloat w_depart=[UILabel_LabelHeightAndWidth getWidthWithTitle:[dic_content objectForKey:@"operationTime"] font:[UIFont systemFontOfSize:i_otherFont]];
+        CGFloat w_depart=[UILabel getWidthWithTitle:[dic_content objectForKey:@"operationTime"] font:[UIFont systemFontOfSize:i_otherFont]];
         str_department=[dic_content objectForKey:@"operationTime"];
-        h_depart=[UILabel_LabelHeightAndWidth getHeightByWidth:w_depart title:str_department font:[UIFont systemFontOfSize:i_otherFont]];
+        h_depart=[UILabel getHeightByWidth:w_depart title:str_department font:[UIFont systemFontOfSize:i_otherFont]];
         h_height=h_Title+h_depart;
     }
     
@@ -329,15 +329,15 @@
     
     CGFloat h_Title;
     if (iPad) {
-        h_Title=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width-100 title:str_title font:[UIFont systemFontOfSize:i_titleFont]];
+        h_Title=[UILabel getHeightByWidth:[UIScreen mainScreen].bounds.size.width-100 title:str_title font:[UIFont systemFontOfSize:i_titleFont]];
     }
     else {
-        h_Title=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width-30 title:str_title font:[UIFont systemFontOfSize:i_titleFont]];
+        h_Title=[UILabel getHeightByWidth:[UIScreen mainScreen].bounds.size.width-30 title:str_title font:[UIFont systemFontOfSize:i_titleFont]];
     }
     
     NSString *str_department =[_baseFunc GetValueFromDic:dic_content key:@"operationDeptName"];
     // CGFloat w_depart=[UILabel_LabelHeightAndWidth getWidthWithTitle:[dic_content objectForKey:@"operatorName"] font:[UIFont systemFontOfSize:i_otherFont]];
-    CGFloat h_depart=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width title:str_department font:[UIFont systemFontOfSize:i_otherFont]];
+    CGFloat h_depart=[UILabel getHeightByWidth:[UIScreen mainScreen].bounds.size.width title:str_department font:[UIFont systemFontOfSize:i_otherFont]];
     NSString *str_time =[_baseFunc GetValueFromDic:dic_content key:@"startDate"];
     NSArray *arr_time=[str_time componentsSeparatedByString:@" "];
     NSString *str_time2=[arr_time objectAtIndex:0];
@@ -396,15 +396,15 @@
     
     CGFloat h_Title;
     if (iPad) {
-        h_Title=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width-100 title:str_title font:[UIFont systemFontOfSize:i_titleFont]];
+        h_Title=[UILabel getHeightByWidth:[UIScreen mainScreen].bounds.size.width-100 title:str_title font:[UIFont systemFontOfSize:i_titleFont]];
     }
     else {
-        h_Title=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width-30 title:str_title font:[UIFont systemFontOfSize:i_titleFont]];
+        h_Title=[UILabel getHeightByWidth:[UIScreen mainScreen].bounds.size.width-30 title:str_title font:[UIFont systemFontOfSize:i_titleFont]];
     }
     
     NSString *str_department =[_baseFunc GetValueFromDic:dic_content key:@"operationTime"];
     // CGFloat w_depart=[UILabel_LabelHeightAndWidth getWidthWithTitle:[dic_content objectForKey:@"operatorName"] font:[UIFont systemFontOfSize:i_otherFont]];
-    CGFloat h_depart=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width title:str_department font:[UIFont systemFontOfSize:i_otherFont]];
+    CGFloat h_depart=[UILabel getHeightByWidth:[UIScreen mainScreen].bounds.size.width title:str_department font:[UIFont systemFontOfSize:i_otherFont]];
     NSString *str_time =[_baseFunc GetValueFromDic:dic_content key:@"operationTime"];
     NSArray *arr_time=[str_time componentsSeparatedByString:@" "];
     NSString *str_time2=[arr_time objectAtIndex:0];
