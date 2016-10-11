@@ -76,6 +76,15 @@
     
     NSString *str_port;
     
+    CGFloat i_titleFont;
+    CGFloat i_otherFont;
+    
+    UIButton *btn_title1;
+    
+    UIButton *btn_title2;
+    
+    UIButton *btn_title3;
+    
     
 }
 
@@ -129,7 +138,7 @@
     
     _baseFunc=[[BaseFunction alloc]init];
     
-    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-50) style:UITableViewStylePlain];
+    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 60, self.view.frame.size.width, self.view.frame.size.height-150) style:UITableViewStylePlain];
     _tableView.delegate=self;
     _tableView.dataSource=self;
     _tableView.backgroundColor=[UIColor clearColor];
@@ -148,7 +157,8 @@
     
     
     [self.view addSubview:_tableView];
-    
+  //  [self setupsectionView];
+    [self setupButtonView];
     _news_count=0;
     
     
@@ -173,6 +183,20 @@
         [self NewsList:news_param];
     }
    
+    if (iPhone6_plus) {
+        i_titleFont=17;
+        i_otherFont=14;
+    }
+    else if (iPad) {
+        i_titleFont=24;
+        i_otherFont=18;
+    }
+    else {
+        i_titleFont=17;
+        i_otherFont=11;
+    }
+
+    
     [self NewsCount];
     
     [self setupLocation];
@@ -180,6 +204,97 @@
     timer=[NSTimer scheduledTimerWithTimeInterval:3600 target:self selector:@selector(setupLocation) userInfo:nil repeats:YES];
 }
 
+
+-(void)setupsectionView {
+    CGRect frameRect = CGRectMake(0, 70, self.view.frame.size.width, 40);
+    
+    UIView *seperate_view = [[UIView alloc] initWithFrame:frameRect];
+    
+    UIImageView *img=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"newsbodcast.png"]];
+    
+    [img setFrame:CGRectMake(20, 5, 20, 20)];
+    
+    // [view addSubview:img];
+    
+    UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(25, 5, self.view.frame.size.width-80, 30)];
+    
+    label.textAlignment=NSTextAlignmentLeft;
+    
+    
+    
+    CGFloat i_Float=0;
+    if (iPhone4_4s || iPhone5_5s) {
+        i_Float=16;
+    }
+    else {
+        i_Float=16;
+    }
+    
+    label.font=[UIFont systemFontOfSize:i_Float];
+    
+    // label.backgroundColor=[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1];
+    
+    
+    label.text=@"新闻公告";
+    label.textColor=[UIColor blackColor];
+    
+    
+    [seperate_view addSubview:label];
+    seperate_view.backgroundColor=[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1];
+
+    [self.view addSubview:seperate_view];
+}
+
+-(UIButton*)CreateButton:(NSString*)str_title tag:(NSInteger)i_tag{
+    UIButton *btn_title=[[UIButton alloc]initWithFrame:CGRectMake(i_tag*Width/3, 0, Width/3, 60)];
+    [btn_title setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [btn_title setTitle:str_title forState:UIControlStateNormal];
+    btn_title.titleLabel.font=[UIFont systemFontOfSize:16];
+    [btn_title setBackgroundColor:[UIColor clearColor]];
+    btn_title.titleLabel.textAlignment=NSTextAlignmentCenter;
+    //  [btn_title1 addTarget:self action:@selector(MoveToShenPi:) forControlEvents:UIControlEventTouchUpInside];
+    
+    return btn_title;
+}
+
+
+-(void)UpdateButton:(UIButton*)btn_title num:(NSInteger)i_num {
+    if (i_num!=0) {
+        CATextLayer  *_badgeLayer = [[CATextLayer alloc] init];
+        _badgeLayer.backgroundColor=[UIColor redColor].CGColor;
+        _badgeLayer.foregroundColor = [UIColor blackColor].CGColor;
+        _badgeLayer.alignmentMode = kCAAlignmentCenter;
+        [_badgeLayer setFrame:CGRectMake(0, 0, 6, 6)];
+        _badgeLayer.position=CGPointMake(btn_title.frame.size.width/2+35, 20);
+        _badgeLayer.wrapped = YES;
+        _badgeLayer.cornerRadius = 3.0f;
+        // [_badgeLayer setFontSize:16];
+        // [_badgeLayer setString:@"4"];
+        _badgeLayer.anchorPoint=CGPointZero;
+        _badgeLayer.contentsScale = [[UIScreen mainScreen] scale];
+        [btn_title.layer addSublayer:_badgeLayer];
+    }
+
+}
+
+-(void)setupButtonView {
+    UIView *seperatorline1=[[UIView alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/3, 0, 1, 60)];
+    seperatorline1.backgroundColor=[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1];
+    UIView *seperatorline2=[[UIView alloc]initWithFrame:CGRectMake(2*[UIScreen mainScreen].bounds.size.width/3, 0, 1, 60)];
+    seperatorline2.backgroundColor=[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1];
+
+    btn_title1=[self CreateButton:@"待办流程" tag:0];
+    [btn_title1 addTarget:self action:@selector(PassNavToShenPi) forControlEvents:UIControlEventTouchUpInside];
+    btn_title2 =[self CreateButton:@"公文传阅" tag:1];
+    [btn_title2 addTarget:self action:@selector(PassNavToChuanYue) forControlEvents:UIControlEventTouchUpInside];
+    btn_title3 = [self CreateButton:@"系统消息" tag:2];
+    [btn_title3 addTarget:self action:@selector(PassNaveToMessage) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn_title1];
+    [self.view addSubview:btn_title2];
+    [self.view addSubview:btn_title3];
+    [self.view addSubview:seperatorline1];
+    [self.view addSubview:seperatorline2];
+}
 
 -(void)setupLocation {
     INTULocationManager *mgr=[INTULocationManager sharedInstance];
@@ -247,9 +362,16 @@
                 _i_doc_num=[str_docnum intValue];
                 _i_flow_num=[str_flownum intValue];
                 _i_msg_num=[str_msgnum intValue];
+                
+                [self UpdateButton:btn_title1 num:_i_flow_num];
+                [self UpdateButton:btn_title2 num:_i_doc_num];
+                [self UpdateButton:btn_title3 num:_i_msg_num];
+                [self.view setNeedsDisplay];
+                 
+              //  [self setupButtonView];
               //  [indicator stopAnimating];
-                NSIndexSet *indexSet=[NSIndexSet indexSetWithIndex:0];
-                [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
+              //  NSIndexSet *indexSet=[NSIndexSet indexSetWithIndex:0];
+              //  [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
                 /*
                 //0715 zr 接口不完善前临时添加
                 NSString *str_UnFinish=[db fetchInterface:@"UnFinishTaskShenPiList"];
@@ -340,8 +462,14 @@
             int i_success=[str_success intValue];
             if (i_success==1) {
                 NSArray *arr_list=[JSON objectForKey:@"list"];
+                for (int i=0; i<[arr_list count]; i++) {
+                    NSDictionary *dic_arr=[arr_list objectAtIndex:i];
+                    if (![_arr_NewsList containsObject:dic_arr]) {
+                        [_arr_NewsList addObject:dic_arr];
+                    }
+                }
                 
-                [_arr_NewsList addObjectsFromArray:arr_list];
+               // [_arr_NewsList addObjectsFromArray:arr_list];
                 _news_count++;
                 if (_news_count==2) {
                   //  [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
@@ -428,7 +556,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==0) {
-        return 40;
+        return 0;
     }
     else {
         if ([_arr_NewsList count]==0) {
@@ -438,15 +566,8 @@
             
             
             CGFloat h_height=0;
-            if (iPhone6_plus) {
-                h_height=[self cellHeightForNews:indexPath.section-1 titleFont:17 otherFont:14];
-            }
-            else if (iPad) {
-                h_height=[self cellHeightForNews:indexPath.section-1 titleFont:24 otherFont:18];
-            }
-            else {
-                 h_height=[self cellHeightForNews:indexPath.section-1 titleFont:17 otherFont:11];
-            }
+           
+            h_height=[self cellHeightForNews:indexPath.section-1];
             
             return h_height;
             
@@ -456,11 +577,19 @@
 }
 
 
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if (section==1) {
+        return 30;
+    }
+    else {
+        return 0;
+    }
+}
 
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     if (section==0) {
-        return 30;
+       return 0;
     }
     else {
         if (!iPad) {
@@ -469,12 +598,11 @@
         else {
             return 9;
         }
-        
     }
 }
 
 
--(CGFloat)cellHeightForNews:(NSInteger)i_index titleFont:(CGFloat)i_titleFont otherFont:(CGFloat)i_otherFont {
+-(CGFloat)cellHeightForNews:(NSInteger)i_index {
   //  @try {
         if (i_index<[_arr_NewsList count]) {
             NSDictionary *dic_content=[_arr_NewsList objectAtIndex:i_index];
@@ -553,10 +681,19 @@
    
   //  @try {
         if (indexPath.section==0) {
+            /*
             RemindCell *r_cell=[RemindCell cellWithTable:tableView DocNum:_i_doc_num FlowNum:_i_flow_num MsgNum:_i_msg_num];
             r_cell.delegate=self;
             r_cell.selectionStyle=UITableViewCellSelectionStyleNone;
             return r_cell;
+             */
+            static NSString *identifier=@"Cell";
+            UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:identifier];
+            if (cell==nil) {
+                cell =[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+                cell.textLabel.text=@"";
+            }
+            return cell;
         }
         else  {
             if ([_arr_NewsList count]==0) {
@@ -578,20 +715,6 @@
                    // NSString *str_category=[dic_content objectForKey:@"classname"];
                     NSString *str_category=[_baseFunc GetValueFromDic:dic_content key:@"classname"];
                     
-                    CGFloat i_titleFont=0;
-                    CGFloat i_otherFont=0;
-                    if (iPhone6_plus) {
-                        i_titleFont=16;
-                        i_otherFont=11;
-                    }
-                    else if (iPad) {
-                        i_titleFont=24;
-                        i_otherFont=18;
-                    }
-                    else {
-                        i_titleFont=16;
-                        i_otherFont=11;
-                    }
                     //  CGFloat h_category=[UILabel_LabelHeighndWidth getHeightByWidth:15*self.view.frame.size.width/16 title:str_category font:[UIFont systemFontOfSize:i_otherFont]];
                     NSString *str_title=[_baseFunc GetValueFromDic:dic_content key:@"title"];
                     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str_title];
@@ -623,7 +746,7 @@
                     NSString *str_time2=[arr_time objectAtIndex:0];
                     NSString *str_depart=[NSString stringWithFormat:@"%@ %@",str_department,str_time2];
                     //CGFloat h_height=h_Title+h_depart+30;
-                    CGFloat h_height=[self cellHeightForNews:indexPath.section-1 titleFont:i_titleFont otherFont:i_otherFont];
+                    CGFloat h_height=[self cellHeightForNews:indexPath.section-1];
                     
                     NSObject *obj=[dic_content objectForKey:@"id"];
                     NSInteger i_index = 0;
@@ -636,26 +759,26 @@
 
                     
                     if ([str_category rangeOfString:@"通知"].location!=NSNotFound) {
-                        cell_infrom=[NewsInformTableViewCell cellWithTable:tableView withCellHeight:h_height withTitleHeight:h_Title withButtonHeight:h_depart withTitle:attributedString withCategory:str_category withDepart:str_depart withDate:str_time2 titleFont:i_titleFont otherFont:i_otherFont];
-                        cell_infrom.delegate=self;
+                        cell_infrom=[NewsInformTableViewCell cellWithTable:tableView withCellHeight:h_height withTitleHeight:h_Title withButtonHeight:h_depart withTitle:attributedString withCategory:str_category withDepart:str_depart withDate:str_time2 titleFont:i_titleFont otherFont:i_otherFont atIndexPath:indexPath];
+                      //  cell_infrom.delegate=self;
                         cell_infrom.str_title=str_title;
                         cell_infrom.str_department=str_department;
                         cell_infrom.myTag=indexPath.section-1;
-                        cell_infrom.selectionStyle=UITableViewCellSelectionStyleGray;
+                        cell_infrom.selectionStyle=UITableViewCellSelectionStyleNone;
                         cell_infrom.tag = i_index;
-                        
+                        cell_infrom.lbl_Title.textColor=[UIColor blackColor];
                         return cell_infrom;
                     }
                     else if ([str_category rangeOfString:@"新闻"].location!=NSNotFound) {
-                        cell_news=[NewsNewsTableViewCell cellWithTable:tableView withCellHeight:h_height withTitleHeight:h_Title withButtonHeight:h_depart withTitle:attributedString withCategory:str_category withDepart:str_depart withDate:str_time2 titleFont:i_titleFont otherFont:i_otherFont withImage:str_imgsrc];
-                        cell_news.delegate=self;
+                        cell_news=[NewsNewsTableViewCell cellWithTable:tableView withCellHeight:h_height withTitleHeight:h_Title withButtonHeight:h_depart withTitle:attributedString withCategory:str_category withDepart:str_depart withDate:str_time2 titleFont:i_titleFont otherFont:i_otherFont withImage:str_imgsrc atIndexPath:indexPath];
+                       // cell_news.delegate=self;
                         cell_news.str_title=str_title;
                         cell_news.str_department=str_department;
                         
                         cell_news.myTag=indexPath.section-1;
-                        cell_news.selectionStyle=UITableViewCellSelectionStyleGray;
+                        cell_news.selectionStyle=UITableViewCellSelectionStyleNone;
                         cell_news.tag = i_index;
-                        
+                        cell_news.lbl_Title.textColor=[UIColor blackColor];
                         return cell_news;
                     }
                     
@@ -710,8 +833,8 @@
 
 }
 
--(UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    if (section==0) {
+-(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    if (section==1) {
         CGRect frameRect = CGRectMake(0, 0, self.view.frame.size.width, 40);
         
         UIView *view = [[UIView alloc] initWithFrame:frameRect];
@@ -773,7 +896,18 @@
         }
     }
     else {
-         NSDictionary *dic_content=[_arr_NewsList objectAtIndex:indexPath.section-1];
+        [self.tableView reloadData];
+        NewsNewsTableViewCell *cell_news=(NewsNewsTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
+        if (cell_news!=nil) {
+            cell_news.lbl_Title.textColor=[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1];
+        }
+        else {
+            NewsInformTableViewCell *cell_Inform=(NewsInformTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
+            if (cell_Inform!=nil) {
+                cell_Inform.lbl_Title.textColor=[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1];
+            }
+        }
+        NSDictionary *dic_content=[_arr_NewsList objectAtIndex:indexPath.section-1];
         NSString *str_category=[_baseFunc GetValueFromDic:dic_content key:@"classname"];
         NSInteger i_index=0;
         NSString *str_label=@"";

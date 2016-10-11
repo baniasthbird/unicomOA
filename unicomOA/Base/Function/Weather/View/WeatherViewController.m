@@ -74,12 +74,12 @@
     NSString *city = [[NSUserDefaults standardUserDefaults] objectForKey:@"城市"];
     
     
-   // if (pro && city) {
-   //     [self requestNet:pro city:city];
-   // }
-   // else {
+    if (pro && city) {
+        [self requestNet:pro city:city];
+           }
+    else {
         [self setupLocation];
-   // }
+    }
     
 }
 
@@ -539,7 +539,6 @@
 
 -(void)locClick {
     NSString *city = [[NSUserDefaults standardUserDefaults]objectForKey:@"城市"];
-    
     LocalViewController *localV= [[LocalViewController alloc]init];
     localV.currentTitle= city;
     localV.delegate=self;
@@ -556,6 +555,7 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     
 }
+
 
 
 -(CLGeocoder *)geocoder

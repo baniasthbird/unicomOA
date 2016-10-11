@@ -31,20 +31,20 @@
     self=[super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         //添加两条竖线
-        UIView *seperatorline1=[[UIView alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/3, 0, 1, 40)];
-        seperatorline1.backgroundColor=[UIColor colorWithRed:191/255.0f green:191/255.0f blue:191/255.0f alpha:1];
-        UIView *seperatorline2=[[UIView alloc]initWithFrame:CGRectMake(2*[UIScreen mainScreen].bounds.size.width/3, 0, 1, 40)];
-        seperatorline2.backgroundColor=[UIColor colorWithRed:191/255.0f green:191/255.0f blue:191/255.0f alpha:1];
+        UIView *seperatorline1=[[UIView alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/3, 0, 1, 70)];
+        seperatorline1.backgroundColor=[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1];
+        UIView *seperatorline2=[[UIView alloc]initWithFrame:CGRectMake(2*[UIScreen mainScreen].bounds.size.width/3, 0, 1, 70)];
+        seperatorline2.backgroundColor=[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1];
         
-        UIView *view1=[[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width/3, 30)];
+        UIView *view1=[[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width/3, 60)];
         view1.backgroundColor=[UIColor clearColor];
         view1.userInteractionEnabled=YES;
         
-        UIView *view2=[[UIView alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/3, 0, [UIScreen mainScreen].bounds.size.width/3, 30)];
+        UIView *view2=[[UIView alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/3, 0, [UIScreen mainScreen].bounds.size.width/3, 60)];
         view2.backgroundColor=[UIColor clearColor];
         view2.userInteractionEnabled=YES;
         
-        UIView *view3=[[UIView alloc]initWithFrame:CGRectMake(2*[UIScreen mainScreen].bounds.size.width/3, 0, [UIScreen mainScreen].bounds.size.width/3, 30)];
+        UIView *view3=[[UIView alloc]initWithFrame:CGRectMake(2*[UIScreen mainScreen].bounds.size.width/3, 0, [UIScreen mainScreen].bounds.size.width/3, 60)];
         view3.backgroundColor=[UIColor clearColor];
         view3.userInteractionEnabled=YES;
         
@@ -217,7 +217,7 @@
 
 
 -(UIButton*)CreateButton:(NSString*)str_title num:(NSInteger)i_num {
-    UIButton *btn_title1=[[UIButton alloc]initWithFrame:CGRectMake(0, 10, [UIScreen mainScreen].bounds.size.width/3, 20)];
+    UIButton *btn_title1=[[UIButton alloc]initWithFrame:CGRectMake(0, 25, [UIScreen mainScreen].bounds.size.width/3, 20)];
     [btn_title1 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [btn_title1 setTitle:str_title forState:UIControlStateNormal];
     btn_title1.titleLabel.font=[UIFont systemFontOfSize:16];
@@ -231,7 +231,7 @@
         _badgeLayer.foregroundColor = [UIColor blackColor].CGColor;
         _badgeLayer.alignmentMode = kCAAlignmentCenter;
         [_badgeLayer setFrame:CGRectMake(0, 0, 6, 6)];
-        _badgeLayer.position=CGPointMake(btn_title1.frame.size.width/2+30, 0);
+        _badgeLayer.position=CGPointMake(btn_title1.frame.size.width/2+35, 0);
         _badgeLayer.wrapped = YES;
         _badgeLayer.cornerRadius = 3.0f;
         // [_badgeLayer setFontSize:16];

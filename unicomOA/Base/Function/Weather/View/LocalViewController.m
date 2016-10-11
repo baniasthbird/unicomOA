@@ -16,6 +16,8 @@
 #import "WeatherViewController.h"
 #import "LocalHeaderView.h"
 #import "UIBarButtonItem+Weather.h"
+#import "INTULocationManager.h"
+#import "MBProgressHUD+MJ.h"
 
 @interface LocalViewController()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,UISearchDisplayDelegate>
 
@@ -29,6 +31,12 @@
 
 @property (nonatomic, strong) UISearchBar *mysearchBar;
 @property (nonatomic, strong) UISearchDisplayController *searchDisplayController;
+
+@property (nonatomic, assign) double lati;
+
+@property (nonatomic, assign) double longi;
+
+@property (nonatomic, strong) CLGeocoder *geocoder;
 
 @end
 
@@ -78,6 +86,7 @@
     
     [self initTableView];
     [self initSearchBar];
+    [self setupLocation];
 }
 
 -(void)initTableView {
@@ -112,7 +121,7 @@
         return 1;
     }
     else {
-        return self.groups.count;
+        return self.groups.count+1;
     }
 }
 
@@ -121,8 +130,13 @@
         return self.resultsData.count;
     }
     else {
-        CitiesGroup *group = self.groups[section];
-        return group.cities.count;
+        if (section==0) {
+            return 1;
+        }
+        else {
+            CitiesGroup *group = self.groups[section-1];
+            return group.cities.count;
+        }
     }
 }
 
@@ -140,8 +154,16 @@
         }
     }
     else {
-        CitiesGroup *group = self.groups[indexPath.section];
-        cell.textLabel.text = group.cities[indexPath.row];
+        if (indexPath.section==0) {
+            if (indexPath.row==0) {
+                cell.textLabel.text=self.city;
+            }
+        }
+        else {
+            CitiesGroup *group = self.groups[indexPath.section-1];
+            cell.textLabel.text = group.cities[indexPath.row];
+        }
+        
     }
     
     return cell;
@@ -160,22 +182,38 @@
         }
     }
     else {
-        CitiesGroup *group = self.groups[indexPath.section];
-        if (indexPath.section ==0) {
-            group.state = group.cities[indexPath.row];
+        if (indexPath.section==0) {
+            if ([self.delegate respondsToSelector:@selector(localviewwithview:province:city:)]) {
+                [self.delegate localviewwithview:self province:self.province city:self.city];
+            }
         }
-        if ([self.delegate respondsToSelector:@selector(localviewwithview:province:city:)]) {
-            [self.delegate localviewwithview:self province:group.state city:group.cities[indexPath.row]];
+        else {
+            CitiesGroup *group = self.groups[indexPath.section-1];
+            if (indexPath.section ==1) {
+                group.state = group.cities[indexPath.row];
+            }
+            if ([self.delegate respondsToSelector:@selector(localviewwithview:province:city:)]) {
+                [self.delegate localviewwithview:self province:group.state city:group.cities[indexPath.row]];
+            }
         }
+        
     }
     
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    LocalHeaderView *header=[LocalHeaderView headerWithTableView:tableView];
-    header.groups = self.groups[section];
-    return  header;
+    if (section==0) {
+        UILabel *labelView=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, Width, 30)];
+        labelView.text=@"当前定位";
+        return labelView;
+    }
+    else {
+        LocalHeaderView *header=[LocalHeaderView headerWithTableView:tableView];
+        header.groups = self.groups[section-1];
+        return  header;
+    }
+
 }
 
 #pragma mark - 是否包含或等于要搜索的字符串内容
@@ -223,5 +261,122 @@
 -(void)dismissclick:(UIButton*)Btn {
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
+
+
+
+
+-(void)setupLocation {
+    INTULocationManager *mgr=[INTULocationManager sharedInstance];
+    [mgr requestLocationWithDesiredAccuracy:INTULocationAccuracyCity timeout:20 block:^(CLLocation *currentLocation, INTULocationAccuracy achievedAccuracy, INTULocationStatus status) {
+        NSLog(@"----%ld",(long)status);
+        
+        self.lati=currentLocation.coordinate.latitude;
+        self.longi=currentLocation.coordinate.longitude;
+        if (self.lati==0 && self.longi==0) {
+            self.lati=34.774831;
+            self.longi=113.681393;
+        }
+        
+        if (status == 1) {
+            [MBProgressHUD hideHUD];
+            [MBProgressHUD showError:@"请求超时"];
+            return;
+        }
+        [self setupCity];
+        
+    }];
+}
+
+-(CLGeocoder *)geocoder
+{
+    if (!_geocoder) {
+        self.geocoder = [[CLGeocoder alloc]init];
+    }
+    return _geocoder;
+}
+
+-(void)setupCity {
+    CLLocationDegrees lati = self.lati;
+    CLLocationDegrees longi = self.longi;
+    CLLocation *loc =[[CLLocation alloc]initWithLatitude:lati longitude:longi];
+    
+    [self.geocoder reverseGeocodeLocation:loc completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+        if (error) {
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            NSLog(@"%@",error);
+        }
+        else {
+            CLPlacemark *pm = [placemarks firstObject];
+            
+            NSLog(@"%@",pm.name);
+            NSLog(@"%@ ,%@ ,%@",pm.locality,pm.country,pm.subLocality);
+            
+            if ([pm.name rangeOfString:@"市"].location != NSNotFound) {
+                if ([pm.locality isEqualToString:@"上海市"] || [pm.locality isEqualToString:@"天津市"] || [pm.locality isEqualToString:@"北京市"] || [pm.locality isEqualToString:@"重庆市"]) {
+                    NSRange range =[pm.locality rangeOfString:@"市"];
+                    int loc= (int)range.location;
+                    NSString *citystr =[pm.locality substringToIndex:loc];
+                    
+                    self.city= self.province = citystr;
+                }
+                else {
+                    NSRange range= [pm.name rangeOfString:@"市"];
+                    int loc = (int)range.location;
+                    NSString *str= [pm.name substringToIndex:loc];
+                    str = [str substringFromIndex:2];
+                    
+                    NSRange range1 = [str rangeOfString:@"省"];
+                    int loc1 = (int)range1.location;
+                    
+                    if (range1.location != NSNotFound) {
+                        NSLog(@"%@",str);
+                        self.province = [str substringToIndex:loc1];
+                        self.city = [str substringFromIndex:loc1+1];
+                        
+                        NSLog(@"%@,%@",[str substringToIndex:loc1],[str substringFromIndex:loc1]);
+                    }
+                    else if ([str isEqualToString:@"广西壮族自治区桂林"]) {
+                        self.province=@"广西";
+                        self.city=@"桂林";
+                    }
+                }
+            }
+            else {
+                if ([pm.locality rangeOfString:@"市"].location != NSNotFound) {
+                    NSLog(@"---%@",pm.locality);
+                    NSRange range = [pm.locality rangeOfString:@"市"];
+                    int loc = (int)range.location;
+                    NSString *citystr = [pm.locality substringToIndex:loc];
+                    self.city = citystr;
+                    for (int i=0; i<[_groups count]; i++) {
+                        CitiesGroup *cities=[_groups objectAtIndex:i];
+                        for (int j=0;j<cities.cities.count;j++) {
+                            NSString *str_city=[cities.cities objectAtIndex:j];
+                            if ([str_city isEqualToString:citystr]) {
+                                self.province=cities.state;
+                                break;
+                            }
+                        }
+                    }
+                    
+                    
+                }
+                else {
+                    self.city = self.province = @"北京";
+                }
+            }
+            
+            NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:0];
+            [self.tableview reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
+            
+          //  [self requestNet:self.province city:self.city];
+            
+           // [[NSUserDefaults standardUserDefaults]setObject:self.province forKey:@"省份"];
+           // [[NSUserDefaults standardUserDefaults]setObject:self.city forKey:@"城市"];
+        }
+    }];
+}
+
+
 
 @end

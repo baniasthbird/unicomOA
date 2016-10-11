@@ -38,4 +38,7 @@
 #pragma mark 查找指定字符串出现的所有位置
 -(NSMutableArray*)GetAllSubString:(NSString*)str_origin key:(NSString*)str_key;
 
+//测试是否能获取新闻图片
+-(BOOL)getImgFromNews:(NSDictionary*)dic_content ip_addr:(NSString*)str_ip port_addr:(NSString*)str_port;
+
 @end

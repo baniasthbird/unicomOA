@@ -145,7 +145,7 @@
             // found an occurrence of the substring! do stuff here
            
             NSInteger i_loc=foundRange.location;
-            NSString *str_tmp=[str_origin substringToIndex:i_loc];
+         //   NSString *str_tmp=[str_origin substringToIndex:i_loc];
             i_count++;
             NSString *str_loc=[NSString stringWithFormat:@"%ld",(long)i_loc];
             [arr_Range addObject:str_loc];
@@ -159,6 +159,27 @@
     
     return arr_Range;
     
+}
+
+//测试是否能获取新闻图片
+-(BOOL)getImgFromNews:(NSDictionary*)dic_content ip_addr:(NSString*)str_ip port_addr:(NSString*)str_port {
+    NSString *str_imgsrc=[self GetValueFromDic:dic_content key:@"imgsrc"];
+    if ([str_imgsrc isEqualToString:@""]) {
+        return NO;
+    }
+    else {
+        return YES;
+        /*
+        NSString *str_url=[NSString stringWithFormat:@"%@%@%@%@%@",@"http://",str_ip,@":",str_port,str_imgsrc];
+        UIImage *img_src=[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:str_url]]];
+        if (img_src!=nil) {
+            return YES;
+        }
+        else {
+            return NO;
+        }
+        */
+    }
 }
 
 

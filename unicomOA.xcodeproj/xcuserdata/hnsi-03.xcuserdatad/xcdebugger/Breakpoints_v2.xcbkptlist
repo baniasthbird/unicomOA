@@ -1412,11 +1412,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/View/MessageViewController.m"
-            timestampString = "496905175.262438"
+            timestampString = "497841562.741228"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "324"
-            endingLineNumber = "324"
+            startingLineNumber = "477"
+            endingLineNumber = "477"
             landmarkName = "-NewsList:"
             landmarkType = "7">
          </BreakpointContent>

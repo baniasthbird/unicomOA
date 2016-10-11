@@ -15,6 +15,8 @@
 #import "BaseFunction.h"
 #import "NewsDisplayViewController.h"
 #import "NewsTableViewResultController.h"
+#import "NewsNewsTableViewCell.h"
+#import "NewsInformTableViewCell.h"
 
 @interface NewsSubVC () <UITableViewDelegate, UITableViewDataSource,NewsTapDelegate,FocusNewsPassDelegate,UISearchBarDelegate,UISearchResultsUpdating>
 
@@ -60,6 +62,14 @@
     
     //搜索后得到的数组
     NSMutableArray *arr_searchList;
+    
+    NSString *str_ip;
+    
+    NSString *str_port;
+    
+    NSInteger i_titleFont;
+    
+    NSInteger i_otherFont;
 }
 
 - (UITableView *)tableView
@@ -95,8 +105,28 @@
     [_session.requestSerializer setHTTPShouldHandleCookies:YES];
     [_session.requestSerializer setTimeoutInterval:10.0f];
     
-   
+    NSMutableArray *t_array=[db fetchIPAddress];
+    if (t_array.count==1) {
+        NSArray *arr_ip=[t_array objectAtIndex:0];
+        str_ip=[arr_ip objectAtIndex:0];
+        str_port=[arr_ip objectAtIndex:1];
+    }
 
+
+    if (iPhone6_plus) {
+        i_titleFont=17;
+        i_otherFont=14;
+    }
+    else if (iPad) {
+        i_titleFont=27.4;
+        i_otherFont=20;
+    }
+    else {
+        i_titleFont=17;
+        i_otherFont=11;
+    }
+
+    
     _i_pageIndex=1;
     
     selectedIndex=-1;
@@ -180,15 +210,23 @@
 }
 
 
--(CGFloat)cellHeightForNews:(NSInteger)i_index titleFont:(CGFloat)i_titleFont otherFont:(CGFloat)i_otherFont {
+-(CGFloat)cellHeightForNews:(NSInteger)i_index{
     NSDictionary *dic_content=[_arr_NewsList objectAtIndex:i_index];
-    
-    CGFloat h_Title;
-    if (iPad) {
-        h_Title=[UILabel getHeightByWidth:[UIScreen mainScreen].bounds.size.width-100 title:[dic_content objectForKey:@"title"] font:[UIFont systemFontOfSize:i_titleFont]];
+    CGFloat h_Title = 0.0;
+    NSString *str_title=[_baseFunc GetValueFromDic:dic_content key:@"title"];
+    NSString *str_category=[_baseFunc GetValueFromDic:dic_content key:@"classname"];
+    if ([str_category rangeOfString:@"通知"].location!=NSNotFound) {
+        h_Title=[UILabel getHeightByWidth:Width*0.92 title:str_title font:[UIFont systemFontOfSize:i_titleFont]];
     }
-    else {
-        h_Title=[UILabel getHeightByWidth:[UIScreen mainScreen].bounds.size.width-30 title:[dic_content objectForKey:@"title"] font:[UIFont systemFontOfSize:i_titleFont]];
+    else if ([str_category rangeOfString:@"新闻"].location!=NSNotFound) {
+        BOOL b_has_img=  [_baseFunc getImgFromNews:dic_content ip_addr:str_ip port_addr:str_port];
+        if (b_has_img==YES) {
+            h_Title=[UILabel getHeightByWidth:Width*0.6107 title:str_title font:[UIFont systemFontOfSize:i_titleFont]];
+        }
+        else {
+            h_Title=[UILabel getHeightByWidth:Width*0.92 title:str_title font:[UIFont systemFontOfSize:i_titleFont]];
+        }
+        
     }
     
     NSString *str_department = [dic_content objectForKey:@"operatorName"];
@@ -245,15 +283,8 @@
     }
     else {
         CGFloat h_height=0;
-        if (iPhone6_plus) {
-            h_height=[self cellHeightForNews:indexPath.row titleFont:17 otherFont:14];
-        }
-        else if (iPad) {
-            h_height=[self cellHeightForNews:indexPath.row titleFont:27.4 otherFont:20];
-        }
-        else {
-            h_height=[self cellHeightForNews:indexPath.row titleFont:17 otherFont:11];
-        }
+       
+        h_height=[self cellHeightForNews:indexPath.row];
         
         return h_height;
     }
@@ -280,8 +311,18 @@
     if ([_arr_NewsList count]!=0) {
         NSDictionary *dic_content=[_arr_NewsList objectAtIndex:indexPath.row];
         if (_b_News==YES) {
-            NewsManagementTableViewCell *cell=[self buildNewsCell:dic_content indexPath:indexPath tableview:tableView];
-            return cell;
+            NSString *str_category=[_baseFunc GetValueFromDic:dic_content key:@"classname"];
+            if ([str_category rangeOfString:@"通知"].location!=NSNotFound) {
+                NewsInformTableViewCell *cell=[self buildInformCell:dic_content indexPath:indexPath tableview:tableView];
+                return cell;
+            }
+            else if ([str_category rangeOfString:@"新闻"].location!=NSNotFound) {
+                NewsNewsTableViewCell *cell=[self buildNewsCell:dic_content indexPath:indexPath tableview:tableView];
+                return cell;
+            }
+            else {
+                return nil;
+            }
         }
         else {
             NewsManagementTableViewCell *cell=[self buildRulesCell:dic_content indexPath:indexPath tableview:tableView];
@@ -303,24 +344,10 @@
 }
 
 
--(NewsManagementTableViewCell*)buildNewsCell:(NSDictionary*)dic_content indexPath:(NSIndexPath*)indexPath tableview:(UITableView*)tableView{
+-(NewsNewsTableViewCell*)buildNewsCell:(NSDictionary*)dic_content indexPath:(NSIndexPath*)indexPath tableview:(UITableView*)tableView{
     NSString *str_category=[_baseFunc GetValueFromDic:dic_content key:@"classname"];
-    CGFloat i_titleFont=0;
-    CGFloat i_otherFont=0;
-    if (iPhone6_plus) {
-        i_titleFont=16;
-        i_otherFont=11;
-    }
-    else if (iPad) {
-        i_titleFont=24;
-        i_otherFont=18;
-    }
-    else {
-        i_titleFont=16;
-        i_otherFont=11;
-    }
     //  CGFloat h_category=[UILabel_LabelHeightAndWidth getHeightByWidth:15*self.view.frame.size.width/16 title:str_category font:[UIFont systemFontOfSize:i_otherFont]];
-    NewsManagementTableViewCell *cell;
+    NewsNewsTableViewCell *cell;
     NSString *str_title=[_baseFunc GetValueFromDic:dic_content key:@"title"];
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str_title];
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
@@ -343,9 +370,11 @@
     NSString *str_time2=[arr_time objectAtIndex:0];
     NSString *str_depart=[NSString stringWithFormat:@"%@ %@",str_department,str_time2];
     //CGFloat h_height=h_Title+h_depart+20;
-    CGFloat h_height=[self cellHeightForNews:indexPath.row titleFont:i_titleFont otherFont:i_otherFont];
-    cell=[NewsManagementTableViewCell cellWithTable:tableView withCellHeight:h_height withTitleHeight:h_Title withButtonHeight:h_depart withTitle:attributedString withCategory:str_category withDepart:str_depart titleFont:i_titleFont otherFont:i_otherFont canScroll:NO withImage:nil];
-    cell.delegate=self;
+    CGFloat h_height=[self cellHeightForNews:indexPath.row];
+    NSString *str_imgsrc=[_baseFunc GetValueFromDic:dic_content key:@"imgsrc"];
+  //  cell=[NewsManagementTableViewCell cellWithTable:tableView withCellHeight:h_height withTitleHeight:h_Title withButtonHeight:h_depart withTitle:attributedString withCategory:str_category withDepart:str_depart titleFont:i_titleFont otherFont:i_otherFont canScroll:NO withImage:nil];
+    cell = [NewsNewsTableViewCell cellWithTable:tableView withCellHeight:h_height withTitleHeight:h_Title withButtonHeight:h_depart withTitle:attributedString withCategory:str_category withDepart:str_depart withDate:str_time2 titleFont:i_titleFont otherFont:i_otherFont withImage:str_imgsrc atIndexPath:indexPath];
+   // cell.delegate=self;
     cell.str_title=str_title;
     cell.str_department=str_department;
     cell.myTag=indexPath.row;
@@ -366,26 +395,53 @@
         cell.tag=i_index;
     }
     return cell;
+}
 
+
+-(NewsInformTableViewCell*)buildInformCell:(NSDictionary*)dic_content indexPath:(NSIndexPath*)indexPath tableview:(UITableView*)tableView {
+    NSString *str_category=[_baseFunc GetValueFromDic:dic_content key:@"classname"];
+    NSString *str_title=[_baseFunc GetValueFromDic:dic_content key:@"title"];
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str_title];
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle setLineSpacing:5];
+    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [str_title length])];
+    NSString *str_department =[_baseFunc GetValueFromDic:dic_content key:@"operationDeptName"];
+    // CGFloat w_depart=[UILabel_LabelHeightAndWidth getWidthWithTitle:[dic_content objectForKey:@"operatorName"] font:[UIFont systemFontOfSize:i_otherFont]];
+    CGFloat h_depart=[UILabel getHeightByWidth:[UIScreen mainScreen].bounds.size.width title:str_department font:[UIFont systemFontOfSize:i_otherFont]];
+    NSString *str_time =[_baseFunc GetValueFromDic:dic_content key:@"startDate"];
+    NSArray *arr_time=[str_time componentsSeparatedByString:@" "];
+    NSString *str_time2=[arr_time objectAtIndex:0];
+    NSString *str_depart=[NSString stringWithFormat:@"%@ %@",str_department,str_time2];
+    //CGFloat h_height=h_Title+h_depart+20;
+    CGFloat h_height=[self cellHeightForNews:indexPath.row];
+    //NSString *str_imgsrc=[_baseFunc GetValueFromDic:dic_content key:@"imgsrc"];
+    CGFloat h_Title;
+    if (iPad) {
+        h_Title=[UILabel getHeightByWidth:[UIScreen mainScreen].bounds.size.width-100 title:str_title font:[UIFont systemFontOfSize:i_titleFont]];
+    }
+    else {
+        h_Title=[UILabel getHeightByWidth:[UIScreen mainScreen].bounds.size.width-30 title:str_title font:[UIFont systemFontOfSize:i_titleFont]];
+    }
+
+    NewsInformTableViewCell *cell =[NewsInformTableViewCell cellWithTable:tableView withCellHeight:h_height withTitleHeight:h_Title withButtonHeight:h_depart withTitle:attributedString withCategory:str_category withDepart:str_depart withDate:str_time2 titleFont:i_titleFont otherFont:i_otherFont atIndexPath:indexPath];
+    // cell_infrom.delegate=self;
+    cell.str_title=str_title;
+    cell.str_department=str_department;
+    cell.myTag=indexPath.section-1;
+    cell.selectionStyle=UITableViewCellSelectionStyleGray;
+    NSObject *obj=[dic_content objectForKey:@"id"];
+    if (obj!=nil) {
+        NSNumber *num_index=(NSNumber*)obj;
+        NSInteger i_index=[num_index integerValue];
+        cell.tag=i_index;
+    }
+    
+    return cell;
 }
 
 -(NewsManagementTableViewCell*)buildRulesCell:(NSDictionary*)dic_content indexPath:(NSIndexPath*)indexPath tableview:(UITableView*)tableView
 {
     NSString *str_category=@"规章制度";
-    CGFloat i_titleFont=0;
-    CGFloat i_otherFont=0;
-    if (iPhone6_plus) {
-        i_titleFont=16;
-        i_otherFont=11;
-    }
-    else if (iPad) {
-        i_titleFont=24;
-        i_otherFont=18;
-    }
-    else {
-        i_titleFont=16;
-        i_otherFont=11;
-    }
     //  CGFloat h_category=[UILabel_LabelHeightAndWidth getHeightByWidth:15*self.view.frame.size.width/16 title:str_category font:[UIFont systemFontOfSize:i_otherFont]];
     NewsManagementTableViewCell *cell;
     NSString *str_title=[_baseFunc GetValueFromDic:dic_content key:@"title"];
@@ -409,7 +465,7 @@
     NSArray *arr_time=[str_time componentsSeparatedByString:@" "];
     NSString *str_time2=[arr_time objectAtIndex:0];
     //CGFloat h_height=h_Title+h_depart+20;
-    CGFloat h_height=[self cellHeightForNews:indexPath.row titleFont:i_titleFont otherFont:i_otherFont];
+    CGFloat h_height=[self cellHeightForNews:indexPath.row];
     cell=[NewsManagementTableViewCell cellWithTable:tableView withCellHeight:h_height withTitleHeight:h_Title withButtonHeight:h_depart withTitle:attributedString withCategory:str_category withDepart:str_time2 titleFont:i_titleFont otherFont:i_otherFont canScroll:NO withImage:nil];
     cell.delegate=self;
     cell.str_title=str_title;
@@ -432,8 +488,56 @@
         cell.tag=i_index;
     }
     return cell;
+}
 
-    
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSDictionary *dic_content=[_arr_NewsList objectAtIndex:indexPath.row];
+    NSString *str_category=[_baseFunc GetValueFromDic:dic_content key:@"classname"];
+    NSInteger i_index=0;
+    NSString *str_label=@"";
+    NSString *str_depart=@"";
+    if ([str_category rangeOfString:@"通知"].location!=NSNotFound) {
+        NewsInformTableViewCell *cell=(NewsInformTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
+        i_index=cell.tag;
+        str_label=cell.str_title;
+        str_depart=cell.str_department;
+    }
+    else if ([str_category rangeOfString:@"新闻"].location!=NSNotFound) {
+        NewsNewsTableViewCell *cell=(NewsNewsTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
+        i_index=cell.tag;
+        str_label=cell.str_title;
+        str_depart=cell.str_department;
+    }
+    else {
+        NewsManagementTableViewCell *cell=(NewsManagementTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
+        i_index=cell.tag;
+        str_label=cell.str_title;
+        str_depart=cell.str_department;
+    }
+/*
+    if (selectedIndex!=-1 && index!=selectedIndex) {
+        NSIndexPath *selectIndexPath=[NSIndexPath indexPathForRow:selectedIndex inSection:0];
+        b_ReplaceDataSource=NO;
+        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:selectIndexPath,nil]  withRowAnimation:UITableViewRowAnimationNone];
+    }
+ */
+    NewsDisplayViewController *news_controller=[[NewsDisplayViewController alloc]init];
+    news_controller.news_index=i_index;
+    news_controller.str_label=str_label;
+    news_controller.str_depart=str_depart;
+  //  news_controller.str_time=cell.str_time;
+  //  news_controller.str_operator=cell.str_operator;
+    news_controller.delegate=self;
+    news_controller.b_News=_b_News;
+    //news_controller.userInfo=_userInfo;
+//    cell.backgroundColor=[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1];
+  //  selectedIndex=index;
+   // selected_title=cell.str_title;
+    if (f_v<9.0) {
+        self.navigationController.delegate=nil;
+    }
+    [self.navigationController pushViewController:news_controller animated:NO];
 }
 
 
@@ -465,14 +569,6 @@
         NSString *str_newsList= [db fetchInterface:@"NewsList"];
         if (_b_News==NO) {
             str_newsList=@"/default/mobile/oa/com.hnsi.erp.mobile.oa.RulesSearch.list.biz.ext";
-        }
-        NSString *str_ip=@"";
-        NSString *str_port=@"";
-        NSMutableArray *t_array=[db fetchIPAddress];
-        if (t_array.count==1) {
-            NSArray *arr_ip=[t_array objectAtIndex:0];
-            str_ip=[arr_ip objectAtIndex:0];
-            str_port=[arr_ip objectAtIndex:1];
         }
         __block NSString *str_index=[param objectForKey:@"pageIndex"];
         NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_newsList];
