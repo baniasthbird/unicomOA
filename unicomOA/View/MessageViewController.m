@@ -23,6 +23,7 @@
 #import "WeatherViewController.h"
 #import "NewsNewsTableViewCell.h"
 #import "NewsInformTableViewCell.h"
+#import "FFDropDownMenuView.h"
 
 
 
@@ -58,6 +59,9 @@
 
 @property (nonatomic, copy) NSString *dt;    //当前日期
 
+/** 下拉菜单 */
+@property (nonatomic, strong) FFDropDownMenuView *dropdownMenu;
+
 @end
 
 @implementation MessageViewController {
@@ -84,6 +88,8 @@
     UIButton *btn_title2;
     
     UIButton *btn_title3;
+    
+    NSArray *modelsArray;
     
     
 }
@@ -138,7 +144,7 @@
     
     _baseFunc=[[BaseFunction alloc]init];
     
-    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 60, self.view.frame.size.width, self.view.frame.size.height-150) style:UITableViewStylePlain];
+    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-50) style:UITableViewStylePlain];
     _tableView.delegate=self;
     _tableView.dataSource=self;
     _tableView.backgroundColor=[UIColor clearColor];
@@ -158,7 +164,9 @@
     
     [self.view addSubview:_tableView];
   //  [self setupsectionView];
-    [self setupButtonView];
+  //  [self setupButtonView];
+    [self setupButtonMenu:NO];
+    [self setupDropDownMenu:_i_flow_num doc_num:_i_doc_num msg_num:_i_msg_num];
     _news_count=0;
     
     
@@ -204,6 +212,23 @@
     timer=[NSTimer scheduledTimerWithTimeInterval:3600 target:self selector:@selector(setupLocation) userInfo:nil repeats:YES];
 }
 
+
+/** 显示下拉菜单 */
+- (void)showDropDownMenu:(UIButton*)sender  {
+    for (CALayer *sublayer in sender.layer.sublayers) {
+        if ([sublayer isKindOfClass:[CATextLayer class]]) {
+            [sublayer removeFromSuperlayer];
+        }
+    }
+    [self.dropdownMenu showMenu];
+}
+
+/** 初始化下拉菜单 */
+- (void)setupDropDownMenu:(NSInteger)i_flow_num doc_num:(NSInteger)i_doc_num msg_num:(NSInteger)i_msg_num {
+    modelsArray = [self getMenuModelsArray:i_flow_num doc_num:i_doc_num msg_num:i_msg_num];
+    
+    self.dropdownMenu = [FFDropDownMenuView ff_DefaultStyleDropDownMenuWithMenuModelsArray:modelsArray menuWidth:FFDefaultFloat eachItemHeight:FFDefaultFloat menuRightMargin:FFDefaultFloat triangleRightMargin:FFDefaultFloat];
+}
 
 -(void)setupsectionView {
     CGRect frameRect = CGRectMake(0, 70, self.view.frame.size.width, 40);
@@ -275,6 +300,28 @@
         [btn_title.layer addSublayer:_badgeLayer];
     }
 
+}
+
+-(void)setupButtonMenu:(BOOL)b_num {
+    UIButton *menuBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+    [menuBtn addTarget:self action:@selector(showDropDownMenu:) forControlEvents:UIControlEventTouchUpInside];
+    [menuBtn setImage:[UIImage imageNamed:@"menu"] forState:UIControlStateNormal];
+    if (b_num==YES) {
+            CATextLayer  *_badgeLayer = [[CATextLayer alloc] init];
+            _badgeLayer.backgroundColor=[UIColor redColor].CGColor;
+            _badgeLayer.foregroundColor = [UIColor blackColor].CGColor;
+            _badgeLayer.alignmentMode = kCAAlignmentCenter;
+            [_badgeLayer setFrame:CGRectMake(0, 0, 6, 6)];
+            _badgeLayer.position=CGPointMake(menuBtn.frame.size.width+5, 0);
+            _badgeLayer.wrapped = YES;
+            _badgeLayer.cornerRadius = 3.0f;
+            // [_badgeLayer setFontSize:16];
+            // [_badgeLayer setString:@"4"];
+            _badgeLayer.anchorPoint=CGPointZero;
+            _badgeLayer.contentsScale = [[UIScreen mainScreen] scale];
+            [menuBtn.layer addSublayer:_badgeLayer];
+    }
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuBtn];
 }
 
 -(void)setupButtonView {
@@ -363,9 +410,10 @@
                 _i_flow_num=[str_flownum intValue];
                 _i_msg_num=[str_msgnum intValue];
                 
-                [self UpdateButton:btn_title1 num:_i_flow_num];
-                [self UpdateButton:btn_title2 num:_i_doc_num];
-                [self UpdateButton:btn_title3 num:_i_msg_num];
+                [self setupDropDownMenu:_i_flow_num doc_num:_i_doc_num msg_num:_i_msg_num];
+                if (_i_doc_num!=0 || _i_flow_num!=0 || _i_msg_num!=0) {
+                    [self setupButtonMenu:YES];
+                }
                 [self.view setNeedsDisplay];
                  
               //  [self setupButtonView];
@@ -1251,6 +1299,87 @@
     self.tableView.dataSource=nil;
 }
 
+/** 获取菜单模型数组 */
+- (NSArray *)getMenuModelsArray:(NSInteger)i_flow_num doc_num:(NSInteger)i_doc_num msg_num:(NSInteger)i_msg_num {
+    __weak typeof(self) weakSelf = self;
+    
+  //  NSString *str_title0=[NSString stringWithFormat:@"%@   %ld",@"待办",(long)i_flow_num];
+    //菜单模型0
+    FFDropDownMenuModel *menuModel0 = [FFDropDownMenuModel ff_DropDownMenuModelWithMenuItemTitle:@"待办" menuItemCount:i_flow_num menuItemIconName:@"menu0"  menuBlock:^{
+        NSLog(@"单击事件");
+        MyShenPiViewController *viewController=[[MyShenPiViewController alloc] init];
+        viewController.userInfo=_userInfo;
+        viewController.delegate=self;
+        if (f_v<9.0) {
+            self.navigationController.delegate=nil;
+        }
+        [weakSelf.navigationController pushViewController:viewController animated:NO];
+
+      //  FFMenuViewController *vc = [FFMenuViewController new];
+      //  vc.backgroundImageName = @"menuBackground";
+      //  vc.navigationItem.title = @"QQ";
+      //  [weakSelf.navigationController pushViewController:vc animated:YES];
+    }];
+    
+   // NSString *str_title1=[NSString stringWithFormat:@"%@   %ld",@"传阅",(long)i_doc_num];
+    //菜单模型1
+    FFDropDownMenuModel *menuModel1 = [FFDropDownMenuModel ff_DropDownMenuModelWithMenuItemTitle:@"传阅" menuItemCount:i_doc_num menuItemIconName:@"menu1" menuBlock:^{
+        NSLog(@"单击事件");
+        UnFinishViewController *vc=[[UnFinishViewController alloc]init];
+        vc.str_title=@"公文传阅";
+        if (f_v<9.0) {
+            self.navigationController.delegate=nil;
+        }
+        [weakSelf.navigationController pushViewController:vc animated:NO];
+      //  FFMenuViewController *vc = [FFMenuViewController new];
+      //  vc.backgroundImageName = @"menuBackground";
+      //  vc.navigationItem.title = @"Line";
+      //  [weakSelf.navigationController pushViewController:vc animated:YES];
+    }];
+    
+  //  NSString *str_title2=[NSString stringWithFormat:@"%@   %ld",@"传阅",(long)i_msg_num];
+    //菜单模型2
+    FFDropDownMenuModel *menuModel2 = [FFDropDownMenuModel ff_DropDownMenuModelWithMenuItemTitle:@"消息" menuItemCount:i_msg_num menuItemIconName:@"menu2" menuBlock:^{
+        NSLog(@"单击事件");
+        SysMsgViewController *vc=[[SysMsgViewController alloc] init];
+        vc.userInfo=_userInfo;
+        vc.str_title=@"系统消息";
+        if (f_v<9.0) {
+            self.navigationController.delegate=nil;
+        }
+        [weakSelf.navigationController pushViewController:vc animated:NO];
+     //   FFMenuViewController *vc = [FFMenuViewController new];
+     //   vc.backgroundImageName = @"menuBackground";
+     //   vc.navigationItem.title = @"Twitter";
+     //   [weakSelf.navigationController pushViewController:vc animated:YES];
+    }];
+    
+    /*
+    //菜单模型3
+    FFDropDownMenuModel *menuModel3 = [FFDropDownMenuModel ff_DropDownMenuModelWithMenuItemTitle:@"QZone" menuItemIconName:@"menu3"  menuBlock:^{
+    //    FFMenuViewController *vc = [FFMenuViewController new];
+    //    vc.backgroundImageName = @"menuBackground";
+    //    vc.navigationItem.title = @"QZone";
+    //    [weakSelf.navigationController pushViewController:vc animated:YES];
+    }];
+    //菜单模型4
+    FFDropDownMenuModel *menuModel4 = [FFDropDownMenuModel ff_DropDownMenuModelWithMenuItemTitle:@"WeChat" menuItemIconName:@"menu4"  menuBlock:^{
+     //   FFMenuViewController *vc = [FFMenuViewController new];
+     //   vc.backgroundImageName = @"menuBackground";
+     //   vc.navigationItem.title = @"WeChat";
+     //   [weakSelf.navigationController pushViewController:vc animated:YES];
+    }];
+    //菜单模型5
+    FFDropDownMenuModel *menuModel5 = [FFDropDownMenuModel ff_DropDownMenuModelWithMenuItemTitle:@"Facebook" menuItemIconName:@"menu5"  menuBlock:^{
+      //  FFMenuViewController *vc = [FFMenuViewController new];
+      //  vc.backgroundImageName = @"menuBackground";
+      //  vc.navigationItem.title = @"Facebook";
+      //  [weakSelf.navigationController pushViewController:vc animated:YES];
+    }];
+    */
+    NSArray *menuModelArr = @[menuModel0, menuModel1, menuModel2];
+    return menuModelArr;
+}
 
 
 /*

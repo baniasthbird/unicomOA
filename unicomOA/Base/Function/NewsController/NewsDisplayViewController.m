@@ -362,6 +362,7 @@ int i_comment_num;
 
 
 -(void)ModifyContent:(NSString*)str_content title:(NSString*)str_title departlabel:(NSString*)str_departlabel ip:(NSString*)str_ip port:(NSString*)str_port file:(NSObject*)obj_file{
+    str_content =[str_content stringByReplacingOccurrencesOfString:@"//" withString:@"/"];
     if (_b_News==NO) {
         if (obj_file!=[NSNull null]) {
             NSString *str_file=(NSString*)obj_file;
@@ -548,11 +549,13 @@ int i_comment_num;
         
         
         //若源代码中存在doc、docx、ppt、pptx、xls、xlsx字样的，全部去掉其中的图片
-        NSRange range1=[str_content rangeOfString:@"doc"];
-        NSRange range2=[str_content rangeOfString:@"xls"];
-        NSRange range3=[str_content rangeOfString:@"ppt"];
-        NSString *str_tmp_content=@"";
-        if (range1.length>0 || range2.length>0 || range3.length>0) {
+    NSRange range1=[str_content rangeOfString:@"doc"];
+    NSRange range2=[str_content rangeOfString:@"xls"];
+    NSRange range3=[str_content rangeOfString:@"ppt"];
+    NSRange range4=[str_content rangeOfString:@"rar"];
+    NSRange range5=[str_content rangeOfString:@"jpg"];
+    NSString *str_tmp_content=@"";
+    if (range1.length>0 || range2.length>0 || range3.length>0 || range4.length>0 || range5.length>0) {
             
             NSLog(@"找到office文档");
             NSArray *arr_tmp= [str_content componentsSeparatedByString:@"<p"];
@@ -562,7 +565,9 @@ int i_comment_num;
                 NSRange rangesub1=[str_tmp rangeOfString:@"doc"];
                 NSRange rangesub2=[str_tmp rangeOfString:@"xls"];
                 NSRange rangesub3=[str_tmp rangeOfString:@"ppt"];
-                if (rangesub1.length>0 || rangesub2.length>0 || rangesub3.length > 0) {
+                NSRange rangesub4=[str_tmp rangeOfString:@"rar"];
+                NSRange rangesub5=[str_tmp rangeOfString:@"jpg"];
+                if (rangesub1.length>0 || rangesub2.length>0 || rangesub3.length > 0 || rangesub4.length > 0 || rangesub5.length > 0) {
                     // [arr_new_content removeObjectAtIndex:i];
                     NSRange rangesub_img_start= [str_tmp rangeOfString:@"<img style="];
                     if (rangesub_img_start.length==0) {
@@ -587,7 +592,7 @@ int i_comment_num;
 
     //替换图片源
     NSString *str_relplace1=[NSString stringWithFormat:@"%@%@:%@",@"http://",str_ip,str_port];
-    NSString *str_relplace2=@"/default/ueditor/jsp/upload/image/";
+    NSString *str_relplace2=@"/default/ueditor/jsp/upload/";
     NSRange range_img=[str_content rangeOfString:str_relplace2];
     if (range_img.length!=0) {
         NSString *str_tmp_img= [str_content substringToIndex:range_img.location];
@@ -616,19 +621,23 @@ int i_comment_num;
     NSString *str_replace_after2=[NSString stringWithFormat:@"%@%@",str_replace3,str_relplace1];
     NSRange range_href=[str_content rangeOfString:str_replace3];
     if (range_href.length!=0) {
-        NSString *str_tmp_href=[str_content substringFromIndex:range_href.location+range_href.length];
-        NSString *str_ip_port=@"http://192.168";
-        NSRange range_ip_port=[str_tmp_href rangeOfString:str_ip_port];
-        if (range_ip_port.location!=NSNotFound) {
-            if (range_ip_port.location<10) {
-                NSLog(@"发现IP");
+        NSString *str_tmp =  [str_content substringFromIndex:range_href.location+range_href.length];
+        if ([str_tmp rangeOfString:@"http://192.168"].location==NSNotFound) {
+            NSString *str_tmp_href=[str_content substringFromIndex:range_href.location+range_href.length];
+            NSString *str_ip_port=@"http://192.168";
+            NSRange range_ip_port=[str_tmp_href rangeOfString:str_ip_port];
+            if (range_ip_port.location!=NSNotFound) {
+                if (range_ip_port.location<10) {
+                    NSLog(@"发现IP");
+                }
+                else {
+                    str_content=[str_content stringByReplacingOccurrencesOfString:str_replace3 withString:str_replace_after2];
+                }
             }
             else {
                 str_content=[str_content stringByReplacingOccurrencesOfString:str_replace3 withString:str_replace_after2];
             }
-        }
-        else {
-            str_content=[str_content stringByReplacingOccurrencesOfString:str_replace3 withString:str_replace_after2];
+
         }
     }
     else {

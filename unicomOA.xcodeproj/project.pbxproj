@@ -99,6 +99,12 @@
 		68224D3F1D4F2530002AC0F1 /* SysMsgDisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68224D3E1D4F2530002AC0F1 /* SysMsgDisplayController.m */; };
 		68224D421D4F470A002AC0F1 /* SysMsgTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68224D411D4F470A002AC0F1 /* SysMsgTableViewCell.m */; };
 		6822656F1C96B4C400AB29C0 /* NewsSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6822656E1C96B4C400AB29C0 /* NewsSettingViewController.m */; };
+		6824F8E11DADC85300F98461 /* FFDropDownMenuBasedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6824F8D61DADC85300F98461 /* FFDropDownMenuBasedCell.m */; };
+		6824F8E21DADC85300F98461 /* FFDropDownMenuBasedModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6824F8D81DADC85300F98461 /* FFDropDownMenuBasedModel.m */; };
+		6824F8E31DADC85300F98461 /* FFDropDownMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6824F8DA1DADC85300F98461 /* FFDropDownMenuCell.m */; };
+		6824F8E41DADC85300F98461 /* FFDropDownMenuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6824F8DC1DADC85300F98461 /* FFDropDownMenuModel.m */; };
+		6824F8E51DADC85300F98461 /* FFDropDownMenuTriangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6824F8DE1DADC85300F98461 /* FFDropDownMenuTriangleView.m */; };
+		6824F8E61DADC85300F98461 /* FFDropDownMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6824F8E01DADC85300F98461 /* FFDropDownMenuView.m */; };
 		6825E1081CED507400EA4D87 /* ShenPiAppVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6825E1071CED507400EA4D87 /* ShenPiAppVC.m */; };
 		6826294B1D9DF5CF00A50AE2 /* NewsNewsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6826294A1D9DF5CF00A50AE2 /* NewsNewsTableViewCell.m */; };
 		6826294E1D9DF5F000A50AE2 /* NewsInformTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6826294D1D9DF5F000A50AE2 /* NewsInformTableViewCell.m */; };
@@ -508,6 +514,19 @@
 		68224D411D4F470A002AC0F1 /* SysMsgTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SysMsgTableViewCell.m; path = Base/Function/SysMsg/MsgView/SysMsgTableViewCell.m; sourceTree = "<group>"; };
 		6822656D1C96B4C400AB29C0 /* NewsSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsSettingViewController.h; path = Base/Settings/Controller/NewsSettingViewController.h; sourceTree = "<group>"; };
 		6822656E1C96B4C400AB29C0 /* NewsSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsSettingViewController.m; path = Base/Settings/Controller/NewsSettingViewController.m; sourceTree = "<group>"; };
+		6824F8D41DADC85300F98461 /* FFDropDownMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFDropDownMenu.h; sourceTree = "<group>"; };
+		6824F8D51DADC85300F98461 /* FFDropDownMenuBasedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFDropDownMenuBasedCell.h; sourceTree = "<group>"; };
+		6824F8D61DADC85300F98461 /* FFDropDownMenuBasedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFDropDownMenuBasedCell.m; sourceTree = "<group>"; };
+		6824F8D71DADC85300F98461 /* FFDropDownMenuBasedModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFDropDownMenuBasedModel.h; sourceTree = "<group>"; };
+		6824F8D81DADC85300F98461 /* FFDropDownMenuBasedModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFDropDownMenuBasedModel.m; sourceTree = "<group>"; };
+		6824F8D91DADC85300F98461 /* FFDropDownMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFDropDownMenuCell.h; sourceTree = "<group>"; };
+		6824F8DA1DADC85300F98461 /* FFDropDownMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFDropDownMenuCell.m; sourceTree = "<group>"; };
+		6824F8DB1DADC85300F98461 /* FFDropDownMenuModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFDropDownMenuModel.h; sourceTree = "<group>"; };
+		6824F8DC1DADC85300F98461 /* FFDropDownMenuModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFDropDownMenuModel.m; sourceTree = "<group>"; };
+		6824F8DD1DADC85300F98461 /* FFDropDownMenuTriangleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFDropDownMenuTriangleView.h; sourceTree = "<group>"; };
+		6824F8DE1DADC85300F98461 /* FFDropDownMenuTriangleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFDropDownMenuTriangleView.m; sourceTree = "<group>"; };
+		6824F8DF1DADC85300F98461 /* FFDropDownMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFDropDownMenuView.h; sourceTree = "<group>"; };
+		6824F8E01DADC85300F98461 /* FFDropDownMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFDropDownMenuView.m; sourceTree = "<group>"; };
 		6825E1061CED507400EA4D87 /* ShenPiAppVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShenPiAppVC.h; path = Base/Function/ShenPiContorller/ShenPiAppVC.h; sourceTree = "<group>"; };
 		6825E1071CED507400EA4D87 /* ShenPiAppVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShenPiAppVC.m; path = Base/Function/ShenPiContorller/ShenPiAppVC.m; sourceTree = "<group>"; };
 		682629491D9DF5CF00A50AE2 /* NewsNewsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsNewsTableViewCell.h; path = Base/Function/NewsModel/NewsNewsTableViewCell.h; sourceTree = "<group>"; };
@@ -1407,6 +1426,27 @@
 			name = Controller;
 			sourceTree = "<group>";
 		};
+		6824F8D31DADC85300F98461 /* FFDropDownMenu */ = {
+			isa = PBXGroup;
+			children = (
+				6824F8D41DADC85300F98461 /* FFDropDownMenu.h */,
+				6824F8D51DADC85300F98461 /* FFDropDownMenuBasedCell.h */,
+				6824F8D61DADC85300F98461 /* FFDropDownMenuBasedCell.m */,
+				6824F8D71DADC85300F98461 /* FFDropDownMenuBasedModel.h */,
+				6824F8D81DADC85300F98461 /* FFDropDownMenuBasedModel.m */,
+				6824F8D91DADC85300F98461 /* FFDropDownMenuCell.h */,
+				6824F8DA1DADC85300F98461 /* FFDropDownMenuCell.m */,
+				6824F8DB1DADC85300F98461 /* FFDropDownMenuModel.h */,
+				6824F8DC1DADC85300F98461 /* FFDropDownMenuModel.m */,
+				6824F8DD1DADC85300F98461 /* FFDropDownMenuTriangleView.h */,
+				6824F8DE1DADC85300F98461 /* FFDropDownMenuTriangleView.m */,
+				6824F8DF1DADC85300F98461 /* FFDropDownMenuView.h */,
+				6824F8E01DADC85300F98461 /* FFDropDownMenuView.m */,
+			);
+			name = FFDropDownMenu;
+			path = OpenSource/FFDropDownMenu;
+			sourceTree = "<group>";
+		};
 		682A46CD1D3F69E800FCED9E /* CDFInitialsAvatar */ = {
 			isa = PBXGroup;
 			children = (
@@ -1499,6 +1539,7 @@
 		6846D35D1CABC483004BD285 /* OpenSource */ = {
 			isa = PBXGroup;
 			children = (
+				6824F8D31DADC85300F98461 /* FFDropDownMenu */,
 				685437981D7E995700A0F4FA /* WBGuide */,
 				68C0A3911D65B9FF00985D30 /* MJExtension */,
 				68B68E341D630858003B80AC /* MBProgressHUD-MJ */,
@@ -2437,6 +2478,7 @@
 				68C0A3B01D65B9FF00985D30 /* NSObject+MJKeyValue.m in Sources */,
 				2CFEAD2D1C717FDC0054730E /* SettingViewController.m in Sources */,
 				6846D3531CAB5A1E004BD285 /* IVotingManamentController.m in Sources */,
+				6824F8E51DADC85300F98461 /* FFDropDownMenuTriangleView.m in Sources */,
 				6853A3F91D2679C500AE5145 /* BaseFunction.m in Sources */,
 				686AABA11D4B522C002775C2 /* SysMsgSubVc.m in Sources */,
 				68D05CC01C97AC050039220F /* SendFeedBackViewController.m in Sources */,
@@ -2444,9 +2486,11 @@
 				683FD9FE1D654F4D005B8F5D /* UIBarButtonItem+Weather.m in Sources */,
 				68C33B741D34C58B00FCC0F1 /* LogTriangleView.m in Sources */,
 				6826294B1D9DF5CF00A50AE2 /* NewsNewsTableViewCell.m in Sources */,
+				6824F8E21DADC85300F98461 /* FFDropDownMenuBasedModel.m in Sources */,
 				6884D2D01CD98B4A006215E5 /* UIView+MGBadgeView.m in Sources */,
 				68EEDE571CBB2E19003295EB /* DYCAddress.m in Sources */,
 				2CB7DB651CA3C5970057633D /* MemberInfoViewController.m in Sources */,
+				6824F8E41DADC85300F98461 /* FFDropDownMenuModel.m in Sources */,
 				68008F541CDAE446001A4D64 /* MapViewController.m in Sources */,
 				682B68B61CB64482002EC60F /* AddPrintFile.m in Sources */,
 				68ED4E581CB507B9000E8A7B /* PrintApplicationFileCell.m in Sources */,
@@ -2463,6 +2507,7 @@
 				2CFEADDA1C79D9480054730E /* NewNotesViewController.m in Sources */,
 				2C35B0521C7062160003BF6C /* ViewController.m in Sources */,
 				68052C2F1CAD167400A93BDA /* UIView+WZLBadge.m in Sources */,
+				6824F8E11DADC85300F98461 /* FFDropDownMenuBasedCell.m in Sources */,
 				68DEEBD71CBE0FF7003DB7AA /* PrintShenPiDetail.m in Sources */,
 				2CFEAD2A1C717FCB0054730E /* FunctionViewController.m in Sources */,
 				68D41B0C1D4738CB0001075E /* XZMCoreNewFeatureVC.m in Sources */,
@@ -2521,6 +2566,7 @@
 				686A37001D5D642900288011 /* XSpotLight.m in Sources */,
 				689713701CE336E1008BB4AB /* UnReadMessageCell.m in Sources */,
 				683815421CBCDAA400E6AFD3 /* PrintFileDetail.m in Sources */,
+				6824F8E61DADC85300F98461 /* FFDropDownMenuView.m in Sources */,
 				2C3F219C1C85837F00EBD122 /* NotesTableVIewCell.m in Sources */,
 				68E779FA1CB37D6A006DA5B9 /* FriendGroup.m in Sources */,
 				68B68E261D62B7DF003B80AC /* WeatherViewController.m in Sources */,
@@ -2541,6 +2587,7 @@
 				680861D61CEAD33300257AAA /* PositionCell.m in Sources */,
 				2C9DDECD1CD8E688009462E6 /* LYThreeViewController.m in Sources */,
 				2CB7DB681CAC22BA0057633D /* JXBarChartView.m in Sources */,
+				6824F8E31DADC85300F98461 /* FFDropDownMenuCell.m in Sources */,
 				683FD9F81D654914005B8F5D /* CitiesGroup.m in Sources */,
 				68E779E11CB34A8E006DA5B9 /* CLTreeView_LEVEL2_Model.m in Sources */,
 				68DEEBD41CBE0FD4003DB7AA /* CarShenPiDetail.m in Sources */,
