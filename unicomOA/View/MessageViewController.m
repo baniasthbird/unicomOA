@@ -1313,7 +1313,7 @@
         if (f_v<9.0) {
             self.navigationController.delegate=nil;
         }
-        [weakSelf.navigationController pushViewController:viewController animated:NO];
+        [weakSelf.navigationController pushViewController:viewController animated:YES];
 
       //  FFMenuViewController *vc = [FFMenuViewController new];
       //  vc.backgroundImageName = @"menuBackground";
@@ -1330,7 +1330,7 @@
         if (f_v<9.0) {
             self.navigationController.delegate=nil;
         }
-        [weakSelf.navigationController pushViewController:vc animated:NO];
+        [weakSelf.navigationController pushViewController:vc animated:YES];
       //  FFMenuViewController *vc = [FFMenuViewController new];
       //  vc.backgroundImageName = @"menuBackground";
       //  vc.navigationItem.title = @"Line";
@@ -1347,7 +1347,7 @@
         if (f_v<9.0) {
             self.navigationController.delegate=nil;
         }
-        [weakSelf.navigationController pushViewController:vc animated:NO];
+        [weakSelf.navigationController pushViewController:vc animated:YES];
      //   FFMenuViewController *vc = [FFMenuViewController new];
      //   vc.backgroundImageName = @"menuBackground";
      //   vc.navigationItem.title = @"Twitter";
