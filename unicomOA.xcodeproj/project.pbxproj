@@ -233,6 +233,10 @@
 		68C0A3B21D65B9FF00985D30 /* NSString+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C0A3A71D65B9FF00985D30 /* NSString+MJExtension.m */; };
 		68C0A5BC1CBF6667008BEE27 /* ShenPiStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C0A5BB1CBF6667008BEE27 /* ShenPiStatus.m */; };
 		68C33B741D34C58B00FCC0F1 /* LogTriangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C33B731D34C58B00FCC0F1 /* LogTriangleView.m */; };
+		68C3DF841DB74B4E004A369F /* DWBubbleMenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C3DF831DB74B4E004A369F /* DWBubbleMenuButton.m */; };
+		68C3DF891DB9A7D6004A369F /* AllListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C3DF881DB9A7D6004A369F /* AllListVC.m */; };
+		68C3DF8C1DB9D53E004A369F /* AllListSearchResultVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C3DF8B1DB9D53E004A369F /* AllListSearchResultVC.m */; };
+		68C3DF8F1DBA01CE004A369F /* ListAllCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C3DF8E1DBA01CE004A369F /* ListAllCell.m */; };
 		68C91B441D9CC24E00F70FF9 /* UILabel+LabelHeightAndWidth.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C91B431D9CC24E00F70FF9 /* UILabel+LabelHeightAndWidth.m */; };
 		68D05CBA1C9791000039220F /* PasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D05CB91C9791000039220F /* PasswordViewController.m */; };
 		68D05CC01C97AC050039220F /* SendFeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D05CBF1C97AC050039220F /* SendFeedBackViewController.m */; };
@@ -654,6 +658,7 @@
 		685437991D7E995700A0F4FA /* RAYNewFunctionGuideVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RAYNewFunctionGuideVC.h; sourceTree = "<group>"; };
 		6854379A1D7E995700A0F4FA /* RAYNewFunctionGuideVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RAYNewFunctionGuideVC.m; sourceTree = "<group>"; };
 		6854379B1D7E995700A0F4FA /* RAYNewFunctionGuideVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RAYNewFunctionGuideVC.xib; sourceTree = "<group>"; };
+		685693F51DB6243800B713FB /* libASOAnimatedButton.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libASOAnimatedButton.a; path = "Pods/../build/Debug-iphoneos/libASOAnimatedButton.a"; sourceTree = "<group>"; };
 		68579FA11CC0BBCE00597FBD /* ShenPiAgreeWithCarDeploy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShenPiAgreeWithCarDeploy.h; path = Base/Function/ShenPiContorller/ShenPiAgreeWithCarDeploy.h; sourceTree = "<group>"; };
 		68579FA21CC0BBCE00597FBD /* ShenPiAgreeWithCarDeploy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShenPiAgreeWithCarDeploy.m; path = Base/Function/ShenPiContorller/ShenPiAgreeWithCarDeploy.m; sourceTree = "<group>"; };
 		68579FA41CC0C21100597FBD /* CarModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CarModel.h; path = Base/Function/ShenPiModel/CarModel.h; sourceTree = "<group>"; };
@@ -764,6 +769,16 @@
 		68C0A5BB1CBF6667008BEE27 /* ShenPiStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShenPiStatus.m; path = Base/Function/ShenPiModel/ShenPiStatus.m; sourceTree = "<group>"; };
 		68C33B721D34C58B00FCC0F1 /* LogTriangleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LogTriangleView.h; path = Base/Function/ShenPiModel/LogTriangleView.h; sourceTree = "<group>"; };
 		68C33B731D34C58B00FCC0F1 /* LogTriangleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LogTriangleView.m; path = Base/Function/ShenPiModel/LogTriangleView.m; sourceTree = "<group>"; };
+		68C3DF7F1DB70242004A369F /* libDWBubbleMenuButton.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libDWBubbleMenuButton.a; path = "Pods/../build/Debug-iphoneos/libDWBubbleMenuButton.a"; sourceTree = "<group>"; };
+		68C3DF821DB74B4E004A369F /* DWBubbleMenuButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DWBubbleMenuButton.h; sourceTree = "<group>"; };
+		68C3DF831DB74B4E004A369F /* DWBubbleMenuButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DWBubbleMenuButton.m; sourceTree = "<group>"; };
+		68C3DF851DB8BD9D004A369F /* libJSBadgeView.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libJSBadgeView.a; path = "Pods/../build/Debug-iphoneos/libJSBadgeView.a"; sourceTree = "<group>"; };
+		68C3DF871DB9A7D6004A369F /* AllListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AllListVC.h; path = Base/Function/ShenPiContorller/AllListVC.h; sourceTree = "<group>"; };
+		68C3DF881DB9A7D6004A369F /* AllListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AllListVC.m; path = Base/Function/ShenPiContorller/AllListVC.m; sourceTree = "<group>"; };
+		68C3DF8A1DB9D53E004A369F /* AllListSearchResultVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AllListSearchResultVC.h; path = Base/Function/ShenPiContorller/AllListSearchResultVC.h; sourceTree = "<group>"; };
+		68C3DF8B1DB9D53E004A369F /* AllListSearchResultVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AllListSearchResultVC.m; path = Base/Function/ShenPiContorller/AllListSearchResultVC.m; sourceTree = "<group>"; };
+		68C3DF8D1DBA01CE004A369F /* ListAllCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ListAllCell.h; path = Base/Function/ShenPiModel/ListAllCell.h; sourceTree = "<group>"; };
+		68C3DF8E1DBA01CE004A369F /* ListAllCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ListAllCell.m; path = Base/Function/ShenPiModel/ListAllCell.m; sourceTree = "<group>"; };
 		68C91B421D9CC24E00F70FF9 /* UILabel+LabelHeightAndWidth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+LabelHeightAndWidth.h"; sourceTree = "<group>"; };
 		68C91B431D9CC24E00F70FF9 /* UILabel+LabelHeightAndWidth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+LabelHeightAndWidth.m"; sourceTree = "<group>"; };
 		68D05CB81C9791000039220F /* PasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PasswordViewController.h; path = Base/Settings/Controller/PasswordViewController.h; sourceTree = "<group>"; };
@@ -942,6 +957,9 @@
 		04DF743BC07CED8E72262A08 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				68C3DF851DB8BD9D004A369F /* libJSBadgeView.a */,
+				68C3DF7F1DB70242004A369F /* libDWBubbleMenuButton.a */,
+				685693F51DB6243800B713FB /* libASOAnimatedButton.a */,
 				683FDA081D65AC05005B8F5D /* libMJExtension.a */,
 				683FDA051D65ABFF005B8F5D /* libINTULocationManager.a */,
 				683FDA011D65A92E005B8F5D /* ImageIO.framework */,
@@ -1539,6 +1557,7 @@
 		6846D35D1CABC483004BD285 /* OpenSource */ = {
 			isa = PBXGroup;
 			children = (
+				68C3DF811DB74B4E004A369F /* DWBubbleMenuButton */,
 				6824F8D31DADC85300F98461 /* FFDropDownMenu */,
 				685437981D7E995700A0F4FA /* WBGuide */,
 				68C0A3911D65B9FF00985D30 /* MJExtension */,
@@ -1889,6 +1908,16 @@
 			path = OpenSource/MJExtension;
 			sourceTree = "<group>";
 		};
+		68C3DF811DB74B4E004A369F /* DWBubbleMenuButton */ = {
+			isa = PBXGroup;
+			children = (
+				68C3DF821DB74B4E004A369F /* DWBubbleMenuButton.h */,
+				68C3DF831DB74B4E004A369F /* DWBubbleMenuButton.m */,
+			);
+			name = DWBubbleMenuButton;
+			path = OpenSource/DWBubbleMenuButton;
+			sourceTree = "<group>";
+		};
 		68D05CC11C97B3290039220F /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -1998,6 +2027,8 @@
 				68579FA81CC0C88600597FBD /* CarDeployCell.m */,
 				68B38F0A1D1927D500F28034 /* ListCell.h */,
 				68B38F0B1D1927D500F28034 /* ListCell.m */,
+				68C3DF8D1DBA01CE004A369F /* ListAllCell.h */,
+				68C3DF8E1DBA01CE004A369F /* ListAllCell.m */,
 			);
 			name = ShenPiViews;
 			sourceTree = "<group>";
@@ -2055,6 +2086,10 @@
 				6846EC621CFAA68000A400C5 /* ShenPiQueryLogVC.m */,
 				68109FB81D2B9C0C009B14B7 /* ShenPiSubVc.h */,
 				68109FB91D2B9C0C009B14B7 /* ShenPiSubVc.m */,
+				68C3DF871DB9A7D6004A369F /* AllListVC.h */,
+				68C3DF881DB9A7D6004A369F /* AllListVC.m */,
+				68C3DF8A1DB9D53E004A369F /* AllListSearchResultVC.h */,
+				68C3DF8B1DB9D53E004A369F /* AllListSearchResultVC.m */,
 			);
 			name = ShenPiController;
 			sourceTree = "<group>";
@@ -2439,6 +2474,7 @@
 				68EEDE721CBB911A003295EB /* MCMenuButton.m in Sources */,
 				684E0C561D363E88008088FD /* POPAnimation.m in Sources */,
 				2CFEAD1A1C7168980054730E /* SignInViewController.m in Sources */,
+				68C3DF8F1DBA01CE004A369F /* ListAllCell.m in Sources */,
 				6838153F1CBCCB2A00E6AFD3 /* PrintApplicationDetail.m in Sources */,
 				6846EC551CF99C7C00A400C5 /* IQBarButtonItem.m in Sources */,
 				68B68E3D1D630858003B80AC /* MBProgressHUD.m in Sources */,
@@ -2567,6 +2603,7 @@
 				689713701CE336E1008BB4AB /* UnReadMessageCell.m in Sources */,
 				683815421CBCDAA400E6AFD3 /* PrintFileDetail.m in Sources */,
 				6824F8E61DADC85300F98461 /* FFDropDownMenuView.m in Sources */,
+				68C3DF841DB74B4E004A369F /* DWBubbleMenuButton.m in Sources */,
 				2C3F219C1C85837F00EBD122 /* NotesTableVIewCell.m in Sources */,
 				68E779FA1CB37D6A006DA5B9 /* FriendGroup.m in Sources */,
 				68B68E261D62B7DF003B80AC /* WeatherViewController.m in Sources */,
@@ -2594,6 +2631,7 @@
 				68052C2D1CAD167400A93BDA /* UITabBarItem+WZLBadge.m in Sources */,
 				68C0A3A91D65B9FF00985D30 /* MJExtensionConst.m in Sources */,
 				68A5D8031D2A037500000F95 /* UIView+Frame.m in Sources */,
+				68C3DF8C1DB9D53E004A369F /* AllListSearchResultVC.m in Sources */,
 				68EEDE731CBB911A003295EB /* MCPopMenuCell.m in Sources */,
 				68A5D8061D2A054800000F95 /* NewsSubVC.m in Sources */,
 				6897136A1CE32C9A008BB4AB /* DocCell.m in Sources */,
@@ -2647,6 +2685,7 @@
 				6846EC5D1CFA733900A400C5 /* ListFileController.m in Sources */,
 				2CFEADBD1C76A6440054730E /* MessageCell.m in Sources */,
 				683A452E1D40CAC900B91D82 /* UnFinishViewController.m in Sources */,
+				68C3DF891DB9A7D6004A369F /* AllListVC.m in Sources */,
 				6838153C1CBCB5E700E6AFD3 /* ShenPiResultCell.m in Sources */,
 				683815451CBCE28500E6AFD3 /* PrintFileNavCell.m in Sources */,
 				68ED4E551CB5078C000E8A7B /* PrintApplicationDetailCell.m in Sources */,
@@ -2818,7 +2857,10 @@
 				INFOPLIST_FILE = unicomOA/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.hnsi.oa;
@@ -2841,7 +2883,10 @@
 				INFOPLIST_FILE = unicomOA/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.hnsi.oa;

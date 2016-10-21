@@ -57,7 +57,6 @@
     }
     else {
         [self ColorKeyWord:str_name label:str_lbl_name];
-        
     }
     cell.textLabel.attributedText=str_lbl_name;
     cell.detailTextLabel.attributedText=str_lbl;

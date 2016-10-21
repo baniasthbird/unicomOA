@@ -43,7 +43,8 @@
 
 
 //查询通讯录,根据条件
--(NSMutableArray*)GetPeople:(NSString*)str_condition con2:(NSString*)str_condition2 keyword:(NSString*)str_key;
+-(NSMutableArray*)GetPeopleByNum:(NSString*)str_condition con2:(NSString*)str_condition2 keyword:(NSString*)str_key;
+-(NSMutableArray*)GetPeopleByName:(NSString*)str_condition keyword:(NSString *)str_key;
 
 -(void)UpdateIPTable:(NSString*)str_ipaddr port:(NSString*)str_port IP_Mark:(NSString*)str_mark;
 -(void)UpdateInterFaceTable:(NSMutableDictionary*)dic_inerface;

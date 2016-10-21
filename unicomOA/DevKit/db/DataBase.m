@@ -923,8 +923,33 @@
     
 }
 
+-(NSMutableArray*)GetPeopleByName:(NSString*)str_condition keyword:(NSString *)str_key {
+    [_database open];
+    NSMutableArray *arr_people =[[NSMutableArray alloc]init];
+    NSDictionary *dic_people;
+    NSString *sql=[NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@ LIKE '%%%@%%' ",STAFF_TABLENAME,str_condition,str_key];
+    FMResultSet *rs=[_database executeQuery:sql];
+    while ([rs next]) {
+        NSString *str_empid=[rs stringForColumn:STAFF_ID];
+        NSString *str_empname=[rs stringForColumn:STAFF_USERNAME];
+        NSString *str_sex=[rs stringForColumn:STAFF_GENDER];
+        NSString *str_posi=[rs stringForColumn:STAFF_POSINAME];
+        NSString *str_orgname=[rs stringForColumn:STAFF_ORG_NAME];
+        NSString *str_orgid=[rs stringForColumn:STAFF_ORG_ID];
+        NSString *str_mobile=[rs stringForColumn:STAFF_MOBILE];
+        NSString *str_tel=[rs stringForColumn:STAFF_TEL];
+        NSString *str_email=[rs stringForColumn:STAFF_EMAIL];
+        NSString *str_img=[rs stringForColumn:STAFF_IMG];
+        NSArray *arr_staff=@[str_empid,str_empname,str_sex,str_posi,str_orgname,str_orgid,str_mobile,str_tel,str_email,str_img];
+        NSArray *arr_key=@[@"empid",@"empname",@"sex",@"posiname",@"orgname",@"orgid",@"mobileno",@"otel",@"oemail",@"img"];
+        dic_people=[NSDictionary dictionaryWithObjects:arr_staff forKeys:arr_key];
+        [arr_people addObject:dic_people];
+    }
+    return arr_people;
 
--(NSMutableArray*)GetPeople:(NSString *)str_condition con2:(NSString *)str_condition2 keyword:(NSString *)str_key {
+}
+
+-(NSMutableArray*)GetPeopleByNum:(NSString *)str_condition con2:(NSString *)str_condition2 keyword:(NSString *)str_key {
     [_database open];
     NSMutableArray *arr_people=[[NSMutableArray alloc]init];
     NSDictionary *dic_people;

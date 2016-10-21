@@ -21,9 +21,11 @@
 #import "ShenPiQueryLogVC.h"
 #import "ListCell.h"
 #import "ShenPiResultCell.h"
+#import "AllListVC.h"
+#import "ListAllCell.h"
 
 
-@interface UnFinishVc ()<UITableViewDataSource,UITableViewDelegate,ListFileControllerDelegate,PrintApplicationDetailCellDelegate,UIGestureRecognizerDelegate>
+@interface UnFinishVc ()<UITableViewDataSource,UITableViewDelegate,ListFileControllerDelegate,PrintApplicationDetailCellDelegate,UIGestureRecognizerDelegate,AllListVCDelegate>
 
 @property (nonatomic,strong) AFHTTPSessionManager *session;
 
@@ -652,32 +654,38 @@
                 BOOL b_multi=NO;
                 NSString *str_groupKey=[dic_tmp objectForKey:@"groupKey"];
                 if ([str_groupKey isEqualToString:@"audit"]) {
-                    if (cell.accessibilityElements.count>0) {
-                        cell.accessibilityHint=@"canPopList";
-                        NSString *str_multiselect=[dic_tmp objectForKey:@"multiSelect"];
-                        b_multi=[str_multiselect boolValue];
-                    }
-                    if ([dic_bkvalue count]!=0) {
-                        NSDictionary *dic_bkvalue_tmp=[dic_bkvalue objectForKey:str_label];
-                        if (dic_tmp!=nil) {
-                            NSString *str_text=[dic_bkvalue_tmp objectForKey:@"text"];
-                            NSString *str_value=[dic_bkvalue_tmp objectForKey:@"value"];
-                            str_detail_value=str_text;
-                            [dic_tmp setValue:str_value forKey:@"value"];
+                    if ([arr_listData count]>0) {
+                        if (cell.accessibilityElements.count>0) {
+                            cell.accessibilityHint=@"canPopList";
+                            NSString *str_multiselect=[dic_tmp objectForKey:@"multiSelect"];
+                            b_multi=[str_multiselect boolValue];
+                        }
+                        if ([dic_bkvalue count]!=0) {
+                            NSDictionary *dic_bkvalue_tmp=[dic_bkvalue objectForKey:str_label];
+                            if (dic_tmp!=nil) {
+                                NSString *str_text=[dic_bkvalue_tmp objectForKey:@"text"];
+                                NSString *str_value=[dic_bkvalue_tmp objectForKey:@"value"];
+                                str_detail_value=str_text;
+                                [dic_tmp setValue:str_value forKey:@"value"];
+                                
+                            }
+                            else {
+                                str_detail_value=@"请点击选择";
+                            }
                             
                         }
                         else {
                             str_detail_value=@"请点击选择";
                         }
                         
+                        ListCell *cell=[ListCell cellWithTable:tb withLabel:str_label withDetailLabel:str_detail_value index:indexPath listData:arr_listData mutiSelect:b_multi];
+                        
+                        return cell;
+
                     }
                     else {
-                        str_detail_value=@"请点击选择";
+                        cell.textLabel.text=str_label;
                     }
-                    
-                    ListCell *cell=[ListCell cellWithTable:tb withLabel:str_label withDetailLabel:str_detail_value index:indexPath listData:arr_listData mutiSelect:b_multi];
-                    
-                    return cell;
                     
                 }
                 else {
@@ -748,6 +756,19 @@
                 cell.accessibilityValue=[dic_tmp objectForKey:@"value"];
                 cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
                 cell.detailTextLabel.textColor=[UIColor blueColor];
+            }
+            else if ([str_type isEqualToString:@"alllist"]) {
+                NSString *str_label=[dic_tmp objectForKey:@"label"];
+                NSObject *obj_value=[dic_tmp objectForKey:@"value"];
+                NSString *str_value=@"请点击选择";
+                if (obj_value!=[NSNull null]) {
+                    str_value=[dic_tmp objectForKey:@"tableTitle"];
+                }
+                cell.textLabel.text=str_label;
+                cell.detailTextLabel.text=str_value;
+                cell.detailTextLabel.textColor=[UIColor colorWithRed:69/255.0f green:115/255.0f blue:230/255.0f alpha:1];
+                cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+                cell.accessibilityHint=@"alllist";
             }
             else {
                 cell.textLabel.text=@"";
@@ -1052,6 +1073,17 @@
         }
         [self.navigationController pushViewController:vc animated:YES];
     }
+    else if ([cell.accessibilityHint isEqualToString:@"alllist"]) {
+        AllListVC *vc=[[AllListVC alloc]init];
+        vc.userInfo=_usrInfo;
+        vc.str_title=cell.textLabel.text;
+        vc.indexPath=indexPath;
+        vc.delegate=self;
+        if (f_v<9.0) {
+            self.navigationController.delegate=nil;
+        }
+        [self.navigationController pushViewController:vc animated:YES];
+    }
     
 }
 
@@ -1171,6 +1203,25 @@
     }
     NSDictionary  *dic_tmp=[arr_tmp objectAtIndex:i_indexPath.row];
     [dic_tmp setValue:str_text forKey:@"value"];
+    
+    //再检查下常用意见是否为空，为空将处理意见内容填写
+    for (int i=0; i<[arr_tmp count]; i++) {
+        NSDictionary *dic_tmp=[arr_tmp objectAtIndex:i];
+        NSString *str_label=[dic_tmp objectForKey:@"label"];
+        if ([str_label isEqualToString:@"常用意见"]) {
+            NSObject *obj_value=[dic_tmp objectForKey:@"value"];
+            if (obj_value==[NSNull null]) {
+                [dic_tmp setValue:str_text forKey:@"value"];
+            }
+            else {
+                NSString *str_value=(NSString*)obj_value;
+                if (str_value!=str_text) {
+                     [dic_tmp setValue:str_text forKey:@"value"];
+                }
+            }
+            
+        }
+    }
 }
 
 
@@ -1188,12 +1239,12 @@
         if ([str_type isEqualToString:@"textarea"]) {
             NSString *str_label=[dic_tmp objectForKey:@"label"];
             if ([str_label isEqualToString:@"处理意见"]) {
-                
                 [dic_tmp setValue:str_text forKey:@"value"];
             }
-           
         }
     }
+    
+   
     
 }
 
@@ -1268,6 +1319,26 @@
 
 -(void)handleNavigationTransition:(UIGestureRecognizer *)sender {
     
+}
+
+
+-(void)sendMemberValue:(NSDictionary *)dic_return indexPath:(NSIndexPath *)indexPath{
+    UITableViewCell *cell=[tableView cellForRowAtIndexPath:indexPath];
+    NSString *str_empid=[dic_return objectForKey:@"value"];
+    NSString *str_name=[dic_return objectForKey:@"label"];
+    if (cell!=nil) {
+        cell.detailTextLabel.text=str_name;
+    }
+    NSString *str_index=[NSString stringWithFormat:@"%ld",(long)indexPath.section];
+    NSInteger i_dic_count=[dic_m_ctl count];
+    NSArray *arr_tmp=  [dic_m_ctl objectForKey:str_index];
+    if (arr_tmp==nil) {
+        str_index=[NSString stringWithFormat:@"%ld",(long)i_dic_count-1];
+        arr_tmp=  [dic_m_ctl objectForKey:str_index];
+    }
+    NSDictionary  *dic_tmp=[arr_tmp objectAtIndex:indexPath.row];
+    [dic_tmp setValue:str_empid forKey:@"value"];
+    [dic_tmp setValue:str_name forKey:@"tableTitle"];
 }
 
 /*

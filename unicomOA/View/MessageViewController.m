@@ -24,6 +24,8 @@
 #import "NewsNewsTableViewCell.h"
 #import "NewsInformTableViewCell.h"
 #import "FFDropDownMenuView.h"
+#import "DWBubbleMenuButton.h"
+
 
 
 
@@ -139,6 +141,8 @@
     
     self.navigationController.navigationBar.titleTextAttributes=dict;
 
+    
+    
     selectedIndex=-1;
     b_ReplaceDataSource=NO;
     
@@ -162,7 +166,7 @@
     [self.tableView addSubview:_refreshControl];
     
     
-    [self.view addSubview:_tableView];
+    [self.view insertSubview:_tableView atIndex:0];
   //  [self setupsectionView];
   //  [self setupButtonView];
     [self setupButtonMenu:NO];
@@ -210,6 +214,8 @@
     [self setupLocation];
     
     timer=[NSTimer scheduledTimerWithTimeInterval:3600 target:self selector:@selector(setupLocation) userInfo:nil repeats:YES];
+    
+    
 }
 
 
@@ -244,8 +250,6 @@
     UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(25, 5, self.view.frame.size.width-80, 30)];
     
     label.textAlignment=NSTextAlignmentLeft;
-    
-    
     
     CGFloat i_Float=0;
     if (iPhone4_4s || iPhone5_5s) {
@@ -299,7 +303,6 @@
         _badgeLayer.contentsScale = [[UIScreen mainScreen] scale];
         [btn_title.layer addSublayer:_badgeLayer];
     }
-
 }
 
 -(void)setupButtonMenu:(BOOL)b_num {
@@ -413,6 +416,7 @@
                 [self setupDropDownMenu:_i_flow_num doc_num:_i_doc_num msg_num:_i_msg_num];
                 if (_i_doc_num!=0 || _i_flow_num!=0 || _i_msg_num!=0) {
                     [self setupButtonMenu:YES];
+                    [self addBubbleMenu];
                 }
                 [self.view setNeedsDisplay];
                  
@@ -1381,6 +1385,41 @@
     return menuModelArr;
 }
 
+-(void)addBubbleMenu {
+    UIImageView *img_menu = [[UIImageView alloc]initWithFrame:CGRectMake(0.0f, 0.0f, 40.0f, 40.0f)];
+    [img_menu setImage:[UIImage imageNamed:@"img_menu"]];
+    
+   
+    
+    DWBubbleMenuButton *bubbleMenuButton = [[DWBubbleMenuButton alloc] initWithFrame:CGRectMake(Width-80.0f, Height-165.0f, 40.0f, 40.0f) flow_num:_i_flow_num doc_num:_i_doc_num msg_num:_i_msg_num expansionDirection:DirectionUp];
+    bubbleMenuButton.homeButtonView = img_menu;
+    
+    
+    
+    NSMutableArray *buttonsMutable = [[NSMutableArray alloc] init];
+    btn_title1 = [[UIButton alloc]initWithFrame:CGRectMake(0.0f, 0.0f, 35.0f, 35.0f)];
+    [btn_title1 setBackgroundImage:[UIImage imageNamed:@"img_menu1"] forState:UIControlStateNormal];
+    [btn_title1 addTarget:self action:@selector(PassNavToShenPi) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    btn_title2 = [[UIButton alloc]initWithFrame:CGRectMake(0.0f, 0.0f, 35.0f, 35.0f)];
+    [btn_title2 setBackgroundImage:[UIImage imageNamed:@"img_menu2"] forState:UIControlStateNormal];
+    [btn_title2 addTarget:self action:@selector(PassNavToChuanYue) forControlEvents:UIControlEventTouchUpInside];
+   
+    
+    btn_title3 = [[UIButton alloc]initWithFrame:CGRectMake(0.0f, 0.0f, 35.0f, 35.0f)];
+    [btn_title3 setBackgroundImage:[UIImage imageNamed:@"img_menu3"] forState:UIControlStateNormal];
+    [btn_title3 addTarget:self action:@selector(PassNaveToMessage) forControlEvents:UIControlEventTouchUpInside];
+    
+    [buttonsMutable addObject:btn_title1];
+    [buttonsMutable addObject:btn_title2];
+    [buttonsMutable addObject:btn_title3];
+    
+    [bubbleMenuButton addButtons:buttonsMutable];
+    
+    [self.view addSubview:bubbleMenuButton];
+    
+}
 
 /*
 #pragma mark - Navigation

@@ -235,6 +235,7 @@
             NSObject *obj_phone=[dic objectForKey:@"otel"];
             NSObject *obj_email=[dic objectForKey:@"oemail"];
             NSObject *obj_photo=[dic objectForKey:@"img"];
+            NSString *str_empid=[dic objectForKey:@"empid"];
             NSString *str_cell;
             NSString *str_phone;
             NSString *str_email;
@@ -282,7 +283,7 @@
                 str_level=@"1";
             }
             //   CLTreeViewNode *node=[self CreateLevel2Node:str_name signture:str_position headImgPath:@"headLogo.png" headImgUrl:nil gender:str_sex department:str_department cell:str_cell phone:str_phone email:str_email];
-            CLTreeViewNode *node=[self CreateLevel2Node:str_name signture:str_position headImgPath:nil headImgUrl:str_img gender:str_sex department:str_department cell:str_cell phone:str_phone email:str_email parentLevel:str_level];
+            CLTreeViewNode *node=[self CreateLevel2Node:str_name signture:str_position headImgPath:nil headImgUrl:str_img gender:str_sex department:str_department cell:str_cell phone:str_phone email:str_email parentLevel:str_level empid:str_empid];
             [arr_staff addObject:node];
             
         }
@@ -350,7 +351,7 @@
     return node0;
 }
 
--(CLTreeViewNode*)CreateLevel2Node:(NSString*)str_name signture:(NSString*)str_signture headImgPath:(NSString*)str_headImgPath headImgUrl:(NSString*)str_headImgUrl gender:(NSString*)str_gender department:(NSString*)str_department cell:(NSString*)str_cellphone phone:(NSString*)str_phonenum email:(NSString*)str_email parentLevel:(NSString*)str_level{
+-(CLTreeViewNode*)CreateLevel2Node:(NSString*)str_name signture:(NSString*)str_signture headImgPath:(NSString*)str_headImgPath headImgUrl:(NSString*)str_headImgUrl gender:(NSString*)str_gender department:(NSString*)str_department cell:(NSString*)str_cellphone phone:(NSString*)str_phonenum email:(NSString*)str_email parentLevel:(NSString*)str_level empid:(NSString*)str_empid{
     CLTreeViewNode *node0 = [[CLTreeViewNode alloc]init];
     node0.nodeLevel = 2;
     node0.type = 2;
@@ -367,8 +368,8 @@
     tmp0.phonenum=str_phonenum;
     tmp0.email=str_email;
     tmp0.parentlevel=str_level;
+    tmp0.empid=str_empid;
     node0.nodeData = tmp0;
-    
     return node0;
 }
 

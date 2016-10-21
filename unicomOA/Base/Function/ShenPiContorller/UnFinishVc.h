@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UserInfo.h"
 
 @class UnFinishVc;
 @protocol UnFinishVcDelegate <NSObject>
@@ -27,6 +28,8 @@
 @property (nonatomic,strong) NSString *str_url;
 
 @property (nonatomic,strong) NSString *str_title;
+
+@property (nonatomic,strong) UserInfo *usrInfo;
 
 @property (nonatomic,strong) id<UnFinishVcDelegate> delegate;
 

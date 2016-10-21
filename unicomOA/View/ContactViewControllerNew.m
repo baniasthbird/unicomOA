@@ -706,7 +706,7 @@ CGFloat i_Height=-1;
     NSString *str_con1=STAFF_MOBILE;
     NSString *str_con2=STAFF_TEL;
     NSString *str_key=param[STAFF_MOBILE];
-    NSMutableArray *arr_result=[db GetPeople:str_con1 con2:str_con2 keyword:str_key];
+    NSMutableArray *arr_result=[db GetPeopleByNum:str_con1 con2:str_con2 keyword:str_key];
     if ([arr_result count]>0) {
         _resultViewController.dataArray=arr_result;
         _resultViewController.nav=self.navigationController;
