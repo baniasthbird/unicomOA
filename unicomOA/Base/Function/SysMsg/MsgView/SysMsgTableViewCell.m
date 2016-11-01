@@ -11,59 +11,75 @@
 #define WHScreenW [UIScreen mainScreen].bounds.size.width
 
 @implementation SysMsgTableViewCell {
-    UILabel *lbl_Title;
-    UILabel *lbl_Category;
-    UILabel *lbl_sendName;
+    UIImageView *img_Category;
 }
 
-+(instancetype)cellWithTable:(UITableView *)tableView withCellHeight:(CGFloat)cellHeight withTitle:(NSMutableAttributedString *)str_title withCategory:(NSString *)str_category withSendName:(NSString *)str_sendName titleFont:(CGFloat)i_titleFont otherFont:(CGFloat)i_otherFont {
++(instancetype)cellWithTable:(UITableView*)tableView withTitle:(NSMutableAttributedString*)str_title withCategory:(NSString*)str_category withSendName:(NSString*)str_sendName withTime:(NSString*)str_time titleFont:(NSInteger)i_titleFont otherFont:(NSInteger)i_otherFont {
     static NSString *cellID=@"TapCell";
     SysMsgTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:cellID];
-    cell=[[SysMsgTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID withCellHeight:cellHeight withTitle:str_title withCategory:str_category withSendName:str_sendName titleFont:i_titleFont otherFont:i_otherFont];
+  //  cell=[[SysMsgTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID withCellHeight:cellHeight withTitle:str_title withCategory:str_category withSendName:str_sendName titleFont:i_titleFont otherFont:i_otherFont];
+    cell=[[SysMsgTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID withTitle:str_title withCategory:str_category withSendName:str_sendName withTime:str_time titleFont:i_titleFont otherFont:i_otherFont];
     return cell;
    
 }
 
 
--(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withCellHeight:(CGFloat)cellHeight withTitle:(NSMutableAttributedString*)str_title withCategory:(NSString*)str_category withSendName:(NSString*)str_sendName titleFont:(CGFloat)i_titleFont otherFont:(CGFloat)i_otherFont {
+-(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withTitle:(NSMutableAttributedString*)str_title withCategory:(NSString*)str_category withSendName:(NSString*)str_sendName withTime:(NSString*)str_time titleFont:(NSInteger)i_titleFont otherFont:(NSInteger)i_otherFont{
     self=[super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        CGFloat i_left=17;
-        CGFloat i_width=WHScreenW-34;
+        CGFloat i_left=Width*0.1573;
+        CGFloat i_width=Width*0.52;
         if (iPad) {
             i_left=32;
-            i_width=WHScreenW-80;
+            i_width=Width-80;
         }
-        lbl_Title=[[UILabel alloc]initWithFrame:CGRectMake(i_left, 5, i_width, cellHeight/2-5)];
-        lbl_Title.font=[UIFont systemFontOfSize:i_titleFont];
-        lbl_Title.textColor=[UIColor blackColor];
-        lbl_Title.numberOfLines=2;
-        lbl_Title.attributedText= str_title;
-        lbl_Title.lineBreakMode=NSLineBreakByWordWrapping | NSLineBreakByTruncatingTail;
-        [lbl_Title sizeToFit];
         
-        lbl_Category=[[UILabel alloc] initWithFrame:CGRectMake(i_left, lbl_Title.frame.size.height+20, WHScreenW*0.35, cellHeight/2-5)];
-        lbl_Category.font=[UIFont systemFontOfSize:i_otherFont];
-        lbl_Category.textColor=[UIColor lightGrayColor];
-        lbl_Category.text=str_category;
-        lbl_Category.textAlignment=NSTextAlignmentLeft;
-        [lbl_Category sizeToFit];
+        _lbl_Title=[[UILabel alloc]initWithFrame:CGRectMake(i_left, 16, i_width, 17)];
+        _lbl_Title.font=[UIFont systemFontOfSize:i_titleFont];
+        _lbl_Title.textColor=[UIColor blackColor];
+        _lbl_Title.numberOfLines=2;
+        _lbl_Title.attributedText= str_title;
+        _lbl_Title.lineBreakMode=NSLineBreakByWordWrapping | NSLineBreakByTruncatingTail;
+        [_lbl_Title sizeToFit];
         
-        CGFloat i_r_left=Width*0.65;
-        if (iPhone5_5s) {
-            i_r_left=Width*0.6;
+        _lbl_Category=[[UILabel alloc] initWithFrame:CGRectMake(i_left, 60, Width*0.35, 14)];
+        _lbl_Category.font=[UIFont systemFontOfSize:i_otherFont];
+        _lbl_Category.textColor=[UIColor colorWithRed:171/255.0f green:171/255.0f blue:171/255.0f alpha:1];
+        _lbl_Category.text=str_category;
+        _lbl_Category.textAlignment=NSTextAlignmentLeft;
+        [_lbl_Category sizeToFit];
+        
+        CGFloat i_r_left=Width*0.6927;
+        _lbl_sendName=[[UILabel alloc]initWithFrame:CGRectMake(i_r_left, 60, Width*0.2, 14)];
+        _lbl_sendName.font=[UIFont systemFontOfSize:i_otherFont];
+        _lbl_sendName.textColor=[UIColor colorWithRed:171/255.0f green:171/255.0f blue:171/255.0f alpha:1];
+        _lbl_sendName.text=str_sendName;
+        _lbl_sendName.textAlignment=NSTextAlignmentRight;
+        [_lbl_sendName sizeToFit];
+        
+        _lbl_time=[[UILabel alloc]initWithFrame:CGRectMake(i_r_left, 16, Width*0.15, 17)];
+        _lbl_time.font=[UIFont systemFontOfSize:i_titleFont];
+        _lbl_time.textColor=[UIColor colorWithRed:171/255.0f green:171/255.0f blue:171/255.0f alpha:1];
+        _lbl_time.text=str_time;
+        _lbl_time.textAlignment=NSTextAlignmentRight;
+        [_lbl_time sizeToFit];
+        
+        img_Category=[[UIImageView alloc]initWithFrame:CGRectMake(10, 15, 0.1027*Width, 0.1027*Width)];
+        if ([str_category isEqualToString:@"流程反馈"]) {
+            img_Category.image=[UIImage imageNamed:@"SysMsg_1"];
         }
-        lbl_sendName=[[UILabel alloc]initWithFrame:CGRectMake(i_r_left, lbl_Title.frame.size.height+20, Width*0.3, cellHeight/2-5)];
-        lbl_sendName.font=[UIFont systemFontOfSize:i_otherFont];
-        lbl_sendName.textColor=[UIColor lightGrayColor];
-        lbl_sendName.text=str_sendName;
-        lbl_sendName.textAlignment=NSTextAlignmentRight;
-        [lbl_sendName sizeToFit];
+        else if ([str_category isEqualToString:@"项目反馈"]) {
+            img_Category.image=[UIImage imageNamed:@"SysMsg_2"];
+        }
+        else if ([str_category isEqualToString:@"普通消息"]) {
+            img_Category.image=[UIImage imageNamed:@"SysMsg_3"];
+        }
         
-        
-        [self.contentView addSubview:lbl_Title];
-        [self.contentView addSubview:lbl_Category];
-        [self.contentView addSubview:lbl_sendName];
+        [self.contentView addSubview:_lbl_Title];
+        [self.contentView addSubview:_lbl_Category];
+        [self.contentView addSubview:_lbl_sendName];
+        [self.contentView addSubview:_lbl_time];
+        [self.contentView addSubview:img_Category];
     }
     
     return self;

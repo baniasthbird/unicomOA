@@ -19,7 +19,7 @@
 
 @property (nonatomic,retain) UILabel *lbl_Category;
 
-@property (nonatomic,retain) UILabel *lbl_Title;
+
 
 @property (nonatomic,retain) UILabel *lbl_department;
 
@@ -71,7 +71,7 @@
         
         CGFloat btnViewY=0;
         UIView *btnView=[[UIView alloc]initWithFrame:CGRectMake(btnViewX, btnViewY, btnViewW, btnViewH)];
-        btnView.backgroundColor=[UIColor lightGrayColor];
+        btnView.backgroundColor=[UIColor clearColor];
         
         CGFloat btnX=0;
         UIButton *btn=[[UIButton alloc]initWithFrame:CGRectMake(btnX, btnY, btnW, btnH)];

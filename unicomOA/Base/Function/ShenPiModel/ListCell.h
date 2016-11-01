@@ -12,4 +12,5 @@
 
 +(instancetype)cellWithTable:(UITableView *)tableView withLabel:(NSString*)str_label withDetailLabel:(NSString*)str_detail_label index:(NSIndexPath*)indexPath listData:(NSArray*)arr_listData mutiSelect:(BOOL)b_Multi;
 
+@property (nonatomic,strong) UILabel *lbl_list_label;
 @end

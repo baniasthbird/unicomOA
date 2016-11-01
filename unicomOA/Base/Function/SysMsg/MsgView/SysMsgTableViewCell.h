@@ -16,9 +16,13 @@
 
 @property (nonatomic,assign) NSInteger myTag;
 
+@property (nonatomic,strong) UILabel *lbl_Title;
 
+@property (nonatomic,strong) UILabel *lbl_Category;
+@property (nonatomic,strong) UILabel *lbl_sendName;
+@property (nonatomic,strong) UILabel *lbl_time;
 /**快速建立cell的方法*/
 
-+(instancetype)cellWithTable:(UITableView*)tableView withCellHeight:(CGFloat)cellHeight withTitle:(NSMutableAttributedString*)str_title withCategory:(NSString*)str_category withSendName:(NSString*)str_sendName titleFont:(CGFloat)i_titleFont otherFont:(CGFloat)i_otherFont;
++(instancetype)cellWithTable:(UITableView*)tableView withTitle:(NSMutableAttributedString*)str_title withCategory:(NSString*)str_category withSendName:(NSString*)str_sendName withTime:(NSString*)str_time titleFont:(NSInteger)i_titleFont otherFont:(NSInteger)i_otherFont;
 
 @end

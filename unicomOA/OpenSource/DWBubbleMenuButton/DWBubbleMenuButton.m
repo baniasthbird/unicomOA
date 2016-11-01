@@ -17,9 +17,7 @@
 @property (nonatomic, strong) NSMutableArray *buttonContainer;
 @property (nonatomic, assign) CGRect originFrame;
 @property (assign, nonatomic) CGPoint beginpoint;
-@property (nonatomic, assign) NSInteger i_flow_num;
-@property (nonatomic, assign) NSInteger i_doc_num;
-@property (nonatomic, assign) NSInteger i_msg_num;
+
 
 @end
 
@@ -92,10 +90,12 @@
         if (i==0) {
            [self UpdateButton:button num:_i_flow_num];
         }
+        /*
         else if (i==1) {
            [self UpdateButton:button num:_i_doc_num];
         }
-        else if (i==2) {
+        */
+        else if (i==1) {
            [self UpdateButton:button num:_i_msg_num];
         }
         
@@ -427,6 +427,7 @@
 - (void)setHomeButtonView:(UIView *)homeButtonView {
     if (_homeButtonView != homeButtonView) {
         _homeButtonView = homeButtonView;
+        
     }
     
     if ([_homeButtonView isDescendantOfView:self] == NO) {
@@ -458,9 +459,26 @@
     
     if (CGRectContainsPoint(self.homeButtonView.frame, [touch locationInView:self])) {
         if (_isCollapsed) {
+           // [self runSpinAnimationOnView:self.homeButtonView duration:1 rotations:(M_PI/4.0) repeat:NO];
             [self showButtons];
+           // self.homeButtonView.transform= CGAffineTransformMakeRotation(M_PI / 4.0);
+            UIImageView *img_view=(UIImageView*)self.homeButtonView;
+            img_view.image=[UIImage imageNamed:@"img_menu_rotation"];
         } else {
+          //  self.homeButtonView.transform=CGAffineTransformMakeRotation(45 *M_PI / 180.0);
+          //  [self runSpinAnimationOnView:self.homeButtonView duration:1 rotations:(M_PI/4.0) repeat:NO];
             [self dismissButtons];
+            /*
+            CGAffineTransform currentTransform = self.homeButtonView.transform;
+            CGFloat rotation = (0.0 - 45) * M_PI / 180.0f; // recordDegree记录现在的旋转角度
+            CGAffineTransform newTransform = CGAffineTransformRotate(currentTransform, rotation);
+            self.homeButtonView.transform = newTransform;
+            */
+            UIImageView *img_view=(UIImageView*)self.homeButtonView;
+            img_view.image=[UIImage imageNamed:@"img_menu"];
+            
+           
+            
         }
     }
 }
@@ -563,7 +581,7 @@
         [_badgeLayer setFrame:CGRectMake(0, 0, 12, 12)];
         _badgeLayer.position=CGPointMake(btn_title.frame.size.width-13, 0);
         _badgeLayer.wrapped = YES;
-        _badgeLayer.cornerRadius = 3.0f;
+        _badgeLayer.cornerRadius = 6.0f;
         // [_badgeLayer setFontSize:16];
         // [_badgeLayer setString:@"4"];
         _badgeLayer.anchorPoint=CGPointZero;
@@ -571,9 +589,10 @@
         [btn_title.layer addSublayer:_badgeLayer];
 
     }
-    
-        
 }
+
+
+
 
 @end
 

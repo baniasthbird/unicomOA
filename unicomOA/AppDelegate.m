@@ -33,7 +33,8 @@
          [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"bg_Nav-IPad.png"] forBarMetrics:UIBarMetricsDefault];
     }
     else {
-        [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"bg_Nav.png"] forBarMetrics:UIBarMetricsDefault];
+        UIImage *img_bg=[UIImage imageNamed:[NSString stringWithFormat:@"%@", @"bg_Nav.png"]];
+        [[UINavigationBar appearance] setBackgroundImage:img_bg forBarMetrics:UIBarMetricsDefault];
     }
     
     

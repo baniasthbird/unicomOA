@@ -89,6 +89,7 @@
 		68052C2F1CAD167400A93BDA /* UIView+WZLBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = 68052C2A1CAD167400A93BDA /* UIView+WZLBadge.m */; };
 		680861D61CEAD33300257AAA /* PositionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 680861D51CEAD33300257AAA /* PositionCell.m */; };
 		68109FBA1D2B9C0C009B14B7 /* ShenPiSubVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 68109FB91D2B9C0C009B14B7 /* ShenPiSubVc.m */; };
+		681F25FA1DC2DD200029AC96 /* SwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 681F25F91DC2DD200029AC96 /* SwitchCell.m */; };
 		681FFC761CC7828F0086A934 /* LXAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 681FFC731CC7828F0086A934 /* LXAlertView.m */; };
 		681FFC771CC7828F0086A934 /* UILabel+LXAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 681FFC751CC7828F0086A934 /* UILabel+LXAdd.m */; };
 		682086CB1D1A319A0032A191 /* LoginView-IPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 682086CA1D1A319A0032A191 /* LoginView-IPad.png */; };
@@ -176,6 +177,7 @@
 		6853A3F91D2679C500AE5145 /* BaseFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 6853A3F81D2679C500AE5145 /* BaseFunction.m */; };
 		6854379D1D7E995700A0F4FA /* RAYNewFunctionGuideVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6854379A1D7E995700A0F4FA /* RAYNewFunctionGuideVC.m */; };
 		6854379E1D7E995700A0F4FA /* RAYNewFunctionGuideVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6854379B1D7E995700A0F4FA /* RAYNewFunctionGuideVC.xib */; };
+		6854ACB91DC86A4D00D03452 /* SwitchMutexCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6854ACB81DC86A4D00D03452 /* SwitchMutexCell.m */; };
 		68579FA31CC0BBCE00597FBD /* ShenPiAgreeWithCarDeploy.m in Sources */ = {isa = PBXBuildFile; fileRef = 68579FA21CC0BBCE00597FBD /* ShenPiAgreeWithCarDeploy.m */; };
 		68579FA61CC0C21100597FBD /* CarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68579FA51CC0C21100597FBD /* CarModel.m */; };
 		68579FA91CC0C88600597FBD /* CarDeployCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68579FA81CC0C88600597FBD /* CarDeployCell.m */; };
@@ -500,6 +502,8 @@
 		680861D51CEAD33300257AAA /* PositionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PositionCell.m; path = Base/Function/NotesViews/PositionCell.m; sourceTree = "<group>"; };
 		68109FB81D2B9C0C009B14B7 /* ShenPiSubVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShenPiSubVc.h; path = Base/Function/ShenPiContorller/ShenPiSubVc.h; sourceTree = "<group>"; };
 		68109FB91D2B9C0C009B14B7 /* ShenPiSubVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShenPiSubVc.m; path = Base/Function/ShenPiContorller/ShenPiSubVc.m; sourceTree = "<group>"; };
+		681F25F81DC2DD200029AC96 /* SwitchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SwitchCell.h; path = Base/Function/ShenPiModel/SwitchCell.h; sourceTree = "<group>"; };
+		681F25F91DC2DD200029AC96 /* SwitchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SwitchCell.m; path = Base/Function/ShenPiModel/SwitchCell.m; sourceTree = "<group>"; };
 		681FFC721CC7828F0086A934 /* LXAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXAlertView.h; sourceTree = "<group>"; };
 		681FFC731CC7828F0086A934 /* LXAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXAlertView.m; sourceTree = "<group>"; };
 		681FFC741CC7828F0086A934 /* UILabel+LXAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+LXAdd.h"; sourceTree = "<group>"; };
@@ -658,6 +662,8 @@
 		685437991D7E995700A0F4FA /* RAYNewFunctionGuideVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RAYNewFunctionGuideVC.h; sourceTree = "<group>"; };
 		6854379A1D7E995700A0F4FA /* RAYNewFunctionGuideVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RAYNewFunctionGuideVC.m; sourceTree = "<group>"; };
 		6854379B1D7E995700A0F4FA /* RAYNewFunctionGuideVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RAYNewFunctionGuideVC.xib; sourceTree = "<group>"; };
+		6854ACB71DC86A4D00D03452 /* SwitchMutexCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SwitchMutexCell.h; path = Base/Function/ShenPiModel/SwitchMutexCell.h; sourceTree = "<group>"; };
+		6854ACB81DC86A4D00D03452 /* SwitchMutexCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SwitchMutexCell.m; path = Base/Function/ShenPiModel/SwitchMutexCell.m; sourceTree = "<group>"; };
 		685693F51DB6243800B713FB /* libASOAnimatedButton.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libASOAnimatedButton.a; path = "Pods/../build/Debug-iphoneos/libASOAnimatedButton.a"; sourceTree = "<group>"; };
 		68579FA11CC0BBCE00597FBD /* ShenPiAgreeWithCarDeploy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShenPiAgreeWithCarDeploy.h; path = Base/Function/ShenPiContorller/ShenPiAgreeWithCarDeploy.h; sourceTree = "<group>"; };
 		68579FA21CC0BBCE00597FBD /* ShenPiAgreeWithCarDeploy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShenPiAgreeWithCarDeploy.m; path = Base/Function/ShenPiContorller/ShenPiAgreeWithCarDeploy.m; sourceTree = "<group>"; };
@@ -2029,6 +2035,10 @@
 				68B38F0B1D1927D500F28034 /* ListCell.m */,
 				68C3DF8D1DBA01CE004A369F /* ListAllCell.h */,
 				68C3DF8E1DBA01CE004A369F /* ListAllCell.m */,
+				681F25F81DC2DD200029AC96 /* SwitchCell.h */,
+				681F25F91DC2DD200029AC96 /* SwitchCell.m */,
+				6854ACB71DC86A4D00D03452 /* SwitchMutexCell.h */,
+				6854ACB81DC86A4D00D03452 /* SwitchMutexCell.m */,
 			);
 			name = ShenPiViews;
 			sourceTree = "<group>";
@@ -2560,6 +2570,7 @@
 				68A5D8091D2A457D00000F95 /* IVotingSubVc.m in Sources */,
 				68E779DE1CB34A8E006DA5B9 /* CLTreeView_LEVEL1_Cell.m in Sources */,
 				68723EB61CF839DA0019ACD8 /* UnFinishVc.m in Sources */,
+				6854ACB91DC86A4D00D03452 /* SwitchMutexCell.m in Sources */,
 				68ED4E451CB4E215000E8A7B /* MyApplication.m in Sources */,
 				2C35B04C1C7062160003BF6C /* main.m in Sources */,
 				2CFEADD71C79CCDE0054730E /* NotesViewController.m in Sources */,
@@ -2618,6 +2629,7 @@
 				686AAB9E1D4B44B0002775C2 /* SysMsgViewController.m in Sources */,
 				68C0A3AE1D65B9FF00985D30 /* NSObject+MJClass.m in Sources */,
 				68EEDE761CBB911A003295EB /* MCPopMenuPresentAnimator.m in Sources */,
+				681F25FA1DC2DD200029AC96 /* SwitchCell.m in Sources */,
 				68052C2C1CAD167400A93BDA /* UIBarButtonItem+WZLBadge.m in Sources */,
 				68E8F3791D1249270062E864 /* AlarmCell.m in Sources */,
 				6846D3621CABC496004BD285 /* RadioBox.m in Sources */,

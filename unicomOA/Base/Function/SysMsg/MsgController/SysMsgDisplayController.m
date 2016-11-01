@@ -21,14 +21,44 @@
 
 @implementation SysMsgDisplayController {
     DataBase *db;
-    UITableView *tableView;
+   // UITableView *tableView;
     NSMutableArray *arr_content;
     UIActivityIndicatorView *indicator;
+    UILabel *lbl_sendTitle;
+    UILabel *lbl_receiveTitle;
+    UILabel *lbl_sendName;
+    UILabel *lbl_receiveName;
+    UILabel *lbl_sendCompany;
+    UILabel *lbl_receiveCompany;
+    UIView *view_seperator1;
+    UILabel *lbl_SysMsg_Title;
+    UILabel *lbl_Time;
+    UILabel *lbl_Category;
+    UIView *view_seperator2;
+    UILabel *lbl_SysMsg_Content1;
+    UILabel *lbl_SysMsg_Content2;
+    UILabel *lbl_sYSmsg_Content3;
+    CGFloat i_FontSize1;
+    CGFloat i_FontSize2;
+    
 }
 
 -(void)viewDidLoad {
     [super viewDidLoad];
     self.title=_str_title;
+    
+    if (iPhone5_5s) {
+        i_FontSize1=14;
+        i_FontSize2=13;
+    }
+    else if (iPhone6) {
+        i_FontSize1=16;
+        i_FontSize2=15;
+    }
+    else if (iPhone6_plus) {
+        i_FontSize1=17;
+        i_FontSize2=16;
+    }
     
     NSDictionary * dict;
     if (iPad) {
@@ -50,9 +80,99 @@
     
     self.view.backgroundColor=[UIColor colorWithRed:246/255.0f green:249/255.0f blue:254/255.0f alpha:1];
     
+    lbl_sendTitle=[[UILabel alloc]initWithFrame:CGRectMake(0.0667*Width, 0.027*Height, 0.2*Width, 0.024*Height)];
+    lbl_sendTitle.textColor=[UIColor blackColor];
+    lbl_sendTitle.font=[UIFont systemFontOfSize:i_FontSize1];
+    lbl_sendTitle.text=@"发送人：";
+    [lbl_sendTitle sizeToFit];
+    
+    lbl_receiveTitle=[[UILabel alloc]initWithFrame:CGRectMake(0.0667*Width, 0.070464767616192*Height, 0.2*Width, 0.024*Height)];
+    lbl_receiveTitle.textColor=[UIColor blackColor];
+    lbl_receiveTitle.font=[UIFont systemFontOfSize:i_FontSize1];
+    lbl_receiveTitle.text=@"接收人：";
+    [lbl_receiveTitle sizeToFit];
+    
+    lbl_sendName=[[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(lbl_sendTitle.frame)+10, 0.027*Height, 0.16*Width, 0.024*Height)];
+    lbl_sendName.textColor=[UIColor colorWithRed:85/255.0f green:132/255.0f blue:241/255.0f alpha:1];
+    lbl_sendName.font=[UIFont systemFontOfSize:i_FontSize1];
+    lbl_sendName.text=_str_sendName;
+    [lbl_sendName sizeToFit];
+    
+    lbl_receiveName=[[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(lbl_sendTitle.frame)+10, 0.070464767616192*Height, 0.16*Width, 0.024*Height)];
+    lbl_receiveName.textColor=[UIColor colorWithRed:85/255.0f green:132/255.0f blue:241/255.0f alpha:1];
+    lbl_receiveName.font=[UIFont systemFontOfSize:i_FontSize1];
+    lbl_receiveName.text=_usrInfo.str_name;
+    [lbl_receiveName sizeToFit];
+    
+    lbl_sendCompany=[[UILabel alloc]initWithFrame:CGRectMake(0.6213*Width, 0.027*Height, 0.312*Width, 0.024*Height)];
+    lbl_sendCompany.textColor=[UIColor colorWithRed:174/255.0f green:174/255.0f blue:174/255.0f alpha:1];
+    lbl_sendCompany.font=[UIFont systemFontOfSize:i_FontSize1];
+    lbl_sendCompany.textAlignment=NSTextAlignmentRight;
+   
+    
+    lbl_receiveCompany=[[UILabel alloc]initWithFrame:CGRectMake(0.6213*Width, 0.070464767616192*Height,  0.312*Width, 0.024*Height)];
+    lbl_receiveCompany.textColor=[UIColor colorWithRed:174/255.0f green:174/255.0f blue:174/255.0f alpha:1];
+    lbl_receiveCompany.font=[UIFont systemFontOfSize:i_FontSize1];
+    lbl_receiveCompany.textAlignment=NSTextAlignmentRight;
+  
+    
+    view_seperator1=[[UIView alloc]initWithFrame:CGRectMake(0, 0.129*Height, Width, 1)];
+    view_seperator1.backgroundColor=[UIColor colorWithRed:173/255.0f green:173/255.0f blue:173/255.0f alpha:1];
+    
+    lbl_SysMsg_Title=[[UILabel alloc]initWithFrame:CGRectMake(0.0667*Width, 0.151424*Height, 0.68*Width, 0.024*Height)];
+    lbl_SysMsg_Title.textColor=[UIColor blackColor];
+    lbl_SysMsg_Title.text=_str_SysMsg_Title;
+    lbl_SysMsg_Title.font=[UIFont systemFontOfSize:i_FontSize1];
+    [lbl_SysMsg_Title sizeToFit];
+    
+    lbl_Time=[[UILabel alloc]initWithFrame:CGRectMake(0.6813*Width, 0.151424*Height, 0.3*Width,0.024*Height )];
+    lbl_Time.textColor=[UIColor colorWithRed:174/255.0f green:174/255.0f blue:174/255.0f alpha:1];
+    lbl_Time.text=_str_time;
+    lbl_Time.font=[UIFont systemFontOfSize:i_FontSize1];
+    [lbl_Time sizeToFit];
+    
+    lbl_Category=[[UILabel alloc]initWithFrame:CGRectMake(0.0667*Width, 0.1934*Height,0.8666*Width, 0.02*Height)];
+    lbl_Category.textAlignment=NSTextAlignmentLeft;
+    lbl_Category.textColor=[UIColor colorWithRed:174/255.0f green:174/255.0f blue:174/255.0f alpha:1];
+    lbl_Category.font=[UIFont systemFontOfSize:i_FontSize2];
+    lbl_Category.text=_str_category;
+    [lbl_Category sizeToFit];
+    
+    
+    view_seperator2=[[UIView alloc]initWithFrame:CGRectMake(0, 0.2459*Height, Width, 1)];
+    view_seperator2.backgroundColor=[UIColor colorWithRed:173/255.0f green:173/255.0f blue:173/255.0f alpha:1];
+    
+    lbl_SysMsg_Content1=[[UILabel alloc]initWithFrame:CGRectMake(0.0667*Width, 0.259*Height, 0.2*Width, 0.024*Height)];
+    lbl_SysMsg_Content1.textColor=[UIColor blackColor];
+    lbl_SysMsg_Content1.textAlignment=NSTextAlignmentLeft;
+    lbl_SysMsg_Content1.font=[UIFont systemFontOfSize:i_FontSize1];
+    lbl_SysMsg_Content1.text=@"消息内容";
+    [lbl_SysMsg_Content1 sizeToFit];
+    
+    lbl_SysMsg_Content2=[[UILabel alloc]initWithFrame:CGRectMake(0.4267*Width, 0.259*Height, 0.533*Width, 0.024*Height)];
+    lbl_SysMsg_Content2.textColor=[UIColor colorWithRed:173/255.0f green:173/255.0f blue:173/255.0f alpha:1];
+    lbl_SysMsg_Content2.textAlignment=NSTextAlignmentLeft;
+    lbl_SysMsg_Content2.font=[UIFont boldSystemFontOfSize:i_FontSize1];
+    lbl_SysMsg_Content2.text=@"具体信息请在PC端查询";
+    [lbl_SysMsg_Content2 sizeToFit];
+    
+    CGFloat i_content_height=0.2853*Height;
+    if (iPhone5_5s) {
+        i_content_height=0.33*Height;
+    }
+    else if (iPhone6) {
+        i_content_height=0.3*Height;
+    }
+    lbl_sYSmsg_Content3=[[UILabel alloc]initWithFrame:CGRectMake(0.0667*Width, i_content_height, 0.8666*Width, 0.3*Height)];
+    lbl_sYSmsg_Content3.textColor=[UIColor blackColor];
+    lbl_sYSmsg_Content3.textAlignment=NSTextAlignmentLeft;
+    lbl_sYSmsg_Content3.font=[UIFont systemFontOfSize:i_FontSize1];
+    [lbl_sYSmsg_Content3 sizeToFit];
+    
+    
      _baseFunc=[[BaseFunction alloc]init];
     
-    db=[DataBase sharedinstanceDB];
+    db=[DataBase sharedinstanceDB];    
     
     _session=[AFHTTPSessionManager manager];
     _session.responseSerializer = [AFHTTPResponseSerializer serializer];
@@ -64,37 +184,11 @@
         [arr_content setObject:@"" atIndexedSubscript:i];
     }
     
-    tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height) style:UITableViewStylePlain];
-    tableView.delegate=self;
-    tableView.dataSource=self;
-    
-    
-    /*
-    lbl_title=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 40)];
-    lbl_title.font=[UIFont systemFontOfSize:18];
-    lbl_title.textAlignment=NSTextAlignmentCenter;
-    lbl_title.textColor=[UIColor blackColor];
-    lbl_title.text=@"";
-    
-    lbl_subtitle=[[UILabel alloc]initWithFrame:CGRectMake(0, 40, [UIScreen mainScreen].bounds.size.width, 20)];
-    lbl_subtitle.font=[UIFont systemFontOfSize:9];
-    lbl_subtitle.textColor=[UIColor colorWithRed:153/255.0f green:153/255.0f blue:153/255.0f alpha:1];
-    lbl_subtitle.textAlignment=NSTextAlignmentCenter;
-    lbl_subtitle.text=@"";
-    
-    lbl_content=[[UITextView alloc]initWithFrame:CGRectMake(0, 70, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height-150)];
-    lbl_content.font=[UIFont systemFontOfSize:12];
-    lbl_content.textColor=[UIColor blackColor];
-    lbl_content.textAlignment=NSTextAlignmentCenter;
-    lbl_content.backgroundColor=[UIColor colorWithRed:246/255.0f green:249/255.0f blue:254/255.0f alpha:1];
-    */
-    
-    
     NSMutableDictionary *param=[NSMutableDictionary dictionary];
     param[@"id"]=[NSString stringWithFormat:@"%ld",(long)_i_id];
     [self SysMessageContent:param];
 
-    [self.view addSubview:tableView];
+   // [self.view addSubview:tableView];
     
     indicator =[_baseFunc AddLoop];
     
@@ -105,6 +199,21 @@
     [self.view addSubview:lbl_subtitle];
     [self.view addSubview:lbl_content];
      */
+    
+    [self.view addSubview:lbl_sendTitle];
+    [self.view addSubview:lbl_sendName];
+    [self.view addSubview:lbl_receiveTitle];
+    [self.view addSubview:lbl_receiveName];
+    [self.view addSubview:lbl_sendCompany];
+    [self.view addSubview:lbl_receiveCompany];
+    [self.view addSubview:view_seperator1];
+    [self.view addSubview:lbl_SysMsg_Title];
+    [self.view addSubview:lbl_Time];
+    [self.view addSubview:lbl_Category];
+    [self.view addSubview:view_seperator2];
+    [self.view addSubview:lbl_SysMsg_Content1];
+    [self.view addSubview:lbl_SysMsg_Content2];
+    [self.view addSubview:lbl_sYSmsg_Content3];
 }
 
 -(void)SysMessageContent:(NSMutableDictionary*)param {
@@ -158,9 +267,12 @@
                 [arr_content setObject:str_sendTime2 atIndexedSubscript:4];
                 [arr_content setObject:str_receiveEmpname atIndexedSubscript:5];
                 [arr_content setObject:str_content atIndexedSubscript:6];
-                
-                [tableView reloadData];
-                
+                lbl_sendCompany.text=str_depart;
+                lbl_receiveCompany.text=_usrInfo.str_position;
+                lbl_sYSmsg_Content3.text=str_content;
+                [lbl_sendCompany sizeToFit];
+                [lbl_receiveCompany sizeToFit];
+                [lbl_sYSmsg_Content3 sizeToFit];
                 
             }
             

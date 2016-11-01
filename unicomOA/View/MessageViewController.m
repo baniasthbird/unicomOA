@@ -25,11 +25,12 @@
 #import "NewsInformTableViewCell.h"
 #import "FFDropDownMenuView.h"
 #import "DWBubbleMenuButton.h"
+#import "WZLBadgeImport.h"
+#import "XSpotLight.h"
 
 
 
-
-@interface MessageViewController ()<UITableViewDelegate,UITableViewDataSource,NewsTapDelegate,YBMonitorNetWorkStateDelegate,RemindCellDelegate,MyShenPiViewControllerDelegate>
+@interface MessageViewController ()<UITableViewDelegate,UITableViewDataSource,NewsTapDelegate,YBMonitorNetWorkStateDelegate,RemindCellDelegate,MyShenPiViewControllerDelegate,XSpotLightDelegate>
 
 @property (nonatomic,strong) UITableView *tableView;
 
@@ -62,7 +63,7 @@
 @property (nonatomic, copy) NSString *dt;    //当前日期
 
 /** 下拉菜单 */
-@property (nonatomic, strong) FFDropDownMenuView *dropdownMenu;
+//@property (nonatomic, strong) FFDropDownMenuView *dropdownMenu;
 
 @end
 
@@ -92,6 +93,8 @@
     UIButton *btn_title3;
     
     NSArray *modelsArray;
+    
+    DWBubbleMenuButton *bubbleMenuButton;
     
     
 }
@@ -167,10 +170,7 @@
     
     
     [self.view insertSubview:_tableView atIndex:0];
-  //  [self setupsectionView];
-  //  [self setupButtonView];
-    [self setupButtonMenu:NO];
-    [self setupDropDownMenu:_i_flow_num doc_num:_i_doc_num msg_num:_i_msg_num];
+    [self addBubbleMenu];
     _news_count=0;
     
     
@@ -213,6 +213,32 @@
     
     [self setupLocation];
     
+    XSpotLight *SpotLight=[[XSpotLight alloc]init];
+    SpotLight.messageArray=@[@"快速审批以悬浮球方式展现"];
+    CGFloat i_img_width = 40.0f;
+    CGFloat button_offset_y=85.0f;
+    CGFloat button_offset_x=60.0f;
+    if (iPhone6) {
+        i_img_width = 45.0f;
+        button_offset_y = 95.0f;
+        button_offset_x=55.0f;
+    }
+    else if (iPhone6_plus) {
+        i_img_width=50.0f;
+        button_offset_y = 100.0f;
+        button_offset_x=55.0f;
+    }
+    // SpotLight.rectArray=@[[NSValue valueWithCGRect:CGRectMake(i_x, i_y, 50, 500)]];
+    SpotLight.rectArray=@[[NSValue valueWithCGRect:CGRectMake(Width-button_offset_x, Height-button_offset_y,i_img_width , i_img_width)]];
+    SpotLight.delegate=self;
+   
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]) {
+    //    [self presentViewController:SpotLight animated:NO completion:^{
+            
+    //    }];
+    }
+
+    
     timer=[NSTimer scheduledTimerWithTimeInterval:3600 target:self selector:@selector(setupLocation) userInfo:nil repeats:YES];
     
     
@@ -220,6 +246,7 @@
 
 
 /** 显示下拉菜单 */
+/*
 - (void)showDropDownMenu:(UIButton*)sender  {
     for (CALayer *sublayer in sender.layer.sublayers) {
         if ([sublayer isKindOfClass:[CATextLayer class]]) {
@@ -228,13 +255,15 @@
     }
     [self.dropdownMenu showMenu];
 }
-
+*/
 /** 初始化下拉菜单 */
+/*
 - (void)setupDropDownMenu:(NSInteger)i_flow_num doc_num:(NSInteger)i_doc_num msg_num:(NSInteger)i_msg_num {
     modelsArray = [self getMenuModelsArray:i_flow_num doc_num:i_doc_num msg_num:i_msg_num];
     
     self.dropdownMenu = [FFDropDownMenuView ff_DefaultStyleDropDownMenuWithMenuModelsArray:modelsArray menuWidth:FFDefaultFloat eachItemHeight:FFDefaultFloat menuRightMargin:FFDefaultFloat triangleRightMargin:FFDefaultFloat];
 }
+*/
 
 -(void)setupsectionView {
     CGRect frameRect = CGRectMake(0, 70, self.view.frame.size.width, 40);
@@ -287,22 +316,23 @@
 }
 
 
--(void)UpdateButton:(UIButton*)btn_title num:(NSInteger)i_num {
+-(UIImageView*)updateImage:(UIImageView*)view_menu num:(NSInteger)i_num {
     if (i_num!=0) {
         CATextLayer  *_badgeLayer = [[CATextLayer alloc] init];
         _badgeLayer.backgroundColor=[UIColor redColor].CGColor;
         _badgeLayer.foregroundColor = [UIColor blackColor].CGColor;
         _badgeLayer.alignmentMode = kCAAlignmentCenter;
-        [_badgeLayer setFrame:CGRectMake(0, 0, 6, 6)];
-        _badgeLayer.position=CGPointMake(btn_title.frame.size.width/2+35, 20);
+        [_badgeLayer setFrame:CGRectMake(0, 0, 16, 16)];
+        _badgeLayer.position=CGPointMake(view_menu.frame.size.width/2, view_menu.frame.size.height/2);
         _badgeLayer.wrapped = YES;
-        _badgeLayer.cornerRadius = 3.0f;
+        _badgeLayer.cornerRadius = 8.0f;
         // [_badgeLayer setFontSize:16];
         // [_badgeLayer setString:@"4"];
         _badgeLayer.anchorPoint=CGPointZero;
         _badgeLayer.contentsScale = [[UIScreen mainScreen] scale];
-        [btn_title.layer addSublayer:_badgeLayer];
+        [view_menu.layer addSublayer:_badgeLayer];
     }
+    return view_menu;
 }
 
 -(void)setupButtonMenu:(BOOL)b_num {
@@ -413,11 +443,7 @@
                 _i_flow_num=[str_flownum intValue];
                 _i_msg_num=[str_msgnum intValue];
                 
-                [self setupDropDownMenu:_i_flow_num doc_num:_i_doc_num msg_num:_i_msg_num];
-                if (_i_doc_num!=0 || _i_flow_num!=0 || _i_msg_num!=0) {
-                    [self setupButtonMenu:YES];
-                    [self addBubbleMenu];
-                }
+                [self addBubbleMenu];
                 [self.view setNeedsDisplay];
                  
               //  [self setupButtonView];
@@ -885,6 +911,20 @@
 
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    
+    if (bubbleMenuButton!=nil) {
+        UIImageView *img_view=(UIImageView*)bubbleMenuButton.homeButtonView;
+        img_view.image=[UIImage imageNamed:@"img_menu"];
+        /*
+        bubbleMenuButton.homeButtonView.badgeBgColor=[UIColor redColor];
+        NSInteger i_total=_i_doc_num+_i_msg_num+_i_flow_num;
+        [bubbleMenuButton.homeButtonView showBadgeWithStyle:WBadgeStyleNumber value:i_total animationType:WBadgeAnimTypeNone x:-8 y:8];
+        */
+    }
+    
+}
+
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     if (section==1) {
         CGRect frameRect = CGRectMake(0, 0, self.view.frame.size.width, 40);
@@ -951,12 +991,12 @@
         [self.tableView reloadData];
         NewsNewsTableViewCell *cell_news=(NewsNewsTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
         if (cell_news!=nil) {
-            cell_news.lbl_Title.textColor=[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1];
+            cell_news.lbl_Title.textColor=[UIColor colorWithRed:130/255.0f green:130/255.0f blue:130/255.0f alpha:1];
         }
         else {
             NewsInformTableViewCell *cell_Inform=(NewsInformTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
             if (cell_Inform!=nil) {
-                cell_Inform.lbl_Title.textColor=[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1];
+                cell_Inform.lbl_Title.textColor=[UIColor colorWithRed:130/255.0f green:130/255.0f blue:130/255.0f alpha:1];
             }
         }
         NSDictionary *dic_content=[_arr_NewsList objectAtIndex:indexPath.section-1];
@@ -1381,46 +1421,76 @@
       //  [weakSelf.navigationController pushViewController:vc animated:YES];
     }];
     */
-    NSArray *menuModelArr = @[menuModel0, menuModel1, menuModel2];
+ //   NSArray *menuModelArr = @[menuModel0, menuModel1, menuModel2];
+    NSArray *menuModelArr = @[menuModel0, menuModel2];
     return menuModelArr;
 }
 
 -(void)addBubbleMenu {
-    UIImageView *img_menu = [[UIImageView alloc]initWithFrame:CGRectMake(0.0f, 0.0f, 40.0f, 40.0f)];
+    CGFloat i_img_width = 40.0f;
+    CGFloat i_offset_x = 8.0f;
+    CGFloat i_offset_y = 8.0f;
+    CGFloat button_offset_y=165.0f;
+    if (iPhone6) {
+        i_img_width = 45.0f;
+        i_offset_x = 8.0f;
+        i_offset_y = 8.0f;
+        button_offset_y = 180.0f;
+    }
+    else if (iPhone6_plus) {
+        i_img_width=50.0f;
+        i_offset_x = 9.0f;
+        i_offset_y = 9.0f;
+        button_offset_y = 190.0f;
+    }
+    UIImageView *img_menu = [[UIImageView alloc]initWithFrame:CGRectMake(0.0f, 0.0f, i_img_width, i_img_width)];
     [img_menu setImage:[UIImage imageNamed:@"img_menu"]];
     
    
-    
-    DWBubbleMenuButton *bubbleMenuButton = [[DWBubbleMenuButton alloc] initWithFrame:CGRectMake(Width-80.0f, Height-165.0f, 40.0f, 40.0f) flow_num:_i_flow_num doc_num:_i_doc_num msg_num:_i_msg_num expansionDirection:DirectionUp];
-    bubbleMenuButton.homeButtonView = img_menu;
-    
-    
-    
-    NSMutableArray *buttonsMutable = [[NSMutableArray alloc] init];
-    btn_title1 = [[UIButton alloc]initWithFrame:CGRectMake(0.0f, 0.0f, 35.0f, 35.0f)];
-    [btn_title1 setBackgroundImage:[UIImage imageNamed:@"img_menu1"] forState:UIControlStateNormal];
-    [btn_title1 addTarget:self action:@selector(PassNavToShenPi) forControlEvents:UIControlEventTouchUpInside];
-    
-    
-    btn_title2 = [[UIButton alloc]initWithFrame:CGRectMake(0.0f, 0.0f, 35.0f, 35.0f)];
-    [btn_title2 setBackgroundImage:[UIImage imageNamed:@"img_menu2"] forState:UIControlStateNormal];
-    [btn_title2 addTarget:self action:@selector(PassNavToChuanYue) forControlEvents:UIControlEventTouchUpInside];
+    if (bubbleMenuButton==nil) {
+        bubbleMenuButton = [[DWBubbleMenuButton alloc] initWithFrame:CGRectMake(Width-80.0f, Height-button_offset_y, i_img_width, i_img_width) flow_num:_i_flow_num doc_num:_i_doc_num msg_num:_i_msg_num expansionDirection:DirectionUp];
+        bubbleMenuButton.homeButtonView = img_menu;
+        
+        
+        
+        NSMutableArray *buttonsMutable = [[NSMutableArray alloc] init];
+        btn_title1 = [[UIButton alloc]initWithFrame:CGRectMake(0.0f, 0.0f, i_img_width-5, i_img_width-5)];
+        [btn_title1 setBackgroundImage:[UIImage imageNamed:@"img_menu1"] forState:UIControlStateNormal];
+        [btn_title1 addTarget:self action:@selector(PassNavToShenPi) forControlEvents:UIControlEventTouchUpInside];
+        
+        
+        btn_title2 = [[UIButton alloc]initWithFrame:CGRectMake(0.0f, 0.0f, i_img_width-5, i_img_width-5)];
+        [btn_title2 setBackgroundImage:[UIImage imageNamed:@"img_menu2"] forState:UIControlStateNormal];
+        [btn_title2 addTarget:self action:@selector(PassNavToChuanYue) forControlEvents:UIControlEventTouchUpInside];
+        
+        
+        btn_title3 = [[UIButton alloc]initWithFrame:CGRectMake(0.0f, 0.0f, i_img_width-5, i_img_width-5)];
+        [btn_title3 setBackgroundImage:[UIImage imageNamed:@"img_menu3"] forState:UIControlStateNormal];
+        [btn_title3 addTarget:self action:@selector(PassNaveToMessage) forControlEvents:UIControlEventTouchUpInside];
+        
+        [buttonsMutable addObject:btn_title1];
+      //  [buttonsMutable addObject:btn_title2];
+        [buttonsMutable addObject:btn_title3];
+        
+        [bubbleMenuButton addButtons:buttonsMutable];
+        
+        [self.view addSubview:bubbleMenuButton];
+    }
+    else {
+        bubbleMenuButton.i_flow_num=_i_flow_num;
+        bubbleMenuButton.i_doc_num=_i_doc_num;
+        bubbleMenuButton.i_msg_num=_i_msg_num;
+        NSInteger i_total=_i_flow_num+_i_msg_num+_i_doc_num;
+        bubbleMenuButton.homeButtonView.badgeBgColor=[UIColor redColor];
+        [bubbleMenuButton.homeButtonView showBadgeWithStyle:WBadgeStyleNumber value:i_total animationType:WBadgeAnimTypeNone x:-i_offset_x y:i_offset_y];
+    }
    
-    
-    btn_title3 = [[UIButton alloc]initWithFrame:CGRectMake(0.0f, 0.0f, 35.0f, 35.0f)];
-    [btn_title3 setBackgroundImage:[UIImage imageNamed:@"img_menu3"] forState:UIControlStateNormal];
-    [btn_title3 addTarget:self action:@selector(PassNaveToMessage) forControlEvents:UIControlEventTouchUpInside];
-    
-    [buttonsMutable addObject:btn_title1];
-    [buttonsMutable addObject:btn_title2];
-    [buttonsMutable addObject:btn_title3];
-    
-    [bubbleMenuButton addButtons:buttonsMutable];
-    
-    [self.view addSubview:bubbleMenuButton];
     
 }
 
+-(void)XSpotLightClicked:(NSInteger)index {
+    
+}
 /*
 #pragma mark - Navigation
 

@@ -474,6 +474,21 @@ CGFloat i_Height=-1;
             }
         }
         else {
+            NSString *str_picname=[NSString stringWithFormat:@"%@.%@",nodeData.name,@"jpg"];
+            NSString *fullPath=  [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:str_picname];
+            UIImage *saveImage=[UIImage imageWithContentsOfFile:fullPath];
+            if (saveImage!=nil) {
+                UIImageView *imgView=((CLTreeView_LEVEL2_Cell*)cell).headImg;
+                imgView.layer.cornerRadius=imgView.frame.size.width/2;
+                imgView.layer.masksToBounds=YES;
+                [((CLTreeView_LEVEL2_Cell*)cell).headImg setImage:saveImage];
+            }
+            else {
+                UIImageView *imgView=((CLTreeView_LEVEL2_Cell*)cell).headImg;
+                UIImage *img= [self setTxcolorAndTitle:nodeData.name fid:nodeData.gender imgView:imgView];
+                [((CLTreeView_LEVEL2_Cell*)cell).headImg setImage:img];
+            }
+            /*
             if (nodeData.headImgUrl != nil){
                 //加载图片，这里是同步操作。建议使用SDWebImage异步加载图片
                 NSURL *url=nodeData.headImgUrl;
@@ -487,23 +502,7 @@ CGFloat i_Height=-1;
                         str_ip=[arr_ip objectAtIndex:0];
                         str_port=[arr_ip objectAtIndex:1];
                     }
-                  //  str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_url];
-                  //  NSData * data = [NSData dataWithContentsOfURL:[NSURL URLWithString:str_url]];
-                  //  UIImage *saveImage = [UIImage imageWithData:data];
-                    NSString *str_picname=[NSString stringWithFormat:@"%@.%@",nodeData.name,@"jpg"];
-                    NSString *fullPath=  [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:str_picname];
-                    UIImage *saveImage=[UIImage imageWithContentsOfFile:fullPath];
-                    if (saveImage!=nil) {
-                        UIImageView *imgView=((CLTreeView_LEVEL2_Cell*)cell).headImg;
-                        imgView.layer.cornerRadius=imgView.frame.size.width/2;
-                        imgView.layer.masksToBounds=YES;
-                        [((CLTreeView_LEVEL2_Cell*)cell).headImg setImage:saveImage];
-                    }
-                    else {
-                        UIImageView *imgView=((CLTreeView_LEVEL2_Cell*)cell).headImg;
-                        UIImage *img= [self setTxcolorAndTitle:nodeData.name fid:nodeData.gender imgView:imgView];
-                        [((CLTreeView_LEVEL2_Cell*)cell).headImg setImage:img];
-                    }
+                 
                 }
                 else {
                     if(nodeData.headImgPath != nil){
@@ -523,7 +522,7 @@ CGFloat i_Height=-1;
                 [((CLTreeView_LEVEL2_Cell*)cell).headImg setImage:img];
                 
             }
-
+            */
         }
         
         

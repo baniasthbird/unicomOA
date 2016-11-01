@@ -390,25 +390,29 @@
     [self RemoveLocalLogo:str_name];
 
     str_img_link=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_img_link];
-    NSURL *URL = [NSURL URLWithString:str_img_link];
-    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
-    
-    NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
-        NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
-        NSString *str_filename=[NSString stringWithFormat:@"%@%@",str_name,@".jpg"];
-        return [documentsDirectoryURL URLByAppendingPathComponent:str_filename];
-    } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
-        NSLog(@"File downloaded to: %@", filePath);
-        NSString *str_filename=[NSString stringWithFormat:@"%@%@",str_name,@".jpg"];
-        NSString *fullPath=  [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:str_filename];
-        UIImage *img=[UIImage imageWithContentsOfFile:fullPath];
-        if (img==nil) {
-            
+   // NSURL *URL = [NSURL URLWithString:str_img_link];
+    NSURL * URL = [NSURL URLWithString:[str_img_link stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLFragmentAllowedCharacterSet]]];
+    if (URL!=nil) {
+        NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+        if (request!=nil) {
+            NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
+                NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
+                NSString *str_filename=[NSString stringWithFormat:@"%@%@",str_name,@".jpg"];
+                return [documentsDirectoryURL URLByAppendingPathComponent:str_filename];
+            } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+                NSLog(@"File downloaded to: %@", filePath);
+                NSString *str_filename=[NSString stringWithFormat:@"%@%@",str_name,@".jpg"];
+                NSString *fullPath=  [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:str_filename];
+                UIImage *img=[UIImage imageWithContentsOfFile:fullPath];
+                if (img==nil) {
+                    
+                }
+            }];
+            [downloadTask resume];
         }
        
-        
-    }];
-    [downloadTask resume];
+    }
+   
 }
 
 //zr 0811 当发现下载图片与已有图片有冲突时，先删除已有图片

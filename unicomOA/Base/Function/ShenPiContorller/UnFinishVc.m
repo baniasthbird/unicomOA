@@ -23,9 +23,11 @@
 #import "ShenPiResultCell.h"
 #import "AllListVC.h"
 #import "ListAllCell.h"
+#import "SwitchCell.h"
+#import "SwitchMutexCell.h"
 
 
-@interface UnFinishVc ()<UITableViewDataSource,UITableViewDelegate,ListFileControllerDelegate,PrintApplicationDetailCellDelegate,UIGestureRecognizerDelegate,AllListVCDelegate>
+@interface UnFinishVc ()<UITableViewDataSource,UITableViewDelegate,ListFileControllerDelegate,PrintApplicationDetailCellDelegate,UIGestureRecognizerDelegate,AllListVCDelegate,SwitchCellDelegate,SwitchMutexCellDelegate>
 
 @property (nonatomic,strong) AFHTTPSessionManager *session;
 
@@ -60,6 +62,12 @@
     NSArray *arr_ShenPiQueryList;
     
     BOOL b_Table;
+    
+    //针对type为list的cell专门存储一个dictionary，方便switch类型控制其开关使用
+    NSMutableArray *arr_cell_list;
+    
+    //针对type为switch的cell专门存储一个dictionary，list类型默认看是否在switch中
+    NSMutableArray *arr_cell_switch;
 }
 
 - (void)viewDidLoad {
@@ -120,6 +128,8 @@
     [self PrePareData:dic_param];
     
     dic_bkvalue=[NSMutableDictionary dictionary];
+    arr_cell_list=[[NSMutableArray alloc]init];
+    arr_cell_switch=[[NSMutableArray alloc]init];
     
     tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-60) style:UITableViewStyleGrouped];
     tableView.delegate=self;
@@ -524,6 +534,7 @@
                 cell.textLabel.numberOfLines=0;
                 cell.detailTextLabel.text=str_value;
                 cell.detailTextLabel.numberOfLines=0;
+                cell.selectionStyle=UITableViewCellSelectionStyleNone;
                 CGFloat w_value=[UILabel getWidthWithTitle:str_value font:cell.detailTextLabel.font];
                 if (w_value>[UIScreen mainScreen].bounds.size.width) {
                     int i=0;
@@ -576,6 +587,7 @@
                         PrintApplicationDetailCell *cell=[PrintApplicationDetailCell cellWithTable:tableView withName:str_label withPlaceHolder:str_placeholder withText:str_value atIndexPath:indexPath atHeight:180];
                         cell.i_indexPath=indexPath;
                         cell.delegate=self;
+                        cell.selectionStyle=UITableViewCellSelectionStyleNone;
                         cell.accessibilityHint=@"textArea";
                         return cell;
                     }
@@ -592,6 +604,7 @@
                     cell.textLabel.numberOfLines=0;
                     cell.detailTextLabel.text=str_value;
                     cell.detailTextLabel.numberOfLines=0;
+                    cell.selectionStyle=UITableViewCellSelectionStyleNone;
                     return cell;
                     
                     
@@ -627,6 +640,7 @@
                             cell.file_data=arr_tableData;
                             cell.file_title=arr_title;
                             cell.str_label=str_label;
+                            cell.selectionStyle=UITableViewCellSelectionStyleNone;
                             return cell;
                             
                         }
@@ -637,6 +651,7 @@
                 
                 NSString *str_label=[dic_tmp objectForKey:@"label"];
                 NSObject *obj_value=[dic_tmp objectForKey:@"value"];
+                NSString *str_keyword=[dic_tmp objectForKey:@"key"];
                 NSString *str_value=@"";
                 if (obj_value!=[NSNull null]) {
                     str_value=(NSString*)obj_value;
@@ -652,6 +667,10 @@
                     }
                 }
                 BOOL b_multi=NO;
+                NSMutableDictionary *dic_cell_list=[NSMutableDictionary dictionary];
+                [dic_cell_list setObject:str_keyword forKey:@"keyword"];
+                [dic_cell_list setValue:indexPath forKey:@"value"];
+                [arr_cell_list addObject:dic_cell_list];
                 NSString *str_groupKey=[dic_tmp objectForKey:@"groupKey"];
                 if ([str_groupKey isEqualToString:@"audit"]) {
                     if ([arr_listData count]>0) {
@@ -667,7 +686,6 @@
                                 NSString *str_value=[dic_bkvalue_tmp objectForKey:@"value"];
                                 str_detail_value=str_text;
                                 [dic_tmp setValue:str_value forKey:@"value"];
-                                
                             }
                             else {
                                 str_detail_value=@"请点击选择";
@@ -679,12 +697,28 @@
                         }
                         
                         ListCell *cell=[ListCell cellWithTable:tb withLabel:str_label withDetailLabel:str_detail_value index:indexPath listData:arr_listData mutiSelect:b_multi];
-                        
+                        if (arr_cell_switch!=nil && [arr_tmp count]>0) {
+                            for (int w=0;w<[arr_cell_switch count];w++) {
+                                NSDictionary *dic_tmp_switch=[arr_cell_switch objectAtIndex:w];
+                                NSString *str_tmp_keyword=[dic_tmp_switch objectForKey:@"keyword"];
+                                if ([str_tmp_keyword isEqualToString:str_keyword]) {
+                                    NSString *str_value=[dic_tmp_switch objectForKey:@"value"];
+                                    NSInteger i_value=[str_value integerValue];
+                                    if (i_value==0) {
+                                        cell.textLabel.textColor=[UIColor lightGrayColor];
+                                        cell.lbl_list_label.textColor=[UIColor lightGrayColor];
+                                        cell.accessibilityHint=@"cannotPopList";
+                                    }
+                                }
+                            }
+                        }
+                        cell.selectionStyle=UITableViewCellSelectionStyleNone;
                         return cell;
 
                     }
                     else {
                         cell.textLabel.text=str_label;
+                        cell.selectionStyle=UITableViewCellSelectionStyleNone;
                     }
                     
                 }
@@ -692,6 +726,7 @@
                     cell.textLabel.text=str_label;
                     cell.detailTextLabel.text=str_detail_value;
                     [dic_tmp setValue:str_detail_value forKey:@"value"];
+                    cell.selectionStyle=UITableViewCellSelectionStyleNone;
                     
                     
                 }
@@ -756,6 +791,7 @@
                 cell.accessibilityValue=[dic_tmp objectForKey:@"value"];
                 cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
                 cell.detailTextLabel.textColor=[UIColor blueColor];
+                cell.selectionStyle=UITableViewCellSelectionStyleNone;
             }
             else if ([str_type isEqualToString:@"alllist"]) {
                 NSString *str_label=[dic_tmp objectForKey:@"label"];
@@ -769,9 +805,43 @@
                 cell.detailTextLabel.textColor=[UIColor colorWithRed:69/255.0f green:115/255.0f blue:230/255.0f alpha:1];
                 cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
                 cell.accessibilityHint=@"alllist";
+                cell.selectionStyle=UITableViewCellSelectionStyleNone;
+            }
+            else if ([str_type isEqualToString:@"switch"]) {
+                NSString *str_label=[dic_tmp objectForKey:@"label"];
+                NSObject *obj_value=[dic_tmp objectForKey:@"value"];
+                NSString *str_keyword=[dic_tmp objectForKey:@"prompt"];
+                NSString *str_value=@"";
+                if (obj_value!=[NSNull null]) {
+                    str_value=(NSString*)str_value;
+                    SwitchCell *cell=[SwitchCell cellWithTable:tableView withLabel:str_label index:indexPath withValue:[str_value integerValue]];
+                    cell.delegate=self;
+                    cell.str_keyword=str_keyword;
+                    cell.selectionStyle=UITableViewCellSelectionStyleNone;
+                    return cell;
+                }
+            }
+            else if ([str_type isEqualToString:@"switchmutex"]) {
+                NSString *str_label=[dic_tmp objectForKey:@"label"];
+                NSObject *obj_value=[dic_tmp objectForKey:@"value"];
+                NSString *str_keyword_org=[dic_tmp objectForKey:@"prompt"];
+                NSArray *arr_keyword=[str_keyword_org componentsSeparatedByString:@"|"];
+                NSString *str_keyword1=[arr_keyword objectAtIndex:0];
+                NSString *str_keyword2=[arr_keyword objectAtIndex:1];
+                NSString *str_value=@"";
+                if (obj_value!=[NSNull null]) {
+                    str_value=(NSString*)str_value;
+                    SwitchMutexCell *cell=[SwitchMutexCell cellWithTable:tableView withLabel:str_label index:indexPath withValue:[str_value integerValue]];
+                    cell.delegate=self;
+                    cell.str_keyword1=str_keyword1;
+                    cell.str_keyword2=str_keyword2;
+                    cell.selectionStyle=UITableViewCellSelectionStyleNone;
+                    return cell;
+                }
             }
             else {
                 cell.textLabel.text=@"";
+                cell.selectionStyle=UITableViewCellSelectionStyleNone;
             }
 
         }
@@ -793,6 +863,7 @@
             ShenPiResultCell *cell=[ShenPiResultCell cellWithTable:tableView withContent:str_content withName:str_name withStatus:str_status withTime:str_date ActivityName:str_activename atIndex:indexPath];
             cell.layer.borderWidth=1;
             cell.layer.borderColor=[[UIColor colorWithRed:231/255.0f green:231/255.0f blue:231/255.0f alpha:1] CGColor];
+            cell.selectionStyle=UITableViewCellSelectionStyleNone;
             return cell;
 
         }
@@ -815,6 +886,7 @@
             cell.backgroundColor=[UIColor clearColor];
             cell.layer.borderColor=[[UIColor clearColor] CGColor];
             cell.layer.borderWidth=0;
+            cell.selectionStyle=UITableViewCellSelectionStyleNone;
             
         }
     }
@@ -1085,6 +1157,7 @@
         [self.navigationController pushViewController:vc animated:YES];
     }
     
+    
 }
 
 
@@ -1118,6 +1191,42 @@
                     j=j+(int)i_count;
                 }
             }
+            else if ([str_sub_type isEqualToString:@"switch"]) {
+                NSString *str_keyword=[dic_sub_ctl objectForKey:@"prompt"];
+                NSString *str_value=[dic_sub_ctl objectForKey:@"value"];
+                NSMutableDictionary *dic_cell_switch=[NSMutableDictionary dictionary];
+                [dic_cell_switch setObject:str_keyword forKey:@"keyword"];
+                [dic_cell_switch setValue:str_value forKey:@"value"];
+                [arr_cell_switch addObject:dic_cell_switch];
+            }
+            else if ([str_sub_type isEqualToString:@"switchmutex"]) {
+                NSString *str_keyword_org=[dic_sub_ctl objectForKey:@"prompt"];
+                NSString *str_value=[dic_sub_ctl objectForKey:@"value"];
+                NSInteger i_value=[str_value integerValue];
+                NSArray *arr_keyword=[str_keyword_org componentsSeparatedByString:@"|"];
+                NSString *str_keyword1=[arr_keyword objectAtIndex:0];
+                NSString *str_keyword2=[arr_keyword objectAtIndex:1];
+                NSMutableDictionary *dic_cell_switch1=[NSMutableDictionary dictionary];
+                NSMutableDictionary *dic_cell_switch2=[NSMutableDictionary dictionary];
+                if (i_value==0) {
+                    [dic_cell_switch1 setObject:str_keyword1 forKey:@"keyword"];
+                    [dic_cell_switch1 setObject:@"1" forKey:@"value"];
+                    [arr_cell_switch addObject:dic_cell_switch1];
+                    [dic_cell_switch2 setObject:str_keyword2 forKey:@"keyword"];
+                    [dic_cell_switch2 setObject:@"0" forKey:@"value"];
+                    [arr_cell_switch addObject:dic_cell_switch2];
+                }
+                else if (i_value==1) {
+                    [dic_cell_switch1 setObject:str_keyword1 forKey:@"keyword"];
+                    [dic_cell_switch1 setObject:@"0" forKey:@"value"];
+                    [arr_cell_switch addObject:dic_cell_switch1];
+                    [dic_cell_switch2 setObject:str_keyword2 forKey:@"keyword"];
+                    [dic_cell_switch2 setObject:@"1" forKey:@"value"];
+                    [arr_cell_switch addObject:dic_cell_switch2];
+
+                }
+            }
+            
         }
     }
     return dic_my_ctl;
@@ -1340,6 +1449,47 @@
     [dic_tmp setValue:str_empid forKey:@"value"];
     [dic_tmp setValue:str_name forKey:@"tableTitle"];
 }
+
+
+
+-(void)PassSwitchValueDelegate:(NSDictionary *)dic_value {
+    if (dic_value!=nil) {
+        NSString *str_keyword=[dic_value objectForKey:@"label"];
+        for (int i=0;i<[arr_cell_list count];i++) {
+            NSDictionary *dic_tmp=[arr_cell_list objectAtIndex:i];
+            NSString *str_tmp_key=[dic_tmp objectForKey:@"keyword"];
+            if ([str_tmp_key isEqualToString:str_keyword]) {
+                NSIndexPath *indexPath= [dic_tmp objectForKey:@"value"];
+                NSString *str_value=[dic_value objectForKey:@"value"];
+                NSInteger i_value=[str_value integerValue];
+                if (i_value==0) {
+                    //如果为0则不能选，变灰
+                    ListCell *cell=[tableView cellForRowAtIndexPath:indexPath];
+                    cell.textLabel.textColor=[UIColor lightGrayColor];
+                    cell.lbl_list_label.textColor=[UIColor lightGrayColor];
+                    cell.accessibilityHint=@"cannotPopList";
+                }
+                else {
+                    //如果为0则不能选，变灰
+                    ListCell *cell=[tableView cellForRowAtIndexPath:indexPath];
+                    cell.textLabel.textColor=[UIColor blackColor];
+                    cell.lbl_list_label.textColor=[UIColor colorWithRed:69/255.0f green:115/255.0f blue:230/255.0f alpha:1];
+                    cell.accessibilityHint=@"canPopList";
+                }
+            }
+        }
+    }
+}
+
+-(void)PassSwitchMutexValueDelegate:(NSArray *)arr_value {
+    if (arr_value!=nil) {
+        for (int i=0; i<[arr_value count]; i++) {
+            NSDictionary *dic_value=(NSDictionary*)[arr_value objectAtIndex:i];
+            [self PassSwitchValueDelegate:dic_value];
+        }
+    }
+}
+
 
 /*
 #pragma mark - Navigation

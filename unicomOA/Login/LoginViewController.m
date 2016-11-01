@@ -150,7 +150,8 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
         View.image=[UIImage imageNamed:@"LoginView-IPad.png"];
     }
     else {
-        View.image=[UIImage imageNamed:@"LoginView.png"];
+        UIImage *img_view=[UIImage imageNamed:@"LoginView.png"];
+        View.image=img_view;
     }
     View.backgroundColor=[UIColor whiteColor];
     [self.view addSubview:View];
@@ -424,12 +425,9 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     //创建数据库
     [db_local initTables];
     //添加IP数据
-    [db_local InsertIPTable:@"192.168.1.65" port:@"80" IP_Mark:@"TestServer"];
+    [db_local InsertIPTable:@"192.168.1.68" port:@"80" IP_Mark:@"TestServer"];
     //添加接口数据
     [db_local InsertInterFaceTable];
-    
-    
-    
 }
 
 //注册

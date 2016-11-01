@@ -15,8 +15,9 @@
 #import "SysMsgTableViewCell.h"
 #import "UILabel+LabelHeightAndWidth.h"
 #import "SysMsgDisplayController.h"
+#import "XSpotLight.h"
 
-@interface SysMsgViewController()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate,UISearchResultsUpdating>
+@interface SysMsgViewController()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate,UISearchResultsUpdating,XSpotLightDelegate>
 
 @property (nonatomic,strong) AFHTTPSessionManager *session;
 
@@ -92,6 +93,19 @@
     [_session.requestSerializer setTimeoutInterval:10.0f];
     
     [self buildView];
+    
+    XSpotLight *SpotLight=[[XSpotLight alloc]init];
+    SpotLight.messageArray=@[@"修改系统消息列表及内容页面"];
+    // SpotLight.rectArray=@[[NSValue valueWithCGRect:CGRectMake(i_x, i_y, 50, 500)]];
+    SpotLight.rectArray=@[[NSValue valueWithCGRect:CGRectMake(0, 0,Width , Height)]];
+    SpotLight.delegate=self;
+    
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]) {
+            [self presentViewController:SpotLight animated:NO completion:^{
+        
+            }];
+    }
+
     
 
     
@@ -241,6 +255,8 @@
         return 120;
     }
     else {
+        return 85;
+        /*
         if (iPhone6_plus) {
             h_height=[_baseFunc cellHeightForNews:indexPath.row titleFont:17 otherFont:14 array:_arr_SysMsgList keywordtitle:@"title" keywordName:@"sendEmpname" keywordTime:@"sendTime"];
         }
@@ -252,6 +268,7 @@
         }
         
         return h_height;
+         */
     }
 }
 
@@ -259,6 +276,7 @@
     if ([_arr_SysMsgList count]!=0) {
         NSDictionary *dic_content=[_arr_SysMsgList objectAtIndex:indexPath.row];
         SysMsgTableViewCell *cell=[self buildCell:dic_content indexPath:indexPath tableview:tableView];
+        cell.selectionStyle=UITableViewCellSelectionStyleNone;
         return cell;
     }
     else {
@@ -276,65 +294,48 @@
 
 -(SysMsgTableViewCell*)buildCell:(NSDictionary*)dic_content indexPath:(NSIndexPath*)indexPath tableview:(UITableView*)tableView {
     NSString *str_category=[_baseFunc GetValueFromDic:dic_content key:@"msgType"];
+    NSString *str_title=[_baseFunc GetValueFromDic:dic_content key:@"title"];
+    NSString *str_sendempname =[_baseFunc GetValueFromDic:dic_content key:@"sendEmpname"];
+    NSString *str_time =[_baseFunc GetValueFromDic:dic_content key:@"sendTime"];
+    NSArray *arr_time=[str_time componentsSeparatedByString:@" "];
+    NSString *str_time2=[arr_time objectAtIndex:0];
     CGFloat i_titleFont=0;
     CGFloat i_otherFont=0;
     if (iPhone6_plus) {
-        i_titleFont=16;
-        i_otherFont=11;
+        i_titleFont=17;
+        i_otherFont=14;
     }
     else if (iPad) {
         i_titleFont=24;
         i_otherFont=18;
     }
-    else {
-        i_titleFont=16;
-        i_otherFont=11;
+    else if(iPhone6) {
+        i_titleFont=17;
+        i_otherFont=12;
     }
-    //  CGFloat h_category=[UILabel_LabelHeightAndWidth getHeightByWidth:15*self.view.frame.size.width/16 title:str_category font:[UIFont systemFontOfSize:i_otherFont]];
+    else if (iPhone5_5s) {
+        i_titleFont=15;
+        i_otherFont=12;
+    }
+    
+    
+
     SysMsgTableViewCell *cell;
-    NSString *str_title=[_baseFunc GetValueFromDic:dic_content key:@"title"];
+   
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str_title];
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     [paragraphStyle setLineSpacing:5];
     [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [str_title length])];
     
-    CGFloat h_Title;
-    if (iPad) {
-        h_Title=[UILabel getHeightByWidth:[UIScreen mainScreen].bounds.size.width-100 title:str_title font:[UIFont systemFontOfSize:i_titleFont]];
-    }
-    else {
-        h_Title=[UILabel getHeightByWidth:[UIScreen mainScreen].bounds.size.width-30 title:str_title font:[UIFont systemFontOfSize:i_titleFont]];
-    }
-    
-    NSString *str_sendempname =[_baseFunc GetValueFromDic:dic_content key:@"sendEmpname"];
-    // CGFloat w_depart=[UILabel_LabelHeightAndWidth getWidthWithTitle:[dic_content objectForKey:@"operatorName"] font:[UIFont systemFontOfSize:i_otherFont]];
-  //  CGFloat h_depart=[UILabel_LabelHeightAndWidth getHeightByWidth:[UIScreen mainScreen].bounds.size.width title:str_sendempname font:[UIFont systemFontOfSize:i_otherFont]];
-    NSString *str_time =[_baseFunc GetValueFromDic:dic_content key:@"sendTime"];
-    NSArray *arr_time=[str_time componentsSeparatedByString:@" "];
-    NSString *str_time2=[arr_time objectAtIndex:0];
     NSString *str_depart=[NSString stringWithFormat:@"%@ %@",str_sendempname,str_time2];
-    //CGFloat h_height=h_Title+h_depart+20;
-    //  CGFloat h_height=[self cellHeightForNews:indexPath.row titleFont:i_titleFont otherFont:i_otherFont];
-    //CGFloat h_height=[_baseFunc cellHeightForNews:indexPath.row titleFont:i_titleFont otherFont:i_otherFont array:self.arr_SysMsgList];
-    /*
-    cell=[SysMsgTableViewCell cellWithTable:tableView withCellHeight:h_height withTitleHeight:h_Title withButtonHeight:h_depart withTitle:attributedString withCategory:str_category withDepart:str_depart titleFont:i_titleFont otherFont:i_otherFont canScroll:NO withImage:nil];
-    cell.delegate=self;
-    cell.str_title=str_title;
-    cell.str_department=str_sendempname;
-    cell.myTag=indexPath.row;
-    cell.str_operator=[dic_content objectForKey:@"sendEmpname"];
-     */
-    cell=[SysMsgTableViewCell cellWithTable:tableView withCellHeight:h_height withTitle:attributedString withCategory:str_category withSendName:str_depart titleFont:i_titleFont otherFont:i_otherFont];
+   // cell=[SysMsgTableViewCell cellWithTable:tableView withCellHeight:h_height withTitle:attributedString withCategory:str_category withSendName:str_depart titleFont:i_titleFont otherFont:i_otherFont];
+    cell=[SysMsgTableViewCell cellWithTable:tableView withTitle:attributedString withCategory:str_category withSendName:str_sendempname withTime:str_time2 titleFont:i_titleFont otherFont:i_otherFont];
     NSString *str_id=[_baseFunc GetValueFromDic:dic_content key:@"id"];
     cell.tag=[str_id integerValue];
     //如果在一个页面，就不触发这个
-    
+    cell.lbl_Title.textColor=[UIColor blackColor];
     if ([str_title isEqualToString:selected_title]) {
-        //  cell.backgroundColor=[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1];
-        //if (b_ReplaceDataSource==YES) {
-            cell.backgroundColor=[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1];
-        //}
-        
+      //  cell.backgroundColor=[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1];
     }
     NSObject *obj=[dic_content objectForKey:@"id"];
     if (obj!=nil) {
@@ -347,7 +348,9 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.tableView reloadData];
     SysMsgTableViewCell *cell=(SysMsgTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
+    cell.lbl_Title.textColor=[UIColor colorWithRed:131/255.0f green:131/255.0f blue:131/255.0f alpha:1];
     NSInteger cellTag= cell.tag;
     if (cellTag!=0) {
         /*
@@ -358,6 +361,11 @@
         SysMsgDisplayController *vc=[[SysMsgDisplayController alloc]init];
         vc.i_id=cellTag;
         vc.str_title=@"系统消息内容";
+        vc.str_time=cell.lbl_time.text;
+        vc.str_category=cell.lbl_Category.text;
+        vc.str_SysMsg_Title=cell.lbl_Title.text;
+        vc.str_sendName=cell.lbl_sendName.text;
+        vc.usrInfo=_userInfo;
         if (f_v<9.0) {
             self.navigationController.delegate=nil;
         }

@@ -379,6 +379,8 @@
     cell.str_department=str_department;
     cell.myTag=indexPath.row;
     cell.str_operator=[dic_content objectForKey:@"operatorName"];
+    cell.selectionStyle=UITableViewCellSelectionStyleNone;
+    cell.lbl_Title.textColor=[UIColor blackColor];
     //如果在一个页面，就不触发这个
     
     if ([str_title isEqualToString:selected_title]) {
@@ -428,7 +430,8 @@
     cell.str_title=str_title;
     cell.str_department=str_department;
     cell.myTag=indexPath.section-1;
-    cell.selectionStyle=UITableViewCellSelectionStyleGray;
+    cell.selectionStyle=UITableViewCellSelectionStyleNone;
+    cell.lbl_Title.textColor=[UIColor blackColor];
     NSObject *obj=[dic_content objectForKey:@"id"];
     if (obj!=nil) {
         NSNumber *num_index=(NSNumber*)obj;
@@ -449,6 +452,7 @@
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     [paragraphStyle setLineSpacing:5];
     [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [str_title length])];
+    [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0/255.0f green:49/255.0f blue:119/255.0f alpha:1] range:NSMakeRange(0, attributedString.length)];
     
     CGFloat h_Title;
     if (iPad) {
@@ -472,12 +476,13 @@
     cell.str_department=str_department;
     cell.myTag=indexPath.row;
     cell.str_operator=[dic_content objectForKey:@"operatorName"];
+    cell.lbl_Title.textColor=[UIColor blackColor];
     //如果在一个页面，就不触发这个
-    
+    cell.selectionStyle=UITableViewCellSelectionStyleNone;
     if ([str_title isEqualToString:selected_title]) {
         //  cell.backgroundColor=[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1];
         if (b_ReplaceDataSource==YES) {
-            cell.backgroundColor=[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1];
+            cell.backgroundColor=[UIColor clearColor];
         }
         
     }
@@ -492,6 +497,7 @@
 
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.tableView reloadData];
     NSDictionary *dic_content=[_arr_NewsList objectAtIndex:indexPath.row];
     NSString *str_category=[_baseFunc GetValueFromDic:dic_content key:@"classname"];
     NSInteger i_index=0;
@@ -502,18 +508,23 @@
         i_index=cell.tag;
         str_label=cell.str_title;
         str_depart=cell.str_department;
+        cell.lbl_Title.textColor=[UIColor colorWithRed:130/255.0f green:130/255.0f blue:130/255.0f alpha:1];
     }
     else if ([str_category rangeOfString:@"新闻"].location!=NSNotFound) {
         NewsNewsTableViewCell *cell=(NewsNewsTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
         i_index=cell.tag;
         str_label=cell.str_title;
         str_depart=cell.str_department;
+        cell.lbl_Title.textColor=[UIColor colorWithRed:130/255.0f green:130/255.0f blue:130/255.0f alpha:1];
     }
     else {
         NewsManagementTableViewCell *cell=(NewsManagementTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
         i_index=cell.tag;
         str_label=cell.str_title;
         str_depart=cell.str_department;
+        cell.lbl_Title.textColor=[UIColor colorWithRed:130/255.0f green:130/255.0f blue:130/255.0f alpha:1];
+        cell.backgroundColor=[UIColor clearColor];
+        //cell.lbl_Title.textColor=[UIColor colorWithRed:140/255.0f green:156/255.0f blue:176/255.0f alpha:1];
     }
 /*
     if (selectedIndex!=-1 && index!=selectedIndex) {
@@ -724,7 +735,8 @@
     news_controller.delegate=self;
     news_controller.b_News=_b_News;
     //news_controller.userInfo=_userInfo;
-    cell.backgroundColor=[UIColor colorWithRed:238/255.0f green:238/255.0f blue:238/255.0f alpha:1];
+    cell.backgroundColor=[UIColor clearColor];
+    cell.lbl_Title.textColor=[UIColor colorWithRed:130/255.0f green:130/255.0f blue:130/255.0f alpha:1];
     selectedIndex=index;
     selected_title=cell.str_title;
     if (f_v<9.0) {

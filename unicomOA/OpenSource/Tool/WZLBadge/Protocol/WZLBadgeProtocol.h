@@ -75,7 +75,7 @@ typedef NS_ENUM(NSUInteger, WBadgeAnimType)
 /**
  *  show badge with red dot style and WBadgeAnimTypeNone by default.
  */
-- (void)showBadge;
+- (void)showBadge:(CGFloat)f_x y:(CGFloat)f_y;
 
 /**
  *  showBadge
@@ -87,7 +87,7 @@ typedef NS_ENUM(NSUInteger, WBadgeAnimType)
  */
 - (void)showBadgeWithStyle:(WBadgeStyle)style
                      value:(NSInteger)value
-             animationType:(WBadgeAnimType)aniType;
+             animationType:(WBadgeAnimType)aniType x:(CGFloat)f_x y:(CGFloat)f_y;
 
 
 /**

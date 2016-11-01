@@ -94,8 +94,9 @@
        // img_News.image=[UIImage imageNamed:str_Image];
         
         lbl_Title.font=[UIFont systemFontOfSize:i_titleFont];
-        lbl_Title.textColor=[UIColor blackColor];
+        lbl_Title.textColor=[UIColor colorWithRed:0/255.0f green:49/255.0f blue:119/255.0f alpha:1];
         lbl_Title.numberOfLines=2;
+        [str_title addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0/255.0f green:49/255.0f blue:119/255.0f alpha:1] range:NSMakeRange(0, str_title.length)];
         lbl_Title.attributedText = str_title;
         lbl_Title.lineBreakMode = NSLineBreakByWordWrapping | NSLineBreakByTruncatingTail;
         [lbl_Title sizeToFit];

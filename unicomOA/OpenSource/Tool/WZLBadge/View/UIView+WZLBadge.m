@@ -20,9 +20,9 @@
 /**
  *  show badge with red dot style and WBadgeAnimTypeNone by default.
  */
-- (void)showBadge
+- (void)showBadge:(CGFloat)f_x y:(CGFloat)f_y
 {
-    [self showBadgeWithStyle:WBadgeStyleRedDot value:0 animationType:WBadgeAnimTypeNone];
+    [self showBadgeWithStyle:WBadgeStyleRedDot value:0 animationType:WBadgeAnimTypeNone x:(CGFloat)f_x y:(CGFloat)f_y];
 }
 
 /**
@@ -32,7 +32,7 @@
  *  @param value (if 'style' is WBadgeStyleRedDot or WBadgeStyleNew, 
  *                this value will be ignored. In this case, any value will be ok.)
  */
-- (void)showBadgeWithStyle:(WBadgeStyle)style value:(NSInteger)value animationType:(WBadgeAnimType)aniType
+- (void)showBadgeWithStyle:(WBadgeStyle)style value:(NSInteger)value animationType:(WBadgeAnimType)aniType x:(CGFloat)f_x y:(CGFloat)f_y
 {
     self.aniType = aniType;
     switch (style) {
@@ -40,7 +40,7 @@
             [self showRedDotBadge];
             break;
         case WBadgeStyleNumber:
-            [self showNumberBadgeWithValue:value];
+            [self showNumberBadgeWithValue:value x:f_x y:f_y];
             break;
         case WBadgeStyleNew:
             [self showNewBadge];
@@ -104,7 +104,7 @@
     self.badge.hidden = NO;
 }
 
-- (void)showNumberBadgeWithValue:(NSInteger)value
+- (void)showNumberBadgeWithValue:(NSInteger)value x:(CGFloat)f_x y:(CGFloat)f_y
 {
     if (value < 0) {
         return;
@@ -124,7 +124,8 @@
         frame.size.width = CGRectGetHeight(frame);
     }
     self.badge.frame = frame;
-    self.badge.center = CGPointMake(CGRectGetWidth(self.frame) + 2 + self.badgeCenterOffset.x, self.badgeCenterOffset.y);
+    CGPoint p_center= CGPointMake(CGRectGetWidth(self.frame) + self.badgeCenterOffset.x + f_x, self.badgeCenterOffset.y + f_y);
+    self.badge.center = p_center;
     self.badge.layer.cornerRadius = CGRectGetHeight(self.badge.frame) / 2;
 }
 

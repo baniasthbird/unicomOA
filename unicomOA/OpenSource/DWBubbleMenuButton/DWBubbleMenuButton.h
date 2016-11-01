@@ -56,6 +56,13 @@ typedef NS_ENUM(NSUInteger, ExpansionDirection) {
 // The spacing between menu buttons when expanded
 @property (nonatomic) float buttonSpacing;
 
+@property (nonatomic, assign) NSInteger i_flow_num;
+
+@property (nonatomic, assign) NSInteger i_doc_num;
+
+@property (nonatomic, assign) NSInteger i_msg_num;
+
+
 // Initializers
 - (id)initWithFrame:(CGRect)frame flow_num:(NSInteger)i_flow_num doc_num:(NSInteger)i_doc_num msg_num:(NSInteger)i_msg_num expansionDirection:(ExpansionDirection)direction;
 

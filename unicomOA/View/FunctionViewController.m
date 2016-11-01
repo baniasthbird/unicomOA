@@ -134,13 +134,13 @@
     }
     
     CGFloat i_title1_x=10;
-    CGFloat i_title1_y=36;
+    CGFloat i_title1_y=8;
     CGFloat i_title_w=[UIScreen mainScreen].bounds.size.width-10;
     CGFloat i_title_h=15;
     CGFloat i_title_font=14;
     
     CGFloat view_part_x=0;
-    CGFloat view_part1_y=55;
+    CGFloat view_part1_y=30;
     CGFloat view_part_w=[UIScreen mainScreen].bounds.size.width;
     CGFloat view_part_h=88;
 
@@ -155,37 +155,37 @@
     
     
     CGFloat i_title2_x=10;
-    CGFloat i_title2_y=166;
-    
-    
-    CGFloat i_viewpart2_y=182;
-
-    
-   
-    CGFloat shenpi_y=200;
+    CGFloat i_title2_y=156;
+    CGFloat i_viewpart2_y=178;
+    CGFloat shenpi_y=i_viewpart2_y+12;
     
     CGFloat shenpi_y_2=242;
     
     CGFloat i_title3_x=10;
-    CGFloat i_title3_y=293;
+    CGFloat i_title3_y=299;
     
    
-    CGFloat i_viewpart3_y=319;
+    CGFloat i_viewpart3_y=321;
     
     CGFloat i_insets=70;
     
-    if (iPhone6) {
+    if (iPhone5_5s) {
+        i_title2_y=130;
+        i_viewpart2_y=152;
+        shenpi_y=i_viewpart2_y+9;
+        i_title3_y=249;
+        i_viewpart3_y=271;
+    }
+    else if (iPhone6) {
         btn_x=28;
         btn_x_2=116;
         btn_x_3=204;
         btn_x_4=292;
-        i_title1_y=56;
-        view_part1_y=78;
-        i_title2_y=205;
-        i_viewpart2_y=227;
-        shenpi_y=237;
-        i_title3_y=361;
-        i_viewpart3_y=383;
+     //   i_title2_y=205;
+     //   i_viewpart2_y=227;
+     //   shenpi_y=237;
+    //    i_title3_y=361;
+    //    i_viewpart3_y=383;
         view_part_h=106;
         btn_w=60;
         i_insets=80;
@@ -196,13 +196,8 @@
         btn_x_2=125;
         btn_x_3=225;
         btn_x_4=325;
-        i_title1_y=76;
-        view_part1_y=98;
-        i_title2_y=236;
-        i_viewpart2_y=256;
-        shenpi_y=270;
-        i_title3_y=396;
-        i_viewpart3_y=418;
+      //  i_title3_y=396;
+      //  i_viewpart3_y=418;
         view_part_h=110;
         btn_w=65;
         i_insets=90;
@@ -211,10 +206,10 @@
 
     }
     else if (iPad) {
-        i_title1_y=60;
-        view_part1_y=95;
-        i_title2_y=250;
-        i_viewpart2_y=282;
+      //  i_title1_y=60;
+      //  view_part1_y=95;
+      //  i_title2_y=250;
+      //  i_viewpart2_y=282;
         shenpi_y=292;
         i_title3_y=578;
         i_viewpart3_y=609;
@@ -312,7 +307,7 @@
     if (i_total!=0) {
         _btn_ShenPi.badgeBgColor=[UIColor redColor];
        // _btn_ShenPi.badgeCenterOffset=CGPointMake(0, _btn_ShenPi.size.height*0.08);
-        [_btn_ShenPi showBadgeWithStyle:WBadgeStyleNumber value:i_total animationType:WBadgeAnimTypeNone];
+        [_btn_ShenPi showBadgeWithStyle:WBadgeStyleNumber value:i_total animationType:WBadgeAnimTypeNone x:0 y:0];
         if (iPad) {
             [_btn_ShenPi setBadgeFrame:CGRectMake(_btn_ShenPi.badge.frame.origin.x, _btn_ShenPi.badge.frame.origin.y, 35, 35)];
             _btn_ShenPi.badge.layer.cornerRadius=17.5;
@@ -843,9 +838,9 @@
                 i_bangong=[str_bangong integerValue];
                 i_shiwu=[str_shiwu integerValue];
                 _btn_ShenPi.badgeBgColor=[UIColor redColor];
-                [_btn_ShenPi showBadgeWithStyle:WBadgeStyleNumber value:i_total animationType:WBadgeAnimTypeNone];
-                [_btn_BanGong showBadgeWithStyle:WBadgeStyleNumber value:i_bangong animationType:WBadgeAnimTypeNone];
-                [_btn_ShiWu showBadgeWithStyle:WBadgeStyleNumber value:i_shiwu animationType:WBadgeAnimTypeNone];
+                [_btn_ShenPi showBadgeWithStyle:WBadgeStyleNumber value:i_total animationType:WBadgeAnimTypeNone x:0 y:0];
+                [_btn_BanGong showBadgeWithStyle:WBadgeStyleNumber value:i_bangong animationType:WBadgeAnimTypeNone x:0 y:0];
+                [_btn_ShiWu showBadgeWithStyle:WBadgeStyleNumber value:i_shiwu animationType:WBadgeAnimTypeNone x:0 y:0];
                 [self.view setNeedsDisplay];
                /*
                NSString *str_totalPage=[JSON objectForKey:@"totalPage"];
@@ -927,9 +922,9 @@
                // [_btn_ShenPi setNeedsDisplay];
                 _btn_ShenPi.badgeBgColor=[UIColor redColor];
                 // _btn_ShenPi.badgeCenterOffset=CGPointMake(0, _btn_ShenPi.size.height*0.08);
-                [_btn_ShenPi showBadgeWithStyle:WBadgeStyleNumber value:i_total animationType:WBadgeAnimTypeNone];
-                [_btn_BanGong showBadgeWithStyle:WBadgeStyleNumber value:i_bangong animationType:WBadgeAnimTypeNone];
-                [_btn_ShiWu showBadgeWithStyle:WBadgeStyleNumber value:i_shiwu animationType:WBadgeAnimTypeNone];
+                [_btn_ShenPi showBadgeWithStyle:WBadgeStyleNumber value:i_total animationType:WBadgeAnimTypeNone x:0 y:0];
+                [_btn_BanGong showBadgeWithStyle:WBadgeStyleNumber value:i_bangong animationType:WBadgeAnimTypeNone x:0 y:0];
+                [_btn_ShiWu showBadgeWithStyle:WBadgeStyleNumber value:i_shiwu animationType:WBadgeAnimTypeNone x:0 y:0];
                 [self.view setNeedsDisplay];
                 
                 
@@ -1010,7 +1005,7 @@
     if (i_total>0) {
         i_total=i_total-1;
         _btn_ShenPi.badgeBgColor=[UIColor redColor];
-        [_btn_ShenPi showBadgeWithStyle:WBadgeStyleNumber value:i_total animationType:WBadgeAnimTypeNone];
+        [_btn_ShenPi showBadgeWithStyle:WBadgeStyleNumber value:i_total animationType:WBadgeAnimTypeNone x:0 y:0];
         [self.view setNeedsDisplay];
     }
 }

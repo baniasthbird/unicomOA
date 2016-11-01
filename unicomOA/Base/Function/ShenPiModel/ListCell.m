@@ -35,12 +35,12 @@
         self.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
         self.textLabel.text=str_list_label;
         //self.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-        UILabel *lbl_list_label=[[UILabel alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2, 7, [UIScreen mainScreen].bounds.size.width/2-40,30)];
+        _lbl_list_label=[[UILabel alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2, 7, [UIScreen mainScreen].bounds.size.width/2-40,30)];
        // lbl_list_label.backgroundColor=[UIColor colorWithRed:69/255.0f green:115/255.0f blue:230/255.0f alpha:1];
-        lbl_list_label.textColor=[UIColor colorWithRed:69/255.0f green:115/255.0f blue:230/255.0f alpha:1];
-        lbl_list_label.font=[UIFont systemFontOfSize:16];
-        lbl_list_label.text=str_detail_label;
-        lbl_list_label.textAlignment=NSTextAlignmentRight;
+        _lbl_list_label.textColor=[UIColor colorWithRed:69/255.0f green:115/255.0f blue:230/255.0f alpha:1];
+        _lbl_list_label.font=[UIFont systemFontOfSize:16];
+        _lbl_list_label.text=str_detail_label;
+        _lbl_list_label.textAlignment=NSTextAlignmentRight;
         
         if (arr_listData.count>0) {
             self.accessibilityElements=arr_listData;
@@ -53,7 +53,7 @@
             }
         }
         
-        [self.contentView addSubview:lbl_list_label];
+        [self.contentView addSubview:_lbl_list_label];
         
     }
     return self;

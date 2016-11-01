@@ -235,7 +235,8 @@
         return 120;
     }
     else {
-        CGFloat h_heihgt=0;
+        CGFloat h_heihgt=85;
+        /*
         if (iPhone6_plus) {
             h_heihgt=[_baseFunc cellHeightForNews:indexPath.row titleFont:17 otherFont:14 array:_arr_SysMsgList keywordtitle:@"title" keywordName:@"sendEmpname" keywordTime:@"sendTime" ];
         }
@@ -245,7 +246,7 @@
         else {
             h_heihgt=[_baseFunc cellHeightForNews:indexPath.row titleFont:17 otherFont:11 array:_arr_SysMsgList keywordtitle:@"title" keywordName:@"sendEmpname" keywordTime:@"sendTime"];
         }
-        
+        */
         return h_heihgt;
     }
 }
@@ -273,14 +274,18 @@
     CGFloat i_titleFont=0;
     CGFloat i_otherFont=0;
     if (iPhone6_plus) {
-        i_titleFont=16;
-        i_otherFont=11;
+        i_titleFont=18;
+        i_otherFont=13;
+    }
+    else if (iPhone6) {
+        i_titleFont=17;
+        i_otherFont=12;
     }
     else if (iPad) {
         i_titleFont=24;
         i_otherFont=18;
     }
-    else {
+    else if (iPhone5_5s){
         i_titleFont=16;
         i_otherFont=11;
     }

@@ -21,7 +21,7 @@
  */
 - (void)showBadge
 {
-    [kActualView showBadge];
+    [kActualView showBadge:0 y:0];
 }
 
 /**
@@ -36,7 +36,7 @@
                      value:(NSInteger)value
              animationType:(WBadgeAnimType)aniType
 {
-    [kActualView showBadgeWithStyle:style value:value animationType:aniType];
+    [kActualView showBadgeWithStyle:style value:value animationType:aniType x:0 y:0];
 }
 
 
