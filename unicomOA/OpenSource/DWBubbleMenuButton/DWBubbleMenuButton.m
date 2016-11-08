@@ -589,6 +589,17 @@
         [btn_title.layer addSublayer:_badgeLayer];
 
     }
+    else {
+        
+        NSMutableArray *sub_layers=(NSMutableArray*)btn_title.layer.sublayers;
+        for (int i=0; i<[sub_layers count]; i++) {
+            CALayer *layer_sub=[sub_layers objectAtIndex:i];
+            if ([layer_sub isKindOfClass:[CATextLayer class]]) {
+                [layer_sub removeFromSuperlayer];
+            }
+        }
+        
+    }
 }
 
 

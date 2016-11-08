@@ -133,6 +133,10 @@
         else if ([_userInfo.str_Logo isEqualToString:str_tmp_picname]) {
             NSString *fullPath=  [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:str_tmp_picname];
             imageHead=[[UIImage alloc]initWithContentsOfFile:fullPath];
+            if (imageHead==nil) {
+                imageHead=[UIImage imageNamed:@"headLogo.png"];
+            }
+            
         }
         else {
             NSString *str_picname=[NSString stringWithFormat:@"%@.%@",_userInfo.str_username,@"png"];
@@ -141,6 +145,7 @@
         }
         
         _img_Head=[[UIImageView alloc]initWithImage:imageHead];
+       
         [_img_Head.layer setMasksToBounds:YES];
         _img_Head.layer.cornerRadius=37.0f;
         if (iPad) {

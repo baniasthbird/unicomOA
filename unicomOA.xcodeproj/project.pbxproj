@@ -44,9 +44,7 @@
 		2CDC2BF21C9117FE0067693B /* NewsManagementTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDC2BF11C9117FE0067693B /* NewsManagementTableViewCell.m */; };
 		2CDC2BF51C924DAC0067693B /* NewsDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDC2BF41C924DAC0067693B /* NewsDisplayViewController.m */; };
 		2CE320EE1CB6B4B000B36793 /* PrintFiles.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CE320ED1CB6B4B000B36793 /* PrintFiles.m */; };
-		2CE320F11CB7FF4800B36793 /* CarApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CE320F01CB7FF4800B36793 /* CarApplication.m */; };
 		2CE321101CC2810800B36793 /* DataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CE3210F1CC2810800B36793 /* DataSource.m */; };
-		2CE321131CC3B86300B36793 /* SendMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CE321121CC3B86300B36793 /* SendMeViewController.m */; };
 		2CFEAD181C7168980054730E /* forgetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD131C7168980054730E /* forgetPasswordViewController.m */; };
 		2CFEAD191C7168980054730E /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD151C7168980054730E /* LoginViewController.m */; };
 		2CFEAD1A1C7168980054730E /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEAD171C7168980054730E /* SignInViewController.m */; };
@@ -110,16 +108,11 @@
 		6826294B1D9DF5CF00A50AE2 /* NewsNewsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6826294A1D9DF5CF00A50AE2 /* NewsNewsTableViewCell.m */; };
 		6826294E1D9DF5F000A50AE2 /* NewsInformTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6826294D1D9DF5F000A50AE2 /* NewsInformTableViewCell.m */; };
 		682A46D01D3F69E800FCED9E /* CDFInitialsAvatar.m in Sources */ = {isa = PBXBuildFile; fileRef = 682A46CF1D3F69E800FCED9E /* CDFInitialsAvatar.m */; };
-		682B68B01CB618DD002EC60F /* PrintApplicationNoFileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 682B68AF1CB618DD002EC60F /* PrintApplicationNoFileCell.m */; };
-		682B68B61CB64482002EC60F /* AddPrintFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 682B68B51CB64482002EC60F /* AddPrintFile.m */; };
-		682B68B91CB64683002EC60F /* AddPrintFileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 682B68B81CB64683002EC60F /* AddPrintFileCell.m */; };
 		682B68BC1CB64FDE002EC60F /* AddPrintRadioCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 682B68BB1CB64FDE002EC60F /* AddPrintRadioCell.m */; };
 		68377A161D61A81B007F7B75 /* iphoneqrcode.png in Resources */ = {isa = PBXBuildFile; fileRef = 68377A151D61A81B007F7B75 /* iphoneqrcode.png */; };
 		683815301CBC79F500E6AFD3 /* CarService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6838152F1CBC79F500E6AFD3 /* CarService.m */; };
 		683815331CBC7A2100E6AFD3 /* PrintService.m in Sources */ = {isa = PBXBuildFile; fileRef = 683815321CBC7A2100E6AFD3 /* PrintService.m */; };
-		683815361CBC941300E6AFD3 /* CarApplicationDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 683815351CBC941300E6AFD3 /* CarApplicationDetail.m */; };
 		6838153C1CBCB5E700E6AFD3 /* ShenPiResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6838153B1CBCB5E700E6AFD3 /* ShenPiResultCell.m */; };
-		6838153F1CBCCB2A00E6AFD3 /* PrintApplicationDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 6838153E1CBCCB2A00E6AFD3 /* PrintApplicationDetail.m */; };
 		683815421CBCDAA400E6AFD3 /* PrintFileDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 683815411CBCDAA400E6AFD3 /* PrintFileDetail.m */; };
 		683815451CBCE28500E6AFD3 /* PrintFileNavCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 683815441CBCE28500E6AFD3 /* PrintFileNavCell.m */; };
 		683A452E1D40CAC900B91D82 /* UnFinishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 683A452D1D40CAC900B91D82 /* UnFinishViewController.m */; };
@@ -178,9 +171,7 @@
 		6854379D1D7E995700A0F4FA /* RAYNewFunctionGuideVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6854379A1D7E995700A0F4FA /* RAYNewFunctionGuideVC.m */; };
 		6854379E1D7E995700A0F4FA /* RAYNewFunctionGuideVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6854379B1D7E995700A0F4FA /* RAYNewFunctionGuideVC.xib */; };
 		6854ACB91DC86A4D00D03452 /* SwitchMutexCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6854ACB81DC86A4D00D03452 /* SwitchMutexCell.m */; };
-		68579FA31CC0BBCE00597FBD /* ShenPiAgreeWithCarDeploy.m in Sources */ = {isa = PBXBuildFile; fileRef = 68579FA21CC0BBCE00597FBD /* ShenPiAgreeWithCarDeploy.m */; };
 		68579FA61CC0C21100597FBD /* CarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68579FA51CC0C21100597FBD /* CarModel.m */; };
-		68579FA91CC0C88600597FBD /* CarDeployCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68579FA81CC0C88600597FBD /* CarDeployCell.m */; };
 		686A36FF1D5D642900288011 /* XManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 686A36FA1D5D642900288011 /* XManager.m */; };
 		686A37001D5D642900288011 /* XSpotLight.m in Sources */ = {isa = PBXBuildFile; fileRef = 686A36FC1D5D642900288011 /* XSpotLight.m */; };
 		686A37011D5D642900288011 /* XSpotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 686A36FE1D5D642900288011 /* XSpotView.m */; };
@@ -249,11 +240,6 @@
 		68DA1EC61CE4640B0065517B /* newsbodcast.png in Resources */ = {isa = PBXBuildFile; fileRef = 68DA1EC51CE4640B0065517B /* newsbodcast.png */; };
 		68DEEBC51CBDCED6003DB7AA /* MyShenPiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DEEBC41CBDCED6003DB7AA /* MyShenPiViewController.m */; };
 		68DEEBC81CBDDA91003DB7AA /* MyShenPiCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DEEBC71CBDDA91003DB7AA /* MyShenPiCell.m */; };
-		68DEEBD41CBE0FD4003DB7AA /* CarShenPiDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DEEBD31CBE0FD4003DB7AA /* CarShenPiDetail.m */; };
-		68DEEBD71CBE0FF7003DB7AA /* PrintShenPiDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DEEBD61CBE0FF7003DB7AA /* PrintShenPiDetail.m */; };
-		68DEEBDA1CBE1D0D003DB7AA /* ShenPiAgree.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DEEBD91CBE1D0D003DB7AA /* ShenPiAgree.m */; };
-		68DEEBDD1CBE1D29003DB7AA /* ShenPiDisAgree.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DEEBDC1CBE1D29003DB7AA /* ShenPiDisAgree.m */; };
-		68DEEBE01CBE1D61003DB7AA /* ShenPiCopy.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DEEBDF1CBE1D61003DB7AA /* ShenPiCopy.m */; };
 		68DEEBE31CBE30E6003DB7AA /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DEEBE21CBE30E6003DB7AA /* UserInfo.m */; };
 		68E779DC1CB34A8E006DA5B9 /* CLTreeView_LEVEL0_Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E779BE1CB34A8E006DA5B9 /* CLTreeView_LEVEL0_Cell.m */; };
 		68E779DD1CB34A8E006DA5B9 /* CLTreeView_LEVEL0_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E779C01CB34A8E006DA5B9 /* CLTreeView_LEVEL0_Model.m */; };
@@ -274,20 +260,14 @@
 		68E779F91CB37D6A006DA5B9 /* Friend.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E779F61CB37D6A006DA5B9 /* Friend.m */; };
 		68E779FA1CB37D6A006DA5B9 /* FriendGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E779F81CB37D6A006DA5B9 /* FriendGroup.m */; };
 		68E8F3791D1249270062E864 /* AlarmCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E8F3781D1249270062E864 /* AlarmCell.m */; };
-		68ED4E2B1CB49432000E8A7B /* ShenPiManagementController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68ED4E2A1CB49432000E8A7B /* ShenPiManagementController.m */; };
 		68ED4E3E1CB4CDC4000E8A7B /* headLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 68ED4E3D1CB4CDC4000E8A7B /* headLogo.png */; };
 		68ED4E421CB4DC58000E8A7B /* the_arrow_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 68ED4E411CB4DC58000E8A7B /* the_arrow_0.png */; };
-		68ED4E451CB4E215000E8A7B /* MyApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 68ED4E441CB4E215000E8A7B /* MyApplication.m */; };
-		68ED4E481CB4E3CF000E8A7B /* NewApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 68ED4E471CB4E3CF000E8A7B /* NewApplication.m */; };
-		68ED4E4F1CB4EFD2000E8A7B /* PrintApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 68ED4E4E1CB4EFD2000E8A7B /* PrintApplication.m */; };
 		68ED4E521CB5076D000E8A7B /* PrintApplicationTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68ED4E511CB5076D000E8A7B /* PrintApplicationTitleCell.m */; };
 		68ED4E551CB5078C000E8A7B /* PrintApplicationDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68ED4E541CB5078C000E8A7B /* PrintApplicationDetailCell.m */; };
-		68ED4E581CB507B9000E8A7B /* PrintApplicationFileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68ED4E571CB507B9000E8A7B /* PrintApplicationFileCell.m */; };
 		68EEDE561CBB2E19003295EB /* Address.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EEDE501CBB2E19003295EB /* Address.m */; };
 		68EEDE571CBB2E19003295EB /* DYCAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EEDE521CBB2E19003295EB /* DYCAddress.m */; };
 		68EEDE581CBB2E19003295EB /* DYCAddressPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EEDE541CBB2E19003295EB /* DYCAddressPickerView.m */; };
 		68EEDE591CBB2E19003295EB /* SYS_AREA.xml in Resources */ = {isa = PBXBuildFile; fileRef = 68EEDE551CBB2E19003295EB /* SYS_AREA.xml */; };
-		68EEDE5C1CBB8236003295EB /* CarUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EEDE5B1CBB8236003295EB /* CarUser.m */; };
 		68EEDE711CBB911A003295EB /* down_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68EEDE5E1CBB911A003295EB /* down_arrow@2x.png */; };
 		68EEDE721CBB911A003295EB /* MCMenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EEDE601CBB911A003295EB /* MCMenuButton.m */; };
 		68EEDE731CBB911A003295EB /* MCPopMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EEDE631CBB911A003295EB /* MCPopMenuCell.m */; };
@@ -410,12 +390,8 @@
 		2CDC2BF41C924DAC0067693B /* NewsDisplayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsDisplayViewController.m; path = Base/Function/NewsController/NewsDisplayViewController.m; sourceTree = "<group>"; };
 		2CE320EC1CB6B4B000B36793 /* PrintFiles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrintFiles.h; path = Base/Function/ShenPiModel/PrintFiles.h; sourceTree = "<group>"; };
 		2CE320ED1CB6B4B000B36793 /* PrintFiles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrintFiles.m; path = Base/Function/ShenPiModel/PrintFiles.m; sourceTree = "<group>"; };
-		2CE320EF1CB7FF4800B36793 /* CarApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CarApplication.h; path = Base/Function/ShenPiContorller/CarApplication.h; sourceTree = "<group>"; };
-		2CE320F01CB7FF4800B36793 /* CarApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CarApplication.m; path = Base/Function/ShenPiContorller/CarApplication.m; sourceTree = "<group>"; };
 		2CE3210E1CC2810800B36793 /* DataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataSource.h; path = View/DataSource.h; sourceTree = "<group>"; };
 		2CE3210F1CC2810800B36793 /* DataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataSource.m; path = View/DataSource.m; sourceTree = "<group>"; };
-		2CE321111CC3B86300B36793 /* SendMeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SendMeViewController.h; path = Base/Function/ShenPiContorller/SendMeViewController.h; sourceTree = "<group>"; };
-		2CE321121CC3B86300B36793 /* SendMeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SendMeViewController.m; path = Base/Function/ShenPiContorller/SendMeViewController.m; sourceTree = "<group>"; };
 		2CFEAD121C7168980054730E /* forgetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = forgetPasswordViewController.h; path = Login/forgetPasswordViewController.h; sourceTree = "<group>"; };
 		2CFEAD131C7168980054730E /* forgetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = forgetPasswordViewController.m; path = Login/forgetPasswordViewController.m; sourceTree = "<group>"; };
 		2CFEAD141C7168980054730E /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = Login/LoginViewController.h; sourceTree = "<group>"; };
@@ -543,12 +519,6 @@
 		6826294D1D9DF5F000A50AE2 /* NewsInformTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsInformTableViewCell.m; path = Base/Function/NewsModel/NewsInformTableViewCell.m; sourceTree = "<group>"; };
 		682A46CE1D3F69E800FCED9E /* CDFInitialsAvatar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDFInitialsAvatar.h; sourceTree = "<group>"; };
 		682A46CF1D3F69E800FCED9E /* CDFInitialsAvatar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDFInitialsAvatar.m; sourceTree = "<group>"; };
-		682B68AE1CB618DD002EC60F /* PrintApplicationNoFileCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrintApplicationNoFileCell.h; path = Base/Function/ShenPiModel/PrintApplicationNoFileCell.h; sourceTree = "<group>"; };
-		682B68AF1CB618DD002EC60F /* PrintApplicationNoFileCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrintApplicationNoFileCell.m; path = Base/Function/ShenPiModel/PrintApplicationNoFileCell.m; sourceTree = "<group>"; };
-		682B68B41CB64482002EC60F /* AddPrintFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddPrintFile.h; path = Base/Function/ShenPiContorller/AddPrintFile.h; sourceTree = "<group>"; };
-		682B68B51CB64482002EC60F /* AddPrintFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddPrintFile.m; path = Base/Function/ShenPiContorller/AddPrintFile.m; sourceTree = "<group>"; };
-		682B68B71CB64683002EC60F /* AddPrintFileCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddPrintFileCell.h; path = Base/Function/ShenPiModel/AddPrintFileCell.h; sourceTree = "<group>"; };
-		682B68B81CB64683002EC60F /* AddPrintFileCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddPrintFileCell.m; path = Base/Function/ShenPiModel/AddPrintFileCell.m; sourceTree = "<group>"; };
 		682B68BA1CB64FDE002EC60F /* AddPrintRadioCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddPrintRadioCell.h; path = Base/Function/ShenPiModel/AddPrintRadioCell.h; sourceTree = "<group>"; };
 		682B68BB1CB64FDE002EC60F /* AddPrintRadioCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddPrintRadioCell.m; path = Base/Function/ShenPiModel/AddPrintRadioCell.m; sourceTree = "<group>"; };
 		68377A151D61A81B007F7B75 /* iphoneqrcode.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iphoneqrcode.png; sourceTree = "<group>"; };
@@ -556,12 +526,8 @@
 		6838152F1CBC79F500E6AFD3 /* CarService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CarService.m; path = Base/Function/ShenPiModel/CarService.m; sourceTree = "<group>"; };
 		683815311CBC7A2100E6AFD3 /* PrintService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrintService.h; path = Base/Function/ShenPiModel/PrintService.h; sourceTree = "<group>"; };
 		683815321CBC7A2100E6AFD3 /* PrintService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrintService.m; path = Base/Function/ShenPiModel/PrintService.m; sourceTree = "<group>"; };
-		683815341CBC941300E6AFD3 /* CarApplicationDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CarApplicationDetail.h; path = Base/Function/ShenPiContorller/CarApplicationDetail.h; sourceTree = "<group>"; };
-		683815351CBC941300E6AFD3 /* CarApplicationDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CarApplicationDetail.m; path = Base/Function/ShenPiContorller/CarApplicationDetail.m; sourceTree = "<group>"; };
 		6838153A1CBCB5E700E6AFD3 /* ShenPiResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShenPiResultCell.h; path = Base/Function/ShenPiModel/ShenPiResultCell.h; sourceTree = "<group>"; };
 		6838153B1CBCB5E700E6AFD3 /* ShenPiResultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShenPiResultCell.m; path = Base/Function/ShenPiModel/ShenPiResultCell.m; sourceTree = "<group>"; };
-		6838153D1CBCCB2A00E6AFD3 /* PrintApplicationDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrintApplicationDetail.h; path = Base/Function/ShenPiContorller/PrintApplicationDetail.h; sourceTree = "<group>"; };
-		6838153E1CBCCB2A00E6AFD3 /* PrintApplicationDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrintApplicationDetail.m; path = Base/Function/ShenPiContorller/PrintApplicationDetail.m; sourceTree = "<group>"; };
 		683815401CBCDAA400E6AFD3 /* PrintFileDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrintFileDetail.h; path = Base/Function/ShenPiContorller/PrintFileDetail.h; sourceTree = "<group>"; };
 		683815411CBCDAA400E6AFD3 /* PrintFileDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrintFileDetail.m; path = Base/Function/ShenPiContorller/PrintFileDetail.m; sourceTree = "<group>"; };
 		683815431CBCE28500E6AFD3 /* PrintFileNavCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrintFileNavCell.h; path = Base/Function/ShenPiModel/PrintFileNavCell.h; sourceTree = "<group>"; };
@@ -665,12 +631,8 @@
 		6854ACB71DC86A4D00D03452 /* SwitchMutexCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SwitchMutexCell.h; path = Base/Function/ShenPiModel/SwitchMutexCell.h; sourceTree = "<group>"; };
 		6854ACB81DC86A4D00D03452 /* SwitchMutexCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SwitchMutexCell.m; path = Base/Function/ShenPiModel/SwitchMutexCell.m; sourceTree = "<group>"; };
 		685693F51DB6243800B713FB /* libASOAnimatedButton.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libASOAnimatedButton.a; path = "Pods/../build/Debug-iphoneos/libASOAnimatedButton.a"; sourceTree = "<group>"; };
-		68579FA11CC0BBCE00597FBD /* ShenPiAgreeWithCarDeploy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShenPiAgreeWithCarDeploy.h; path = Base/Function/ShenPiContorller/ShenPiAgreeWithCarDeploy.h; sourceTree = "<group>"; };
-		68579FA21CC0BBCE00597FBD /* ShenPiAgreeWithCarDeploy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShenPiAgreeWithCarDeploy.m; path = Base/Function/ShenPiContorller/ShenPiAgreeWithCarDeploy.m; sourceTree = "<group>"; };
 		68579FA41CC0C21100597FBD /* CarModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CarModel.h; path = Base/Function/ShenPiModel/CarModel.h; sourceTree = "<group>"; };
 		68579FA51CC0C21100597FBD /* CarModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CarModel.m; path = Base/Function/ShenPiModel/CarModel.m; sourceTree = "<group>"; };
-		68579FA71CC0C88600597FBD /* CarDeployCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CarDeployCell.h; path = Base/Function/ShenPiModel/CarDeployCell.h; sourceTree = "<group>"; };
-		68579FA81CC0C88600597FBD /* CarDeployCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CarDeployCell.m; path = Base/Function/ShenPiModel/CarDeployCell.m; sourceTree = "<group>"; };
 		686A36F91D5D642900288011 /* XManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XManager.h; sourceTree = "<group>"; };
 		686A36FA1D5D642900288011 /* XManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XManager.m; sourceTree = "<group>"; };
 		686A36FB1D5D642900288011 /* XSpotLight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XSpotLight.h; sourceTree = "<group>"; };
@@ -804,16 +766,6 @@
 		68DEEBC41CBDCED6003DB7AA /* MyShenPiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyShenPiViewController.m; path = Base/Function/ShenPiContorller/MyShenPiViewController.m; sourceTree = "<group>"; };
 		68DEEBC61CBDDA91003DB7AA /* MyShenPiCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyShenPiCell.h; path = Base/Function/ShenPiModel/MyShenPiCell.h; sourceTree = "<group>"; };
 		68DEEBC71CBDDA91003DB7AA /* MyShenPiCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyShenPiCell.m; path = Base/Function/ShenPiModel/MyShenPiCell.m; sourceTree = "<group>"; };
-		68DEEBD21CBE0FD4003DB7AA /* CarShenPiDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CarShenPiDetail.h; path = Base/Function/ShenPiContorller/CarShenPiDetail.h; sourceTree = "<group>"; };
-		68DEEBD31CBE0FD4003DB7AA /* CarShenPiDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CarShenPiDetail.m; path = Base/Function/ShenPiContorller/CarShenPiDetail.m; sourceTree = "<group>"; };
-		68DEEBD51CBE0FF7003DB7AA /* PrintShenPiDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrintShenPiDetail.h; path = Base/Function/ShenPiContorller/PrintShenPiDetail.h; sourceTree = "<group>"; };
-		68DEEBD61CBE0FF7003DB7AA /* PrintShenPiDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrintShenPiDetail.m; path = Base/Function/ShenPiContorller/PrintShenPiDetail.m; sourceTree = "<group>"; };
-		68DEEBD81CBE1D0D003DB7AA /* ShenPiAgree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShenPiAgree.h; path = Base/Function/ShenPiContorller/ShenPiAgree.h; sourceTree = "<group>"; };
-		68DEEBD91CBE1D0D003DB7AA /* ShenPiAgree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShenPiAgree.m; path = Base/Function/ShenPiContorller/ShenPiAgree.m; sourceTree = "<group>"; };
-		68DEEBDB1CBE1D29003DB7AA /* ShenPiDisAgree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShenPiDisAgree.h; path = Base/Function/ShenPiContorller/ShenPiDisAgree.h; sourceTree = "<group>"; };
-		68DEEBDC1CBE1D29003DB7AA /* ShenPiDisAgree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShenPiDisAgree.m; path = Base/Function/ShenPiContorller/ShenPiDisAgree.m; sourceTree = "<group>"; };
-		68DEEBDE1CBE1D61003DB7AA /* ShenPiCopy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShenPiCopy.h; path = Base/Function/ShenPiContorller/ShenPiCopy.h; sourceTree = "<group>"; };
-		68DEEBDF1CBE1D61003DB7AA /* ShenPiCopy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShenPiCopy.m; path = Base/Function/ShenPiContorller/ShenPiCopy.m; sourceTree = "<group>"; };
 		68DEEBE11CBE30E6003DB7AA /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserInfo.h; path = Base/Settings/Modal/UserInfo.h; sourceTree = "<group>"; };
 		68DEEBE21CBE30E6003DB7AA /* UserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserInfo.m; path = Base/Settings/Modal/UserInfo.m; sourceTree = "<group>"; };
 		68E779BC1CB34A8E006DA5B9 /* CLTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLTree.h; path = OpenSource/CLTreeView/CLTree.h; sourceTree = "<group>"; };
@@ -847,22 +799,12 @@
 		68E779F81CB37D6A006DA5B9 /* FriendGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FriendGroup.m; path = Base/Contact/Model/FriendGroup.m; sourceTree = "<group>"; };
 		68E8F3771D1249270062E864 /* AlarmCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlarmCell.h; path = Base/Function/NotesViews/AlarmCell.h; sourceTree = "<group>"; };
 		68E8F3781D1249270062E864 /* AlarmCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AlarmCell.m; path = Base/Function/NotesViews/AlarmCell.m; sourceTree = "<group>"; };
-		68ED4E291CB49432000E8A7B /* ShenPiManagementController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShenPiManagementController.h; path = Base/Function/ShenPiContorller/ShenPiManagementController.h; sourceTree = "<group>"; };
-		68ED4E2A1CB49432000E8A7B /* ShenPiManagementController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShenPiManagementController.m; path = Base/Function/ShenPiContorller/ShenPiManagementController.m; sourceTree = "<group>"; };
 		68ED4E3D1CB4CDC4000E8A7B /* headLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = headLogo.png; sourceTree = "<group>"; };
 		68ED4E411CB4DC58000E8A7B /* the_arrow_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = the_arrow_0.png; sourceTree = "<group>"; };
-		68ED4E431CB4E215000E8A7B /* MyApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyApplication.h; path = Base/Function/ShenPiContorller/MyApplication.h; sourceTree = "<group>"; };
-		68ED4E441CB4E215000E8A7B /* MyApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyApplication.m; path = Base/Function/ShenPiContorller/MyApplication.m; sourceTree = "<group>"; };
-		68ED4E461CB4E3CF000E8A7B /* NewApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewApplication.h; path = Base/Function/ShenPiContorller/NewApplication.h; sourceTree = "<group>"; };
-		68ED4E471CB4E3CF000E8A7B /* NewApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewApplication.m; path = Base/Function/ShenPiContorller/NewApplication.m; sourceTree = "<group>"; };
-		68ED4E4D1CB4EFD2000E8A7B /* PrintApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrintApplication.h; path = Base/Function/ShenPiContorller/PrintApplication.h; sourceTree = "<group>"; };
-		68ED4E4E1CB4EFD2000E8A7B /* PrintApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrintApplication.m; path = Base/Function/ShenPiContorller/PrintApplication.m; sourceTree = "<group>"; };
 		68ED4E501CB5076D000E8A7B /* PrintApplicationTitleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrintApplicationTitleCell.h; path = Base/Function/ShenPiModel/PrintApplicationTitleCell.h; sourceTree = "<group>"; };
 		68ED4E511CB5076D000E8A7B /* PrintApplicationTitleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrintApplicationTitleCell.m; path = Base/Function/ShenPiModel/PrintApplicationTitleCell.m; sourceTree = "<group>"; };
 		68ED4E531CB5078C000E8A7B /* PrintApplicationDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrintApplicationDetailCell.h; path = Base/Function/ShenPiModel/PrintApplicationDetailCell.h; sourceTree = "<group>"; };
 		68ED4E541CB5078C000E8A7B /* PrintApplicationDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrintApplicationDetailCell.m; path = Base/Function/ShenPiModel/PrintApplicationDetailCell.m; sourceTree = "<group>"; };
-		68ED4E561CB507B9000E8A7B /* PrintApplicationFileCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrintApplicationFileCell.h; path = Base/Function/ShenPiModel/PrintApplicationFileCell.h; sourceTree = "<group>"; };
-		68ED4E571CB507B9000E8A7B /* PrintApplicationFileCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrintApplicationFileCell.m; path = Base/Function/ShenPiModel/PrintApplicationFileCell.m; sourceTree = "<group>"; };
 		68EEDE4F1CBB2E19003295EB /* Address.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Address.h; sourceTree = "<group>"; };
 		68EEDE501CBB2E19003295EB /* Address.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Address.m; sourceTree = "<group>"; };
 		68EEDE511CBB2E19003295EB /* DYCAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DYCAddress.h; sourceTree = "<group>"; };
@@ -870,8 +812,6 @@
 		68EEDE531CBB2E19003295EB /* DYCAddressPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DYCAddressPickerView.h; sourceTree = "<group>"; };
 		68EEDE541CBB2E19003295EB /* DYCAddressPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DYCAddressPickerView.m; sourceTree = "<group>"; };
 		68EEDE551CBB2E19003295EB /* SYS_AREA.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SYS_AREA.xml; sourceTree = "<group>"; };
-		68EEDE5A1CBB8236003295EB /* CarUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CarUser.h; path = Base/Function/ShenPiContorller/CarUser.h; sourceTree = "<group>"; };
-		68EEDE5B1CBB8236003295EB /* CarUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CarUser.m; path = Base/Function/ShenPiContorller/CarUser.m; sourceTree = "<group>"; };
 		68EEDE5E1CBB911A003295EB /* down_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "down_arrow@2x.png"; sourceTree = "<group>"; };
 		68EEDE5F1CBB911A003295EB /* MCMenuButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMenuButton.h; sourceTree = "<group>"; };
 		68EEDE601CBB911A003295EB /* MCMenuButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCMenuButton.m; sourceTree = "<group>"; };
@@ -2015,12 +1955,6 @@
 				68ED4E511CB5076D000E8A7B /* PrintApplicationTitleCell.m */,
 				68ED4E531CB5078C000E8A7B /* PrintApplicationDetailCell.h */,
 				68ED4E541CB5078C000E8A7B /* PrintApplicationDetailCell.m */,
-				68ED4E561CB507B9000E8A7B /* PrintApplicationFileCell.h */,
-				68ED4E571CB507B9000E8A7B /* PrintApplicationFileCell.m */,
-				682B68AE1CB618DD002EC60F /* PrintApplicationNoFileCell.h */,
-				682B68AF1CB618DD002EC60F /* PrintApplicationNoFileCell.m */,
-				682B68B71CB64683002EC60F /* AddPrintFileCell.h */,
-				682B68B81CB64683002EC60F /* AddPrintFileCell.m */,
 				682B68BA1CB64FDE002EC60F /* AddPrintRadioCell.h */,
 				682B68BB1CB64FDE002EC60F /* AddPrintRadioCell.m */,
 				6838153A1CBCB5E700E6AFD3 /* ShenPiResultCell.h */,
@@ -2029,8 +1963,6 @@
 				683815441CBCE28500E6AFD3 /* PrintFileNavCell.m */,
 				68DEEBC61CBDDA91003DB7AA /* MyShenPiCell.h */,
 				68DEEBC71CBDDA91003DB7AA /* MyShenPiCell.m */,
-				68579FA71CC0C88600597FBD /* CarDeployCell.h */,
-				68579FA81CC0C88600597FBD /* CarDeployCell.m */,
 				68B38F0A1D1927D500F28034 /* ListCell.h */,
 				68B38F0B1D1927D500F28034 /* ListCell.m */,
 				68C3DF8D1DBA01CE004A369F /* ListAllCell.h */,
@@ -2046,42 +1978,10 @@
 		68ED4E2D1CB4951A000E8A7B /* ShenPiController */ = {
 			isa = PBXGroup;
 			children = (
-				68ED4E291CB49432000E8A7B /* ShenPiManagementController.h */,
-				68ED4E2A1CB49432000E8A7B /* ShenPiManagementController.m */,
-				68ED4E431CB4E215000E8A7B /* MyApplication.h */,
-				68ED4E441CB4E215000E8A7B /* MyApplication.m */,
-				68ED4E461CB4E3CF000E8A7B /* NewApplication.h */,
-				68ED4E471CB4E3CF000E8A7B /* NewApplication.m */,
-				68ED4E4D1CB4EFD2000E8A7B /* PrintApplication.h */,
-				68ED4E4E1CB4EFD2000E8A7B /* PrintApplication.m */,
-				682B68B41CB64482002EC60F /* AddPrintFile.h */,
-				682B68B51CB64482002EC60F /* AddPrintFile.m */,
-				2CE320EF1CB7FF4800B36793 /* CarApplication.h */,
-				2CE320F01CB7FF4800B36793 /* CarApplication.m */,
-				68EEDE5A1CBB8236003295EB /* CarUser.h */,
-				68EEDE5B1CBB8236003295EB /* CarUser.m */,
-				683815341CBC941300E6AFD3 /* CarApplicationDetail.h */,
-				683815351CBC941300E6AFD3 /* CarApplicationDetail.m */,
-				6838153D1CBCCB2A00E6AFD3 /* PrintApplicationDetail.h */,
-				6838153E1CBCCB2A00E6AFD3 /* PrintApplicationDetail.m */,
 				683815401CBCDAA400E6AFD3 /* PrintFileDetail.h */,
 				683815411CBCDAA400E6AFD3 /* PrintFileDetail.m */,
 				68DEEBC31CBDCED6003DB7AA /* MyShenPiViewController.h */,
 				68DEEBC41CBDCED6003DB7AA /* MyShenPiViewController.m */,
-				68DEEBD21CBE0FD4003DB7AA /* CarShenPiDetail.h */,
-				68DEEBD31CBE0FD4003DB7AA /* CarShenPiDetail.m */,
-				68DEEBD51CBE0FF7003DB7AA /* PrintShenPiDetail.h */,
-				68DEEBD61CBE0FF7003DB7AA /* PrintShenPiDetail.m */,
-				68DEEBD81CBE1D0D003DB7AA /* ShenPiAgree.h */,
-				68DEEBD91CBE1D0D003DB7AA /* ShenPiAgree.m */,
-				68DEEBDB1CBE1D29003DB7AA /* ShenPiDisAgree.h */,
-				68DEEBDC1CBE1D29003DB7AA /* ShenPiDisAgree.m */,
-				68DEEBDE1CBE1D61003DB7AA /* ShenPiCopy.h */,
-				68DEEBDF1CBE1D61003DB7AA /* ShenPiCopy.m */,
-				68579FA11CC0BBCE00597FBD /* ShenPiAgreeWithCarDeploy.h */,
-				68579FA21CC0BBCE00597FBD /* ShenPiAgreeWithCarDeploy.m */,
-				2CE321111CC3B86300B36793 /* SendMeViewController.h */,
-				2CE321121CC3B86300B36793 /* SendMeViewController.m */,
 				6825E1061CED507400EA4D87 /* ShenPiAppVC.h */,
 				6825E1071CED507400EA4D87 /* ShenPiAppVC.m */,
 				68723EB41CF839DA0019ACD8 /* UnFinishVc.h */,
@@ -2479,22 +2379,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				683815361CBC941300E6AFD3 /* CarApplicationDetail.m in Sources */,
 				6846EC501CF99C7C00A400C5 /* IQUIViewController+Additions.m in Sources */,
 				68EEDE721CBB911A003295EB /* MCMenuButton.m in Sources */,
 				684E0C561D363E88008088FD /* POPAnimation.m in Sources */,
 				2CFEAD1A1C7168980054730E /* SignInViewController.m in Sources */,
 				68C3DF8F1DBA01CE004A369F /* ListAllCell.m in Sources */,
-				6838153F1CBCCB2A00E6AFD3 /* PrintApplicationDetail.m in Sources */,
 				6846EC551CF99C7C00A400C5 /* IQBarButtonItem.m in Sources */,
 				68B68E3D1D630858003B80AC /* MBProgressHUD.m in Sources */,
 				68B68E311D62F7A2003B80AC /* NSString+Extension.m in Sources */,
-				68DEEBE01CBE1D61003DB7AA /* ShenPiCopy.m in Sources */,
 				686A36FF1D5D642900288011 /* XManager.m in Sources */,
 				68DEEBC51CBDCED6003DB7AA /* MyShenPiViewController.m in Sources */,
-				2CE320F11CB7FF4800B36793 /* CarApplication.m in Sources */,
 				6846EC6C1CFAD48300A400C5 /* Reachability.m in Sources */,
-				68579FA31CC0BBCE00597FBD /* ShenPiAgreeWithCarDeploy.m in Sources */,
 				6846EC4D1CF99C7C00A400C5 /* IQUIScrollView+Additions.m in Sources */,
 				68EEDE771CBB911A003295EB /* MCPopMenuViewController.m in Sources */,
 				2C5460BD1C854733005C5AB9 /* TableViewCell.m in Sources */,
@@ -2528,7 +2423,6 @@
 				6853A3F91D2679C500AE5145 /* BaseFunction.m in Sources */,
 				686AABA11D4B522C002775C2 /* SysMsgSubVc.m in Sources */,
 				68D05CC01C97AC050039220F /* SendFeedBackViewController.m in Sources */,
-				682B68B01CB618DD002EC60F /* PrintApplicationNoFileCell.m in Sources */,
 				683FD9FE1D654F4D005B8F5D /* UIBarButtonItem+Weather.m in Sources */,
 				68C33B741D34C58B00FCC0F1 /* LogTriangleView.m in Sources */,
 				6826294B1D9DF5CF00A50AE2 /* NewsNewsTableViewCell.m in Sources */,
@@ -2538,40 +2432,32 @@
 				2CB7DB651CA3C5970057633D /* MemberInfoViewController.m in Sources */,
 				6824F8E41DADC85300F98461 /* FFDropDownMenuModel.m in Sources */,
 				68008F541CDAE446001A4D64 /* MapViewController.m in Sources */,
-				682B68B61CB64482002EC60F /* AddPrintFile.m in Sources */,
-				68ED4E581CB507B9000E8A7B /* PrintApplicationFileCell.m in Sources */,
 				6846EC631CFAA68000A400C5 /* ShenPiQueryLogVC.m in Sources */,
 				68D05CC71C97F6470039220F /* AboutViewController.m in Sources */,
 				68579FA61CC0C21100597FBD /* CarModel.m in Sources */,
 				6822656F1C96B4C400AB29C0 /* NewsSettingViewController.m in Sources */,
 				2CFEADE61C7C05830054730E /* LYButton.m in Sources */,
-				68ED4E481CB4E3CF000E8A7B /* NewApplication.m in Sources */,
 				2CB7DB5F1CA278C00057633D /* SMSCodeViewController.m in Sources */,
 				2C35B0D21C7157120003BF6C /* settingPasswordViewController.m in Sources */,
 				2C9DDEC81CD8E257009462E6 /* RemindViewController.m in Sources */,
-				68EEDE5C1CBB8236003295EB /* CarUser.m in Sources */,
 				2CFEADDA1C79D9480054730E /* NewNotesViewController.m in Sources */,
 				2C35B0521C7062160003BF6C /* ViewController.m in Sources */,
 				68052C2F1CAD167400A93BDA /* UIView+WZLBadge.m in Sources */,
 				6824F8E11DADC85300F98461 /* FFDropDownMenuBasedCell.m in Sources */,
-				68DEEBD71CBE0FF7003DB7AA /* PrintShenPiDetail.m in Sources */,
 				2CFEAD2A1C717FCB0054730E /* FunctionViewController.m in Sources */,
 				68D41B0C1D4738CB0001075E /* XZMCoreNewFeatureVC.m in Sources */,
 				2CFEADEF1C7C06CB0054730E /* CellModel.m in Sources */,
 				684E0C531D363B9B008088FD /* BaseViewController.m in Sources */,
-				68ED4E4F1CB4EFD2000E8A7B /* PrintApplication.m in Sources */,
 				2CFEADBC1C76A6440054730E /* HeadView.m in Sources */,
 				2CDC2BF21C9117FE0067693B /* NewsManagementTableViewCell.m in Sources */,
 				68EEDE7C1CBB9D07003295EB /* MyApplicationCell.m in Sources */,
 				68F950B61C9F9A4200CA1519 /* LZActionSheet.m in Sources */,
-				68DEEBDD1CBE1D29003DB7AA /* ShenPiDisAgree.m in Sources */,
 				2C35B04F1C7062160003BF6C /* AppDelegate.m in Sources */,
 				6825E1081CED507400EA4D87 /* ShenPiAppVC.m in Sources */,
 				68A5D8091D2A457D00000F95 /* IVotingSubVc.m in Sources */,
 				68E779DE1CB34A8E006DA5B9 /* CLTreeView_LEVEL1_Cell.m in Sources */,
 				68723EB61CF839DA0019ACD8 /* UnFinishVc.m in Sources */,
 				6854ACB91DC86A4D00D03452 /* SwitchMutexCell.m in Sources */,
-				68ED4E451CB4E215000E8A7B /* MyApplication.m in Sources */,
 				2C35B04C1C7062160003BF6C /* main.m in Sources */,
 				2CFEADD71C79CCDE0054730E /* NotesViewController.m in Sources */,
 				6846EC531CF99C7C00A400C5 /* IQKeyboardReturnKeyHandler.m in Sources */,
@@ -2580,8 +2466,6 @@
 				2C703CF21CDECD1100C7EF77 /* DataBase.m in Sources */,
 				68E779DF1CB34A8E006DA5B9 /* CLTreeView_LEVEL1_Model.m in Sources */,
 				68D41B0B1D4738CB0001075E /* CALayer+Transition.m in Sources */,
-				682B68B91CB64683002EC60F /* AddPrintFileCell.m in Sources */,
-				68ED4E2B1CB49432000E8A7B /* ShenPiManagementController.m in Sources */,
 				68E779DD1CB34A8E006DA5B9 /* CLTreeView_LEVEL0_Model.m in Sources */,
 				68B68E2A1D62E897003B80AC /* WeatherData.m in Sources */,
 				2CFEADCC1C76E56D0054730E /* SearchResultViewController.m in Sources */,
@@ -2591,7 +2475,6 @@
 				6846E6DC1D518CA5005287A1 /* HcdGuideViewCell.m in Sources */,
 				68109FBA1D2B9C0C009B14B7 /* ShenPiSubVc.m in Sources */,
 				6846E6DD1D518CA5005287A1 /* HcdGuideViewManager.m in Sources */,
-				68DEEBDA1CBE1D0D003DB7AA /* ShenPiAgree.m in Sources */,
 				68E779E31CB34A8E006DA5B9 /* CLTreeViewNode.m in Sources */,
 				2C9DDEC91CD8E257009462E6 /* LYOneViewController.m in Sources */,
 				68C0A3B11D65B9FF00985D30 /* NSObject+MJProperty.m in Sources */,
@@ -2639,7 +2522,6 @@
 				6824F8E31DADC85300F98461 /* FFDropDownMenuCell.m in Sources */,
 				683FD9F81D654914005B8F5D /* CitiesGroup.m in Sources */,
 				68E779E11CB34A8E006DA5B9 /* CLTreeView_LEVEL2_Model.m in Sources */,
-				68DEEBD41CBE0FD4003DB7AA /* CarShenPiDetail.m in Sources */,
 				68052C2D1CAD167400A93BDA /* UITabBarItem+WZLBadge.m in Sources */,
 				68C0A3A91D65B9FF00985D30 /* MJExtensionConst.m in Sources */,
 				68A5D8031D2A037500000F95 /* UIView+Frame.m in Sources */,
@@ -2648,7 +2530,6 @@
 				68A5D8061D2A054800000F95 /* NewsSubVC.m in Sources */,
 				6897136A1CE32C9A008BB4AB /* DocCell.m in Sources */,
 				2CFEADD31C770D6F0054730E /* UITableGridViewCell.m in Sources */,
-				68579FA91CC0C88600597FBD /* CarDeployCell.m in Sources */,
 				68DEEBE31CBE30E6003DB7AA /* UserInfo.m in Sources */,
 				68EEDE781CBB911A003295EB /* UITableView+SDAutoTableViewCellHeight.m in Sources */,
 				6846EC591CF99C7C00A400C5 /* IQUIView+IQKeyboardToolbar.m in Sources */,
@@ -2707,7 +2588,6 @@
 				6846EC4C1CF99C7C00A400C5 /* IQNSArray+Sort.m in Sources */,
 				2C35B0D51C715CB90003BF6C /* settingHeaderViewController.m in Sources */,
 				6846D3561CAB62B1004BD285 /* VotingCell.m in Sources */,
-				2CE321131CC3B86300B36793 /* SendMeViewController.m in Sources */,
 				2CA10C8B1CA18F17008D6394 /* ChangePhoneNumStep1.m in Sources */,
 				68C0A3B21D65B9FF00985D30 /* NSString+MJExtension.m in Sources */,
 				2CFEADB71C76A6350054730E /* MessageModel.m in Sources */,

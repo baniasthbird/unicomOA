@@ -90,7 +90,7 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
     NSLog(@"出现");
        [self.tableView reloadData];
     /*
-    NSIndexPath *i_indexPath=[NSIndexPath indexPathForRow:2 inSection:0];
+    NSIndexPath *i_in、？dexPath=[NSIndexPath indexPathForRow:2 inSection:0];
     [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:i_indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
      */
 }
@@ -153,7 +153,13 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
         
         NSString *fullPath=  [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:str_tmp_picname];
         UIImage *saveImage=[[UIImage alloc]initWithContentsOfFile:fullPath];
-        item1.image=saveImage;
+        if (saveImage!=nil) {
+             item1.image=saveImage;
+        }
+        else {
+            item1.image=[UIImage imageNamed:@"headLogo.png"];
+        }
+       
         
         
     }

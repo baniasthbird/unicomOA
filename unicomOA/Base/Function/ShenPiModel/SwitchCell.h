@@ -10,7 +10,7 @@
 
 @protocol SwitchCellDelegate <NSObject>
 
--(void)PassSwitchValueDelegate:(NSDictionary*)dic_value;
+-(void)PassSwitchValueDelegate:(NSDictionary*)dic_value switch:(NSDictionary*)dic_switch;
 
 @end
 
@@ -21,5 +21,8 @@
 @property (nonatomic,strong) id<SwitchCellDelegate> delegate;
 
 @property (nonatomic,strong) NSString *str_keyword;
+
+@property (nonatomic,strong) NSString *str_switch_key;
+
 
 @end

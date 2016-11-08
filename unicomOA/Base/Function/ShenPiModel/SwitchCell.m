@@ -8,7 +8,9 @@
 
 #import "SwitchCell.h"
 
-@implementation SwitchCell
+@implementation SwitchCell {
+    NSIndexPath *g_IndexPath;
+}
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -24,15 +26,15 @@
 +(instancetype)cellWithTable:(UITableView *)tableView withLabel:(NSString*)str_label index:(NSIndexPath*)indexPath withValue:(NSInteger)i_value {
     static NSString *cellID=@"cellID";
     SwitchCell *cell=[tableView cellForRowAtIndexPath:indexPath];
-    cell=[[SwitchCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellID withLabel:str_label withValue:i_value];
-    
+    cell=[[SwitchCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellID withLabel:str_label withValue:i_value withIndexPath:indexPath];
     return cell;
 }
 
--(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withLabel:(NSString*)str_label  withValue:(NSInteger)i_value
+-(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withLabel:(NSString*)str_label  withValue:(NSInteger)i_value withIndexPath:(NSIndexPath*)indexPath
 {
     self=[super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        g_IndexPath=indexPath;
         self.textLabel.text=str_label;
         UISwitch *sw_switch= [[UISwitch alloc] initWithFrame:CGRectMake(Width-85.0f, 5.0f, 50.0f, 28.0f)];
         if (i_value==0) {
@@ -52,11 +54,13 @@
     BOOL isButtonOn = [switchButton isOn];
     if (isButtonOn) {
         NSDictionary *dic_value=[NSDictionary dictionaryWithObjectsAndKeys:_str_keyword,@"label",@"1",@"value", nil];
-        [_delegate PassSwitchValueDelegate:dic_value];
+        NSDictionary *dic_switch=[NSDictionary dictionaryWithObjectsAndKeys:_str_switch_key,@"label",@"1",@"value",g_IndexPath,@"Index",nil];
+        [_delegate PassSwitchValueDelegate:dic_value switch:dic_switch];
     }
     else {
         NSDictionary *dic_value=[NSDictionary dictionaryWithObjectsAndKeys:_str_keyword,@"label",@"0",@"value", nil];
-        [_delegate PassSwitchValueDelegate:dic_value];
+        NSDictionary *dic_switch=[NSDictionary dictionaryWithObjectsAndKeys:_str_switch_key,@"label",@"0",@"value",g_IndexPath,@"Index",nil];
+        [_delegate PassSwitchValueDelegate:dic_value switch:dic_switch];
     }
 }
 

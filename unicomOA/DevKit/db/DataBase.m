@@ -529,7 +529,7 @@
                     NSString *str_sex=[_base_func GetValueFromDic:dic_tmp key:@"sex"];
                     NSString *str_orgid=[_base_func GetValueFromDic:dic_tmp key:@"orgid"];
                     NSString *str_empid=[_base_func GetValueFromDic:dic_tmp key:@"empid"];
-                    NSString *str_img=@"";
+                    NSString *str_img=[_base_func GetValueFromDic:dic_tmp key:@"headimg"];
                     
                     NSString *instrSQL=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@') VALUES ('%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@')",STAFF_TABLENAME,STAFF_ID,STAFF_USERNAME,STAFF_GENDER,STAFF_ORG_NAME,STAFF_POSINAME,STAFF_TEL,STAFF_MOBILE,STAFF_EMAIL,STAFF_ORG_ID,STAFF_IMG,str_empid,str_empname,str_sex,str_orgname,str_posiname,str_otel,str_mobileno,str_email,str_orgid,str_img];
                     BOOL res=[_database executeUpdate:instrSQL];

@@ -10,7 +10,7 @@
 
 @protocol SwitchMutexCellDelegate <NSObject>
 
--(void)PassSwitchMutexValueDelegate:(NSArray*)arr_value;
+-(void)PassSwitchMutexValueDelegate:(NSDictionary*)dic_value switchmutex:(NSDictionary *)dic_switch;
 
 @end
 
@@ -23,5 +23,7 @@
 @property (nonatomic,strong) NSString *str_keyword1;
 
 @property (nonatomic,strong) NSString *str_keyword2;
+
+@property (nonatomic,strong) NSString *str_switch_key;
 
 @end

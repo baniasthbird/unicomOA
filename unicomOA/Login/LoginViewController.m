@@ -213,6 +213,7 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     if (!iPad) {
         checkbox.frame=CGRectMake(self.view.frame.size.width*0.08, self.view.frame.size.height/2+45,20,20);
         lbl_checkname=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.08+30, self.view.frame.size.height/2+30, self.view.frame.size.width*0.3, 50)];
+        lbl_checkname.font=[UIFont systemFontOfSize:15];
     }
     else {
         checkbox.frame=CGRectMake(105, 620,25,25);
@@ -498,7 +499,7 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     
     UIColor *placeholderColor= [UIColor colorWithRed:166/255.0f green:191/255.0f blue:250/255.0f alpha:1];
     if (!iPad) {
-        user=[self createTextFielfFrame:CGRectMake(60, self.view.frame.size.height/2-50, self.view.frame.size.width-120, 30) font:[UIFont systemFontOfSize:20] placeholder:@"用户名"];
+        user=[self createTextFielfFrame:CGRectMake(60, Height/2-50,Width-120, 30) font:[UIFont systemFontOfSize:20] placeholder:@"用户名"];
     }
     else {
         user=[self createTextFielfFrame:CGRectMake(160, 450, self.view.frame.size.width-320, 50) font:[UIFont systemFontOfSize:25] placeholder:@"用户名"];
@@ -506,15 +507,17 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
    
     user.attributedPlaceholder=[[NSAttributedString alloc] initWithString:@"用户名" attributes:@{NSForegroundColorAttributeName:placeholderColor}];
     //user.text=@"13419693608";
+    user.textAlignment=NSTextAlignmentCenter;
     user.keyboardType=UIKeyboardTypeDefault;
     user.textColor=[UIColor whiteColor];
     user.clearButtonMode = UITextFieldViewModeWhileEditing;
     user.delegate=self;
+    
    // user.text=@"sysadmin";
   //  user.text=@"张克进";
     
     if (!iPad) {
-        pwd=[self createTextFielfFrame:CGRectMake(60, self.view.frame.size.height/2, self.view.frame.size.width-120, 30) font:[UIFont systemFontOfSize:20]  placeholder:@"密码" ];
+        pwd=[self createTextFielfFrame:CGRectMake(60, Height/2, Width-120, 30) font:[UIFont systemFontOfSize:20]  placeholder:@"密码" ];
     }
     else {
         pwd=[self createTextFielfFrame:CGRectMake(160, 550, self.view.frame.size.width-320, 50) font:[UIFont systemFontOfSize:25]  placeholder:@"密码" ];
@@ -523,6 +526,7 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     pwd.clearButtonMode = UITextFieldViewModeWhileEditing;
     //pwd.text=@"123456";
     //密文样式
+    pwd.textAlignment=NSTextAlignmentCenter;
     pwd.secureTextEntry=YES;
     pwd.textColor=[UIColor whiteColor];
     pwd.attributedPlaceholder=[[NSAttributedString alloc] initWithString:@"密码" attributes:@{NSForegroundColorAttributeName:placeholderColor}];
