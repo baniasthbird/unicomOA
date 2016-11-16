@@ -576,7 +576,7 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
             NSDictionary *dic = [defaults dictionaryRepresentation];
             for (id  key in dic) {
-                if ([key isEqualToString:@"name"] || [key isEqualToString:@"password"]) {
+                if ([key isEqualToString:@"name"] || [key isEqualToString:@"password"] || [key isEqualToString:@"everLaunched"] || [key isEqualToString:@"systemversion"] || [key isEqualToString:@"firstLaunch"] || [key isEqualToString:@"connection"]) {
                     continue;
                 }
                 else {

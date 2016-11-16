@@ -33,6 +33,8 @@
 
 @property NSInteger i_pageTotal;
 
+
+
 @end
 
 @implementation SysMsgViewController {
@@ -51,6 +53,8 @@
     CGFloat h_height;
     
     NSString *str_username;
+    
+    NSIndexPath *i_targetIndexPath;
 }
 
 
@@ -322,6 +326,11 @@
     if ([_arr_SysMsgList count]!=0) {
         NSDictionary *dic_content=[_arr_SysMsgList objectAtIndex:indexPath.row];
         SysMsgTableViewCell *cell=[self buildCell:dic_content indexPath:indexPath tableview:tableView];
+        if (i_targetIndexPath!=nil) {
+            if (i_targetIndexPath==indexPath) {
+                cell.lbl_Title.textColor=[UIColor colorWithRed:131/255.0f green:131/255.0f blue:131/255.0f alpha:1];
+            }
+        }
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
         return cell;
     }
@@ -409,7 +418,7 @@
         [db addSingleSysMsg:dic_read];
     }
     SysMsgTableViewCell *cell=(SysMsgTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
-    cell.lbl_Title.textColor=[UIColor colorWithRed:131/255.0f green:131/255.0f blue:131/255.0f alpha:1];
+   // cell.lbl_Title.textColor=[UIColor colorWithRed:131/255.0f green:131/255.0f blue:131/255.0f alpha:1];
     NSInteger cellTag= cell.tag;
     if (cellTag!=0) {
         /*
@@ -426,6 +435,7 @@
         vc.str_SysMsg_Title=cell.lbl_Title.text;
         vc.str_sendName=cell.lbl_sendName.text;
         vc.usrInfo=_userInfo;
+        vc.indexPath=indexPath;
         if (f_v<9.0) {
             self.navigationController.delegate=nil;
         }
@@ -544,7 +554,8 @@
     
 }
 
--(void)RefreshTable {
+-(void)RefreshTable:(NSIndexPath*)indexPath {
+    i_targetIndexPath=indexPath;
     NSMutableArray *arr_read=[db fetchAllSysMsg:str_username];
     for (int i=0; i<[_arr_SysMsgList count]; i++) {
         BOOL b_read=NO;

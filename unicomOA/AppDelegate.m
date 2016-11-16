@@ -12,10 +12,11 @@
 #import <AudioToolbox/AudioToolbox.h>
 #import "XZMCoreNewFeatureVC.h"
 #import "CALayer+Transition.h"
+#import "YBMonitorNetWorkState.h"
 
 
 
-@interface AppDelegate ()
+@interface AppDelegate ()<YBMonitorNetWorkStateDelegate>
 
 @end
 
@@ -68,12 +69,25 @@
 }
 
 -(void)enter {
+    // 设置代理
+    [YBMonitorNetWorkState shareMonitorNetWorkState].delegate = self;
+    // 添加网络监听
+    [[YBMonitorNetWorkState shareMonitorNetWorkState] addMonitorNetWorkState];
+    
+    [self netWorkStateChanged];
     NSString *str_url=@"https://app.hnsi.cn/hnti_soa/unicomOA.plist";
     BOOL b_update= [self checkUpdate:str_url];
     LoginViewController *login=[[LoginViewController alloc]init];
     login.b_update=b_update;
     if (remark!=nil) {
         login.str_remark=remark;
+    }
+    else {
+        NSString *currentNetWorkState=[[NSUserDefaults standardUserDefaults] objectForKey:@"connection"];
+        if ([currentNetWorkState isEqualToString:@"GPRS"]) {
+            login.str_remark=@"检查系统更新失败，若要进行系统更新请切换至wifi模式";
+        }
+        
     }
     UINavigationController *nav=[[UINavigationController alloc]initWithRootViewController:login];
     NSDictionary *attributes=[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:248/255.0f green:144/255.0f blue:34/255.0f alpha:1],NSForegroundColorAttributeName,nil];
@@ -127,31 +141,47 @@
 
 
 -(BOOL)checkUpdate:(NSString*)str_url {
-    NSDictionary* dict = [NSDictionary dictionaryWithContentsOfURL:[NSURL URLWithString:str_url]];
-    if (dict) {
-        
-        NSArray* list = [dict objectForKey:@"items"];
-        NSDictionary* dict2 = [list objectAtIndex:0];
-        
-        NSDictionary* dict3 = [dict2 objectForKey:@"metadata"];
-        NSString* newVersion = [dict3 objectForKey:@"bundle-version"];
-        CGFloat f_newVersion=[newVersion floatValue];
-        
-        NSString *newRemark=[dict3 objectForKey:@"remark"];
-        if (newRemark!=nil) {
-            remark=newRemark;
+    NSURL *urlString=[NSURL URLWithString:str_url];
+    NSURLResponse* urlResponse;
+    NSError* error;
+    NSMutableURLRequest* urlRequest = [NSMutableURLRequest requestWithURL:urlString cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:10];
+    NSData* data = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&urlResponse error:&error];
+    if (data==nil) {
+        NSLog(@"检查系统更新失败，请切换至wifi更新");
+        return NO;
+    }
+    else {
+        NSDictionary* dict = [NSDictionary dictionaryWithContentsOfURL:[NSURL URLWithString:str_url]];
+        if (dict) {
+            
+            NSArray* list = [dict objectForKey:@"items"];
+            NSDictionary* dict2 = [list objectAtIndex:0];
+            
+            NSDictionary* dict3 = [dict2 objectForKey:@"metadata"];
+            NSString* newVersion = [dict3 objectForKey:@"bundle-version"];
+            CGFloat f_newVersion=[newVersion floatValue];
+            
+            NSString *newRemark=[dict3 objectForKey:@"remark"];
+            
+            
+            NSDictionary *infoDict = [[NSBundle mainBundle] infoDictionary];
+            NSString *myVersion = [infoDict objectForKey:@"CFBundleShortVersionString"];
+            CGFloat f_myVersion=[myVersion floatValue];
+            
+            if (f_newVersion>f_myVersion) {
+                if (newRemark!=nil) {
+                    remark=newRemark;
+                }
+                return YES;
+            }
+            else {
+                return NO;
+            }
         }
-        
-        NSDictionary *infoDict = [[NSBundle mainBundle] infoDictionary];
-        NSString *myVersion = [infoDict objectForKey:@"CFBundleShortVersionString"];
-        CGFloat f_myVersion=[myVersion floatValue];
-        
-        if (f_newVersion>f_myVersion) {
-            return YES;
+        else {
+            return NO;
         }
     }
-    return NO;
-    
 }
 
 -(NSString *)notRounding:(float)price afterPoint:(int)position{
@@ -210,6 +240,17 @@
 
 
 -(void)application:(UIApplication*)application didReceiveRemoteNotification:(nonnull NSDictionary *)userInfo {
+    
+}
+
+-(void)netWorkStateChanged {
+    // 获取当前网络类型
+    NSString *currentNetWorkState = [[YBMonitorNetWorkState shareMonitorNetWorkState] getCurrentNetWorkType];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:currentNetWorkState forKey:@"connection"];
+    [defaults synchronize];
+    
+   // str_reachable=currentNetWorkState;
     
 }
 

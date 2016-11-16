@@ -288,7 +288,7 @@
     if (f_v<9.0) {
         self.navigationController.delegate=nil;
     }
-    [_delegate RefreshTable];
+    [_delegate RefreshTable:_indexPath];
     [self.navigationController popViewControllerAnimated:NO];
 }
 

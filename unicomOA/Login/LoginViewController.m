@@ -138,7 +138,15 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
             }
         }];
         [alert showLXAlertView];
+    }
+    else {
+        if (_str_remark!=nil) {
+            LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"提示" message:_str_remark cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+                
+            }];
+            [alert showLXAlertView];
 
+        }
     }
     
     [self.navigationItem setHidesBackButton:YES];
@@ -198,12 +206,14 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     lbl_ip.textAlignment=NSTextAlignmentCenter;
   //  [self.view addSubview:lbl_ip];
     
+    /*
     // 设置代理
     [YBMonitorNetWorkState shareMonitorNetWorkState].delegate = self;
     // 添加网络监听
     [[YBMonitorNetWorkState shareMonitorNetWorkState] addMonitorNetWorkState];
-    
+    */
     [self netWorkStateChanged];
+    
 }
 
 //新增添加显示IP地址的界面
@@ -357,6 +367,7 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
 //登录
 -(void)landClick
 {
+    str_reachable=[[NSUserDefaults standardUserDefaults] objectForKey:@"connection"];
     //zr 20160215 测试暂时屏蔽
     /*
     UIAlertController *alert;
@@ -666,6 +677,8 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     [indicator startAnimating];
     [self.view addSubview:indicator];
     
+    
+    
     if ([str_reachable isEqualToString:@"wifi"] || [str_reachable isEqualToString:@"GPRS"])
     {
         [_session POST:str_url parameters:_params progress:^(NSProgress * _Nonnull uploadProgress) {
@@ -938,6 +951,7 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
 }
 
 #pragma mark 网络监听代理方法，当网络状态发生改变的时候出发
+
 -(void)netWorkStateChanged {
     // 获取当前网络类型
     NSString *currentNetWorkState = [[YBMonitorNetWorkState shareMonitorNetWorkState] getCurrentNetWorkType];
@@ -946,8 +960,8 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     [defaults synchronize];
     
     str_reachable=currentNetWorkState;
-
 }
+
 
 -(void)checkboxClick:(UIButton*)btn {
     btn.selected=!btn.selected;

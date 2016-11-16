@@ -230,6 +230,7 @@
 		68C3DF891DB9A7D6004A369F /* AllListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C3DF881DB9A7D6004A369F /* AllListVC.m */; };
 		68C3DF8C1DB9D53E004A369F /* AllListSearchResultVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C3DF8B1DB9D53E004A369F /* AllListSearchResultVC.m */; };
 		68C3DF8F1DBA01CE004A369F /* ListAllCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C3DF8E1DBA01CE004A369F /* ListAllCell.m */; };
+		68C8C55A1DDC5011009E9824 /* MenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C8C5591DDC5011009E9824 /* MenuView.m */; };
 		68C91B441D9CC24E00F70FF9 /* UILabel+LabelHeightAndWidth.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C91B431D9CC24E00F70FF9 /* UILabel+LabelHeightAndWidth.m */; };
 		68D05CBA1C9791000039220F /* PasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D05CB91C9791000039220F /* PasswordViewController.m */; };
 		68D05CC01C97AC050039220F /* SendFeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D05CBF1C97AC050039220F /* SendFeedBackViewController.m */; };
@@ -747,6 +748,8 @@
 		68C3DF8B1DB9D53E004A369F /* AllListSearchResultVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AllListSearchResultVC.m; path = Base/Function/ShenPiContorller/AllListSearchResultVC.m; sourceTree = "<group>"; };
 		68C3DF8D1DBA01CE004A369F /* ListAllCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ListAllCell.h; path = Base/Function/ShenPiModel/ListAllCell.h; sourceTree = "<group>"; };
 		68C3DF8E1DBA01CE004A369F /* ListAllCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ListAllCell.m; path = Base/Function/ShenPiModel/ListAllCell.m; sourceTree = "<group>"; };
+		68C8C5581DDC5011009E9824 /* MenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuView.h; sourceTree = "<group>"; };
+		68C8C5591DDC5011009E9824 /* MenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuView.m; sourceTree = "<group>"; };
 		68C91B421D9CC24E00F70FF9 /* UILabel+LabelHeightAndWidth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+LabelHeightAndWidth.h"; sourceTree = "<group>"; };
 		68C91B431D9CC24E00F70FF9 /* UILabel+LabelHeightAndWidth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+LabelHeightAndWidth.m"; sourceTree = "<group>"; };
 		68D05CB81C9791000039220F /* PasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PasswordViewController.h; path = Base/Settings/Controller/PasswordViewController.h; sourceTree = "<group>"; };
@@ -1503,6 +1506,7 @@
 		6846D35D1CABC483004BD285 /* OpenSource */ = {
 			isa = PBXGroup;
 			children = (
+				68C8C5571DDC5011009E9824 /* Menu */,
 				68C3DF811DB74B4E004A369F /* DWBubbleMenuButton */,
 				6824F8D31DADC85300F98461 /* FFDropDownMenu */,
 				685437981D7E995700A0F4FA /* WBGuide */,
@@ -1862,6 +1866,16 @@
 			);
 			name = DWBubbleMenuButton;
 			path = OpenSource/DWBubbleMenuButton;
+			sourceTree = "<group>";
+		};
+		68C8C5571DDC5011009E9824 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				68C8C5581DDC5011009E9824 /* MenuView.h */,
+				68C8C5591DDC5011009E9824 /* MenuView.m */,
+			);
+			name = Menu;
+			path = OpenSource/Menu;
 			sourceTree = "<group>";
 		};
 		68D05CC11C97B3290039220F /* Model */ = {
@@ -2518,6 +2532,7 @@
 				6846D3621CABC496004BD285 /* RadioBox.m in Sources */,
 				680861D61CEAD33300257AAA /* PositionCell.m in Sources */,
 				2C9DDECD1CD8E688009462E6 /* LYThreeViewController.m in Sources */,
+				68C8C55A1DDC5011009E9824 /* MenuView.m in Sources */,
 				2CB7DB681CAC22BA0057633D /* JXBarChartView.m in Sources */,
 				6824F8E31DADC85300F98461 /* FFDropDownMenuCell.m in Sources */,
 				683FD9F81D654914005B8F5D /* CitiesGroup.m in Sources */,

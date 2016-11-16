@@ -377,26 +377,32 @@
 }
 
 -(void)setupLocation {
-    INTULocationManager *mgr=[INTULocationManager sharedInstance];
-    [mgr requestLocationWithDesiredAccuracy:INTULocationAccuracyCity timeout:20 block:^(CLLocation *currentLocation, INTULocationAccuracy achievedAccuracy, INTULocationStatus status) {
-        NSLog(@"----%ld",(long)status);
-        
-        self.lati=currentLocation.coordinate.latitude;
-        self.longi=currentLocation.coordinate.longitude;
-        if (self.lati==0 && self.longi==0) {
-            self.lati=34.774831;
-            self.longi=113.681393;
-        }
-        
-        if (status == 1) {
-          //  [MBProgressHUD hideHUD];
-          //  [MBProgressHUD showError:@"请求超时"];
-            [indicator stopAnimating];
-            return;
-        }
-        [self setupCity];
-        
-    }];
+    NSString *str_connection=[self GetConnectionStatus];
+    if ([str_connection isEqualToString:@"wifi"]) {
+        INTULocationManager *mgr=[INTULocationManager sharedInstance];
+        [mgr requestLocationWithDesiredAccuracy:INTULocationAccuracyCity timeout:20 block:^(CLLocation *currentLocation, INTULocationAccuracy achievedAccuracy, INTULocationStatus status) {
+            NSLog(@"----%ld",(long)status);
+            
+            self.lati=currentLocation.coordinate.latitude;
+            self.longi=currentLocation.coordinate.longitude;
+            if (self.lati==0 && self.longi==0) {
+                self.lati=34.774831;
+                self.longi=113.681393;
+            }
+            
+            if (status == 1) {
+                //  [MBProgressHUD hideHUD];
+                //  [MBProgressHUD showError:@"请求超时"];
+                [indicator stopAnimating];
+                return;
+            }
+            [self setupCity];
+            
+        }];
+    }
+    else {
+        [indicator stopAnimating];
+    }
 }
 
 

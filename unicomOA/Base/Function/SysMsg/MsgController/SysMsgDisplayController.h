@@ -11,7 +11,7 @@
 
 @protocol SysMsgDisplayDelegate <NSObject>
 
--(void)RefreshTable;
+-(void)RefreshTable:(NSIndexPath*)indexPath;
 
 @end
 
@@ -30,6 +30,8 @@
 @property (nonatomic,strong) NSString *str_category;
 
 @property (nonatomic,strong) NSString *str_SysMsg_Title;
+
+@property (nonatomic,strong) NSIndexPath *indexPath;
 
 @property (nonatomic,strong) UserInfo *usrInfo;
 
