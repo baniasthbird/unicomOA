@@ -19,11 +19,13 @@
 #import "BaseFunction.h"
 
 
+
 @interface DataBase : NSObject
 
 @property (nonatomic,strong) FMDatabase *database;  //数据库操作对象
 
 @property (nonatomic,strong) BaseFunction *base_func;
+
 
 +(DataBase *)sharedinstanceDB;
 -(void)initTables;
@@ -36,6 +38,10 @@
 -(void)InserStaffTable:(NSMutableArray*)arr_staff;
 //添加部门（首次登录时使用）
 -(void)InserDepartMentTable:(NSMutableArray*)arr_department;
+//添加已读消息
+-(void)InsertSysMsg:(NSMutableArray*)arr_sysmsg;
+
+-(void)addSingleSysMsg:(NSDictionary*)dic_sysmsg;
 
 //更新通讯录
 -(void)UpdateStaffTable:(NSMutableArray*)arr_staff;
@@ -56,6 +62,9 @@
 -(NSMutableArray*)fetchAllNotes;
 -(NSMutableArray*)fetchAllStaff;
 -(NSMutableArray*)fetchAllDepart;
+-(NSMutableArray*)fetchAllSysMsg:(NSString*)str_username;
+
+
 
 -(void)DeleteNotesTable:(NSString*)str_index;
 

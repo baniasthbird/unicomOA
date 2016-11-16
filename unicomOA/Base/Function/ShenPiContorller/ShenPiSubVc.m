@@ -369,6 +369,11 @@
                    
                     
                 }
+                
+                NSSortDescriptor* sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"startTime" ascending:NO];
+                NSArray* sortedArray = [arr_list sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+                arr_MyReview=[[NSMutableArray alloc]initWithArray:sortedArray];
+                
                 NSString *str_totalPage=[JSON objectForKey:@"totalPage"];
                 _i_page_Total=[str_totalPage integerValue];
                                // if ([_str_searchKeyword2 isEqualToString:@"全部"] && [_str_searchKeyword1 isEqualToString:@"全部"]) {
@@ -509,11 +514,13 @@
         }
     }
     
-        
-        
-    
 }
 
+/*
+-(NSComparisonResult)startTimeCompare:(NSDictionary*)otherObject {
+    
+}
+ */
 
 /*
 #pragma mark - Navigation

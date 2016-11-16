@@ -103,10 +103,12 @@
         NSString *str_older_version=[self notRounding:d_older_version afterPoint:2];
         if (![str_version1 isEqualToString:str_older_version]) {
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunch"];
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"everLaunched"];
             [[NSUserDefaults standardUserDefaults] setFloat:d_version forKey:@"systemversion"];
             [[NSUserDefaults standardUserDefaults] synchronize];
         }
         else {
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"everLaunched"];
             [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"firstLaunch"];
             [[NSUserDefaults standardUserDefaults] synchronize];
         }

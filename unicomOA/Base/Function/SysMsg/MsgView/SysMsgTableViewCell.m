@@ -12,22 +12,31 @@
 
 @implementation SysMsgTableViewCell {
     UIImageView *img_Category;
+    
 }
 
-+(instancetype)cellWithTable:(UITableView*)tableView withTitle:(NSMutableAttributedString*)str_title withCategory:(NSString*)str_category withSendName:(NSString*)str_sendName withTime:(NSString*)str_time titleFont:(NSInteger)i_titleFont otherFont:(NSInteger)i_otherFont {
++(instancetype)cellWithTable:(UITableView*)tableView withTitle:(NSMutableAttributedString*)str_title withCategory:(NSString*)str_category withSendName:(NSString*)str_sendName withTime:(NSString*)str_time isRead:(BOOL)b_Read titleFont:(NSInteger)i_titleFont otherFont:(NSInteger)i_otherFont {
     static NSString *cellID=@"TapCell";
     SysMsgTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:cellID];
   //  cell=[[SysMsgTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID withCellHeight:cellHeight withTitle:str_title withCategory:str_category withSendName:str_sendName titleFont:i_titleFont otherFont:i_otherFont];
-    cell=[[SysMsgTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID withTitle:str_title withCategory:str_category withSendName:str_sendName withTime:str_time titleFont:i_titleFont otherFont:i_otherFont];
+    cell=[[SysMsgTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID withTitle:str_title withCategory:str_category withSendName:str_sendName withTime:str_time isRead:b_Read titleFont:i_titleFont otherFont:i_otherFont];
     return cell;
    
 }
 
 
--(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withTitle:(NSMutableAttributedString*)str_title withCategory:(NSString*)str_category withSendName:(NSString*)str_sendName withTime:(NSString*)str_time titleFont:(NSInteger)i_titleFont otherFont:(NSInteger)i_otherFont{
+-(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withTitle:(NSMutableAttributedString*)str_title withCategory:(NSString*)str_category withSendName:(NSString*)str_sendName withTime:(NSString*)str_time isRead:(BOOL)b_Read titleFont:(NSInteger)i_titleFont otherFont:(NSInteger)i_otherFont{
     self=[super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        
         CGFloat i_left=Width*0.1573;
+        if (b_Read==NO) {
+            i_left=0.18*Width;
+            UIView *view_bluedot=[[UIView alloc]initWithFrame:CGRectMake(0.145*Width, 20, 8, 8)];
+            view_bluedot.backgroundColor=[UIColor colorWithRed:28/255.0f green:173/255.0f blue:248/255.0f alpha:1];
+            view_bluedot.layer.cornerRadius=4;
+            [self.contentView addSubview:view_bluedot];
+        }
         CGFloat i_width=Width*0.52;
         if (iPad) {
             i_left=32;

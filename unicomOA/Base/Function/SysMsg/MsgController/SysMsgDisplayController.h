@@ -9,6 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "UserInfo.h"
 
+@protocol SysMsgDisplayDelegate <NSObject>
+
+-(void)RefreshTable;
+
+@end
+
 @interface SysMsgDisplayController : UIViewController
 
 @property NSInteger i_id;
@@ -26,5 +32,7 @@
 @property (nonatomic,strong) NSString *str_SysMsg_Title;
 
 @property (nonatomic,strong) UserInfo *usrInfo;
+
+@property (nonatomic,strong) id<SysMsgDisplayDelegate> delegate;
 
 @end

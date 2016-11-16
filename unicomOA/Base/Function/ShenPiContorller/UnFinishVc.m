@@ -992,7 +992,7 @@
             str_index=[NSString stringWithFormat:@"%ld",(long)indexPath.section];
         }
         else if (indexPath.section==[arr_groupList count]) {
-            str_index=[NSString stringWithFormat:@"%ld",indexPath.section-1];
+            str_index=[NSString stringWithFormat:@"%ld",(long)indexPath.section-1];
         }
         NSArray *arr_tmp=  [dic_m_ctl objectForKey:str_index];
         if (indexPath.row<[arr_tmp count]) {
@@ -1177,7 +1177,7 @@
     for (int i=0;i<[dic_my_ctl count];i++) {
         NSString *str_index=[NSString stringWithFormat:@"%d",i];
         NSMutableArray *arr_my_ctl=[dic_my_ctl objectForKey:str_index];
-        for (int j=0;j<[arr_my_ctl count];j++) {
+        for (int j=(int)arr_my_ctl.count-1;j>=0;j--) {
             NSMutableDictionary *dic_sub_ctl=[arr_my_ctl objectAtIndex:j];
             NSString *str_sub_type=[dic_sub_ctl objectForKey:@"type"];
             if ([str_sub_type isEqualToString:@"hidden"]) {

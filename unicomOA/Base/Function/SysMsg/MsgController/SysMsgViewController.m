@@ -17,7 +17,7 @@
 #import "SysMsgDisplayController.h"
 #import "XSpotLight.h"
 
-@interface SysMsgViewController()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate,UISearchResultsUpdating,XSpotLightDelegate>
+@interface SysMsgViewController()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate,UISearchResultsUpdating,XSpotLightDelegate,SysMsgDisplayDelegate>
 
 @property (nonatomic,strong) AFHTTPSessionManager *session;
 
@@ -50,6 +50,7 @@
     
     CGFloat h_height;
     
+    NSString *str_username;
 }
 
 
@@ -78,6 +79,8 @@
     _baseFunc=[[BaseFunction alloc]init];
     
     _i_pageIndex=1;
+    
+    str_username=[[NSUserDefaults standardUserDefaults] objectForKey:@"name"];
     
     _arr_SysMsgList=[[NSMutableArray alloc]init];
     
@@ -201,6 +204,49 @@
                 NSNumber *l_totalPage=(NSNumber*)obj;
                 _i_pageTotal=[l_totalPage integerValue];
                 NSArray *arr_tmp=[JSON objectForKey:@"list"];
+                NSMutableArray *arr_read=[db fetchAllSysMsg:str_username];
+                if (arr_tmp!=nil && arr_read!=nil) {
+                    for (int i=0;i<[arr_tmp count];i++) {
+                        BOOL b_read=NO;
+                        NSDictionary *dic_tmp=[arr_tmp objectAtIndex:i];
+                        NSString *str_msgType1= [dic_tmp objectForKey:@"msgType"];
+                        NSString *str_sendEmpname1 = [dic_tmp objectForKey:@"sendEmpname"];
+                        NSString *str_title1 = [dic_tmp objectForKey:@"title"];
+                        NSString *str_sendTime1 = [dic_tmp objectForKey:@"sendTime"];
+                        NSNumber *num_id1=[dic_tmp objectForKey:@"id"];
+                        NSString *str_id1=num_id1.description;
+                        for (int j=0; j<[arr_read  count]; j++) {
+                            NSDictionary *dic_read=[arr_read objectAtIndex:j];
+                            NSString *str_msgType2= [dic_read objectForKey:@"msgType"];
+                            NSString *str_sendEmpname2 = [dic_read objectForKey:@"sendEmpname"];
+                            NSString *str_title2 = [dic_read objectForKey:@"title"];
+                            NSString *str_sendTime2 = [dic_read objectForKey:@"sendTime"];
+                            NSNumber *num_id2=[dic_read objectForKey:@"id"];
+                            NSString *str_id2=num_id2.description;
+                            //如果找到就为已读
+                            if ([str_msgType1 isEqualToString:str_msgType2] && [str_sendEmpname1 isEqualToString:str_sendEmpname2] && [str_title1 isEqualToString:str_title2] && [str_sendTime1 isEqualToString:str_sendTime2] && [str_id1 isEqualToString:str_id2]) {
+                                b_read=YES;
+                                break;
+                            }
+                        }
+                        NSMutableDictionary *dic_SysMsg=[[NSMutableDictionary alloc]initWithDictionary:dic_tmp];
+                        if (b_read==NO) {
+                            [dic_SysMsg setObject:@"0" forKey:@"isRead"];
+                        }
+                        else if (b_read==YES) {
+                            [dic_SysMsg setObject:@"1" forKey:@"isRead"];
+                        }
+                        if ([_arr_SysMsgList count]>0) {
+                            if (![_arr_SysMsgList containsObject:dic_SysMsg]) {
+                                [_arr_SysMsgList addObject:dic_SysMsg];
+                            }
+                        }
+                        else {
+                            [_arr_SysMsgList addObject:dic_SysMsg];
+                        }
+                    }
+                }
+                /*
                 if ([_arr_SysMsgList count]>0) {
                     for (int i=0;i<[arr_tmp count];i++) {
                         NSDictionary *dic_tmp=[arr_tmp objectAtIndex:i];
@@ -212,7 +258,7 @@
                 else {
                     [_arr_SysMsgList addObjectsFromArray:arr_tmp];
                 }
-                
+                */
                 [self.tableView reloadData];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     //刷新完成
@@ -297,6 +343,7 @@
     NSString *str_title=[_baseFunc GetValueFromDic:dic_content key:@"title"];
     NSString *str_sendempname =[_baseFunc GetValueFromDic:dic_content key:@"sendEmpname"];
     NSString *str_time =[_baseFunc GetValueFromDic:dic_content key:@"sendTime"];
+    NSString *str_isRead = [_baseFunc GetValueFromDic:dic_content key:@"isRead"];
     NSArray *arr_time=[str_time componentsSeparatedByString:@" "];
     NSString *str_time2=[arr_time objectAtIndex:0];
     CGFloat i_titleFont=0;
@@ -318,7 +365,13 @@
         i_otherFont=12;
     }
     
-    
+    BOOL b_Read=NO;
+    if ([str_isRead isEqualToString:@"0"] || str_isRead==nil) {
+        b_Read=NO;
+    }
+    else {
+        b_Read=YES;
+    }
 
     SysMsgTableViewCell *cell;
    
@@ -329,7 +382,7 @@
     
     NSString *str_depart=[NSString stringWithFormat:@"%@ %@",str_sendempname,str_time2];
    // cell=[SysMsgTableViewCell cellWithTable:tableView withCellHeight:h_height withTitle:attributedString withCategory:str_category withSendName:str_depart titleFont:i_titleFont otherFont:i_otherFont];
-    cell=[SysMsgTableViewCell cellWithTable:tableView withTitle:attributedString withCategory:str_category withSendName:str_sendempname withTime:str_time2 titleFont:i_titleFont otherFont:i_otherFont];
+    cell=[SysMsgTableViewCell cellWithTable:tableView withTitle:attributedString withCategory:str_category withSendName:str_sendempname withTime:str_time2 isRead:b_Read titleFont:i_titleFont otherFont:i_otherFont];
     NSString *str_id=[_baseFunc GetValueFromDic:dic_content key:@"id"];
     cell.tag=[str_id integerValue];
     //如果在一个页面，就不触发这个
@@ -349,6 +402,12 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.tableView reloadData];
+    if ([_arr_SysMsgList count]!=0) {
+        NSDictionary *dic_content=[_arr_SysMsgList objectAtIndex:indexPath.row];
+        NSMutableDictionary *dic_read=[[NSMutableDictionary alloc]initWithDictionary:dic_content];
+        [dic_read setObject:str_username forKey:@"receiveName"];
+        [db addSingleSysMsg:dic_read];
+    }
     SysMsgTableViewCell *cell=(SysMsgTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
     cell.lbl_Title.textColor=[UIColor colorWithRed:131/255.0f green:131/255.0f blue:131/255.0f alpha:1];
     NSInteger cellTag= cell.tag;
@@ -359,6 +418,7 @@
         [self SysMessageContent:param];
         */
         SysMsgDisplayController *vc=[[SysMsgDisplayController alloc]init];
+        vc.delegate=self;
         vc.i_id=cellTag;
         vc.str_title=@"系统消息内容";
         vc.str_time=cell.lbl_time.text;
@@ -480,5 +540,45 @@
     self.tableView.dataSource=nil;
 }
 
+-(void)XSpotLightClicked:(NSInteger)index {
+    
+}
+
+-(void)RefreshTable {
+    NSMutableArray *arr_read=[db fetchAllSysMsg:str_username];
+    for (int i=0; i<[_arr_SysMsgList count]; i++) {
+        BOOL b_read=NO;
+        NSMutableDictionary *dic_tmp=[_arr_SysMsgList objectAtIndex:i];
+        NSString *str_msgType1= [dic_tmp objectForKey:@"msgType"];
+        NSString *str_sendEmpname1 = [dic_tmp objectForKey:@"sendEmpname"];
+        NSString *str_title1 = [dic_tmp objectForKey:@"title"];
+        NSString *str_sendTime1 = [dic_tmp objectForKey:@"sendTime"];
+        NSNumber *num_id1=[dic_tmp objectForKey:@"id"];
+        NSString *str_id1=num_id1.description;
+        for (int j=0; j<[arr_read  count]; j++) {
+            NSDictionary *dic_read=[arr_read objectAtIndex:j];
+            NSString *str_msgType2= [dic_read objectForKey:@"msgType"];
+            NSString *str_sendEmpname2 = [dic_read objectForKey:@"sendEmpname"];
+            NSString *str_title2 = [dic_read objectForKey:@"title"];
+            NSString *str_sendTime2 = [dic_read objectForKey:@"sendTime"];
+            NSString *str_id2=[dic_read objectForKey:@"id"];
+            
+            //如果找到就为已读
+            if ([str_msgType1 isEqualToString:str_msgType2] && [str_sendEmpname1 isEqualToString:str_sendEmpname2] && [str_title1 isEqualToString:str_title2] && [str_sendTime1 isEqualToString:str_sendTime2] && [str_id1 isEqualToString:str_id2]) {
+                b_read=YES;
+                break;
+            }
+        }
+       // NSMutableDictionary *dic_SysMsg=[[NSMutableDictionary alloc]initWithDictionary:dic_tmp];
+        if (b_read==NO) {
+            [dic_tmp setObject:@"0" forKey:@"isRead"];
+        }
+        else if (b_read==YES) {
+            [dic_tmp setObject:@"1" forKey:@"isRead"];
+        }
+
+    }
+    [self.tableView reloadData];
+}
 
 @end

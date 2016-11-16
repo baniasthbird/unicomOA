@@ -553,9 +553,9 @@ int i_comment_num;
     NSRange range2=[str_content rangeOfString:@"xls"];
     NSRange range3=[str_content rangeOfString:@"ppt"];
     NSRange range4=[str_content rangeOfString:@"rar"];
-    NSRange range5=[str_content rangeOfString:@"jpg"];
+   // NSRange range5=[str_content rangeOfString:@"jpg"];
     NSString *str_tmp_content=@"";
-    if (range1.length>0 || range2.length>0 || range3.length>0 || range4.length>0 || range5.length>0) {
+    if (range1.length>0 || range2.length>0 || range3.length>0 || range4.length>0) {
             
             NSLog(@"找到office文档");
             NSArray *arr_tmp= [str_content componentsSeparatedByString:@"<p"];

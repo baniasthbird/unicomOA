@@ -135,6 +135,17 @@
     else {
         NSLog(@"success to creating depart table");
     }
+    
+    //生成已读系统消息表
+    NSString *sqlCreateTableSysMsg=[NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS '%@' ( '%@' INTEGER PRIMARY KEY AUTOINCREMENT, '%@' TEXT , '%@' TEXT , '%@' TEXT , '%@' TEXT , '%@' TEXT , '%@' TEXT)",SYSMSG_TABLENAME,SYSMSG_ID,SYSMSG_SYSID,SYSMSG_MSGTYPE,SYSMSG_SENDEMPNAME,SYSMSG_RECEIVENAME,SYSMSG_TITLE,SYSMSG_SENDTIME];
+    BOOL resSysMsg=[_database executeUpdate:sqlCreateTableSysMsg];
+    if (!resSysMsg) {
+        NSLog(@"error when creating sysmsg table");
+    }
+    else {
+        NSLog(@"success to creating sysmsg table");
+    }
+
 
 }
 
@@ -209,7 +220,7 @@
         if (res) {
             NSLog(@"成功更新至IP表!");
         } else {
-            NSLog(@"更新数据至IP表出错！"  );
+            NSLog(@"更新数据至IP表出错！");
         }
     }
 }
@@ -638,8 +649,8 @@
     [_database close];
     
     return array;
-
 }
+
 
 -(NSString*)fetchInterface:(NSString *)str_key {
     [_database open];
@@ -974,13 +985,179 @@
     }
     return arr_people;
 }
+
+//获取系统消息数据
+-(NSMutableArray*)fetchAllSysMsg:(NSString*)str_username {
+    [_database open];
+    NSString *sql=[NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@ = '%@'", SYSMSG_TABLENAME,SYSMSG_RECEIVENAME,str_username];
+    
+    NSMutableArray *array=[@[] mutableCopy];
+    
+    FMResultSet *rs=[_database executeQuery:sql];
+    while ([rs next]) {
+        NSString *str_sysmsg_type=[rs stringForColumn:SYSMSG_MSGTYPE];
+        NSString *str_sysmsg_name=[rs stringForColumn:SYSMSG_SENDEMPNAME];
+        NSString *str_sysmsg_title=[rs stringForColumn:SYSMSG_TITLE];
+        NSString *str_sysmsg_sendTime=[rs stringForColumn:SYSMSG_SENDTIME];
+        NSString *str_sysmsg_receivename=[rs stringForColumn:SYSMSG_RECEIVENAME];
+        NSString *str_sysmsg_id=[rs stringForColumn:SYSMSG_SYSID];
+        NSDictionary *dic_sysmsg=[NSDictionary dictionaryWithObjectsAndKeys:str_sysmsg_id,@"id",str_sysmsg_type,@"msgType",str_sysmsg_name,@"sendEmpname",str_sysmsg_receivename,@"receiveName",str_sysmsg_title,@"title",str_sysmsg_sendTime,@"sendTime", nil];
+        [array addObject:dic_sysmsg];
+    }
+    
+    [_database close];
+    
+    return array;
+}
+
+//获取单个系统消息
+-(NSMutableArray*)fetchSysMsg:(NSDictionary*)dic_sysmsg {
+    [_database open];
+    NSString *str_sendTime=[_base_func GetValueFromDic:dic_sysmsg key:@"sendTime"];
+    NSString *str_title=[_base_func GetValueFromDic:dic_sysmsg key:@"title"];
+    NSString *str_sendEmpname=[_base_func GetValueFromDic:dic_sysmsg key:@"sendEmpname"];
+    NSString *str_receiveName=[_base_func GetValueFromDic:dic_sysmsg key:@"receiveName"];
+    NSString *str_id=[_base_func GetValueFromDic:dic_sysmsg key:@"id"];
+    NSString *sql=[NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@ = '%@' AND %@ = '%@' AND %@ = '%@' AND %@ = '%@' AND %@ = '%@'", SYSMSG_TABLENAME,SYSMSG_SENDTIME,str_sendTime,SYSMSG_TITLE,str_title,SYSMSG_SENDEMPNAME,str_sendEmpname,SYSMSG_RECEIVENAME,str_receiveName,SYSMSG_SYSID,str_id];
+    
+    NSMutableArray *array=[@[] mutableCopy];
+    
+    FMResultSet *rs=[_database executeQuery:sql];
+    while ([rs next]) {
+        NSString *str_sysmsg_type=[rs stringForColumn:SYSMSG_MSGTYPE];
+        NSString *str_sysmsg_name=[rs stringForColumn:SYSMSG_SENDEMPNAME];
+        NSString *str_sysmsg_title=[rs stringForColumn:SYSMSG_TITLE];
+        NSString *str_sysmsg_sendTime=[rs stringForColumn:SYSMSG_SENDTIME];
+        NSString *str_sysmsg_receivename=[rs stringForColumn:SYSMSG_RECEIVENAME];
+        NSString *str_sysmsg_id=[rs stringForColumn:SYSMSG_SYSID];
+        //NSArray *arr_interface=@[str_sysmsg_type,str_sysmsg_name,str_sysmsg_title,str_sysmsg_sendTime,str_sysmsg_isRead];
+        NSDictionary *dic_sysmsg=[NSDictionary dictionaryWithObjectsAndKeys:str_sysmsg_id,@"id",str_sysmsg_type,@"msgType",str_sysmsg_name,@"sendEmpname",str_sysmsg_receivename,@"receiveName",str_sysmsg_title,@"title",str_sysmsg_sendTime,@"sendTime", nil];
+        [array addObject:dic_sysmsg];
+    }
+    
+    [_database close];
+    
+    return array;
+
+}
+
+-(void)InsertSysMsg:(NSMutableArray*)arr_sysmsg {
+    if ([_database open]) {
+        if ([arr_sysmsg count]>0) {
+            for (int i=0;i<[arr_sysmsg count];i++) {
+                NSDictionary *dic_sysmsg=(NSDictionary*)[arr_sysmsg objectAtIndex:i];
+                NSMutableArray *arr_sysmsg = [self fetchSysMsg:dic_sysmsg];
+                if ([arr_sysmsg count]==0) {
+                    /*
+                    NSString *str_msgtype=[_base_func GetValueFromDic:dic_sysmsg key:@"msgType"];
+                    NSString *str_msgname=[_base_func GetValueFromDic:dic_sysmsg key:@"sendEmpname"];
+                    NSString *str_msgtitle=[_base_func GetValueFromDic:dic_sysmsg key:@"title"];
+                    NSString *str_sendTime=[_base_func GetValueFromDic:dic_sysmsg key:@"sendTime"];
+                    NSString *str_isRead=@"0";
+                    NSString *str_receiveName=[_base_func GetValueFromDic:dic_sysmsg key:@"receiveName"];
+                    
+                    NSString *inserSQL=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@','%@', '%@' , '%@' ,'%@', '%@') VALUES ('%@','%@' , '%@' , '%@' , '%@' , '%@')",SYSMSG_TABLENAME,SYSMSG_MSGTYPE,SYSMSG_SENDEMPNAME,SYSMSG_RECEIVENAME,SYSMSG_TITLE,SYSMSG_SENDTIME,SYSMSG_ISREAD,str_msgtype,str_msgname,str_receiveName,str_msgtitle,str_sendTime,str_isRead];
+                    BOOL res=[_database executeUpdate:inserSQL];
+                    if (res) {
+                        NSLog(@"添加系统消息成功!");
+                    }
+                    else {
+                        NSLog(@"添加系统消息失败!");
+                    }
+                     */
+                    [self addSingleSysMsg:dic_sysmsg];
+                }
+                
+                
+            }
+        }
+    }
+}
+
+-(void)UpdateSysMsg:(NSMutableArray*)arr_sysmsg {
+    if ([_database open]) {
+        if ([arr_sysmsg count]>0) {
+            for (int i=0; i<[arr_sysmsg count]; i++) {
+                NSDictionary *dic_sysmsg=(NSDictionary*)[arr_sysmsg objectAtIndex:i];
+                NSMutableArray *arr_sysmsg = [self fetchSysMsg:dic_sysmsg];
+                if ([arr_sysmsg count]==0) {
+                    [self addSingleSysMsg:dic_sysmsg];
+                }
+                else if ([arr_sysmsg count]==1) {
+                    [self updateSingleSysMsg:dic_sysmsg];
+                }
+            }
+        }
+    }
+}
+
+//添加单独一条系统消息
+-(void)addSingleSysMsg:(NSDictionary*)dic_sysmsg {
+    if (dic_sysmsg!=nil) {
+        NSMutableArray *arr_sysmsg = [self fetchSysMsg:dic_sysmsg];
+        if ([arr_sysmsg count]==0) {
+            if ([_database open]) {
+                NSString *str_msgtype=[_base_func GetValueFromDic:dic_sysmsg key:@"msgType"];
+                NSString *str_msgname=[_base_func GetValueFromDic:dic_sysmsg key:@"sendEmpname"];
+                NSString *str_msgtitle=[_base_func GetValueFromDic:dic_sysmsg key:@"title"];
+                NSString *str_sendTime=[_base_func GetValueFromDic:dic_sysmsg key:@"sendTime"];
+                NSString *str_receiveName=[_base_func GetValueFromDic:dic_sysmsg key:@"receiveName"];
+                NSString *str_id=[_base_func GetValueFromDic:dic_sysmsg key:@"id"];
+                NSString *inserSQL=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@','%@', '%@' ,'%@', '%@','%@') VALUES ('%@','%@' , '%@' , '%@' , '%@' , '%@')",SYSMSG_TABLENAME,SYSMSG_SYSID,SYSMSG_MSGTYPE,SYSMSG_SENDEMPNAME,SYSMSG_RECEIVENAME,SYSMSG_TITLE,SYSMSG_SENDTIME,str_id,str_msgtype,str_msgname,str_receiveName,str_msgtitle,str_sendTime];
+                BOOL res=[_database executeUpdate:inserSQL];
+                if (res) {
+                    NSLog(@"添加系统消息成功!");
+                }
+                else {
+                    NSLog(@"添加系统消息失败!");
+                }
+
+            }
+        }
+    }
+}
+
+-(void)updateSingleSysMsg:(NSDictionary*)dic_sysmsg {
+    if (dic_sysmsg!=nil) {
+        NSString *str_msgtype=[_base_func GetValueFromDic:dic_sysmsg key:@"msgType"];
+        NSString *str_msgname=[_base_func GetValueFromDic:dic_sysmsg key:@"sendEmpname"];
+        NSString *str_msgtitle=[_base_func GetValueFromDic:dic_sysmsg key:@"title"];
+        NSString *str_sendTime=[_base_func GetValueFromDic:dic_sysmsg key:@"sendTime"];
+        NSString *str_receiveName=[_base_func GetValueFromDic:dic_sysmsg key:@"receiveName"];
+        NSString *str_id=[_base_func GetValueFromDic:dic_sysmsg key:@"id"];
+        NSString *updateSQL=[NSString stringWithFormat:@"UPDATE '%@' SET '%@' = '%@', '%@' = '%@', '%@' = '%@', '%@' = '%@' , '%@' = '%@' , '%@' = '%@'  ",SYSMSG_TABLENAME,SYSMSG_SYSID,str_id,SYSMSG_MSGTYPE,str_msgtype,SYSMSG_SENDEMPNAME,str_msgname,SYSMSG_RECEIVENAME,str_receiveName,SYSMSG_TITLE,str_msgtitle,SYSMSG_SENDTIME,str_sendTime];
+        BOOL res=[_database executeUpdate:updateSQL];
+        if (res) {
+            NSLog(@"更新系统消息成功!");
+        }
+        else {
+            NSLog(@"更新系统消息失败!");
+        }
+    }
+}
+
+-(void)DeleteSysMsgTable {
+    if ([_database open]) {
+        NSString *deleteSql=[NSString stringWithFormat:@"DELETE FROM %@",SYSMSG_TABLENAME];
+        
+        BOOL res=[_database executeUpdate:deleteSql];
+        if (res) {
+            NSLog(@"成功删除系统消息表");
+        }
+        else {
+            NSLog(@"删除系统消息表失败");
+        }
+        
+    }
+
+}
 //根据条件查找某一条备忘录
 //-(NSMutableDictionary*)fetchNotes:(
 
 
 //更新备忘录表
 //-(void)UpdateNotesTable:(NSMutableDictionary *)dic_notes {
-    
+
 //}
 
 
