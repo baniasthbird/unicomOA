@@ -378,7 +378,7 @@
 
 -(void)setupLocation {
     NSString *str_connection=[self GetConnectionStatus];
-    if ([str_connection isEqualToString:@"wifi"]) {
+    if ([str_connection isEqualToString:@"wifi"] && f_v>=10.0) {
         INTULocationManager *mgr=[INTULocationManager sharedInstance];
         [mgr requestLocationWithDesiredAccuracy:INTULocationAccuracyCity timeout:20 block:^(CLLocation *currentLocation, INTULocationAccuracy achievedAccuracy, INTULocationStatus status) {
             NSLog(@"----%ld",(long)status);

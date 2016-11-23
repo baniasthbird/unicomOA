@@ -13,15 +13,13 @@
 #import "MyShenPiCell.h"
 #import "CarService.h"
 #import "PrintService.h"
-//#import "CarShenPiDetail.h"
-//#import "PrintShenPiDetail.h"
 #import "DataBase.h"
 #import "AFNetworking.h"
 #import "LXAlertView.h"
-
 #import "FinishVc.h"
 #import "UILabel+LabelHeightAndWidth.h"
 #import "ShenPiSubVc.h"
+
 
 
 @interface MyShenPiViewController()
@@ -69,6 +67,8 @@
 @property NSInteger i_pageIndex1;
 //已办流程当前页
 @property NSInteger i_pageIndex2;
+
+
 @end
 
 @implementation MyShenPiViewController {
@@ -134,6 +134,9 @@
     _session.responseSerializer= [AFHTTPResponseSerializer serializer];
     [_session.requestSerializer setHTTPShouldHandleCookies:YES];
     [_session.requestSerializer setTimeoutInterval:10.0f];
+    
+   
+
     
     /*
     _i_sectionClicked=-1;
@@ -1034,14 +1037,24 @@
     vc1.title=@"待办任务";
     vc1.b_isDaiBan=YES;
     vc1.i_Class=_i_Class;
+   // LeftTableVC *left_vc=[[LeftTableVC alloc]init];
+   // MenuViewController *menuVC=[MenuViewController drawerWithLeftViewController:left_vc andMainViewController:self andMaxWidth:300];
+    
+    if (_i_Class==5) {
+       
+    }
     
     ShenPiSubVc *vc2=[[ShenPiSubVc alloc]init];
     vc2.title=@"已办任务";
     vc2.b_isDaiBan=NO;
     vc2.i_Class=_i_Class;
     
+    
     [self addChildViewController:vc1];
     [self addChildViewController:vc2];
+    
+   
+   // [self.navigationController pushViewController:menuVC animated:YES];
 }
 
 -(void)dealloc {
@@ -1058,5 +1071,7 @@
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 }
+
+
 
 @end

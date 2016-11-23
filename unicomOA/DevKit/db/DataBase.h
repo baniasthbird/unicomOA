@@ -40,6 +40,10 @@
 -(void)InserDepartMentTable:(NSMutableArray*)arr_department;
 //添加已读消息
 -(void)InsertSysMsg:(NSMutableArray*)arr_sysmsg;
+//添加事务流程表数据
+-(void)InsertShiwuTable;
+//添加单个事务流程
+-(void)InsertSingleShiWU:(NSMutableDictionary*)dic_shiwu;
 
 -(void)addSingleSysMsg:(NSDictionary*)dic_sysmsg;
 
@@ -71,6 +75,8 @@
 
 //获得单一数据
 -(NSString*)fetchInterface:(NSString*)str_key;
+//获得事务流程标题
+-(NSString*)fetchShiWu:(NSString *)str_key;
 //-(UserEntity*)fetchNotes:(NSString*)str_key;
 //-(CarService*)fetchCarApplication:(NSString*)str_key;
 

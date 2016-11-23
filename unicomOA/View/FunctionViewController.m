@@ -376,7 +376,7 @@
     [view_part3 addSubview:btn_IVoting];
    // [view_part3 addSubview:btn_JueCe];
     NSString *currentNetWorkState=[[NSUserDefaults standardUserDefaults] objectForKey:@"connection"];
-    if ([currentNetWorkState isEqualToString:@"wifi"]) {
+    if ([currentNetWorkState isEqualToString:@"wifi"] && f_v>=10.0) {
         [view_part3 addSubview:btn_Weather];
     }
     [self.view addSubview:view_part1];

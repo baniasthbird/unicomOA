@@ -146,6 +146,15 @@
         NSLog(@"success to creating sysmsg table");
     }
 
+    //生成事务管理流程表
+    NSString *sqlCreateTableShiWuProcess=[NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS '%@' ( '%@' INTEGER PRIMARY KEY AUTOINCREMENT, '%@' TEXT , '%@' TEXT)",SHIWU_TABLENAME,SHIWU_ID,SHIWU_LABEL,SHIWU_TITLE];
+    BOOL resShiWu=[_database executeUpdate:sqlCreateTableShiWuProcess];
+    if (!resShiWu) {
+        NSLog(@"error when creating shiwu table");
+    }
+    else {
+         NSLog(@"success to creating shiwu table");
+    }
 
 }
 
@@ -1151,6 +1160,160 @@
     }
 
 }
+
+//获取接口数据表
+-(NSMutableArray*)fetchAllShiWu {
+    [_database open];
+    NSString *sql=[NSString stringWithFormat:@"SELECT * FROM %@", SHIWU_TABLENAME];
+    
+    NSMutableArray *array=[@[] mutableCopy];
+    
+    FMResultSet *rs=[_database executeQuery:sql];
+    while ([rs next]) {
+        NSString *str_shiwu_label=[rs stringForColumn:SHIWU_LABEL];
+        NSString *str_shiwu_title=[rs stringForColumn:SHIWU_TITLE];
+        NSArray *arr_interface=@[str_shiwu_label,str_shiwu_title];
+        [array addObject:arr_interface];
+    }
+    
+    [_database close];
+    
+    return array;
+}
+
+
+
+-(void)InsertShiwuTable {
+     NSMutableArray *t_array=[self fetchAllShiWu];
+     if (t_array.count == 0) {
+         if ([_database open]) {
+            
+             NSString *insertSql1=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",SHIWU_TABLENAME,SHIWU_TITLE,SHIWU_LABEL,@"通用费用报销",@"com.hnsi.erp.xmyy.utilitycost.utilityBaoxiao"];
+             BOOL res1=[_database executeUpdate:insertSql1];
+             
+             NSString *insertSql2=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",SHIWU_TABLENAME,SHIWU_TITLE,SHIWU_LABEL,@"物品领用申请",@"com.hnsi.erp.xmyy.getGoods.getGoods"];
+             BOOL res2=[_database executeUpdate:insertSql2];
+             
+             NSString *insertSql3=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",SHIWU_TABLENAME,SHIWU_TITLE,SHIWU_LABEL,@"图书及资料购置费报销",@"com.hnsi.erp.xmyy.tswzgz.tszlgzworkflow"];
+             BOOL res3=[_database executeUpdate:insertSql3];
+             
+             NSString *insertSql4=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",SHIWU_TABLENAME,SHIWU_TITLE,SHIWU_LABEL,@"业务招待费申请",@"com.hnsi.erp.xmyy.businessettm.businessettm"];
+             BOOL res4=[_database executeUpdate:insertSql4];
+             
+             NSString *insertSql5=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",SHIWU_TABLENAME,SHIWU_TITLE,SHIWU_LABEL,@"业务招待费报销",@"com.hnsi.erp.xmyy.businessettm.businessBaoxiao"];
+             BOOL res5=[_database executeUpdate:insertSql5];
+             
+             NSString *insertSql6=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",SHIWU_TABLENAME,SHIWU_TITLE,SHIWU_LABEL,@"会议费申请",@"com.hnsi.erp.xmyy.hyfycost.hyfyApply"];
+             BOOL res6=[_database executeUpdate:insertSql6];
+             
+             NSString *insertSql7=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",SHIWU_TABLENAME,SHIWU_TITLE,SHIWU_LABEL,@"会议费报销",@"com.hnsi.erp.xmyy.hyfycost.hyfyBaoxiao"];
+             BOOL res7=[_database executeUpdate:insertSql7];
+             
+             NSString *insertSql8=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",SHIWU_TABLENAME,SHIWU_TITLE,SHIWU_LABEL,@"会议室申请",@"com.hnsi.erp.xmyy.hyssy.hyssyflow"];
+             BOOL res8=[_database executeUpdate:insertSql8];
+             
+             NSString *insertSql9=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",SHIWU_TABLENAME,SHIWU_TITLE,SHIWU_LABEL,@"中转过渡房申请",@"com.hnsi.erp.xmyy.gdzzf.gdzzfInfoflow"];
+             BOOL res9=[_database executeUpdate:insertSql9];
+             
+             NSString *insertSql10=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",SHIWU_TABLENAME,SHIWU_TITLE,SHIWU_LABEL,@"设备维修申请",@"com.hnsi.erp.xmyy.wangjunhui.equipmentServiceworkflow"];
+             BOOL res10=[_database executeUpdate:insertSql10];
+             
+             NSString *insertSql11=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",SHIWU_TABLENAME,SHIWU_TITLE,SHIWU_LABEL,@"综合服务申请",@"com.hnsi.erp.xmyy.zhService.zhService"];
+             BOOL res11=[_database executeUpdate:insertSql11];
+             
+             NSString *insertSql12=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",SHIWU_TABLENAME,SHIWU_TITLE,SHIWU_LABEL,@"预算外事项申请",@"com.hnsi.erp.xmyy.yswfp.yswsx"];
+             BOOL res12=[_database executeUpdate:insertSql12];
+             
+             NSString *insertSql13=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",SHIWU_TABLENAME,SHIWU_TITLE,SHIWU_LABEL,@"预算外事项报销",@"com.hnsi.erp.xmyy.yswfp.yswfp"];
+             BOOL res13=[_database executeUpdate:insertSql13];
+             
+             NSString *insertSql14=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",SHIWU_TABLENAME,SHIWU_TITLE,SHIWU_LABEL,@"部门自控费用报销",@"com.hnsi.erp.xmyy.depControlCost.apply"];
+             BOOL res14=[_database executeUpdate:insertSql14];
+             
+             NSString *insertSql15=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",SHIWU_TABLENAME,SHIWU_TITLE,SHIWU_LABEL,@"用印申请",@"com.hnsi.erp.xmyy.yysq.yysqflow"];
+             BOOL res15=[_database executeUpdate:insertSql15];
+             
+             NSString *insertSql16=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",SHIWU_TABLENAME,SHIWU_TITLE,SHIWU_LABEL,@"差旅费申请",@"com.hnsi.erp.xmyy.clfy.clfyApply"];
+             BOOL res16=[_database executeUpdate:insertSql16];
+             
+             NSString *insertSql17=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",SHIWU_TABLENAME,SHIWU_TITLE,SHIWU_LABEL,@"差旅费报销",@"com.hnsi.erp.xmyy.clfy.clfyBaoxiao"];
+             BOOL res17=[_database executeUpdate:insertSql17];
+             
+             NSString *insertSql18=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",SHIWU_TABLENAME,SHIWU_TITLE,SHIWU_LABEL,@"差旅费报销",@"com.hnsi.erp.xmyy.clfy.clfyBaoxiao"];
+             BOOL res18=[_database executeUpdate:insertSql18];
+             
+             NSString *insertSql19=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",SHIWU_TABLENAME,SHIWU_TITLE,SHIWU_LABEL,@"外部培训费报销",@"com.hnsi.erp.xmyy.wbpxfy.pxfyRei"];
+             BOOL res19=[_database executeUpdate:insertSql19];
+             
+             NSString *insertSql20=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",SHIWU_TABLENAME,SHIWU_TITLE,SHIWU_LABEL,@"驻地化费用报销",@"com.hnsi.erp.xmyy.zhudify.zhudifybaoxiao"];
+             BOOL res20=[_database executeUpdate:insertSql20];
+             
+             NSString *insertSql21=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",SHIWU_TABLENAME,SHIWU_TITLE,SHIWU_LABEL,@"通用业务付款单",@"com.hnsi.erp.xmyy.payment.payment"];
+             BOOL res21=[_database executeUpdate:insertSql21];
+             
+             NSString *insertSql22=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",SHIWU_TABLENAME,SHIWU_TITLE,SHIWU_LABEL,@"借款单",@"com.hnsi.erp.xmyy.loan.loan"];
+             BOOL res22=[_database executeUpdate:insertSql22];
+             
+             NSString *insertSql23=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",SHIWU_TABLENAME,SHIWU_TITLE,SHIWU_LABEL,@"坏账核销申请",@"com.hnsi.erp.xmyy.hzhx.hzhxflow"];
+             BOOL res23=[_database executeUpdate:insertSql23];
+
+             NSString *insertSql24=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",SHIWU_TABLENAME,SHIWU_TITLE,SHIWU_LABEL,@"固定资产部门内部调拨申请",@"com.hnsi.erp.xmyy.gdzznb.gdzcnb"];
+             BOOL res24=[_database executeUpdate:insertSql24];
+             
+             NSString *insertSql25=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",SHIWU_TABLENAME,SHIWU_TITLE,SHIWU_LABEL,@"固定资产调拨申请",@"com.hnsi.erp.xmyy.gdzcdb.gdzcdb"];
+             BOOL res25=[_database executeUpdate:insertSql25];
+             
+             NSString *insertSql26=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",SHIWU_TABLENAME,SHIWU_TITLE,SHIWU_LABEL,@"分摊费用申请",@"com.hnsi.erp.xmyy.ftfy.ftfyApply"];
+             BOOL res26=[_database executeUpdate:insertSql26];
+             
+             NSString *insertSql27=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",SHIWU_TABLENAME,SHIWU_TITLE,SHIWU_LABEL,@"分摊费用报销",@"com.hnsi.erp.xmyy.ftfy.ftfyBaoxiao"];
+             BOOL res27=[_database executeUpdate:insertSql27];
+             
+             NSString *insertSql28=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",SHIWU_TABLENAME,SHIWU_TITLE,SHIWU_LABEL,@"固定资产报废",@"com.hnsi.erp.xmyy.gdzcbf.gdzcbfflow"];
+             BOOL res28=[_database executeUpdate:insertSql28];
+
+             if (res1 && res2 && res3 && res4 && res5 && res6 && res7 && res8 && res9 && res10 && res11 && res12 && res13 && res14 && res15 && res16 && res17 && res18 && res19 && res20 && res21 && res22 && res23 && res24 && res25 && res26 && res27 && res28) {
+                 NSLog(@"成功添加数据至事务流程表");
+             }
+             else {
+                 NSLog(@"添加数据至事务流程表失败");
+             }
+         }
+     }
+}
+
+-(void)InsertSingleShiWU:(NSMutableDictionary*)dic_shiwu {
+    if (dic_shiwu!=nil) {
+        NSString *str_key=[dic_shiwu objectForKey:SHIWU_LABEL];
+        NSString *str_value=[dic_shiwu objectForKey:SHIWU_TITLE];
+        NSString *str_title= [self fetchShiWu:str_key];
+        if ([str_title isEqualToString:@""]) {
+            if ([_database open]) {
+                NSString *insertSql=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",SHIWU_TABLENAME,SHIWU_TITLE,SHIWU_LABEL,str_value,str_key];
+                BOOL res=[_database executeUpdate:insertSql];
+                if (res) {
+                    NSLog(@"成功添加数据至事务流程表");
+                }
+                else {
+                    NSLog(@"添加数据至事务流程表失败");
+                }
+            }
+        }
+    }
+}
+
+-(NSString*)fetchShiWu:(NSString *)str_key {
+    [_database open];
+    NSString *str_shiwu_title=@"";
+    NSString *sql=[NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@ like '%%%@%%' ", SHIWU_TABLENAME,SHIWU_LABEL,str_key];
+    FMResultSet *rs=[_database executeQuery:sql];
+    while ([rs next]) {
+        str_shiwu_title=[rs stringForColumn:SHIWU_TITLE];
+    }
+    [_database close];
+    return str_shiwu_title;
+}
+
 //根据条件查找某一条备忘录
 //-(NSMutableDictionary*)fetchNotes:(
 

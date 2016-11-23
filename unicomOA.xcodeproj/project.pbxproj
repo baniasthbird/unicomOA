@@ -230,8 +230,11 @@
 		68C3DF891DB9A7D6004A369F /* AllListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C3DF881DB9A7D6004A369F /* AllListVC.m */; };
 		68C3DF8C1DB9D53E004A369F /* AllListSearchResultVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C3DF8B1DB9D53E004A369F /* AllListSearchResultVC.m */; };
 		68C3DF8F1DBA01CE004A369F /* ListAllCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C3DF8E1DBA01CE004A369F /* ListAllCell.m */; };
-		68C8C55A1DDC5011009E9824 /* MenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C8C5591DDC5011009E9824 /* MenuView.m */; };
 		68C91B441D9CC24E00F70FF9 /* UILabel+LabelHeightAndWidth.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C91B431D9CC24E00F70FF9 /* UILabel+LabelHeightAndWidth.m */; };
+		68CA75471DE3CD1600F2FA74 /* LeftMenuTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CA75421DE3CD1600F2FA74 /* LeftMenuTableView.m */; };
+		68CA75481DE3CD1600F2FA74 /* LeftMenuViewNew.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CA75441DE3CD1600F2FA74 /* LeftMenuViewNew.m */; };
+		68CA75491DE3CD1600F2FA74 /* MenuTableViewCellNew.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CA75461DE3CD1600F2FA74 /* MenuTableViewCellNew.m */; };
+		68CA754D1DE3D0B900F2FA74 /* UIView+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CA754C1DE3D0B900F2FA74 /* UIView+Extend.m */; };
 		68D05CBA1C9791000039220F /* PasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D05CB91C9791000039220F /* PasswordViewController.m */; };
 		68D05CC01C97AC050039220F /* SendFeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D05CBF1C97AC050039220F /* SendFeedBackViewController.m */; };
 		68D05CC41C97B3530039220F /* SendFeedbackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D05CC31C97B3530039220F /* SendFeedbackView.m */; };
@@ -748,10 +751,16 @@
 		68C3DF8B1DB9D53E004A369F /* AllListSearchResultVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AllListSearchResultVC.m; path = Base/Function/ShenPiContorller/AllListSearchResultVC.m; sourceTree = "<group>"; };
 		68C3DF8D1DBA01CE004A369F /* ListAllCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ListAllCell.h; path = Base/Function/ShenPiModel/ListAllCell.h; sourceTree = "<group>"; };
 		68C3DF8E1DBA01CE004A369F /* ListAllCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ListAllCell.m; path = Base/Function/ShenPiModel/ListAllCell.m; sourceTree = "<group>"; };
-		68C8C5581DDC5011009E9824 /* MenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuView.h; sourceTree = "<group>"; };
-		68C8C5591DDC5011009E9824 /* MenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuView.m; sourceTree = "<group>"; };
 		68C91B421D9CC24E00F70FF9 /* UILabel+LabelHeightAndWidth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+LabelHeightAndWidth.h"; sourceTree = "<group>"; };
 		68C91B431D9CC24E00F70FF9 /* UILabel+LabelHeightAndWidth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+LabelHeightAndWidth.m"; sourceTree = "<group>"; };
+		68CA75411DE3CD1600F2FA74 /* LeftMenuTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftMenuTableView.h; sourceTree = "<group>"; };
+		68CA75421DE3CD1600F2FA74 /* LeftMenuTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftMenuTableView.m; sourceTree = "<group>"; };
+		68CA75431DE3CD1600F2FA74 /* LeftMenuViewNew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftMenuViewNew.h; sourceTree = "<group>"; };
+		68CA75441DE3CD1600F2FA74 /* LeftMenuViewNew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftMenuViewNew.m; sourceTree = "<group>"; };
+		68CA75451DE3CD1600F2FA74 /* MenuTableViewCellNew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuTableViewCellNew.h; sourceTree = "<group>"; };
+		68CA75461DE3CD1600F2FA74 /* MenuTableViewCellNew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuTableViewCellNew.m; sourceTree = "<group>"; };
+		68CA754B1DE3D0B900F2FA74 /* UIView+Extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extend.h"; sourceTree = "<group>"; };
+		68CA754C1DE3D0B900F2FA74 /* UIView+Extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extend.m"; sourceTree = "<group>"; };
 		68D05CB81C9791000039220F /* PasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PasswordViewController.h; path = Base/Settings/Controller/PasswordViewController.h; sourceTree = "<group>"; };
 		68D05CB91C9791000039220F /* PasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PasswordViewController.m; path = Base/Settings/Controller/PasswordViewController.m; sourceTree = "<group>"; };
 		68D05CBE1C97AC050039220F /* SendFeedBackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SendFeedBackViewController.h; path = Base/Settings/Controller/SendFeedBackViewController.h; sourceTree = "<group>"; };
@@ -1871,11 +1880,33 @@
 		68C8C5571DDC5011009E9824 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
-				68C8C5581DDC5011009E9824 /* MenuView.h */,
-				68C8C5591DDC5011009E9824 /* MenuView.m */,
+				68CA75401DE3CD1600F2FA74 /* LeftMenuView */,
 			);
 			name = Menu;
 			path = OpenSource/Menu;
+			sourceTree = "<group>";
+		};
+		68CA75401DE3CD1600F2FA74 /* LeftMenuView */ = {
+			isa = PBXGroup;
+			children = (
+				68CA754A1DE3D0B900F2FA74 /* Category */,
+				68CA75411DE3CD1600F2FA74 /* LeftMenuTableView.h */,
+				68CA75421DE3CD1600F2FA74 /* LeftMenuTableView.m */,
+				68CA75431DE3CD1600F2FA74 /* LeftMenuViewNew.h */,
+				68CA75441DE3CD1600F2FA74 /* LeftMenuViewNew.m */,
+				68CA75451DE3CD1600F2FA74 /* MenuTableViewCellNew.h */,
+				68CA75461DE3CD1600F2FA74 /* MenuTableViewCellNew.m */,
+			);
+			path = LeftMenuView;
+			sourceTree = "<group>";
+		};
+		68CA754A1DE3D0B900F2FA74 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				68CA754B1DE3D0B900F2FA74 /* UIView+Extend.h */,
+				68CA754C1DE3D0B900F2FA74 /* UIView+Extend.m */,
+			);
+			path = Category;
 			sourceTree = "<group>";
 		};
 		68D05CC11C97B3290039220F /* Model */ = {
@@ -2411,6 +2442,7 @@
 				68A5D8021D2A037500000F95 /* LXSegmentController.m in Sources */,
 				68F950B91C9F9E9000CA1519 /* ChangePhoneNumViewController.m in Sources */,
 				6846EC511CF99C7C00A400C5 /* IQUIWindow+Hierarchy.m in Sources */,
+				68CA754D1DE3D0B900F2FA74 /* UIView+Extend.m in Sources */,
 				689713731CE33B88008BB4AB /* NewsListCell.m in Sources */,
 				68C0A3AC1D65B9FF00985D30 /* MJPropertyKey.m in Sources */,
 				68B68E2D1D62F072003B80AC /* LocalViewController.m in Sources */,
@@ -2522,6 +2554,7 @@
 				6846EC6D1CFAD48300A400C5 /* YBMonitorNetWorkState.m in Sources */,
 				2CFEADF31C7C27020054730E /* UIViewExt.m in Sources */,
 				2CFEAD191C7168980054730E /* LoginViewController.m in Sources */,
+				68CA75491DE3CD1600F2FA74 /* MenuTableViewCellNew.m in Sources */,
 				2CFEAD451C72B8B90054730E /* LGSettingSection.m in Sources */,
 				686AAB9E1D4B44B0002775C2 /* SysMsgViewController.m in Sources */,
 				68C0A3AE1D65B9FF00985D30 /* NSObject+MJClass.m in Sources */,
@@ -2532,7 +2565,7 @@
 				6846D3621CABC496004BD285 /* RadioBox.m in Sources */,
 				680861D61CEAD33300257AAA /* PositionCell.m in Sources */,
 				2C9DDECD1CD8E688009462E6 /* LYThreeViewController.m in Sources */,
-				68C8C55A1DDC5011009E9824 /* MenuView.m in Sources */,
+				68CA75471DE3CD1600F2FA74 /* LeftMenuTableView.m in Sources */,
 				2CB7DB681CAC22BA0057633D /* JXBarChartView.m in Sources */,
 				6824F8E31DADC85300F98461 /* FFDropDownMenuCell.m in Sources */,
 				683FD9F81D654914005B8F5D /* CitiesGroup.m in Sources */,
@@ -2555,6 +2588,7 @@
 				6846EC521CF99C7C00A400C5 /* IQKeyboardManager.m in Sources */,
 				6846EC571CF99C7C00A400C5 /* IQTitleBarButtonItem.m in Sources */,
 				2CFEAD301C7181F30054730E /* NTButton.m in Sources */,
+				68CA75481DE3CD1600F2FA74 /* LeftMenuViewNew.m in Sources */,
 				2CE321101CC2810800B36793 /* DataSource.m in Sources */,
 				2CFEADC61C76A65E0054730E /* UIImage+ResizeImage.m in Sources */,
 				6846EC601CFA897A00A400C5 /* NewsDetailVc.m in Sources */,

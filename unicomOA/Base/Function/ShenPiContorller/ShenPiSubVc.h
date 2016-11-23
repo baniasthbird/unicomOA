@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "UserInfo.h"
+#import "MyShenPiViewController.h"
+
 
 @interface ShenPiSubVc : UIViewController
 
@@ -16,5 +18,7 @@
 @property (nonatomic,strong) UserInfo *userInfo;
 
 @property NSInteger i_Class;
+
+
 
 @end

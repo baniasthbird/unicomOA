@@ -94,6 +94,11 @@
 #define SYSMSG_SENDTIME  @"SYSMSG_SENDTIME"
 #define SYSMSG_ISREAD    @"SYSMSG_ISREAD"
 
+//事务管理流程表
+#define SHIWU_TABLENAME @"SHIWU_TABLE"
+#define SHIWU_ID        @"SHIWU_ID"
+#define SHIWU_LABEL     @"SHIWU_LABEL"
+#define SHIWU_TITLE     @"SHIWU_TITLE"
 //#define DEPART_ID        @""
 
 #endif /* DBDef_h */

@@ -14,9 +14,11 @@
 #import "MyShenPiCell.h"
 #import "UnFinishVc.h"
 #import "FinishVc.h"
+#import "LeftMenuViewNew.h"
+//#import "MenuView2.h"
 
 
-@interface ShenPiSubVc ()<UITableViewDelegate,UITableViewDataSource,UnFinishVcDelegate>
+@interface ShenPiSubVc ()<UITableViewDelegate,UITableViewDataSource,UnFinishVcDelegate,LeftMenuViewNewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 
@@ -29,6 +31,10 @@
 @property (nonatomic,strong) NSMutableArray *arr_MyShenPi;
 
 @property (nonatomic,strong) UIRefreshControl *refreshControl;
+
+@property (nonatomic, strong) LeftMenuViewNew *menuView;
+
+//@property (nonatomic,strong) MenuView2 *menu2;
 
 @end
 
@@ -43,6 +49,10 @@
     NSMutableDictionary *dic_url;
     
     UIActivityIndicatorView *indicator;
+    
+    NSMutableArray *arr_menuItem;
+    
+    NSString *str_cell_hint;
     
 }
 
@@ -91,6 +101,7 @@
         [self PrePareData:dic_param interface:@"FinishTaskShenPiList"];
     }
 
+    str_cell_hint=@"all";
     [self.view addSubview:_tableView];
     
     indicator=[self AddLoop];
@@ -335,6 +346,28 @@
                             [dic_url setObject:str_Mapvalue forKey:str_Mapkey];
                         }
                     }
+                    NSArray *arr_tmp_menuItem=[JSON objectForKey:@"MenuItem"];
+                    if (arr_tmp_menuItem!=nil) {
+                        arr_menuItem=[[NSMutableArray alloc]initWithArray:arr_tmp_menuItem];
+                        NSNumber *i_count=[JSON objectForKey:@"count"];
+                        NSString *str_count=[NSString stringWithFormat:@"%@",i_count];
+                        NSDictionary *dic_all=[NSDictionary dictionaryWithObjectsAndKeys:@"all",@"label",str_count,@"num", nil];
+                        [arr_menuItem insertObject:dic_all atIndex:0];
+                        if(_i_Class==5) {
+                            self.menuView = [[LeftMenuViewNew ShareManager:arr_menuItem] initWithContainerViewController:self];
+                            self.menuView.arr_menus=arr_menuItem;
+                            self.menuView.menuViewDelegate = self;
+                            
+                            [self.navigationController.view addSubview:self.menuView];
+                        }
+                    }
+                    else {
+                        if (_i_Class==5) {
+                            
+                        }
+                    }
+                    
+                    NSLog(@"设置设置");
                 }
                 else if ([str_interface isEqualToString:@"FinishTaskShenPiList"]) {
                     str_listname=@"list";
@@ -366,8 +399,6 @@
                     else {
                         [arr_MyReview addObjectsFromArray:arr_list];
                     }
-                   
-                    
                 }
                 
                 NSSortDescriptor* sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"startTime" ascending:NO];
@@ -419,10 +450,15 @@
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         [arr_MyReview removeAllObjects];
         if (_b_isDaiBan==YES) {
-            dic_param[@"pageIndex"]=@"1";
-            dic_param[@"sys"]=[NSString stringWithFormat:@"%ld",(long)_i_Class];
-            [self PrePareData:dic_param interface:@"UnFinishTaskShenPiList"];
-            
+            if ([str_cell_hint isEqualToString:@"all"]) {
+                dic_param[@"pageIndex"]=@"1";
+                dic_param[@"sys"]=[NSString stringWithFormat:@"%ld",(long)_i_Class];
+                [self PrePareData:dic_param interface:@"UnFinishTaskShenPiList"];
+            }
+            else {
+                NSMutableDictionary *param=[NSMutableDictionary dictionaryWithObjectsAndKeys:str_cell_hint,@"processDefnames",@"1",@"pageIndex",nil];
+                [self LoadSubData:str_cell_hint param:param];
+            }
         }
         else {
             dic_param[@"pageIndex"]=@"1";
@@ -464,10 +500,17 @@
 -(void)RefreshUnFinishView {
     [arr_MyReview removeAllObjects];
     _i_pageIndex=1;
-    dic_param[@"pageIndex"]=@"1";
-    dic_param[@"sys"]=[NSString stringWithFormat:@"%ld",(long)_i_Class];
-    [self.tableView setContentOffset:CGPointMake(0, 0) animated:NO];
-    [self PrePareData:dic_param interface:@"UnFinishTaskShenPiList"];
+    if ([str_cell_hint isEqualToString:@"all"]) {
+        dic_param[@"pageIndex"]=@"1";
+        dic_param[@"sys"]=[NSString stringWithFormat:@"%ld",(long)_i_Class];
+        [self.tableView setContentOffset:CGPointMake(0, 0) animated:NO];
+        [self PrePareData:dic_param interface:@"UnFinishTaskShenPiList"];
+    }
+    else {
+        NSMutableDictionary *dic_sub_param=[NSMutableDictionary dictionaryWithObjectsAndKeys:@"1",@"pageIndex",str_cell_hint,@"processDefnames", nil];
+        [self LoadSubData:str_cell_hint param:dic_sub_param];
+    }
+    
     
     
     
@@ -481,25 +524,6 @@
     CGFloat distanceFromBottom=scrollView.contentSize.height-contentYoffset;
     //NSLog(@"height:%f contentYoffset:%f frame.y:%f",height,contentYoffset,scrollView.frame.origin.y);
     if (distanceFromBottom<height) {
-        //  NSLog((@"end of table"));
-        /*
-         if ([_str_searchKeyword1 isEqualToString:@"全部"])
-         {
-         //  [self PareData:dic_param];
-         //   [self PareData:dic_param interface:@"FinishTaskShenPiList"];
-         if (_i_pageIndex1<_i_page_Total1) {
-         _i_pageIndex1=_i_pageIndex1+1;
-         dic_param1[@"pageIndex"]=[NSString stringWithFormat:@"%ld",(long)_i_pageIndex1];
-         [self PrePareData:dic_param1 interface:@"UnFinishTaskShenPiList"];
-         }
-         if (_i_pageIndex2<_i_page_Total2) {
-         _i_pageIndex2=_i_pageIndex2+1;
-         dic_param2[@"pageIndex"]=[NSString stringWithFormat:@"%ld",(long)_i_pageIndex2];
-         [self PrePareData:dic_param2 interface:@"FinishTaskShenPiList"];
-         }
-         }
-         */
-       
         if (_i_pageIndex<_i_page_Total) {
             _i_pageIndex=_i_pageIndex+1;
             dic_param[@"pageIndex"]=[NSString stringWithFormat:@"%ld",(long)_i_pageIndex];
@@ -508,14 +532,98 @@
                 [self PrePareData:dic_param interface:@"FinishTaskShenPiList"];
             }
             else {
-                [self PrePareData:dic_param interface:@"UnFinishTaskShenPiList"];
+                if ([str_cell_hint isEqualToString:@"all"]) {
+                    [self PrePareData:dic_param interface:@"UnFinishTaskShenPiList"];
+                }
+                else {
+                    NSString *str_pageIndex=[NSString stringWithFormat:@"%ld",(long)_i_pageIndex];
+                    NSMutableDictionary *param=[NSMutableDictionary dictionaryWithObjectsAndKeys:str_cell_hint,@"processDefnames",str_pageIndex,@"pageIndex",nil];
+                    [self LoadSubData:str_cell_hint param:param];
+                }
             }
 
         }
     }
-    
 }
 
+//根据左侧菜单点击结果，筛选细分
+-(void)LoadSubData:(NSString*)str_hint param:(NSMutableDictionary*)dic_sub_param {
+    NSString *str_connection=[self GetConnectionStatus];
+    if ([str_connection isEqualToString:@"wifi"] || [str_connection isEqualToString:@"GPRS"]) {
+        if (_b_isDaiBan==YES && _i_Class==5) {
+            NSString *str_ip=@"";
+            NSString *str_port=@"";
+            NSMutableArray *t_array=[db fetchIPAddress];
+            if (t_array.count==1) {
+                NSArray *arr_ip=[t_array objectAtIndex:0];
+                str_ip=[arr_ip objectAtIndex:0];
+                str_port=[arr_ip objectAtIndex:1];
+            }
+            NSString *str_urldata=@"/default/com.hnsi.erp.mobile.oa.TaskAuditSearch.pendingListByDef.biz.ext";
+           
+            NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_urldata];
+                        [_session POST:str_url parameters:dic_sub_param progress:^(NSProgress * _Nonnull uploadProgress) {
+                
+            } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                [indicator stopAnimating];
+                NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+                NSString *str_success= [JSON objectForKey:@"success"];
+                BOOL b_success=[str_success boolValue];
+                if (b_success==YES) {
+                        NSLog(@"测试测试");
+                        NSMutableDictionary *dic_tmpMap =[JSON objectForKey:@"urlMap"];
+                        NSMutableArray *arr_list=[JSON objectForKey:@"taskList"];
+                        if ([arr_list count]==0) {
+                            [arr_MyReview removeAllObjects];
+                        }
+                        else {
+                            if ([arr_MyReview count]>0) {
+                                for (int i=0;i<[arr_list count];i++) {
+                                    NSDictionary *dic_tmp=[arr_list objectAtIndex:i];
+                                    if (![arr_MyReview containsObject:dic_tmp]) {
+                                        [arr_MyReview addObject:dic_tmp];
+                                    }
+                                }
+                            }
+                            else {
+                                [arr_MyReview addObjectsFromArray:arr_list];
+                            }
+                        }
+                        
+                        NSSortDescriptor* sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"startTime" ascending:NO];
+                        NSArray* sortedArray = [arr_list sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+                        arr_MyReview=[[NSMutableArray alloc]initWithArray:sortedArray];
+                        [dic_url removeAllObjects];
+                        dic_url=dic_tmpMap;
+                        NSString *str_totalPage=[JSON objectForKey:@"totalPage"];
+                        _i_page_Total=[str_totalPage integerValue];
+                        _arr_MyShenPi=[arr_MyReview mutableCopy];
+                    [self.tableView reloadData];
+                }
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                
+            }];
+        }
+    }
+}
+
+
+
+-(void)LeftMenuViewActionIndex:(NSString *)vType {
+    [self.menuView closeLeftView];
+    str_cell_hint=vType;
+    [indicator startAnimating];
+    if ([str_cell_hint isEqualToString:@"all"]) {
+        [self PrePareData:dic_param interface:@"UnFinishTaskShenPiList"];
+    }
+    else {
+        NSString *str_title= [db fetchShiWu:vType];
+        super.title=str_title;
+        NSMutableDictionary *param=[NSMutableDictionary dictionaryWithObjectsAndKeys:str_cell_hint,@"processDefnames",@"1",@"pageIndex",nil];
+        [self LoadSubData:vType param:param];
+    }
+
+}
 /*
 -(NSComparisonResult)startTimeCompare:(NSDictionary*)otherObject {
     

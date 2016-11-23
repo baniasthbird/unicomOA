@@ -11,6 +11,7 @@
 #import "LXSegmentControllerConst.h"
 #import "UIView+Frame.h"
 #import "LXFlowLayout.h"
+//#import "UINavigationController+UINavigationControllerIOS7.h"
 
 @interface LXSegmentController ()<UICollectionViewDataSource,UICollectionViewDelegate>
 
@@ -428,6 +429,8 @@
         [self setUpTitleWidth];
         
         [self setUpAllTitle];
+     //   UIScreenEdgePanGestureRecognizer *screenEdgePanGestureRecognizer = self.navigationController.screenEdgePanGestureRecognizer;
+      //  [self.contentScrollView.panGestureRecognizer requireGestureRecognizerToFail:screenEdgePanGestureRecognizer];
         
     }
     
@@ -1185,5 +1188,7 @@
     // 记录上一次的偏移量
     _lastOffsetX = offsetX;
 }
+
+
 
 @end

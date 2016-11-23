@@ -440,6 +440,9 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     [db_local InsertIPTable:@"192.168.1.68" port:@"80" IP_Mark:@"TestServer"];
     //添加接口数据
     [db_local InsertInterFaceTable];
+    
+    [db_local InsertShiwuTable];
+    
 }
 
 //注册
