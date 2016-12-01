@@ -10,7 +10,7 @@
 #import "AddPrintRadioCell.h"
 #import "RadioBox.h"
 
-@interface PrintFileDetail()<UITableViewDelegate,UITableViewDataSource>
+@interface PrintFileDetail()<UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>
 
 @property (nonatomic,strong) UITableView *tableview;
 
@@ -42,6 +42,18 @@
     _tableview.backgroundColor=[UIColor clearColor];
     
     [self.view addSubview:_tableview];
+    
+    //侧滑返回
+    id target = self.navigationController.interactivePopGestureRecognizer.delegate;
+    
+    // handleNavigationTransition:为系统私有API,即系统自带侧滑手势的回调方法，我们在自己的手势上直接用它的回调方法
+    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:target action:@selector(handleNavigationTransition:)];
+    panGesture.delegate = self; // 设置手势代理，拦截手势触发
+    [self.view addGestureRecognizer:panGesture];
+    
+    // 一定要禁止系统自带的滑动手势
+    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+
 
 }
 
@@ -143,7 +155,9 @@
      */
 }
 
-
+-(void)handleNavigationTransition:(UIPanGestureRecognizer*)sender {
+    
+}
 
 
 @end

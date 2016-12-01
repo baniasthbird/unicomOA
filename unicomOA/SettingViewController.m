@@ -659,7 +659,11 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
 //显示缓存大小
 -(float)filePath {
     NSString *cachePath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject];
-    return [self folderSizeAtPath:cachePath];
+    NSString *docPath=[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+    float f_cache=[self folderSizeAtPath:cachePath];
+    float f_doc=[self folderSizeAtPath:docPath];
+    float f_path=f_cache+f_doc;
+    return f_path;
 }
 
 //清理缓存
@@ -677,6 +681,17 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
         }
     }
     
+    NSString *docPath=[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSArray *doc_files=[[NSFileManager defaultManager] subpathsAtPath:docPath];
+    NSLog(@"cachePath = %@", docPath);
+    for (NSString *p in doc_files) {
+        NSError *error = nil;
+        NSString *path = [docPath stringByAppendingPathComponent:p];
+        if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
+            [[NSFileManager defaultManager] removeItemAtPath:path error:&error];
+        }
+    }
+
     [self performSelectorOnMainThread:@selector(clearCacheSuccess) withObject:nil waitUntilDone:YES];
 }
 

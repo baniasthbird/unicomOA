@@ -44,6 +44,7 @@ static LeftMenuViewNew *menuView = nil;
     });
     menuView.arr_menus=arr_menu;
     menuView.menuTableView.arr_menus=arr_menu;
+    [menuView.menuTableView reloadData];
     return menuView;
 }
 

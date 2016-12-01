@@ -10,4 +10,6 @@
 
 @interface MenuTableViewCellNew : UITableViewCell
 
++ (instancetype)cellWithTable:(UITableView *)tableView withTitle:(NSString*)str_Title withCount:(NSString*)str_count withLabel:(NSString*)str_Label atIndexPath:(NSIndexPath *)indexPath;
+
 @end

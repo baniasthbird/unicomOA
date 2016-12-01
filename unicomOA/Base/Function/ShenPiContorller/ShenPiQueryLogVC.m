@@ -210,7 +210,7 @@
         NSString *str_status=@"";
         str_status=str_decision;
         //ShenPiResultCell *cell=[ShenPiResultCell cellWithTable:tableView withImage:@"headLogo.png" withName:str_name withStatus:str_status withTime:str_date ActivityName:str_activename atIndex:indexPath];
-        ShenPiResultCell *cell=[ShenPiResultCell cellWithTable:tableView withContent:str_content withName:str_name withStatus:str_status withTime:str_date ActivityName:str_activename atIndex:indexPath];
+        ShenPiResultCell *cell=[ShenPiResultCell cellWithTable:tableView withContent:str_content withName:str_name withStatus:str_status withTime:str_date ActivityName:str_activename atIndex:indexPath withCellHeight:80];
         return cell;
     }
     else {

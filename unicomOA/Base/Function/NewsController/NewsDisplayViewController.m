@@ -553,9 +553,9 @@ int i_comment_num;
     NSRange range2=[str_content rangeOfString:@"xls"];
     NSRange range3=[str_content rangeOfString:@"ppt"];
     NSRange range4=[str_content rangeOfString:@"rar"];
-   // NSRange range5=[str_content rangeOfString:@"jpg"];
+    NSRange range5=[str_content rangeOfString:@"pdf"];
     NSString *str_tmp_content=@"";
-    if (range1.length>0 || range2.length>0 || range3.length>0 || range4.length>0) {
+    if (range1.length>0 || range2.length>0 || range3.length>0 || range4.length>0 || range5.length>0) {
             
             NSLog(@"找到office文档");
             NSArray *arr_tmp= [str_content componentsSeparatedByString:@"<p"];
@@ -566,7 +566,7 @@ int i_comment_num;
                 NSRange rangesub2=[str_tmp rangeOfString:@"xls"];
                 NSRange rangesub3=[str_tmp rangeOfString:@"ppt"];
                 NSRange rangesub4=[str_tmp rangeOfString:@"rar"];
-                NSRange rangesub5=[str_tmp rangeOfString:@"jpg"];
+                NSRange rangesub5=[str_tmp rangeOfString:@"pdf"];
                 if (rangesub1.length>0 || rangesub2.length>0 || rangesub3.length > 0 || rangesub4.length > 0 || rangesub5.length > 0) {
                     // [arr_new_content removeObjectAtIndex:i];
                     NSRange rangesub_img_start= [str_tmp rangeOfString:@"<img style="];

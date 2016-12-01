@@ -442,7 +442,6 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     [db_local InsertInterFaceTable];
     
     [db_local InsertShiwuTable];
-    
 }
 
 //注册

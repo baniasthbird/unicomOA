@@ -373,6 +373,7 @@
     cell.textLabel.textAlignment=NSTextAlignmentLeft;
     cell.detailTextLabel.textColor=[UIColor colorWithRed:112/255.0f green:112/255.0f blue:112/255.0f alpha:1];
     cell.detailTextLabel.font=[UIFont systemFontOfSize:16];
+    cell.detailTextLabel.textAlignment=NSTextAlignmentLeft;
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     if (indexPath.row%2==0) {
         cell.textLabel.backgroundColor=[UIColor colorWithRed:245/255.0f green:245/255.0f blue:245/255.0f alpha:1];
@@ -535,7 +536,9 @@
             NSString *str_activename=[dic_tmp objectForKey:@"activityName"];
             NSString *str_status=@"";
             str_status=str_decision;
-            ShenPiResultCell *cell=[ShenPiResultCell cellWithTable:tableView withContent:str_content withName:str_name withStatus:str_status withTime:str_date ActivityName:str_activename atIndex:indexPath];
+            CGFloat i_contentHeight=[UILabel getHeightByWidth:Width*0.9-100 title:str_content font:[UIFont systemFontOfSize:16]];
+            CGFloat i_resultHeight=i_contentHeight+50;
+            ShenPiResultCell *cell=[ShenPiResultCell cellWithTable:tableView withContent:str_content withName:str_name withStatus:str_status withTime:str_date ActivityName:str_activename atIndex:indexPath withCellHeight:i_resultHeight];
             return cell;
             
         }
@@ -760,7 +763,16 @@
 
     }
     else {
-        return 80;
+       // return 80;
+        NSDictionary *dic_tmp=[arr_ShenPiQueryList objectAtIndex:indexPath.row];
+        NSObject *obj_content=[dic_tmp objectForKey:@"content"];
+        NSString *str_content=@"";
+        if (obj_content!=[NSNull null]) {
+            str_content=(NSString*)obj_content;
+        }
+        CGFloat i_contentHeight=[UILabel getHeightByWidth:Width*0.9-100 title:str_content font:[UIFont systemFontOfSize:16]];
+        CGFloat i_resultHeight=i_contentHeight+50;
+        return i_resultHeight;
     }
     
 }

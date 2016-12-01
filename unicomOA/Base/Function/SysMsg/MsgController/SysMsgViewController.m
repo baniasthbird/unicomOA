@@ -108,9 +108,9 @@
     SpotLight.delegate=self;
     
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]) {
-            [self presentViewController:SpotLight animated:NO completion:^{
+       //     [self presentViewController:SpotLight animated:NO completion:^{
         
-            }];
+       //     }];
     }
 
     

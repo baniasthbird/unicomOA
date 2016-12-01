@@ -98,6 +98,9 @@
     dic_param1[@"pageIndex"]=@"1";
     [self PrePareData:dic_param1 interface:@"UnFinishTaskShenPiList"];
     [self AddressList];
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]) {
+        [self UpdateFlowTable];
+    }
     //UserInfo *userInfo=[self CreateUserInfo];
     /*
        */
@@ -376,6 +379,37 @@
     
 }
 
+//每次更新系统后更新流程数据表
+-(void)UpdateFlowTable {
+    NSString *str_connection=[self GetConnectionStatus];
+    if ([str_connection isEqualToString:@"wifi"] || [str_connection isEqualToString:@"GPRS"]){
+        NSString *str_ip=@"";
+        NSString *str_port=@"";
+        NSMutableArray *t_array=[db fetchIPAddress];
+        if (t_array.count==1) {
+            NSArray *arr_ip=[t_array objectAtIndex:0];
+            str_ip=[arr_ip objectAtIndex:0];
+            str_port=[arr_ip objectAtIndex:1];
+        }
+        NSString *str_flowupdate_url=@"/default/mobile/oa/com.hnsi.erp.mobile.oa.TaskAuditSearch.countAllFlow.biz.ext";
+        NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@",@"http://",str_ip,str_port,str_flowupdate_url];
+        [_session POST:str_url parameters:nil progress:^(NSProgress * _Nonnull uploadProgress) {
+            
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            
+            NSLog(@"获取流程列表成功");
+            NSMutableArray *flowArray=[JSON objectForKey:@"Process"];
+            if (flowArray!=nil && flowArray.count>0) {
+                 [db UpdateShiWuTable:flowArray];
+            }
+            
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            
+        }];
+    }
+}
 
 //添加菊花等待图标
 -(UIActivityIndicatorView*)AddLoop {

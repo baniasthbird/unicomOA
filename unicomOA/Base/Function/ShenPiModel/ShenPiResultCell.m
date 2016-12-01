@@ -19,12 +19,12 @@
     [super awakeFromNib];
 }
 
-+(instancetype)cellWithTable:(UITableView *)tableView withContent:str_Content withName:(NSString *)str_Name withStatus:(NSString *)str_status withTime:(NSString *)str_time ActivityName:(NSString *)str_activename atIndex:(NSIndexPath *)indexPath {
++(instancetype)cellWithTable:(UITableView *)tableView withContent:str_Content withName:(NSString *)str_Name withStatus:(NSString *)str_status withTime:(NSString *)str_time ActivityName:(NSString *)str_activename atIndex:(NSIndexPath *)indexPath withCellHeight:(CGFloat)i_Height{
     static NSString *cellID=@"cellID";
     ShenPiResultCell *cell=[tableView cellForRowAtIndexPath:indexPath];
     if (!cell) {
         // cell=[ShenPiResultCell cellWithTable:tableView withImage:str_Image withName:str_Name withStatus:str_status withTime:str_time];
-        cell=[[ShenPiResultCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID withContent:str_Content withName:str_Name withStatus:str_status  ActivityName:(NSString*)str_activename withTime:str_time];
+        cell=[[ShenPiResultCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID withContent:str_Content withName:str_Name withStatus:str_status  ActivityName:(NSString*)str_activename withTime:str_time withCellHeight:(CGFloat)i_Height];
     }
     return cell;
 }
@@ -32,7 +32,7 @@
 
 
 
--(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withContent:str_Content withName:(NSString*)str_Name withStatus:(NSString*)str_status ActivityName:(NSString*)str_activename withTime:(NSString*)str_time {
+-(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withContent:str_Content withName:(NSString*)str_Name withStatus:(NSString*)str_status ActivityName:(NSString*)str_activename withTime:(NSString*)str_time withCellHeight:(CGFloat)i_Height{
     self=[super initWithStyle:style reuseIdentifier:reuseIdentifier];
     self.selectionStyle=UITableViewCellSelectionStyleNone;
     if (self) {
@@ -43,7 +43,7 @@
         lbl_name.text=str_Name;
         [lbl_name sizeToFit];
         
-        UILabel *lbl_time=[[UILabel alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width*0.5, 60, [UIScreen mainScreen].bounds.size.width*0.45, 10)];
+        UILabel *lbl_time=[[UILabel alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width*0.5, i_Height-20, [UIScreen mainScreen].bounds.size.width*0.45, 10)];
         lbl_time.textColor=[UIColor colorWithRed:177/255.0f green:177/255.0f blue:177/255.0f alpha:1];
         lbl_time.font=[UIFont systemFontOfSize:14];
         lbl_time.textAlignment=NSTextAlignmentRight;
@@ -59,7 +59,7 @@
         lbl_info.text=str_info;
        // [lbl_info sizeToFit];
         
-        UILabel *lbl_content=[[UILabel alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width*0.05+50, 25, [UIScreen mainScreen].bounds.size.width*0.9-100, 30)];
+        UILabel *lbl_content=[[UILabel alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width*0.05+50, 25, [UIScreen mainScreen].bounds.size.width*0.9-100, i_Height-55)];
         lbl_content.textColor=[UIColor blackColor];
         lbl_content.text=str_Content;
         lbl_content.textAlignment=NSTextAlignmentLeft;

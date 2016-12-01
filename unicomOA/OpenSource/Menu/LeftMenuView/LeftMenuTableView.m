@@ -34,8 +34,8 @@
         db=[DataBase sharedinstanceDB];
         self.delegate=self;
         self.dataSource=self;
-        self.rowHeight = 40;
         self.scrollEnabled = YES;
+        self.rowHeight=40;
         self.separatorColor = [UIColor clearColor];
         self.separatorStyle= UITableViewCellSeparatorStyleNone;
        
@@ -45,9 +45,6 @@
         
        // self.classSourceArr= @[@[@"Action1", @"Action2"], @[@"Action3", @"Action4", @"Action5", @"Action6"], @[@"Action7"]];
         
-        UIView *footerView = [[UIView alloc] init];
-        footerView.backgroundColor = [UIColor yellowColor];
-        self.tableFooterView = footerView;
         
         self.backgroundColor=[UIColor clearColor];
     }
@@ -67,50 +64,24 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    static NSString *cellID = @"menu";
-    MenuTableViewCellNew *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-    if (!cell) {
-        cell = [[MenuTableViewCellNew alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellID];
-    }
-    cell.backgroundColor = [UIColor clearColor];
-    [cell.textLabel setTextColor:[UIColor whiteColor]];
-    [cell.detailTextLabel setTextColor:[UIColor whiteColor]];
-    cell.detailTextLabel.font=[UIFont boldSystemFontOfSize:16];
-
-    if (_arr_menus==nil || [_arr_menus count]==0) {
-        cell.textLabel.text=@"差旅报销";
-        cell.detailTextLabel.text=@"2";
-        
-    }
-    else {
+  //  static NSString *cellID = @"menu";
+    NSString *str_label=@"";
+    NSString *str_num=@"";
+    NSString *str_title=@"";
+    if (_arr_menus!=nil || [_arr_menus count]>0) {
         NSDictionary *dic_menuItem=[_arr_menus objectAtIndex:indexPath.row];
-        NSString *str_label=[base_Func GetValueFromDic:dic_menuItem key:@"label"];
-        NSString *str_num=[base_Func GetValueFromDic:dic_menuItem key:@"num"];
-        NSString *str_title;
+        str_label=[base_Func GetValueFromDic:dic_menuItem key:@"label"];
+        str_num=[base_Func GetValueFromDic:dic_menuItem key:@"num"];
+        
         if ([str_label isEqualToString:@"all"]) {
             str_title=@"全部";
         }
         else {
             str_title=[db fetchShiWu:str_label];
         }
-        cell.textLabel.text=str_title;
-        cell.detailTextLabel.text=str_num;
-        cell.accessibilityHint=str_label;
-        //根据id比对
-        
-        
     }
-    
-   // cell.textLabel.text = _dataSourceArr[indexPath.section][indexPath.row];
- //   cell.textLabel.textColor = [UIColor blackColor];
- //   cell.textLabel.highlightedTextColor = RGBCOLOR(9, 235, 255);
- //   cell.textLabel.font = [UIFont systemFontOfSize:15];
-  //  NSString *norImage = [NSString stringWithFormat:@"%@", _imageSourceArr[indexPath.section][indexPath.row]];
-//    NSString *norImage = [NSString stringWithFormat:@"%@_nor", _imageSourceArr[indexPath.section][indexPath.row]];
-//    NSString *selImage = [NSString stringWithFormat:@"%@_press", _imageSourceArr[indexPath.section][indexPath.row]];
-  //  cell.imageView.image = [UIImage imageNamed:norImage];
-//    cell.imageView.highlightedImage = [UIImage imageNamed:selImage];
-    cell.selectedBackgroundView = [[UIView alloc] init];
+    MenuTableViewCellNew *cell = [MenuTableViewCellNew cellWithTable:tableView withTitle:str_title withCount:str_num withLabel:str_label atIndexPath:indexPath];
+ 
     return cell;
 }
 
@@ -146,7 +117,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     
-    return 20;
+    return 0;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
@@ -154,6 +125,24 @@
     UIView *view = [[UIView alloc] init];
     view.backgroundColor = [UIColor clearColor];
     return view;
+}
+
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (_arr_menus!=nil || [_arr_menus count]>0) {
+        NSDictionary *dic_menuItem=[_arr_menus objectAtIndex:indexPath.row];
+        NSString *str_label=[base_Func GetValueFromDic:dic_menuItem key:@"label"];
+        NSString *str_title=[db fetchShiWu:str_label];
+        if (str_title.length<=8) {
+            return 30;
+        }
+        else {
+            return 50;
+        }
+    }
+    else {
+        return 20;
+    }
 }
 
 @end

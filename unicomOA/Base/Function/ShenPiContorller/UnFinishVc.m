@@ -25,6 +25,7 @@
 #import "ListAllCell.h"
 #import "SwitchCell.h"
 #import "SwitchMutexCell.h"
+#import "TableFilesDetail.h"
 
 
 @interface UnFinishVc ()<UITableViewDataSource,UITableViewDelegate,ListFileControllerDelegate,PrintApplicationDetailCellDelegate,UIGestureRecognizerDelegate,AllListVCDelegate,SwitchCellDelegate,SwitchMutexCellDelegate>
@@ -503,7 +504,7 @@
     cell.textLabel.textAlignment=NSTextAlignmentLeft;
     cell.detailTextLabel.textColor=[UIColor colorWithRed:112/255.0f green:112/255.0f blue:112/255.0f alpha:1];
     cell.detailTextLabel.font=[UIFont systemFontOfSize:16];
-    cell.detailTextLabel.textAlignment=NSTextAlignmentRight;
+    cell.detailTextLabel.textAlignment=NSTextAlignmentLeft;
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     if ([dic_ctl count]==0) {
         cell.textLabel.text=@"";
@@ -516,7 +517,7 @@
                 str_index=[NSString stringWithFormat:@"%ld",(long)indexPath.section];
             }
             else if (indexPath.section==[arr_groupList count]) {
-                str_index=[NSString stringWithFormat:@"%ld",indexPath.section-1];
+                str_index=[NSString stringWithFormat:@"%ld",(long)indexPath.section-1];
             }
             NSArray *arr_tmp=  [dic_m_ctl objectForKey:str_index];
             NSDictionary  *dic_tmp=[arr_tmp objectAtIndex:indexPath.row];
@@ -614,43 +615,51 @@
                     
                 }
             }
-            else if ([str_type isEqualToString:@"tableView"]) {
-                
-                
+            else if ([str_type isEqualToString:@"tableView"] || [str_type isEqualToString:@"tableFiles"]) {
                 NSArray *arr_title=[dic_tmp objectForKey:@"tableTitle"];
-                NSArray *arr_data=[dic_tmp objectForKey:@"tableData"];
-                if ([arr_data count]>0) {
-                    NSString *str_index=[dic_tmp objectForKey:@"tableIndex"];
-                    NSObject *obj_tableData=[arr_data objectAtIndex:[str_index integerValue]];
-                    if (obj_tableData!=[NSNull null]) {
-                        NSArray *arr_tableData=(NSArray*)obj_tableData;
-                        if ([arr_tableData count]>0) {
-                            NSObject *obj_titlename=[arr_tableData objectAtIndex:0];
-                            NSString *str_titlename=@"";
-                            if (obj_titlename!=[NSNull null]) {
-                                str_titlename=(NSString*)obj_titlename;
+                NSObject *obj_data=[dic_tmp objectForKey:@"tableData"];
+                if (obj_data!=[NSNull null]) {
+                    NSArray *arr_data=[dic_tmp objectForKey:@"tableData"];
+                    if ([arr_data count]>0) {
+                        NSString *str_index=[dic_tmp objectForKey:@"tableIndex"];
+                        NSObject *obj_tableData=[arr_data objectAtIndex:[str_index integerValue]];
+                        if (obj_tableData!=[NSNull null]) {
+                            NSArray *arr_tableData=(NSArray*)obj_tableData;
+                            if ([arr_tableData count]>0) {
+                                NSObject *obj_titlename=[arr_tableData objectAtIndex:0];
+                                NSString *str_titlename=@"";
+                                if (obj_titlename!=[NSNull null]) {
+                                    str_titlename=(NSString*)obj_titlename;
+                                }
+                                NSObject *obj_title=[arr_tableData objectAtIndex:1];
+                                NSString *str_title=@"";
+                                if (obj_title!=[NSNull null]) {
+                                    str_title=(NSString*)obj_title;
+                                }
+                                NSObject *obj_label=[dic_tmp objectForKey:@"label"];
+                                NSString *str_label=@"";
+                                if (obj_label!=[NSNull null]) {
+                                    str_label=(NSString*)obj_label;
+                                }
+                                PrintFileNavCell *cell=[PrintFileNavCell cellWithTable:tb withTitle:str_title withTileName:str_index withLabel:str_label atIndexPath:indexPath];
+                                cell.file_data=arr_tableData;
+                                cell.file_title=arr_title;
+                                cell.str_label=str_label;
+                                cell.selectionStyle=UITableViewCellSelectionStyleNone;
+                                if ([str_type isEqualToString:@"tableView"]) {
+                                    cell.accessibilityHint=@"tableView";
+                                }
+                                else if ([str_type isEqualToString:@"tableFiles"]) {
+                                    cell.accessibilityHint=@"tableFiles";
+                                }
+                                return cell;
+                                
                             }
-                            NSObject *obj_title=[arr_tableData objectAtIndex:1];
-                            NSString *str_title=@"";
-                            if (obj_title!=[NSNull null]) {
-                                str_title=(NSString*)obj_title;
-                            }
-                            NSObject *obj_label=[dic_tmp objectForKey:@"label"];
-                            NSString *str_label=@"";
-                            if (obj_label!=[NSNull null]) {
-                                str_label=(NSString*)obj_label;
-                            }
-                            PrintFileNavCell *cell=[PrintFileNavCell cellWithTable:tb withTitle:str_title withTileName:str_index withLabel:str_label atIndexPath:indexPath];
-                            cell.file_data=arr_tableData;
-                            cell.file_title=arr_title;
-                            cell.str_label=str_label;
-                            cell.selectionStyle=UITableViewCellSelectionStyleNone;
-                            return cell;
-                            
                         }
                     }
                 }
             }
+            
             else if ([str_type isEqualToString:@"list"]) {
                 
                 NSString *str_label=[dic_tmp objectForKey:@"label"];
@@ -897,7 +906,13 @@
             NSString *str_activename=[dic_tmp objectForKey:@"activityName"];
             NSString *str_status=@"";
             str_status=str_decision;
-            ShenPiResultCell *cell=[ShenPiResultCell cellWithTable:tableView withContent:str_content withName:str_name withStatus:str_status withTime:str_date ActivityName:str_activename atIndex:indexPath];
+            CGFloat i_contentHeight=[UILabel getHeightByWidth:Width*0.9-100 title:str_content font:[UIFont systemFontOfSize:16]];
+            CGFloat i_resultHeight=i_contentHeight+50;
+            if (i_resultHeight<80) {
+                i_resultHeight=80;
+            }
+            
+            ShenPiResultCell *cell=[ShenPiResultCell cellWithTable:tableView withContent:str_content withName:str_name withStatus:str_status withTime:str_date ActivityName:str_activename atIndex:indexPath withCellHeight:i_resultHeight];
             cell.layer.borderWidth=1;
             cell.layer.borderColor=[[UIColor colorWithRed:231/255.0f green:231/255.0f blue:231/255.0f alpha:1] CGColor];
             cell.selectionStyle=UITableViewCellSelectionStyleNone;
@@ -1093,7 +1108,21 @@
 
     }
     else if (indexPath.section==[arr_groupList count]-1) {
-        return 80;
+        //审批记录也要根据文字大小调整 zr 1130
+        NSDictionary *dic_tmp=[arr_ShenPiQueryList objectAtIndex:indexPath.row];
+        NSObject *obj_content=[dic_tmp objectForKey:@"content"];
+        NSString *str_content=@"";
+        if (obj_content!=[NSNull null]) {
+            str_content=(NSString*)obj_content;
+        }
+        CGFloat i_contentHeight=[UILabel getHeightByWidth:Width*0.9-100 title:str_content font:[UIFont systemFontOfSize:16]];
+        CGFloat i_resultHeight=i_contentHeight+50;
+        if (i_resultHeight<80) {
+            return 80;
+        }
+        else {
+            return i_resultHeight;
+        }
     }
     else {
         return 54;
@@ -1109,7 +1138,7 @@
 
 -(void)tableView:(UITableView *)tb didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell=[tb cellForRowAtIndexPath:indexPath];
-    if ([cell isMemberOfClass:[PrintFileNavCell class]]) {
+    if ([cell.accessibilityHint isEqualToString:@"tableView"]) {
         PrintFileNavCell *cell_nav=(PrintFileNavCell*)cell;
         NSArray *tmp_Files=cell_nav.file_data;
         NSArray *tmp_Title=cell_nav.file_title;
@@ -1122,6 +1151,21 @@
             self.navigationController.delegate=nil;
         }
         [self.navigationController pushViewController:viewController animated:YES];
+    }
+    else if ([cell.accessibilityHint isEqualToString:@"tableFiles"]) {
+        PrintFileNavCell *cell_nav=(PrintFileNavCell*)cell;
+        NSArray *tmp_Files=cell_nav.file_data;
+        NSArray *tmp_Title=cell_nav.file_title;
+        NSString *str_label=cell_nav.str_label;
+        TableFilesDetail *viewController=[[TableFilesDetail alloc]init];
+        viewController.arr_data=tmp_Files;
+        viewController.arr_title=tmp_Title;
+        viewController.str_title=str_label;
+        if (f_v<9.0) {
+            self.navigationController.delegate=nil;
+        }
+        [self.navigationController pushViewController:viewController animated:YES];
+
     }
     else if ([cell.accessibilityHint isEqualToString:@"canPopList"]) {
         NSArray *arr_value=cell.accessibilityElements;
@@ -1192,22 +1236,25 @@
         for (int j=0; j<[arr_my_ctl count]; j++) {
             NSMutableDictionary *dic_sub_ctl=[arr_my_ctl objectAtIndex:j];
             NSString *str_sub_type=[dic_sub_ctl objectForKey:@"type"];
-            if ([str_sub_type isEqualToString:@"tableView"]) {
-                NSArray *arr_tabledata=[dic_sub_ctl objectForKey:@"tableData"];
-                [arr_my_ctl removeObjectAtIndex:j];
-                NSUInteger i_count=[arr_tabledata count];
-                if (i_count>0) {
-                    for (int l=0;l<i_count;l++) {
-                        /*
-                         NSMutableArray *arr_data=[[arr_tabledata objectAtIndex:l] mutableCopy];
-                         [dic_sub_ctl setValue:arr_data forKey:@"tableDataContent"];
-                         */
-                        NSString *str_index=[NSString stringWithFormat:@"%d",l];
-                        NSDictionary *dic_tmp=[dic_sub_ctl mutableCopy];
-                        [dic_tmp setValue:str_index forKey:@"tableIndex"];
-                        [arr_my_ctl insertObject:dic_tmp atIndex:j+l];
+            if ([str_sub_type isEqualToString:@"tableView"] || [str_sub_type isEqualToString:@"tableFiles"]) {
+                NSObject *obj_tabledata=[dic_sub_ctl objectForKey:@"tableData"];
+                if (obj_tabledata!=[NSNull null]) {
+                    NSArray *arr_tabledata=[dic_sub_ctl objectForKey:@"tableData"];
+                    [arr_my_ctl removeObjectAtIndex:j];
+                    NSUInteger i_count=[arr_tabledata count];
+                    if (i_count>0) {
+                        for (int l=0;l<i_count;l++) {
+                            /*
+                             NSMutableArray *arr_data=[[arr_tabledata objectAtIndex:l] mutableCopy];
+                             [dic_sub_ctl setValue:arr_data forKey:@"tableDataContent"];
+                             */
+                            NSString *str_index=[NSString stringWithFormat:@"%d",l];
+                            NSDictionary *dic_tmp=[dic_sub_ctl mutableCopy];
+                            [dic_tmp setValue:str_index forKey:@"tableIndex"];
+                            [arr_my_ctl insertObject:dic_tmp atIndex:j+l];
+                        }
+                        j=j+(int)i_count;
                     }
-                    j=j+(int)i_count;
                 }
             }
             else if ([str_sub_type isEqualToString:@"switch"]) {

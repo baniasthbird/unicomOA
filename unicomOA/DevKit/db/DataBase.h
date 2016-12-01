@@ -50,8 +50,8 @@
 //更新通讯录
 -(void)UpdateStaffTable:(NSMutableArray*)arr_staff;
 -(void)UpdateDepartmentTable:(NSMutableArray*)arr_department;
-
-
+//更新流程表
+-(void)UpdateShiWuTable:(NSMutableArray*)flowArray;
 //查询通讯录,根据条件
 -(NSMutableArray*)GetPeopleByNum:(NSString*)str_condition con2:(NSString*)str_condition2 keyword:(NSString*)str_key;
 -(NSMutableArray*)GetPeopleByName:(NSString*)str_condition keyword:(NSString *)str_key;

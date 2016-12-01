@@ -839,7 +839,7 @@
 -(void)UpdateStaffTable:(NSMutableArray *)arr_staff {
     if ([_database open]) {
         if ([arr_staff count]>0) {
-            [self DeleteStaffTable];
+            [self DeleteTable:STAFF_TABLENAME];
             
             for (int i=0;i<[arr_staff count];i++) {
                 NSDictionary *dic_tmp=[arr_staff objectAtIndex:i];
@@ -874,7 +874,7 @@
 -(void)UpdateDepartmentTable:(NSMutableArray *)arr_department {
     if ([_database open]) {
         if ([arr_department count]>0) {
-            [self DeleteDepartmentTable];
+            [self DeleteTable:DEPART_TABLENAME];
             for (int i=0;i<[arr_department count];i++) {
                 NSDictionary *dic_tmp=[arr_department objectAtIndex:i];
                 NSString *str_orgid=[_base_func GetValueFromDic:dic_tmp key:@"orgid"];
@@ -1161,6 +1161,20 @@
 
 }
 
+-(void)DeleteTable:(NSString*)str_tablename {
+    if ([_database open]) {
+        NSString *deleteSql=[NSString stringWithFormat:@"DELETE FROM %@",str_tablename];
+        
+        BOOL res=[_database executeUpdate:deleteSql];
+        if (res) {
+            NSLog(@"成功删除表");
+        }
+        else {
+            NSLog(@"删除表失败");
+        }
+    }
+}
+
 //获取接口数据表
 -(NSMutableArray*)fetchAllShiWu {
     [_database open];
@@ -1272,6 +1286,7 @@
              NSString *insertSql28=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",SHIWU_TABLENAME,SHIWU_TITLE,SHIWU_LABEL,@"固定资产报废",@"com.hnsi.erp.xmyy.gdzcbf.gdzcbfflow"];
              BOOL res28=[_database executeUpdate:insertSql28];
 
+
              if (res1 && res2 && res3 && res4 && res5 && res6 && res7 && res8 && res9 && res10 && res11 && res12 && res13 && res14 && res15 && res16 && res17 && res18 && res19 && res20 && res21 && res22 && res23 && res24 && res25 && res26 && res27 && res28) {
                  NSLog(@"成功添加数据至事务流程表");
              }
@@ -1312,6 +1327,32 @@
     }
     [_database close];
     return str_shiwu_title;
+}
+
+
+-(void)UpdateShiWuTable:(NSMutableArray*)flowArray {
+    if ([_database open]) {
+        if (flowArray.count>0) {
+            [self DeleteTable:SHIWU_TABLENAME];
+            
+            for (NSDictionary *dic_flowArray in flowArray) {
+                NSString *str_title=[dic_flowArray objectForKey:@"lable"];
+                NSString *str_key=[dic_flowArray objectForKey:@"title"];
+                if (str_title!=nil && ![str_title isEqualToString:@""] && str_key!=nil && ![str_key isEqualToString:@""]) {
+                    NSString *insertSql=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@' ) VALUES ('%@' , '%@')",SHIWU_TABLENAME,SHIWU_TITLE,SHIWU_LABEL,str_title,str_key];
+                    BOOL res=[_database executeUpdate:insertSql];
+                    if (res) {
+                        NSLog(@"成功添加数据至事务流程表");
+                    }
+                    else {
+                        NSLog(@"添加数据至事务流程表失败");
+                    }
+
+                }
+                
+            }
+        }
+    }
 }
 
 //根据条件查找某一条备忘录

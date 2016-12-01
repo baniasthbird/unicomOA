@@ -19,10 +19,11 @@
 #import "FinishVc.h"
 #import "UILabel+LabelHeightAndWidth.h"
 #import "ShenPiSubVc.h"
+#import "XSpotLight.h"
 
 
 
-@interface MyShenPiViewController()
+@interface MyShenPiViewController()<XSpotLightDelegate>
 
 /**
  *  头部筛选模块
@@ -135,7 +136,21 @@
     [_session.requestSerializer setHTTPShouldHandleCookies:YES];
     [_session.requestSerializer setTimeoutInterval:10.0f];
     
-   
+    if (_i_Class==5) {
+        XSpotLight *SpotLight=[[XSpotLight alloc]init];
+        SpotLight.messageArray=@[@"向右滑动屏幕打开审批分类菜单"];
+       
+        SpotLight.rectArray=@[[NSValue valueWithCGRect:CGRectMake(0, 0, 0, 0)]];
+        SpotLight.delegate=self;
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]) {
+            
+             [self presentViewController:SpotLight animated:NO completion:^{
+             
+             }];
+            
+        }
+
+    }
 
     
     /*
@@ -1072,6 +1087,8 @@
     [super viewDidAppear:animated];
 }
 
-
+-(void)XSpotLightClicked:(NSInteger)index {
+    
+}
 
 @end
