@@ -11,7 +11,7 @@
 
 #define LZActionSheetCancelTag 9999
 #define LZActionSheetCancelBaseTag 1000
-#define LZActionSheetBaseHeight 44
+//#define LZActionSheetBaseHeight 44
 #define LZActionSheetBaseAnimationDuration 0.25
 #define SCREEN_WIDTH  [UIScreen mainScreen].bounds.size.width
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
@@ -46,7 +46,7 @@
 }
 
 
-- (instancetype)initWithDelegate:(id)delegate cancelButtonTitle:(NSString *)cancleTitle otherButtonTitles:(NSArray *)otherButtonTitles cancelButtonColor:(UIColor *)color_cancel otherButtonColor:(UIColor *)color_other{
+- (instancetype)initWithDelegate:(id)delegate cancelButtonTitle:(NSString *)cancleTitle otherButtonTitles:(NSArray *)otherButtonTitles cancelButtonColor:(UIColor *)color_cancel otherButtonColor:(UIColor *)color_other cancelBgColor:(UIColor*)color_cancel_bg otherBgColor:(UIColor*)color_other_bg {
     if (self = [super init]) {
         
         self.btnArray = nil;
@@ -75,14 +75,15 @@
         
         // 操作action
         for (int i = 0; i < otherButtonTitles.count; i++) {
-            [self createBtnWithTitle:otherButtonTitles[i] backgroundColor:[UIColor colorWithWhite:1 alpha:1] titleColor:color_other tagIndex:i + LZActionSheetCancelBaseTag];
+            [self createBtnWithTitle:otherButtonTitles[i] backgroundColor:[UIColor colorWithWhite:1 alpha:1] titleColor:color_other bgColor:color_other_bg tagIndex:i + LZActionSheetCancelBaseTag];
         }
         
         
         // 取消action
         UIButton *cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         cancelBtn.tag = LZActionSheetCancelTag;
-        cancelBtn.backgroundColor = [UIColor colorWithWhite:1 alpha:1];
+       // cancelBtn.backgroundColor = [UIColor colorWithWhite:1 alpha:1];
+         cancelBtn.backgroundColor = color_cancel_bg;
         cancelBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
         cancelBtn.titleLabel.font = [UIFont systemFontOfSize:15.0];
         [cancelBtn setTitle:cancleTitle forState:UIControlStateNormal];
@@ -95,11 +96,11 @@
 
 }
 
-+ (instancetype)showActionSheetWithDelegate:(id)delegate cancelButtonTitle:(NSString *)cancleTitle otherButtonTitles:(NSArray *)otherButtonTitles cancelButtonColor:(UIColor *)color_cancel otherButtonColor:(UIColor *)color_other{
-    return [[self alloc] initWithDelegate:delegate cancelButtonTitle:cancleTitle otherButtonTitles:otherButtonTitles cancelButtonColor:color_cancel otherButtonColor:color_other];
++ (instancetype)showActionSheetWithDelegate:(id)delegate cancelButtonTitle:(NSString *)cancleTitle otherButtonTitles:(NSArray *)otherButtonTitles cancelButtonColor:(UIColor *)color_cancel otherButtonColor:(UIColor *)color_other cancelBgColor:(UIColor*)color_cancel_bg otherBgColor:(UIColor*)color_other_bg{
+    return [[self alloc] initWithDelegate:delegate cancelButtonTitle:cancleTitle otherButtonTitles:otherButtonTitles cancelButtonColor:color_cancel otherButtonColor:color_other cancelBgColor:color_cancel_bg otherBgColor:color_other_bg];
 }
 
-- (void)createBtnWithTitle:(NSString *)title backgroundColor:(UIColor *)backgroudColor titleColor:(UIColor *)textColor tagIndex:(NSInteger)tagIndex{
+- (void)createBtnWithTitle:(NSString *)title backgroundColor:(UIColor *)backgroudColor titleColor:(UIColor *)textColor bgColor:(UIColor*)bgColor tagIndex:(NSInteger)tagIndex {
     UIButton *actionBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     actionBtn.tag = tagIndex;
     actionBtn.titleLabel.font = [UIFont systemFontOfSize:15.0];
@@ -158,21 +159,21 @@
     self.LZActionSheet.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     self.coverView.frame = self.LZActionSheet.bounds;
     
-    CGFloat actionHeight = (self.btnArray.count + 1) * LZActionSheetBaseHeight + 5;
+    CGFloat actionHeight = (self.btnArray.count + 1) * _LZActionSheetBaseHeight + 5;
     self.actionSheet.frame = CGRectMake(0, self.av_h, SCREEN_WIDTH, actionHeight);
     
     
-    self.cancelBtn.frame = CGRectMake(0, actionHeight - LZActionSheetBaseHeight,self.av_w, LZActionSheetBaseHeight);
+    self.cancelBtn.frame = CGRectMake(0, actionHeight - _LZActionSheetBaseHeight,self.av_w, _LZActionSheetBaseHeight);
     
     
     CGFloat btnW = self.av_w;
-    CGFloat btnH = LZActionSheetBaseHeight;
+    CGFloat btnH = _LZActionSheetBaseHeight;
     CGFloat btnX = 0;
     CGFloat btnY = 0;
     for (int i = 0; i < self.btnArray.count; i++) {
         UIButton *btn = self.btnArray[i];
         UIView *divider = self.dividerArray[i];
-        btnY = LZActionSheetBaseHeight * i;
+        btnY = _LZActionSheetBaseHeight * i;
         btn.frame = CGRectMake(btnX, btnY, btnW, btnH);
         divider.frame = CGRectMake(btnX, btnH - 1, btnW, 1);
     }

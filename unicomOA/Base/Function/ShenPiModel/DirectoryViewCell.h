@@ -10,7 +10,7 @@
 
 @interface DirectoryViewCell : UITableViewCell
 
-+(instancetype)cellWithTable:(UITableView *)tableView withName:(NSString*)str_Name index:(NSIndexPath*)indexPath withPath:(NSString*)str_Path;
++(instancetype)cellWithTable:(UITableView *)tableView withName:(NSString*)str_Name index:(NSIndexPath*)indexPath withPath:(NSString*)str_Path withHeight:(CGFloat)i_Height;
 
 @property (nonatomic,strong) NSString *str_Name;
 

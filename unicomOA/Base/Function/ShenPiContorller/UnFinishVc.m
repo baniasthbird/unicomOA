@@ -26,9 +26,11 @@
 #import "SwitchCell.h"
 #import "SwitchMutexCell.h"
 #import "TableFilesDetail.h"
+#import "TableViewTitleCell.h"
+#import "TableFilesTitleCell.h"
 
 
-@interface UnFinishVc ()<UITableViewDataSource,UITableViewDelegate,ListFileControllerDelegate,PrintApplicationDetailCellDelegate,UIGestureRecognizerDelegate,AllListVCDelegate,SwitchCellDelegate,SwitchMutexCellDelegate>
+@interface UnFinishVc ()<UITableViewDataSource,UITableViewDelegate,ListFileControllerDelegate,PrintApplicationDetailCellDelegate,UIGestureRecognizerDelegate,AllListVCDelegate,SwitchCellDelegate,SwitchMutexCellDelegate,TableFilesDetailDelegate>
 
 @property (nonatomic,strong) AFHTTPSessionManager *session;
 
@@ -72,6 +74,9 @@
     
     //针对type为switchmutex的cell专门存储一个array，
     NSMutableArray *arr_cell_switchmutex;
+    
+    
+    
 }
 
 - (void)viewDidLoad {
@@ -115,6 +120,7 @@
     // 一定要禁止系统自带的滑动手势
     self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     
+    _arr_attachment_data=[[NSMutableArray alloc]init];
     
     b_Table=NO;
     
@@ -641,7 +647,7 @@
                                 if (obj_label!=[NSNull null]) {
                                     str_label=(NSString*)obj_label;
                                 }
-                                PrintFileNavCell *cell=[PrintFileNavCell cellWithTable:tb withTitle:str_title withTileName:str_index withLabel:str_label atIndexPath:indexPath];
+                                PrintFileNavCell *cell=[PrintFileNavCell cellWithTable:tb withTitle:str_title withTileName:str_index withLabel:str_label atIndexPath:indexPath Category:str_type];
                                 cell.file_data=arr_tableData;
                                 cell.file_title=arr_title;
                                 cell.str_label=str_label;
@@ -659,7 +665,25 @@
                     }
                 }
             }
-            
+            //如果是table的标题
+            else if ([str_type isEqualToString:@"tableViewTitle"]) {
+                NSObject *obj_label=[dic_tmp objectForKey:@"label"];
+                NSString *str_label=@"";
+                if (obj_label!=[NSNull null]) {
+                    str_label=(NSString*)obj_label;
+                }
+                NSRange range=[str_label rangeOfString:@"表"];
+                if (range.location==NSNotFound) {
+                    str_label=[NSString stringWithFormat:@"%@%@",str_label,@"表"];
+                }
+                TableViewTitleCell *cell=[TableViewTitleCell cellWithTable:tableView withTitle:str_label atIndexPath:indexPath];
+                return cell;
+            }
+            //如果是附件的标题
+            else if ([str_type isEqualToString:@"tableFilesTitle"]) {
+                TableFilesTitleCell *cell=[TableFilesTitleCell cellWithTable:tableView atIndexPath:indexPath];
+                return cell;
+            }
             else if ([str_type isEqualToString:@"list"]) {
                 
                 NSString *str_label=[dic_tmp objectForKey:@"label"];
@@ -1156,11 +1180,44 @@
         PrintFileNavCell *cell_nav=(PrintFileNavCell*)cell;
         NSArray *tmp_Files=cell_nav.file_data;
         NSArray *tmp_Title=cell_nav.file_title;
+        NSInteger l=0;
+        for (int i=0; i<tmp_Title.count; i++) {
+            NSString *str_title=[tmp_Title objectAtIndex:i];
+            if ([str_title isEqualToString:@"附件名称"]) {
+                l=i;
+                break;
+            }
+        }
+        NSString *str_file_name=[tmp_Files objectAtIndex:l];
         NSString *str_label=cell_nav.str_label;
         TableFilesDetail *viewController=[[TableFilesDetail alloc]init];
         viewController.arr_data=tmp_Files;
         viewController.arr_title=tmp_Title;
         viewController.str_title=str_label;
+        viewController.delegate=self;
+        
+        if ([_arr_attachment_data count]>0) {
+            for (int i=0; i<_arr_attachment_data.count; i++) {
+                NSDictionary *dic_tmp=[_arr_attachment_data objectAtIndex:i];
+                NSString *str_title_tmp=[dic_tmp objectForKey:@"title"];
+                if ([str_title_tmp isEqualToString:str_file_name]) {
+                    NSData *data_tmp=[dic_tmp objectForKey:@"data"];
+                    if (data_tmp!=nil) {
+                        viewController.partialData=data_tmp;
+                    }
+                    NSString *f_percent=[dic_tmp objectForKey:@"percent"];
+                    if (f_percent!=nil) {
+                        viewController.partialData_percent=f_percent;
+                    }
+                    NSURLSessionDownloadTask *downloadtask=[dic_tmp objectForKey:@"downloadTask"];
+                    if (downloadtask!=nil) {
+                        viewController.downloadTask=downloadtask;
+                    }
+                    break;
+
+                }
+            }
+        }
         if (f_v<9.0) {
             self.navigationController.delegate=nil;
         }
@@ -1243,17 +1300,21 @@
                     [arr_my_ctl removeObjectAtIndex:j];
                     NSUInteger i_count=[arr_tabledata count];
                     if (i_count>0) {
+                        NSDictionary *dic_title_tmp=[dic_sub_ctl mutableCopy];
+                        if ([str_sub_type isEqualToString:@"tableView"]) {
+                            [dic_title_tmp setValue:@"tableViewTitle" forKey:@"type"];
+                        }
+                        else if ([str_sub_type isEqualToString:@"tableFiles"]) {
+                            [dic_title_tmp setValue:@"tableFilesTitle" forKey:@"type"];
+                        }
+                        [arr_my_ctl insertObject:dic_title_tmp atIndex:j];
                         for (int l=0;l<i_count;l++) {
-                            /*
-                             NSMutableArray *arr_data=[[arr_tabledata objectAtIndex:l] mutableCopy];
-                             [dic_sub_ctl setValue:arr_data forKey:@"tableDataContent"];
-                             */
                             NSString *str_index=[NSString stringWithFormat:@"%d",l];
                             NSDictionary *dic_tmp=[dic_sub_ctl mutableCopy];
                             [dic_tmp setValue:str_index forKey:@"tableIndex"];
-                            [arr_my_ctl insertObject:dic_tmp atIndex:j+l];
+                            [arr_my_ctl insertObject:dic_tmp atIndex:j+l+1];
                         }
-                        j=j+(int)i_count;
+                        j=j+(int)i_count+1;
                     }
                 }
             }
@@ -1786,7 +1847,44 @@
 
 }
 
-
+-(void)PassPartialData:(NSDictionary *)dic_data {
+    NSMutableDictionary *dic_tmp=[[NSMutableDictionary alloc]init];
+    NSString *str_title=[dic_data objectForKey:@"title"];
+    NSData *data=[dic_data objectForKey:@"data"];
+    NSString *str_percent=[dic_data objectForKey:@"percent"];
+    NSURLSessionTask *tmpTask=[dic_data objectForKey:@"downloadTask"];
+    [dic_tmp setObject:str_title forKey:@"title"];
+    if (data!=nil) {
+        [dic_tmp setObject:data forKey:@"data"];
+    }
+    if (str_percent!=nil) {
+        [dic_tmp setObject:str_percent forKey:@"percent"];
+    }
+    if (tmpTask!=nil) {
+        [dic_tmp setObject:tmpTask forKey:@"downloadTask"];
+    }
+    
+    if ([_arr_attachment_data count]==0) {
+        [_arr_attachment_data addObject:dic_tmp];
+    }
+    else {
+        BOOL b_IsIn=NO;
+        for (int i=0; i<[_arr_attachment_data count]; i++) {
+                NSDictionary *dic_tmp_sub=[_arr_attachment_data objectAtIndex:i];
+                NSString *str_title=[dic_tmp_sub objectForKey:@"title"];
+                NSString *str_title_data=[dic_tmp objectForKey:@"title"];
+                if ([str_title isEqualToString:str_title_data]) {
+                    [_arr_attachment_data setObject:dic_tmp atIndexedSubscript:i];
+                    b_IsIn=YES;
+                    break;
+                }
+        }
+        if (b_IsIn==NO) {
+            [_arr_attachment_data addObject:dic_tmp];
+        }
+    }
+    
+}
 
 /*
 #pragma mark - Navigation

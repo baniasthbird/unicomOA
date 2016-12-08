@@ -36,7 +36,7 @@
     self=[super initWithStyle:style reuseIdentifier:reuseIdentifier];
     self.selectionStyle=UITableViewCellSelectionStyleNone;
     if (self) {
-        UILabel *lbl_name=[[UILabel alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width*0.05+50, 0, [UIScreen mainScreen].bounds.size.width*0.4, 20)];
+        UILabel *lbl_name=[[UILabel alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width*0.05+50, 5, [UIScreen mainScreen].bounds.size.width*0.4, 20)];
         lbl_name.textColor=[UIColor colorWithRed:94/255.0f green:145/255.0f blue:172/255.0f alpha:1];
         lbl_name.font=[UIFont systemFontOfSize:16];
         lbl_name.textAlignment=NSTextAlignmentLeft;
@@ -50,7 +50,7 @@
         lbl_time.text=str_time;
         //[lbl_time sizeToFit];
         
-        UILabel *lbl_info=[[UILabel alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width*0.5, 0, [UIScreen mainScreen].bounds.size.width*0.45, 20)];
+        UILabel *lbl_info=[[UILabel alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width*0.5, 5, [UIScreen mainScreen].bounds.size.width*0.45, 20)];
         lbl_info.textColor=[UIColor colorWithRed:94/255.0f green:145/255.0f blue:172/255.0f alpha:1];
         lbl_info.font=[UIFont systemFontOfSize:16];
         lbl_info.numberOfLines=1;

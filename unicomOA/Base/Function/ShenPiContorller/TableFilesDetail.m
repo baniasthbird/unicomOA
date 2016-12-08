@@ -14,26 +14,33 @@
 #import "UnzipedFileVC.h"
 #import "SARUnArchiveANY.h"
 #import "LZMAExtractor.h"
+#import "OAViewController.h"
+#import "WaveProgressView.h"
 
 
 
-@interface TableFilesDetail ()<UITableViewDelegate,UITableViewDataSource,UIDocumentInteractionControllerDelegate,UIGestureRecognizerDelegate> {
+
+@interface TableFilesDetail ()<UIDocumentInteractionControllerDelegate,UIGestureRecognizerDelegate> {
     UIDocumentInteractionController *_documentController;   //文档交互控制器
 }
 
-@property (nonatomic,strong) UITableView *tableview;
 
 @property (nonatomic,strong) UIButton *btn_download;
 
 //@property (nonatomic,strong) CustomSlider *slider;
 
-@property (nonatomic,strong) UIProgressView *progress_view;
-
 @property (nonatomic, assign) BOOL isDownLoad;
 
-@property (nonatomic,strong) UILabel *lbl_percentage;
+@property (nonatomic, assign) BOOL isResume;
+
 
 @property (nonatomic,strong) UIButton *btn_share;
+
+@property (nonatomic,strong) AFURLSessionManager *manager;
+
+@property (nonatomic, strong) WaveProgressView *waveProgress;
+
+
 
 @end
 
@@ -42,18 +49,22 @@
     NSString *str_file_category;
     //文件名
     NSString *str_file_name;
-    // 下载句柄
-    NSURLSessionDownloadTask *_downloadTask;
     
     int i_value;
     
-    NSURLSessionDownloadTask *downloadTask;
+    DataBase *db;
+    
+    
+    NSString *str_file_title;
+    
+    CGFloat f_percent;
+    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    DataBase *db=[DataBase sharedinstanceDB];
+    db=[DataBase sharedinstanceDB];
     
     self.title=_str_title;
     
@@ -67,14 +78,7 @@
     UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"  " style:UIBarButtonItemStyleDone target:self action:@selector(MovePreviousVc:)];
     barButtonItem.tintColor=[UIColor whiteColor];
     [barButtonItem setImage:[UIImage imageNamed:@"returnlogo.png"]];
-    self.navigationItem.leftBarButtonItem=barButtonItem;
-    
-    _tableview=[[UITableView alloc]initWithFrame:CGRectMake(0, -35, Width, Height*0.35) style:UITableViewStyleGrouped];
-    _tableview.delegate=self;
-    _tableview.dataSource=self;
-    _tableview.backgroundColor=[UIColor clearColor];
-    
-    [self.view addSubview:_tableview];
+   
     
     //NSUInteger i_count=[_arr_title count];
     NSString *str_ip=@"";
@@ -89,6 +93,7 @@
     NSInteger l1=0;
     NSInteger l2=0;
     NSInteger l3=0;
+    NSInteger l4=0;
     for (int i=0; i<_arr_title.count; i++) {
         NSString *str_title=[_arr_title objectAtIndex:i];
         if ([str_title isEqualToString:@"附件大小"]) {
@@ -99,6 +104,9 @@
         }
         else if ([str_title isEqualToString:@"附件名称"]) {
             l3=i;
+        }
+        else if ([str_title isEqualToString:@"上传时间"]) {
+            l4=i;
         }
     }
     
@@ -114,11 +122,32 @@
     }
     NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@%@",@"http://",str_ip,str_port,@"/default",str_urldata];
     
+    barButtonItem.accessibilityHint=str_url;
+    self.navigationItem.leftBarButtonItem=barButtonItem;
+    
+    UIImageView *img_Logo=[[UIImageView alloc]initWithFrame:CGRectMake(0.38*Width, 0.1223*Height, 0.2447*Width, 0.1114*Height)];
+    img_Logo.image=[UIImage imageNamed:@"filefolder.png"];
+    
+  
+    
+    UILabel *lbl_file_name=[[UILabel alloc]initWithFrame:CGRectMake(50, 0.2663*Height, Width-100, 0.03*Height)];
+    lbl_file_name.textColor=[UIColor blackColor];
+    lbl_file_name.textAlignment=NSTextAlignmentCenter;
+    lbl_file_name.font=[UIFont boldSystemFontOfSize:20];
+    lbl_file_name.text=[_arr_data objectAtIndex:l3];
+    
+    UILabel *lbl_file_time=[[UILabel alloc]initWithFrame:CGRectMake(50, 0.3116*Height, Width-100, 0.022645*Height)];
+    lbl_file_time.textColor=[UIColor colorWithRed:155/255.0f green:155/255.0f blue:155/255.0f alpha:1];
+    lbl_file_time.textAlignment=NSTextAlignmentCenter;
+    lbl_file_time.font=[UIFont systemFontOfSize:18];
+    lbl_file_time.text=[_arr_data objectAtIndex:l4];
+
     
     NSString *str_tmp_name=[_arr_data objectAtIndex:l3];
+    str_file_title=str_tmp_name;
     NSArray *arr_tmp=[str_tmp_name componentsSeparatedByString:@"."];
     if (arr_tmp!=nil && [arr_tmp count]>0) {
-        str_file_category=[arr_tmp objectAtIndex:1];
+        str_file_category=[arr_tmp lastObject];
     }
 
     NSArray *arr_link_name=[str_url_link componentsSeparatedByString:@"/"];
@@ -134,42 +163,50 @@
         _isDownLoad=NO;
     }
     
-    _btn_download=[[UIButton alloc]initWithFrame:CGRectMake(25, Height*0.5,Width-50,40)];
-    _btn_download.layer.cornerRadius=20;
-    _btn_download.backgroundColor=[UIColor colorWithRed:90/255.0f green:134/255.0f blue:243/255.0f alpha:1];
-    [_btn_download setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    _btn_download=[[UIButton alloc]initWithFrame:CGRectMake(0.0805*Width, Height*0.4248,Width*0.839,0.07156*Height)];
+    _btn_download.layer.cornerRadius=5;
+    _btn_download.backgroundColor=[UIColor whiteColor];
+    [_btn_download setTitleColor:[UIColor colorWithRed:83/255.0f green:127/255.0f blue:238/255.0f alpha:1] forState:UIControlStateNormal];
     _btn_download.titleLabel.font=[UIFont systemFontOfSize:21];
     
-    _btn_share=[[UIButton alloc]initWithFrame:CGRectMake(25, Height*0.6,Width-50,40)];
-    _btn_share.layer.cornerRadius=20;
-    _btn_share.backgroundColor=[UIColor colorWithRed:90/255.0f green:134/255.0f blue:243/255.0f alpha:1];
-    [_btn_share setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    _btn_share=[[UIButton alloc]initWithFrame:CGRectMake(0.0805*Width, Height*0.548,Width*0.839,0.07156*Height)];
+    _btn_share.layer.cornerRadius=5;
+    _btn_share.backgroundColor=[UIColor whiteColor];
+    [_btn_share setTitleColor:[UIColor colorWithRed:83/255.0f green:127/255.0f blue:238/255.0f alpha:1] forState:UIControlStateNormal];
     _btn_share.titleLabel.font=[UIFont systemFontOfSize:21];
     
     if (_isDownLoad==NO) {
         _btn_download.accessibilityHint=str_url;
-        if ([str_file_category isEqualToString:@"zip"] || [str_file_category isEqualToString:@"rar"]) {
-            [_btn_download setTitle:@"下   载" forState:UIControlStateNormal];
-            _btn_download.tag=1001;
-            [_btn_download addTarget:self action:@selector(DownLoad:) forControlEvents:UIControlEventTouchUpInside];
-        }
-        else {
-            if (i_size>2000) {
+        if (_partialData==nil) {
+            if ([str_file_category isEqualToString:@"zip"] || [str_file_category isEqualToString:@"rar"]) {
                 [_btn_download setTitle:@"下   载" forState:UIControlStateNormal];
                 _btn_download.tag=1001;
                 [_btn_download addTarget:self action:@selector(DownLoad:) forControlEvents:UIControlEventTouchUpInside];
             }
             else {
-                [_btn_download setTitle:@"查   看" forState:UIControlStateNormal];
-                _btn_download.tag=1002;
-                [_btn_download addTarget:self action:@selector(LookUp:) forControlEvents:UIControlEventTouchUpInside];
+                if (i_size>2000) {
+                    [_btn_download setTitle:@"下   载" forState:UIControlStateNormal];
+                    _btn_download.tag=1001;
+                    [_btn_download addTarget:self action:@selector(DownLoad:) forControlEvents:UIControlEventTouchUpInside];
+                }
+                else {
+                    [_btn_download setTitle:@"查   看" forState:UIControlStateNormal];
+                    _btn_download.tag=1002;
+                    [_btn_download addTarget:self action:@selector(LookUp:) forControlEvents:UIControlEventTouchUpInside];
+                }
             }
+        }
+        else {
+            _isResume=YES;
+             [_btn_download setTitle:@"继   续" forState:UIControlStateNormal];
+            _btn_download.tag=1005;
+            [_btn_download addTarget:self action:@selector(DownLoadResume:) forControlEvents:UIControlEventTouchUpInside];
         }
     }
     else {
         _btn_download.accessibilityHint=filePath;
         if ([str_file_category isEqualToString:@"zip"] || [str_file_category isEqualToString:@"rar"]) {
-            [_btn_download setTitle:@"解    压" forState:UIControlStateNormal];
+            [_btn_download setTitle:@"打    开" forState:UIControlStateNormal];
             _btn_download.tag=1003;
             [_btn_download addTarget:self action:@selector(Unzip:) forControlEvents:UIControlEventTouchUpInside];
         }
@@ -191,30 +228,45 @@
         [self.view addSubview:_btn_share];
     }
     
-    
-    _lbl_percentage=[[UILabel alloc]initWithFrame:CGRectMake(Width/2-100, Height*0.45, 200, 30)];
-    _lbl_percentage.textColor=[UIColor blackColor];
-    _lbl_percentage.font=[UIFont systemFontOfSize:15];
-    _lbl_percentage.text=@"0.0%";
-    _lbl_percentage.textAlignment=NSTextAlignmentCenter;
     if (_btn_download.tag==1001) {
-         [self.view addSubview:_lbl_percentage];
-    }
-   
-    
-    _progress_view =[[UIProgressView alloc]initWithProgressViewStyle:UIProgressViewStyleBar];
-    _progress_view.frame=CGRectMake(25, 0.4*Height, Width-50, 30);
-    _progress_view.backgroundColor=[UIColor redColor];
-    _progress_view.progressTintColor=[UIColor yellowColor];
-    _progress_view.trackTintColor=[UIColor orangeColor];
- //   [_progress_view setProgress:0 animated:YES];
-    if (i_size>2000) {
-        if (_btn_download.tag==1001) {
-            [self.view addSubview:_progress_view];
+      //   [self.view addSubview:_lbl_percentage];
+        if(!_waveProgress)
+        {
+            _waveProgress = [[WaveProgressView alloc] initWithFrame:CGRectMake(0.38*Width, 0.1223*Height, 0.2447*Width, 0.1114*Height)];
+            [self.view addSubview:_waveProgress];
+        }
+        else {
+            if (_isDownLoad==NO) {
+                [_waveProgress initWave];
+            }
         }
     }
+    else if (_btn_download.tag==1005) {
+        if(!_waveProgress)
+        {
+            _waveProgress = [[WaveProgressView alloc] initWithFrame:CGRectMake(0.38*Width, 0.1223*Height, 0.2447*Width, 0.1114*Height)];
+            CGFloat tmp_progress=[_partialData_percent floatValue];
+            _waveProgress.percent=tmp_progress;
+            NSString *str_percent=[NSString stringWithFormat:@"%.2f%@",tmp_progress*100.0,@"%"];
+            _waveProgress.centerLabel.text=str_percent;
+            [self.view addSubview:_waveProgress];
+        }
+        else {
+            if (_isDownLoad==NO) {
+                [_waveProgress initWave];
+                _waveProgress.percent=[_partialData_percent floatValue];
+                CGFloat tmp_progress=[_partialData_percent floatValue];
+                _waveProgress.percent=tmp_progress;
+                NSString *str_percent=[NSString stringWithFormat:@"%.2f%@",tmp_progress*100.0,@"%"];
+                _waveProgress.centerLabel.text=str_percent;
+            }
+        }
+    }
+    else {
+        [self.view addSubview:img_Logo];
+    }
     
-    
+   
     //侧滑返回
     id target = self.navigationController.interactivePopGestureRecognizer.delegate;
     
@@ -226,6 +278,11 @@
     // 一定要禁止系统自带的滑动手势
     self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     
+    
+    [self.view addSubview:lbl_file_name];
+    [self.view addSubview:lbl_file_time];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -234,57 +291,40 @@
 }
 
 -(void)MovePreviousVc:(UIButton*)sender {
+     NSString *str_percent=[NSString stringWithFormat:@"%f",f_percent];
+    if (_downloadTask!=nil) {
+        if (_downloadTask.error==nil) {
+            if (_downloadTask.state==NSURLSessionTaskStateSuspended) {
+                str_percent=_btn_download.accessibilityValue;
+                [_downloadTask cancelByProducingResumeData:^(NSData * _Nullable resumeData) {
+                    NSDictionary *dic_data=[NSDictionary dictionaryWithObjectsAndKeys:str_file_title,@"title",resumeData,@"data",str_percent,@"percent",_downloadTask,@"downloadTask",nil];
+                    [self.delegate PassPartialData:dic_data];
+                }];
+            }
+            else if (_downloadTask.state==NSURLSessionTaskStateRunning) {
+                NSDictionary *dic_downloadTask=[NSDictionary dictionaryWithObjectsAndKeys:str_file_title,@"title",_downloadTask,@"downloadTask",str_percent,@"percent",nil];
+                [self.delegate PassPartialData:dic_downloadTask];
+            }
+        }
+        else {
+            /*
+            NSError *error=_downloadTask.error;
+            NSDictionary *dic_error=error.userInfo;
+            NSData *resumeData=[dic_error objectForKey:@"NSURLSessionDownloadTaskResumeData"];
+            str_percent=_btn_download.accessibilityValue;
+            NSDictionary *dic_data=[NSDictionary dictionaryWithObjectsAndKeys:str_file_title,@"title",str_percent,@"percent",resumeData,@"data",nil];
+               // [self.delegate PassPartialData:dic_data];
+            */
+        }
+
+    }
+    
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+
 #pragma mark tableview方法
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [_arr_title count]-2;
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 40;
-}
-
--(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath  {
-    NSString *ID=@"cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
-    //UITableViewCell *cell=[tableView cellForRowAtIndexPath:indexPath];
-    if (cell==nil) {
-        cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:ID];
-    }
-    cell.textLabel.textAlignment=NSTextAlignmentLeft;
-    cell.textLabel.textColor=[UIColor blackColor];
-    cell.detailTextLabel.textColor=[UIColor colorWithRed:110/255.0f green:112/255.0f blue:112/255.0f alpha:1];
-    cell.textLabel.font=[UIFont systemFontOfSize:16];
-    cell.detailTextLabel.font=[UIFont systemFontOfSize:16];
-    
-    NSObject *obj_title= [_arr_title objectAtIndex:indexPath.row];
-    
-    NSString *str_title=@"";
-    if (obj_title!=[NSNull null]) {
-        str_title=(NSString*)obj_title;
-    }
-    if (![str_title isEqualToString:@"附件路径"] && ![str_title isEqualToString:@"附件大小"]) {
-        cell.textLabel.text=str_title;
-        cell.textLabel.numberOfLines=0;
-        
-        NSObject *obj_data= [_arr_data objectAtIndex:indexPath.row];
-        NSString *str_data=@"";
-        if (obj_data!=[NSNull null]) {
-            str_data=(NSString*)obj_data;
-        }
-        cell.detailTextLabel.text=str_data;
-        cell.detailTextLabel.numberOfLines=0;
-    }
-    
-    return cell;
-    
-}
 
 //下载
 -(void)DownLoad:(UIButton*)btn {
@@ -345,12 +385,15 @@
             [fileManager createDirectoryAtPath:createPath withIntermediateDirectories:YES attributes:nil error:nil];
         }
     
+       //不要每次都解压
     
+    NSArray *tempArray=[fileManager contentsOfDirectoryAtPath:createPath error:nil];
+    if (tempArray==nil || tempArray.count==0) {
         [self unArchive:str_path andPassword:nil destinationPath:createPath];
-    
-        NSArray *tempArray=[fileManager contentsOfDirectoryAtPath:createPath error:nil];
-    
-        for (NSString *fileName in tempArray) {
+        tempArray=[fileManager contentsOfDirectoryAtPath:createPath error:nil];
+    }
+
+    for (NSString *fileName in tempArray) {
             NSString *fullPath= [createPath stringByAppendingPathComponent:fileName];
             if ([fileManager fileExistsAtPath:fullPath]) {
                 //先不考虑压缩包套压缩包的问题
@@ -375,55 +418,65 @@
 
 -(void)DownLoadFile:(NSString*)str_url btn:(UIButton*)btn{
     
+    //退回后后台下载可以继续
+   // NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:str_file_name];
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    _manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    
     
     NSURL *URL=[NSURL URLWithString:str_url];
 
     NSURLRequest *request = [NSURLRequest requestWithURL:URL];
 
-    downloadTask = [manager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
-        CGFloat f_progress=1.0 * downloadProgress.completedUnitCount / downloadProgress.totalUnitCount;
-        NSLog(@"%lf",f_progress);
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.progress_view setProgress:f_progress animated:YES];
-            NSString *str_percent=[NSString stringWithFormat:@"%.2f%@",f_progress*100.0,@"%"];
-            _lbl_percentage.text=str_percent;
-        });
+    _downloadTask = [_manager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
+            CGFloat f_progress=1.0 * downloadProgress.completedUnitCount / downloadProgress.totalUnitCount;
+            f_percent=f_progress;
+            NSLog(@"%lf",f_progress);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UINavigationController *nav=(UINavigationController*)[UIApplication sharedApplication].keyWindow.rootViewController;
+                OAViewController *oa_vc=[nav.viewControllers objectAtIndex:1];
+                UINavigationController *nav_main=(UINavigationController*)[oa_vc.viewControllers objectAtIndex:0];
+                NSURL *tmp_url=request.URL;
+                if ([nav_main.viewControllers.lastObject isKindOfClass:[TableFilesDetail class]]) {
+                        [self DownLoadProgress:nav_main progress:f_progress url:tmp_url] ;
+                }
+                else {
+                    nav_main=(UINavigationController*)[oa_vc.viewControllers objectAtIndex:2];
+                    if ([nav_main.viewControllers.lastObject isKindOfClass:[TableFilesDetail class]]) {
+                        [self DownLoadProgress:nav_main progress:f_progress url:tmp_url];
+                    }
+                }
+            });
+       
     }
    destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
         NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
         return [documentsDirectoryURL URLByAppendingPathComponent:[response suggestedFilename]];
     } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
-        [btn removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
-        NSString *pathDocuments = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-        NSString *str_filePath = [pathDocuments  stringByAppendingPathComponent:str_file_name];
-        NSFileManager *manager=[[NSFileManager alloc]init];
-        if ([manager fileExistsAtPath:str_filePath]) {
-            NSLog(@"可以找到");
-            btn.accessibilityHint=str_filePath;
-        }
-       
-        if ([str_file_category isEqualToString:@"zip"] || [str_file_category isEqualToString:@"rar"]) {
-            [btn setTitle:@"解    压" forState:UIControlStateNormal];
-            [btn addTarget:self action:@selector(Unzip:) forControlEvents:UIControlEventTouchUpInside];
+        UINavigationController *nav=(UINavigationController*)[UIApplication sharedApplication].keyWindow.rootViewController;
+        OAViewController *oa_vc=[nav.viewControllers objectAtIndex:1];
+        UINavigationController *nav_main=(UINavigationController*)[oa_vc.viewControllers objectAtIndex:0];
+        NSURL *tmp_url=request.URL;
+        if ([nav_main.viewControllers.lastObject isKindOfClass:[TableFilesDetail class]])  {
+            if (filePath!=nil) {
+                [self DownLoadFinished:nav_main filePath:filePath url:tmp_url];
+            }
+            
         }
         else {
-            [btn setTitle:@"预    览" forState:UIControlStateNormal];
-            [btn addTarget:self action:@selector(FilePreview:) forControlEvents:UIControlEventTouchUpInside];
-            [_btn_share setTitle:@"其他应用打开" forState:UIControlStateNormal];
-            _btn_share.accessibilityHint=filePath.absoluteString;
-            [_btn_share addTarget:self action:@selector(FileShare:) forControlEvents:UIControlEventTouchUpInside];
-            [self.view addSubview:_btn_share];
-            [self.view setNeedsDisplay];
+            nav_main=(UINavigationController*)[oa_vc.viewControllers objectAtIndex:2];
+            if ([nav_main.viewControllers.lastObject isKindOfClass:[TableFilesDetail class]]){
+                if (filePath!=nil) {
+                    [self DownLoadFinished:nav_main filePath:filePath url:tmp_url];
+                }
+                
+            }
         }
        
-        
-        NSLog(@"File downloaded to: %@", filePath);
     }];
      
   
-    [downloadTask resume];
+    [_downloadTask resume];
     
   //  [self.progress_view setProgressWithDownloadProgressOfTask:downloadTask animated:YES];
 }
@@ -433,9 +486,19 @@
     [btn setTitle:@"继    续" forState:UIControlStateNormal];
     [btn removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
     [btn addTarget:self action:@selector(DownLoadResume:) forControlEvents:UIControlEventTouchUpInside];
-    if (downloadTask!=nil) {
-        [downloadTask suspend];
+    btn.accessibilityValue=[NSString stringWithFormat:@"%f",f_percent];
+    //NSString *str_url=btn.accessibilityHint;
+    NSLog(@"%@", _downloadTask.description);
+    if (_isResume==YES) {
+        _isResume=NO;
     }
+    
+    if (_downloadTask.state== NSURLSessionTaskStateRunning) {
+        [_downloadTask suspend];
+    }
+   
+    NSError *error=_downloadTask.error;
+    NSLog(@"%@%@",@"pause:",error.description);
 }
 
 
@@ -443,8 +506,62 @@
     [btn setTitle:@"暂   停" forState:UIControlStateNormal];
     [btn removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
     [btn addTarget:self action:@selector(DownLoadPause:) forControlEvents:UIControlEventTouchUpInside];
-    if (downloadTask!=nil) {
-        [downloadTask resume];
+    
+    if (_isResume==YES) {
+        if (_partialData) {
+            NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+            _manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+            _downloadTask =[_manager downloadTaskWithResumeData:_partialData progress:^(NSProgress * _Nonnull downloadProgress) {
+                CGFloat f_progress=1.0 * downloadProgress.completedUnitCount / downloadProgress.totalUnitCount;
+                NSLog(@"%lf",f_progress);
+                f_percent=f_progress;
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    UINavigationController *nav=(UINavigationController*)[UIApplication sharedApplication].keyWindow.rootViewController;
+                    OAViewController *oa_vc=[nav.viewControllers objectAtIndex:1];
+                    UINavigationController *nav_main=(UINavigationController*)[oa_vc.viewControllers objectAtIndex:0];
+                    NSURL *tmp_url=[NSURL URLWithString:btn.accessibilityHint];
+                    if ([nav_main.viewControllers.lastObject isKindOfClass:[TableFilesDetail class]]) {
+                        [self DownLoadProgress:nav_main progress:f_progress url:tmp_url] ;
+                    }
+                    else {
+                        nav_main=(UINavigationController*)[oa_vc.viewControllers objectAtIndex:2];
+                        if ([nav_main.viewControllers.lastObject isKindOfClass:[TableFilesDetail class]]) {
+                            [self DownLoadProgress:nav_main progress:f_progress url:tmp_url];
+                        }
+                    }
+                });
+            } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
+                NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
+                return [documentsDirectoryURL URLByAppendingPathComponent:[response suggestedFilename]];
+            } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
+                UINavigationController *nav=(UINavigationController*)[UIApplication sharedApplication].keyWindow.rootViewController;
+                OAViewController *oa_vc=[nav.viewControllers objectAtIndex:1];
+                UINavigationController *nav_main=(UINavigationController*)[oa_vc.viewControllers objectAtIndex:0];
+                NSURL *tmp_url=[NSURL URLWithString:btn.accessibilityHint];
+                if ([nav_main.viewControllers.lastObject isKindOfClass:[TableFilesDetail class]])  {
+                    if (filePath!=nil) {
+                        [self DownLoadFinished:nav_main filePath:filePath url:tmp_url];
+                    }
+                    
+                }
+                else {
+                    nav_main=(UINavigationController*)[oa_vc.viewControllers objectAtIndex:2];
+                    if ([nav_main.viewControllers.lastObject isKindOfClass:[TableFilesDetail class]]){
+                        if (filePath!=nil) {
+                            [self DownLoadFinished:nav_main filePath:filePath url:tmp_url];
+                        }
+                        
+                    }
+                }
+                
+            }];
+            
+            [_downloadTask resume];
+        }
+    }
+    
+    if (_downloadTask.state==NSURLSessionTaskStateSuspended) {
+        [_downloadTask resume];
     }
 }
 
@@ -505,6 +622,111 @@
     [unarchive decompress];
 }
 
+-(void)viewDidDisappear:(BOOL)animated {
+    NSLog(@"消失");
+    [super viewDidDisappear:animated];
+}
+
+//下载事件
+-(void)DownLoadProgress:(UINavigationController*)nav_main progress:(CGFloat)f_progress url:(NSURL*)url {
+    TableFilesDetail *vc_tb=nav_main.viewControllers.lastObject;
+    if ([self FindTheTableFilesDetail:vc_tb url:url]) {
+        NSString *str_percent=[NSString stringWithFormat:@"%.2f%@",f_progress*100.0,@"%"];
+        vc_tb.waveProgress.percent=f_progress;
+        vc_tb.waveProgress.centerLabel.text=str_percent;
+        [vc_tb.btn_download setTitle:@"暂   停" forState:UIControlStateNormal];
+        [vc_tb.btn_download removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
+        [vc_tb.btn_download addTarget:self action:@selector(DownLoadPause:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
+   
+}
+
+//下载完成事件
+-(void)DownLoadFinished:(UINavigationController*)nav_main filePath:(NSURL*)filePath url:(NSURL*)url{
+    TableFilesDetail *vc_tb=nav_main.viewControllers.lastObject;
+    if ([vc_tb FindTheTableFilesDetail:vc_tb url:url]) {
+        [vc_tb.btn_download removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
+        NSString *pathDocuments = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        NSString *str_filePath = [pathDocuments  stringByAppendingPathComponent:str_file_name];
+        NSFileManager *manager=[[NSFileManager alloc]init];
+        if ([manager fileExistsAtPath:str_filePath]) {
+            NSLog(@"可以找到");
+            vc_tb.btn_download.accessibilityHint=str_filePath;
+        }
+        
+         [vc_tb.waveProgress clearWave];
+        UIGraphicsBeginImageContext(vc_tb.waveProgress.frame.size);
+        [[UIImage imageNamed:@"filefolder"] drawInRect:vc_tb.waveProgress.bounds];
+        UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        vc_tb.waveProgress.backgroundColor = [UIColor colorWithPatternImage:image];
+       
+        
+        
+        if ([str_file_category isEqualToString:@"zip"] || [str_file_category isEqualToString:@"rar"]) {
+            [vc_tb.btn_download setTitle:@"打    开" forState:UIControlStateNormal];
+            [vc_tb.btn_download addTarget:self action:@selector(Unzip:) forControlEvents:UIControlEventTouchUpInside];
+        }
+        else {
+            _documentController=[UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:str_filePath]];
+            if (![_documentController.UTI isEqualToString:@"public.data"]) {
+                [vc_tb.btn_download setTitle:@"预    览" forState:UIControlStateNormal];
+                [vc_tb.btn_download addTarget:self action:@selector(FilePreview:) forControlEvents:UIControlEventTouchUpInside];
+            }
+            else {
+                [vc_tb.btn_download setHidden:YES];
+            }
+            [_btn_share setTitle:@"其他应用打开" forState:UIControlStateNormal];
+            _btn_share.accessibilityHint=filePath.absoluteString;
+            [_btn_share addTarget:self action:@selector(FileShare:) forControlEvents:UIControlEventTouchUpInside];
+            [self.view addSubview:_btn_share];
+            [self.view setNeedsDisplay];
+        }
+        NSLog(@"File downloaded to: %@", filePath);
+    }
+   
+}
+
+-(void)RefreshViewData {
+    [self viewDidLoad];
+    [self.view setNeedsDisplay];
+}
+
+//用url找到那个唯一的tableFilesDetail
+-(BOOL)FindTheTableFilesDetail:(TableFilesDetail*)vc_tb  url:(NSURL*)url{
+    NSInteger l=0;
+    for (int i=0; i<vc_tb.arr_title.count; i++) {
+        NSString *str_title=[vc_tb.arr_title objectAtIndex:i];
+        if ([str_title isEqualToString:@"附件路径"]) {
+            l=i;
+            break;
+        }
+    }
+    NSString *str_url_link=[vc_tb.arr_data objectAtIndex:l];
+    NSCharacterSet *whitespace = [NSCharacterSet  whitespaceAndNewlineCharacterSet];
+    NSString *str_urldata= [str_url_link stringByTrimmingCharactersInSet:whitespace];
+    NSString *str_substring=[str_urldata substringWithRange:NSMakeRange(0, 1)];
+    if (![str_substring isEqualToString:@"/"]) {
+        str_urldata=[NSString stringWithFormat:@"%@%@",@"/",str_urldata];
+    }
+    NSString *str_ip=@"";
+    NSString *str_port=@"";
+    NSMutableArray *t_array=[db fetchIPAddress];
+    if (t_array.count==1) {
+        NSArray *arr_ip=[t_array objectAtIndex:0];
+        str_ip=[arr_ip objectAtIndex:0];
+        str_port=[arr_ip objectAtIndex:1];
+    }
+    NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@%@",@"http://",str_ip,str_port,@"/default",str_urldata];
+    if ([str_url isEqualToString:url.absoluteString]) {
+        return YES;
+    }
+    else {
+        return NO;
+    }
+}
 /*
 #pragma mark - Navigation
 

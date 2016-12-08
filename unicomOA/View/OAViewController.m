@@ -20,6 +20,7 @@
 
 
 
+
 @interface OAViewController () {
     NTButton * _previousBtn;//记录前一次选中的按钮
     DataBase *db;
@@ -440,6 +441,21 @@
     NSString *currentNetWorkState=[[NSUserDefaults standardUserDefaults] objectForKey:@"connection"];
     return currentNetWorkState;
 }
+
+-(void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item {
+    /*
+    //如果点击清除缓存后
+    if ([item.title isEqualToString:@"消息"]) {
+        [self RefreshTableFilesDetail:0];
+    }
+    else if ([item.title isEqualToString:@"应用"]) {
+        [self RefreshTableFilesDetail:2];
+    }
+     */
+}
+
+
+
 /*
 #pragma mark - Navigation
 

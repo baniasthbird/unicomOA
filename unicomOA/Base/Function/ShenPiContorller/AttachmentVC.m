@@ -53,7 +53,7 @@
     // 根据生成的WKUserScript对象，初始化WKWebViewConfiguration
     [config.userContentController addUserScript:script];
     
-    NSString *jScript=  @"var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);var style = document.createElement('style');style.innerHTML = 'body { -webkit-text-size-adjust: none; }';document.getElementsByTagName('head')[0].appendChild(styl‌​e);";
+    NSString *jScript=  @"var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);";
     WKUserScript *wkUScript = [[WKUserScript alloc] initWithSource:jScript injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
     [config.userContentController addUserScript:wkUScript];
     

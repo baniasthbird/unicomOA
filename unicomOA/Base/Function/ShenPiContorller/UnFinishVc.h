@@ -29,8 +29,14 @@
 
 @property (nonatomic,strong) NSString *str_title;
 
+
+
 @property (nonatomic,strong) UserInfo *usrInfo;
 
 @property (nonatomic,strong) id<UnFinishVcDelegate> delegate;
+
+//附件传值
+@property (nonatomic,strong)  NSMutableArray *arr_attachment_data;
+
 
 @end

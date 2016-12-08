@@ -10,8 +10,10 @@
 #import "FileViewerCell.h"
 #import "DirectoryViewCell.h"
 #import "UILabel+LabelHeightAndWidth.h"
+#import "LZActionSheet.h"
+
 //解压后的文件显示
-@interface UnzipedFileVC ()<UITableViewDelegate,UITableViewDataSource,UIDocumentInteractionControllerDelegate,FileViewDelegate,UIGestureRecognizerDelegate> {
+@interface UnzipedFileVC ()<UITableViewDelegate,UITableViewDataSource,UIDocumentInteractionControllerDelegate,FileViewDelegate,UIGestureRecognizerDelegate,LZActionSheetDelegate> {
     UIDocumentInteractionController *_documentController;   //文档交互控制器
 }
 
@@ -80,8 +82,8 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *str_name=[_arr_files objectAtIndex:indexPath.row];
     CGFloat i_height=[UILabel getHeightByWidth:0.4*Width title:str_name font:[UIFont systemFontOfSize:16]];
-    if (i_height<40) {
-        return 40;
+    if (i_height<0.093*Height) {
+        return 0.093*Height;
     }
     else {
         return i_height;
@@ -93,19 +95,20 @@
     NSString *str_name=[_arr_files objectAtIndex:indexPath.row];
     NSString *str_path=[NSString stringWithFormat:@"%@/%@",_str_dir,str_name];
     CGFloat i_height=[UILabel getHeightByWidth:0.4*Width title:str_name font:[UIFont systemFontOfSize:16]];
-    if (i_height<40) {
-        i_height=40;
+    if (i_height<0.093*Height) {
+        i_height = 0.093*Height;
     }
     NSFileManager *manager=[[NSFileManager alloc]init];
     BOOL isDir = YES;
     BOOL isExist = [manager fileExistsAtPath:str_path isDirectory:&isDir];
     if (isExist==YES) {
         if (isDir==YES) {
-            DirectoryViewCell *cell=[DirectoryViewCell cellWithTable:tableView withName:str_name index:indexPath withPath:str_path];
+            DirectoryViewCell *cell=[DirectoryViewCell cellWithTable:tableView withName:str_name index:indexPath withPath:str_path withHeight:i_height];
             return cell;
         }
         else {
             FileViewerCell *cell=[FileViewerCell cellWithTable:tableView withName:str_name index:indexPath withPath:str_path withHeight:i_height];
+            cell.str_Path=str_path;
             cell.delegate=self;
             return cell;
         }
@@ -153,6 +156,24 @@
         [self.navigationController pushViewController:vc animated:YES];
         
     }
+    else if ([cell isKindOfClass:[FileViewerCell class]]) {
+        FileViewerCell *cell_file=(FileViewerCell*)cell;
+        NSString *str_path=cell_file.str_Path;
+        _documentController=[UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:str_path]];
+        if ([_documentController.UTI isEqualToString:@"public.data"]) {
+            [_documentController setDelegate:self];
+            [_documentController presentOpenInMenuFromRect:CGRectMake(0, 50, Width, 40) inView:self.view animated:YES];
+        }
+        else {
+        //    LZActionSheet *sheet=[LZActionSheet showActionSheetWithDelegate:self cancelButtonTitle:@"其他方式打开" otherButtonTitles:@[@"直接查看"] cancelButtonColor:[UIColor whiteColor] otherButtonColor:[UIColor blackColor]];
+            UIColor *color_other_bg=[UIColor colorWithRed:191/255.0f green:191/255.0f blue:191/255.0f alpha:1];
+            UIColor *color_cancel_bg=[UIColor colorWithRed:96/255.0f green:96/255.0f blue:96/255.0f alpha:1];
+            LZActionSheet *sheet=[LZActionSheet showActionSheetWithDelegate:self cancelButtonTitle:@"取消" otherButtonTitles:@[@"直接查看",@"其他方式打开"] cancelButtonColor:[UIColor whiteColor] otherButtonColor:[UIColor blackColor] cancelBgColor:color_other_bg otherBgColor:color_cancel_bg];
+            sheet.LZActionSheetBaseHeight=0.07*Height;
+            sheet.accessibilityHint=str_path;
+             [sheet show];
+        }
+    }
 }
 
 
@@ -181,6 +202,23 @@
 }
 
 -(void)handleNavigationTransition:(UIPanGestureRecognizer*)sender {
+    
+}
+
+-(void)LZActionSheet:(LZActionSheet *)actionSheet didClickedButtonAtIndex:(NSInteger)index {
+    NSString *str_path=actionSheet.accessibilityHint;
+    if (index==0) {
+        NSURL *url=[NSURL fileURLWithPath:str_path];
+        _documentController=[UIDocumentInteractionController interactionControllerWithURL:url];
+        [_documentController setDelegate:self];
+        [_documentController presentPreviewAnimated:YES];
+    }
+    else if (index==1) {
+        NSURL *url=[NSURL fileURLWithPath:str_path];
+        _documentController=[UIDocumentInteractionController interactionControllerWithURL:url];
+        [_documentController setDelegate:self];
+        [_documentController presentOpenInMenuFromRect:CGRectMake(0, 50, Width, 40) inView:self.view animated:YES];
+    }
     
 }
 /*

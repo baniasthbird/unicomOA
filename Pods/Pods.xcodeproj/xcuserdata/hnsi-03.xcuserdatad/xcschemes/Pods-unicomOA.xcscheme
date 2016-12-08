@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'E7E5832F279AB4F9FACC29B1'
-               BlueprintName = 'AFNetworking'
+               BlueprintIdentifier = '225CB2D0BF76BCFCAAB510AD7CAD56E2'
+               BlueprintName = 'Pods-unicomOA'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'libAFNetworking.a'>
+               BuildableName = 'libPods-unicomOA.a'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

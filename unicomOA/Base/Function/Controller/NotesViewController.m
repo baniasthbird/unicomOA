@@ -313,7 +313,10 @@ NSInteger i_count=0;
     
     UIColor *other_color=[UIColor colorWithRed:81/255.0f green:127/255.0f blue:238/255.0f alpha:1];
     UIColor *cancel_color=[UIColor colorWithRed:246/255.0f green:88/255.0f blue:87/255.0f alpha:1];
-    LZActionSheet *sheet=[LZActionSheet showActionSheetWithDelegate:self cancelButtonTitle:@"取消" otherButtonTitles:@[@"编辑备忘录",@"删除备忘录"] cancelButtonColor:cancel_color otherButtonColor:other_color];
+    UIColor *bg_Color=[UIColor whiteColor];
+   // LZActionSheet *sheet=[LZActionSheet showActionSheetWithDelegate:self cancelButtonTitle:@"取消" otherButtonTitles:@[@"编辑备忘录",@"删除备忘录"] cancelButtonColor:cancel_color otherButtonColor:other_color ];
+    LZActionSheet *sheet=[LZActionSheet showActionSheetWithDelegate:self cancelButtonTitle:@"取消" otherButtonTitles:@[@"编辑备忘录",@"删除备忘录"] cancelButtonColor:cancel_color otherButtonColor:other_color cancelBgColor:bg_Color otherBgColor:bg_Color];
+    sheet.LZActionSheetBaseHeight=60;
     sheet.notes_tag=cell;
     sheet.note_index=index;
     [sheet show];

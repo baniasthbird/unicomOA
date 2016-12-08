@@ -19,4 +19,7 @@
 
 @property (nonatomic,strong) BaseFunction *baseFunc;
 
+//附件传值
+@property (nonatomic,strong)  NSMutableArray *arr_attachment_data;
+
 @end

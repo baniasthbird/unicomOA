@@ -19,6 +19,6 @@
 @property (nonatomic,strong) NSString *str_label;
 
 /** 快速创建cell的方法*/
-+ (instancetype)cellWithTable:(UITableView *)tableView withTitle:(NSString*)str_Title withTileName:(NSString*)str_TitleName withLabel:(NSString*)str_Label atIndexPath:(NSIndexPath*)indexPath;
++ (instancetype)cellWithTable:(UITableView *)tableView withTitle:(NSString*)str_Title withTileName:(NSString*)str_TitleName withLabel:(NSString*)str_Label atIndexPath:(NSIndexPath*)indexPath Category:(NSString*)str_category;
 
 @end

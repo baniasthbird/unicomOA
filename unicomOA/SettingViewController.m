@@ -20,6 +20,10 @@
 #import "LoginViewController.h"
 #import "YBMonitorNetWorkState.h"
 #import "UIImageView+WebCache.h"
+#import "TableFilesDetail.h"
+#import "UnFinishVc.h"
+#import "FinishVc.h"
+#import "OAViewController.h"
 
 
 @interface SettingViewController ()<YBMonitorNetWorkStateDelegate>
@@ -692,7 +696,22 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
         }
     }
 
+    UINavigationController *nav=(UINavigationController*)[UIApplication sharedApplication].keyWindow.rootViewController;
+    OAViewController *oa_vc=[nav.viewControllers objectAtIndex:1];
+    UINavigationController *nav_main=(UINavigationController*)[oa_vc.viewControllers objectAtIndex:0];
+    if ([nav_main.viewControllers.lastObject isKindOfClass:[TableFilesDetail class]]) {
+        [self RefreshTableFilesDetail:nav_main];
+    }
+    else {
+        nav_main=(UINavigationController*)[oa_vc.viewControllers objectAtIndex:2];
+        if ([nav_main.viewControllers.lastObject isKindOfClass:[TableFilesDetail class]]){
+            [self RefreshTableFilesDetail:nav_main];
+        }
+    }
     [self performSelectorOnMainThread:@selector(clearCacheSuccess) withObject:nil waitUntilDone:YES];
+    
+    
+    
 }
 
 -(void)clearCacheSuccess {
@@ -702,6 +721,25 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
     [self.tableView reloadData];
 }
 
+-(void)RefreshTableFilesDetail:(UINavigationController*)nav_main {
+    for (int i=0; i<nav_main.viewControllers.count; i++) {
+        UIViewController *vc=(UIViewController*)[nav_main.viewControllers objectAtIndex:i];
+        if ([vc isKindOfClass:[TableFilesDetail class]]) {
+            TableFilesDetail *tb_vc=(TableFilesDetail*)vc;
+            tb_vc.partialData=nil;
+            tb_vc.partialData_percent=0;
+            [tb_vc RefreshViewData];
+        }
+        else if ([vc isKindOfClass:[UnFinishVc class]]) {
+            UnFinishVc *vc_un=(UnFinishVc*)vc;
+            [vc_un.arr_attachment_data removeAllObjects];
+        }
+        else if ([vc isKindOfClass:[FinishVc class]]) {
+            FinishVc *vc_fn=(FinishVc*)vc;
+            [vc_fn.arr_attachment_data removeAllObjects];
+        }
+    }
+}
 
 /*
  

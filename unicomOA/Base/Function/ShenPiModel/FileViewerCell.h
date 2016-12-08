@@ -21,4 +21,6 @@
 
 @property (nonatomic,strong) id<FileViewDelegate> delegate;
 
+@property (nonatomic,strong) NSString *str_Path;
+
 @end

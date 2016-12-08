@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		28C9318FDF9FBC70396481EC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FC70EFCE782F56C4A2701E0F /* libPods.a */; };
 		2C35B04C1C7062160003BF6C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C35B04B1C7062160003BF6C /* main.m */; };
 		2C35B04F1C7062160003BF6C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C35B04E1C7062160003BF6C /* AppDelegate.m */; };
 		2C35B0521C7062160003BF6C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C35B0511C7062160003BF6C /* ViewController.m */; };
@@ -248,6 +247,9 @@
 		68B38F0C1D1927D500F28034 /* ListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B38F0B1D1927D500F28034 /* ListCell.m */; };
 		68B38F0E1D19441500F28034 /* disagree.png in Resources */ = {isa = PBXBuildFile; fileRef = 68B38F0D1D19441500F28034 /* disagree.png */; };
 		68B38F101D19441C00F28034 /* agree.png in Resources */ = {isa = PBXBuildFile; fileRef = 68B38F0F1D19441C00F28034 /* agree.png */; };
+		68B624921DF53F7A00E6E22A /* TableFilesTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B624911DF53F7A00E6E22A /* TableFilesTitleCell.m */; };
+		68B624951DF53FB500E6E22A /* TableViewTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B624941DF53FB500E6E22A /* TableViewTitleCell.m */; };
+		68B6249F1DF5745900E6E22A /* WaveProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B6249E1DF5745900E6E22A /* WaveProgressView.m */; };
 		68B68E261D62B7DF003B80AC /* WeatherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B68E251D62B7DF003B80AC /* WeatherViewController.m */; };
 		68B68E2A1D62E897003B80AC /* WeatherData.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B68E291D62E897003B80AC /* WeatherData.m */; };
 		68B68E2D1D62F072003B80AC /* LocalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B68E2C1D62F072003B80AC /* LocalViewController.m */; };
@@ -345,6 +347,7 @@
 		68F8E18C1CD04409005D2727 /* alarm.png in Resources */ = {isa = PBXBuildFile; fileRef = 68F8E18B1CD04409005D2727 /* alarm.png */; };
 		68F950B61C9F9A4200CA1519 /* LZActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F950B51C9F9A4200CA1519 /* LZActionSheet.m */; };
 		68F950B91C9F9E9000CA1519 /* ChangePhoneNumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F950B81C9F9E9000CA1519 /* ChangePhoneNumViewController.m */; };
+		8A914D437CC3198A77ADF8E2 /* libPods-unicomOA.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D66A75536F87FD8244E0AEEE /* libPods-unicomOA.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -501,7 +504,6 @@
 		2CFEADEE1C7C06CB0054730E /* MenuItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenuItemModel.m; path = Base/Function/NotesModel/MenuItemModel.m; sourceTree = "<group>"; };
 		2CFEADF11C7C27020054730E /* UIViewExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIViewExt.h; path = Base/Function/NotesViews/UIViewExt.h; sourceTree = "<group>"; };
 		2CFEADF21C7C27020054730E /* UIViewExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIViewExt.m; path = Base/Function/NotesViews/UIViewExt.m; sourceTree = "<group>"; };
-		43F5D90068DFD3BE0870646D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		68008F4E1CDADE49001A4D64 /* libAFNetworking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAFNetworking.a; path = "../../../Library/Developer/Xcode/DerivedData/unicomOA-casyuftkadckdjdwnuvyvlrozdco/Build/Products/Debug-iphonesimulator/libAFNetworking.a"; sourceTree = "<group>"; };
 		68008F501CDAE27F001A4D64 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		68008F521CDAE446001A4D64 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MapViewController.h; path = Base/Function/Controller/MapViewController.h; sourceTree = "<group>"; };
@@ -885,6 +887,12 @@
 		68B38F0B1D1927D500F28034 /* ListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ListCell.m; path = Base/Function/ShenPiModel/ListCell.m; sourceTree = "<group>"; };
 		68B38F0D1D19441500F28034 /* disagree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = disagree.png; sourceTree = "<group>"; };
 		68B38F0F1D19441C00F28034 /* agree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = agree.png; sourceTree = "<group>"; };
+		68B624901DF53F7A00E6E22A /* TableFilesTitleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TableFilesTitleCell.h; path = Base/Function/ShenPiModel/TableFilesTitleCell.h; sourceTree = "<group>"; };
+		68B624911DF53F7A00E6E22A /* TableFilesTitleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TableFilesTitleCell.m; path = Base/Function/ShenPiModel/TableFilesTitleCell.m; sourceTree = "<group>"; };
+		68B624931DF53FB500E6E22A /* TableViewTitleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TableViewTitleCell.h; path = Base/Function/ShenPiModel/TableViewTitleCell.h; sourceTree = "<group>"; };
+		68B624941DF53FB500E6E22A /* TableViewTitleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TableViewTitleCell.m; path = Base/Function/ShenPiModel/TableViewTitleCell.m; sourceTree = "<group>"; };
+		68B6249D1DF5745900E6E22A /* WaveProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaveProgressView.h; sourceTree = "<group>"; };
+		68B6249E1DF5745900E6E22A /* WaveProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaveProgressView.m; sourceTree = "<group>"; };
 		68B68E241D62B7DF003B80AC /* WeatherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WeatherViewController.h; path = Base/Function/Weather/View/WeatherViewController.h; sourceTree = "<group>"; };
 		68B68E251D62B7DF003B80AC /* WeatherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WeatherViewController.m; path = Base/Function/Weather/View/WeatherViewController.m; sourceTree = "<group>"; };
 		68B68E281D62E897003B80AC /* WeatherData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WeatherData.h; path = Base/Function/Weather/Modal/WeatherData.h; sourceTree = "<group>"; };
@@ -1050,8 +1058,9 @@
 		68F950B51C9F9A4200CA1519 /* LZActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LZActionSheet.m; path = Base/Settings/Modal/LZActionSheet.m; sourceTree = "<group>"; };
 		68F950B71C9F9E9000CA1519 /* ChangePhoneNumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChangePhoneNumViewController.h; path = Base/Settings/Controller/ChangePhoneNumViewController.h; sourceTree = "<group>"; };
 		68F950B81C9F9E9000CA1519 /* ChangePhoneNumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChangePhoneNumViewController.m; path = Base/Settings/Controller/ChangePhoneNumViewController.m; sourceTree = "<group>"; };
-		CECFF6537388F9C53C969858 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		FC70EFCE782F56C4A2701E0F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		ADFFB9B029CE451B5FDD4B84 /* Pods-unicomOA.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-unicomOA.release.xcconfig"; path = "Pods/Target Support Files/Pods-unicomOA/Pods-unicomOA.release.xcconfig"; sourceTree = "<group>"; };
+		D66A75536F87FD8244E0AEEE /* libPods-unicomOA.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-unicomOA.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E8D2A2F73E068E39C63022DD /* Pods-unicomOA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-unicomOA.debug.xcconfig"; path = "Pods/Target Support Files/Pods-unicomOA/Pods-unicomOA.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1075,7 +1084,7 @@
 				684A715B1CD9DC4800A892B1 /* QuartzCore.framework in Frameworks */,
 				684A71591CD9DC4100A892B1 /* Foundation.framework in Frameworks */,
 				684A71571CD9DC2A00A892B1 /* UIKit.framework in Frameworks */,
-				28C9318FDF9FBC70396481EC /* libPods.a in Frameworks */,
+				8A914D437CC3198A77ADF8E2 /* libPods-unicomOA.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1118,9 +1127,18 @@
 				68008F4E1CDADE49001A4D64 /* libAFNetworking.a */,
 				2C9DDECE1CDA3653009462E6 /* libsqlite3.dylib */,
 				685233921CD9F9DE0093E368 /* MapKit.framework */,
-				FC70EFCE782F56C4A2701E0F /* libPods.a */,
+				D66A75536F87FD8244E0AEEE /* libPods-unicomOA.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		05138743057A18A2485649B0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E8D2A2F73E068E39C63022DD /* Pods-unicomOA.debug.xcconfig */,
+				ADFFB9B029CE451B5FDD4B84 /* Pods-unicomOA.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		2C35B03E1C7062160003BF6C = {
@@ -1134,8 +1152,8 @@
 				2C35B0631C7062160003BF6C /* unicomOATests */,
 				2C35B06E1C7062160003BF6C /* unicomOAUITests */,
 				2C35B0481C7062160003BF6C /* Products */,
-				9AFD5C2B45A9D56F1E972E44 /* Pods */,
 				04DF743BC07CED8E72262A08 /* Frameworks */,
+				05138743057A18A2485649B0 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1914,6 +1932,7 @@
 		6846D35D1CABC483004BD285 /* OpenSource */ = {
 			isa = PBXGroup;
 			children = (
+				68B6249C1DF5745900E6E22A /* WaveProgressView */,
 				6839821A1DF002EC001D3B10 /* vendor */,
 				68A9EE851DEC192000BC640A /* CustomSlider */,
 				68C8C5571DDC5011009E9824 /* Menu */,
@@ -2194,6 +2213,16 @@
 			path = OpenSource/CustomSlider;
 			sourceTree = "<group>";
 		};
+		68B6249C1DF5745900E6E22A /* WaveProgressView */ = {
+			isa = PBXGroup;
+			children = (
+				68B6249D1DF5745900E6E22A /* WaveProgressView.h */,
+				68B6249E1DF5745900E6E22A /* WaveProgressView.m */,
+			);
+			name = WaveProgressView;
+			path = OpenSource/WaveProgressView;
+			sourceTree = "<group>";
+		};
 		68B68E231D62B70C003B80AC /* Weather */ = {
 			isa = PBXGroup;
 			children = (
@@ -2416,6 +2445,10 @@
 				6839810D1DEEC386001D3B10 /* FileViewerCell.m */,
 				6839810F1DEEC9AA001D3B10 /* DirectoryViewCell.h */,
 				683981101DEEC9AA001D3B10 /* DirectoryViewCell.m */,
+				68B624901DF53F7A00E6E22A /* TableFilesTitleCell.h */,
+				68B624911DF53F7A00E6E22A /* TableFilesTitleCell.m */,
+				68B624931DF53FB500E6E22A /* TableViewTitleCell.h */,
+				68B624941DF53FB500E6E22A /* TableViewTitleCell.m */,
 			);
 			name = ShenPiViews;
 			sourceTree = "<group>";
@@ -2578,15 +2611,6 @@
 			path = image;
 			sourceTree = "<group>";
 		};
-		9AFD5C2B45A9D56F1E972E44 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				43F5D90068DFD3BE0870646D /* Pods.debug.xcconfig */,
-				CECFF6537388F9C53C969858 /* Pods.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2594,12 +2618,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2C35B0741C7062160003BF6C /* Build configuration list for PBXNativeTarget "unicomOA" */;
 			buildPhases = (
-				66B87BD1C06AD99A42CCE3F6 /* Check Pods Manifest.lock */,
+				DB1C9CE66B836EECAD02EC2C /* [CP] Check Pods Manifest.lock */,
 				2C35B0431C7062160003BF6C /* Sources */,
 				2C35B0441C7062160003BF6C /* Frameworks */,
 				2C35B0451C7062160003BF6C /* Resources */,
-				DE0C883FF05F696721989D11 /* Embed Pods Frameworks */,
-				8CEEEE9040E4E5253CEBA1A0 /* Copy Pods Resources */,
+				C2BBC5CE8068B451B4859CDC /* [CP] Embed Pods Frameworks */,
+				C785057AC9D7A66065F8C384 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2777,49 +2801,49 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		66B87BD1C06AD99A42CCE3F6 /* Check Pods Manifest.lock */ = {
+		C2BBC5CE8068B451B4859CDC /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-unicomOA/Pods-unicomOA-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		8CEEEE9040E4E5253CEBA1A0 /* Copy Pods Resources */ = {
+		C785057AC9D7A66065F8C384 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-unicomOA/Pods-unicomOA-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		DE0C883FF05F696721989D11 /* Embed Pods Frameworks */ = {
+		DB1C9CE66B836EECAD02EC2C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2849,6 +2873,7 @@
 				68A5D8021D2A037500000F95 /* LXSegmentController.m in Sources */,
 				68F950B91C9F9E9000CA1519 /* ChangePhoneNumViewController.m in Sources */,
 				6846EC511CF99C7C00A400C5 /* IQUIWindow+Hierarchy.m in Sources */,
+				68B624951DF53FB500E6E22A /* TableViewTitleCell.m in Sources */,
 				68CA754D1DE3D0B900F2FA74 /* UIView+Extend.m in Sources */,
 				689713731CE33B88008BB4AB /* NewsListCell.m in Sources */,
 				68C0A3AC1D65B9FF00985D30 /* MJPropertyKey.m in Sources */,
@@ -2900,6 +2925,7 @@
 				683982DD1DF00C5F001D3B10 /* SSZipArchive.m in Sources */,
 				2C9DDEC81CD8E257009462E6 /* RemindViewController.m in Sources */,
 				2CFEADDA1C79D9480054730E /* NewNotesViewController.m in Sources */,
+				68B624921DF53F7A00E6E22A /* TableFilesTitleCell.m in Sources */,
 				2C35B0521C7062160003BF6C /* ViewController.m in Sources */,
 				68052C2F1CAD167400A93BDA /* UIView+WZLBadge.m in Sources */,
 				6824F8E11DADC85300F98461 /* FFDropDownMenuBasedCell.m in Sources */,
@@ -2946,6 +2972,7 @@
 				6846E6DD1D518CA5005287A1 /* HcdGuideViewManager.m in Sources */,
 				68E779E31CB34A8E006DA5B9 /* CLTreeViewNode.m in Sources */,
 				2C9DDEC91CD8E257009462E6 /* LYOneViewController.m in Sources */,
+				68B6249F1DF5745900E6E22A /* WaveProgressView.m in Sources */,
 				68C0A3B11D65B9FF00985D30 /* NSObject+MJProperty.m in Sources */,
 				68EEDE791CBB911A003295EB /* UIView+SDAutoLayout.m in Sources */,
 				68ED4E521CB5076D000E8A7B /* PrintApplicationTitleCell.m in Sources */,
@@ -3231,7 +3258,7 @@
 		};
 		2C35B0751C7062160003BF6C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 43F5D90068DFD3BE0870646D /* Pods.debug.xcconfig */;
+			baseConfigurationReference = E8D2A2F73E068E39C63022DD /* Pods-unicomOA.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -3265,7 +3292,7 @@
 		};
 		2C35B0761C7062160003BF6C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CECFF6537388F9C53C969858 /* Pods.release.xcconfig */;
+			baseConfigurationReference = ADFFB9B029CE451B5FDD4B84 /* Pods-unicomOA.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
