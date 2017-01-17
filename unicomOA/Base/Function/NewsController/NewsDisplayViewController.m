@@ -548,7 +548,7 @@ int i_comment_num;
         }
         
         
-        //若源代码中存在doc、docx、ppt、pptx、xls、xlsx字样的，全部去掉其中的图片
+    //若源代码中存在doc、docx、ppt、pptx、xls、xlsx字样的，全部去掉其中的图片
     NSRange range1=[str_content rangeOfString:@"doc"];
     NSRange range2=[str_content rangeOfString:@"xls"];
     NSRange range3=[str_content rangeOfString:@"ppt"];
@@ -570,6 +570,9 @@ int i_comment_num;
                 if (rangesub1.length>0 || rangesub2.length>0 || rangesub3.length > 0 || rangesub4.length > 0 || rangesub5.length > 0) {
                     // [arr_new_content removeObjectAtIndex:i];
                     NSRange rangesub_img_start= [str_tmp rangeOfString:@"<img style="];
+                    if (rangesub_img_start.location>1000000 && rangesub_img_start.length==0) {
+                        continue;
+                    }
                     if (rangesub_img_start.length==0) {
                         rangesub_img_start=[str_tmp rangeOfString:@"<img src="];
                     }
@@ -590,6 +593,26 @@ int i_comment_num;
             str_content=[NSString stringWithFormat:@"%@%@",[arr_new_content objectAtIndex:0],str_tmp_content];
         }
 
+    //若新闻中有表格数据，宽度应自适应手机屏幕
+    NSRange rangeTable=[str_content rangeOfString:@"<table"];
+    if (rangeTable.length>0) {
+        NSString *str_table_content=[str_content substringFromIndex:rangeTable.location];
+        NSRange rangeTableEnd=[str_table_content rangeOfString:@">"];
+        str_table_content=[str_table_content substringToIndex:rangeTableEnd.location];
+        NSRange rangeTableWidth=[str_table_content rangeOfString:@"width"];
+        if (rangeTableWidth.length>0) {
+            NSString *str_TableWidth=[str_table_content substringFromIndex:rangeTableWidth.location];
+            NSRange rangeTableWidthValue1=[str_TableWidth rangeOfString:@"\""];
+            NSString *str_TableWidthSub=[str_TableWidth substringFromIndex:rangeTableWidthValue1.location+rangeTableWidthValue1.length];
+            NSRange rangeTableWidthValue2=[str_TableWidthSub rangeOfString:@"\""];
+            NSRange rangeWdithValue=NSMakeRange(rangeTableWidthValue1.location+1, rangeTableWidthValue2.location);
+            NSString *str_TableWidthValue=[str_TableWidth substringWithRange:rangeWdithValue];
+            NSString *str_TableNewWidth = [str_TableWidth stringByReplacingOccurrencesOfString:str_TableWidthValue withString:@"auto"];
+            str_content=[str_content stringByReplacingOccurrencesOfString:str_TableWidth withString:str_TableNewWidth];
+        }
+        
+        
+    }
     //替换图片源
     NSString *str_relplace1=[NSString stringWithFormat:@"%@%@:%@",@"http://",str_ip,str_port];
     NSString *str_relplace2=@"/default/ueditor/jsp/upload/";

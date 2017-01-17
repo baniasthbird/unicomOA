@@ -13,10 +13,13 @@
 #import "XZMCoreNewFeatureVC.h"
 #import "CALayer+Transition.h"
 #import "YBMonitorNetWorkState.h"
+#import "Mpush.h"
+#ifdef NSFoundationVersionNumber_iOS_9_x_Max
+#import <UserNotifications/UserNotifications.h>
+#endif
 
 
-
-@interface AppDelegate ()<YBMonitorNetWorkStateDelegate>
+@interface AppDelegate ()<YBMonitorNetWorkStateDelegate,UNUserNotificationCenterDelegate>
 
 @end
 
@@ -29,7 +32,29 @@
     // Override point for customization after application launch.
     //在这里判断是否可以系统更新
         // [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:70/255.0f green:156/255.0f blue:241/255.0f alpha:1]];
-    
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 10.0) {
+        //ios 10特有
+        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+        //必须写代理，不然无法监听通知的接收与点击
+        center.delegate= self;
+        [center requestAuthorizationWithOptions:UNAuthorizationOptionAlert | UNAuthorizationOptionBadge | UNAuthorizationOptionSound completionHandler:^(BOOL granted, NSError * _Nullable error) {
+            if (granted) {
+                //点击允许
+                NSLog(@"注册成功");
+                [center getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings * _Nonnull settings) {
+                    NSLog(@"%@",settings);
+                }];
+            } else {
+                //点击不允许
+                NSLog(@"注册失败");
+            }
+        }];
+    }
+    else if ([[UIDevice currentDevice].systemVersion floatValue] >=8.0) {
+        UIUserNotificationSettings *settings=[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge|UIUserNotificationTypeAlert|UIUserNotificationTypeSound) categories:nil];
+        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    }
+    [application registerForRemoteNotifications];
     if (iPad) {
          [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"bg_Nav-IPad.png"] forBarMetrics:UIBarMetricsDefault];
     }
@@ -40,31 +65,11 @@
     
     
     
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]) {
-        /*
-        self.window.rootViewController=[XZMCoreNewFeatureVC newFeatureVCWithImageNames:@[@"new1",@"new2",@"new3"] enterBlock:^{
-            NSLog(@"进入主页面");
-            [self enter];
-        } configuration:^(UIButton *enterButton) {
-            [enterButton setBackgroundImage:[UIImage imageNamed:@"btn_nor"] forState:UIControlStateNormal];
-            [enterButton setBackgroundImage:[UIImage imageNamed:@"btn_pressed"] forState:UIControlStateHighlighted];
-            enterButton.bounds = CGRectMake(0, 0, 120, 40);
-            enterButton.center = CGPointMake(KScreenW * 0.5, KScreenH* 0.85);
-        }];
-         */
-        
-          }
-    else {
-        /*
-        if ([launchView isMemberOfClass:[UIImageView class]]) {
-           
-        }
-        sleep(2);
-         */
-        sleep(2);
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]) {
+         sleep(2);
     }
     
-     [self enter];
+    [self enter];
     return YES;
 }
 
@@ -207,6 +212,7 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+     application.applicationIconBadgeNumber=0;
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -240,7 +246,23 @@
 
 
 -(void)application:(UIApplication*)application didReceiveRemoteNotification:(nonnull NSDictionary *)userInfo {
+    //app在前台收到推送消息调用此方法
+    // 处理推送消息
+    NSLog(@"userinfo:%@",userInfo);
     
+    NSLog(@"收到推送消息:%@",[[userInfo objectForKey:@"aps"] objectForKey:@"alert"]);
+    
+    NSString *str_msg=[[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
+    
+    [application setApplicationIconBadgeNumber:0];
+    
+    //app在前台运行时，针对推送消息单独处理
+    if (application.applicationState==UIApplicationStateActive) {
+        NSLog(@"前台运行");
+    }
+    else if (application.applicationState==UIApplicationStateBackground) {
+        
+    }
 }
 
 -(void)netWorkStateChanged {
@@ -251,6 +273,86 @@
     [defaults synchronize];
     
    // str_reachable=currentNetWorkState;
+    
+}
+
+-(void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
+    [application registerForRemoteNotifications];
+}
+
+-(void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    NSLog(@"远程通知注册失败：%@",error);
+}
+
+-(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    NSMutableString *deviceTokenString1 = [NSMutableString string];
+    const char *bytes = deviceToken.bytes;
+    NSUInteger iCount = deviceToken.length;
+    for (int i = 0; i < iCount; i++) {
+        [deviceTokenString1 appendFormat:@"%02x", bytes[i]&0x000000FF];
+    }
+    [MPUserDefaults setObject:deviceTokenString1 forKey:MPDeviceToken];
+    //  NSLog(@"%@", deviceToken);
+}
+
+-(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    NSLog(@"iOS7及以上系统，收到通知:%@", userInfo);
+    //ios7-9系统受到推送通知的方法
+    
+    completionHandler(UIBackgroundFetchResultNewData);
+}
+
+-(void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler {
+    NSDictionary *userInfo=notification.request.content.userInfo;
+    // 收到推送的请求
+    UNNotificationRequest *request = notification.request;
+    //收到推送的消息内容
+    UNNotificationContent *content = request.content;
+    //收到推送的角标
+    NSNumber *badge= content.badge;
+    //推送的消息
+    NSString *body= content.body;
+    //推送消息的声音
+    UNNotificationSound *sound = content.sound;
+    //推送消息的副标题
+    NSString *subtitle=content.subtitle;
+    //推送消息的标题
+    NSString *title=content.title;
+    
+    if ([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        NSLog(@"iOS10 前台收到远程通知:%@", userInfo);
+    }
+    else {
+        //判断为本地通知
+        NSLog(@"iOS10 收到本地通知:{\\\\nbody:%@，\\\\ntitle:%@,\\\\nsubtitle:%@,\\\\nbadge：%@，\\\\nsound：%@，\\\\nuserInfo：%@\\\\n}",body,title,subtitle,badge,sound,userInfo);
+    }
+    
+    completionHandler(UNNotificationPresentationOptionBadge|UNNotificationPresentationOptionAlert|UNNotificationPresentationOptionSound);
+    
+}
+
+// 通知的点击事件
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void(^)())completionHandler{
+    //点击通知后，显示badge，获取XXX
+    NSDictionary * userInfo = response.notification.request.content.userInfo;
+    UNNotificationRequest *request = response.notification.request; // 收到推送的请求
+    UNNotificationContent *content = request.content; // 收到推送的消息内容
+    NSNumber *badge = content.badge;  // 推送消息的角标
+    NSString *body = content.body;    // 推送消息体
+    UNNotificationSound *sound = content.sound;  // 推送消息的声音
+    NSString *subtitle = content.subtitle;  // 推送消息的副标题
+    NSString *title = content.title;  // 推送消息的标题
+    if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        NSLog(@"iOS10 收到远程通知:%@", userInfo);
+        
+    }
+    else {
+        // 判断为本地通知
+        NSLog(@"iOS10 收到本地通知:{\\\\nbody:%@，\\\\ntitle:%@,\\\\nsubtitle:%@,\\\\nbadge：%@，\\\\nsound：%@，\\\\nuserInfo：%@\\\\n}",body,title,subtitle,badge,sound,userInfo);
+    }
+    
+    // Warning: UNUserNotificationCenter delegate received call to -userNotificationCenter:didReceiveNotificationResponse:withCompletionHandler: but the completion handler was never called.
+    completionHandler();  // 系统要求执行这个方法
     
 }
 

@@ -11,12 +11,16 @@
 @class ServerIPViewController;
 @protocol ServerIPViewControllerDelegate <NSObject>
 
--(void)RefreshIP;
+-(void)RefreshIP:(NSString*)str_name pwd:(NSString*)str_pwd;
 
 @end
 
 @interface ServerIPViewController : UIViewController
 
 @property (nonatomic,strong) id<ServerIPViewControllerDelegate> delegate;
+
+@property (nonatomic,strong) NSString *str_username;
+
+@property (nonatomic,strong) NSString *str_pwd;
 
 @end

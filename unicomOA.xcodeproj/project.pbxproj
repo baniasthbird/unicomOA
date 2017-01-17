@@ -85,6 +85,12 @@
 		68052C2E1CAD167400A93BDA /* CAAnimation+WAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 68052C251CAD167400A93BDA /* CAAnimation+WAnimation.m */; };
 		68052C2F1CAD167400A93BDA /* UIView+WZLBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = 68052C2A1CAD167400A93BDA /* UIView+WZLBadge.m */; };
 		680861D61CEAD33300257AAA /* PositionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 680861D51CEAD33300257AAA /* PositionCell.m */; };
+		680BC9EA1E271A55003A7464 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 680BC9DE1E271A55003A7464 /* GCDAsyncSocket.m */; };
+		680BC9EB1E271A55003A7464 /* LFCGzipUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 680BC9E11E271A55003A7464 /* LFCGzipUtility.m */; };
+		680BC9EC1E271A55003A7464 /* RFIReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 680BC9E41E271A55003A7464 /* RFIReader.m */; };
+		680BC9ED1E271A55003A7464 /* RFIWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 680BC9E61E271A55003A7464 /* RFIWriter.m */; };
+		680BC9EE1E271A55003A7464 /* RSA.m in Sources */ = {isa = PBXBuildFile; fileRef = 680BC9E91E271A55003A7464 /* RSA.m */; };
+		680BC9F21E271B94003A7464 /* MessageDataPacketTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 680BC9F11E271B94003A7464 /* MessageDataPacketTool.m */; };
 		68109FBA1D2B9C0C009B14B7 /* ShenPiSubVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 68109FB91D2B9C0C009B14B7 /* ShenPiSubVc.m */; };
 		681F25FA1DC2DD200029AC96 /* SwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 681F25F91DC2DD200029AC96 /* SwitchCell.m */; };
 		681FFC761CC7828F0086A934 /* LXAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 681FFC731CC7828F0086A934 /* LXAlertView.m */; };
@@ -108,6 +114,7 @@
 		6826294E1D9DF5F000A50AE2 /* NewsInformTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6826294D1D9DF5F000A50AE2 /* NewsInformTableViewCell.m */; };
 		682A46D01D3F69E800FCED9E /* CDFInitialsAvatar.m in Sources */ = {isa = PBXBuildFile; fileRef = 682A46CF1D3F69E800FCED9E /* CDFInitialsAvatar.m */; };
 		682B68BC1CB64FDE002EC60F /* AddPrintRadioCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 682B68BB1CB64FDE002EC60F /* AddPrintRadioCell.m */; };
+		683045BA1DF94A1500D6C58D /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 683045B91DF94A1500D6C58D /* MBProgressHUD.m */; };
 		68377A161D61A81B007F7B75 /* iphoneqrcode.png in Resources */ = {isa = PBXBuildFile; fileRef = 68377A151D61A81B007F7B75 /* iphoneqrcode.png */; };
 		683815301CBC79F500E6AFD3 /* CarService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6838152F1CBC79F500E6AFD3 /* CarService.m */; };
 		683815331CBC7A2100E6AFD3 /* PrintService.m in Sources */ = {isa = PBXBuildFile; fileRef = 683815321CBC7A2100E6AFD3 /* PrintService.m */; };
@@ -166,7 +173,6 @@
 		683FDA031D65ABF2005B8F5D /* libAFNetworking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 68008F4E1CDADE49001A4D64 /* libAFNetworking.a */; };
 		683FDA041D65ABFB005B8F5D /* libFMDB.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6882288C1CE013A1007F5861 /* libFMDB.a */; };
 		683FDA061D65ABFF005B8F5D /* libINTULocationManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 683FDA051D65ABFF005B8F5D /* libINTULocationManager.a */; };
-		683FDA071D65AC02005B8F5D /* libMBProgressHUD.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686C80001D5C0CC00071A410 /* libMBProgressHUD.a */; };
 		683FDA0A1D65AC08005B8F5D /* libSDWebImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 686C80021D5C7D0E0071A410 /* libSDWebImage.a */; };
 		6842B3E41D6AE76800054D6A /* WeatherFileTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 6842B3E31D6AE76800054D6A /* WeatherFileTool.m */; };
 		6846D3531CAB5A1E004BD285 /* IVotingManamentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6846D3521CAB5A1E004BD285 /* IVotingManamentController.m */; };
@@ -284,6 +290,9 @@
 		68D41B0B1D4738CB0001075E /* CALayer+Transition.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D41B081D4738CB0001075E /* CALayer+Transition.m */; };
 		68D41B0C1D4738CB0001075E /* XZMCoreNewFeatureVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D41B0A1D4738CB0001075E /* XZMCoreNewFeatureVC.m */; };
 		68DA1EC61CE4640B0065517B /* newsbodcast.png in Resources */ = {isa = PBXBuildFile; fileRef = 68DA1EC51CE4640B0065517B /* newsbodcast.png */; };
+		68DE65AE1DF93EA700C2C0ED /* MBProgressHUD+MJ.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DE65A91DF93EA700C2C0ED /* MBProgressHUD+MJ.m */; };
+		68DE65AF1DF93EA700C2C0ED /* MBProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 68DE65AA1DF93EA700C2C0ED /* MBProgressHUD.bundle */; };
+		68DE65B11DF93EA700C2C0ED /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 68DE65AD1DF93EA700C2C0ED /* README.md */; };
 		68DEEBC51CBDCED6003DB7AA /* MyShenPiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DEEBC41CBDCED6003DB7AA /* MyShenPiViewController.m */; };
 		68DEEBC81CBDDA91003DB7AA /* MyShenPiCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DEEBC71CBDDA91003DB7AA /* MyShenPiCell.m */; };
 		68DEEBE31CBE30E6003DB7AA /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DEEBE21CBE30E6003DB7AA /* UserInfo.m */; };
@@ -508,6 +517,7 @@
 		68008F501CDAE27F001A4D64 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		68008F521CDAE446001A4D64 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MapViewController.h; path = Base/Function/Controller/MapViewController.h; sourceTree = "<group>"; };
 		68008F531CDAE446001A4D64 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MapViewController.m; path = Base/Function/Controller/MapViewController.m; sourceTree = "<group>"; };
+		680090D41E27828F004494E4 /* unicomOA.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = unicomOA.entitlements; sourceTree = "<group>"; };
 		68052C1A1CAD166800A93BDA /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
 		68052C1B1CAD166800A93BDA /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
 		68052C1F1CAD167400A93BDA /* UIBarButtonItem+WZLBadge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+WZLBadge.h"; sourceTree = "<group>"; };
@@ -522,6 +532,19 @@
 		68052C2B1CAD167400A93BDA /* WZLBadgeImport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WZLBadgeImport.h; sourceTree = "<group>"; };
 		680861D41CEAD33300257AAA /* PositionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PositionCell.h; path = Base/Function/NotesViews/PositionCell.h; sourceTree = "<group>"; };
 		680861D51CEAD33300257AAA /* PositionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PositionCell.m; path = Base/Function/NotesViews/PositionCell.m; sourceTree = "<group>"; };
+		680BC9DB1E26245E003A7464 /* Mpush.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Mpush.h; sourceTree = "<group>"; };
+		680BC9DD1E271A55003A7464 /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
+		680BC9DE1E271A55003A7464 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
+		680BC9E01E271A55003A7464 /* LFCGzipUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFCGzipUtility.h; sourceTree = "<group>"; };
+		680BC9E11E271A55003A7464 /* LFCGzipUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFCGzipUtility.m; sourceTree = "<group>"; };
+		680BC9E31E271A55003A7464 /* RFIReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFIReader.h; sourceTree = "<group>"; };
+		680BC9E41E271A55003A7464 /* RFIReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFIReader.m; sourceTree = "<group>"; };
+		680BC9E51E271A55003A7464 /* RFIWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFIWriter.h; sourceTree = "<group>"; };
+		680BC9E61E271A55003A7464 /* RFIWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFIWriter.m; sourceTree = "<group>"; };
+		680BC9E81E271A55003A7464 /* RSA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSA.h; sourceTree = "<group>"; };
+		680BC9E91E271A55003A7464 /* RSA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSA.m; sourceTree = "<group>"; };
+		680BC9F01E271B94003A7464 /* MessageDataPacketTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageDataPacketTool.h; sourceTree = "<group>"; };
+		680BC9F11E271B94003A7464 /* MessageDataPacketTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageDataPacketTool.m; sourceTree = "<group>"; };
 		68109FB81D2B9C0C009B14B7 /* ShenPiSubVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShenPiSubVc.h; path = Base/Function/ShenPiContorller/ShenPiSubVc.h; sourceTree = "<group>"; };
 		68109FB91D2B9C0C009B14B7 /* ShenPiSubVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShenPiSubVc.m; path = Base/Function/ShenPiContorller/ShenPiSubVc.m; sourceTree = "<group>"; };
 		681F25F81DC2DD200029AC96 /* SwitchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SwitchCell.h; path = Base/Function/ShenPiModel/SwitchCell.h; sourceTree = "<group>"; };
@@ -567,6 +590,8 @@
 		682A46CF1D3F69E800FCED9E /* CDFInitialsAvatar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDFInitialsAvatar.m; sourceTree = "<group>"; };
 		682B68BA1CB64FDE002EC60F /* AddPrintRadioCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddPrintRadioCell.h; path = Base/Function/ShenPiModel/AddPrintRadioCell.h; sourceTree = "<group>"; };
 		682B68BB1CB64FDE002EC60F /* AddPrintRadioCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddPrintRadioCell.m; path = Base/Function/ShenPiModel/AddPrintRadioCell.m; sourceTree = "<group>"; };
+		683045B81DF94A1500D6C58D /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		683045B91DF94A1500D6C58D /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		68377A151D61A81B007F7B75 /* iphoneqrcode.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iphoneqrcode.png; sourceTree = "<group>"; };
 		6838152E1CBC79F500E6AFD3 /* CarService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CarService.h; path = Base/Function/ShenPiModel/CarService.h; sourceTree = "<group>"; };
 		6838152F1CBC79F500E6AFD3 /* CarService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CarService.m; path = Base/Function/ShenPiModel/CarService.m; sourceTree = "<group>"; };
@@ -963,6 +988,10 @@
 		68D41B091D4738CB0001075E /* XZMCoreNewFeatureVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XZMCoreNewFeatureVC.h; sourceTree = "<group>"; };
 		68D41B0A1D4738CB0001075E /* XZMCoreNewFeatureVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XZMCoreNewFeatureVC.m; sourceTree = "<group>"; };
 		68DA1EC51CE4640B0065517B /* newsbodcast.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newsbodcast.png; sourceTree = "<group>"; };
+		68DE65A81DF93EA700C2C0ED /* MBProgressHUD+MJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+MJ.h"; sourceTree = "<group>"; };
+		68DE65A91DF93EA700C2C0ED /* MBProgressHUD+MJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+MJ.m"; sourceTree = "<group>"; };
+		68DE65AA1DF93EA700C2C0ED /* MBProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MBProgressHUD.bundle; sourceTree = "<group>"; };
+		68DE65AD1DF93EA700C2C0ED /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		68DEEBC31CBDCED6003DB7AA /* MyShenPiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyShenPiViewController.h; path = Base/Function/ShenPiContorller/MyShenPiViewController.h; sourceTree = "<group>"; };
 		68DEEBC41CBDCED6003DB7AA /* MyShenPiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyShenPiViewController.m; path = Base/Function/ShenPiContorller/MyShenPiViewController.m; sourceTree = "<group>"; };
 		68DEEBC61CBDDA91003DB7AA /* MyShenPiCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyShenPiCell.h; path = Base/Function/ShenPiModel/MyShenPiCell.h; sourceTree = "<group>"; };
@@ -1072,7 +1101,6 @@
 				683982191DF0017D001D3B10 /* libz.1.dylib in Frameworks */,
 				683980A21DEEA353001D3B10 /* libz.tbd in Frameworks */,
 				683FDA0A1D65AC08005B8F5D /* libSDWebImage.a in Frameworks */,
-				683FDA071D65AC02005B8F5D /* libMBProgressHUD.a in Frameworks */,
 				683FDA061D65ABFF005B8F5D /* libINTULocationManager.a in Frameworks */,
 				683FDA041D65ABFB005B8F5D /* libFMDB.a in Frameworks */,
 				683FDA031D65ABF2005B8F5D /* libAFNetworking.a in Frameworks */,
@@ -1170,6 +1198,7 @@
 		2C35B0491C7062160003BF6C /* unicomOA */ = {
 			isa = PBXGroup;
 			children = (
+				680090D41E27828F004494E4 /* unicomOA.entitlements */,
 				68212DF01CF3EA6A0022955A /* Thunder Song.m4r */,
 				2C703CEB1CDECCAA00C7EF77 /* DevKit */,
 				68A349B31CD8A9FF00E2851B /* MessageViewBase */,
@@ -1203,6 +1232,7 @@
 				2CFEADA41C769EBF0054730E /* friends.plist */,
 				2CFEADA51C769EBF0054730E /* messages.plist */,
 				2C703CF31CDEE0E900C7EF77 /* DBDef.h */,
+				680BC9DB1E26245E003A7464 /* Mpush.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1251,6 +1281,7 @@
 		2C703CEB1CDECCAA00C7EF77 /* DevKit */ = {
 			isa = PBXGroup;
 			children = (
+				680BC9EF1E271B94003A7464 /* MessageDataPacketTool */,
 				6853A3F61D2679C500AE5145 /* Base */,
 				2C703CEC1CDECCB800C7EF77 /* db */,
 			);
@@ -1568,6 +1599,58 @@
 				68052C2A1CAD167400A93BDA /* UIView+WZLBadge.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		680BC9DC1E271A55003A7464 /* CocoaAsyncSocket */ = {
+			isa = PBXGroup;
+			children = (
+				680BC9DD1E271A55003A7464 /* GCDAsyncSocket.h */,
+				680BC9DE1E271A55003A7464 /* GCDAsyncSocket.m */,
+			);
+			name = CocoaAsyncSocket;
+			path = OpenSource/CocoaAsyncSocket;
+			sourceTree = "<group>";
+		};
+		680BC9DF1E271A55003A7464 /* LFCGzipUtility */ = {
+			isa = PBXGroup;
+			children = (
+				680BC9E01E271A55003A7464 /* LFCGzipUtility.h */,
+				680BC9E11E271A55003A7464 /* LFCGzipUtility.m */,
+			);
+			name = LFCGzipUtility;
+			path = OpenSource/LFCGzipUtility;
+			sourceTree = "<group>";
+		};
+		680BC9E21E271A55003A7464 /* rfi_reader */ = {
+			isa = PBXGroup;
+			children = (
+				680BC9E31E271A55003A7464 /* RFIReader.h */,
+				680BC9E41E271A55003A7464 /* RFIReader.m */,
+				680BC9E51E271A55003A7464 /* RFIWriter.h */,
+				680BC9E61E271A55003A7464 /* RFIWriter.m */,
+			);
+			name = rfi_reader;
+			path = OpenSource/rfi_reader;
+			sourceTree = "<group>";
+		};
+		680BC9E71E271A55003A7464 /* RSA */ = {
+			isa = PBXGroup;
+			children = (
+				680BC9E81E271A55003A7464 /* RSA.h */,
+				680BC9E91E271A55003A7464 /* RSA.m */,
+			);
+			name = RSA;
+			path = OpenSource/RSA;
+			sourceTree = "<group>";
+		};
+		680BC9EF1E271B94003A7464 /* MessageDataPacketTool */ = {
+			isa = PBXGroup;
+			children = (
+				680BC9F01E271B94003A7464 /* MessageDataPacketTool.h */,
+				680BC9F11E271B94003A7464 /* MessageDataPacketTool.m */,
+			);
+			name = MessageDataPacketTool;
+			path = DevKit/MessageDataPacketTool;
 			sourceTree = "<group>";
 		};
 		681FFC711CC7828F0086A934 /* LXAlertView */ = {
@@ -1932,6 +2015,11 @@
 		6846D35D1CABC483004BD285 /* OpenSource */ = {
 			isa = PBXGroup;
 			children = (
+				680BC9DC1E271A55003A7464 /* CocoaAsyncSocket */,
+				680BC9DF1E271A55003A7464 /* LFCGzipUtility */,
+				680BC9E21E271A55003A7464 /* rfi_reader */,
+				680BC9E71E271A55003A7464 /* RSA */,
+				68DE65A71DF93EA700C2C0ED /* MBProgressHUD-MJ */,
 				68B6249C1DF5745900E6E22A /* WaveProgressView */,
 				6839821A1DF002EC001D3B10 /* vendor */,
 				68A9EE851DEC192000BC640A /* CustomSlider */,
@@ -2367,6 +2455,20 @@
 			path = Category;
 			sourceTree = "<group>";
 		};
+		68DE65A71DF93EA700C2C0ED /* MBProgressHUD-MJ */ = {
+			isa = PBXGroup;
+			children = (
+				683045B81DF94A1500D6C58D /* MBProgressHUD.h */,
+				683045B91DF94A1500D6C58D /* MBProgressHUD.m */,
+				68DE65A81DF93EA700C2C0ED /* MBProgressHUD+MJ.h */,
+				68DE65A91DF93EA700C2C0ED /* MBProgressHUD+MJ.m */,
+				68DE65AA1DF93EA700C2C0ED /* MBProgressHUD.bundle */,
+				68DE65AD1DF93EA700C2C0ED /* README.md */,
+			);
+			name = "MBProgressHUD-MJ";
+			path = "OpenSource/MBProgressHUD-MJ";
+			sourceTree = "<group>";
+		};
 		68E779BB1CB34A72006DA5B9 /* CLTreeView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2682,6 +2784,14 @@
 					2C35B0461C7062160003BF6C = {
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = K2XM9WW286;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					2C35B05F1C7062160003BF6C = {
 						CreatedOnToolsVersion = 7.2.1;
@@ -2719,6 +2829,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				68F8E1791CD042AA005D2727 /* bg_Nav.png in Resources */,
+				68DE65AF1DF93EA700C2C0ED /* MBProgressHUD.bundle in Resources */,
 				68B6DE741D42113C00EC3889 /* unfinish.png in Resources */,
 				68F8E1841CD042AA005D2727 /* position.png in Resources */,
 				68B38F071D18E03300F28034 /* down_arrow_blue@2x.png in Resources */,
@@ -2887,7 +2998,9 @@
 				2CFEAD241C717F910054730E /* MessageViewController.m in Sources */,
 				2CFEAD331C7183930054730E /* BaseNavigationViewController.m in Sources */,
 				6854379D1D7E995700A0F4FA /* RAYNewFunctionGuideVC.m in Sources */,
+				680BC9ED1E271A55003A7464 /* RFIWriter.m in Sources */,
 				68D05CBA1C9791000039220F /* PasswordViewController.m in Sources */,
+				683045BA1DF94A1500D6C58D /* MBProgressHUD.m in Sources */,
 				6846D3591CABA8AC004BD285 /* IVotingDisplayController.m in Sources */,
 				6846EC4E1CF99C7C00A400C5 /* IQUITextFieldView+Additions.m in Sources */,
 				68052C2E1CAD167400A93BDA /* CAAnimation+WAnimation.m in Sources */,
@@ -2908,6 +3021,7 @@
 				6824F8E21DADC85300F98461 /* FFDropDownMenuBasedModel.m in Sources */,
 				683982D21DF00C5F001D3B10 /* aestab.c in Sources */,
 				6884D2D01CD98B4A006215E5 /* UIView+MGBadgeView.m in Sources */,
+				680BC9EE1E271A55003A7464 /* RSA.m in Sources */,
 				68EEDE571CBB2E19003295EB /* DYCAddress.m in Sources */,
 				2CB7DB651CA3C5970057633D /* MemberInfoViewController.m in Sources */,
 				6824F8E41DADC85300F98461 /* FFDropDownMenuModel.m in Sources */,
@@ -2917,11 +3031,13 @@
 				683982DA1DF00C5F001D3B10 /* mztools.c in Sources */,
 				68D05CC71C97F6470039220F /* AboutViewController.m in Sources */,
 				68579FA61CC0C21100597FBD /* CarModel.m in Sources */,
+				680BC9EC1E271A55003A7464 /* RFIReader.m in Sources */,
 				683982941DF002ED001D3B10 /* 7zStream.c in Sources */,
 				6822656F1C96B4C400AB29C0 /* NewsSettingViewController.m in Sources */,
 				2CFEADE61C7C05830054730E /* LYButton.m in Sources */,
 				2CB7DB5F1CA278C00057633D /* SMSCodeViewController.m in Sources */,
 				2C35B0D21C7157120003BF6C /* settingPasswordViewController.m in Sources */,
+				680BC9EB1E271A55003A7464 /* LFCGzipUtility.m in Sources */,
 				683982DD1DF00C5F001D3B10 /* SSZipArchive.m in Sources */,
 				2C9DDEC81CD8E257009462E6 /* RemindViewController.m in Sources */,
 				2CFEADDA1C79D9480054730E /* NewNotesViewController.m in Sources */,
@@ -2931,8 +3047,10 @@
 				6824F8E11DADC85300F98461 /* FFDropDownMenuBasedCell.m in Sources */,
 				2CFEAD2A1C717FCB0054730E /* FunctionViewController.m in Sources */,
 				683982D81DF00C5F001D3B10 /* sha1.c in Sources */,
+				680BC9F21E271B94003A7464 /* MessageDataPacketTool.m in Sources */,
 				683982961DF002ED001D3B10 /* CpuArch.c in Sources */,
 				68D41B0C1D4738CB0001075E /* XZMCoreNewFeatureVC.m in Sources */,
+				68DE65B11DF93EA700C2C0ED /* README.md in Sources */,
 				2CFEADEF1C7C06CB0054730E /* CellModel.m in Sources */,
 				684E0C531D363B9B008088FD /* BaseViewController.m in Sources */,
 				2CFEADBC1C76A6440054730E /* HeadView.m in Sources */,
@@ -2949,6 +3067,7 @@
 				2C35B04C1C7062160003BF6C /* main.m in Sources */,
 				2CFEADD71C79CCDE0054730E /* NotesViewController.m in Sources */,
 				68A9EE841DEBD91200BC640A /* AttachmentVC.m in Sources */,
+				68DE65AE1DF93EA700C2C0ED /* MBProgressHUD+MJ.m in Sources */,
 				6846EC531CF99C7C00A400C5 /* IQKeyboardReturnKeyHandler.m in Sources */,
 				6839828F1DF002ED001D3B10 /* 7zBuf.c in Sources */,
 				683982911DF002ED001D3B10 /* 7zDec.c in Sources */,
@@ -3085,6 +3204,7 @@
 				68224D3F1D4F2530002AC0F1 /* SysMsgDisplayController.m in Sources */,
 				2CFEADE91C7C05830054730E /* UIButton+Extra.m in Sources */,
 				68EEDE751CBB911A003295EB /* MCPopMenuItem.m in Sources */,
+				680BC9EA1E271A55003A7464 /* GCDAsyncSocket.m in Sources */,
 				6882C3181CA8D78300CDEB1A /* LogoView.m in Sources */,
 				68DEEBC81CBDDA91003DB7AA /* MyShenPiCell.m in Sources */,
 				6846EC561CF99C7C00A400C5 /* IQPreviousNextView.m in Sources */,
@@ -3263,6 +3383,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGN_ENTITLEMENTS = unicomOA/unicomOA.entitlements;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
@@ -3297,6 +3418,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGN_ENTITLEMENTS = unicomOA/unicomOA.entitlements;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;

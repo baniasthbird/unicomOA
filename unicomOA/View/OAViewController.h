@@ -13,4 +13,7 @@
 
 @property (nonatomic,strong) UserInfo *user_Info;
 
+/** 盛放消息内容的数组  */
+@property(nonatomic,strong)NSMutableArray *messages;
+
 @end

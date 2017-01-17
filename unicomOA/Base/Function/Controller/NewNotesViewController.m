@@ -954,8 +954,6 @@ typedef enum
                 
             }];
         }
-           
-            
             break;
         case 1: {
             UIImagePickerController *imagePickerController=[[UIImagePickerController alloc] init];
@@ -965,11 +963,7 @@ typedef enum
             [self presentViewController:imagePickerController animated:NO completion:^{
                 
             }];
-
-            
         }
-           
-
             break;
         default:
             break;

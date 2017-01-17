@@ -1300,21 +1300,32 @@
                     [arr_my_ctl removeObjectAtIndex:j];
                     NSUInteger i_count=[arr_tabledata count];
                     if (i_count>0) {
-                        NSDictionary *dic_title_tmp=[dic_sub_ctl mutableCopy];
-                        if ([str_sub_type isEqualToString:@"tableView"]) {
-                            [dic_title_tmp setValue:@"tableViewTitle" forKey:@"type"];
+                        NSMutableArray *arr_tableIndex=[[NSMutableArray alloc]init];
+                        for (int l=0; l<i_count; l++) {
+                            NSObject *obj_tmp=[arr_tabledata objectAtIndex:l];
+                            if (obj_tmp!=[NSNull null]) {
+                                NSString *str_table_index=[NSString stringWithFormat:@"%d",l];
+                                [arr_tableIndex addObject:str_table_index];
+                            }
                         }
-                        else if ([str_sub_type isEqualToString:@"tableFiles"]) {
-                            [dic_title_tmp setValue:@"tableFilesTitle" forKey:@"type"];
+                        if (arr_tableIndex.count>0) {
+                            NSDictionary *dic_title_tmp=[dic_sub_ctl mutableCopy];
+                            if ([str_sub_type isEqualToString:@"tableView"]) {
+                                [dic_title_tmp setValue:@"tableViewTitle" forKey:@"type"];
+                            }
+                            else if ([str_sub_type isEqualToString:@"tableFiles"]) {
+                                [dic_title_tmp setValue:@"tableFilesTitle" forKey:@"type"];
+                            }
+                            [arr_my_ctl insertObject:dic_title_tmp atIndex:j];
+                            for (int l=0;l<arr_tableIndex.count;l++) {
+                                // NSString *str_index=[NSString stringWithFormat:@"%d",l];
+                                NSString *str_index=[arr_tableIndex objectAtIndex:l];
+                                NSDictionary *dic_tmp=[dic_sub_ctl mutableCopy];
+                                [dic_tmp setValue:str_index forKey:@"tableIndex"];
+                                [arr_my_ctl insertObject:dic_tmp atIndex:j+l+1];
+                            }
+                            j=j+(int)arr_tableIndex.count+1;
                         }
-                        [arr_my_ctl insertObject:dic_title_tmp atIndex:j];
-                        for (int l=0;l<i_count;l++) {
-                            NSString *str_index=[NSString stringWithFormat:@"%d",l];
-                            NSDictionary *dic_tmp=[dic_sub_ctl mutableCopy];
-                            [dic_tmp setValue:str_index forKey:@"tableIndex"];
-                            [arr_my_ctl insertObject:dic_tmp atIndex:j+l+1];
-                        }
-                        j=j+(int)i_count+1;
                     }
                 }
             }

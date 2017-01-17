@@ -84,18 +84,22 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     NSUserDefaults *account = [NSUserDefaults standardUserDefaults];
     NSString *str_usrname= [account objectForKey:@"name"];
     NSString *str_password= [account objectForKey:@"password"];
-    if (str_usrname==nil && str_password==nil) {
-        user.text=@"";
-        pwd.text=@"";
-        checkbox.selected=NO;
-        b_rememberPwd=NO;
+    
+    if ([user.text isEqualToString:@""] || [pwd.text isEqualToString:@""]) {
+        if (str_usrname==nil && str_password==nil) {
+            user.text=@"";
+            pwd.text=@"";
+            checkbox.selected=NO;
+            b_rememberPwd=NO;
+        }
+        else if (![str_usrname isEqualToString:@""] && ![str_password isEqualToString:@""]) {
+            pwd.text=str_password;
+            user.text=str_usrname;
+            checkbox.selected=YES;
+            b_rememberPwd=YES;
+        }
     }
-    else if (![str_usrname isEqualToString:@""] && ![str_password isEqualToString:@""]) {
-        pwd.text=str_password;
-        user.text=str_usrname;
-        checkbox.selected=YES;
-        b_rememberPwd=YES;
-    }
+    
 }
  
 -(void)viewDidLoad
@@ -437,7 +441,14 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     //创建数据库
     [db_local initTables];
     //添加IP数据
-    [db_local InsertIPTable:@"192.168.1.68" port:@"80" IP_Mark:@"TestServer"];
+    BOOL b_firstLaunch =[[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"];
+  //  [db_local InsertIPTable:@"192.168.1.68" port:@"80" IP_Mark:@"TestServer" ];
+    if (b_firstLaunch) {
+        [db_local DeleteIPTable];
+        [db_local InsertIPTable:@"192.168.1.68" port:@"80" IP_Mark:@"Server"];
+        [db_local InsertIPTable:@"192.168.12.106" port:@"9999" IP_Mark:@"PushServer"];
+    }
+    
     //添加接口数据
     [db_local InsertInterFaceTable];
     
@@ -470,6 +481,8 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
 -(void)serverip:(UIButton*)button {
     ServerIPViewController *vc=[[ServerIPViewController alloc]init];
     vc.delegate=self;
+    vc.str_username=user.text;
+    vc.str_pwd=pwd.text;
     if (f_v<9.0) {
         self.navigationController.delegate=nil;
     }
@@ -858,6 +871,8 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     NSString *str_cellphone=[baseFunc GetValueFromDic:dic_usr key:@"mobileno"];
     NSString *str_posiname=[baseFunc GetValueFromDic:dic_usr key:@"posiname"];
     NSString *str_tel=[baseFunc GetValueFromDic:dic_usr key:@"otel"];
+    NSString *str_userid=[baseFunc GetValueFromDic:dic_usr key:@"empid"];
+    
    // NSString *str_imgurl=[dic_usr objectForKey:@"headimg"];
     str_img_url=[baseFunc GetValueFromDic:dic_usr key:@"headimg"];
     if (![str_img_url isEqualToString:@""]) {
@@ -870,9 +885,10 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     userInfo.str_department=str_orgname;
     userInfo.str_position=str_posiname;
     userInfo.str_cellphone=str_cellphone;
-   //    userInfo.str_email=str_email;
     userInfo.str_email=str_email;
     userInfo.str_phonenum=str_tel;
+    userInfo.str_empid=str_userid;
+    
     NSString *str_Logo=[[NSUserDefaults standardUserDefaults] objectForKey:@"Logo"];
     if ([str_img_url isEqualToString:@""]) {
         if (str_Logo==nil) {
@@ -941,7 +957,7 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
 }
 
 
--(void)RefreshIP {
+-(void)RefreshIP:(NSString *)str_name pwd:(NSString *)str_pwd {
     NSMutableArray *arr_ip= [db fetchIPAddress];
     if (arr_ip!=nil && [arr_ip count]>0) {
         NSArray *arr_sub_ip=[arr_ip objectAtIndex:0];
@@ -949,6 +965,10 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
         NSString *str_port=[arr_sub_ip objectAtIndex:1];
         lbl_ip.text=[NSString stringWithFormat:@"%@   %@:%@",@"当前服务器地址为",str_ip,str_port];
         lbl_ip.textAlignment=NSTextAlignmentCenter;
+    }
+    if (str_name!=nil && str_pwd!=nil) {
+        user.text=str_name;
+        pwd.text=str_pwd;
     }
 }
 
@@ -1025,6 +1045,8 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     }
     
 }
+
+
 
 
 

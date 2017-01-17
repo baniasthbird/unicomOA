@@ -17,11 +17,13 @@
 #import "DataBase.h"
 #import "AFNetworking.h"
 #import "LXAlertView.h"
+#import "GCDAsyncSocket.h"
+#import "MessageDataPacketTool.h"
 
 
 
-
-@interface OAViewController () {
+@interface OAViewController ()<GCDAsyncSocketDelegate>
+{
     NTButton * _previousBtn;//记录前一次选中的按钮
     DataBase *db;
     
@@ -29,6 +31,23 @@
 
 @property (nonatomic,strong) AFHTTPSessionManager *session;
 
+@property(nonatomic,strong)GCDAsyncSocket *socket;
+
+
+/** host  */
+@property(nonatomic,copy)NSString *host;
+/** port  */
+@property(nonatomic,assign)int port;
+/**  发送心跳的计时器 */
+@property(nonatomic,strong)NSTimer *timer;
+/**  一条消息接收到的次数（半包处理） */
+@property(nonatomic,assign)int recieveNum;
+/**  接收到消息的body Data */
+@property(nonatomic,strong)NSMutableData *messageBodyData;
+/** 绑定的用户id  */
+@property(nonatomic,copy)NSString *userId;
+/** 连接次数  */
+@property(nonatomic,assign)int connectNum;
 @end
 
 @implementation OAViewController {
@@ -50,38 +69,20 @@
     return self;
 }
 */
+
+- (NSMutableArray *)messages{
+    if (_messages == nil) {
+        _messages = [[NSMutableArray alloc] init];
+    }
+    return _messages ;
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    /*
-    //wsq
-    for (UIView* obj in self.tabBar.subviews) {
-        if (obj != _tabBarView) {//_tabBarView 应该单独封装。
-            [obj removeFromSuperview];
-        }
-        //        if ([obj isKindOfClass:[]]) {
-        //
-        //        }
-    }
-     */
-}
-
-
--(UserInfo*)CreateUserInfo {
-    UserInfo *userInfo=[[UserInfo alloc]init];
-    userInfo.str_name=@"张三";
-    userInfo.str_username=@"张三";
-    userInfo.str_gender=@"男";
-    userInfo.str_department=@"综合部";
-    userInfo.str_position=@"部门经理";
-    userInfo.str_cellphone=@"13812345678";
-    userInfo.str_email=@"未绑定";
-    userInfo.str_phonenum=@"未填写";
-    userInfo.str_Logo=@"headLogo.png";
     
-    return userInfo;
-
 }
+
 
 
 - (void)viewDidLoad {
@@ -116,6 +117,9 @@
     message.delegate=self;
     message.userInfo=userInfo;
     
+    self.userId=userInfo.str_empid;
+    [self connectToHost];
+  //  [self BindUser];
     UINavigationController *navi1=[[UINavigationController alloc]initWithRootViewController:message];
     
    // ContactViewController *contact=[[ContactViewController alloc]init];
@@ -454,6 +458,310 @@
      */
 }
 
+- (void)connectToHost{
+    // 获取分配的 主机ip 和 端口号
+    NSMutableArray *t_array=[db fetchPushIPAddress];
+    NSString *str_ip;
+    NSString *str_port;
+    if (t_array.count==1) {
+        NSArray *arr_ip=[t_array objectAtIndex:0];
+        str_ip=[arr_ip objectAtIndex:0];
+        str_port=[arr_ip objectAtIndex:1];
+    }
+    NSString *str_url=[NSString stringWithFormat:@"%@%@:%@",@"http://",str_ip,str_port];
+    AFHTTPSessionManager *mng = [AFHTTPSessionManager manager];
+    mng.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/plain",@"text/html",nil];
+    [mng.requestSerializer setValue:@"text/html; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+    mng.requestSerializer= [AFHTTPRequestSerializer serializer];
+    mng.responseSerializer= [AFHTTPResponseSerializer serializer];
+    NSDictionary *infoDict = [[NSBundle mainBundle] infoDictionary];
+    NSString *currentVersion = [infoDict objectForKey:@"CFBundleShortVersionString"];
+    [mng.requestSerializer setValue:currentVersion forHTTPHeaderField:@"version"];
+    [mng GET:str_url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"responseObject-----%@",responseObject);
+        NSString *responseObjectStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        NSLog(@"--%@",responseObjectStr);
+        if (responseObjectStr.length < 3) {
+            return ;
+        }
+        NSArray *hostArr = [responseObjectStr componentsSeparatedByString:@":"];
+        NSString *host = hostArr[0];
+        self.host = host;
+        int port = [hostArr[1] intValue];
+        self.port = port;
+        NSLog(@"%@---%d",host,port);
+        
+        // 创建一个Socket对象
+        _socket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
+        
+        // 连接
+        NSError *error = nil;
+        [_socket connectToHost:host onPort:port error:&error];
+       
+       // [self.messages addObject:@"socketConnectToHost"];
+       // [self messageTableViewReloadData]
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error-----%@",error);
+    }];
+    
+}
+
+#pragma mark -GCDAsyncSocketDelegate
+// 连接主机成功
+-(void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port{
+    NSLog(@"连接主机成功");
+    self.title = @"连接成功";
+    [self.messages addObject:@"socketDidConnectToHost"];
+    [self messageTableViewReloadData];
+    if (![MessageDataPacketTool isFastConnect]) {
+        [self.messages addObject:@"发送握手数据"];
+        [self messageTableViewReloadData];
+        [sock writeData:[MessageDataPacketTool handshakeMessagePacketData] withTimeout:-1 tag:222];
+        return;
+    }
+    
+    [self.messages addObject:@"发送快速重连数据"];
+    [self messageTableViewReloadData];
+    [sock writeData:[MessageDataPacketTool fastConnect] withTimeout:-1 tag:222];
+    
+}
+- (void) messageTableViewReloadData{
+    /*
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.messageTableView reloadData];
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.messages.count-1 inSection:0];
+        [self.messageTableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    });
+     */
+}
+
+// 与主机断开连接
+-(void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err{
+    
+    if(err){
+        NSLog(@"断开连接 %@",err);
+        self.title = @"连接错误";
+        _connectNum ++;
+        if (_connectNum < MPMaxConnectTimes) {
+            sleep(_connectNum+2);
+            NSError *error = nil;
+            [_socket connectToHost:self.host onPort:self.port error:&error];
+        }
+    } else{
+        self.title = @"断开连接";
+    }
+    [self.messages addObject:@"socketDidDisconnect"];
+    [self messageTableViewReloadData];
+}
+
+// 数据成功发送到服务器
+-(void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag{
+    NSLog(@"数据成功发送到服务器");
+    //数据发送成功后，自己调用一下读取数据的方法，接着_socket才会调用下面的代理方法
+    [_socket readDataWithTimeout:-1 tag:tag];
+}
+
+// 读取到数据时调用
+-(void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag{
+    
+    //心跳
+    if (data.length == 1) {
+        return ;
+    }
+    
+    // 半包处理
+    int length = 0;
+    if (_recieveNum < 1) {
+        
+        NSData *lengthData = [data subdataWithRange:NSMakeRange(0, 4)];
+        [lengthData getBytes: &length length: sizeof(length)];
+        NTOHL(length);
+    }
+    
+    if (length > data.length - 13) {
+        _recieveNum ++ ;
+        [self.messageBodyData appendData:data];
+        length = 0;
+        return;
+    }
+    
+    [self.messageBodyData appendData:data];
+    
+    length = 0;
+    _recieveNum = 0;
+    
+    IP_PACKET packet ;
+    if (self.messageBodyData == nil) {
+        //读取到的数据
+        packet = [MessageDataPacketTool handShakeSuccessResponesWithData:data];
+    } else {
+        packet = [MessageDataPacketTool handShakeSuccessResponesWithData:self.messageBodyData];
+    }
+    self.messageBodyData = nil;
+    
+    //解密以前的body
+    NSData *body_data = [NSData dataWithBytes:packet.body length:packet.length];
+    NSLog(@"bodyData--%@--%d",body_data,packet.length);
+    switch (packet.cmd) {
+            
+        case MpushMessageBodyCMDHandShakeSuccess:
+            NSLog(@"握手成功");
+            
+            [self.messages addObject:@"握手成功"];
+            [self messageTableViewReloadData];
+            [self processHandShakeDataWithPacket:packet andData:body_data];
+            [self BindUser];
+            break;
+            
+        case MpushMessageBodyCMDLogin: //登录
+            
+            break;
+            
+        case MpushMessageBodyCMDLogout: //退出
+            
+            break;
+        case MpushMessageBodyCMDBind: //绑定
+            
+            break;
+        case MpushMessageBodyCMDUnbind: //解绑
+            
+            break;
+        case MpushMessageBodyCMDFastConnect: //快速重连
+            
+            NSLog(@"MpushMessageBodyCMDUNFastConnect");
+            NSLog(@"快速重连成功");
+            [self.messages addObject:@"快速重连成功"];
+            [self messageTableViewReloadData];
+            [self BindUser];
+            break;
+            
+        case MpushMessageBodyCMDStop: //暂停
+            
+            break;
+        case MpushMessageBodyCMDResume: //重新开始
+            
+            break;
+        case MpushMessageBodyCMDError: //错误
+            [MessageDataPacketTool errorWithBody:body_data];
+            break;
+        case MpushMessageBodyCMDOk: //ok
+            //                        [MessageDataPacketTool okWithBody:body_data];
+            [self.messages addObject:@"操作成功!"];
+            [self messageTableViewReloadData];
+            break;
+            
+        case MpushMessageBodyCMDHttp: // http代理
+        {
+            NSLog(@"ok======聊天=========");
+            [self.messages addObject:@"成功调用http代理"];
+            [self messageTableViewReloadData];
+            NSData *bodyData = [MessageDataPacketTool processFlagWithPacket:packet andBodyData:body_data];
+            HTTP_RESPONES_BODY responesBody = [MessageDataPacketTool chatDataSuccessWithData:bodyData];
+            NSLog(@"--%d",responesBody.statusCode);
+        }
+            break;
+        case MpushMessageBodyCMDPush:  //收到的push消息
+            [self processRecievePushMessageWithPacket:packet andData:body_data];
+            
+            break;
+            
+        case MpushMessageBodyCMDChat: //聊天
+            break;
+            
+        default:
+            break;
+    }
+    
+    [sock readDataWithTimeout:-1 tag:tag];//持续接收服务端放回的数据
+}
+/**
+ *  心跳
+ */
+- (void)heartbeatSend{
+    
+    [_socket writeData:[MessageDataPacketTool heartbeatPacketData] withTimeout:-1 tag:123];
+}
+
+/**
+ *  处理收到的消息
+ *
+ *  @param packet    协议包
+ *  @param body_data 协议包body data
+ */
+- (void)processRecievePushMessageWithPacket:(IP_PACKET)packet andData:(NSData *)body_data{
+    id content = [MessageDataPacketTool processRecievePushMessageWithPacket:packet andData:body_data];
+    NSString *contentJsonStr = content[@"content"];
+    
+    NSDictionary *contentDict = [self dictionaryWithJsonString:contentJsonStr];
+    NSString *contentStr = @"";
+    if (contentDict==nil) {
+        contentStr = contentJsonStr;
+    }
+    else {
+        contentStr = contentDict[@"content"];
+        
+    }
+    
+    
+    [self.messages addObject:[NSString stringWithFormat:@"收到push消息--%@",contentStr]];
+    [self messageTableViewReloadData];
+    //  NSLog(@"content--%@",contentDict);
+}
+/*!
+ * @brief 把格式化的JSON格式的字符串转换成字典
+ * @param jsonString JSON格式的字符串
+ * @return 返回字典
+ */
+- (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString {
+    if (jsonString == nil) {
+        return nil;
+    }
+    
+    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *err;
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                        options:NSJSONReadingMutableContainers
+                                                          error:&err];
+    if(err) {
+        NSLog(@"json解析失败：%@",err);
+        return nil;
+    }
+    return dic;
+}
+
+/**
+ *  处理心跳响应的数据
+ *
+ *  @param bodyData 握手ok的bodyData
+ */
+- (void) processHeartDataWithData:(NSData *)bodyData{
+    NSLog(@"接收到心跳");
+}
+
+/**
+ *  处理握手ok响应的数据
+ *
+ *  @param bodyData 握手ok的bodyData
+ */
+- (void) processHandShakeDataWithPacket:(IP_PACKET)packet andData:(NSData *)body_data{
+    
+    HAND_SUCCESS_BODY handSuccessBody = [MessageDataPacketTool HandSuccessBodyDataWithData:body_data andPacket:packet];
+    
+    //添加计时器
+    _timer = [NSTimer timerWithTimeInterval:handSuccessBody.heartbeat/1000.0 target:self selector:@selector(heartbeatSend) userInfo:nil repeats:YES];
+    [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSDefaultRunLoopMode];
+    
+}
+
+-(void)BindUser {
+    [self.messages addObject:@"绑定用户..."];
+    [self messageTableViewReloadData];
+    //绑定用户
+    NSString *str_id=[NSString stringWithFormat:@"%@",self.userId];
+    
+    [_socket writeData:[MessageDataPacketTool bindDataWithUserId:str_id andIsUnbindFlag:NO] withTimeout:-1 tag:222];
+}
 
 
 /*

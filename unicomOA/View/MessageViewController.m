@@ -213,6 +213,13 @@
     
     [self setupLocation];
     
+    //添加消息响应
+    UIButton *btn_notification=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 90, 40)];
+    [btn_notification setTitle:@"推送" forState:UIControlStateNormal];
+    [btn_notification addTarget:self action:@selector(PushNotification:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *barButtonItem=[[UIBarButtonItem alloc]initWithCustomView:btn_notification];
+   // self.navigationItem.leftBarButtonItem=barButtonItem;
+    
     XSpotLight *SpotLight=[[XSpotLight alloc]init];
     SpotLight.messageArray=@[@"快速审批以悬浮球方式展现"];
     CGFloat i_img_width = 40.0f;
@@ -1491,6 +1498,12 @@
         [bubbleMenuButton.homeButtonView showBadgeWithStyle:WBadgeStyleNumber value:i_total animationType:WBadgeAnimTypeNone x:-i_offset_x y:i_offset_y];
     }
    
+    
+}
+
+
+//推送消息快速响应
+-(void)PushNotification:(UIButton*)sender {
     
 }
 

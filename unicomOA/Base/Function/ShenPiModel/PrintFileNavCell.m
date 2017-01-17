@@ -47,7 +47,7 @@
         UILabel *lbl_textLabel=[[UILabel alloc]initWithFrame:CGRectMake(0.2142*Width, 0, 0.5*Width, self.contentView.frame.size.height)];
         lbl_textLabel.font=[UIFont systemFontOfSize:16];
         lbl_textLabel.textColor=[UIColor blackColor];
-        UIImageView *img_label=[[UIImageView alloc]initWithFrame:CGRectMake(0.145*Width, 8, 0.0515*Width, self.contentView.frame.size.height-16)];
+        UIImageView *img_label=[[UIImageView alloc]initWithFrame:CGRectMake(0.145*Width, (self.contentView.frame.size.height-0.0515*Width)/2, 0.0515*Width, 0.0515*Width)];
         if ([str_category isEqualToString:@"tableView"]) {
             lbl_textLabel.text=str_text;
             img_label.image=[UIImage imageNamed:@"tableViewLogo"];

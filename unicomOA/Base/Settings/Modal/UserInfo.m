@@ -21,6 +21,7 @@
     [aCoder encodeObject:self.str_phonenum forKey:@"phonenum"];
     [aCoder encodeObject:self.str_Logo forKey:@"Logo"];
     [aCoder encodeObject:self.str_imgurl forKey:@"imgurl"];
+    [aCoder encodeObject:self.str_empid forKey:@"empid"];
 }
 
 -(id)initWithCoder:(NSCoder *)aDecoder {
@@ -35,6 +36,7 @@
         self.str_phonenum=[aDecoder decodeObjectForKey:@"phonenum"];
         self.str_Logo=[aDecoder decodeObjectForKey:@"Logo"];
         self.str_imgurl=[aDecoder decodeObjectForKey:@"imgurl"];
+        self.str_empid=[aDecoder decodeObjectForKey:@"empid"];
     }
     return self;
 }

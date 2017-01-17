@@ -179,7 +179,7 @@
     
     str_title=[NSString stringWithFormat:@"%@%@",@"标题:",str_title];
     CGFloat i_width= [UILabel getWidthWithTitle:str_title font:[UIFont systemFontOfSize:i_otherFont]];
-    CGFloat f_linenum=i_width/([UIScreen mainScreen].bounds.size.width-80);
+    CGFloat f_linenum=i_width/(Width-160);
     NSInteger i_linenum=0;
     if (f_linenum<1) {
         i_linenum=1;

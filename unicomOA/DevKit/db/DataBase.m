@@ -159,50 +159,48 @@
 }
 
 
+-(void)DeleteIPTable {
+    if ([_database open]) {
+        NSString *deleteSql=[NSString stringWithFormat:@"DELETE FROM %@",IP_TABLENAME];
+        
+        BOOL res=[_database executeUpdate:deleteSql];
+        if (res) {
+            NSLog(@"成功删除IP表");
+        }
+        else {
+            NSLog(@"删除IP表失败");
+        }
+    }
+
+}
 
 //初始化IP表
 -(void)InsertIPTable:(NSString *)str_ipaddr port:(NSString *)str_port IP_Mark:(NSString *)str_mark {
-    NSMutableArray *t_array=[self fetchIPAddress];
+    NSMutableArray *t_array=[[NSMutableArray alloc]init];
+    if ([str_mark isEqualToString:@"Server"]) {
+        t_array=[self fetchIPAddress];
+    }
+    else if ([str_mark isEqualToString:@"PushServer"]) {
+        t_array=[self fetchPushIPAddress];
+    }
     if (t_array.count==0) {
         if ([_database open]) {
-           NSString *insertSql1=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@' , '%@' , '%@') VALUES ('%@', '%@', '%@')",IP_TABLENAME,IP_NAME,IP_PORT,IP_MARK,str_ipaddr,str_port,str_mark];
-            BOOL res=[_database executeUpdate:insertSql1];
-            if (res) {
-                NSLog(@"成功添加至IP表!");
-            } else {
-                NSLog(@"添加数据至IP表出错！");
-            }
-        }
-    }
-    else {
-        if ([_database open]) {
-            NSString *deleteSql=[NSString stringWithFormat:@"DELETE FROM %@",IP_TABLENAME];
-            
-            BOOL res=[_database executeUpdate:deleteSql];
-            if (res) {
-                NSLog(@"成功删除IP表");
-            }
-            else {
-                NSLog(@"删除IP表失败");
-            }
-            
             NSString *insertSql1=[NSString stringWithFormat:@"INSERT INTO '%@' ('%@' , '%@' , '%@') VALUES ('%@', '%@', '%@')",IP_TABLENAME,IP_NAME,IP_PORT,IP_MARK,str_ipaddr,str_port,str_mark];
-            BOOL res2=[_database executeUpdate:insertSql1];
-            if (res2) {
-                NSLog(@"成功添加至IP表!");
-            } else {
-                NSLog(@"添加数据至IP表出错！");
-            }
-
-
+                BOOL res=[_database executeUpdate:insertSql1];
+                if (res) {
+                    NSLog(@"成功添加至IP表!");
+                } else {
+                    NSLog(@"添加数据至IP表出错！");
+                }
         }
     }
+    
 }
 
-//获取IP表数据
+//获取主服务器IP表数据
 -(NSMutableArray*) fetchIPAddress {
     [_database open];
-    NSString *sql=[NSString stringWithFormat:@"SELECT * FROM %@", IP_TABLENAME];
+    NSString *sql=[NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@  = '%@' ", IP_TABLENAME,IP_MARK,@"Server"];
     
     NSMutableArray *array=[@[] mutableCopy];
     
@@ -219,12 +217,32 @@
     return array;
 }
 
+-(NSMutableArray*) fetchPushIPAddress {
+    [_database open];
+    NSString *sql=[NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@  = '%@' ", IP_TABLENAME,IP_MARK,@"PushServer"];
+    
+    NSMutableArray *array=[@[] mutableCopy];
+    
+    FMResultSet *rs=[_database executeQuery:sql];
+    while ([rs next]) {
+        NSString *str_ipaddress=[rs stringForColumn:IP_NAME];
+        NSString *str_port=[rs stringForColumn:IP_PORT];
+        NSArray *arr_ip=@[str_ipaddress,str_port];
+        [array addObject:arr_ip];
+    }
+    
+    [_database close];
+    
+    return array;
+
+}
+
 
 //更新IP地址
 -(void)UpdateIPTable:(NSString *)str_ipaddr port:(NSString *)str_port IP_Mark:(NSString *)str_mark {
     if ([_database open]) {
         NSString *updateSql1=@"";
-        updateSql1=[NSString stringWithFormat:@"UPDATE '%@' SET '%@' = '%@', '%@' = '%@', '%@' = '%@' ",IP_TABLENAME,IP_NAME,str_ipaddr,IP_PORT,str_port,IP_MARK,str_mark];
+        updateSql1=[NSString stringWithFormat:@"UPDATE %@ SET %@ = '%@', %@ = '%@' WHERE %@ = '%@' ",IP_TABLENAME,IP_NAME,str_ipaddr,IP_PORT,str_port,IP_MARK,str_mark];
         BOOL res=[_database executeUpdate:updateSql1];
         if (res) {
             NSLog(@"成功更新至IP表!");

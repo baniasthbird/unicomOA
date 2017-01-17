@@ -131,12 +131,12 @@
   
     
     UILabel *lbl_file_name=[[UILabel alloc]initWithFrame:CGRectMake(50, 0.2663*Height, Width-100, 0.03*Height)];
-    lbl_file_name.textColor=[UIColor blackColor];
+    lbl_file_name.textColor=[UIColor colorWithRed:5/255.0f green:5/255.0f blue:5/255.0f alpha:1];
     lbl_file_name.textAlignment=NSTextAlignmentCenter;
-    lbl_file_name.font=[UIFont boldSystemFontOfSize:20];
+    lbl_file_name.font=[UIFont systemFontOfSize:20];
     lbl_file_name.text=[_arr_data objectAtIndex:l3];
     
-    UILabel *lbl_file_time=[[UILabel alloc]initWithFrame:CGRectMake(50, 0.3116*Height, Width-100, 0.022645*Height)];
+    UILabel *lbl_file_time=[[UILabel alloc]initWithFrame:CGRectMake(50, 0.325*Height, Width-100, 0.022645*Height)];
     lbl_file_time.textColor=[UIColor colorWithRed:155/255.0f green:155/255.0f blue:155/255.0f alpha:1];
     lbl_file_time.textAlignment=NSTextAlignmentCenter;
     lbl_file_time.font=[UIFont systemFontOfSize:18];

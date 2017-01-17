@@ -12,6 +12,8 @@
 
 @interface UserInfo : NSObject<NSCoding>
 
+@property (nonatomic,strong) NSString *str_empid;
+
 @property (nonatomic,strong) NSString *str_name;
 
 @property (nonatomic,strong) NSString *str_username;

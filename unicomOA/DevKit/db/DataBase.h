@@ -60,8 +60,10 @@
 -(void)UpdateInterFaceTable:(NSMutableDictionary*)dic_inerface;
 -(void)UpdateNotesTable:(NSMutableDictionary*)dic_notes;
 
-
+//获取主服务器地址
 -(NSMutableArray*)fetchIPAddress;
+//获取推送服务器地址
+-(NSMutableArray*) fetchPushIPAddress;
 -(NSMutableArray*)fetchAllInterface;
 -(NSMutableArray*)fetchAllNotes;
 -(NSMutableArray*)fetchAllStaff;
@@ -71,7 +73,7 @@
 
 
 -(void)DeleteNotesTable:(NSString*)str_index;
-
+-(void)DeleteIPTable;
 
 //获得单一数据
 -(NSString*)fetchInterface:(NSString*)str_key;
