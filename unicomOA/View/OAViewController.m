@@ -478,7 +478,7 @@
     NSString *currentVersion = [infoDict objectForKey:@"CFBundleShortVersionString"];
     [mng.requestSerializer setValue:currentVersion forHTTPHeaderField:@"version"];
     [mng GET:str_url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"responseObject-----%@",responseObject);
+       // NSLog(@"responseObject-----%@",responseObject);
         NSString *responseObjectStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         NSLog(@"--%@",responseObjectStr);
         if (responseObjectStr.length < 3) {
@@ -496,8 +496,12 @@
         
         // 连接
         NSError *error = nil;
-        [_socket connectToHost:host onPort:port error:&error];
-       
+        BOOL b_connect = [_socket connectToHost:host onPort:port error:&error];
+        if (b_connect==YES) {
+         //   [self BindUser];
+        }
+        
+        NSLog(@"连接服务器");
        // [self.messages addObject:@"socketConnectToHost"];
        // [self messageTableViewReloadData]
         
@@ -515,13 +519,15 @@
     [self.messages addObject:@"socketDidConnectToHost"];
     [self messageTableViewReloadData];
     if (![MessageDataPacketTool isFastConnect]) {
-        [self.messages addObject:@"发送握手数据"];
+      //  [self.messages addObject:@"发送握手数据"];
+        NSLog(@"发送握手数据");
         [self messageTableViewReloadData];
         [sock writeData:[MessageDataPacketTool handshakeMessagePacketData] withTimeout:-1 tag:222];
         return;
     }
     
-    [self.messages addObject:@"发送快速重连数据"];
+    //[self.messages addObject:@"发送快速重连数据"];
+    NSLog(@"发送快速重连数据");
     [self messageTableViewReloadData];
     [sock writeData:[MessageDataPacketTool fastConnect] withTimeout:-1 tag:222];
     
@@ -691,21 +697,24 @@
  */
 - (void)processRecievePushMessageWithPacket:(IP_PACKET)packet andData:(NSData *)body_data{
     id content = [MessageDataPacketTool processRecievePushMessageWithPacket:packet andData:body_data];
-    NSString *contentJsonStr = content[@"content"];
-    
-    NSDictionary *contentDict = [self dictionaryWithJsonString:contentJsonStr];
-    NSString *contentStr = @"";
-    if (contentDict==nil) {
-        contentStr = contentJsonStr;
-    }
-    else {
-        contentStr = contentDict[@"content"];
+    if (content!=nil) {
+        NSString *contentJsonStr = content[@"content"];
         
+        NSDictionary *contentDict = [self dictionaryWithJsonString:contentJsonStr];
+        NSString *contentStr = @"";
+        if (contentDict==nil) {
+            contentStr = contentJsonStr;
+        }
+        else {
+            contentStr = contentDict[@"content"];
+            
+        }
+        
+        
+        [self.messages addObject:[NSString stringWithFormat:@"收到push消息--%@",contentStr]];
+        [self messageTableViewReloadData];
     }
     
-    
-    [self.messages addObject:[NSString stringWithFormat:@"收到push消息--%@",contentStr]];
-    [self messageTableViewReloadData];
     //  NSLog(@"content--%@",contentDict);
 }
 /*!
@@ -755,15 +764,33 @@
 }
 
 -(void)BindUser {
-    [self.messages addObject:@"绑定用户..."];
+    //[self.messages addObject:@"绑定用户..."];
+    NSLog(@"绑定用户...");
     [self messageTableViewReloadData];
     //绑定用户
     NSString *str_id=[NSString stringWithFormat:@"%@",self.userId];
-    
+    NSLog(@"%@%@",@"userId:",str_id);
     [_socket writeData:[MessageDataPacketTool bindDataWithUserId:str_id andIsUnbindFlag:NO] withTimeout:-1 tag:222];
 }
 
+//解绑用户
+- (void)unBindUser {
+    if (self.userId) {
+        //[self.messages addObject:@"解绑用户"];
+        NSLog(@"解绑用户");
+        [self messageTableViewReloadData];
+        //绑定用户
+        NSString *str_id=[NSString stringWithFormat:@"%@",self.userId];
+        NSLog(@"%@%@",@"userId:",str_id);
+        [self.socket writeData:[MessageDataPacketTool bindDataWithUserId:str_id andIsUnbindFlag:YES] withTimeout:-1 tag:222];
+        self.userId = nil;
+    }
+}
 
+//断开连接
+-(void)disconnect {
+    [self.socket disconnect];
+}
 /*
 #pragma mark - Navigation
 

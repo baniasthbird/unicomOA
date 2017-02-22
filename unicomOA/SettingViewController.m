@@ -580,7 +580,7 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
             NSDictionary *dic = [defaults dictionaryRepresentation];
             for (id  key in dic) {
-                if ([key isEqualToString:@"name"] || [key isEqualToString:@"password"] || [key isEqualToString:@"everLaunched"] || [key isEqualToString:@"systemversion"] || [key isEqualToString:@"firstLaunch"] || [key isEqualToString:@"connection"]) {
+                if ([key isEqualToString:@"name"] || [key isEqualToString:@"password"] || [key isEqualToString:@"everLaunched"] || [key isEqualToString:@"systemversion"] || [key isEqualToString:@"firstLaunch"] || [key isEqualToString:@"connection"] || [key isEqualToString:MPDeviceToken] ) {
                     continue;
                 }
                 else {
@@ -589,6 +589,9 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
             }
             [defaults synchronize];
             
+            OAViewController *tab_vc= (OAViewController*) self.tabBarController;
+            [tab_vc unBindUser];
+            [tab_vc disconnect];
             LoginViewController *login=[[LoginViewController alloc]init];
             login.b_update=NO;
             UINavigationController *nav=[[UINavigationController alloc]initWithRootViewController:login];

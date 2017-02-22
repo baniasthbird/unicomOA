@@ -15,6 +15,7 @@
 #import "UnFinishVc.h"
 #import "FinishVc.h"
 #import "LeftMenuViewNew.h"
+#import "BaseFunction.h"
 //#import "MenuView2.h"
 
 
@@ -54,6 +55,8 @@
     
     NSString *str_cell_hint;
     
+    BaseFunction *baseFunc;
+    
 }
 
 - (UITableView *)tableView
@@ -75,6 +78,8 @@
     dic_url=[NSMutableDictionary dictionary];
     
     arr_MyReview=[[NSMutableArray alloc]init];
+    
+    baseFunc=[[BaseFunction alloc]init];
     db=[DataBase sharedinstanceDB];
     
     _session=[AFHTTPSessionManager manager];
@@ -271,11 +276,15 @@
      }
      */
     //流程类别
-    NSString *str_categroy=[dic_task objectForKey:@"processChName"];
+ //   NSString *str_categroy=[dic_task objectForKey:@"processChName"];
+    NSString *str_categroy=[baseFunc GetValueFromDic:dic_task key:@"processChName"];
     //流程标题
-    NSString *str_title=[dic_task objectForKey:@"processInstName"];
+    //NSString *str_title=[dic_task objectForKey:@"processInstName"];
+    NSString *str_title=[baseFunc GetValueFromDic:dic_task key:@"processInstName"];
     
-    NSString *str_endTime=[dic_task objectForKey:@"endTime"];
+  //  NSString *str_endTime=[dic_task objectForKey:@"endTime"];
+    NSString *str_endTime=[baseFunc GetValueFromDic:dic_task key:@"endTime"];
+    
     NSString *str_status=@"";
     if (str_endTime!=nil) {
         str_status=@"已办";
@@ -286,7 +295,9 @@
     //当前节点名称
     //NSString *str_node=[dic_task objectForKey:@"workItemName"];
     //时间
-    NSString *str_startTime=[dic_task objectForKey:@"startTime"];
+    //NSString *str_startTime=[dic_task objectForKey:@"startTime"];
+    NSString *str_startTime=[baseFunc GetValueFromDic:dic_task key:@"startTime"];
+    
     NSArray *arr_time=[str_startTime componentsSeparatedByString:@"."];
     NSString *str_time=[arr_time objectAtIndex:0];
     

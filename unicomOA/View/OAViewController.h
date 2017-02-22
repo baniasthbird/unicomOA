@@ -16,4 +16,8 @@
 /** 盛放消息内容的数组  */
 @property(nonatomic,strong)NSMutableArray *messages;
 
+- (void)unBindUser;
+
+-(void)disconnect;
+
 @end

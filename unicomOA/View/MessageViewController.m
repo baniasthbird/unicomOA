@@ -27,10 +27,11 @@
 #import "DWBubbleMenuButton.h"
 #import "WZLBadgeImport.h"
 #import "XSpotLight.h"
+#import "PushMsgVC.h"
 
 
 
-@interface MessageViewController ()<UITableViewDelegate,UITableViewDataSource,NewsTapDelegate,YBMonitorNetWorkStateDelegate,RemindCellDelegate,MyShenPiViewControllerDelegate,XSpotLightDelegate>
+@interface MessageViewController ()<UITableViewDelegate,UITableViewDataSource,NewsTapDelegate,YBMonitorNetWorkStateDelegate,RemindCellDelegate,MyShenPiViewControllerDelegate,XSpotLightDelegate,PushMsgVCDelegate>
 
 @property (nonatomic,strong) UITableView *tableView;
 
@@ -95,6 +96,8 @@
     NSArray *modelsArray;
     
     DWBubbleMenuButton *bubbleMenuButton;
+    
+    NSMutableArray *arr_Push_Msg;
     
     
 }
@@ -215,10 +218,18 @@
     
     //添加消息响应
     UIButton *btn_notification=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 90, 40)];
-    [btn_notification setTitle:@"推送" forState:UIControlStateNormal];
+   // [btn_notification setTitle:@"推送" forState:UIControlStateNormal];
+    BOOL b_new_notification=[[NSUserDefaults standardUserDefaults] boolForKey:@"GetNotification"];
+    if (b_new_notification==YES) {
+        [btn_notification setImage:[UIImage imageNamed:@"push_notification1"] forState:UIControlStateNormal];
+    }
+    else {
+        [btn_notification setImage:[UIImage imageNamed:@"push_notification"] forState:UIControlStateNormal];
+    }
+    [btn_notification setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 45)];
     [btn_notification addTarget:self action:@selector(PushNotification:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *barButtonItem=[[UIBarButtonItem alloc]initWithCustomView:btn_notification];
-   // self.navigationItem.leftBarButtonItem=barButtonItem;
+    self.navigationItem.leftBarButtonItem=barButtonItem;
     
     XSpotLight *SpotLight=[[XSpotLight alloc]init];
     SpotLight.messageArray=@[@"快速审批以悬浮球方式展现"];
@@ -244,6 +255,10 @@
             
     //    }];
     }
+    
+    NSMutableDictionary *param=[NSMutableDictionary dictionary];
+    param[@"userId"]=[NSString stringWithFormat:@"%@",_userInfo.str_empid];
+    [self GetPushNotification:param];
 
     
     timer=[NSTimer scheduledTimerWithTimeInterval:3600 target:self selector:@selector(setupLocation) userInfo:nil repeats:YES];
@@ -831,7 +846,7 @@
                     */
                     NSString *str_department =[_baseFunc GetValueFromDic:dic_content key:@"operationDeptName"];
                    // CGFloat w_depart=[UILabel_LabelHeightAndWidth getWidthWithTitle:[dic_content objectForKey:@"operatorName"] font:[UIFont systemFontOfSize:i_otherFont]];
-                    CGFloat h_depart=[UILabel getHeightByWidth:[UIScreen mainScreen].bounds.size.width title:str_department font:[UIFont systemFontOfSize:i_otherFont]];
+                    CGFloat h_depart=[UILabel getHeightByWidth:Width title:str_department font:[UIFont systemFontOfSize:i_otherFont]];
                     NSString *str_time =[_baseFunc GetValueFromDic:dic_content key:@"startDate"];
                     NSArray *arr_time=[str_time componentsSeparatedByString:@" "];
                     NSString *str_time2=[arr_time objectAtIndex:0];
@@ -1504,12 +1519,96 @@
 
 //推送消息快速响应
 -(void)PushNotification:(UIButton*)sender {
+    NSLog(@"单击事件");
+    PushMsgVC *vc=[[PushMsgVC alloc] init];
+    vc.userInfo=_userInfo;
+    vc.str_title=@"系统消息";
+    vc.i_rownum=[arr_Push_Msg count];
+    vc.arr_PushMsg=arr_Push_Msg;
+    vc.delegate=self;
+    if (f_v<9.0) {
+        self.navigationController.delegate=nil;
+    }
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"GetNotification"];
+    [self.navigationController pushViewController:vc animated:NO];
+
+}
+
+//从推送服务器获取消息
+-(void)GetPushNotification:(NSMutableDictionary*)param {
+    NSMutableArray *t_array=[db fetchPushIPAddress];
+    NSString *str_push_ip;
+    NSString *str_push_port;
+    if (t_array.count==1) {
+        NSArray *arr_ip=[t_array objectAtIndex:0];
+        str_push_ip=[arr_ip objectAtIndex:0];
+        str_push_port=@"8083";
+    }
+    NSString *str_id=[NSString stringWithFormat:@"%@",_userInfo.str_empid];
+    NSString *str_url=[NSString stringWithFormat:@"%@%@:%@%@%@",@"http://",str_push_ip,str_push_port,@"/api/admin/get/userMsg.json?userId=",str_id];
     
+    [_session POST:str_url parameters:nil progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"获取用户推送信息成功");
+        NSDictionary *JSON=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        NSString *str_success= [JSON objectForKey:@"success"];
+        BOOL b_success=[str_success boolValue];
+        if (b_success==YES) {
+            NSArray *arr_list=[JSON objectForKey:@"data"];
+            NSMutableArray *arr_mute_tmp=[[NSMutableArray alloc]init];
+            for (int i=0; i<[arr_list count]; i++) {
+                NSObject *o_tmp=[arr_list objectAtIndex:i];
+                if (o_tmp!=[NSNull null]) {
+                    NSString *str_tmp=(NSString*)o_tmp;
+                    NSArray *arr_tmp=[str_tmp componentsSeparatedByString:@"||"];
+                    if ([arr_tmp count]==2) {
+                        [arr_mute_tmp addObject:str_tmp];
+                    }
+                }
+            }
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+            for (int i=0; i<[arr_mute_tmp count]-1; i++) {
+                for (int j=0; j<[arr_mute_tmp count]-i-1; j++) {
+                    NSString *str_tmp0=[arr_mute_tmp objectAtIndex:j];
+                    NSString *str_time0=(NSString*)[[str_tmp0 componentsSeparatedByString:@"||"] objectAtIndex:1];
+                    NSDate *date0 = [dateFormatter dateFromString:str_time0];
+                    NSString *str_tmp1=[arr_mute_tmp objectAtIndex:j+1];
+                    NSString *str_time1=(NSString*)[[str_tmp1 componentsSeparatedByString:@"||"] objectAtIndex:1];
+                    NSDate *date1 = [dateFormatter dateFromString:str_time1];
+                    if (date0<date1) {
+                        NSString *str_tmp=str_tmp0;
+                        [arr_mute_tmp setObject:str_tmp1 atIndexedSubscript:j];
+                        [arr_mute_tmp setObject:str_tmp atIndexedSubscript:j+1];
+                    }
+                }
+            }
+            arr_Push_Msg=arr_mute_tmp;
+            NSLog(@"测试");
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
 }
 
 -(void)XSpotLightClicked:(NSInteger)index {
     
 }
+
+-(void)RefreshBtnBadge {
+    UIButton *btn_notification=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 90, 40)];
+    // [btn_notification setTitle:@"推送" forState:UIControlStateNormal];
+    [btn_notification setImage:[UIImage imageNamed:@"push_notification"] forState:UIControlStateNormal];
+    [btn_notification setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 45)];
+    [btn_notification addTarget:self action:@selector(PushNotification:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *barButtonItem=[[UIBarButtonItem alloc]initWithCustomView:btn_notification];
+    self.navigationItem.leftBarButtonItem=barButtonItem;
+    [self.view setNeedsDisplay];
+
+}
+
+
 /*
 #pragma mark - Navigation
 

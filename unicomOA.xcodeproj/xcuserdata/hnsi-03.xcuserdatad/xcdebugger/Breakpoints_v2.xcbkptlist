@@ -474,7 +474,7 @@
             startingLineNumber = "29"
             endingLineNumber = "29"
             landmarkName = "-imageRectForContentRect:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1364,11 +1364,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "unicomOA/View/MessageViewController.m"
-            timestampString = "506313218.884014"
+            timestampString = "509252459.094336"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "568"
-            endingLineNumber = "568"
+            startingLineNumber = "581"
+            endingLineNumber = "581"
             landmarkName = "-NewsList:"
             landmarkType = "7">
          </BreakpointContent>

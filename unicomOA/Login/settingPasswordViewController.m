@@ -252,8 +252,8 @@
         _txt_Pwd2.secureTextEntry=NO;
     }
     btn.selected=!btn.selected; //每次点击都改变按钮状态
-    
 }
+
 
 -(BOOL)textFieldShouldEndEditing:(UITextField *)textField {
     

@@ -349,7 +349,13 @@
     NSString *aliasStr = @"0";
     [writerPacket writeString:aliasStr];
     
-    NSString *tagsStr = @"0";
+    NSString *tagsStr;
+    if (isUnbindFlag) {
+        tagsStr=@"unbind";
+    }
+    else {
+        tagsStr=@"bind";
+    }
     [writerPacket writeString:tagsStr];
     
     //数据包
@@ -604,10 +610,16 @@
 + (id)processRecievePushMessageWithPacket:(IP_PACKET)packet andData:(NSData *)body_data{
     
     NSData *bodyData = [MessageDataPacketTool processFlagWithPacket:packet andBodyData:body_data];
-    id contentDic = [NSJSONSerialization JSONObjectWithData:bodyData options:NSJSONReadingMutableContainers error:nil];//转换数据格式
-    NSLog(@"contentDic--%@",contentDic);
+    if (bodyData!=nil) {
+        id contentDic = [NSJSONSerialization JSONObjectWithData:bodyData options:NSJSONReadingMutableContainers error:nil];//转换数据格式
+        NSLog(@"contentDic--%@",contentDic);
+        
+        return contentDic;
+    }
+    else {
+        return nil;
+    }
     
-    return contentDic;
 }
 
 /**

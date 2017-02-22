@@ -21,6 +21,8 @@
 
 @property (nonatomic,strong) BaseFunction *baseFunc;
 
+-(void)GetPushNotification:(NSMutableDictionary*)param;
+
 -(void)RefreshFlowNum;
 
 @end

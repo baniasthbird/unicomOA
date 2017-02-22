@@ -231,6 +231,7 @@
 		6882C3181CA8D78300CDEB1A /* LogoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6882C3171CA8D78300CDEB1A /* LogoView.m */; };
 		6882C3211CA92C4B00CDEB1A /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6882C3201CA92C4B00CDEB1A /* CommentViewController.m */; };
 		6884D2D01CD98B4A006215E5 /* UIView+MGBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6884D2CF1CD98B4A006215E5 /* UIView+MGBadgeView.m */; };
+		689198961E5D1D8600D3B1AA /* PushMsgCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 689198951E5D1D8600D3B1AA /* PushMsgCell.m */; };
 		689713641CE2CF02008BB4AB /* RemindCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 689713631CE2CF02008BB4AB /* RemindCell.m */; };
 		689713671CE30420008BB4AB /* FlowListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 689713661CE30420008BB4AB /* FlowListCell.m */; };
 		6897136A1CE32C9A008BB4AB /* DocCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 689713691CE32C9A008BB4AB /* DocCell.m */; };
@@ -283,6 +284,13 @@
 		68CA75481DE3CD1600F2FA74 /* LeftMenuViewNew.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CA75441DE3CD1600F2FA74 /* LeftMenuViewNew.m */; };
 		68CA75491DE3CD1600F2FA74 /* MenuTableViewCellNew.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CA75461DE3CD1600F2FA74 /* MenuTableViewCellNew.m */; };
 		68CA754D1DE3D0B900F2FA74 /* UIView+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CA754C1DE3D0B900F2FA74 /* UIView+Extend.m */; };
+		68D02DA41E51A2A30064C837 /* PushMsgVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D02DA31E51A2A30064C837 /* PushMsgVC.m */; };
+		68D02DB31E53E8E50064C837 /* MCDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D02DA81E53E8E50064C837 /* MCDownloadManager.m */; };
+		68D02DB41E53E8E50064C837 /* MCURLRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D02DAA1E53E8E50064C837 /* MCURLRequest.m */; };
+		68D02DB51E53E8E50064C837 /* MCURLRequestCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D02DAC1E53E8E50064C837 /* MCURLRequestCenter.m */; };
+		68D02DB61E53E8E50064C837 /* MCURLResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D02DAE1E53E8E50064C837 /* MCURLResponse.m */; };
+		68D02DB71E53E8E50064C837 /* MCURLSessionConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D02DB01E53E8E50064C837 /* MCURLSessionConfiguration.m */; };
+		68D02DB81E53E8E50064C837 /* MCWiFiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D02DB21E53E8E50064C837 /* MCWiFiManager.m */; };
 		68D05CBA1C9791000039220F /* PasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D05CB91C9791000039220F /* PasswordViewController.m */; };
 		68D05CC01C97AC050039220F /* SendFeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D05CBF1C97AC050039220F /* SendFeedBackViewController.m */; };
 		68D05CC41C97B3530039220F /* SendFeedbackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D05CC31C97B3530039220F /* SendFeedbackView.m */; };
@@ -871,6 +879,8 @@
 		6882C3201CA92C4B00CDEB1A /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommentViewController.m; path = Base/Function/NewsController/CommentViewController.m; sourceTree = "<group>"; };
 		6884D2CE1CD98B4A006215E5 /* UIView+MGBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MGBadgeView.h"; sourceTree = "<group>"; };
 		6884D2CF1CD98B4A006215E5 /* UIView+MGBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MGBadgeView.m"; sourceTree = "<group>"; };
+		689198941E5D1D8600D3B1AA /* PushMsgCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PushMsgCell.h; path = Base/Function/PushMsg/PushMsgCell.h; sourceTree = "<group>"; };
+		689198951E5D1D8600D3B1AA /* PushMsgCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PushMsgCell.m; path = Base/Function/PushMsg/PushMsgCell.m; sourceTree = "<group>"; };
 		689713621CE2CF02008BB4AB /* RemindCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RemindCell.h; path = Base/Message/View/RemindCell.h; sourceTree = "<group>"; };
 		689713631CE2CF02008BB4AB /* RemindCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RemindCell.m; path = Base/Message/View/RemindCell.m; sourceTree = "<group>"; };
 		689713651CE30420008BB4AB /* FlowListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FlowListCell.h; path = Base/Message/View/FlowListCell.h; sourceTree = "<group>"; };
@@ -975,6 +985,21 @@
 		68CA75461DE3CD1600F2FA74 /* MenuTableViewCellNew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuTableViewCellNew.m; sourceTree = "<group>"; };
 		68CA754B1DE3D0B900F2FA74 /* UIView+Extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extend.h"; sourceTree = "<group>"; };
 		68CA754C1DE3D0B900F2FA74 /* UIView+Extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extend.m"; sourceTree = "<group>"; };
+		68D02DA21E51A2A30064C837 /* PushMsgVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PushMsgVC.h; path = Base/Function/PushMsg/PushMsgVC.h; sourceTree = "<group>"; };
+		68D02DA31E51A2A30064C837 /* PushMsgVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PushMsgVC.m; path = Base/Function/PushMsg/PushMsgVC.m; sourceTree = "<group>"; };
+		68D02DA61E53E8E50064C837 /* MCDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCDefine.h; sourceTree = "<group>"; };
+		68D02DA71E53E8E50064C837 /* MCDownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCDownloadManager.h; sourceTree = "<group>"; };
+		68D02DA81E53E8E50064C837 /* MCDownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCDownloadManager.m; sourceTree = "<group>"; };
+		68D02DA91E53E8E50064C837 /* MCURLRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCURLRequest.h; sourceTree = "<group>"; };
+		68D02DAA1E53E8E50064C837 /* MCURLRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCURLRequest.m; sourceTree = "<group>"; };
+		68D02DAB1E53E8E50064C837 /* MCURLRequestCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCURLRequestCenter.h; sourceTree = "<group>"; };
+		68D02DAC1E53E8E50064C837 /* MCURLRequestCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCURLRequestCenter.m; sourceTree = "<group>"; };
+		68D02DAD1E53E8E50064C837 /* MCURLResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCURLResponse.h; sourceTree = "<group>"; };
+		68D02DAE1E53E8E50064C837 /* MCURLResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCURLResponse.m; sourceTree = "<group>"; };
+		68D02DAF1E53E8E50064C837 /* MCURLSessionConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCURLSessionConfiguration.h; sourceTree = "<group>"; };
+		68D02DB01E53E8E50064C837 /* MCURLSessionConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCURLSessionConfiguration.m; sourceTree = "<group>"; };
+		68D02DB11E53E8E50064C837 /* MCWiFiManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCWiFiManager.h; sourceTree = "<group>"; };
+		68D02DB21E53E8E50064C837 /* MCWiFiManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCWiFiManager.m; sourceTree = "<group>"; };
 		68D05CB81C9791000039220F /* PasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PasswordViewController.h; path = Base/Settings/Controller/PasswordViewController.h; sourceTree = "<group>"; };
 		68D05CB91C9791000039220F /* PasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PasswordViewController.m; path = Base/Settings/Controller/PasswordViewController.m; sourceTree = "<group>"; };
 		68D05CBE1C97AC050039220F /* SendFeedBackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SendFeedBackViewController.h; path = Base/Settings/Controller/SendFeedBackViewController.h; sourceTree = "<group>"; };
@@ -1462,6 +1487,7 @@
 		2CFEADCD1C770D1D0054730E /* FunctionViewBase */ = {
 			isa = PBXGroup;
 			children = (
+				68D02D9E1E51A0030064C837 /* PushMsg */,
 				68B68E231D62B70C003B80AC /* Weather */,
 				686AAB981D4B43A6002775C2 /* SysMsg */,
 				683A452B1D40CA8200B91D82 /* UnFinish */,
@@ -2015,6 +2041,7 @@
 		6846D35D1CABC483004BD285 /* OpenSource */ = {
 			isa = PBXGroup;
 			children = (
+				68D02DA51E53E8E50064C837 /* MCDownloadManager */,
 				680BC9DC1E271A55003A7464 /* CocoaAsyncSocket */,
 				680BC9DF1E271A55003A7464 /* LFCGzipUtility */,
 				680BC9E21E271A55003A7464 /* rfi_reader */,
@@ -2422,6 +2449,38 @@
 			path = Category;
 			sourceTree = "<group>";
 		};
+		68D02D9E1E51A0030064C837 /* PushMsg */ = {
+			isa = PBXGroup;
+			children = (
+				68D02DA21E51A2A30064C837 /* PushMsgVC.h */,
+				68D02DA31E51A2A30064C837 /* PushMsgVC.m */,
+				689198941E5D1D8600D3B1AA /* PushMsgCell.h */,
+				689198951E5D1D8600D3B1AA /* PushMsgCell.m */,
+			);
+			name = PushMsg;
+			sourceTree = "<group>";
+		};
+		68D02DA51E53E8E50064C837 /* MCDownloadManager */ = {
+			isa = PBXGroup;
+			children = (
+				68D02DA61E53E8E50064C837 /* MCDefine.h */,
+				68D02DA71E53E8E50064C837 /* MCDownloadManager.h */,
+				68D02DA81E53E8E50064C837 /* MCDownloadManager.m */,
+				68D02DA91E53E8E50064C837 /* MCURLRequest.h */,
+				68D02DAA1E53E8E50064C837 /* MCURLRequest.m */,
+				68D02DAB1E53E8E50064C837 /* MCURLRequestCenter.h */,
+				68D02DAC1E53E8E50064C837 /* MCURLRequestCenter.m */,
+				68D02DAD1E53E8E50064C837 /* MCURLResponse.h */,
+				68D02DAE1E53E8E50064C837 /* MCURLResponse.m */,
+				68D02DAF1E53E8E50064C837 /* MCURLSessionConfiguration.h */,
+				68D02DB01E53E8E50064C837 /* MCURLSessionConfiguration.m */,
+				68D02DB11E53E8E50064C837 /* MCWiFiManager.h */,
+				68D02DB21E53E8E50064C837 /* MCWiFiManager.m */,
+			);
+			name = MCDownloadManager;
+			path = OpenSource/MCDownloadManager;
+			sourceTree = "<group>";
+		};
 		68D05CC11C97B3290039220F /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -2784,8 +2843,12 @@
 					2C35B0461C7062160003BF6C = {
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = K2XM9WW286;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Keychain = {
 								enabled = 1;
 							};
 							com.apple.Push = {
@@ -3029,6 +3092,7 @@
 				6846EC631CFAA68000A400C5 /* ShenPiQueryLogVC.m in Sources */,
 				683982D41DF00C5F001D3B10 /* fileenc.c in Sources */,
 				683982DA1DF00C5F001D3B10 /* mztools.c in Sources */,
+				68D02DB71E53E8E50064C837 /* MCURLSessionConfiguration.m in Sources */,
 				68D05CC71C97F6470039220F /* AboutViewController.m in Sources */,
 				68579FA61CC0C21100597FBD /* CarModel.m in Sources */,
 				680BC9EC1E271A55003A7464 /* RFIReader.m in Sources */,
@@ -3064,6 +3128,7 @@
 				68E779DE1CB34A8E006DA5B9 /* CLTreeView_LEVEL1_Cell.m in Sources */,
 				68723EB61CF839DA0019ACD8 /* UnFinishVc.m in Sources */,
 				6854ACB91DC86A4D00D03452 /* SwitchMutexCell.m in Sources */,
+				68D02DB81E53E8E50064C837 /* MCWiFiManager.m in Sources */,
 				2C35B04C1C7062160003BF6C /* main.m in Sources */,
 				2CFEADD71C79CCDE0054730E /* NotesViewController.m in Sources */,
 				68A9EE841DEBD91200BC640A /* AttachmentVC.m in Sources */,
@@ -3090,6 +3155,7 @@
 				68109FBA1D2B9C0C009B14B7 /* ShenPiSubVc.m in Sources */,
 				6846E6DD1D518CA5005287A1 /* HcdGuideViewManager.m in Sources */,
 				68E779E31CB34A8E006DA5B9 /* CLTreeViewNode.m in Sources */,
+				68D02DB41E53E8E50064C837 /* MCURLRequest.m in Sources */,
 				2C9DDEC91CD8E257009462E6 /* LYOneViewController.m in Sources */,
 				68B6249F1DF5745900E6E22A /* WaveProgressView.m in Sources */,
 				68C0A3B11D65B9FF00985D30 /* NSObject+MJProperty.m in Sources */,
@@ -3115,12 +3181,14 @@
 				6824F8E61DADC85300F98461 /* FFDropDownMenuView.m in Sources */,
 				68C3DF841DB74B4E004A369F /* DWBubbleMenuButton.m in Sources */,
 				2C3F219C1C85837F00EBD122 /* NotesTableVIewCell.m in Sources */,
+				68D02DB61E53E8E50064C837 /* MCURLResponse.m in Sources */,
 				683982A21DF002ED001D3B10 /* Unrar4iOS.mm in Sources */,
 				683982D01DF00C5F001D3B10 /* aescrypt.c in Sources */,
 				68E779FA1CB37D6A006DA5B9 /* FriendGroup.m in Sources */,
 				68B68E261D62B7DF003B80AC /* WeatherViewController.m in Sources */,
 				683982D31DF00C5F001D3B10 /* entropy.c in Sources */,
 				682B68BC1CB64FDE002EC60F /* AddPrintRadioCell.m in Sources */,
+				68D02DB31E53E8E50064C837 /* MCDownloadManager.m in Sources */,
 				2CFEADF01C7C06CB0054730E /* MenuItemModel.m in Sources */,
 				68C0A3AB1D65B9FF00985D30 /* MJProperty.m in Sources */,
 				68C91B441D9CC24E00F70FF9 /* UILabel+LabelHeightAndWidth.m in Sources */,
@@ -3134,6 +3202,7 @@
 				68C0A3AE1D65B9FF00985D30 /* NSObject+MJClass.m in Sources */,
 				68EEDE761CBB911A003295EB /* MCPopMenuPresentAnimator.m in Sources */,
 				681F25FA1DC2DD200029AC96 /* SwitchCell.m in Sources */,
+				68D02DB51E53E8E50064C837 /* MCURLRequestCenter.m in Sources */,
 				68052C2C1CAD167400A93BDA /* UIBarButtonItem+WZLBadge.m in Sources */,
 				68E8F3791D1249270062E864 /* AlarmCell.m in Sources */,
 				683982931DF002ED001D3B10 /* 7zIn.c in Sources */,
@@ -3197,6 +3266,7 @@
 				683982981DF002ED001D3B10 /* Lzma2Dec.c in Sources */,
 				2CB7DB621CA2C3150057633D /* ServerIPViewController.m in Sources */,
 				2CE320EE1CB6B4B000B36793 /* PrintFiles.m in Sources */,
+				689198961E5D1D8600D3B1AA /* PushMsgCell.m in Sources */,
 				6842B3E41D6AE76800054D6A /* WeatherFileTool.m in Sources */,
 				2C74F0791CAEACDA00CC5C5F /* PhoneLabelView.m in Sources */,
 				683982D51DF00C5F001D3B10 /* hmac.c in Sources */,
@@ -3206,6 +3276,7 @@
 				68EEDE751CBB911A003295EB /* MCPopMenuItem.m in Sources */,
 				680BC9EA1E271A55003A7464 /* GCDAsyncSocket.m in Sources */,
 				6882C3181CA8D78300CDEB1A /* LogoView.m in Sources */,
+				68D02DA41E51A2A30064C837 /* PushMsgVC.m in Sources */,
 				68DEEBC81CBDDA91003DB7AA /* MyShenPiCell.m in Sources */,
 				6846EC561CF99C7C00A400C5 /* IQPreviousNextView.m in Sources */,
 				2CFEAD441C72B8B90054730E /* LGSettingItem.m in Sources */,
@@ -3386,6 +3457,7 @@
 				CODE_SIGN_ENTITLEMENTS = unicomOA/unicomOA.entitlements;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = K2XM9WW286;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3404,8 +3476,9 @@
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.hnsi.oa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				PROVISIONING_PROFILE = "4b04f108-741c-4030-b9d9-56f72e42aa5c";
+				PROVISIONING_PROFILE_SPECIFIER = oa_dev;
+				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 				VALID_ARCHS = "arm64 armv7 armv7s i386";
 			};
@@ -3419,8 +3492,9 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CODE_SIGN_ENTITLEMENTS = unicomOA/unicomOA.entitlements;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: HeNan Province Information Consultation Designing Reseach Co., Ltd.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = K2XM9WW286;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3439,8 +3513,9 @@
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.hnsi.oa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				PROVISIONING_PROFILE = "384dbf57-5d34-40ec-9044-8d1a4aab0fd9";
+				PROVISIONING_PROFILE_SPECIFIER = OA_release;
+				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 				VALID_ARCHS = "arm64 armv7 armv7s i386";
 			};

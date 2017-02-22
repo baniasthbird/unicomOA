@@ -30,6 +30,7 @@
     UITextField *pwd;
     UITextField *user;
     UIButton *checkbox;
+    UIButton *checkbox_AutoLogin;
     UIButton *btn_login;
 }
 
@@ -67,6 +68,8 @@
     UILabel *lbl_ip;
     
     BOOL b_rememberPwd;
+    
+    BOOL b_autoLogin;
     
     BaseFunction *baseFunc;
     
@@ -145,7 +148,27 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     }
     else {
         if (_str_remark!=nil) {
-            LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"提示" message:_str_remark cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+            LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"提示" message:_str_remark cancelBtnTitle:@"打开VPN" otherBtnTitle:@"打开WIFI" clickIndexBlock:^(NSInteger clickIndex) {
+                NSURL *url;
+                if (clickIndex==0) {
+                    //打开VPN
+                    url= [NSURL URLWithString:@"Prefs:root=General&path=VPN"];
+                    
+                }
+                else {
+                    url=[NSURL URLWithString:@"Prefs:root=WIFI"];
+                }
+                if (f_v<10.0) {
+                    if( [[UIApplication sharedApplication]canOpenURL:url] ) {
+                        [[UIApplication sharedApplication]openURL:url];
+                    }
+                }
+                else {
+                    //这是解决推送通知问题的
+                    // url=[NSURL URLWithString:UIApplicationOpenSettingsURLString];
+                    Class LSApplicationWorkspace = NSClassFromString(@"LSApplicationWorkspace");
+                    [[LSApplicationWorkspace performSelector:@selector(defaultWorkspace)] performSelector:@selector(openSensitiveURL:withOptions:) withObject:url withObject:nil];
+                }
                 
             }];
             [alert showLXAlertView];
@@ -183,6 +206,7 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
    // _params[@"password"]=@"000000";
    
     
+    
     [self createLabels];
     [self createButtons];
     [self createTextFields];
@@ -210,6 +234,23 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     lbl_ip.textAlignment=NSTextAlignmentCenter;
   //  [self.view addSubview:lbl_ip];
     
+    BOOL b_Notification= [self isAllowedNotification];
+    if (b_Notification==NO) {
+        if (![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]) {
+            //弹出对话框，开启
+            LXAlertView *alert=[[LXAlertView alloc] initWithTitle:@"提示" message:@"请开启通知推送" cancelBtnTitle:nil otherBtnTitle:@"打开通知推送" clickIndexBlock:^(NSInteger clickIndex) {
+                if (clickIndex==0) {
+                    NSURL * url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+                    if([[UIApplication sharedApplication] canOpenURL:url]) {
+                        NSURL*url =[NSURL URLWithString:UIApplicationOpenSettingsURLString];
+                        [[UIApplication sharedApplication] openURL:url];
+                        
+                    }
+                }
+            }];
+            [alert showLXAlertView];
+        }
+    }
     /*
     // 设置代理
     [YBMonitorNetWorkState shareMonitorNetWorkState].delegate = self;
@@ -218,32 +259,57 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     */
     [self netWorkStateChanged];
     
+    b_autoLogin=[[NSUserDefaults standardUserDefaults] objectForKey:@"AUTOLOGIN"];
+    if (b_autoLogin==YES) {
+        NSUserDefaults *account = [NSUserDefaults standardUserDefaults];
+        NSString *str_usrname= [account objectForKey:@"name"];
+        NSString *str_password= [account objectForKey:@"password"];
+        if (![str_usrname isEqualToString:@""] && ![str_password isEqualToString:@""]) {
+            user.text=str_usrname;
+            pwd.text=str_password;
+            [self postLogin];
+        }
+    }
 }
 
 //新增添加显示IP地址的界面
 -(void)CreateCheckBox {
     checkbox=[[UIButton alloc]initWithFrame:CGRectZero];
+    checkbox_AutoLogin=[[UIButton alloc]initWithFrame:CGRectZero];
     UILabel *lbl_checkname;
+    UILabel *lbl_checkbox_AutoLogin;
     if (!iPad) {
-        checkbox.frame=CGRectMake(self.view.frame.size.width*0.08, self.view.frame.size.height/2+45,20,20);
-        lbl_checkname=[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.08+30, self.view.frame.size.height/2+30, self.view.frame.size.width*0.3, 50)];
+        checkbox.frame=CGRectMake(Width*0.08, Height/2+45,20,20);
+        checkbox_AutoLogin.frame=CGRectMake(Width*0.65, Height/2+45,20,20);
+        lbl_checkname=[[UILabel alloc]initWithFrame:CGRectMake(Width*0.08+30, Height/2+30, Width*0.3, 50)];
         lbl_checkname.font=[UIFont systemFontOfSize:15];
+        lbl_checkbox_AutoLogin=[[UILabel alloc]initWithFrame:CGRectMake(Width*0.65+30, Height/2+30, Width*0.3, 50)];
+        lbl_checkbox_AutoLogin.font=[UIFont systemFontOfSize:15];
     }
     else {
         checkbox.frame=CGRectMake(105, 620,25,25);
-        lbl_checkname=[[UILabel alloc]initWithFrame:CGRectMake(160, 608, self.view.frame.size.width*0.3, 50)];
+        checkbox_AutoLogin.frame=CGRectMake(Width*0.7, 620, 25, 25);
+        lbl_checkname=[[UILabel alloc]initWithFrame:CGRectMake(160, 608, Width*0.3, 50)];
         lbl_checkname.font=[UIFont systemFontOfSize:20];
+        lbl_checkbox_AutoLogin=[[UILabel alloc]initWithFrame:CGRectMake(Width*0.65+55, 608, Width*0.3, 50)];
+        lbl_checkbox_AutoLogin.font=[UIFont systemFontOfSize:15];
     }
     lbl_checkname.textColor=[UIColor whiteColor];
     lbl_checkname.text=@"记住密码";
+    lbl_checkbox_AutoLogin.textColor=[UIColor whiteColor];
+    lbl_checkbox_AutoLogin.text=@"自动登录";
 
     [checkbox setImage:[UIImage imageNamed:@"check_off.png"]forState:UIControlStateNormal];
     [checkbox setImage:[UIImage imageNamed:@"check_on.png"]forState:UIControlStateSelected];
     [checkbox addTarget:self action:@selector(checkboxClick:) forControlEvents:UIControlEventTouchUpInside];
-    
+    [checkbox_AutoLogin setImage:[UIImage imageNamed:@"check_off.png"]forState:UIControlStateNormal];
+    [checkbox_AutoLogin setImage:[UIImage imageNamed:@"check_on.png"]forState:UIControlStateSelected];
+    [checkbox_AutoLogin addTarget:self action:@selector(checkboxAutoLogin:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:checkbox];
     [self.view addSubview:lbl_checkname];
+    [self.view addSubview:checkbox_AutoLogin];
+    [self.view addSubview:lbl_checkbox_AutoLogin];
     
 }
 
@@ -408,8 +474,7 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
      */
     
     
-    
-    [self postLogin];
+   [self postLogin];
    // }
     
    // [self LocalEnter];
@@ -875,6 +940,7 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     
    // NSString *str_imgurl=[dic_usr objectForKey:@"headimg"];
     str_img_url=[baseFunc GetValueFromDic:dic_usr key:@"headimg"];
+    
     if (![str_img_url isEqualToString:@""]) {
         [self RemoveLocalLogo:str_name];
         [self DownloadImage:str_img_url name:str_name];
@@ -890,6 +956,9 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     userInfo.str_empid=str_userid;
     
     NSString *str_Logo=[[NSUserDefaults standardUserDefaults] objectForKey:@"Logo"];
+    
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"firstLaunch"];
+
     if ([str_img_url isEqualToString:@""]) {
         if (str_Logo==nil) {
             userInfo.str_Logo=@"headLogo.png";
@@ -1001,6 +1070,20 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
     }
 }
 
+-(void)checkboxAutoLogin:(UIButton*)btn {
+    btn.selected=!btn.selected;
+     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    if (btn.selected) {
+        b_autoLogin=YES;
+         [userDefaults setBool:YES forKey:@"AUTOLOGIN"];
+    }
+    else {
+        b_autoLogin=NO;
+        [userDefaults setBool:NO forKey:@"AUTOLOGIN"];
+    }
+
+}
+
 -(void)DownloadImage:(NSString*)str_img_link name:(NSString*)str_name {
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
@@ -1047,7 +1130,34 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
 }
 
 
+//zr 判断推送是否开启
+-(void)OpenPushNotification {
+    if ([[UIApplication sharedApplication] isRegisteredForRemoteNotifications]==NO) {
+        
+    }
+}
 
+
+/**
+ *  check if user allow local notification of system setting
+ *
+ *  @return YES-allowed,otherwise,NO.
+ */
+- (BOOL)isAllowedNotification {
+    //iOS8 check if user allow notification
+    if ([[UIDevice currentDevice].systemVersion floatValue]>=8.0) {// system is iOS8
+        UIUserNotificationSettings *setting = [[UIApplication sharedApplication] currentUserNotificationSettings];
+        if (UIUserNotificationTypeNone != setting.types) {
+            return YES;
+        }
+    } else {//iOS7
+        UIRemoteNotificationType type = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
+        if(UIRemoteNotificationTypeNone != type)
+            return YES;
+    }
+    
+    return NO;
+}
 
 
 

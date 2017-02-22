@@ -14,6 +14,8 @@
 #import "CALayer+Transition.h"
 #import "YBMonitorNetWorkState.h"
 #import "Mpush.h"
+#import "OAViewController.h"
+#import "MessageViewController.h"
 #ifdef NSFoundationVersionNumber_iOS_9_x_Max
 #import <UserNotifications/UserNotifications.h>
 #endif
@@ -69,6 +71,13 @@
          sleep(2);
     }
     
+    if (application.applicationIconBadgeNumber!=0) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"GetNotification"];
+    }
+    else {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"GetNotification"];
+    }
+
     [self enter];
     return YES;
 }
@@ -90,7 +99,7 @@
     else {
         NSString *currentNetWorkState=[[NSUserDefaults standardUserDefaults] objectForKey:@"connection"];
         if ([currentNetWorkState isEqualToString:@"GPRS"]) {
-            login.str_remark=@"检查系统更新失败，若要进行系统更新请切换至wifi模式";
+            login.str_remark=@"检查系统更新失败，若要进行系统更新请切换至wifi模式或打开VPN";
         }
         
     }
@@ -212,7 +221,8 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-     application.applicationIconBadgeNumber=0;
+    [self ChangeIcon];
+    application.applicationIconBadgeNumber=0;
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -222,6 +232,8 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+
 
 -(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
     NSString *str_content=notification.alertBody;
@@ -254,7 +266,8 @@
     
     NSString *str_msg=[[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
     
-    [application setApplicationIconBadgeNumber:0];
+  //  [application setApplicationIconBadgeNumber:0];
+    [self ChangeIcon];
     
     //app在前台运行时，针对推送消息单独处理
     if (application.applicationState==UIApplicationStateActive) {
@@ -281,16 +294,26 @@
 }
 
 -(void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
-    NSLog(@"远程通知注册失败：%@",error);
+    //NSLog(@"远程通知注册失败：%@",error);
+    LXAlertView *alert=[[LXAlertView alloc]initWithTitle:@"远程通知注册失败" message:error.description  cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+        
+    }];
+  //  [alert showLXAlertView];
+    
 }
 
 -(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    
     NSMutableString *deviceTokenString1 = [NSMutableString string];
     const char *bytes = deviceToken.bytes;
     NSUInteger iCount = deviceToken.length;
     for (int i = 0; i < iCount; i++) {
         [deviceTokenString1 appendFormat:@"%02x", bytes[i]&0x000000FF];
     }
+    LXAlertView *alert=[[LXAlertView alloc]initWithTitle:@"远程通知注册成功" message:deviceTokenString1  cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+        
+    }];
+   // [alert showLXAlertView];
     [MPUserDefaults setObject:deviceTokenString1 forKey:MPDeviceToken];
     //  NSLog(@"%@", deviceToken);
 }
@@ -316,11 +339,19 @@
     UNNotificationSound *sound = content.sound;
     //推送消息的副标题
     NSString *subtitle=content.subtitle;
+    
     //推送消息的标题
-    NSString *title=content.title;
+    NSString *title=[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"];
+    
     
     if ([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         NSLog(@"iOS10 前台收到远程通知:%@", userInfo);
+        [self ChangeIcon];
+      //  LXAlertView *alert=[[LXAlertView alloc]initWithTitle:@"收到远程通知" message:content.body  cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+            
+    //    }];
+     //   [alert showLXAlertView];
+
     }
     else {
         //判断为本地通知
@@ -333,6 +364,7 @@
 
 // 通知的点击事件
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void(^)())completionHandler{
+    
     //点击通知后，显示badge，获取XXX
     NSDictionary * userInfo = response.notification.request.content.userInfo;
     UNNotificationRequest *request = response.notification.request; // 收到推送的请求
@@ -343,8 +375,9 @@
     NSString *subtitle = content.subtitle;  // 推送消息的副标题
     NSString *title = content.title;  // 推送消息的标题
     if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
-        NSLog(@"iOS10 收到远程通知:%@", userInfo);
         
+        NSLog(@"iOS10 收到远程通知:%@", userInfo);
+        [self ChangeIcon];
     }
     else {
         // 判断为本地通知
@@ -354,6 +387,24 @@
     // Warning: UNUserNotificationCenter delegate received call to -userNotificationCenter:didReceiveNotificationResponse:withCompletionHandler: but the completion handler was never called.
     completionHandler();  // 系统要求执行这个方法
     
+}
+
+
+//改变消息左上角的ICON
+-(void)ChangeIcon {
+    UINavigationController *nav=(UINavigationController*)self.window.rootViewController;
+    OAViewController *vc_oa=(OAViewController*)[nav.viewControllers objectAtIndex:1];
+    UINavigationController *vc_sub=(UINavigationController*)[vc_oa.viewControllers objectAtIndex:0];
+    MessageViewController *vc_msg=(MessageViewController*)[vc_sub.viewControllers objectAtIndex:0];
+    UIBarButtonItem *button_item=  vc_msg.navigationItem.leftBarButtonItem;
+    UIButton *btn_view=(UIButton*)button_item.customView;
+    [btn_view setImage:[UIImage imageNamed:@"push_notification1"] forState:UIControlStateNormal];
+    [btn_view setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 45)];
+    NSMutableDictionary *param=[NSMutableDictionary dictionary];
+    param[@"userId"]=[NSString stringWithFormat:@"%@",vc_msg.userInfo.str_empid];
+    [vc_msg GetPushNotification:param];
+    [vc_msg.view setNeedsDisplay];
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"GetNotification"];
 }
 
 
