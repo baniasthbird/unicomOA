@@ -21,7 +21,7 @@
 
 @property NSInteger i_rownum;
 
-@property (nonatomic,strong) NSMutableArray *arr_PushMsg;
+@property (nonatomic,strong) NSArray *arr_PushMsg;
 
 @property (nonatomic,strong) UserInfo *userInfo;
 

@@ -221,9 +221,12 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-    [self ChangeIcon];
-    application.applicationIconBadgeNumber=0;
-}
+    if (application.applicationIconBadgeNumber!=0) {
+        [self ChangeIcon];
+        application.applicationIconBadgeNumber=0;
+    }
+    
+    }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
@@ -393,18 +396,20 @@
 //改变消息左上角的ICON
 -(void)ChangeIcon {
     UINavigationController *nav=(UINavigationController*)self.window.rootViewController;
-    OAViewController *vc_oa=(OAViewController*)[nav.viewControllers objectAtIndex:1];
-    UINavigationController *vc_sub=(UINavigationController*)[vc_oa.viewControllers objectAtIndex:0];
-    MessageViewController *vc_msg=(MessageViewController*)[vc_sub.viewControllers objectAtIndex:0];
-    UIBarButtonItem *button_item=  vc_msg.navigationItem.leftBarButtonItem;
-    UIButton *btn_view=(UIButton*)button_item.customView;
-    [btn_view setImage:[UIImage imageNamed:@"push_notification1"] forState:UIControlStateNormal];
-    [btn_view setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 45)];
-    NSMutableDictionary *param=[NSMutableDictionary dictionary];
-    param[@"userId"]=[NSString stringWithFormat:@"%@",vc_msg.userInfo.str_empid];
-    [vc_msg GetPushNotification:param];
-    [vc_msg.view setNeedsDisplay];
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"GetNotification"];
+    if (nav.viewControllers.count>1) {
+        OAViewController *vc_oa=(OAViewController*)[nav.viewControllers objectAtIndex:1];
+        UINavigationController *vc_sub=(UINavigationController*)[vc_oa.viewControllers objectAtIndex:0];
+        MessageViewController *vc_msg=(MessageViewController*)[vc_sub.viewControllers objectAtIndex:0];
+        UIBarButtonItem *button_item=  vc_msg.navigationItem.leftBarButtonItem;
+        UIButton *btn_view=(UIButton*)button_item.customView;
+        [btn_view setSelected:YES];
+        NSMutableDictionary *param=[NSMutableDictionary dictionary];
+        param[@"userId"]=[NSString stringWithFormat:@"%@",vc_msg.userInfo.str_empid];
+        [vc_msg GetPushNotification:param];
+        [vc_msg.view setNeedsDisplay];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"GetNotification"];
+    }
+    
 }
 
 

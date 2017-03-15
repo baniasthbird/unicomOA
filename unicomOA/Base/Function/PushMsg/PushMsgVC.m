@@ -67,8 +67,8 @@
     if (arr_text.count==2) {
         NSString *str_text_title=[arr_text objectAtIndex:0];
         NSString *str_text_time=[arr_text objectAtIndex:1];
-        CGFloat h_Title=[UILabel getHeightByWidth:0.92*Width title:str_text_title font:[UIFont systemFontOfSize:15]];
-        CGFloat h_depart=[UILabel getHeightByWidth:0.92*Width title:str_text_time font:[UIFont systemFontOfSize:15]];
+        CGFloat h_Title=[UILabel getHeightByWidth:0.92*Width title:str_text_title font:[UIFont systemFontOfSize:17]];
+        CGFloat h_depart=[UILabel getHeightByWidth:0.92*Width title:str_text_time font:[UIFont systemFontOfSize:11]];
         CGFloat cellHeight;
         if (h_Title>45) {
             cellHeight= 71+h_depart;

@@ -232,6 +232,7 @@
 		6882C3211CA92C4B00CDEB1A /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6882C3201CA92C4B00CDEB1A /* CommentViewController.m */; };
 		6884D2D01CD98B4A006215E5 /* UIView+MGBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6884D2CF1CD98B4A006215E5 /* UIView+MGBadgeView.m */; };
 		689198961E5D1D8600D3B1AA /* PushMsgCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 689198951E5D1D8600D3B1AA /* PushMsgCell.m */; };
+		6891989A1E5D958C00D3B1AA /* UIBarButtonItem+Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = 689198991E5D958C00D3B1AA /* UIBarButtonItem+Badge.m */; };
 		689713641CE2CF02008BB4AB /* RemindCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 689713631CE2CF02008BB4AB /* RemindCell.m */; };
 		689713671CE30420008BB4AB /* FlowListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 689713661CE30420008BB4AB /* FlowListCell.m */; };
 		6897136A1CE32C9A008BB4AB /* DocCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 689713691CE32C9A008BB4AB /* DocCell.m */; };
@@ -881,6 +882,8 @@
 		6884D2CF1CD98B4A006215E5 /* UIView+MGBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MGBadgeView.m"; sourceTree = "<group>"; };
 		689198941E5D1D8600D3B1AA /* PushMsgCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PushMsgCell.h; path = Base/Function/PushMsg/PushMsgCell.h; sourceTree = "<group>"; };
 		689198951E5D1D8600D3B1AA /* PushMsgCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PushMsgCell.m; path = Base/Function/PushMsg/PushMsgCell.m; sourceTree = "<group>"; };
+		689198981E5D958C00D3B1AA /* UIBarButtonItem+Badge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Badge.h"; sourceTree = "<group>"; };
+		689198991E5D958C00D3B1AA /* UIBarButtonItem+Badge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Badge.m"; sourceTree = "<group>"; };
 		689713621CE2CF02008BB4AB /* RemindCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RemindCell.h; path = Base/Message/View/RemindCell.h; sourceTree = "<group>"; };
 		689713631CE2CF02008BB4AB /* RemindCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RemindCell.m; path = Base/Message/View/RemindCell.m; sourceTree = "<group>"; };
 		689713651CE30420008BB4AB /* FlowListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FlowListCell.h; path = Base/Message/View/FlowListCell.h; sourceTree = "<group>"; };
@@ -2041,6 +2044,7 @@
 		6846D35D1CABC483004BD285 /* OpenSource */ = {
 			isa = PBXGroup;
 			children = (
+				689198971E5D958C00D3B1AA /* UIBarButtonItemBadage */,
 				68D02DA51E53E8E50064C837 /* MCDownloadManager */,
 				680BC9DC1E271A55003A7464 /* CocoaAsyncSocket */,
 				680BC9DF1E271A55003A7464 /* LFCGzipUtility */,
@@ -2273,6 +2277,16 @@
 			);
 			name = "UIView-MGBadgeView";
 			path = "OpenSource/UIView-MGBadgeView";
+			sourceTree = "<group>";
+		};
+		689198971E5D958C00D3B1AA /* UIBarButtonItemBadage */ = {
+			isa = PBXGroup;
+			children = (
+				689198981E5D958C00D3B1AA /* UIBarButtonItem+Badge.h */,
+				689198991E5D958C00D3B1AA /* UIBarButtonItem+Badge.m */,
+			);
+			name = UIBarButtonItemBadage;
+			path = OpenSource/UIBarButtonItemBadage;
 			sourceTree = "<group>";
 		};
 		689713611CE2CEC6008BB4AB /* View */ = {
@@ -3225,6 +3239,7 @@
 				68DEEBE31CBE30E6003DB7AA /* UserInfo.m in Sources */,
 				68EEDE781CBB911A003295EB /* UITableView+SDAutoTableViewCellHeight.m in Sources */,
 				6846EC591CF99C7C00A400C5 /* IQUIView+IQKeyboardToolbar.m in Sources */,
+				6891989A1E5D958C00D3B1AA /* UIBarButtonItem+Badge.m in Sources */,
 				2C9DDECA1CD8E257009462E6 /* LYTwoViewController.m in Sources */,
 				6839829A1DF002ED001D3B10 /* LZMAExtractor.m in Sources */,
 				6826294E1D9DF5F000A50AE2 /* NewsInformTableViewCell.m in Sources */,

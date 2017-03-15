@@ -10,6 +10,8 @@
 #import <CommonCrypto/CommonCryptor.h>
 
 
+
+
 @implementation MessageDataPacketTool
 
 
@@ -73,7 +75,7 @@
     [writerPacket writeString:iosStr];
     
     //设备版本号
-    NSString *osVersionStr =  appVersion;
+    NSString *osVersionStr =  [MPUserDefaults objectForKey:MPMainServerIP];
     [writerPacket writeString:osVersionStr];
     
     //app版本号

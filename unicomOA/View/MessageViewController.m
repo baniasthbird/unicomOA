@@ -216,16 +216,14 @@
     
     [self setupLocation];
     
+    arr_Push_Msg=[[NSMutableArray alloc]init];
     //添加消息响应
     UIButton *btn_notification=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 90, 40)];
+    [btn_notification setImage:[UIImage imageNamed:@"push_notification1"] forState:UIControlStateSelected];
+    [btn_notification setImage:[UIImage imageNamed:@"push_notification"] forState:UIControlStateNormal];
    // [btn_notification setTitle:@"推送" forState:UIControlStateNormal];
     BOOL b_new_notification=[[NSUserDefaults standardUserDefaults] boolForKey:@"GetNotification"];
-    if (b_new_notification==YES) {
-        [btn_notification setImage:[UIImage imageNamed:@"push_notification1"] forState:UIControlStateNormal];
-    }
-    else {
-        [btn_notification setImage:[UIImage imageNamed:@"push_notification"] forState:UIControlStateNormal];
-    }
+    btn_notification.selected=b_new_notification;
     [btn_notification setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 45)];
     [btn_notification addTarget:self action:@selector(PushNotification:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *barButtonItem=[[UIBarButtonItem alloc]initWithCustomView:btn_notification];
@@ -1523,8 +1521,9 @@
     PushMsgVC *vc=[[PushMsgVC alloc] init];
     vc.userInfo=_userInfo;
     vc.str_title=@"系统消息";
-    vc.i_rownum=[arr_Push_Msg count];
-    vc.arr_PushMsg=arr_Push_Msg;
+    NSArray *Usr_Push_Msg=[[NSUserDefaults standardUserDefaults] objectForKey:@"push_notification"];
+    vc.i_rownum=[Usr_Push_Msg count];
+    vc.arr_PushMsg=Usr_Push_Msg;
     vc.delegate=self;
     if (f_v<9.0) {
         self.navigationController.delegate=nil;
@@ -1567,25 +1566,32 @@
                     }
                 }
             }
-            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-            [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-            for (int i=0; i<[arr_mute_tmp count]-1; i++) {
-                for (int j=0; j<[arr_mute_tmp count]-i-1; j++) {
-                    NSString *str_tmp0=[arr_mute_tmp objectAtIndex:j];
-                    NSString *str_time0=(NSString*)[[str_tmp0 componentsSeparatedByString:@"||"] objectAtIndex:1];
-                    NSDate *date0 = [dateFormatter dateFromString:str_time0];
-                    NSString *str_tmp1=[arr_mute_tmp objectAtIndex:j+1];
-                    NSString *str_time1=(NSString*)[[str_tmp1 componentsSeparatedByString:@"||"] objectAtIndex:1];
-                    NSDate *date1 = [dateFormatter dateFromString:str_time1];
-                    if (date0<date1) {
-                        NSString *str_tmp=str_tmp0;
-                        [arr_mute_tmp setObject:str_tmp1 atIndexedSubscript:j];
-                        [arr_mute_tmp setObject:str_tmp atIndexedSubscript:j+1];
+            if ([arr_mute_tmp count]>0) {
+                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+                for (int i=0; i<[arr_mute_tmp count]-1; i++) {
+                    for (int j=0; j<[arr_mute_tmp count]-i-1; j++) {
+                        NSString *str_tmp0=[arr_mute_tmp objectAtIndex:j];
+                        NSString *str_time0=(NSString*)[[str_tmp0 componentsSeparatedByString:@"||"] objectAtIndex:1];
+                        NSDate *date0 = [dateFormatter dateFromString:str_time0];
+                        NSString *str_tmp1=[arr_mute_tmp objectAtIndex:j+1];
+                        NSString *str_time1=(NSString*)[[str_tmp1 componentsSeparatedByString:@"||"] objectAtIndex:1];
+                        NSDate *date1 = [dateFormatter dateFromString:str_time1];
+                        if (date0<date1) {
+                            NSString *str_tmp=str_tmp0;
+                            [arr_mute_tmp setObject:str_tmp1 atIndexedSubscript:j];
+                            [arr_mute_tmp setObject:str_tmp atIndexedSubscript:j+1];
+                        }
                     }
                 }
+                NSArray *Usr_Push_Msg=[NSArray arrayWithArray:arr_mute_tmp];
+                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                [defaults setObject:Usr_Push_Msg forKey:@"push_notification"];
+                [defaults synchronize];
+                //记录到数据库中
+                arr_Push_Msg=arr_mute_tmp;
             }
-            arr_Push_Msg=arr_mute_tmp;
-            NSLog(@"测试");
+            
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
@@ -1600,9 +1606,11 @@
     UIButton *btn_notification=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 90, 40)];
     // [btn_notification setTitle:@"推送" forState:UIControlStateNormal];
     [btn_notification setImage:[UIImage imageNamed:@"push_notification"] forState:UIControlStateNormal];
+    [btn_notification setImage:[UIImage imageNamed:@"push_notification1"] forState:UIControlStateSelected];
     [btn_notification setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 45)];
     [btn_notification addTarget:self action:@selector(PushNotification:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *barButtonItem=[[UIBarButtonItem alloc]initWithCustomView:btn_notification];
+    btn_notification.selected=NO;
     self.navigationItem.leftBarButtonItem=barButtonItem;
     [self.view setNeedsDisplay];
 

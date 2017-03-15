@@ -25,6 +25,7 @@
 #define MPMinHeartbeat 180
 #define MPMaxHeartbeat 180
 #define MPMaxConnectTimes 6
+#define MPMainServerIP @"MainServerIP"
 
 
 #endif /* Mpush_h */

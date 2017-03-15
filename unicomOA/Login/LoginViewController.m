@@ -786,6 +786,7 @@ static NSString *kBaseUrl=@"http://192.168.12.151:8080/default/mobile/user/com.h
             else if (JSON.count==3) {
                 [indicator stopAnimating];
             
+                [MPUserDefaults setObject:str_ip forKey:MPMainServerIP];
                 NSLog(@"请求JSON成功");
                 NSString *str_success=[JSON objectForKey:@"success"];
                 BOOL b_success=[str_success boolValue];
