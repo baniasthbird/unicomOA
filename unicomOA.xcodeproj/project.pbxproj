@@ -84,6 +84,11 @@
 		68052C2D1CAD167400A93BDA /* UITabBarItem+WZLBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = 68052C221CAD167400A93BDA /* UITabBarItem+WZLBadge.m */; };
 		68052C2E1CAD167400A93BDA /* CAAnimation+WAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 68052C251CAD167400A93BDA /* CAAnimation+WAnimation.m */; };
 		68052C2F1CAD167400A93BDA /* UIView+WZLBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = 68052C2A1CAD167400A93BDA /* UIView+WZLBadge.m */; };
+		68083A6A1E7A92D2002BE1C5 /* 客户端接口V0.65.docx in Resources */ = {isa = PBXBuildFile; fileRef = 68083A651E7A92D2002BE1C5 /* 客户端接口V0.65.docx */; };
+		68083A6B1E7A92D2002BE1C5 /* 手机端功能类比明细zr-2.xlsx in Resources */ = {isa = PBXBuildFile; fileRef = 68083A661E7A92D2002BE1C5 /* 手机端功能类比明细zr-2.xlsx */; };
+		68083A6C1E7A92D2002BE1C5 /* 推送系统部署步骤.docx in Resources */ = {isa = PBXBuildFile; fileRef = 68083A671E7A92D2002BE1C5 /* 推送系统部署步骤.docx */; };
+		68083A6D1E7A92D2002BE1C5 /* YICR APP部署.docx in Resources */ = {isa = PBXBuildFile; fileRef = 68083A681E7A92D2002BE1C5 /* YICR APP部署.docx */; };
+		68083A6E1E7A92D2002BE1C5 /* YICR接口对接.docx in Resources */ = {isa = PBXBuildFile; fileRef = 68083A691E7A92D2002BE1C5 /* YICR接口对接.docx */; };
 		680861D61CEAD33300257AAA /* PositionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 680861D51CEAD33300257AAA /* PositionCell.m */; };
 		680BC9EA1E271A55003A7464 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 680BC9DE1E271A55003A7464 /* GCDAsyncSocket.m */; };
 		680BC9EB1E271A55003A7464 /* LFCGzipUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 680BC9E11E271A55003A7464 /* LFCGzipUtility.m */; };
@@ -539,6 +544,11 @@
 		68052C291CAD167400A93BDA /* UIView+WZLBadge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WZLBadge.h"; sourceTree = "<group>"; };
 		68052C2A1CAD167400A93BDA /* UIView+WZLBadge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WZLBadge.m"; sourceTree = "<group>"; };
 		68052C2B1CAD167400A93BDA /* WZLBadgeImport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WZLBadgeImport.h; sourceTree = "<group>"; };
+		68083A651E7A92D2002BE1C5 /* 客户端接口V0.65.docx */ = {isa = PBXFileReference; lastKnownFileType = file; name = "客户端接口V0.65.docx"; path = "doc/客户端接口V0.65.docx"; sourceTree = "<group>"; };
+		68083A661E7A92D2002BE1C5 /* 手机端功能类比明细zr-2.xlsx */ = {isa = PBXFileReference; lastKnownFileType = file; name = "手机端功能类比明细zr-2.xlsx"; path = "doc/手机端功能类比明细zr-2.xlsx"; sourceTree = "<group>"; };
+		68083A671E7A92D2002BE1C5 /* 推送系统部署步骤.docx */ = {isa = PBXFileReference; lastKnownFileType = file; name = "推送系统部署步骤.docx"; path = "doc/推送系统部署步骤.docx"; sourceTree = "<group>"; };
+		68083A681E7A92D2002BE1C5 /* YICR APP部署.docx */ = {isa = PBXFileReference; lastKnownFileType = file; name = "YICR APP部署.docx"; path = "doc/YICR APP部署.docx"; sourceTree = "<group>"; };
+		68083A691E7A92D2002BE1C5 /* YICR接口对接.docx */ = {isa = PBXFileReference; lastKnownFileType = file; name = "YICR接口对接.docx"; path = "doc/YICR接口对接.docx"; sourceTree = "<group>"; };
 		680861D41CEAD33300257AAA /* PositionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PositionCell.h; path = Base/Function/NotesViews/PositionCell.h; sourceTree = "<group>"; };
 		680861D51CEAD33300257AAA /* PositionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PositionCell.m; path = Base/Function/NotesViews/PositionCell.m; sourceTree = "<group>"; };
 		680BC9DB1E26245E003A7464 /* Mpush.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Mpush.h; sourceTree = "<group>"; };
@@ -1200,6 +1210,7 @@
 		2C35B03E1C7062160003BF6C = {
 			isa = PBXGroup;
 			children = (
+				68083A641E7A9092002BE1C5 /* Doc */,
 				684A715C1CD9DC5F00A892B1 /* MobileCoreServices.framework */,
 				684A715A1CD9DC4800A892B1 /* QuartzCore.framework */,
 				684A71581CD9DC4100A892B1 /* Foundation.framework */,
@@ -1628,6 +1639,18 @@
 				68052C2A1CAD167400A93BDA /* UIView+WZLBadge.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		68083A641E7A9092002BE1C5 /* Doc */ = {
+			isa = PBXGroup;
+			children = (
+				68083A651E7A92D2002BE1C5 /* 客户端接口V0.65.docx */,
+				68083A661E7A92D2002BE1C5 /* 手机端功能类比明细zr-2.xlsx */,
+				68083A671E7A92D2002BE1C5 /* 推送系统部署步骤.docx */,
+				68083A681E7A92D2002BE1C5 /* YICR APP部署.docx */,
+				68083A691E7A92D2002BE1C5 /* YICR接口对接.docx */,
+			);
+			name = Doc;
 			sourceTree = "<group>";
 		};
 		680BC9DC1E271A55003A7464 /* CocoaAsyncSocket */ = {
@@ -2906,6 +2929,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				68F8E1791CD042AA005D2727 /* bg_Nav.png in Resources */,
+				68083A6B1E7A92D2002BE1C5 /* 手机端功能类比明细zr-2.xlsx in Resources */,
 				68DE65AF1DF93EA700C2C0ED /* MBProgressHUD.bundle in Resources */,
 				68B6DE741D42113C00EC3889 /* unfinish.png in Resources */,
 				68F8E1841CD042AA005D2727 /* position.png in Resources */,
@@ -2941,8 +2965,11 @@
 				687E74BA1D113B9500F67884 /* check_off.png in Resources */,
 				68E779E41CB34A8E006DA5B9 /* contacts_collect@2x.png in Resources */,
 				68F8E1801CD042AA005D2727 /* myApplication.png in Resources */,
+				68083A6D1E7A92D2002BE1C5 /* YICR APP部署.docx in Resources */,
 				683D5A2B1D2DF6E6002958D3 /* imageResize.js in Resources */,
 				6846EC5A1CF99C7C00A400C5 /* IQKeyboardManager.bundle in Resources */,
+				68083A6A1E7A92D2002BE1C5 /* 客户端接口V0.65.docx in Resources */,
+				68083A6E1E7A92D2002BE1C5 /* YICR接口对接.docx in Resources */,
 				68B38F091D19248A00F28034 /* tablerow.png in Resources */,
 				68F8E18C1CD04409005D2727 /* alarm.png in Resources */,
 				68E779E61CB34A8E006DA5B9 /* head1.jpg in Resources */,
@@ -2954,6 +2981,7 @@
 				6854379E1D7E995700A0F4FA /* RAYNewFunctionGuideVC.xib in Resources */,
 				68F8E17E1CD042AA005D2727 /* logoimage.png in Resources */,
 				68F8E1811CD042AA005D2727 /* myApproval.png in Resources */,
+				68083A6C1E7A92D2002BE1C5 /* 推送系统部署步骤.docx in Resources */,
 				68EEDE711CBB911A003295EB /* down_arrow@2x.png in Resources */,
 				68F8E17C1CD042AA005D2727 /* LoginView.png in Resources */,
 				68F8E1861CD042AA005D2727 /* returnlogo.png in Resources */,
