@@ -447,7 +447,7 @@ static NSString *kServerSessionCookie=@"JSESSIONID";
         if (f_v<9.0) {
             self.navigationController.delegate=nil;
         }
-        [self.navigationController pushViewController:staffController animated:NO];
+        [self.navigationController pushViewController:staffController animated:YES];
     }
     /*
     else if (indexPath.section==0 && indexPath.row==0) {

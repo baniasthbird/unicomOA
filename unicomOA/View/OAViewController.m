@@ -20,7 +20,7 @@
 #import "GCDAsyncSocket.h"
 #import "MessageDataPacketTool.h"
 
-
+#import "OANavigationController.h"
 
 @interface OAViewController ()<GCDAsyncSocketDelegate>
 {
@@ -119,24 +119,27 @@
     
     self.userId=userInfo.str_empid;
     [self connectToHost];
-  //  [self BindUser];
-    UINavigationController *navi1=[[UINavigationController alloc]initWithRootViewController:message];
+    //  [self BindUser];
+    //    UINavigationController *navi1=[[UINavigationController alloc]initWithRootViewController:message];
+    OANavigationController *messageNav = [[OANavigationController alloc]initWithRootViewController:message];
     
-   // ContactViewController *contact=[[ContactViewController alloc]init];
+    // ContactViewController *contact=[[ContactViewController alloc]init];
     ContactViewControllerNew *contact=[[ContactViewControllerNew alloc]init];
     contact.userInfo=userInfo;
-    UINavigationController *navi2=[[UINavigationController alloc]initWithRootViewController:contact];
+    //    UINavigationController *navi2=[[UINavigationController alloc]initWithRootViewController:contact];
+    OANavigationController *contactNav = [[OANavigationController alloc]initWithRootViewController:contact];
     
     func=[[FunctionViewController alloc]init];
     func.userInfo=userInfo;
-    UINavigationController *navi3=[[UINavigationController alloc]initWithRootViewController:func];
+    //    UINavigationController *navi3=[[UINavigationController alloc]initWithRootViewController:func];
+    OANavigationController *funcNav = [[OANavigationController alloc]initWithRootViewController:func];
     
     SettingViewController *setting=[[SettingViewController alloc]init];
     setting.userInfo=userInfo;
-    UINavigationController *navi4=[[UINavigationController alloc]initWithRootViewController:setting];
+    //    UINavigationController *navi4=[[UINavigationController alloc]initWithRootViewController:setting];
+    OANavigationController *settingNav = [[OANavigationController alloc]initWithRootViewController:setting];
     
-    self.viewControllers=[NSArray arrayWithObjects:navi1,navi2,navi3,navi4, nil];
-    
+    self.viewControllers=[NSArray arrayWithObjects:messageNav,contactNav,funcNav,settingNav, nil];
     /*
     if (!iPad) {
         [self creatButtonWithNormalName:@"message.png" andSelectName:@"message_selected.png" andTitle:@"" andIndex:0];

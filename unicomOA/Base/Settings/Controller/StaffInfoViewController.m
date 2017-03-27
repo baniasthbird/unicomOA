@@ -32,7 +32,7 @@
     [super viewDidLoad];
     
     self.title=@"我的资料";
-    
+    self.tableView.tableFooterView = [UIView new];
     
 
     
@@ -316,14 +316,14 @@
 
 -(void)MovePreviousVc:(UIButton *)sender {
     
-    SettingViewController *viewController=[[SettingViewController alloc]init];
-    viewController.userInfo=_userInfo;
-    if (f_v<9.0) {
-        self.navigationController.delegate=nil;
-    }
-    [self.navigationController pushViewController:viewController animated:NO];
-     
-     //[self.navigationController popViewControllerAnimated:YES];
+//    SettingViewController *viewController=[[SettingViewController alloc]init];
+//    viewController.userInfo=_userInfo;
+//    if (f_v<9.0) {
+//        self.navigationController.delegate=nil;
+//    }
+//    [self.navigationController pushViewController:viewController animated:NO];
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 

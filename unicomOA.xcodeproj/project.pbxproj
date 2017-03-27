@@ -268,6 +268,7 @@
 		68B68E2D1D62F072003B80AC /* LocalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B68E2C1D62F072003B80AC /* LocalViewController.m */; };
 		68B68E311D62F7A2003B80AC /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B68E301D62F7A2003B80AC /* NSString+Extension.m */; };
 		68B6DE741D42113C00EC3889 /* unfinish.png in Resources */ = {isa = PBXBuildFile; fileRef = 68B6DE731D42113C00EC3889 /* unfinish.png */; };
+		68BB4A711E8511100086F9DB /* OANavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BB4A701E8511100086F9DB /* OANavigationController.m */; };
 		68C0A3A81D65B9FF00985D30 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 68C0A3921D65B9FF00985D30 /* Info.plist */; };
 		68C0A3A91D65B9FF00985D30 /* MJExtensionConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C0A3951D65B9FF00985D30 /* MJExtensionConst.m */; };
 		68C0A3AA1D65B9FF00985D30 /* MJFoundation.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C0A3971D65B9FF00985D30 /* MJFoundation.m */; };
@@ -952,6 +953,8 @@
 		68B68E321D62FC1B003B80AC /* libINTULocationManager.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libINTULocationManager.a; path = "Pods/../build/Debug-iphoneos/libINTULocationManager.a"; sourceTree = "<group>"; };
 		68B68E3F1D631E82003B80AC /* libMJExtension.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMJExtension.a; path = "Pods/../build/Debug-iphoneos/libMJExtension.a"; sourceTree = "<group>"; };
 		68B6DE731D42113C00EC3889 /* unfinish.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unfinish.png; sourceTree = "<group>"; };
+		68BB4A6F1E8511100086F9DB /* OANavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OANavigationController.h; path = View/OANavigationController.h; sourceTree = "<group>"; };
+		68BB4A701E8511100086F9DB /* OANavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OANavigationController.m; path = View/OANavigationController.m; sourceTree = "<group>"; };
 		68C0A3921D65B9FF00985D30 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		68C0A3931D65B9FF00985D30 /* MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJExtension.h; sourceTree = "<group>"; };
 		68C0A3941D65B9FF00985D30 /* MJExtensionConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJExtensionConst.h; sourceTree = "<group>"; };
@@ -1416,6 +1419,8 @@
 				68E779F31CB34D78006DA5B9 /* ContactViewControllerNew.m */,
 				684E93D11CFD537600545D55 /* UITabBar+badge.h */,
 				684E93D21CFD537600545D55 /* UITabBar+badge.m */,
+				68BB4A6F1E8511100086F9DB /* OANavigationController.h */,
+				68BB4A701E8511100086F9DB /* OANavigationController.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -3122,6 +3127,7 @@
 				68D05CC01C97AC050039220F /* SendFeedBackViewController.m in Sources */,
 				683FD9FE1D654F4D005B8F5D /* UIBarButtonItem+Weather.m in Sources */,
 				68C33B741D34C58B00FCC0F1 /* LogTriangleView.m in Sources */,
+				68BB4A711E8511100086F9DB /* OANavigationController.m in Sources */,
 				6826294B1D9DF5CF00A50AE2 /* NewsNewsTableViewCell.m in Sources */,
 				6824F8E21DADC85300F98461 /* FFDropDownMenuBasedModel.m in Sources */,
 				683982D21DF00C5F001D3B10 /* aestab.c in Sources */,

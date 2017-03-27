@@ -154,7 +154,7 @@
     
     _baseFunc=[[BaseFunction alloc]init];
     
-    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-50) style:UITableViewStylePlain];
+    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-64) style:UITableViewStylePlain];
     _tableView.delegate=self;
     _tableView.dataSource=self;
     _tableView.backgroundColor=[UIColor clearColor];
@@ -1053,7 +1053,7 @@
         if (f_v<9.0) {
             self.navigationController.delegate=nil;
         }
-        [self.navigationController pushViewController:news_controller animated:NO];
+        [self.navigationController pushViewController:news_controller animated:YES];
         
     }
 }
@@ -1082,7 +1082,7 @@
     if (f_v<9.0) {
         self.navigationController.delegate=nil;
     }
-    [self.navigationController pushViewController:news_controller animated:NO];
+    [self.navigationController pushViewController:news_controller animated:YES];
 }
 
 -(void)sideslipCellRemoveCell:(NewsManagementTableViewCell *)cell atIndex:(NSInteger)index {
@@ -1156,7 +1156,7 @@
     if (f_v<9.0) {
         self.navigationController.delegate=nil;
     }
-    [self.navigationController pushViewController:viewController animated:NO];
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 
@@ -1167,7 +1167,7 @@
     if (f_v<9.0) {
         self.navigationController.delegate=nil;
     }
-    [self.navigationController pushViewController:vc animated:NO];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)PassNaveToMessage {
@@ -1178,7 +1178,7 @@
     if (f_v<9.0) {
         self.navigationController.delegate=nil;
     }
-    [self.navigationController pushViewController:vc animated:NO];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 
@@ -1529,7 +1529,7 @@
         self.navigationController.delegate=nil;
     }
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"GetNotification"];
-    [self.navigationController pushViewController:vc animated:NO];
+    [self.navigationController pushViewController:vc animated:YES];
 
 }
 

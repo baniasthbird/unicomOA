@@ -189,6 +189,7 @@
                 return YES;
             }
             else {
+                
                 return NO;
             }
         }
@@ -298,9 +299,9 @@
 
 -(void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
     //NSLog(@"远程通知注册失败：%@",error);
-    LXAlertView *alert=[[LXAlertView alloc]initWithTitle:@"远程通知注册失败" message:error.description  cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
-        
-    }];
+//    LXAlertView *alert=[[LXAlertView alloc]initWithTitle:@"远程通知注册失败" message:error.description  cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+//        
+//    }];
   //  [alert showLXAlertView];
     
 }
@@ -313,9 +314,9 @@
     for (int i = 0; i < iCount; i++) {
         [deviceTokenString1 appendFormat:@"%02x", bytes[i]&0x000000FF];
     }
-    LXAlertView *alert=[[LXAlertView alloc]initWithTitle:@"远程通知注册成功" message:deviceTokenString1  cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
-        
-    }];
+//    LXAlertView *alert=[[LXAlertView alloc]initWithTitle:@"远程通知注册成功" message:deviceTokenString1  cancelBtnTitle:nil otherBtnTitle:@"确定" clickIndexBlock:^(NSInteger clickIndex) {
+//        
+//    }];
    // [alert showLXAlertView];
     [MPUserDefaults setObject:deviceTokenString1 forKey:MPDeviceToken];
     //  NSLog(@"%@", deviceToken);
@@ -324,7 +325,6 @@
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     NSLog(@"iOS7及以上系统，收到通知:%@", userInfo);
     //ios7-9系统受到推送通知的方法
-    
     completionHandler(UIBackgroundFetchResultNewData);
 }
 
